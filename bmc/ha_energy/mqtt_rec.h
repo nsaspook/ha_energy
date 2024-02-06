@@ -16,7 +16,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "bmc.h"
+#include "energy.h"
 
     enum mqtt_id {
         P8055_ID,

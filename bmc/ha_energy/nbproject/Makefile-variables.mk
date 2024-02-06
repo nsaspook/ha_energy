@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
-CND_ARTIFACT_NAME_Debug=bmc
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/bmc
+CND_ARTIFACT_NAME_Debug=ha_energy
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/ha_energy
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Debug=bmc.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/bmc.tar
+CND_PACKAGE_NAME_Debug=haenergy.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/haenergy.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
-CND_ARTIFACT_NAME_Release=bmc
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/bmc
+CND_ARTIFACT_NAME_Release=ha_energy
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/ha_energy
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
-CND_PACKAGE_NAME_Release=bmc.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/bmc.tar
+CND_PACKAGE_NAME_Release=haenergy.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/haenergy.tar
 #
 # include compiler specific variables
 #

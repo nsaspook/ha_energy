@@ -23,7 +23,7 @@ AS=as
 # Macros
 CND_PLATFORM=GNU-Linux
 CND_DLIB_EXT=so
-CND_CONF=Release
+CND_CONF=Debug
 CND_DISTDIR=dist
 CND_BUILDDIR=build
 
@@ -35,7 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/_ext/5c0/bmc.o \
+	${OBJECTDIR}/_ext/5c0/energy.o \
 	${OBJECTDIR}/daq.o \
 	${OBJECTDIR}/mqtt_rec.o
 
@@ -54,30 +54,30 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=`pkg-config --libs comedilib` `pkg-config --libs libcjson` -lpaho-mqtt3c  
+LDLIBSOPTIONS=-lcomedi -lm `pkg-config --libs libcjson`  
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/bmc
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ha_energy
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/bmc: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ha_energy: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/bmc ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ha_energy ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/_ext/5c0/bmc.o: ../bmc.c
+${OBJECTDIR}/_ext/5c0/energy.o: ../energy.c
 	${MKDIR} -p ${OBJECTDIR}/_ext/5c0
 	${RM} "$@.d"
-	$(COMPILE.c) -O3 -Wall `pkg-config --cflags comedilib` `pkg-config --cflags libcjson` -std=c11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/5c0/bmc.o ../bmc.c
+	$(COMPILE.c) -g `pkg-config --cflags libcjson`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/5c0/energy.o ../energy.c
 
 ${OBJECTDIR}/daq.o: daq.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -O3 -Wall `pkg-config --cflags comedilib` `pkg-config --cflags libcjson` -std=c11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/daq.o daq.c
+	$(COMPILE.c) -g `pkg-config --cflags libcjson`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/daq.o daq.c
 
 ${OBJECTDIR}/mqtt_rec.o: mqtt_rec.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -O3 -Wall `pkg-config --cflags comedilib` `pkg-config --cflags libcjson` -std=c11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/mqtt_rec.o mqtt_rec.c
+	$(COMPILE.c) -g `pkg-config --cflags libcjson`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/mqtt_rec.o mqtt_rec.c
 
 # Subprojects
 .build-subprojects:

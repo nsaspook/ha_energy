@@ -7,11 +7,11 @@
  * source code.
  */
 #define _DEFAULT_SOURCE
-#include "bmc/bmc.h"
-#include "bmc/mqtt_rec.h"
-#include "bmc/sine_table.h"
+#include "ha_energy/energy.h"
+#include "ha_energy/mqtt_rec.h"
+#include "ha_energy/sine_table.h"
 
-#define LOG_VERSION     "v0.22"
+#define LOG_VERSION     "v0.23"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID        "Comedi_Mqtt_HA"

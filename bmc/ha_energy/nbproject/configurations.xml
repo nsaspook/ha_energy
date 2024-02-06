@@ -4,8 +4,8 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>bmc.h</itemPath>
       <itemPath>daq.h</itemPath>
+      <itemPath>energy.h</itemPath>
       <itemPath>mqtt_rec.h</itemPath>
       <itemPath>sine_table.h</itemPath>
     </logicalFolder>
@@ -16,8 +16,8 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>../bmc.c</itemPath>
       <itemPath>daq.c</itemPath>
+      <itemPath>../energy.c</itemPath>
       <itemPath>mqtt_rec.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -49,13 +49,13 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="../bmc.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="bmc.h" ex="false" tool="3" flavor2="0">
+      <item path="../energy.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="daq.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="daq.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="energy.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="mqtt_rec.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -93,13 +93,13 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="../bmc.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="bmc.h" ex="false" tool="3" flavor2="0">
+      <item path="../energy.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="daq.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="daq.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="energy.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="mqtt_rec.c" ex="false" tool="0" flavor2="0">
       </item>
