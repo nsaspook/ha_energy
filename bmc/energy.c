@@ -14,9 +14,10 @@
 #define LOG_VERSION     "v0.23"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
-#define CLIENTID        "Comedi_Mqtt_HA"
-#define TOPIC_P         "comedi/data/p8055/get"
-#define TOPIC_S         "comedi/data/p8055/set"
+#define CLIENTID        "Energy_Mqtt_HA"
+#define TOPIC_P         "mateq84/data/gticmd"
+#define TOPIC_SS        "mateq84/data/solar"
+#define TOPIC_SD        "mateq84/data/dumpload"
 #define QOS             1
 #define TIMEOUT         10000L
 #define SPACING_USEC    500 * 1000
@@ -109,7 +110,7 @@ int main(int argc, char *argv[]) {
     /*
      * on topic received data will trigger the msgarrvd function
      */
-    MQTTClient_subscribe(client, TOPIC_S, QOS);
+    MQTTClient_subscribe(client, TOPIC_SS, QOS);
 
     if (do_ao_only) {
         if (init_dac(0.0, 25.0, false) < 0) {
