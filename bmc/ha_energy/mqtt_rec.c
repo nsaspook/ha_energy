@@ -29,6 +29,7 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
         buffer[i] = *payloadptr++;
     }
     buffer[i] = 0; // make C string
+    //    printf("%s\r\n",buffer);
 
     // parse the JSON data
     cJSON *json = cJSON_ParseWithLength(buffer, message->payloadlen);
@@ -80,6 +81,31 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
 #endif
                 set_dac_volts(i, name->valuedouble);
             }
+        }
+    }
+
+    if (ha_flag->ha_id == FM80_ID) {
+        printf("FM80 MQTT data\r\n");
+        // access the JSON data
+        cJSON *name = cJSON_GetObjectItemCaseSensitive(json, "pccmode");
+        if (cJSON_IsString(name) && (name->valuestring != NULL)) {
+            printf("Name: %s\n", name->valuestring);
+        }
+        if (cJSON_IsNumber(name)) {
+            printf("%s Value: %f\n", chann, name->valuedouble);
+        }
+    }
+
+    if (ha_flag->ha_id == DUMPLOAD_ID) {
+        printf("DUMPLOAD MQTT data\r\n");
+
+        // access the JSON data
+        cJSON *name = cJSON_GetObjectItemCaseSensitive(json, "DLsequence");
+        if (cJSON_IsString(name) && (name->valuestring != NULL)) {
+            printf("Name: %s\n", name->valuestring);
+        }
+        if (cJSON_IsNumber(name)) {
+            printf("%s Value: %f\n", chann, name->valuedouble);
         }
     }
 

@@ -14,7 +14,8 @@
 #define LOG_VERSION     "v0.23"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
-#define CLIENTID        "Energy_Mqtt_HA"
+#define CLIENTID1       "Energy_Mqtt_HA1"
+#define CLIENTID2       "Energy_Mqtt_HA2"
 #define TOPIC_P         "mateq84/data/gticmd"
 #define TOPIC_SS        "mateq84/data/solar"
 #define TOPIC_SD        "mateq84/data/dumpload"
@@ -26,12 +27,31 @@
  * for the publish and subscribe topic pair
  * passed as a context variable
  */
-struct ha_flag_type ha_flag_vars = {
+// for local device Comedi device control
+struct ha_flag_type ha_flag_vars_pc = {
     .runner = false,
     .receivedtoken = false,
     .deliveredtoken = false,
     .rec_ok = false,
     .ha_id = P8055_ID,
+};
+
+// solar data from mateq84
+struct ha_flag_type ha_flag_vars_ss = {
+    .runner = false,
+    .receivedtoken = false,
+    .deliveredtoken = false,
+    .rec_ok = false,
+    .ha_id = FM80_ID,
+};
+
+// dumpload data from mbmc_k42
+struct ha_flag_type ha_flag_vars_sd = {
+    .runner = false,
+    .receivedtoken = false,
+    .deliveredtoken = false,
+    .rec_ok = false,
+    .ha_id = DUMPLOAD_ID,
 };
 
 char *token;
@@ -47,7 +67,7 @@ cJSON *json;
  */
 void timer_callback(int32_t signum) {
     signal(signum, timer_callback);
-    ha_flag_vars.runner = true;
+    ha_flag_vars_ss.runner = true;
 }
 
 /*
@@ -72,10 +92,7 @@ void connlost(void *context, char *cause) {
  * Use MQTT to send/receive DAQ updates to a Comedi hardware device
  */
 int main(int argc, char *argv[]) {
-    int32_t do_ao_only = false;
-    uint8_t i = 0, j = 75;
     uint32_t speed_go = 0, sequence = 0, rc;
-    char chann[DAQ_STR];
     struct itimerval new_timer = {
         .it_value.tv_sec = 1,
         .it_value.tv_usec = 0,
@@ -84,8 +101,9 @@ int main(int argc, char *argv[]) {
     };
     struct itimerval old_timer;
 
-    MQTTClient client;
-    MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer;
+    MQTTClient client_p, client_sd;
+    MQTTClient_connectOptions conn_opts_p = MQTTClient_connectOptions_initializer,
+            conn_opts_sd = MQTTClient_connectOptions_initializer;
     MQTTClient_message pubmsg = MQTTClient_message_initializer;
     MQTTClient_deliveryToken token;
 
@@ -96,13 +114,24 @@ int main(int argc, char *argv[]) {
     setitimer(ITIMER_REAL, &new_timer, &old_timer);
     signal(SIGALRM, timer_callback);
 
-    MQTTClient_create(&client, ADDRESS, CLIENTID,
+    MQTTClient_create(&client_p, ADDRESS, CLIENTID1,
             MQTTCLIENT_PERSISTENCE_NONE, NULL);
-    conn_opts.keepAliveInterval = 20;
-    conn_opts.cleansession = 1;
+    conn_opts_p.keepAliveInterval = 20;
+    conn_opts_p.cleansession = 1;
 
-    MQTTClient_setCallbacks(client, &ha_flag_vars, connlost, msgarrvd, delivered);
-    if ((rc = MQTTClient_connect(client, &conn_opts)) != MQTTCLIENT_SUCCESS) {
+    MQTTClient_setCallbacks(client_p, &ha_flag_vars_ss, connlost, msgarrvd, delivered);
+    if ((rc = MQTTClient_connect(client_p, &conn_opts_p)) != MQTTCLIENT_SUCCESS) {
+        printf("Failed to connect, return code %d\n", rc);
+        exit(EXIT_FAILURE);
+    }
+
+    MQTTClient_create(&client_sd, ADDRESS, CLIENTID2,
+            MQTTCLIENT_PERSISTENCE_NONE, NULL);
+    conn_opts_sd.keepAliveInterval = 20;
+    conn_opts_sd.cleansession = 1;
+
+    MQTTClient_setCallbacks(client_sd, &ha_flag_vars_sd, connlost, msgarrvd, delivered);
+    if ((rc = MQTTClient_connect(client_sd, &conn_opts_sd)) != MQTTCLIENT_SUCCESS) {
         printf("Failed to connect, return code %d\n", rc);
         exit(EXIT_FAILURE);
     }
@@ -110,71 +139,23 @@ int main(int argc, char *argv[]) {
     /*
      * on topic received data will trigger the msgarrvd function
      */
-    MQTTClient_subscribe(client, TOPIC_SS, QOS);
+    MQTTClient_subscribe(client_p, TOPIC_SS, QOS);
+    MQTTClient_subscribe(client_sd, TOPIC_SD, QOS);
 
-    if (do_ao_only) {
-        if (init_dac(0.0, 25.0, false) < 0) {
-            printf("Missing Analog AO subdevice\n");
-            return -1;
-        }
-        while (true) {
-            set_dac_raw(0, sine_wave[255 - i++] << 4);
-            set_dac_raw(1, sine_wave[255 - j++] << 4);
-        }
-    } else {
-        // setup the DAQ hardware
-        if (init_daq(0.0, 25.0, false) < 0) {
-            printf("Missing Analog subdevice(s)\n");
-            return -1;
-        }
-        if (init_dio() < 0) {
-            printf("Missing Digital subdevice(s)\n");
-            return -1;
-        }
-
-        // parse the remote JSON names for the DAQ outputs
-        printf("\r\n ANALOG OUT channel names for Board: %s, Driver: %s", board_name, driver_name);
-        for (int i = 0; i < channels_ao; i++) {
-            snprintf(chann, DAQ_STR_M, "DAC%d", i);
-            printf("\r\n%s", chann);
-        }
-        printf("\r\n DIGITAL OUT channel names");
-        for (int i = 0; i < channels_do; i++) {
-            snprintf(chann, DAQ_STR_M, "DO%d", i);
-            printf("\r\n%s", chann);
-        }
-        printf("\r\n Use these channel names in JSON formatted data\r\n");
+    {
+        printf("\r\n Solar Energy AC power controller\r\n");
 
         while (true) {
-#ifndef NO_CYLON
-            get_data_sample();
-            /*
-             * testing inputs and outputs
-             */
 
-            if (!bmc.datain.D0) {
-                led_lightshow(4);
-            }
-#else
             usleep(100);
-#endif
 
-            if (ha_flag_vars.runner || speed_go++ > 1500) {
+            if (ha_flag_vars_ss.runner || speed_go++ > 1500) {
                 speed_go = 0;
-                ha_flag_vars.runner = false;
+                ha_flag_vars_ss.runner = false;
                 json = cJSON_CreateObject();
-                cJSON_AddStringToObject(json, "Name", "HA_comedi_get");
+                cJSON_AddStringToObject(json, "Name", "HA_ENERGY");
                 cJSON_AddNumberToObject(json, "Sequence", sequence++);
-                // parse the remote JSON names for DAQ inputs
-                for (int i = 0; i < channels_ai; i++) {
-                    snprintf(chann, DAQ_STR_M, "ADC%d", i);
-                    cJSON_AddNumberToObject(json, chann, get_adc_volts(i));
-                }
-                for (int i = 0; i < channels_di; i++) {
-                    snprintf(chann, DAQ_STR_M, "DI%d", i);
-                    cJSON_AddNumberToObject(json, chann, get_dio_bit(i));
-                }
-                cJSON_AddStringToObject(json, "System", board_name);
+                cJSON_AddStringToObject(json, "System", "HA_energy_server");
                 // convert the cJSON object to a JSON string
                 char *json_str = cJSON_Print(json);
 
@@ -182,12 +163,12 @@ int main(int argc, char *argv[]) {
                 pubmsg.payloadlen = strlen(json_str);
                 pubmsg.qos = QOS;
                 pubmsg.retained = 0;
-                ha_flag_vars.deliveredtoken = 0;
-                MQTTClient_publishMessage(client, TOPIC_P, &pubmsg, &token);
+                ha_flag_vars_ss.deliveredtoken = 0;
+                MQTTClient_publishMessage(client_p, TOPIC_P, &pubmsg, &token);
                 // a busy, wait loop for the async delivery thread to complete
                 {
                     uint32_t waiting = 0;
-                    while (ha_flag_vars.deliveredtoken != token) {
+                    while (ha_flag_vars_ss.deliveredtoken != token) {
                         usleep(100);
                         if (waiting++ > MQTT_TIMEOUT) {
                             printf("\r\nStill Waiting, timeout");
@@ -199,8 +180,11 @@ int main(int argc, char *argv[]) {
                 cJSON_free(json_str);
                 cJSON_Delete(json);
             } else {
-                if (ha_flag_vars.receivedtoken) {
-                    ha_flag_vars.receivedtoken = false;
+                if (ha_flag_vars_ss.receivedtoken) {
+                    ha_flag_vars_ss.receivedtoken = false;
+                }
+                if (ha_flag_vars_sd.receivedtoken) {
+                    ha_flag_vars_sd.receivedtoken = false;
                 }
             }
         }
