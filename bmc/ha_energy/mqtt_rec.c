@@ -86,27 +86,21 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
 
     if (ha_flag->ha_id == FM80_ID) {
         printf("FM80 MQTT data\r\n");
-        // access the JSON data
-        cJSON *name = cJSON_GetObjectItemCaseSensitive(json, "pccmode");
-        if (cJSON_IsString(name) && (name->valuestring != NULL)) {
-            printf("Name: %s\n", name->valuestring);
-        }
-        if (cJSON_IsNumber(name)) {
-            printf("%s Value: %f\n", chann, name->valuedouble);
-        }
+        cJSON *data_result;
+        json_get_data(json, "pccmode", data_result);
+        json_get_data(json, "batenergykw", data_result);
+        json_get_data(json, "runtime", data_result);
+        json_get_data(json, "bvolts", data_result);
+        json_get_data(json, "load", data_result);
     }
 
     if (ha_flag->ha_id == DUMPLOAD_ID) {
         printf("DUMPLOAD MQTT data\r\n");
-
-        // access the JSON data
-        cJSON *name = cJSON_GetObjectItemCaseSensitive(json, "DLsequence");
-        if (cJSON_IsString(name) && (name->valuestring != NULL)) {
-            printf("Name: %s\n", name->valuestring);
-        }
-        if (cJSON_IsNumber(name)) {
-            printf("%s Value: %f\n", chann, name->valuedouble);
-        }
+        cJSON *data_result;
+        json_get_data(json, "DLv_pv", data_result);
+        json_get_data(json, "DLp_pv", data_result);
+        json_get_data(json, "DLp_bat", data_result);
+        json_get_data(json, "DLgti", data_result);
     }
 
     ha_flag->receivedtoken = true;
@@ -131,4 +125,20 @@ void delivered(void *context, MQTTClient_deliveryToken dt) {
         return;
     }
     ha_flag->deliveredtoken = dt;
+}
+
+bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name) {
+    bool ret = false;
+
+    // access the JSON data
+    name = cJSON_GetObjectItemCaseSensitive(json_src, data_id);
+    if (cJSON_IsString(name) && (name->valuestring != NULL)) {
+        printf("Name: %s\n", name->valuestring);
+        ret = true;
+    }
+    if (cJSON_IsNumber(name)) {
+        printf("Value: %f\n", name->valuedouble);
+        ret = true;
+    }
+    return ret;
 }

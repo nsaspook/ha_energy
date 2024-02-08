@@ -33,6 +33,8 @@ extern "C" {
 
     int32_t msgarrvd(void *, char *, int, MQTTClient_message *);
     void delivered(void *, MQTTClient_deliveryToken);
+    
+    bool json_get_data(cJSON *, const char *, cJSON *);
 
 #ifdef __cplusplus
 }
