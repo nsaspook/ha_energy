@@ -4,6 +4,23 @@
  */
 #include "mqtt_rec.h"
 
+double mvar[V_DLAST];
+const char* mqtt_name[V_DLAST] = {
+    "pccmode",
+    "batenergykw",
+    "runtime",
+    "bvolts",
+    "load",
+    "solar",
+    "flast",
+    "DLv_pv",
+    "DLp_pv",
+    "DLp_bat",
+    "DLv_bat",
+    "DLc_mppt",
+    "DLgti",
+};
+
 /*
  * data received on topic from the broker
  */
@@ -86,21 +103,22 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
 
     if (ha_flag->ha_id == FM80_ID) {
         printf("FM80 MQTT data\r\n");
-        cJSON *data_result;
-        json_get_data(json, "pccmode", data_result);
-        json_get_data(json, "batenergykw", data_result);
-        json_get_data(json, "runtime", data_result);
-        json_get_data(json, "bvolts", data_result);
-        json_get_data(json, "load", data_result);
+        cJSON *data_result = json;
+
+        for (int i = V_FCCM; i < V_FLAST; i++) {
+            json_get_data(json, mqtt_name[i], data_result);
+            mvar[i] = data_result->valuedouble;
+        }
     }
 
     if (ha_flag->ha_id == DUMPLOAD_ID) {
         printf("DUMPLOAD MQTT data\r\n");
-        cJSON *data_result;
-        json_get_data(json, "DLv_pv", data_result);
-        json_get_data(json, "DLp_pv", data_result);
-        json_get_data(json, "DLp_bat", data_result);
-        json_get_data(json, "DLgti", data_result);
+        cJSON *data_result = json;
+
+        for (int i = V_DVPV; i < V_DLAST; i++) {
+            json_get_data(json, mqtt_name[i], data_result);
+            mvar[i] = data_result->valuedouble;
+        }
     }
 
     ha_flag->receivedtoken = true;
@@ -133,11 +151,11 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name) {
     // access the JSON data
     name = cJSON_GetObjectItemCaseSensitive(json_src, data_id);
     if (cJSON_IsString(name) && (name->valuestring != NULL)) {
-        printf("Name: %s\n", name->valuestring);
+        printf("%s Name: %s\n", data_id, name->valuestring);
         ret = true;
     }
     if (cJSON_IsNumber(name)) {
-        printf("Value: %f\n", name->valuedouble);
+        printf("%s Value: %f\n", data_id, name->valuedouble);
         ret = true;
     }
     return ret;

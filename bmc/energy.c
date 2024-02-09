@@ -11,12 +11,12 @@
 #include "ha_energy/mqtt_rec.h"
 #include "ha_energy/sine_table.h"
 
-#define LOG_VERSION     "v0.23"
+#define LOG_VERSION     "v0.24"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
 #define CLIENTID2       "Energy_Mqtt_HA2"
-#define TOPIC_P         "mateq84/data/gticmd"
+#define TOPIC_P         "mateq84/data/gticmd_testing"
 #define TOPIC_SS        "mateq84/data/solar"
 #define TOPIC_SD        "mateq84/data/dumpload"
 #define QOS             1

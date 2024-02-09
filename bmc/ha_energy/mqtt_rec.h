@@ -17,6 +17,7 @@
 extern "C" {
 #endif
 #include "energy.h"
+#include "mqtt_vars.h"
 
     enum mqtt_id {
         P8055_ID,
