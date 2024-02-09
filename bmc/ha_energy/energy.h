@@ -43,8 +43,6 @@ extern "C" {
 
     extern int channels_ai, channels_ao, channels_di, channels_do, channels_counter;
 
-    void led_lightshow(int32_t);
-
     void timer_callback(int32_t);
 
     void connlost(void *, char *);

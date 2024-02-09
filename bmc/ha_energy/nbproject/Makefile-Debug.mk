@@ -37,7 +37,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/_ext/5c0/energy.o \
 	${OBJECTDIR}/daq.o \
-	${OBJECTDIR}/mqtt_rec.o
+	${OBJECTDIR}/mqtt_rec.o \
+	${OBJECTDIR}/mqtt_vars.o
 
 
 # C Compiler Flags
@@ -78,6 +79,11 @@ ${OBJECTDIR}/mqtt_rec.o: mqtt_rec.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g `pkg-config --cflags libcjson`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/mqtt_rec.o mqtt_rec.c
+
+${OBJECTDIR}/mqtt_vars.o: mqtt_vars.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g `pkg-config --cflags libcjson`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/mqtt_vars.o mqtt_vars.c
 
 # Subprojects
 .build-subprojects:

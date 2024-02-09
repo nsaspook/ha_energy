@@ -38,6 +38,8 @@ extern "C" {
 
     extern const char* mqtt_name[V_DLAST];
 
+    void mqtt_ha_switch(MQTTClient, const char *, bool);
+
 #ifdef __cplusplus
 }
 #endif

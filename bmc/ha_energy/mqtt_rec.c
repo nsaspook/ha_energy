@@ -78,6 +78,7 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
                 printf("%s Value: %i\n", chann, name->valueint);
 #endif
                 put_dio_bit(i, name->valueint);
+                ha_flag->var_update++;
             }
         }
 
@@ -97,6 +98,7 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
                 printf("%s Value: %f\n", chann, name->valuedouble);
 #endif
                 set_dac_volts(i, name->valuedouble);
+                ha_flag->var_update++;
             }
         }
     }
@@ -106,7 +108,9 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
         cJSON *data_result = json;
 
         for (int i = V_FCCM; i < V_FLAST; i++) {
-            json_get_data(json, mqtt_name[i], data_result);
+            if (json_get_data(json, mqtt_name[i], data_result)) {
+                ha_flag->var_update++;
+            }
             mvar[i] = data_result->valuedouble;
         }
     }
@@ -116,7 +120,9 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
         cJSON *data_result = json;
 
         for (int i = V_DVPV; i < V_DLAST; i++) {
-            json_get_data(json, mqtt_name[i], data_result);
+            if (json_get_data(json, mqtt_name[i], data_result)){
+                ha_flag->var_update++;
+            }
             mvar[i] = data_result->valuedouble;
         }
     }

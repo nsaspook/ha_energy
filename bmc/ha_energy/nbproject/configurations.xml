@@ -20,6 +20,7 @@
       <itemPath>daq.c</itemPath>
       <itemPath>../energy.c</itemPath>
       <itemPath>mqtt_rec.c</itemPath>
+      <itemPath>mqtt_vars.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -61,6 +62,8 @@
       <item path="mqtt_rec.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="mqtt_rec.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="mqtt_vars.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="mqtt_vars.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -107,6 +110,8 @@
       <item path="mqtt_rec.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="mqtt_rec.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="mqtt_vars.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="mqtt_vars.h" ex="false" tool="3" flavor2="0">
       </item>

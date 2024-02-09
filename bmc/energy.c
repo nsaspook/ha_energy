@@ -11,17 +11,25 @@
 #include "ha_energy/mqtt_rec.h"
 #include "ha_energy/sine_table.h"
 
-#define LOG_VERSION     "v0.24"
+#define LOG_VERSION     "V0.25"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
 #define CLIENTID2       "Energy_Mqtt_HA2"
 #define TOPIC_P         "mateq84/data/gticmd_testing"
+#define TOPIC_PACA      "home-assistant/gtiac/availability"
+#define TOPIC_PDCA      "home-assistant/gtidc/availability"
+#define TOPIC_PACC      "home-assistant/gtiac/contact"
+#define TOPIC_PDCC      "home-assistant/gtidc/contact"
 #define TOPIC_SS        "mateq84/data/solar"
 #define TOPIC_SD        "mateq84/data/dumpload"
 #define QOS             1
 #define TIMEOUT         10000L
 #define SPACING_USEC    500 * 1000
+
+/*
+ * V0.25 add Home Assistant Matter controlled utility power control switching
+ */
 
 /*
  * for the publish and subscribe topic pair
@@ -34,6 +42,7 @@ struct ha_flag_type ha_flag_vars_pc = {
     .deliveredtoken = false,
     .rec_ok = false,
     .ha_id = P8055_ID,
+    .var_update = 0,
 };
 
 // solar data from mateq84
@@ -43,6 +52,7 @@ struct ha_flag_type ha_flag_vars_ss = {
     .deliveredtoken = false,
     .rec_ok = false,
     .ha_id = FM80_ID,
+    .var_update = 0,
 };
 
 // dumpload data from mbmc_k42
@@ -52,6 +62,7 @@ struct ha_flag_type ha_flag_vars_sd = {
     .deliveredtoken = false,
     .rec_ok = false,
     .ha_id = DUMPLOAD_ID,
+    .var_update = 0,
 };
 
 char *token;
@@ -142,6 +153,19 @@ int main(int argc, char *argv[]) {
     MQTTClient_subscribe(client_p, TOPIC_SS, QOS);
     MQTTClient_subscribe(client_sd, TOPIC_SD, QOS);
 
+    pubmsg.payload = "online";
+    pubmsg.payloadlen = strlen("online");
+    pubmsg.qos = 0;
+    pubmsg.retained = 0;
+    ha_flag_vars_ss.deliveredtoken = 0;
+    // notify HA we are running
+    MQTTClient_publishMessage(client_p, TOPIC_PACA, &pubmsg, &token);
+    MQTTClient_publishMessage(client_p, TOPIC_PDCA, &pubmsg, &token);
+
+    // turn of HA power switches
+    mqtt_ha_switch(client_p, TOPIC_PDCC, false);
+    mqtt_ha_switch(client_p, TOPIC_PACC, false);
+
     {
         printf("\r\n Solar Energy AC power controller\r\n");
 
@@ -191,41 +215,4 @@ int main(int argc, char *argv[]) {
     }
     return 0;
 }
-
-/*
- * idle test pattern of Comedi DO leds
- */
-void led_lightshow(int32_t speed) {
-    static int32_t j = 0;
-    static uint8_t cylon = 0xff;
-    static int32_t alive_led = 0;
-    static bool LED_UP = true;
-
-    if (j++ >= speed) { // delay a bit ok
-        if (false) { // screen status feedback
-            bmc.dataout.dio_buf = ~cylon; // roll leds cylon style
-        } else {
-            bmc.dataout.dio_buf = cylon; // roll leds cylon style (inverted)
-        }
-
-        if (LED_UP && (alive_led != 0)) {
-            alive_led = alive_led * 2;
-            cylon = cylon << 1;
-        } else {
-            if (alive_led != 0) alive_led = alive_led / 2;
-            cylon = cylon >> 1;
-        }
-        if (alive_led < 2) {
-            alive_led = 2;
-            LED_UP = true;
-        } else {
-            if (alive_led > 128) {
-                alive_led = 128;
-                LED_UP = false;
-            }
-        }
-        j = 0;
-    }
-}
-
 
