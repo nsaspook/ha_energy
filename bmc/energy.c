@@ -163,6 +163,8 @@ int main(int argc, char *argv[]) {
     MQTTClient_publishMessage(client_p, TOPIC_PDCA, &pubmsg, &token);
 
     // turn of HA power switches
+    mqtt_ha_switch(client_p, TOPIC_PDCC, true);
+    mqtt_ha_switch(client_p, TOPIC_PACC, true);
     mqtt_ha_switch(client_p, TOPIC_PDCC, false);
     mqtt_ha_switch(client_p, TOPIC_PACC, false);
 
