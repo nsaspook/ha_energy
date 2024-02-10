@@ -16,7 +16,7 @@
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
 #define CLIENTID2       "Energy_Mqtt_HA2"
-#define TOPIC_P         "mateq84/data/gticmd_testing"
+#define TOPIC_P         "mateq84/data/gticmd"
 #define TOPIC_PACA      "home-assistant/gtiac/availability"
 #define TOPIC_PDCA      "home-assistant/gtidc/availability"
 #define TOPIC_PACC      "home-assistant/gtiac/contact"
@@ -53,6 +53,7 @@ struct ha_flag_type ha_flag_vars_ss = {
     .rec_ok = false,
     .ha_id = FM80_ID,
     .var_update = 0,
+    .energy_mode = NORM_MODE,
 };
 
 // dumpload data from mbmc_k42
@@ -105,9 +106,9 @@ void connlost(void *context, char *cause) {
 int main(int argc, char *argv[]) {
     uint32_t speed_go = 0, sequence = 0, rc;
     struct itimerval new_timer = {
-        .it_value.tv_sec = 1,
+        .it_value.tv_sec = 10,
         .it_value.tv_usec = 0,
-        .it_interval.tv_sec = 0,
+        .it_interval.tv_sec = 9,
         .it_interval.tv_usec = SPACING_USEC,
     };
     struct itimerval old_timer;
@@ -171,40 +172,42 @@ int main(int argc, char *argv[]) {
     {
         printf("\r\n Solar Energy AC power controller\r\n");
 
+        if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {
+            mqtt_ha_switch(client_p, TOPIC_PDCC, true);
+            usleep(500000);
+        }
+
         while (true) {
 
             usleep(100);
 
-            if (ha_flag_vars_ss.runner || speed_go++ > 1500) {
+            if (ha_flag_vars_ss.runner || speed_go++ > 1500000) {
                 speed_go = 0;
                 ha_flag_vars_ss.runner = false;
-                json = cJSON_CreateObject();
-                cJSON_AddStringToObject(json, "Name", "HA_ENERGY");
-                cJSON_AddNumberToObject(json, "Sequence", sequence++);
-                cJSON_AddStringToObject(json, "System", "HA_energy_server");
-                // convert the cJSON object to a JSON string
-                char *json_str = cJSON_Print(json);
 
-                pubmsg.payload = json_str;
-                pubmsg.payloadlen = strlen(json_str);
-                pubmsg.qos = QOS;
-                pubmsg.retained = 0;
-                ha_flag_vars_ss.deliveredtoken = 0;
-                MQTTClient_publishMessage(client_p, TOPIC_P, &pubmsg, &token);
-                // a busy, wait loop for the async delivery thread to complete
-                {
-                    uint32_t waiting = 0;
-                    while (ha_flag_vars_ss.deliveredtoken != token) {
-                        usleep(100);
-                        if (waiting++ > MQTT_TIMEOUT) {
-                            printf("\r\nStill Waiting, timeout");
+                if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {
+                    switch (sequence) {
+                        case 5:
+                        case 4:
+                            sequence++;
+                            mqtt_gti_power(client_p, TOPIC_P, "-#"); // - 100W power
                             break;
-                        }
-                    };
+                        case 3:
+                        case 2:
+                        case 1:
+                            sequence++;
+                            mqtt_gti_power(client_p, TOPIC_P, "+#"); // +100W power
+                            break;
+                        case 0:
+                            sequence++;
+                            mqtt_gti_power(client_p, TOPIC_P, "Z#"); // zero power
+                            break;
+                        default:
+                            mqtt_gti_power(client_p, TOPIC_P, "Z#"); // zero power
+                            sequence = 0;
+                            break;
+                    }
                 }
-
-                cJSON_free(json_str);
-                cJSON_Delete(json);
             } else {
                 if (ha_flag_vars_ss.receivedtoken) {
                     ha_flag_vars_ss.receivedtoken = false;

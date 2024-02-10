@@ -30,7 +30,7 @@ extern "C" {
         volatile MQTTClient_deliveryToken deliveredtoken, receivedtoken;
         volatile bool runner, rec_ok;
         int32_t ha_id; 
-        volatile int32_t var_update;
+        volatile int32_t var_update, energy_mode;
     };
 
     int32_t msgarrvd(void *, char *, int, MQTTClient_message *);

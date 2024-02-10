@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/cFiles/file.c to edit this template
  */
 #define _DEFAULT_SOURCE
+#include "mqtt_rec.h"
 #include "energy.h"
 
 /*
@@ -13,7 +14,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
 
     MQTTClient_message pubmsg = MQTTClient_message_initializer;
     MQTTClient_deliveryToken token;
-    volatile MQTTClient_deliveryToken deliveredtoken = 0;
+    ha_flag_vars_ss.deliveredtoken = 0;
 
     json = cJSON_CreateObject();
     if (sw_state) {
@@ -33,10 +34,10 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
     // a busy, wait loop for the async delivery thread to complete
     {
         uint32_t waiting = 0;
-        while (deliveredtoken != token) {
-            usleep(100);
+        while (ha_flag_vars_ss.deliveredtoken != token) {
+            usleep(250);
             if (waiting++ > MQTT_TIMEOUT) {
-                printf("\r\nStill Waiting, timeout");
+                printf("\r\nSW Still Waiting, timeout\r\n");
                 break;
             }
         };
@@ -44,4 +45,32 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
 
     cJSON_free(json_str);
     cJSON_Delete(json);
+}
+
+/*
+ * send mqtt messages to the dumpload GTI controller
+ */
+void mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
+
+    MQTTClient_message pubmsg = MQTTClient_message_initializer;
+    MQTTClient_deliveryToken token;
+    ha_flag_vars_ss.deliveredtoken = 0;
+
+    pubmsg.payload = msg;
+    pubmsg.payloadlen = strlen(msg);
+    pubmsg.qos = 1;
+    pubmsg.retained = 0;
+
+    MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token);
+    // a busy, wait loop for the async delivery thread to complete
+    {
+        uint32_t waiting = 0;
+        while (ha_flag_vars_ss.deliveredtoken != token) {
+            usleep(250);
+            if (waiting++ > MQTT_TIMEOUT) {
+                printf("\r\nGTI Still Waiting, timeout\r\n");
+                break;
+            }
+        };
+    }
 }

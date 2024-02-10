@@ -35,13 +35,15 @@ extern "C" {
 
 #define NO_CYLON
 
-
+#define UNIT_TEST       0
+#define NORM_MODE       1
 
     extern volatile struct bmcdata bmc; /* DIO buffer */
     extern struct didata datain;
     extern struct dodata dataout;
 
     extern int channels_ai, channels_ao, channels_di, channels_do, channels_counter;
+    extern struct ha_flag_type ha_flag_vars_ss;
 
     void timer_callback(int32_t);
 

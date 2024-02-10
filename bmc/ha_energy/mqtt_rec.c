@@ -120,7 +120,7 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
         cJSON *data_result = json;
 
         for (int i = V_DVPV; i < V_DLAST; i++) {
-            if (json_get_data(json, mqtt_name[i], data_result)){
+            if (json_get_data(json, mqtt_name[i], data_result)) {
                 ha_flag->var_update++;
             }
             mvar[i] = data_result->valuedouble;
@@ -157,11 +157,15 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name) {
     // access the JSON data
     name = cJSON_GetObjectItemCaseSensitive(json_src, data_id);
     if (cJSON_IsString(name) && (name->valuestring != NULL)) {
+#ifdef GET_DEBUG
         printf("%s Name: %s\n", data_id, name->valuestring);
+#endif
         ret = true;
     }
     if (cJSON_IsNumber(name)) {
+#ifdef GET_DEBUG
         printf("%s Value: %f\n", data_id, name->valuedouble);
+#endif
         ret = true;
     }
     return ret;
