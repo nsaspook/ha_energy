@@ -28,7 +28,6 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
     int32_t i, ret = 1;
     char* payloadptr;
     char buffer[1024];
-    char chann[DAQ_STR];
     struct ha_flag_type *ha_flag = context;
 
     // bug-out if no context variables passed to callback
@@ -61,50 +60,10 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
         return ret;
     }
 
-    if (ha_flag->ha_id == P8055_ID) {
-        for (int32_t i = 0; i < channels_do; i++) {
-            snprintf(chann, DAQ_STR_M, "DO%d", i);
-
-            // access the JSON data
-            cJSON *name = cJSON_GetObjectItemCaseSensitive(json, chann);
-            if (cJSON_IsString(name) && (name->valuestring != NULL)) {
-#ifdef DEBUG_REC
-                printf("Name: %s\n", name->valuestring);
-#endif
-            }
-
-            if (cJSON_IsNumber(name)) {
-#ifdef DEBUG_REC
-                printf("%s Value: %i\n", chann, name->valueint);
-#endif
-                put_dio_bit(i, name->valueint);
-                ha_flag->var_update++;
-            }
-        }
-
-        for (int32_t i = 0; i < channels_ao; i++) {
-            snprintf(chann, DAQ_STR_M, "DAC%d", i);
-
-            // access the JSON data
-            cJSON *name = cJSON_GetObjectItemCaseSensitive(json, chann);
-            if (cJSON_IsString(name) && (name->valuestring != NULL)) {
-#ifdef DEBUG_REC
-                printf("Name: %s\n", name->valuestring);
-#endif
-            }
-
-            if (cJSON_IsNumber(name)) {
-#ifdef DEBUG_REC
-                printf("%s Value: %f\n", chann, name->valuedouble);
-#endif
-                set_dac_volts(i, name->valuedouble);
-                ha_flag->var_update++;
-            }
-        }
-    }
-
     if (ha_flag->ha_id == FM80_ID) {
+#ifdef DEBUG_REC
         printf("FM80 MQTT data\r\n");
+#endif
         cJSON *data_result = json;
 
         for (int i = V_FCCM; i < V_FLAST; i++) {
@@ -116,7 +75,9 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
     }
 
     if (ha_flag->ha_id == DUMPLOAD_ID) {
+#ifdef DEBUG_REC
         printf("DUMPLOAD MQTT data\r\n");
+#endif
         cJSON *data_result = json;
 
         for (int i = V_DVPV; i < V_DLAST; i++) {

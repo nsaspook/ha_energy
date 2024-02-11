@@ -8,10 +8,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/store/solar_software/ha_energy/bmc/ha_energy/mqtt_vars.c</file>
+            <file>file:/store/solar_software/ha_energy/bmc/ha_energy/bsoc.h</file>
             <file>file:/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c</file>
             <file>file:/store/solar_software/ha_energy/bmc/ha_energy/energy.h</file>
             <file>file:/store/solar_software/ha_energy/bmc/ha_energy/mqtt_vars.h</file>
             <file>file:/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.h</file>
+            <file>file:/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c</file>
             <file>file:/store/solar_software/ha_energy/bmc/energy.c</file>
         </group>
     </open-files>

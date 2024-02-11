@@ -17,6 +17,10 @@
 extern "C" {
 #endif
 
+#define DEBUG_HA_CMD    // show debug text
+#define HA_SW_DELAY     400000  // usecs
+#define TOKEN_DELAY     250
+    
     enum mqtt_vars {
         V_FCCM,
         V_FBEKW,

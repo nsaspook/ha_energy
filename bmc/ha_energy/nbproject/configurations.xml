@@ -4,7 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>daq.h</itemPath>
+      <itemPath>bsoc.h</itemPath>
       <itemPath>energy.h</itemPath>
       <itemPath>mqtt_rec.h</itemPath>
       <itemPath>mqtt_vars.h</itemPath>
@@ -17,7 +17,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>daq.c</itemPath>
+      <itemPath>bsoc.c</itemPath>
       <itemPath>../energy.c</itemPath>
       <itemPath>mqtt_rec.c</itemPath>
       <itemPath>mqtt_vars.c</itemPath>
@@ -53,9 +53,9 @@
       </compileType>
       <item path="../energy.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="daq.c" ex="false" tool="0" flavor2="0">
+      <item path="bsoc.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="daq.h" ex="false" tool="3" flavor2="0">
+      <item path="bsoc.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="energy.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -93,7 +93,6 @@
         </asmTool>
         <linkerTool>
           <linkerLibItems>
-            <linkerOptionItem>`pkg-config --libs comedilib`</linkerOptionItem>
             <linkerOptionItem>`pkg-config --libs libcjson`</linkerOptionItem>
             <linkerLibLibItem>paho-mqtt3c</linkerLibLibItem>
           </linkerLibItems>
@@ -101,9 +100,9 @@
       </compileType>
       <item path="../energy.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="daq.c" ex="false" tool="0" flavor2="0">
+      <item path="bsoc.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="daq.h" ex="false" tool="3" flavor2="0">
+      <item path="bsoc.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="energy.h" ex="false" tool="3" flavor2="0">
       </item>

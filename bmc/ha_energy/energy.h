@@ -17,7 +17,6 @@ extern "C" {
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
-#include <comedilib.h>
 #include <signal.h>
 #include <time.h>
 #include <sys/wait.h>
@@ -26,7 +25,6 @@ extern "C" {
 #include <errno.h>
 #include <cjson/cJSON.h>
 #include "MQTTClient.h"
-#include "daq.h"
 
 #define DAQ_STR 32
 #define DAQ_STR_M DAQ_STR-1

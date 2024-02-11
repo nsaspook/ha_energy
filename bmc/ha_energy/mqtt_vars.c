@@ -30,12 +30,16 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
     pubmsg.qos = 1;
     pubmsg.retained = 0;
 
+#ifdef DEBUG_HA_CMD
+    printf("HA switch command\r\n");
+#endif    
+
     MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token);
     // a busy, wait loop for the async delivery thread to complete
     {
         uint32_t waiting = 0;
         while (ha_flag_vars_ss.deliveredtoken != token) {
-            usleep(250);
+            usleep(TOKEN_DELAY);
             if (waiting++ > MQTT_TIMEOUT) {
                 printf("\r\nSW Still Waiting, timeout\r\n");
                 break;
@@ -45,6 +49,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
 
     cJSON_free(json_str);
     cJSON_Delete(json);
+    usleep(HA_SW_DELAY);
 }
 
 /*
@@ -61,16 +66,21 @@ void mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
     pubmsg.qos = 1;
     pubmsg.retained = 0;
 
+#ifdef DEBUG_HA_CMD
+    printf("HA GTI power command %s\r\n",msg);
+#endif
+
     MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token);
     // a busy, wait loop for the async delivery thread to complete
     {
         uint32_t waiting = 0;
         while (ha_flag_vars_ss.deliveredtoken != token) {
-            usleep(250);
+            usleep(TOKEN_DELAY);
             if (waiting++ > MQTT_TIMEOUT) {
                 printf("\r\nGTI Still Waiting, timeout\r\n");
                 break;
             }
         };
     }
+    usleep(HA_SW_DELAY);
 }

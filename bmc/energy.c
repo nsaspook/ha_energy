@@ -9,9 +9,9 @@
 #define _DEFAULT_SOURCE
 #include "ha_energy/energy.h"
 #include "ha_energy/mqtt_rec.h"
-#include "ha_energy/sine_table.h"
+#include "ha_energy/bsoc.h"
 
-#define LOG_VERSION     "V0.25"
+#define LOG_VERSION     "V0.26"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -29,6 +29,7 @@
 
 /*
  * V0.25 add Home Assistant Matter controlled utility power control switching
+ * V0.26 BSOC weights for system condition for power diversion
  */
 
 /*
@@ -53,7 +54,7 @@ struct ha_flag_type ha_flag_vars_ss = {
     .rec_ok = false,
     .ha_id = FM80_ID,
     .var_update = 0,
-    .energy_mode = NORM_MODE,
+    .energy_mode = UNIT_TEST,
 };
 
 // dumpload data from mbmc_k42
@@ -163,7 +164,9 @@ int main(int argc, char *argv[]) {
     MQTTClient_publishMessage(client_p, TOPIC_PACA, &pubmsg, &token);
     MQTTClient_publishMessage(client_p, TOPIC_PDCA, &pubmsg, &token);
 
-    // turn of HA power switches
+    // sync HA power switches
+    mqtt_ha_switch(client_p, TOPIC_PDCC, false);
+    mqtt_ha_switch(client_p, TOPIC_PACC, false);
     mqtt_ha_switch(client_p, TOPIC_PDCC, true);
     mqtt_ha_switch(client_p, TOPIC_PACC, true);
     mqtt_ha_switch(client_p, TOPIC_PDCC, false);
@@ -171,6 +174,8 @@ int main(int argc, char *argv[]) {
 
     {
         printf("\r\n Solar Energy AC power controller\r\n");
+
+        bsoc_init();
 
         if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {
             mqtt_ha_switch(client_p, TOPIC_PDCC, true);

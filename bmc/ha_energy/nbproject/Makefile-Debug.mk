@@ -36,7 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/_ext/5c0/energy.o \
-	${OBJECTDIR}/daq.o \
+	${OBJECTDIR}/bsoc.o \
 	${OBJECTDIR}/mqtt_rec.o \
 	${OBJECTDIR}/mqtt_vars.o
 
@@ -70,10 +70,10 @@ ${OBJECTDIR}/_ext/5c0/energy.o: ../energy.c
 	${RM} "$@.d"
 	$(COMPILE.c) -g `pkg-config --cflags libcjson`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/5c0/energy.o ../energy.c
 
-${OBJECTDIR}/daq.o: daq.c
+${OBJECTDIR}/bsoc.o: bsoc.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g `pkg-config --cflags libcjson`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/daq.o daq.c
+	$(COMPILE.c) -g `pkg-config --cflags libcjson`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/bsoc.o bsoc.c
 
 ${OBJECTDIR}/mqtt_rec.o: mqtt_rec.c
 	${MKDIR} -p ${OBJECTDIR}
