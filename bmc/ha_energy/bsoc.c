@@ -1,11 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/cFiles/file.c to edit this template
- */
 #include "bsoc.h"
 #include "mqtt_rec.h"
 
-static double ac_weight = 0.0f, gti_weight = 0.0f;
+static volatile double ac_weight = 0.0f, gti_weight = 0.0f, pv_voltage=0.0f;
 
 bool bsoc_init(void) {
     ac_weight = 0.0f;
@@ -23,6 +19,7 @@ bool bsoc_data_collect(void) {
 
     ac_weight = mvar[V_FBEKW];
     gti_weight = mvar[V_FBEKW];
+    pv_voltage = mvar[V_DVPV];
 
     pthread_mutex_unlock(&ha_lock); // resume MQTT var updates
 #ifdef BSOC_DEBUG
@@ -38,5 +35,9 @@ double bsoc_ac(void) {
 
 double bsoc_gti(void) {
 
+    printf("pvp %f, gweight %f, aweight %f\r\n",pv_voltage,gti_weight,ac_weight);
+    if (pv_voltage <45.0f) {
+        gti_weight=0.0f;
+    }
     return gti_weight;
 };

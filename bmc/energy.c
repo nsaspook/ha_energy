@@ -1,5 +1,5 @@
 /*
- * Demo code for Comedi to MQTT JSON format data
+ * HA Energy control using MQTT JSON format data from various energy monitor sources
  * asynchronous mode using threads
  *
  * This file may be freely modified, distributed, and combined with
@@ -11,7 +11,7 @@
 #include "ha_energy/mqtt_rec.h"
 #include "ha_energy/bsoc.h"
 
-#define LOG_VERSION     "V0.26"
+#define LOG_VERSION     "V0.27"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"

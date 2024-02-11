@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/cFiles/file.c to edit this template
- */
 #define _DEFAULT_SOURCE
 #include "mqtt_rec.h"
 #include "energy.h"
+#include "bsoc.h"
 
 /*
  * turn on and off the Matter switches controlled by Home Assistant
@@ -66,14 +63,22 @@ void mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
     pubmsg.qos = 1;
     pubmsg.retained = 0;
 
-#ifdef DEBUG_HA_CMD
-    printf("HA GTI power command %s\r\n", msg);
-#endif
-
 #ifdef GTI_NO_POWER
     MQTTClient_publishMessage(client_p, "mateq84/data/gticmd_testing", &pubmsg, &token);
 #else
-    MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token);
+    if (bsoc_gti() > 4500.0f) {
+#ifdef DEBUG_HA_CMD
+        printf("HA GTI power command %s\r\n", msg);
+#endif
+        MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token); // run power commands
+    } else {
+#ifdef DEBUG_HA_CMD
+        printf("HA GTI power set to zero\r\n");
+#endif
+        pubmsg.payload = "Z#";
+        pubmsg.payloadlen = strlen("Z#");
+        MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token); // only shutdown GTI power
+    }
 #endif
     // a busy, wait loop for the async delivery thread to complete
     {

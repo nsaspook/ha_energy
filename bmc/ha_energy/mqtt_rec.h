@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/cFiles/file.h to edit this template
- */
-
 /* 
  * File:   mqtt_rec.h
  * Author: root
@@ -21,8 +16,9 @@ extern "C" {
 #include "energy.h"
 #include "mqtt_vars.h"
 
-#define DEBUG_REC
-    
+//#define DEBUG_REC
+//#define GET_DEBUG
+
     enum mqtt_id {
         P8055_ID,
         FM80_ID,
@@ -33,16 +29,16 @@ extern "C" {
     struct ha_flag_type {
         volatile MQTTClient_deliveryToken deliveredtoken, receivedtoken;
         volatile bool runner, rec_ok;
-        int32_t ha_id; 
+        int32_t ha_id;
         volatile int32_t var_update, energy_mode;
     };
-    
-    extern pthread_mutex_t ha_lock; 
+
+    extern pthread_mutex_t ha_lock;
 
     int32_t msgarrvd(void *, char *, int, MQTTClient_message *);
     void delivered(void *, MQTTClient_deliveryToken);
-    
-    bool json_get_data(cJSON *, const char *, cJSON *);
+
+    bool json_get_data(cJSON *, const char *, cJSON *, uint32_t);
 
 #ifdef __cplusplus
 }
