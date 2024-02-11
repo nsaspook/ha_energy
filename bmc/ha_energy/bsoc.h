@@ -17,6 +17,8 @@
 extern "C" {
 #endif
 
+#define BSOC_DEBUG
+    
 #include <stdlib.h>
 #include <stdio.h> /* for printf() */
 #include <unistd.h>
@@ -30,7 +32,7 @@ extern "C" {
 #include <sys/time.h>
 #include <errno.h>
 
-    void bsoc_init(void);
+    bool bsoc_init(void);
     bool bsoc_data_collect(void);
     double bsoc_ac(void);
     double bsoc_gti(void);

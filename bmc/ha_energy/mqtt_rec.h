@@ -16,9 +16,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#include <pthread.h> 
 #include "energy.h"
 #include "mqtt_vars.h"
 
+#define DEBUG_REC
+    
     enum mqtt_id {
         P8055_ID,
         FM80_ID,
@@ -32,6 +36,8 @@ extern "C" {
         int32_t ha_id; 
         volatile int32_t var_update, energy_mode;
     };
+    
+    extern pthread_mutex_t ha_lock; 
 
     int32_t msgarrvd(void *, char *, int, MQTTClient_message *);
     void delivered(void *, MQTTClient_deliveryToken);

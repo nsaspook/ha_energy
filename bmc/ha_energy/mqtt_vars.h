@@ -16,6 +16,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+    
+#define GTI_NO_POWER
 
 #define DEBUG_HA_CMD    // show debug text
 #define HA_SW_DELAY     400000  // usecs

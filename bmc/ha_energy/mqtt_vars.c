@@ -67,10 +67,14 @@ void mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
     pubmsg.retained = 0;
 
 #ifdef DEBUG_HA_CMD
-    printf("HA GTI power command %s\r\n",msg);
+    printf("HA GTI power command %s\r\n", msg);
 #endif
 
+#ifdef GTI_NO_POWER
+    MQTTClient_publishMessage(client_p, "mateq84/data/gticmd_testing", &pubmsg, &token);
+#else
     MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token);
+#endif
     // a busy, wait loop for the async delivery thread to complete
     {
         uint32_t waiting = 0;

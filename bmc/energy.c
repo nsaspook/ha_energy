@@ -121,6 +121,10 @@ int main(int argc, char *argv[]) {
     MQTTClient_deliveryToken token;
 
     printf("\r\n LOG Version %s : MQTT Version %s\r\n", LOG_VERSION, MQTT_VERSION);
+
+    if (!bsoc_init()) {
+        exit(EXIT_FAILURE);
+    }
     /*
      * set the timer for MQTT publishing sample speed
      */
@@ -135,6 +139,7 @@ int main(int argc, char *argv[]) {
     MQTTClient_setCallbacks(client_p, &ha_flag_vars_ss, connlost, msgarrvd, delivered);
     if ((rc = MQTTClient_connect(client_p, &conn_opts_p)) != MQTTCLIENT_SUCCESS) {
         printf("Failed to connect, return code %d\n", rc);
+        pthread_mutex_destroy(&ha_lock);
         exit(EXIT_FAILURE);
     }
 
@@ -146,6 +151,7 @@ int main(int argc, char *argv[]) {
     MQTTClient_setCallbacks(client_sd, &ha_flag_vars_sd, connlost, msgarrvd, delivered);
     if ((rc = MQTTClient_connect(client_sd, &conn_opts_sd)) != MQTTCLIENT_SUCCESS) {
         printf("Failed to connect, return code %d\n", rc);
+        pthread_mutex_destroy(&ha_lock);
         exit(EXIT_FAILURE);
     }
 
@@ -175,8 +181,6 @@ int main(int argc, char *argv[]) {
     {
         printf("\r\n Solar Energy AC power controller\r\n");
 
-        bsoc_init();
-
         if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {
             mqtt_ha_switch(client_p, TOPIC_PDCC, true);
             usleep(500000);
@@ -189,6 +193,7 @@ int main(int argc, char *argv[]) {
             if (ha_flag_vars_ss.runner || speed_go++ > 1500000) {
                 speed_go = 0;
                 ha_flag_vars_ss.runner = false;
+                bsoc_data_collect();
 
                 if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {
                     switch (sequence) {

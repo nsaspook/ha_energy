@@ -21,6 +21,8 @@ const char* mqtt_name[V_DLAST] = {
     "DLgti",
 };
 
+pthread_mutex_t ha_lock; 
+
 /*
  * data received on topic from the broker
  */
@@ -70,7 +72,9 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
             if (json_get_data(json, mqtt_name[i], data_result)) {
                 ha_flag->var_update++;
             }
+            pthread_mutex_lock(&ha_lock);
             mvar[i] = data_result->valuedouble;
+            pthread_mutex_unlock(&ha_lock);
         }
     }
 
@@ -84,7 +88,9 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
             if (json_get_data(json, mqtt_name[i], data_result)) {
                 ha_flag->var_update++;
             }
+            pthread_mutex_lock(&ha_lock);
             mvar[i] = data_result->valuedouble;
+            pthread_mutex_unlock(&ha_lock);
         }
     }
 
