@@ -24,7 +24,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
 
     pubmsg.payload = json_str;
     pubmsg.payloadlen = strlen(json_str);
-    pubmsg.qos = 1;
+    pubmsg.qos = QOS;
     pubmsg.retained = 0;
 
 #ifdef DEBUG_HA_CMD
@@ -60,13 +60,13 @@ void mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
 
     pubmsg.payload = msg;
     pubmsg.payloadlen = strlen(msg);
-    pubmsg.qos = 1;
+    pubmsg.qos = QOS;
     pubmsg.retained = 0;
 
 #ifdef GTI_NO_POWER
     MQTTClient_publishMessage(client_p, "mateq84/data/gticmd_testing", &pubmsg, &token);
 #else
-    if (bsoc_gti() > 4500.0f) {
+    if (bsoc_gti() > MIN_BAT_KW) {
 #ifdef DEBUG_HA_CMD
         printf("HA GTI power command %s\r\n", msg);
 #endif

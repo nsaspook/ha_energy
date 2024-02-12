@@ -30,11 +30,14 @@ extern "C" {
 #define DAQ_STR_M DAQ_STR-1
 
 #define MQTT_TIMEOUT    400
+#define SW_QOS          1
 
 #define NO_CYLON
 
 #define UNIT_TEST       0
 #define NORM_MODE       1
+    
+#define CMD_SEC         10
 
     extern volatile struct bmcdata bmc; /* DIO buffer */
     extern struct didata datain;

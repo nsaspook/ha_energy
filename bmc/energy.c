@@ -107,10 +107,10 @@ void connlost(void *context, char *cause) {
 int main(int argc, char *argv[]) {
     uint32_t speed_go = 0, sequence = 0, rc;
     struct itimerval new_timer = {
-        .it_value.tv_sec = 10,
+        .it_value.tv_sec = CMD_SEC,
         .it_value.tv_usec = 0,
-        .it_interval.tv_sec = 9,
-        .it_interval.tv_usec = SPACING_USEC,
+        .it_interval.tv_sec = CMD_SEC,
+        .it_interval.tv_usec = 0,
     };
     struct itimerval old_timer;
 
@@ -163,10 +163,10 @@ int main(int argc, char *argv[]) {
 
     pubmsg.payload = "online";
     pubmsg.payloadlen = strlen("online");
-    pubmsg.qos = 0;
+    pubmsg.qos = QOS;
     pubmsg.retained = 0;
     ha_flag_vars_ss.deliveredtoken = 0;
-    // notify HA we are running
+    // notify HA we are running and controlling AC power plugs
     MQTTClient_publishMessage(client_p, TOPIC_PACA, &pubmsg, &token);
     MQTTClient_publishMessage(client_p, TOPIC_PDCA, &pubmsg, &token);
 
@@ -183,7 +183,7 @@ int main(int argc, char *argv[]) {
 
         if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {
             mqtt_ha_switch(client_p, TOPIC_PDCC, true);
-            usleep(500000);
+            usleep(500000); // wait for voltage to ramp
         }
 
         while (true) {
