@@ -54,3 +54,7 @@ double bsoc_gti(void) {
 double gti_test(void) {
     return gti_weight;
 }
+
+double ac_test(void) {
+    return ac_weight;
+}

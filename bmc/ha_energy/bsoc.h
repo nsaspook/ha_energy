@@ -35,6 +35,7 @@ extern "C" {
     double bsoc_ac(void);
     double bsoc_gti(void);
     double gti_test(void);
+    double ac_test(void);
 
 #ifdef __cplusplus
 }

@@ -114,6 +114,8 @@ int main(int argc, char *argv[]) {
     };
     struct itimerval old_timer;
 
+    bool ac_sw_on = true, gti_sw_on = true;
+
     MQTTClient client_p, client_sd;
     MQTTClient_connectOptions conn_opts_p = MQTTClient_connectOptions_initializer,
             conn_opts_sd = MQTTClient_connectOptions_initializer;
@@ -192,16 +194,20 @@ int main(int argc, char *argv[]) {
 
                 if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {
                     if (gti_test() > MIN_BAT_KW_GTI_HI) {
-                        ramp_up_gti(client_p, false); // fixme on the ONCE code
-                        if (gti_test() > MIN_BAT_KW_AC_HI) {
-                            mqtt_ha_switch(client_p, TOPIC_PACC, true);
+                        ramp_up_gti(client_p, gti_sw_on); // fixme on the ONCE code
+                        gti_sw_on = false;
+                        if (ac_test() > MIN_BAT_KW_AC_HI) {
+                            mqtt_ha_switch(client_p, TOPIC_PACC, ac_sw_on);
+                            ac_sw_on = false;
                         }
                     } else {
                         if (gti_test() < MIN_BAT_KW_GTI_LO) {
                             ramp_down_gti(client_p, true);
+                            gti_sw_on = true;
                         }
-                        if (gti_test() < MIN_BAT_KW_AC_LO) {
+                        if (ac_test() < MIN_BAT_KW_AC_LO) {
                             mqtt_ha_switch(client_p, TOPIC_PACC, false);
+                            ac_sw_on = true;
                         }
                     }
                 }
