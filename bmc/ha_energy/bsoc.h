@@ -13,10 +13,10 @@ extern "C" {
 #endif
 
 #define BSOC_DEBUG
-    
+
 #define MIN_PV_VOLTS    45.0f
-#define MIN_BAT_KW      4500.0f
-    
+#define MIN_BAT_KW      4100.0f
+
 #include <stdlib.h>
 #include <stdio.h> /* for printf() */
 #include <unistd.h>
@@ -34,6 +34,7 @@ extern "C" {
     bool bsoc_data_collect(void);
     double bsoc_ac(void);
     double bsoc_gti(void);
+    double gti_test(void);
 
 #ifdef __cplusplus
 }

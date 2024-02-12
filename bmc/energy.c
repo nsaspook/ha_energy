@@ -105,7 +105,7 @@ void connlost(void *context, char *cause) {
  * Use MQTT to send/receive DAQ updates to a Comedi hardware device
  */
 int main(int argc, char *argv[]) {
-    uint32_t speed_go = 0, sequence = 0, rc;
+    uint32_t speed_go = 0, rc;
     struct itimerval new_timer = {
         .it_value.tv_sec = CMD_SEC,
         .it_value.tv_usec = 0,
@@ -181,11 +181,6 @@ int main(int argc, char *argv[]) {
     {
         printf("\r\n Solar Energy AC power controller\r\n");
 
-        if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {
-            mqtt_ha_switch(client_p, TOPIC_PDCC, true);
-            usleep(500000); // wait for voltage to ramp
-        }
-
         while (true) {
 
             usleep(100);
@@ -196,26 +191,18 @@ int main(int argc, char *argv[]) {
                 bsoc_data_collect();
 
                 if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {
-                    switch (sequence) {
-                        case 5:
-                        case 4:
-                            sequence++;
-                            mqtt_gti_power(client_p, TOPIC_P, "-#"); // - 100W power
-                            break;
-                        case 3:
-                        case 2:
-                        case 1:
-                            sequence++;
-                            mqtt_gti_power(client_p, TOPIC_P, "+#"); // +100W power
-                            break;
-                        case 0:
-                            sequence++;
-                            mqtt_gti_power(client_p, TOPIC_P, "Z#"); // zero power
-                            break;
-                        default:
-                            mqtt_gti_power(client_p, TOPIC_P, "Z#"); // zero power
-                            sequence = 0;
-                            break;
+                    if (gti_test() > MIN_BAT_KW_GTI_HI) {
+                        ramp_up_gti(client_p, false); // fixme on the ONCE code
+                        if (gti_test() > MIN_BAT_KW_AC_HI) {
+                            mqtt_ha_switch(client_p, TOPIC_PACC, true);
+                        }
+                    } else {
+                        if (gti_test() < MIN_BAT_KW_GTI_LO) {
+                            ramp_down_gti(client_p, true);
+                        }
+                        if (gti_test() < MIN_BAT_KW_AC_LO) {
+                            mqtt_ha_switch(client_p, TOPIC_PACC, false);
+                        }
                     }
                 }
             } else {
@@ -231,3 +218,52 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
+void ramp_up_gti(MQTTClient client_p, bool start) {
+    static uint32_t sequence = 0;
+    static bool once = true;
+
+    if (start) {
+        once = true;
+    }
+
+    if (once) {
+        once = false;
+        sequence = 0;
+        mqtt_ha_switch(client_p, TOPIC_PDCC, true);
+        usleep(500000); // wait for voltage to ramp
+    }
+
+    switch (sequence) {
+        case 5:
+        case 4:
+            sequence++;
+            if (!mqtt_gti_power(client_p, TOPIC_P, "-#")) {
+                sequence = 0;
+            }; // - 100W power
+            break;
+        case 3:
+        case 2:
+        case 1:
+            sequence++;
+            if (!mqtt_gti_power(client_p, TOPIC_P, "+#")) {
+                sequence = 0;
+            }; // +100W power
+            break;
+        case 0:
+            sequence++;
+            mqtt_gti_power(client_p, TOPIC_P, "Z#"); // zero power
+            break;
+        default:
+            mqtt_gti_power(client_p, TOPIC_P, "Z#"); // zero power
+            sequence = 0;
+            break;
+    }
+}
+
+void ramp_down_gti(MQTTClient client_p, bool sw_off) {
+
+    mqtt_gti_power(client_p, TOPIC_P, "Z#"); // zero power
+    if (sw_off) {
+        mqtt_ha_switch(client_p, TOPIC_PDCC, false);
+    }
+}

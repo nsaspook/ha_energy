@@ -52,8 +52,8 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
 /*
  * send mqtt messages to the dumpload GTI controller
  */
-void mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
-
+bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
+    bool ret = true;
     MQTTClient_message pubmsg = MQTTClient_message_initializer;
     MQTTClient_deliveryToken token;
     ha_flag_vars_ss.deliveredtoken = 0;
@@ -72,6 +72,7 @@ void mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
 #endif
         MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token); // run power commands
     } else {
+        ret = false;
 #ifdef DEBUG_HA_CMD
         printf("HA GTI power set to zero\r\n");
 #endif
@@ -92,4 +93,6 @@ void mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
         };
     }
     usleep(HA_SW_DELAY);
+    return ret;
 }
+

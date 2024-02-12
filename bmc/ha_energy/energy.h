@@ -36,8 +36,14 @@ extern "C" {
 
 #define UNIT_TEST       0
 #define NORM_MODE       1
-    
+
 #define CMD_SEC         10
+    
+#define MIN_BAT_KW_GTI_HI   4200.0f
+#define MIN_BAT_KW_GTI_LO   4000.0f
+    
+#define MIN_BAT_KW_AC_HI    5000.0f
+#define MIN_BAT_KW_AC_LO    4300.0f
 
     extern volatile struct bmcdata bmc; /* DIO buffer */
     extern struct didata datain;
@@ -49,6 +55,9 @@ extern "C" {
     void timer_callback(int32_t);
 
     void connlost(void *, char *);
+
+    void ramp_up_gti(MQTTClient, bool);
+    void ramp_down_gti(MQTTClient, bool);
 
 #ifdef __cplusplus
 }
