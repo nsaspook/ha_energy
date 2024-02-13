@@ -2,7 +2,7 @@
 #include "mqtt_rec.h"
 
 static volatile double ac_weight = 0.0f, gti_weight = 0.0f, pv_voltage = 0.0f, bat_current = 0.0f, batc_std_dev = 0.0f;
-static double bat_c[DEV_SIZE];
+double bat_c[DEV_SIZE];
 
 static void calculateStandardDeviation(uint32_t, double *);
 
@@ -122,9 +122,13 @@ void calculateStandardDeviation(uint32_t N, double data[]) {
 }
 
 bool bat_current_stable(void) {
-    if (batc_std_dev <= MAX_BATC_DEV) {
+    static double gap = 0.0f;
+
+    if (batc_std_dev <= (MAX_BATC_DEV + gap)) {
+        gap = MAX_BATC_DEV;
         return true;
     } else {
+        gap = 0.0f;
         return false;
     }
 }

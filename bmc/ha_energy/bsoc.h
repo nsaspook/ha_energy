@@ -18,7 +18,7 @@ extern "C" {
 #define MIN_BAT_KW      4100.0f
 
 #define DEV_SIZE        10
-#define MAX_BATC_DEV    1.0f
+#define MAX_BATC_DEV    0.6f
 
 #include <stdlib.h>
 #include <stdio.h> /* for printf() */
@@ -34,6 +34,8 @@ extern "C" {
 #include <errno.h>
 #include <math.h>
 
+    extern double bat_c[DEV_SIZE];
+    
     bool bsoc_init(void);
     bool bsoc_data_collect(void);
     double bsoc_ac(void);

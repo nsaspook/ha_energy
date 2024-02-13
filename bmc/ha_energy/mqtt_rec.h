@@ -16,6 +16,7 @@ extern "C" {
 #include "energy.h"
 #include "mqtt_vars.h"
 
+#define RDEV_SIZE        10
     //#define DEBUG_REC
     //#define GET_DEBUG
 

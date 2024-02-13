@@ -1,4 +1,5 @@
 #include "mqtt_rec.h"
+#include "bsoc.h"
 
 volatile double mvar[V_DLAST];
 const char* mqtt_name[V_DLAST] = {
@@ -109,6 +110,7 @@ void delivered(void *context, MQTTClient_deliveryToken dt) {
 
 bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t i) {
     bool ret = false;
+    static uint32_t j = 0;
 
     // access the JSON data
     name = cJSON_GetObjectItemCaseSensitive(json_src, data_id);
@@ -128,6 +130,13 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
         pthread_mutex_lock(&ha_lock);
         mvar[i] = name->valuedouble;
         pthread_mutex_unlock(&ha_lock);
+
+        if (i == V_DCMPPT) {
+            bat_c[j++] = mvar[i];
+            if (j >= RDEV_SIZE) {
+                j = 0;
+            }
+        }
         ret = true;
     }
     return ret;
