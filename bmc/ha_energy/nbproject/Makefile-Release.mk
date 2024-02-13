@@ -55,7 +55,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=`pkg-config --libs libcjson` -lpaho-mqtt3c  
+LDLIBSOPTIONS=`pkg-config --libs libcjson` -lpaho-mqtt3c -lm   
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}

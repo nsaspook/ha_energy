@@ -11,7 +11,7 @@
 #include "ha_energy/mqtt_rec.h"
 #include "ha_energy/bsoc.h"
 
-#define LOG_VERSION     "V0.27"
+#define LOG_VERSION     "V0.28"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -30,6 +30,7 @@
 /*
  * V0.25 add Home Assistant Matter controlled utility power control switching
  * V0.26 BSOC weights for system condition for power diversion
+ * V0.27 -> V0.28 GTI power ramps stability using battery current STD DEV
  */
 
 /*
@@ -241,23 +242,23 @@ void ramp_up_gti(MQTTClient client_p, bool start) {
     }
 
     switch (sequence) {
-            //        case 5:
-            //        case 4:
-            //           sequence++;
-            //            if (!mqtt_gti_power(client_p, TOPIC_P, "-#")) {
-            //                sequence = 0;
-            //            }; // - 100W power
-            //            break;
         case 4:
             break;
         case 3:
-            break;
         case 2:
         case 1:
-            sequence++;
-            if (!mqtt_gti_power(client_p, TOPIC_P, "+#")) {
-                sequence = 0;
-            }; // +100W power
+            if (bat_current_stable()) { // check battery current std dev, stop 'motorboating'
+                sequence++;
+                if (!mqtt_gti_power(client_p, TOPIC_P, "+#")) {
+                    sequence = 0;
+                }; // +100W power
+            } else {
+                usleep(500000); // wait a bit more for power to be stable
+                sequence=1; // do power ramps when ready
+                if (!mqtt_gti_power(client_p, TOPIC_P, "-#")) {
+                    sequence = 0;
+                }; // - 100W power
+            }
             break;
         case 0:
             sequence++;

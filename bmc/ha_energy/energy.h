@@ -39,7 +39,7 @@ extern "C" {
 
 #define CMD_SEC         10
     
-#define MIN_BAT_KW_GTI_HI   4600.0f
+#define MIN_BAT_KW_GTI_HI   4500.0f
 #define MIN_BAT_KW_GTI_LO   4250.0f
     
 #define MIN_BAT_KW_AC_HI    4900.0f

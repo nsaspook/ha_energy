@@ -16,8 +16,8 @@ extern "C" {
 #include "energy.h"
 #include "mqtt_vars.h"
 
-//#define DEBUG_REC
-//#define GET_DEBUG
+    //#define DEBUG_REC
+    //#define GET_DEBUG
 
     enum mqtt_id {
         P8055_ID,
