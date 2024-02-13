@@ -39,11 +39,11 @@ extern "C" {
 
 #define CMD_SEC         10
     
-#define MIN_BAT_KW_GTI_HI   4200.0f
-#define MIN_BAT_KW_GTI_LO   4000.0f
+#define MIN_BAT_KW_GTI_HI   4600.0f
+#define MIN_BAT_KW_GTI_LO   4250.0f
     
-#define MIN_BAT_KW_AC_HI    5000.0f
-#define MIN_BAT_KW_AC_LO    4300.0f
+#define MIN_BAT_KW_AC_HI    4900.0f
+#define MIN_BAT_KW_AC_LO    4200.0f
 
     extern volatile struct bmcdata bmc; /* DIO buffer */
     extern struct didata datain;
@@ -57,7 +57,9 @@ extern "C" {
     void connlost(void *, char *);
 
     void ramp_up_gti(MQTTClient, bool);
+    void ramp_up_ac(MQTTClient, bool);
     void ramp_down_gti(MQTTClient, bool);
+    void ramp_down_ac(MQTTClient, bool);
 
 #ifdef __cplusplus
 }

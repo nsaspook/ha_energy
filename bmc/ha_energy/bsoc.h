@@ -14,7 +14,7 @@ extern "C" {
 
 #define BSOC_DEBUG
 
-#define MIN_PV_VOLTS    45.0f
+#define MIN_PV_VOLTS    5.0f
 #define MIN_BAT_KW      4100.0f
 
 #include <stdlib.h>

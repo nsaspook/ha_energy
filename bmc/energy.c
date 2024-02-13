@@ -71,6 +71,8 @@ char *token;
 const char *board_name = "NO_BOARD", *driver_name = "NO_DRIVER";
 cJSON *json;
 
+bool once_gti = true, once_ac = true;
+
 /*
  * Async processing threads
  */
@@ -197,7 +199,7 @@ int main(int argc, char *argv[]) {
                         ramp_up_gti(client_p, gti_sw_on); // fixme on the ONCE code
                         gti_sw_on = false;
                         if (ac_test() > MIN_BAT_KW_AC_HI) {
-                            mqtt_ha_switch(client_p, TOPIC_PACC, ac_sw_on);
+                            ramp_up_ac(client_p, ac_sw_on);
                             ac_sw_on = false;
                         }
                     } else {
@@ -206,7 +208,7 @@ int main(int argc, char *argv[]) {
                             gti_sw_on = true;
                         }
                         if (ac_test() < MIN_BAT_KW_AC_LO) {
-                            mqtt_ha_switch(client_p, TOPIC_PACC, false);
+                            ramp_down_ac(client_p, true);
                             ac_sw_on = true;
                         }
                     }
@@ -226,28 +228,30 @@ int main(int argc, char *argv[]) {
 
 void ramp_up_gti(MQTTClient client_p, bool start) {
     static uint32_t sequence = 0;
-    static bool once = true;
 
     if (start) {
-        once = true;
+        once_gti = true;
     }
 
-    if (once) {
-        once = false;
+    if (once_gti) {
+        once_gti = false;
         sequence = 0;
         mqtt_ha_switch(client_p, TOPIC_PDCC, true);
         usleep(500000); // wait for voltage to ramp
     }
 
     switch (sequence) {
-        case 5:
+            //        case 5:
+            //        case 4:
+            //           sequence++;
+            //            if (!mqtt_gti_power(client_p, TOPIC_P, "-#")) {
+            //                sequence = 0;
+            //            }; // - 100W power
+            //            break;
         case 4:
-            sequence++;
-            if (!mqtt_gti_power(client_p, TOPIC_P, "-#")) {
-                sequence = 0;
-            }; // - 100W power
             break;
         case 3:
+            break;
         case 2:
         case 1:
             sequence++;
@@ -272,4 +276,25 @@ void ramp_down_gti(MQTTClient client_p, bool sw_off) {
     if (sw_off) {
         mqtt_ha_switch(client_p, TOPIC_PDCC, false);
     }
+    once_gti = true;
+}
+
+void ramp_up_ac(MQTTClient client_p, bool start) {
+
+    if (start) {
+        once_ac = true;
+    }
+
+    if (once_ac) {
+        once_ac = false;
+        mqtt_ha_switch(client_p, TOPIC_PACC, true);
+        usleep(500000); // wait for voltage to ramp
+    }
+}
+
+void ramp_down_ac(MQTTClient client_p, bool sw_off) {
+    if (sw_off) {
+        mqtt_ha_switch(client_p, TOPIC_PACC, false);
+    }
+    once_ac = true;
 }

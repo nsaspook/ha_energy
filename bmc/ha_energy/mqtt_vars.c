@@ -28,7 +28,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
     pubmsg.retained = 0;
 
 #ifdef DEBUG_HA_CMD
-    printf("HA switch command\r\n");
+    printf("HA switch command %s, %s\r\n", topic_p, json_str);
 #endif    
 
     MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token);
