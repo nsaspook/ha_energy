@@ -8,6 +8,7 @@
  */
 void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
     cJSON *json;
+    static bool spam = false;
 
     MQTTClient_message pubmsg = MQTTClient_message_initializer;
     MQTTClient_deliveryToken token;
@@ -16,6 +17,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
     json = cJSON_CreateObject();
     if (sw_state) {
         cJSON_AddStringToObject(json, "state", "ON");
+        spam = true;
     } else {
         cJSON_AddStringToObject(json, "state", "OFF");
     }
@@ -28,7 +30,12 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
     pubmsg.retained = 0;
 
 #ifdef DEBUG_HA_CMD
-    fprintf(fout,"HA switch command %s, %s\r\n", topic_p, json_str);
+    if (spam) {
+        fprintf(fout, "HA switch command %s, %s\r\n", topic_p, json_str);
+        if (!sw_state) {
+            spam = false;
+        }
+    }
 #endif    
 
     MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token);
@@ -38,7 +45,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
         while (ha_flag_vars_ss.deliveredtoken != token) {
             usleep(TOKEN_DELAY);
             if (waiting++ > MQTT_TIMEOUT) {
-                fprintf(fout,"\r\nSW Still Waiting, timeout\r\n");
+                fprintf(fout, "\r\nSW Still Waiting, timeout\r\n");
                 break;
             }
         };
@@ -57,6 +64,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
     MQTTClient_message pubmsg = MQTTClient_message_initializer;
     MQTTClient_deliveryToken token;
     ha_flag_vars_ss.deliveredtoken = 0;
+    static bool spam = false;
 
     pubmsg.payload = msg;
     pubmsg.payloadlen = strlen(msg);
@@ -68,13 +76,17 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
 #else
     if (bsoc_gti() > MIN_BAT_KW) {
 #ifdef DEBUG_HA_CMD
-        fprintf(fout,"HA GTI power command %s\r\n", msg);
+        fprintf(fout, "HA GTI power command %s\r\n", msg);
+        spam = true;
 #endif
         MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token); // run power commands
     } else {
         ret = false;
 #ifdef DEBUG_HA_CMD
-        fprintf(fout,"HA GTI power set to zero\r\n");
+        if (spam) {
+            fprintf(fout, "HA GTI power set to zero\r\n");
+            spam = false;
+        }
 #endif
         pubmsg.payload = "Z#";
         pubmsg.payloadlen = strlen("Z#");
@@ -87,7 +99,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
         while (ha_flag_vars_ss.deliveredtoken != token) {
             usleep(TOKEN_DELAY);
             if (waiting++ > MQTT_TIMEOUT) {
-                fprintf(fout,"\r\nGTI Still Waiting, timeout\r\n");
+                fprintf(fout, "\r\nGTI Still Waiting, timeout\r\n");
                 break;
             }
         };

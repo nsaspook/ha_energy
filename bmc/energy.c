@@ -11,7 +11,7 @@
 #include "ha_energy/mqtt_rec.h"
 #include "ha_energy/bsoc.h"
 
-#define LOG_VERSION     "V0.28"
+#define LOG_VERSION     "V0.29"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -31,6 +31,7 @@
  * V0.25 add Home Assistant Matter controlled utility power control switching
  * V0.26 BSOC weights for system condition for power diversion
  * V0.27 -> V0.28 GTI power ramps stability using battery current STD DEV
+ * V0.29 log date-time and spam control
  */
 
 /*
@@ -119,6 +120,7 @@ int main(int argc, char *argv[]) {
     struct itimerval old_timer;
 
     bool ac_sw_on = true, gti_sw_on = true;
+    time_t rawtime;
 
     MQTTClient client_p, client_sd;
     MQTTClient_connectOptions conn_opts_p = MQTTClient_connectOptions_initializer,
@@ -224,6 +226,9 @@ int main(int argc, char *argv[]) {
                             ac_sw_on = true;
                         }
                     }
+
+                    time(&rawtime);
+                    fprintf(fout,"%s\r", ctime(&rawtime));
                 }
             } else {
                 if (ha_flag_vars_ss.receivedtoken) {

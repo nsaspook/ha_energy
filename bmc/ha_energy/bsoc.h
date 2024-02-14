@@ -43,6 +43,8 @@ extern "C" {
     double gti_test(void);
     double ac_test(void);
     bool bat_current_stable(void);
+    
+    double calculateStandardDeviation(uint32_t, double *);
 
 #ifdef __cplusplus
 }
