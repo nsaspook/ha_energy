@@ -37,7 +37,7 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
     }
 
 #ifdef DEBUG_REC
-    printf("Message arrived\n");
+    fprintf(fout,"Message arrived\n");
 #endif
     payloadptr = message->payload;
     for (i = 0; i < message->payloadlen; i++) {
@@ -50,7 +50,7 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
     if (json == NULL) {
         const char *error_ptr = cJSON_GetErrorPtr();
         if (error_ptr != NULL) {
-            printf("Error: %s\n", error_ptr);
+            fprintf(fout,"Error: %s\n", error_ptr);
         }
         ret = -1;
         ha_flag->rec_ok = false;
@@ -60,7 +60,7 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
 
     if (ha_flag->ha_id == FM80_ID) {
 #ifdef DEBUG_REC
-        printf("FM80 MQTT data\r\n");
+        fprintf(fout,"FM80 MQTT data\r\n");
 #endif
         cJSON *data_result = json;
 
@@ -73,7 +73,7 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
 
     if (ha_flag->ha_id == DUMPLOAD_ID) {
 #ifdef DEBUG_REC
-        printf("DUMPLOAD MQTT data\r\n");
+        fprintf(fout,"DUMPLOAD MQTT data\r\n");
 #endif
         cJSON *data_result = json;
 
@@ -116,13 +116,13 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
     name = cJSON_GetObjectItemCaseSensitive(json_src, data_id);
     if (cJSON_IsString(name) && (name->valuestring != NULL)) {
 #ifdef GET_DEBUG
-        printf("%s Name: %s\n", data_id, name->valuestring);
+        fprintf(fout,"%s Name: %s\n", data_id, name->valuestring);
 #endif
         ret = true;
     }
     if (cJSON_IsNumber(name)) {
 #ifdef GET_DEBUG
-        printf("%s Value: %f\n", data_id, name->valuedouble);
+        fprintf(fout,"%s Value: %f\n", data_id, name->valuedouble);
 #endif
         if (i > V_DLAST) {
             i = V_DLAST;

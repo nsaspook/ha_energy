@@ -73,6 +73,7 @@ const char *board_name = "NO_BOARD", *driver_name = "NO_DRIVER";
 cJSON *json;
 
 bool once_gti = true, once_ac = true;
+FILE* fout;
 
 /*
  * Async processing threads
@@ -126,6 +127,16 @@ int main(int argc, char *argv[]) {
     MQTTClient_deliveryToken token;
 
     printf("\r\n LOG Version %s : MQTT Version %s\r\n", LOG_VERSION, MQTT_VERSION);
+
+#ifdef LOG_TO_FILE
+    fout = fopen(LOG_TO_FILE, "a");
+    if (fout == NULL) {
+        fout = stdout;
+        printf("\r\nUnable to open LOG file %s \r\n", LOG_TO_FILE);
+    }
+#else
+    fout = stdout;
+#endif
 
     if (!bsoc_init()) {
         exit(EXIT_FAILURE);
@@ -222,6 +233,7 @@ int main(int argc, char *argv[]) {
                     ha_flag_vars_sd.receivedtoken = false;
                 }
             }
+            fflush(fout);
         }
     }
     return 0;
@@ -254,7 +266,7 @@ void ramp_up_gti(MQTTClient client_p, bool start) {
                 }; // +100W power
             } else {
                 usleep(500000); // wait a bit more for power to be stable
-                sequence=1; // do power ramps when ready
+                sequence = 1; // do power ramps when ready
                 if (!mqtt_gti_power(client_p, TOPIC_P, "-#")) {
                     sequence = 0;
                 }; // - 100W power

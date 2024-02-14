@@ -39,18 +39,16 @@ extern "C" {
 
 #define CMD_SEC         10
     
-#define MIN_BAT_KW_GTI_HI   4500.0f
-#define MIN_BAT_KW_GTI_LO   4250.0f
+#define MIN_BAT_KW_GTI_HI   4700.0f
+#define MIN_BAT_KW_GTI_LO   4650.0f
     
-#define MIN_BAT_KW_AC_HI    4900.0f
-#define MIN_BAT_KW_AC_LO    4200.0f
+#define MIN_BAT_KW_AC_HI    4700.0f
+#define MIN_BAT_KW_AC_LO    4500.0f
+    
+#define LOG_TO_FILE         "/store/logs/energy.log"
 
-    extern volatile struct bmcdata bmc; /* DIO buffer */
-    extern struct didata datain;
-    extern struct dodata dataout;
-
-    extern int channels_ai, channels_ao, channels_di, channels_do, channels_counter;
     extern struct ha_flag_type ha_flag_vars_ss;
+    extern FILE* fout;
 
     void timer_callback(int32_t);
 

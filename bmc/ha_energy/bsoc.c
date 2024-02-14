@@ -39,7 +39,7 @@ bool bsoc_data_collect(void) {
     calculateStandardDeviation(DEV_SIZE, bat_c);
 
 #ifdef BSOC_DEBUG
-    printf("\r\nmqtt var bsoc update\r\n");
+    fprintf(fout,"\r\nmqtt var bsoc update\r\n");
 #endif
     return ret;
 }
@@ -57,7 +57,7 @@ double bsoc_ac(void) {
  */
 double bsoc_gti(void) {
 #ifdef BSOC_DEBUG
-    printf("pvp %f, gweight %f, aweight %f, batc %f\r\n", pv_voltage, gti_weight, ac_weight, bat_current);
+    fprintf(fout,"pvp %f, gweight %f, aweight %f, batc %f\r\n", pv_voltage, gti_weight, ac_weight, bat_current);
 #endif
     // check for 48VDC AC charger powered from the Solar battery bank AC inverter
     if (pv_voltage < MIN_PV_VOLTS) {
@@ -74,7 +74,7 @@ double gti_test(void) {
     if (pv_voltage < MIN_PV_VOLTS) {
         gti_weight = 0.0f; // reduce power to zero
 #ifdef BSOC_DEBUG
-        printf("pvp %f, gweight %f, aweight %f, batc %f\r\n", pv_voltage, gti_weight, ac_weight, bat_current);
+        fprintf(fout,"pvp %f, gweight %f, aweight %f, batc %f\r\n", pv_voltage, gti_weight, ac_weight, bat_current);
 #endif
     }
     return gti_weight;
@@ -117,7 +117,7 @@ void calculateStandardDeviation(uint32_t N, double data[]) {
 
 #ifdef BSOC_DEBUG
     // printing standard deviation
-    printf("STD DEV of Current %.2f\r\n", standardDeviation);
+    fprintf(fout,"STD DEV of Current %.2f\r\n", standardDeviation);
 #endif
 }
 

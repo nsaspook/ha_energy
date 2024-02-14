@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-#define BSOC_DEBUG
+//#define BSOC_DEBUG
 
 #define MIN_PV_VOLTS    5.0f
 #define MIN_BAT_KW      4100.0f

@@ -28,7 +28,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
     pubmsg.retained = 0;
 
 #ifdef DEBUG_HA_CMD
-    printf("HA switch command %s, %s\r\n", topic_p, json_str);
+    fprintf(fout,"HA switch command %s, %s\r\n", topic_p, json_str);
 #endif    
 
     MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token);
@@ -38,7 +38,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
         while (ha_flag_vars_ss.deliveredtoken != token) {
             usleep(TOKEN_DELAY);
             if (waiting++ > MQTT_TIMEOUT) {
-                printf("\r\nSW Still Waiting, timeout\r\n");
+                fprintf(fout,"\r\nSW Still Waiting, timeout\r\n");
                 break;
             }
         };
@@ -68,13 +68,13 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
 #else
     if (bsoc_gti() > MIN_BAT_KW) {
 #ifdef DEBUG_HA_CMD
-        printf("HA GTI power command %s\r\n", msg);
+        fprintf(fout,"HA GTI power command %s\r\n", msg);
 #endif
         MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token); // run power commands
     } else {
         ret = false;
 #ifdef DEBUG_HA_CMD
-        printf("HA GTI power set to zero\r\n");
+        fprintf(fout,"HA GTI power set to zero\r\n");
 #endif
         pubmsg.payload = "Z#";
         pubmsg.payloadlen = strlen("Z#");
@@ -87,7 +87,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
         while (ha_flag_vars_ss.deliveredtoken != token) {
             usleep(TOKEN_DELAY);
             if (waiting++ > MQTT_TIMEOUT) {
-                printf("\r\nGTI Still Waiting, timeout\r\n");
+                fprintf(fout,"\r\nGTI Still Waiting, timeout\r\n");
                 break;
             }
         };
