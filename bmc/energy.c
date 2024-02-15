@@ -79,7 +79,7 @@ FILE* fout;
 
 CURL *curl;
 CURLcode res;
-char custom_pointer[1024];
+volatile double im_vars[PHASE_LAST][IA_LAST];
 
 /*
  * Async processing threads
@@ -121,7 +121,9 @@ size_t iammeter_write_callback(char *buffer, size_t size, size_t nitems, void *s
         }
         goto iammeter_exit;
     }
+#ifdef IM_DEBUG
     fprintf(fout, "\n iammeter_read_callback %s \n", buffer);
+#endif
 
     cJSON *data_result = json;
     data_result = cJSON_GetObjectItemCaseSensitive(json, "Datas");
@@ -131,14 +133,23 @@ size_t iammeter_write_callback(char *buffer, size_t size, size_t nitems, void *s
     }
 
     cJSON *jname;
+    uint32_t phase = 0;
 
     cJSON_ArrayForEach(jname, data_result) {
         cJSON *ianame;
+#ifdef IM_DEBUG
         fprintf(fout, "\n iammeter variables ");
+#endif
 
         cJSON_ArrayForEach(ianame, jname) {
-            fprintf(fout, "%f ", ianame->valuedouble);
+            uint32_t phase_var = 0;
+            im_vars[phase][phase_var] = ianame->valuedouble;
+#ifdef IM_DEBUG
+            fprintf(fout, "%f ", im_vars[phase][phase_var]);
+#endif
+            phase_var++;
         }
+        phase++;
     }
 
 iammeter_exit:
@@ -169,7 +180,7 @@ void iammeter_read(void) {
  * Use MQTT to send/receive DAQ updates to a Comedi hardware device
  */
 int main(int argc, char *argv[]) {
-    uint32_t speed_go = 0, rc;
+    uint32_t speed_go = 0, rc, im_delay=0;
     struct itimerval new_timer = {
         .it_value.tv_sec = CMD_SEC,
         .it_value.tv_usec = 0,
@@ -301,6 +312,10 @@ int main(int argc, char *argv[]) {
                 if (ha_flag_vars_sd.receivedtoken) {
                     ha_flag_vars_sd.receivedtoken = false;
                 }
+            }
+            if (im_delay++> IM_DELAY) {
+                im_delay=0;
+                iammeter_read();
             }
             fflush(fout);
         }
