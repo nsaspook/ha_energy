@@ -308,7 +308,7 @@ int main(int argc, char *argv[]) {
 
                     time(&rawtime);
                     fprintf(fout, "%s\r", ctime(&rawtime));
-                    if (im_delay++> IM_DELAY) {
+                    if (im_delay++ >= IM_DELAY) {
                         im_delay = 0;
                         iammeter_read();
                     }

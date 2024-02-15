@@ -49,7 +49,7 @@ extern "C" {
 #define LOG_TO_FILE         "/store/logs/energy.log"
 
 //#define IM_DEBUG            // WEM3080T LOGGING
-#define IM_DELAY            6
+#define IM_DELAY            1   // tens of second updates
 
     /*
         Three Phase WiFi Energy Meter (WEM3080T)
