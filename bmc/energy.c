@@ -11,7 +11,7 @@
 #include "ha_energy/mqtt_rec.h"
 #include "ha_energy/bsoc.h"
 
-#define LOG_VERSION     "V0.29"
+#define LOG_VERSION     "V0.30"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -32,6 +32,7 @@
  * V0.26 BSOC weights for system condition for power diversion
  * V0.27 -> V0.28 GTI power ramps stability using battery current STD DEV
  * V0.29 log date-time and spam control
+ * V0.30 add iammeter http data reading and processing
  */
 
 /*
@@ -73,8 +74,12 @@ char *token;
 const char *board_name = "NO_BOARD", *driver_name = "NO_DRIVER";
 cJSON *json;
 
-bool once_gti = true, once_ac = true;
+bool once_gti = true, once_ac = true, iammeter = false;
 FILE* fout;
+
+CURL *curl;
+CURLcode res;
+char custom_pointer[1024];
 
 /*
  * Async processing threads
@@ -104,6 +109,60 @@ void connlost(void *context, char *cause) {
     printf("\nConnection lost\n");
     printf("     cause: %s, %d\n", cause, id_num);
     exit(EXIT_FAILURE);
+}
+
+size_t iammeter_write_callback(char *buffer, size_t size, size_t nitems, void *stream) {
+    cJSON *json = cJSON_ParseWithLength(buffer, strlen(buffer));
+
+    if (json == NULL) {
+        const char *error_ptr = cJSON_GetErrorPtr();
+        if (error_ptr != NULL) {
+            fprintf(fout, "Error: %s\n", error_ptr);
+        }
+        goto iammeter_exit;
+    }
+    fprintf(fout, "\n iammeter_read_callback %s \n", buffer);
+
+    cJSON *data_result = json;
+    data_result = cJSON_GetObjectItemCaseSensitive(json, "Datas");
+
+    if (!data_result) {
+        goto iammeter_exit;
+    }
+
+    cJSON *jname;
+
+    cJSON_ArrayForEach(jname, data_result) {
+        cJSON *ianame;
+        fprintf(fout, "\n iammeter variables ");
+
+        cJSON_ArrayForEach(ianame, jname) {
+            fprintf(fout, "%f ", ianame->valuedouble);
+        }
+    }
+
+iammeter_exit:
+    cJSON_Delete(json);
+    return size * nitems;
+}
+
+void iammeter_read(void) {
+
+    curl = curl_easy_init();
+    if (curl) {
+        curl_easy_setopt(curl, CURLOPT_URL, "http://10.1.1.101/monitorjson");
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, iammeter_write_callback);
+
+        res = curl_easy_perform(curl);
+        /* Check for errors */
+        if (res != CURLE_OK) {
+            fprintf(stderr, "curl_easy_perform() failed: %s\n",
+                    curl_easy_strerror(res));
+        } else {
+            iammeter = true;
+        }
+        curl_easy_cleanup(curl);
+    }
 }
 
 /*
@@ -196,6 +255,11 @@ int main(int argc, char *argv[]) {
     mqtt_ha_switch(client_p, TOPIC_PDCC, false);
     mqtt_ha_switch(client_p, TOPIC_PACC, false);
 
+    /*
+     * use libcurl to read AC power meter HTTP data
+     */
+    iammeter_read();
+
     {
         printf("\r\n Solar Energy AC power controller\r\n");
 
@@ -228,7 +292,7 @@ int main(int argc, char *argv[]) {
                     }
 
                     time(&rawtime);
-                    fprintf(fout,"%s\r", ctime(&rawtime));
+                    fprintf(fout, "%s\r", ctime(&rawtime));
                 }
             } else {
                 if (ha_flag_vars_ss.receivedtoken) {

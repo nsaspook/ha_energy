@@ -24,6 +24,7 @@ extern "C" {
 #include <sys/time.h>
 #include <errno.h>
 #include <cjson/cJSON.h>
+#include <curl/curl.h>
 #include "MQTTClient.h"
 
 #define DAQ_STR 32
@@ -38,13 +39,13 @@ extern "C" {
 #define NORM_MODE       1
 
 #define CMD_SEC         10
-    
-#define MIN_BAT_KW_GTI_HI   4700.0f
+
+#define MIN_BAT_KW_GTI_HI   5100.0f
 #define MIN_BAT_KW_GTI_LO   4650.0f
-    
-#define MIN_BAT_KW_AC_HI    4700.0f
+
+#define MIN_BAT_KW_AC_HI    5000.0f
 #define MIN_BAT_KW_AC_LO    4500.0f
-    
+
 #define LOG_TO_FILE         "/store/logs/energy.log"
 
     extern struct ha_flag_type ha_flag_vars_ss;
@@ -58,6 +59,9 @@ extern "C" {
     void ramp_up_ac(MQTTClient, bool);
     void ramp_down_gti(MQTTClient, bool);
     void ramp_down_ac(MQTTClient, bool);
+
+    size_t iammeter_write_callback(char *, size_t, size_t, void *);
+    void iammeter_read(void);
 
 #ifdef __cplusplus
 }

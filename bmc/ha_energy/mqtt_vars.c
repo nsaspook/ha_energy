@@ -9,6 +9,7 @@
 void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
     cJSON *json;
     static bool spam = false;
+    static uint32_t less_spam = 0;
 
     MQTTClient_message pubmsg = MQTTClient_message_initializer;
     MQTTClient_deliveryToken token;
@@ -18,6 +19,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
     if (sw_state) {
         cJSON_AddStringToObject(json, "state", "ON");
         spam = true;
+        less_spam = 0;
     } else {
         cJSON_AddStringToObject(json, "state", "OFF");
     }
@@ -33,7 +35,10 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
     if (spam) {
         fprintf(fout, "HA switch command %s, %s\r\n", topic_p, json_str);
         if (!sw_state) {
-            spam = false;
+            if (less_spam++ > 3) {
+                spam = false;
+                less_spam = 0;
+            }
         }
     }
 #endif    

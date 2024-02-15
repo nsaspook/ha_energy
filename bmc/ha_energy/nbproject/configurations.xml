@@ -96,6 +96,7 @@
             <linkerOptionItem>`pkg-config --libs libcjson`</linkerOptionItem>
             <linkerLibLibItem>paho-mqtt3c</linkerLibLibItem>
             <linkerLibStdlibItem>Mathematics</linkerLibStdlibItem>
+            <linkerOptionItem>`pkg-config --libs libcurl`</linkerOptionItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
