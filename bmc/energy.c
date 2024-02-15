@@ -74,7 +74,7 @@ char *token;
 const char *board_name = "NO_BOARD", *driver_name = "NO_DRIVER";
 cJSON *json;
 
-bool once_gti = true, once_ac = true, iammeter = false;
+volatile bool once_gti = true, once_ac = true, iammeter = false;
 FILE* fout;
 
 CURL *curl;
@@ -151,6 +151,9 @@ size_t iammeter_write_callback(char *buffer, size_t size, size_t nitems, void *s
         }
         phase++;
     }
+#ifdef IM_DEBUG
+    fprintf(fout, "\n");
+#endif
 
 iammeter_exit:
     cJSON_Delete(json);
@@ -169,6 +172,7 @@ void iammeter_read(void) {
         if (res != CURLE_OK) {
             fprintf(stderr, "curl_easy_perform() failed: %s\n",
                     curl_easy_strerror(res));
+            iammeter = false;
         } else {
             iammeter = true;
         }
@@ -180,7 +184,7 @@ void iammeter_read(void) {
  * Use MQTT to send/receive DAQ updates to a Comedi hardware device
  */
 int main(int argc, char *argv[]) {
-    uint32_t speed_go = 0, rc, im_delay=0;
+    uint32_t speed_go = 0, rc, im_delay = 0;
     struct itimerval new_timer = {
         .it_value.tv_sec = CMD_SEC,
         .it_value.tv_usec = 0,
@@ -304,6 +308,10 @@ int main(int argc, char *argv[]) {
 
                     time(&rawtime);
                     fprintf(fout, "%s\r", ctime(&rawtime));
+                    if (im_delay++> IM_DELAY) {
+                        im_delay = 0;
+                        iammeter_read();
+                    }
                 }
             } else {
                 if (ha_flag_vars_ss.receivedtoken) {
@@ -312,10 +320,6 @@ int main(int argc, char *argv[]) {
                 if (ha_flag_vars_sd.receivedtoken) {
                     ha_flag_vars_sd.receivedtoken = false;
                 }
-            }
-            if (im_delay++> IM_DELAY) {
-                im_delay=0;
-                iammeter_read();
             }
             fflush(fout);
         }
