@@ -145,7 +145,7 @@ size_t iammeter_write_callback(char *buffer, size_t size, size_t nitems, void *s
             uint32_t phase_var = 0;
             im_vars[phase][phase_var] = ianame->valuedouble;
 #ifdef IM_DEBUG
-            fprintf(fout, "%f ", im_vars[phase][phase_var]);
+            fprintf(fout, "%10.2f ", im_vars[phase][phase_var]);
 #endif
             phase_var++;
         }
