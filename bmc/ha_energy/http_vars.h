@@ -22,7 +22,7 @@ extern "C" {
     extern CURL *curl;
     extern CURLcode res;
     extern volatile double im_vars[PHASE_LAST][IA_LAST];
-    extern volatile bool once_gti, once_ac, iammeter, fm80, dumpload;
+    extern volatile bool iammeter, fm80, dumpload;
 
 
 #ifdef __cplusplus
