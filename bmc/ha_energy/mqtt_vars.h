@@ -41,6 +41,8 @@ extern "C" {
     extern volatile double mvar[V_DLAST];
 
     extern const char* mqtt_name[V_DLAST];
+    
+    extern volatile bool once_gti, once_ac, iammeter, fm80, dumpload;
 
     void mqtt_ha_switch(MQTTClient, const char *, bool);
     bool mqtt_gti_power(MQTTClient, const char *, char *);

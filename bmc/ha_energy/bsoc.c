@@ -2,7 +2,7 @@
 #include "mqtt_rec.h"
 
 static volatile double ac_weight = 0.0f, gti_weight = 0.0f, pv_voltage = 0.0f, bat_current = 0.0f, batc_std_dev = 0.0f;
-double bat_c[DEV_SIZE];
+double bat_c_std_dev[DEV_SIZE];
 
 double calculateStandardDeviation(uint32_t, double *);
 
@@ -31,12 +31,12 @@ bool bsoc_data_collect(void) {
 
     pthread_mutex_unlock(&ha_lock); // resume MQTT var updates
 
-    bat_c[i++] = bat_current;
+    bat_c_std_dev[i++] = bat_current;
     if (i >= DEV_SIZE) {
         i = 0;
     }
 
-    calculateStandardDeviation(DEV_SIZE, bat_c);
+    calculateStandardDeviation(DEV_SIZE, bat_c_std_dev);
 
 #ifdef BSOC_DEBUG
     fprintf(fout, "\r\nmqtt var bsoc update\r\n");

@@ -34,7 +34,7 @@ extern "C" {
 #include <errno.h>
 #include <math.h>
 
-    extern double bat_c[DEV_SIZE];
+    extern double bat_c_std_dev[DEV_SIZE];
     
     bool bsoc_init(void);
     bool bsoc_data_collect(void);

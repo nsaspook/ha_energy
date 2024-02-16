@@ -11,7 +11,7 @@
 #include "ha_energy/mqtt_rec.h"
 #include "ha_energy/bsoc.h"
 
-#define LOG_VERSION     "V0.30"
+#define LOG_VERSION     "V0.31"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -33,6 +33,7 @@
  * V0.27 -> V0.28 GTI power ramps stability using battery current STD DEV
  * V0.29 log date-time and spam control
  * V0.30 add iammeter http data reading and processing
+ * V0.31 refactor http code and a few vars
  */
 
 /*
@@ -74,12 +75,8 @@ char *token;
 const char *board_name = "NO_BOARD", *driver_name = "NO_DRIVER";
 cJSON *json;
 
-volatile bool once_gti = true, once_ac = true, iammeter = false;
+volatile bool once_gti = true, once_ac = true, iammeter = false, fm80 = false, dumpload=false;
 FILE* fout;
-
-CURL *curl;
-CURLcode res;
-volatile double im_vars[PHASE_LAST][IA_LAST];
 
 /*
  * Async processing threads
@@ -109,75 +106,6 @@ void connlost(void *context, char *cause) {
     printf("\nConnection lost\n");
     printf("     cause: %s, %d\n", cause, id_num);
     exit(EXIT_FAILURE);
-}
-
-size_t iammeter_write_callback(char *buffer, size_t size, size_t nitems, void *stream) {
-    cJSON *json = cJSON_ParseWithLength(buffer, strlen(buffer));
-
-    if (json == NULL) {
-        const char *error_ptr = cJSON_GetErrorPtr();
-        if (error_ptr != NULL) {
-            fprintf(fout, "Error: %s\n", error_ptr);
-        }
-        goto iammeter_exit;
-    }
-#ifdef IM_DEBUG
-    fprintf(fout, "\n iammeter_read_callback %s \n", buffer);
-#endif
-
-    cJSON *data_result = json;
-    data_result = cJSON_GetObjectItemCaseSensitive(json, "Datas");
-
-    if (!data_result) {
-        goto iammeter_exit;
-    }
-
-    cJSON *jname;
-    uint32_t phase = 0;
-
-    cJSON_ArrayForEach(jname, data_result) {
-        cJSON *ianame;
-#ifdef IM_DEBUG
-        fprintf(fout, "\n iammeter variables ");
-#endif
-
-        cJSON_ArrayForEach(ianame, jname) {
-            uint32_t phase_var = 0;
-            im_vars[phase][phase_var] = ianame->valuedouble;
-#ifdef IM_DEBUG
-            fprintf(fout, "%10.2f ", im_vars[phase][phase_var]);
-#endif
-            phase_var++;
-        }
-        phase++;
-    }
-#ifdef IM_DEBUG
-    fprintf(fout, "\n");
-#endif
-
-iammeter_exit:
-    cJSON_Delete(json);
-    return size * nitems;
-}
-
-void iammeter_read(void) {
-
-    curl = curl_easy_init();
-    if (curl) {
-        curl_easy_setopt(curl, CURLOPT_URL, "http://10.1.1.101/monitorjson");
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, iammeter_write_callback);
-
-        res = curl_easy_perform(curl);
-        /* Check for errors */
-        if (res != CURLE_OK) {
-            fprintf(stderr, "curl_easy_perform() failed: %s\n",
-                    curl_easy_strerror(res));
-            iammeter = false;
-        } else {
-            iammeter = true;
-        }
-        curl_easy_cleanup(curl);
-    }
 }
 
 /*

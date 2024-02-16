@@ -40,16 +40,16 @@ extern "C" {
 
 #define CMD_SEC         10
 
-#define MIN_BAT_KW_GTI_HI   5100.0f
+#define MIN_BAT_KW_GTI_HI   4800.0f
 #define MIN_BAT_KW_GTI_LO   4650.0f
 
-#define MIN_BAT_KW_AC_HI    5000.0f
+#define MIN_BAT_KW_AC_HI    4700.0f
 #define MIN_BAT_KW_AC_LO    4500.0f
 
 #define LOG_TO_FILE         "/store/logs/energy.log"
 
-//#define IM_DEBUG            // WEM3080T LOGGING
-#define IM_DELAY            1   // tens of second updates
+    //#define IM_DEBUG            // WEM3080T LOGGING
+#define IM_DELAY            1   // tens of second updates    
 
     /*
         Three Phase WiFi Energy Meter (WEM3080T)
@@ -99,7 +99,6 @@ extern "C" {
     extern FILE* fout;
 
     void timer_callback(int32_t);
-
     void connlost(void *, char *);
 
     void ramp_up_gti(MQTTClient, bool);

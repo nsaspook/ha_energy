@@ -6,6 +6,7 @@
                    projectFiles="true">
       <itemPath>bsoc.h</itemPath>
       <itemPath>energy.h</itemPath>
+      <itemPath>http_vars.h</itemPath>
       <itemPath>mqtt_rec.h</itemPath>
       <itemPath>mqtt_vars.h</itemPath>
       <itemPath>sine_table.h</itemPath>
@@ -19,6 +20,7 @@
                    projectFiles="true">
       <itemPath>bsoc.c</itemPath>
       <itemPath>../energy.c</itemPath>
+      <itemPath>http_vars.c</itemPath>
       <itemPath>mqtt_rec.c</itemPath>
       <itemPath>mqtt_vars.c</itemPath>
     </logicalFolder>
@@ -58,6 +60,10 @@
       <item path="bsoc.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="energy.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="http_vars.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="http_vars.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="mqtt_rec.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -107,6 +113,10 @@
       <item path="bsoc.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="energy.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="http_vars.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="http_vars.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="mqtt_rec.c" ex="false" tool="0" flavor2="0">
       </item>

@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/_ext/5c0/energy.o \
 	${OBJECTDIR}/bsoc.o \
+	${OBJECTDIR}/http_vars.o \
 	${OBJECTDIR}/mqtt_rec.o \
 	${OBJECTDIR}/mqtt_vars.o
 
@@ -74,6 +75,11 @@ ${OBJECTDIR}/bsoc.o: bsoc.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g `pkg-config --cflags libcjson`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/bsoc.o bsoc.c
+
+${OBJECTDIR}/http_vars.o: http_vars.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g `pkg-config --cflags libcjson`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/http_vars.o http_vars.c
 
 ${OBJECTDIR}/mqtt_rec.o: mqtt_rec.c
 	${MKDIR} -p ${OBJECTDIR}
