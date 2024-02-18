@@ -17,6 +17,8 @@ extern "C" {
 #include "mqtt_vars.h"
 
 #define RDEV_SIZE        10
+    
+#define FLOAT_CODE      1
     //#define DEBUG_REC
     //#define GET_DEBUG
 
@@ -35,11 +37,13 @@ extern "C" {
     };
 
     extern pthread_mutex_t ha_lock;
+    extern FILE* fout;
 
     int32_t msgarrvd(void *, char *, int, MQTTClient_message *);
     void delivered(void *, MQTTClient_deliveryToken);
 
     bool json_get_data(cJSON *, const char *, cJSON *, uint32_t);
+    bool fm80_float(void);
 
 #ifdef __cplusplus
 }

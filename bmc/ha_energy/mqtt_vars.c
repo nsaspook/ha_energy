@@ -82,23 +82,23 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
     if (bsoc_gti() > MIN_BAT_KW) {
 #ifdef DEBUG_HA_CMD
         fprintf(fout, "HA GTI power command %s\r\n", msg);
-#endif
         spam = true;
+#endif
         MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token); // run power commands
     } else {
         ret = false;
 #ifdef DEBUG_HA_CMD
         if (spam) {
             fprintf(fout, "HA GTI power set to zero\r\n");
+            spam = false;
         }
 #endif
         pubmsg.payload = "Z#";
         pubmsg.payloadlen = strlen("Z#");
-        if (!spam) { // don't send commands to the GTI power controller channel
+        if (!spam) {
             MQTTClient_publishMessage(client_p, "mateq84/data/gticmd_spam", &pubmsg, &token);
         } else {
             MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token); // only shutdown GTI power
-            spam=false;
         }
     }
 #endif

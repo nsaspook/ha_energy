@@ -1,9 +1,4 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/cFiles/file.h to edit this template
- */
-
-/*
  * File:   http_vars.h
  * Author: root
  *
@@ -19,11 +14,13 @@ extern "C" {
 
 #include "energy.h"
 
+#define MAX_IM_VAR  48
+
     extern CURL *curl;
     extern CURLcode res;
-    extern volatile double im_vars[PHASE_LAST][IA_LAST];
+    extern volatile double im_vars[IA_LAST][PHASE_LAST];
     extern volatile bool iammeter, fm80, dumpload;
-
+    extern FILE* fout;
 
 #ifdef __cplusplus
 }

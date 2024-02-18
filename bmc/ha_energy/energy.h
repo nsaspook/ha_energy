@@ -50,6 +50,7 @@ extern "C" {
 
     //#define IM_DEBUG            // WEM3080T LOGGING
 #define IM_DELAY            1   // tens of second updates    
+#define IM_DISPLAY          6
 
     /*
         Three Phase WiFi Energy Meter (WEM3080T)
@@ -108,6 +109,9 @@ extern "C" {
 
     size_t iammeter_write_callback(char *, size_t, size_t, void *);
     void iammeter_read(void);
+    void print_im_vars(void);
+    void print_mvar_vars(void);
+
 
 #ifdef __cplusplus
 }

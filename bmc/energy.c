@@ -75,8 +75,10 @@ char *token;
 const char *board_name = "NO_BOARD", *driver_name = "NO_DRIVER";
 cJSON *json;
 
-volatile bool once_gti = true, once_ac = true, iammeter = false, fm80 = false, dumpload=false;
+volatile bool once_gti = true, once_ac = true, iammeter = false, fm80 = false, dumpload = false;
 FILE* fout;
+
+volatile double im_vars[IA_LAST][PHASE_LAST];
 
 /*
  * Async processing threads
@@ -112,7 +114,7 @@ void connlost(void *context, char *cause) {
  * Use MQTT to send/receive DAQ updates to a Comedi hardware device
  */
 int main(int argc, char *argv[]) {
-    uint32_t speed_go = 0, rc, im_delay = 0;
+    uint32_t speed_go = 0, rc, im_delay = 0, im_display = 0;
     struct itimerval new_timer = {
         .it_value.tv_sec = CMD_SEC,
         .it_value.tv_usec = 0,
@@ -215,8 +217,8 @@ int main(int argc, char *argv[]) {
                 ha_flag_vars_ss.runner = false;
                 bsoc_data_collect();
 
-                if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {
-                    if (gti_test() > MIN_BAT_KW_GTI_HI) {
+                if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {                    
+                    if ((gti_test() > MIN_BAT_KW_GTI_HI) || fm80_float()) {
                         ramp_up_gti(client_p, gti_sw_on); // fixme on the ONCE code
                         gti_sw_on = false;
                         if (ac_test() > MIN_BAT_KW_AC_HI) {
@@ -235,11 +237,17 @@ int main(int argc, char *argv[]) {
                     }
 
                     time(&rawtime);
-                    fprintf(fout, "%s\r", ctime(&rawtime));
+
                     if (im_delay++ >= IM_DELAY) {
                         im_delay = 0;
                         iammeter_read();
                     }
+                    if (im_display++ >= IM_DISPLAY) {
+                        im_display = 0;
+                        print_im_vars();
+                        print_mvar_vars();
+                    }
+                    fprintf(fout, "%s\r", ctime(&rawtime));
                 }
             } else {
                 if (ha_flag_vars_ss.receivedtoken) {
