@@ -86,5 +86,5 @@ static void iammeter_get_data(double valuedouble, uint32_t i, uint32_t j) {
 }
 
 void print_im_vars(void) {
-    fprintf(fout, "House L1 %8.2f, House L2 %8.2f, GTI L1 %8.2f", print_vars[2], print_vars[9], print_vars[16]);
+    fprintf(fout, "House L1 %8.2f, House L2 %8.2f, GTI L1 %8.2f", print_vars[L1_P], print_vars[L2_P], print_vars[L3_P]);
 }
