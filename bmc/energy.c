@@ -1,5 +1,5 @@
 /*
- * HA Energy control using MQTT JSON format data from various energy monitor sources
+ * HA Energy control using MQTT JSON and HTTP format data from various energy monitor sources
  * asynchronous mode using threads
  *
  * This file may be freely modified, distributed, and combined with
