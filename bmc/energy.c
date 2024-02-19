@@ -217,7 +217,7 @@ int main(int argc, char *argv[]) {
                 ha_flag_vars_ss.runner = false;
                 bsoc_data_collect();
 
-                if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {                    
+                if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {
                     if ((gti_test() > MIN_BAT_KW_GTI_HI) || fm80_float()) {
                         ramp_up_gti(client_p, gti_sw_on); // fixme on the ONCE code
                         gti_sw_on = false;
@@ -243,7 +243,14 @@ int main(int argc, char *argv[]) {
                         iammeter_read();
                     }
                     if (im_display++ >= IM_DISPLAY) {
+                        char buffer[80];
+                        uint32_t len;
+
                         im_display = 0;
+                        sprintf(buffer, "%s", ctime(&rawtime));
+                        len = strlen(buffer);
+                        buffer[len - 1] = 0; // munge out the return character
+                        fprintf(fout, "%s ", buffer);
                         print_im_vars();
                         print_mvar_vars();
                     }

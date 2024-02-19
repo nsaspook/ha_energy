@@ -152,11 +152,11 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
 }
 
 void print_mvar_vars(void) {
-    fprintf(fout, ", AC Inverter %8.2f, BAT Energy %8.2f ", mvar[V_FLO], mvar[V_FBEKW]);
+    fprintf(fout, ", AC Inverter %8.2f, BAT Energy %8.2f \r", mvar[V_FLO], mvar[V_FBEKW]);
 }
 
 bool fm80_float(void) {
-    if ((uint32_t) mvar[V_FBEKW] == FLOAT_CODE) {
+    if ((uint32_t) mvar[V_FCCM] == FLOAT_CODE) {
         return true;
     }
     return false;
