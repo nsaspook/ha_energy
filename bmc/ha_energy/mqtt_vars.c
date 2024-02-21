@@ -81,7 +81,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
 #else
     if (bsoc_gti() > MIN_BAT_KW) {
 #ifdef DEBUG_HA_CMD
-        fprintf(fout, "HA GTI power command %s\r\n", msg);
+        fprintf(fout, "HA GTI power command %s, SDEV %5.2f\r\n", msg,get_batc_dev());
         spam = true;
 #endif
         MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token); // run power commands

@@ -84,6 +84,10 @@ double ac_test(void) {
     return ac_weight;
 }
 
+double get_batc_dev(void) {
+    return batc_std_dev;
+}
+
 /*
  * used to wait until GTI power ramps are stable
  * batc_std_dev needs to be under some standard value to continue power ramps
@@ -127,7 +131,11 @@ bool bat_current_stable(void) {
 
     if (batc_std_dev <= (MAX_BATC_DEV + gap)) {
         gap = MAX_BATC_DEV;
-        return true;
+        if (bat_c_std_dev[0] < BAT_C_DRAW) {
+            return true;
+        } else {
+            return false;
+        }
     } else {
         gap = 0.0f;
         return false;

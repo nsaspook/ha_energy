@@ -11,7 +11,7 @@
 #include "ha_energy/mqtt_rec.h"
 #include "ha_energy/bsoc.h"
 
-#define LOG_VERSION     "V0.31"
+#define LOG_VERSION     "V0.32"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -34,6 +34,7 @@
  * V0.29 log date-time and spam control
  * V0.30 add iammeter http data reading and processing
  * V0.31 refactor http code and a few vars
+ * V0.32 AC and GTI power triggers reworked
  */
 
 /*
@@ -218,22 +219,23 @@ int main(int argc, char *argv[]) {
                 bsoc_data_collect();
 
                 if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {
-                    if ((gti_test() > MIN_BAT_KW_GTI_HI) || fm80_float()) {
+                    if (fm80_float() || (ac_test() > MIN_BAT_KW_AC_HI)) {
+                        ramp_up_ac(client_p, ac_sw_on);
+                        ac_sw_on = false;
+                    }
+                    if (ac_test() < MIN_BAT_KW_AC_LO) {
+                        ramp_down_ac(client_p, true);
+                        ac_sw_on = true;
+                    }
+                    if ((gti_test() > MIN_BAT_KW_GTI_HI)) {
                         ramp_up_gti(client_p, gti_sw_on); // fixme on the ONCE code
                         gti_sw_on = false;
-                        if (ac_test() > MIN_BAT_KW_AC_HI) {
-                            ramp_up_ac(client_p, ac_sw_on);
-                            ac_sw_on = false;
-                        }
                     } else {
                         if (gti_test() < MIN_BAT_KW_GTI_LO) {
                             ramp_down_gti(client_p, true);
                             gti_sw_on = true;
                         }
-                        if (ac_test() < MIN_BAT_KW_AC_LO) {
-                            ramp_down_ac(client_p, true);
-                            ac_sw_on = true;
-                        }
+
                     }
 
                     time(&rawtime);
@@ -247,10 +249,16 @@ int main(int argc, char *argv[]) {
                         uint32_t len;
 
                         im_display = 0;
+                        if (!(fm80 && dumpload && iammeter)) {
+                            fprintf(fout, "\r\n !!!! Source data update error !!!! , check FM80, DUMPLOAD, IAMMETER channels\r\n");
+                        }
                         sprintf(buffer, "%s", ctime(&rawtime));
                         len = strlen(buffer);
                         buffer[len - 1] = 0; // munge out the return character
                         fprintf(fout, "%s ", buffer);
+                        fm80 = false;
+                        dumpload = false;
+                        iammeter = false;
                         print_im_vars();
                         print_mvar_vars();
                     }
