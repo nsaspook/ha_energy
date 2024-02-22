@@ -8,6 +8,7 @@ const char* mqtt_name[V_DLAST] = {
     "bvolts",
     "load",
     "solar",
+    "acenergy",
     "flast",
     "DLv_pv",
     "DLp_pv",
@@ -151,7 +152,7 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
 }
 
 void print_mvar_vars(void) {
-    fprintf(fout, ", AC Inverter %8.2f, BAT Energy %8.2f \r", E.mvar[V_FLO], E.mvar[V_FBEKW]);
+    fprintf(fout, ", AC Inverter %8.2fW, BAT Energy %8.2fWh, Solar E %8.2fWh, AC E %8.2fWh\r", E.mvar[V_FLO], E.mvar[V_FBEKW],E.mvar[V_FSO], E.mvar[V_FACE]);
 }
 
 bool fm80_float(void) {

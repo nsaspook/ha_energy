@@ -28,8 +28,17 @@ bool bsoc_data_collect(void) {
     gti_weight = E.mvar[V_FBEKW];
     pv_voltage = E.mvar[V_DVPV];
     bat_current = E.mvar[V_DCMPPT];
+    E.ac_low_adj = E.mvar[V_FSO]* -1.0f;
+    E.gti_low_adj = E.mvar[V_FACE] * -1.0f;
 
     pthread_mutex_unlock(&ha_lock); // resume MQTT var updates
+
+    if (E.ac_low_adj < -2000.0f) {
+        E.ac_low_adj = -2000.0f;
+    }
+    if (E.gti_low_adj < -2000.0f) {
+        E.gti_low_adj = -2000.0f;
+    }
 
     bat_c_std_dev[i++] = bat_current;
     if (i >= DEV_SIZE) {
@@ -134,6 +143,7 @@ bool bat_current_stable(void) {
         if (bat_c_std_dev[0] < BAT_C_DRAW) {
             return true;
         } else {
+            gap = 0.0f;
             return false;
         }
     } else {

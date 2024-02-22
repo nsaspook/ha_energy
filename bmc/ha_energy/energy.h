@@ -103,6 +103,7 @@ extern "C" {
         V_FBV,
         V_FLO,
         V_FSO,
+        V_FACE,
         V_FLAST,
         // add other data ranges here
         V_DVPV,
@@ -121,6 +122,7 @@ extern "C" {
         volatile double im_vars[IA_LAST][PHASE_LAST];
         volatile double mvar[V_DLAST];
         volatile bool once_gti, once_ac, iammeter, fm80, dumpload;
+        volatile double gti_low_adj, ac_low_adj;
     };
 
     extern struct energy_type E;

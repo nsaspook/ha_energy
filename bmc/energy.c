@@ -11,7 +11,7 @@
 #include "ha_energy/mqtt_rec.h"
 #include "ha_energy/bsoc.h"
 
-#define LOG_VERSION     "V0.33"
+#define LOG_VERSION     "V0.34"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -36,6 +36,7 @@
  * V0.31 refactor http code and a few vars
  * V0.32 AC and GTI power triggers reworked
  * V0.33 refactor system parms into energy structure energy_type E
+ * V0.34 GTI and AC Inverter battery energy run down limits adjustments per energy usage and solar production
  */
 
 /*
@@ -87,6 +88,8 @@ struct energy_type E = {
     .iammeter = false,
     .fm80 = false,
     .dumpload = false,
+    .ac_low_adj = 0.0f,
+    .gti_low_adj = 0.0f,
 };
 
 /*
@@ -231,7 +234,7 @@ int main(int argc, char *argv[]) {
                         ramp_up_ac(client_p, ac_sw_on);
                         ac_sw_on = false;
                     }
-                    if (ac_test() < MIN_BAT_KW_AC_LO) {
+                    if (ac_test() < (MIN_BAT_KW_AC_LO+E.ac_low_adj)) {
                         ramp_down_ac(client_p, true);
                         ac_sw_on = true;
                     }
@@ -239,7 +242,7 @@ int main(int argc, char *argv[]) {
                         ramp_up_gti(client_p, gti_sw_on); // fixme on the ONCE code
                         gti_sw_on = false;
                     } else {
-                        if (gti_test() < MIN_BAT_KW_GTI_LO) {
+                        if (gti_test() < (MIN_BAT_KW_GTI_LO+E.gti_low_adj)) {
                             ramp_down_gti(client_p, true);
                             gti_sw_on = true;
                         }
