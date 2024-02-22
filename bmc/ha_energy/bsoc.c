@@ -24,10 +24,10 @@ bool bsoc_data_collect(void) {
     static uint32_t i = 0;
     pthread_mutex_lock(&ha_lock); // lockout MQTT var updates
 
-    ac_weight = mvar[V_FBEKW];
-    gti_weight = mvar[V_FBEKW];
-    pv_voltage = mvar[V_DVPV];
-    bat_current = mvar[V_DCMPPT];
+    ac_weight = E.mvar[V_FBEKW];
+    gti_weight = E.mvar[V_FBEKW];
+    pv_voltage = E.mvar[V_DVPV];
+    bat_current = E.mvar[V_DCMPPT];
 
     pthread_mutex_unlock(&ha_lock); // resume MQTT var updates
 

@@ -14,16 +14,12 @@ extern "C" {
 
 #include "energy.h"
 
-#define MAX_IM_VAR  IA_LAST*PHASE_LAST
-
 #define L1_P    IA_POWER
 #define L2_P    L1_P+IA_LAST
 #define L3_P    L2_P+IA_LAST
 
     extern CURL *curl;
     extern CURLcode res;
-    extern volatile double im_vars[IA_LAST][PHASE_LAST];
-    extern volatile bool iammeter, fm80, dumpload;
     extern FILE* fout;
 
 #ifdef __cplusplus

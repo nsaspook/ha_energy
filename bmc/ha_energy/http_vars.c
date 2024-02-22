@@ -5,11 +5,9 @@ CURLcode res;
 
 static void iammeter_get_data(double, uint32_t, uint32_t);
 
-volatile double print_vars[MAX_IM_VAR];
-
 size_t iammeter_write_callback(char *buffer, size_t size, size_t nitems, void *stream) {
     cJSON *json = cJSON_ParseWithLength(buffer, strlen(buffer));
-    double * print_vars = stream;
+    struct energy_type * e = stream;
     uint32_t next_var = 0;
 
     if (json == NULL) {
@@ -42,8 +40,7 @@ size_t iammeter_write_callback(char *buffer, size_t size, size_t nitems, void *s
         cJSON_ArrayForEach(ianame, jname) {
             uint32_t phase_var = 0;
             iammeter_get_data(ianame->valuedouble, phase_var, phase);
-            //            im_vars[phase_var][phase] = ianame->valuedouble;
-            print_vars[next_var++] = ianame->valuedouble;
+            e->print_vars[next_var++] = ianame->valuedouble;
 #ifdef IM_DEBUG
             fprintf(fout, "%8.2f ", im_vars[phase_var][phase]);
 #endif
@@ -66,25 +63,25 @@ void iammeter_read(void) {
     if (curl) {
         curl_easy_setopt(curl, CURLOPT_URL, "http://10.1.1.101/monitorjson");
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, iammeter_write_callback);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, print_vars); // external data array for iammeter values
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, E.print_vars); // external data array for iammeter values
 
         res = curl_easy_perform(curl);
         /* Check for errors */
         if (res != CURLE_OK) {
             fprintf(stderr, "curl_easy_perform() failed: %s\n",
                     curl_easy_strerror(res));
-            iammeter = false;
+            E.iammeter = false;
         } else {
-            iammeter = true;
+            E.iammeter = true;
         }
         curl_easy_cleanup(curl);
     }
 }
 
 static void iammeter_get_data(double valuedouble, uint32_t i, uint32_t j) {
-    im_vars[i][j] = valuedouble;
+    E.im_vars[i][j] = valuedouble;
 }
 
 void print_im_vars(void) {
-    fprintf(fout, "House L1 %8.2f, House L2 %8.2f, GTI L1 %8.2f", print_vars[L1_P], print_vars[L2_P], print_vars[L3_P]);
+    fprintf(fout, "House L1 %8.2f, House L2 %8.2f, GTI L1 %8.2f", E.print_vars[L1_P], E.print_vars[L2_P], E.print_vars[L3_P]);
 }

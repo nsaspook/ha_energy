@@ -1,7 +1,6 @@
 #include "mqtt_rec.h"
 #include "bsoc.h"
 
-volatile double mvar[V_DLAST];
 const char* mqtt_name[V_DLAST] = {
     "pccmode",
     "batenergykw",
@@ -54,8 +53,8 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
         }
         ret = -1;
         ha_flag->rec_ok = false;
-        fm80 = false;
-        dumpload = false;
+        E.fm80 = false;
+        E.dumpload = false;
         goto error_exit;
     }
 
@@ -70,7 +69,7 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
                 ha_flag->var_update++;
             }
         }
-        fm80 = true;
+        E.fm80 = true;
     }
 
     if (ha_flag->ha_id == DUMPLOAD_ID) {
@@ -84,7 +83,7 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
                 ha_flag->var_update++;
             }
         }
-        dumpload = true;
+        E.dumpload = true;
     }
 
     ha_flag->receivedtoken = true;
@@ -134,14 +133,14 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
             i = V_DLAST;
         }
         pthread_mutex_lock(&ha_lock);
-        mvar[i] = name->valuedouble;
+        E.mvar[i] = name->valuedouble;
         pthread_mutex_unlock(&ha_lock);
 
         if (i == V_DCMPPT) {
             /*
              * load battery current standard deviation array bat_c_std_dev with data
              */
-            bat_c_std_dev[j++] = mvar[i];
+            bat_c_std_dev[j++] = E.mvar[i];
             if (j >= RDEV_SIZE) {
                 j = 0;
             }
@@ -152,11 +151,11 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
 }
 
 void print_mvar_vars(void) {
-    fprintf(fout, ", AC Inverter %8.2f, BAT Energy %8.2f \r", mvar[V_FLO], mvar[V_FBEKW]);
+    fprintf(fout, ", AC Inverter %8.2f, BAT Energy %8.2f \r", E.mvar[V_FLO], E.mvar[V_FBEKW]);
 }
 
 bool fm80_float(void) {
-    if ((uint32_t) mvar[V_FCCM] == FLOAT_CODE) {
+    if ((uint32_t) E.mvar[V_FCCM] == FLOAT_CODE) {
         return true;
     }
     return false;

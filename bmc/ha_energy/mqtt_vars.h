@@ -20,29 +20,7 @@ extern "C" {
 
 #define QOS             1
 
-    enum mqtt_vars {
-        V_FCCM,
-        V_FBEKW,
-        V_FRUNT,
-        V_FBV,
-        V_FLO,
-        V_FSO,
-        V_FLAST,
-        // add other data ranges here
-        V_DVPV,
-        V_DPPV,
-        V_DPBAT,
-        V_DVBAT,
-        V_DCMPPT,
-        V_DGTI,
-        V_DLAST,
-    };
-
-    extern volatile double mvar[V_DLAST];
-
     extern const char* mqtt_name[V_DLAST];
-    
-    extern volatile bool once_gti, once_ac, iammeter, fm80, dumpload;
 
     void mqtt_ha_switch(MQTTClient, const char *, bool);
     bool mqtt_gti_power(MQTTClient, const char *, char *);

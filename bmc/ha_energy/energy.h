@@ -40,10 +40,10 @@ extern "C" {
 
 #define CMD_SEC         10
 
-#define MIN_BAT_KW_GTI_HI   4800.0f
+#define MIN_BAT_KW_GTI_HI   5100.0f
 #define MIN_BAT_KW_GTI_LO   4650.0f
 
-#define MIN_BAT_KW_AC_HI    4700.0f
+#define MIN_BAT_KW_AC_HI    5000.0f
 #define MIN_BAT_KW_AC_LO    4500.0f
 
 #define LOG_TO_FILE         "/store/logs/energy.log"
@@ -96,6 +96,34 @@ extern "C" {
         IA_LAST,
     };
 
+    enum mqtt_vars {
+        V_FCCM,
+        V_FBEKW,
+        V_FRUNT,
+        V_FBV,
+        V_FLO,
+        V_FSO,
+        V_FLAST,
+        // add other data ranges here
+        V_DVPV,
+        V_DPPV,
+        V_DPBAT,
+        V_DVBAT,
+        V_DCMPPT,
+        V_DGTI,
+        V_DLAST,
+    };
+
+#define MAX_IM_VAR  IA_LAST*PHASE_LAST
+
+    struct energy_type {
+        volatile double print_vars[MAX_IM_VAR];
+        volatile double im_vars[IA_LAST][PHASE_LAST];
+        volatile double mvar[V_DLAST];
+        volatile bool once_gti, once_ac, iammeter, fm80, dumpload;
+    };
+
+    extern struct energy_type E;
     extern struct ha_flag_type ha_flag_vars_ss;
     extern FILE* fout;
 

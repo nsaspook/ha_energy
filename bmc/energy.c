@@ -11,7 +11,7 @@
 #include "ha_energy/mqtt_rec.h"
 #include "ha_energy/bsoc.h"
 
-#define LOG_VERSION     "V0.32"
+#define LOG_VERSION     "V0.33"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -35,6 +35,7 @@
  * V0.30 add iammeter http data reading and processing
  * V0.31 refactor http code and a few vars
  * V0.32 AC and GTI power triggers reworked
+ * V0.33 refactor system parms into energy structure energy_type E
  */
 
 /*
@@ -76,10 +77,17 @@ char *token;
 const char *board_name = "NO_BOARD", *driver_name = "NO_DRIVER";
 cJSON *json;
 
-volatile bool once_gti = true, once_ac = true, iammeter = false, fm80 = false, dumpload = false;
 FILE* fout;
 
-volatile double im_vars[IA_LAST][PHASE_LAST];
+//volatile double im_vars[IA_LAST][PHASE_LAST];
+
+struct energy_type E = {
+    .once_gti = true,
+    .once_ac = true,
+    .iammeter = false,
+    .fm80 = false,
+    .dumpload = false,
+};
 
 /*
  * Async processing threads
@@ -249,16 +257,17 @@ int main(int argc, char *argv[]) {
                         uint32_t len;
 
                         im_display = 0;
-                        if (!(fm80 && dumpload && iammeter)) {
-                            fprintf(fout, "\r\n !!!! Source data update error !!!! , check FM80, DUMPLOAD, IAMMETER channels\r\n");
+                        if (!(E.fm80 && E.dumpload && E.iammeter)) {
+                            fprintf(fout, "\r\n !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels\r\n", E.fm80, E.dumpload, E.fm80);
+                            fprintf(stderr, "\r\n !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels\r\n", E.fm80, E.dumpload, E.fm80);
                         }
                         sprintf(buffer, "%s", ctime(&rawtime));
                         len = strlen(buffer);
                         buffer[len - 1] = 0; // munge out the return character
                         fprintf(fout, "%s ", buffer);
-                        fm80 = false;
-                        dumpload = false;
-                        iammeter = false;
+                        E.fm80 = false;
+                        E.dumpload = false;
+                        E.iammeter = false;
                         print_im_vars();
                         print_mvar_vars();
                     }
@@ -282,11 +291,11 @@ void ramp_up_gti(MQTTClient client_p, bool start) {
     static uint32_t sequence = 0;
 
     if (start) {
-        once_gti = true;
+        E.once_gti = true;
     }
 
-    if (once_gti) {
-        once_gti = false;
+    if (E.once_gti) {
+        E.once_gti = false;
         sequence = 0;
         mqtt_ha_switch(client_p, TOPIC_PDCC, true);
         usleep(500000); // wait for voltage to ramp
@@ -328,17 +337,17 @@ void ramp_down_gti(MQTTClient client_p, bool sw_off) {
     if (sw_off) {
         mqtt_ha_switch(client_p, TOPIC_PDCC, false);
     }
-    once_gti = true;
+    E.once_gti = true;
 }
 
 void ramp_up_ac(MQTTClient client_p, bool start) {
 
     if (start) {
-        once_ac = true;
+        E.once_ac = true;
     }
 
-    if (once_ac) {
-        once_ac = false;
+    if (E.once_ac) {
+        E.once_ac = false;
         mqtt_ha_switch(client_p, TOPIC_PACC, true);
         usleep(500000); // wait for voltage to ramp
     }
@@ -348,5 +357,5 @@ void ramp_down_ac(MQTTClient client_p, bool sw_off) {
     if (sw_off) {
         mqtt_ha_switch(client_p, TOPIC_PACC, false);
     }
-    once_ac = true;
+    E.once_ac = true;
 }
