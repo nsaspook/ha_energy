@@ -234,7 +234,7 @@ int main(int argc, char *argv[]) {
                         ramp_up_ac(client_p, ac_sw_on);
                         ac_sw_on = false;
                     }
-                    if (ac_test() < (MIN_BAT_KW_AC_LO+E.ac_low_adj)) {
+                    if (ac_test() < (MIN_BAT_KW_AC_LO + E.ac_low_adj)) {
                         ramp_down_ac(client_p, true);
                         ac_sw_on = true;
                     }
@@ -242,12 +242,15 @@ int main(int argc, char *argv[]) {
                         ramp_up_gti(client_p, gti_sw_on); // fixme on the ONCE code
                         gti_sw_on = false;
                     } else {
-                        if (gti_test() < (MIN_BAT_KW_GTI_LO+E.gti_low_adj)) {
+                        if (gti_test() < (MIN_BAT_KW_GTI_LO + E.gti_low_adj)) {
                             ramp_down_gti(client_p, true);
                             gti_sw_on = true;
                         }
-
                     }
+
+#ifdef B_ADJ_DEBUG
+                    fprintf(fout, "\r\n LO ADJ: AC %8.2fWh, GTI %8.2fWh\r\n", MIN_BAT_KW_AC_LO + E.ac_low_adj, MIN_BAT_KW_GTI_LO + E.gti_low_adj);
+#endif
 
                     time(&rawtime);
 

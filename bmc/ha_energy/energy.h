@@ -49,6 +49,7 @@ extern "C" {
 #define LOG_TO_FILE         "/store/logs/energy.log"
 
     //#define IM_DEBUG            // WEM3080T LOGGING
+    //#define B_ADJ_DEBUG
 #define IM_DELAY            1   // tens of second updates    
 #define IM_DISPLAY          6
 
