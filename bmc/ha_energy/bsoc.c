@@ -2,7 +2,7 @@
 #include "mqtt_rec.h"
 
 static volatile double ac_weight = 0.0f, gti_weight = 0.0f, pv_voltage = 0.0f, bat_current = 0.0f, batc_std_dev = 0.0f;
-double bat_c_std_dev[DEV_SIZE];
+static double bat_c_std_dev[DEV_SIZE];
 
 double calculateStandardDeviation(uint32_t, double *);
 
@@ -17,6 +17,13 @@ bool bsoc_init(void) {
 };
 
 /*
+ * set battery std dev array value
+ */
+void bsoc_set_std_dev(double value, uint32_t i) {
+    bat_c_std_dev[i] = value;
+}
+
+/*
  * move the data into work variables from the receive threads array
  */
 bool bsoc_data_collect(void) {
@@ -28,8 +35,8 @@ bool bsoc_data_collect(void) {
     gti_weight = E.mvar[V_FBEKW];
     pv_voltage = E.mvar[V_DVPV];
     bat_current = E.mvar[V_DCMPPT];
-    E.ac_low_adj = E.mvar[V_FSO]* -1.0f;
-    E.gti_low_adj = E.mvar[V_FACE] * -1.0f;
+    E.ac_low_adj = E.mvar[V_FSO]* -0.5f;
+    E.gti_low_adj = E.mvar[V_FACE] * -0.5f;
 
     pthread_mutex_unlock(&ha_lock); // resume MQTT var updates
 

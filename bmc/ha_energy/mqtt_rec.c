@@ -141,7 +141,7 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
             /*
              * load battery current standard deviation array bat_c_std_dev with data
              */
-            bat_c_std_dev[j++] = E.mvar[i];
+            bsoc_set_std_dev(E.mvar[i], j++);
             if (j >= RDEV_SIZE) {
                 j = 0;
             }
@@ -152,7 +152,7 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
 }
 
 void print_mvar_vars(void) {
-    fprintf(fout, ", AC Inverter %8.2fW, BAT Energy %8.2fWh, Solar E %8.2fWh, AC E %8.2fWh\r", E.mvar[V_FLO], E.mvar[V_FBEKW],E.mvar[V_FSO], E.mvar[V_FACE]);
+    fprintf(fout, ", AC Inverter %8.2fW, BAT Energy %8.2fWh, Solar E %8.2fWh, AC E %8.2fWh\r", E.mvar[V_FLO], E.mvar[V_FBEKW], E.mvar[V_FSO], E.mvar[V_FACE]);
 }
 
 bool fm80_float(void) {

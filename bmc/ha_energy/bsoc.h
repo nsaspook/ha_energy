@@ -35,8 +35,6 @@ extern "C" {
 #include <errno.h>
 #include <math.h>
 
-    extern double bat_c_std_dev[DEV_SIZE];
-
     bool bsoc_init(void);
     bool bsoc_data_collect(void);
     double bsoc_ac(void);
@@ -45,6 +43,7 @@ extern "C" {
     double ac_test(void);
     double get_batc_dev(void);
     bool bat_current_stable(void);
+    void bsoc_set_std_dev(double, uint32_t);
 
     double calculateStandardDeviation(uint32_t, double *);
 

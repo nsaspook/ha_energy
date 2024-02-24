@@ -80,8 +80,6 @@ cJSON *json;
 
 FILE* fout;
 
-//volatile double im_vars[IA_LAST][PHASE_LAST];
-
 struct energy_type E = {
     .once_gti = true,
     .once_ac = true,
@@ -90,6 +88,12 @@ struct energy_type E = {
     .dumpload = false,
     .ac_low_adj = 0.0f,
     .gti_low_adj = 0.0f,
+    .ac_sw_on = true,
+    .gti_sw_on = true,
+    .im_delay = 0,
+    .im_display = 0,
+    .rc = 0,
+    .speed_go = 0,
 };
 
 /*
@@ -126,7 +130,6 @@ void connlost(void *context, char *cause) {
  * Use MQTT to send/receive DAQ updates to a Comedi hardware device
  */
 int main(int argc, char *argv[]) {
-    uint32_t speed_go = 0, rc, im_delay = 0, im_display = 0;
     struct itimerval new_timer = {
         .it_value.tv_sec = CMD_SEC,
         .it_value.tv_usec = 0,
@@ -135,7 +138,6 @@ int main(int argc, char *argv[]) {
     };
     struct itimerval old_timer;
 
-    bool ac_sw_on = true, gti_sw_on = true;
     time_t rawtime;
 
     MQTTClient client_p, client_sd;
@@ -171,8 +173,8 @@ int main(int argc, char *argv[]) {
     conn_opts_p.cleansession = 1;
 
     MQTTClient_setCallbacks(client_p, &ha_flag_vars_ss, connlost, msgarrvd, delivered);
-    if ((rc = MQTTClient_connect(client_p, &conn_opts_p)) != MQTTCLIENT_SUCCESS) {
-        printf("Failed to connect, return code %d\n", rc);
+    if ((E.rc = MQTTClient_connect(client_p, &conn_opts_p)) != MQTTCLIENT_SUCCESS) {
+        printf("Failed to connect, return code %d\n", E.rc);
         pthread_mutex_destroy(&ha_lock);
         exit(EXIT_FAILURE);
     }
@@ -183,8 +185,8 @@ int main(int argc, char *argv[]) {
     conn_opts_sd.cleansession = 1;
 
     MQTTClient_setCallbacks(client_sd, &ha_flag_vars_sd, connlost, msgarrvd, delivered);
-    if ((rc = MQTTClient_connect(client_sd, &conn_opts_sd)) != MQTTCLIENT_SUCCESS) {
-        printf("Failed to connect, return code %d\n", rc);
+    if ((E.rc = MQTTClient_connect(client_sd, &conn_opts_sd)) != MQTTCLIENT_SUCCESS) {
+        printf("Failed to connect, return code %d\n", E.rc);
         pthread_mutex_destroy(&ha_lock);
         exit(EXIT_FAILURE);
     }
@@ -224,27 +226,27 @@ int main(int argc, char *argv[]) {
 
             usleep(100);
 
-            if (ha_flag_vars_ss.runner || speed_go++ > 1500000) {
-                speed_go = 0;
+            if (ha_flag_vars_ss.runner || E.speed_go++ > 1500000) {
+                E.speed_go = 0;
                 ha_flag_vars_ss.runner = false;
                 bsoc_data_collect();
 
                 if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {
                     if (fm80_float() || (ac_test() > MIN_BAT_KW_AC_HI)) {
-                        ramp_up_ac(client_p, ac_sw_on);
-                        ac_sw_on = false;
+                        ramp_up_ac(client_p, E.ac_sw_on);
+                        E.ac_sw_on = false;
                     }
                     if (ac_test() < (MIN_BAT_KW_AC_LO + E.ac_low_adj)) {
                         ramp_down_ac(client_p, true);
-                        ac_sw_on = true;
+                        E.ac_sw_on = true;
                     }
                     if ((gti_test() > MIN_BAT_KW_GTI_HI)) {
-                        ramp_up_gti(client_p, gti_sw_on); // fixme on the ONCE code
-                        gti_sw_on = false;
+                        ramp_up_gti(client_p, E.gti_sw_on); // fixme on the ONCE code
+                        E.gti_sw_on = false;
                     } else {
                         if (gti_test() < (MIN_BAT_KW_GTI_LO + E.gti_low_adj)) {
                             ramp_down_gti(client_p, true);
-                            gti_sw_on = true;
+                            E.gti_sw_on = true;
                         }
                     }
 
@@ -254,15 +256,15 @@ int main(int argc, char *argv[]) {
 
                     time(&rawtime);
 
-                    if (im_delay++ >= IM_DELAY) {
-                        im_delay = 0;
+                    if (E.im_delay++ >= IM_DELAY) {
+                        E.im_delay = 0;
                         iammeter_read();
                     }
-                    if (im_display++ >= IM_DISPLAY) {
+                    if (E.im_display++ >= IM_DISPLAY) {
                         char buffer[80];
                         uint32_t len;
 
-                        im_display = 0;
+                        E.im_display = 0;
                         if (!(E.fm80 && E.dumpload && E.iammeter)) {
                             fprintf(fout, "\r\n !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels\r\n", E.fm80, E.dumpload, E.fm80);
                             fprintf(stderr, "\r\n !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels\r\n", E.fm80, E.dumpload, E.fm80);
