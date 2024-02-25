@@ -1,10 +1,13 @@
 #include "http_vars.h"
 
-CURL *curl;
-CURLcode res;
+static CURL *curl;
+static CURLcode res;
 
 static void iammeter_get_data(double, uint32_t, uint32_t);
 
+/*
+ * read and format data returned from libcurl http WRITEDATA function call
+ */
 size_t iammeter_write_callback(char *buffer, size_t size, size_t nitems, void *stream) {
     cJSON *json = cJSON_ParseWithLength(buffer, strlen(buffer));
     struct energy_type * e = stream;
@@ -57,6 +60,9 @@ iammeter_exit:
     return size * nitems;
 }
 
+/*
+ * use the standard IAMMETER HTTP API for AC line power status
+ */
 void iammeter_read(void) {
 
     curl = curl_easy_init();
@@ -78,10 +84,16 @@ void iammeter_read(void) {
     }
 }
 
+/*
+ * move data into global state structure
+ */
 static void iammeter_get_data(double valuedouble, uint32_t i, uint32_t j) {
     E.im_vars[i][j] = valuedouble;
 }
 
+/*
+ * logging
+ */
 void print_im_vars(void) {
     fprintf(fout, "House L1 %8.2fW, House L2 %8.2fW, GTI L1 %8.2fW", E.print_vars[L1_P], E.print_vars[L2_P], E.print_vars[L3_P]);
 }

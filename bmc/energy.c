@@ -1,6 +1,8 @@
 /*
  * HA Energy control using MQTT JSON and HTTP format data from various energy monitor sources
  * asynchronous mode using threads
+ * 
+ * long life HA token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI2OTczODQyMGZlMDU0MjVmYjk1OWY0YjM3Mjg4NjRkOSIsImlhdCI6MTcwODg3NzA1OSwiZXhwIjoyMDI0MjM3MDU5fQ.5vfW85qQ2DO3vAyM_lcm1YyNqIX2O8JlTqoYKLdxf6M
  *
  * This file may be freely modified, distributed, and combined with
  * other software, as long as proper attribution is given in the
@@ -11,7 +13,7 @@
 #include "ha_energy/mqtt_rec.h"
 #include "ha_energy/bsoc.h"
 
-#define LOG_VERSION     "V0.34"
+#define LOG_VERSION     "V0.35"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -37,6 +39,7 @@
  * V0.32 AC and GTI power triggers reworked
  * V0.33 refactor system parms into energy structure energy_type E
  * V0.34 GTI and AC Inverter battery energy run down limits adjustments per energy usage and solar production
+ * V0.35 more refactors and global variable consolidation
  */
 
 /*
@@ -175,7 +178,7 @@ int main(int argc, char *argv[]) {
     MQTTClient_setCallbacks(client_p, &ha_flag_vars_ss, connlost, msgarrvd, delivered);
     if ((E.rc = MQTTClient_connect(client_p, &conn_opts_p)) != MQTTCLIENT_SUCCESS) {
         printf("Failed to connect, return code %d\n", E.rc);
-        pthread_mutex_destroy(&ha_lock);
+        pthread_mutex_destroy(&E.ha_lock);
         exit(EXIT_FAILURE);
     }
 
@@ -187,7 +190,7 @@ int main(int argc, char *argv[]) {
     MQTTClient_setCallbacks(client_sd, &ha_flag_vars_sd, connlost, msgarrvd, delivered);
     if ((E.rc = MQTTClient_connect(client_sd, &conn_opts_sd)) != MQTTCLIENT_SUCCESS) {
         printf("Failed to connect, return code %d\n", E.rc);
-        pthread_mutex_destroy(&ha_lock);
+        pthread_mutex_destroy(&E.ha_lock);
         exit(EXIT_FAILURE);
     }
 

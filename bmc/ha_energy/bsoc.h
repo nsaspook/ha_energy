@@ -18,7 +18,7 @@ extern "C" {
 #define MIN_BAT_KW      4100.0f
 
 #define DEV_SIZE        10
-#define MAX_BATC_DEV    0.6f
+#define MAX_BATC_DEV    0.5f
 #define BAT_C_DRAW      3.0f
 
 #include <stdlib.h>

@@ -18,8 +18,6 @@ const char* mqtt_name[V_DLAST] = {
     "DLgti",
 };
 
-pthread_mutex_t ha_lock;
-
 /*
  * data received on topic from the broker
  */
@@ -133,9 +131,9 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
         if (i > V_DLAST) {
             i = V_DLAST;
         }
-        pthread_mutex_lock(&ha_lock);
+        pthread_mutex_lock(&E.ha_lock);
         E.mvar[i] = name->valuedouble;
-        pthread_mutex_unlock(&ha_lock);
+        pthread_mutex_unlock(&E.ha_lock);
 
         if (i == V_DCMPPT) {
             /*
@@ -150,11 +148,16 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
     }
     return ret;
 }
-
+/*
+ * logging
+ */
 void print_mvar_vars(void) {
     fprintf(fout, ", AC Inverter %8.2fW, BAT Energy %8.2fWh, Solar E %8.2fWh, AC E %8.2fWh\r", E.mvar[V_FLO], E.mvar[V_FBEKW], E.mvar[V_FSO], E.mvar[V_FACE]);
 }
 
+/*
+ * return float status of FM80 to trigger dumploads
+ */
 bool fm80_float(void) {
     if ((uint32_t) E.mvar[V_FCCM] == FLOAT_CODE) {
         return true;

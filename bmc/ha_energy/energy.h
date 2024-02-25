@@ -25,6 +25,7 @@ extern "C" {
 #include <errno.h>
 #include <cjson/cJSON.h>
 #include <curl/curl.h>
+#include <pthread.h> 
 #include "MQTTClient.h"
 
 #define DAQ_STR 32
@@ -126,6 +127,7 @@ extern "C" {
         volatile double gti_low_adj, ac_low_adj;
         bool ac_sw_on, gti_sw_on;
         uint32_t speed_go, rc, im_delay, im_display;
+        pthread_mutex_t ha_lock;
     };
 
     extern struct energy_type E;

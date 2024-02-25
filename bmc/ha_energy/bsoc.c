@@ -9,7 +9,7 @@ double calculateStandardDeviation(uint32_t, double *);
 bool bsoc_init(void) {
     ac_weight = 0.0f;
     gti_weight = 0.0f;
-    if (pthread_mutex_init(&ha_lock, NULL) != 0) {
+    if (pthread_mutex_init(&E.ha_lock, NULL) != 0) {
         printf("\n mutex init has failed\n");
         return false;
     }
@@ -29,7 +29,7 @@ void bsoc_set_std_dev(double value, uint32_t i) {
 bool bsoc_data_collect(void) {
     bool ret = false;
     static uint32_t i = 0;
-    pthread_mutex_lock(&ha_lock); // lockout MQTT var updates
+    pthread_mutex_lock(&E.ha_lock); // lockout MQTT var updates
 
     ac_weight = E.mvar[V_FBEKW];
     gti_weight = E.mvar[V_FBEKW];
@@ -38,7 +38,7 @@ bool bsoc_data_collect(void) {
     E.ac_low_adj = E.mvar[V_FSO]* -0.5f;
     E.gti_low_adj = E.mvar[V_FACE] * -0.5f;
 
-    pthread_mutex_unlock(&ha_lock); // resume MQTT var updates
+    pthread_mutex_unlock(&E.ha_lock); // resume MQTT var updates
 
     if (E.ac_low_adj < -2000.0f) {
         E.ac_low_adj = -2000.0f;

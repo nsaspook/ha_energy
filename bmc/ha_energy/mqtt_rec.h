@@ -12,7 +12,6 @@
 extern "C" {
 #endif
 
-#include <pthread.h> 
 #include "energy.h"
 #include "mqtt_vars.h"
 
@@ -36,7 +35,6 @@ extern "C" {
         volatile int32_t var_update, energy_mode;
     };
 
-    extern pthread_mutex_t ha_lock;
     extern FILE* fout;
 
     int32_t msgarrvd(void *, char *, int, MQTTClient_message *);
