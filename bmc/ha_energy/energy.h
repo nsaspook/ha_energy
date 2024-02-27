@@ -125,8 +125,8 @@ extern "C" {
         volatile double mvar[V_DLAST];
         volatile bool once_gti, once_ac, iammeter, fm80, dumpload;
         volatile double gti_low_adj, ac_low_adj;
-        bool ac_sw_on, gti_sw_on;
-        uint32_t speed_go, rc, im_delay, im_display;
+        volatile bool ac_sw_on, gti_sw_on;
+        volatile uint32_t speed_go, rc, im_delay, im_display;
         pthread_mutex_t ha_lock;
     };
 

@@ -1,7 +1,7 @@
 #include "bsoc.h"
 #include "mqtt_rec.h"
 
-static volatile double ac_weight = 0.0f, gti_weight = 0.0f, pv_voltage = 0.0f, bat_current = 0.0f, batc_std_dev = 0.0f;
+static volatile double ac_weight = 0.0f, gti_weight = 0.0f, pv_voltage = 0.0f, bat_current = 0.0f, batc_std_dev = 0.0f, bat_voltage = 0.0f;
 static double bat_c_std_dev[DEV_SIZE];
 
 double calculateStandardDeviation(uint32_t, double *);
@@ -34,6 +34,7 @@ bool bsoc_data_collect(void) {
     ac_weight = E.mvar[V_FBEKW];
     gti_weight = E.mvar[V_FBEKW];
     pv_voltage = E.mvar[V_DVPV];
+    bat_voltage = E.mvar[V_DVBAT];
     bat_current = E.mvar[V_DCMPPT];
     E.ac_low_adj = E.mvar[V_FSO]* -0.5f;
     E.gti_low_adj = E.mvar[V_FACE] * -0.5f;
@@ -73,10 +74,10 @@ double bsoc_ac(void) {
  */
 double bsoc_gti(void) {
 #ifdef BSOC_DEBUG
-    fprintf(fout, "pvp %f, gweight %f, aweight %f, batc %f\r\n", pv_voltage, gti_weight, ac_weight, bat_current);
+    fprintf(fout, "pvp %f, gweight %f, aweight %f, batv, batc %f\r\n", pv_voltage, gti_weight, ac_weight, bat_voltage, bat_current);
 #endif
     // check for 48VDC AC charger powered from the Solar battery bank AC inverter
-    if (pv_voltage < MIN_PV_VOLTS) {
+    if ((pv_voltage < MIN_PV_VOLTS) || (bat_voltage < MIN_BAT_VOLTS)) {
         gti_weight = 0.0f; // reduce power to zero
     }
     return gti_weight;
@@ -87,10 +88,10 @@ double bsoc_gti(void) {
  */
 double gti_test(void) {
     // check for 48VDC AC charger powered from the Solar battery bank AC inverter
-    if (pv_voltage < MIN_PV_VOLTS) {
+    if ((pv_voltage < MIN_PV_VOLTS) || (bat_voltage < MIN_BAT_VOLTS)) {
         gti_weight = 0.0f; // reduce power to zero
 #ifdef BSOC_DEBUG
-        fprintf(fout, "pvp %f, gweight %f, aweight %f, batc %f\r\n", pv_voltage, gti_weight, ac_weight, bat_current);
+        fprintf(fout, "pvp %8.2f, gweight %8.2f, aweight %8.2f, batv %8.2f, batc %8.2f\r\n", pv_voltage, gti_weight, ac_weight, bat_voltage, bat_current);
 #endif
     }
     return gti_weight;
