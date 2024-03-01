@@ -13,7 +13,7 @@
 #include "ha_energy/mqtt_rec.h"
 #include "ha_energy/bsoc.h"
 
-#define LOG_VERSION     "V0.35"
+#define LOG_VERSION     "V0.36"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -40,6 +40,7 @@
  * V0.33 refactor system parms into energy structure energy_type E
  * V0.34 GTI and AC Inverter battery energy run down limits adjustments per energy usage and solar production
  * V0.35 more refactors and global variable consolidation
+ * V.036 more command repeat fixes for ramp up/down dumpload commands
  */
 
 /*
@@ -86,6 +87,7 @@ FILE* fout;
 struct energy_type E = {
     .once_gti = true,
     .once_ac = true,
+    .once_gti_zero = true,
     .iammeter = false,
     .fm80 = false,
     .dumpload = false,
@@ -314,10 +316,12 @@ void ramp_up_gti(MQTTClient client_p, bool start) {
 
     switch (sequence) {
         case 4:
+            E.once_gti_zero = true;
             break;
         case 3:
         case 2:
         case 1:
+            E.once_gti_zero = true;
             if (bat_current_stable()) { // check battery current std dev, stop 'motorboating'
                 sequence++;
                 if (!mqtt_gti_power(client_p, TOPIC_P, "+#")) {
@@ -333,22 +337,32 @@ void ramp_up_gti(MQTTClient client_p, bool start) {
             break;
         case 0:
             sequence++;
-            mqtt_gti_power(client_p, TOPIC_P, "Z#"); // zero power
+            if (E.once_gti_zero) {
+                mqtt_gti_power(client_p, TOPIC_P, "Z#"); // zero power
+                E.once_gti_zero = false;
+            }
             break;
         default:
-            mqtt_gti_power(client_p, TOPIC_P, "Z#"); // zero power
+            if (E.once_gti_zero) {
+                mqtt_gti_power(client_p, TOPIC_P, "Z#"); // zero power
+                E.once_gti_zero = false;
+            }
             sequence = 0;
             break;
     }
 }
 
 void ramp_down_gti(MQTTClient client_p, bool sw_off) {
-
-    mqtt_gti_power(client_p, TOPIC_P, "Z#"); // zero power
     if (sw_off) {
         mqtt_ha_switch(client_p, TOPIC_PDCC, false);
+        E.once_gti_zero = true;
     }
     E.once_gti = true;
+
+    if (E.once_gti_zero) {
+        mqtt_gti_power(client_p, TOPIC_P, "Z#"); // zero power
+        E.once_gti_zero = false;
+    }
 }
 
 void ramp_up_ac(MQTTClient client_p, bool start) {
