@@ -162,6 +162,7 @@ int main(int argc, char *argv[]) {
 #else
     fout = stdout;
 #endif
+    fprintf(fout, "\r\n LOG Version %s : MQTT Version %s\r\n", LOG_VERSION, MQTT_VERSION);
 
     if (!bsoc_init()) {
         exit(EXIT_FAILURE);
@@ -226,6 +227,7 @@ int main(int argc, char *argv[]) {
 
     {
         printf("\r\n Solar Energy AC power controller\r\n");
+        fprintf(fout, "\r\n Solar Energy AC power controller\r\n");
 
         while (true) {
 
