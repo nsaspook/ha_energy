@@ -176,6 +176,6 @@ bool bsoc_set_mode(double target, bool mode) {
 
     E.mode.gti_dumpload = (E.print_vars[L3_P]* -1.0f) + E.mvar[V_DPPV];
     E.mode.total_system = (E.mvar[V_FLO] - E.mode.gti_dumpload) + E.mvar[V_DPPV] +(E.print_vars[L3_P]* -1.0f);
-
+    E.mode.gti_dumpload = (E.print_vars[L3_P]* -1.0f) - E.mvar[V_DPPV];
     return bsoc_mode;
 }
