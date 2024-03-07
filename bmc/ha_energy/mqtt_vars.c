@@ -4,6 +4,45 @@
 #include "bsoc.h"
 
 /*
+ * send PID power control variables to Home Assistant
+ */
+void mqtt_ha_pid(MQTTClient client_p, const char * topic_p) {
+    cJSON *json;
+
+    MQTTClient_message pubmsg = MQTTClient_message_initializer;
+    MQTTClient_deliveryToken token;
+    ha_flag_vars_ss.deliveredtoken = 0;
+
+    json = cJSON_CreateObject();
+    cJSON_AddNumberToObject(json, "piderror", E.mode.error);
+    cJSON_AddNumberToObject(json, "totalsystem", E.mode.total_system);
+    cJSON_AddNumberToObject(json, "gtinet", E.mode.gti_dumpload);
+    // convert the cJSON object to a JSON string
+    char *json_str = cJSON_Print(json);
+
+    pubmsg.payload = json_str;
+    pubmsg.payloadlen = strlen(json_str);
+    pubmsg.qos = QOS;
+    pubmsg.retained = 0;
+
+    MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token);
+    // a busy, wait loop for the async delivery thread to complete
+    {
+        uint32_t waiting = 0;
+        while (ha_flag_vars_ss.deliveredtoken != token) {
+            usleep(TOKEN_DELAY);
+            if (waiting++ > MQTT_TIMEOUT) {
+                fprintf(fout, "\r\nSW Still Waiting, timeout\r\n");
+                break;
+            }
+        };
+    }
+
+    cJSON_free(json_str);
+    cJSON_Delete(json);
+}
+
+/*
  * turn on and off the Matter switches controlled by Home Assistant
  */
 void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
@@ -81,7 +120,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
 #else
     if (bsoc_gti() > MIN_BAT_KW) {
 #ifdef DEBUG_HA_CMD
-        fprintf(fout, "HA GTI power command %s, SDEV %5.2f\r\n", msg,get_batc_dev());
+        fprintf(fout, "HA GTI power command %s, SDEV %5.2f\r\n", msg, get_batc_dev());
         spam = true;
 #endif
         MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token); // run power commands

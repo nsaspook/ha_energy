@@ -21,6 +21,9 @@ extern "C" {
 #define DEV_SIZE        10
 #define MAX_BATC_DEV    0.5f
 #define BAT_C_DRAW      3.0f
+    
+#define PBAL_OFFSET     -50.0f // postive bias for control point
+#define PV_FULL_PWR     750.0f
 
 #include <stdlib.h>
 #include <stdio.h> /* for printf() */
@@ -35,6 +38,7 @@ extern "C" {
 #include <sys/time.h>
 #include <errno.h>
 #include <math.h>
+#include "pid.h"
 
     bool bsoc_init(void);
     bool bsoc_data_collect(void);
@@ -47,6 +51,8 @@ extern "C" {
     void bsoc_set_std_dev(double, uint32_t);
 
     double calculateStandardDeviation(uint32_t, double *);
+    
+    bool bsoc_set_mode(double, bool);
 
 #ifdef __cplusplus
 }

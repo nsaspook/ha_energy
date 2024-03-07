@@ -27,6 +27,7 @@ extern "C" {
 #include <curl/curl.h>
 #include <pthread.h> 
 #include "MQTTClient.h"
+#include "pid.h"
 
 #define DAQ_STR 32
 #define DAQ_STR_M DAQ_STR-1
@@ -46,13 +47,17 @@ extern "C" {
 
 #define MIN_BAT_KW_AC_HI    5000.0f
 #define MIN_BAT_KW_AC_LO    4500.0f
+    
+#define PV_PGAIN            3.0f
+#define PV_IGAIN            0.05f
+#define PV_IMAX             1800.0f
 
 #define LOG_TO_FILE         "/store/logs/energy.log"
 
     //#define IM_DEBUG            // WEM3080T LOGGING
     //#define B_ADJ_DEBUG
 #define IM_DELAY            1   // tens of second updates    
-#define IM_DISPLAY          6
+#define IM_DISPLAY          1
 
     /*
         Three Phase WiFi Energy Meter (WEM3080T)
@@ -106,6 +111,8 @@ extern "C" {
         V_FLO,
         V_FSO,
         V_FACE,
+        V_BEN,
+        V_PWA,
         V_FLAST,
         // add other data ranges here
         V_DVPV,
@@ -118,7 +125,18 @@ extern "C" {
     };
 
 #define MAX_IM_VAR  IA_LAST*PHASE_LAST
+    
+#define L1_P    IA_POWER
+#define L2_P    L1_P+IA_LAST
+#define L3_P    L2_P+IA_LAST
 
+    struct mode_type {
+        volatile double error, target, total_system, gti_dumpload;
+        volatile bool mode;
+        volatile uint32_t mode_tmr;
+        volatile struct SPid pid;
+    };
+    
     struct energy_type {
         volatile double print_vars[MAX_IM_VAR];
         volatile double im_vars[IA_LAST][PHASE_LAST];
@@ -128,6 +146,7 @@ extern "C" {
         volatile bool ac_sw_on, gti_sw_on;
         volatile uint32_t speed_go, rc, im_delay, im_display;
         pthread_mutex_t ha_lock;
+        struct mode_type mode;
     };
 
     extern struct energy_type E;

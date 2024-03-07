@@ -13,7 +13,7 @@
 #include "ha_energy/mqtt_rec.h"
 #include "ha_energy/bsoc.h"
 
-#define LOG_VERSION     "V0.36"
+#define LOG_VERSION     "V0.37"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -23,6 +23,7 @@
 #define TOPIC_PDCA      "home-assistant/gtidc/availability"
 #define TOPIC_PACC      "home-assistant/gtiac/contact"
 #define TOPIC_PDCC      "home-assistant/gtidc/contact"
+#define TOPIC_PPID      "home-assistant/solar/pid"
 #define TOPIC_SS        "mateq84/data/solar"
 #define TOPIC_SD        "mateq84/data/dumpload"
 #define QOS             1
@@ -41,6 +42,7 @@
  * V0.34 GTI and AC Inverter battery energy run down limits adjustments per energy usage and solar production
  * V0.35 more refactors and global variable consolidation
  * V.036 more command repeat fixes for ramp up/down dumpload commands
+ * V0.37 Power feedback to use PV power to GTI and AC loads
  */
 
 /*
@@ -99,6 +101,12 @@ struct energy_type E = {
     .im_display = 0,
     .rc = 0,
     .speed_go = 0,
+    .mode.pid.iMax = PV_IMAX,
+    .mode.pid.iMin = 0.0f,
+    .mode.pid.pGain = PV_PGAIN,
+    .mode.pid.iGain = PV_IGAIN,
+    .mode.mode_tmr = 0,
+    .mode.mode = true,
 };
 
 /*
@@ -237,6 +245,7 @@ int main(int argc, char *argv[]) {
                 E.speed_go = 0;
                 ha_flag_vars_ss.runner = false;
                 bsoc_data_collect();
+                bsoc_set_mode(50.0f, true);
 
                 if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {
                     if (fm80_float() || (ac_test() > MIN_BAT_KW_AC_HI)) {
@@ -272,6 +281,7 @@ int main(int argc, char *argv[]) {
                         uint32_t len;
 
                         E.im_display = 0;
+                        mqtt_ha_pid(client_p, TOPIC_PPID);
                         if (!(E.fm80 && E.dumpload && E.iammeter)) {
                             fprintf(fout, "\r\n !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels\r\n", E.fm80, E.dumpload, E.fm80);
                             fprintf(stderr, "\r\n !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels\r\n", E.fm80, E.dumpload, E.fm80);

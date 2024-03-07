@@ -9,6 +9,8 @@ const char* mqtt_name[V_DLAST] = {
     "load",
     "solar",
     "acenergy",
+    "benergy",
+    "pwatts",
     "flast",
     "DLv_pv",
     "DLp_pv",
@@ -148,11 +150,13 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
     }
     return ret;
 }
+
 /*
  * logging
  */
 void print_mvar_vars(void) {
-    fprintf(fout, ", AC Inverter %8.2fW, BAT Energy %8.2fWh, Solar E %8.2fWh, AC E %8.2fWh\r", E.mvar[V_FLO], E.mvar[V_FBEKW], E.mvar[V_FSO], E.mvar[V_FACE]);
+    fprintf(fout, ", AC Inverter %7.2fW, BAT Energy %7.2fWh, Solar E %7.2fWh, AC E %7.2fWh, PERR %7.2fW, PBAL %7.2fW, ST %7.2f, GDL %7.2f\r",
+            E.mvar[V_FLO], E.mvar[V_FBEKW], E.mvar[V_FSO], E.mvar[V_FACE], E.mode.error, E.mvar[V_BEN], E.mode.total_system, E.mode.gti_dumpload);
 }
 
 /*

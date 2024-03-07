@@ -14,10 +14,6 @@ extern "C" {
 
 #include "energy.h"
 
-#define L1_P    IA_POWER
-#define L2_P    L1_P+IA_LAST
-#define L3_P    L2_P+IA_LAST
-
     extern FILE* fout;
 
 #ifdef __cplusplus

@@ -39,7 +39,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/bsoc.o \
 	${OBJECTDIR}/http_vars.o \
 	${OBJECTDIR}/mqtt_rec.o \
-	${OBJECTDIR}/mqtt_vars.o
+	${OBJECTDIR}/mqtt_vars.o \
+	${OBJECTDIR}/pid.o
 
 
 # C Compiler Flags
@@ -90,6 +91,11 @@ ${OBJECTDIR}/mqtt_vars.o: mqtt_vars.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -O3 -Wall `pkg-config --cflags libcjson` `pkg-config --cflags libcurl` -std=c11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/mqtt_vars.o mqtt_vars.c
+
+${OBJECTDIR}/pid.o: pid.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O3 -Wall `pkg-config --cflags libcjson` `pkg-config --cflags libcurl` -std=c11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/pid.o pid.c
 
 # Subprojects
 .build-subprojects:
