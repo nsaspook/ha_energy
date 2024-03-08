@@ -160,22 +160,29 @@ bool bat_current_stable(void) {
     }
 }
 
+/*
+ * set mode to true to add GTI power to AC power for control power feedback
+ * target is the positive power bias to keep the battery(s) charged
+ */
 bool bsoc_set_mode(double target, bool mode) {
     bool bsoc_mode = false;
-
-    E.mode.error = (int32_t) UpdatePI(&E.mode.pid, E.mvar[V_BEN] + PBAL_OFFSET);
-    E.mode.target = target;
 
     if (E.mvar[V_PWA] >= PV_FULL_PWR) {
         bsoc_mode = true;
     }
 
-    if (mode) { // add GTI power from dumpload
-
-    }
-
     E.mode.gti_dumpload = (E.print_vars[L3_P]* -1.0f) + E.mvar[V_DPPV];
     E.mode.total_system = (E.mvar[V_FLO] - E.mode.gti_dumpload) + E.mvar[V_DPPV] +(E.print_vars[L3_P]* -1.0f);
     E.mode.gti_dumpload = (E.print_vars[L3_P]* -1.0f) - E.mvar[V_DPPV];
+
+    /*
+     * look at system energy balance for power control drive
+     */
+    if (mode) { // add GTI power from dumpload
+        E.mode.error = (int32_t) UpdatePI(&E.mode.pid, E.mvar[V_BEN] + E.mode.gti_dumpload + PBAL_OFFSET);
+    } else {
+        E.mode.error = (int32_t) UpdatePI(&E.mode.pid, E.mvar[V_BEN] + PBAL_OFFSET);
+    }
+    E.mode.target = target;
     return bsoc_mode;
 }

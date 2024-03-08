@@ -41,7 +41,7 @@
  * V0.33 refactor system parms into energy structure energy_type E
  * V0.34 GTI and AC Inverter battery energy run down limits adjustments per energy usage and solar production
  * V0.35 more refactors and global variable consolidation
- * V.036 more command repeat fixes for ramp up/down dumpload commands
+ * V0.36 more command repeat fixes for ramp up/down dumpload commands
  * V0.37 Power feedback to use PV power to GTI and AC loads
  */
 
@@ -98,6 +98,7 @@ struct energy_type E = {
     .ac_sw_on = true,
     .gti_sw_on = true,
     .im_delay = 0,
+    .gti_delay = 0,
     .im_display = 0,
     .rc = 0,
     .speed_go = 0,
@@ -245,7 +246,20 @@ int main(int argc, char *argv[]) {
                 E.speed_go = 0;
                 ha_flag_vars_ss.runner = false;
                 bsoc_data_collect();
-                bsoc_set_mode(50.0f, true);
+                if (bsoc_set_mode(PV_BIAS, true) && E.gti_sw_on) {
+                    char gti_str[16];
+                    int32_t error_drive;
+
+                    if (E.gti_delay++ >= GTI_DELAY) {
+                        E.gti_delay = 0;
+                        error_drive = (int32_t) E.mode.error; // PI feedback control signal
+                        if (error_drive < 0) {
+                            error_drive = PV_BIAS; // control wide power swings
+                        }
+                        snprintf(gti_str, 15, "V%04dX", error_drive); // format for dumpload controller gti power commands
+                        mqtt_gti_power(client_p, TOPIC_P, gti_str);
+                    }
+                };
 
                 if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {
                     if (fm80_float() || (ac_test() > MIN_BAT_KW_AC_HI)) {
