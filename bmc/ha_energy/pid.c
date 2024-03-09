@@ -1,7 +1,7 @@
 #include "pid.h"
 
 /*
- * converted to PI for motor control
+ * converted to PI for solar power control
  */
 double UpdatePI(volatile struct SPid * const pid, double const error) {
     double pTerm, iTerm;

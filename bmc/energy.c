@@ -108,6 +108,9 @@ struct energy_type E = {
     .mode.pid.iGain = PV_IGAIN,
     .mode.mode_tmr = 0,
     .mode.mode = true,
+    .mode.in_control = false,
+    .ac_sw_status = false,
+    .git_sw_status = false,
 };
 
 /*
@@ -246,11 +249,12 @@ int main(int argc, char *argv[]) {
                 E.speed_go = 0;
                 ha_flag_vars_ss.runner = false;
                 bsoc_data_collect();
-                if (bsoc_set_mode(PV_BIAS, true) && E.gti_sw_on) {
+                if (bsoc_set_mode(PV_BIAS, true) && E.git_sw_status) {
                     char gti_str[16];
                     int32_t error_drive;
 
                     if (E.gti_delay++ >= GTI_DELAY) {
+                        E.mode.in_control = true;
                         E.gti_delay = 0;
                         error_drive = (int32_t) E.mode.error; // PI feedback control signal
                         if (error_drive < 0) {
@@ -258,6 +262,12 @@ int main(int argc, char *argv[]) {
                         }
                         snprintf(gti_str, 15, "V%04dX", error_drive); // format for dumpload controller gti power commands
                         mqtt_gti_power(client_p, TOPIC_P, gti_str);
+                    }
+                } else {
+                    if (E.mode.in_control) {
+                        E.mode.in_control = false;
+                        ramp_down_gti(client_p, true);
+                        ramp_down_ac(client_p, true);
                     }
                 };
 
@@ -337,6 +347,7 @@ void ramp_up_gti(MQTTClient client_p, bool start) {
         E.once_gti = false;
         sequence = 0;
         mqtt_ha_switch(client_p, TOPIC_PDCC, true);
+        E.git_sw_status = true;
         usleep(500000); // wait for voltage to ramp
     }
 
@@ -382,6 +393,7 @@ void ramp_down_gti(MQTTClient client_p, bool sw_off) {
     if (sw_off) {
         mqtt_ha_switch(client_p, TOPIC_PDCC, false);
         E.once_gti_zero = true;
+        E.git_sw_status = false;
     }
     E.once_gti = true;
 
@@ -400,6 +412,7 @@ void ramp_up_ac(MQTTClient client_p, bool start) {
     if (E.once_ac) {
         E.once_ac = false;
         mqtt_ha_switch(client_p, TOPIC_PACC, true);
+        E.ac_sw_status = true;
         usleep(500000); // wait for voltage to ramp
     }
 }
@@ -407,6 +420,7 @@ void ramp_up_ac(MQTTClient client_p, bool start) {
 void ramp_down_ac(MQTTClient client_p, bool sw_off) {
     if (sw_off) {
         mqtt_ha_switch(client_p, TOPIC_PACC, false);
+        E.ac_sw_status = false;
     }
     E.once_ac = true;
 }

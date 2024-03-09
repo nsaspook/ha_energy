@@ -47,7 +47,7 @@ extern "C" {
 
 #define MIN_BAT_KW_AC_HI    5000.0f
 #define MIN_BAT_KW_AC_LO    4500.0f
-    
+
 #define PV_PGAIN            0.25f
 #define PV_IGAIN            0.08f
 #define PV_IMAX             1400.0f
@@ -127,25 +127,25 @@ extern "C" {
     };
 
 #define MAX_IM_VAR  IA_LAST*PHASE_LAST
-    
+
 #define L1_P    IA_POWER
 #define L2_P    L1_P+IA_LAST
 #define L3_P    L2_P+IA_LAST
 
     struct mode_type {
         volatile double error, target, total_system, gti_dumpload;
-        volatile bool mode;
+        volatile bool mode, in_control;
         volatile uint32_t mode_tmr;
         volatile struct SPid pid;
     };
-    
+
     struct energy_type {
         volatile double print_vars[MAX_IM_VAR];
         volatile double im_vars[IA_LAST][PHASE_LAST];
         volatile double mvar[V_DLAST];
         volatile bool once_gti, once_ac, iammeter, fm80, dumpload, once_gti_zero;
         volatile double gti_low_adj, ac_low_adj;
-        volatile bool ac_sw_on, gti_sw_on;
+        volatile bool ac_sw_on, gti_sw_on, ac_sw_status, git_sw_status;
         volatile uint32_t speed_go, rc, im_delay, im_display, gti_delay;
         pthread_mutex_t ha_lock;
         struct mode_type mode;
