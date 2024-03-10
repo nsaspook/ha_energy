@@ -269,27 +269,26 @@ int main(int argc, char *argv[]) {
                         ramp_down_gti(client_p, true);
                         ramp_down_ac(client_p, true);
                     }
-                };
 
-                if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {
-                    if (fm80_float() || (ac_test() > MIN_BAT_KW_AC_HI)) {
-                        ramp_up_ac(client_p, E.ac_sw_on);
-                        E.ac_sw_on = false;
-                    }
-                    if (ac_test() < (MIN_BAT_KW_AC_LO + E.ac_low_adj)) {
-                        ramp_down_ac(client_p, true);
-                        E.ac_sw_on = true;
-                    }
-                    if ((gti_test() > MIN_BAT_KW_GTI_HI)) {
-                        ramp_up_gti(client_p, E.gti_sw_on); // fixme on the ONCE code
-                        E.gti_sw_on = false;
-                    } else {
-                        if (gti_test() < (MIN_BAT_KW_GTI_LO + E.gti_low_adj)) {
-                            ramp_down_gti(client_p, true);
-                            E.gti_sw_on = true;
+                    if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {
+                        if (fm80_float() || (ac_test() > MIN_BAT_KW_AC_HI)) {
+                            ramp_up_ac(client_p, E.ac_sw_on);
+                            E.ac_sw_on = false;
                         }
-                    }
-
+                        if (ac_test() < (MIN_BAT_KW_AC_LO + E.ac_low_adj)) {
+                            ramp_down_ac(client_p, true);
+                            E.ac_sw_on = true;
+                        }
+                        if ((gti_test() > MIN_BAT_KW_GTI_HI)) {
+                            ramp_up_gti(client_p, E.gti_sw_on); // fixme on the ONCE code
+                            E.gti_sw_on = false;
+                        } else {
+                            if (gti_test() < (MIN_BAT_KW_GTI_LO + E.gti_low_adj)) {
+                                ramp_down_gti(client_p, true);
+                                E.gti_sw_on = true;
+                            }
+                        }
+                    };
 #ifdef B_ADJ_DEBUG
                     fprintf(fout, "\r\n LO ADJ: AC %8.2fWh, GTI %8.2fWh\r\n", MIN_BAT_KW_AC_LO + E.ac_low_adj, MIN_BAT_KW_GTI_LO + E.gti_low_adj);
 #endif

@@ -2,9 +2,10 @@
 #include "mqtt_rec.h"
 
 static volatile double ac_weight = 0.0f, gti_weight = 0.0f, pv_voltage = 0.0f, bat_current = 0.0f, batc_std_dev = 0.0f, bat_voltage = 0.0f;
-static double bat_c_std_dev[DEV_SIZE];
+static double bat_c_std_dev[DEV_SIZE], coef = COEF;
 
 double calculateStandardDeviation(uint32_t, double *);
+static double error_filter(double);
 
 bool bsoc_init(void) {
     ac_weight = 0.0f;
@@ -183,6 +184,22 @@ bool bsoc_set_mode(double target, bool mode) {
     } else {
         E.mode.error = (int32_t) UpdatePI(&E.mode.pid, E.mvar[V_BEN] + PBAL_OFFSET);
     }
+
+    if (E.mode.error > 0.0f) {
+        coef = COEF;
+    } else {
+        coef = COEFN;
+    }
     E.mode.target = target;
+    E.mode.error = round(error_filter(E.mode.error));
     return bsoc_mode;
+}
+
+/*
+ * power drive error signal smoothing
+ */
+static double error_filter(double raw) {
+    static double accum = 0.0f;
+    accum = accum - accum / coef + raw;
+    return accum / coef;
 }

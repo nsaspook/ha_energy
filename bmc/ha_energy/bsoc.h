@@ -11,7 +11,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+#include <math.h>
     //#define BSOC_DEBUG
 
 #define MIN_PV_VOLTS    5.0f
@@ -21,9 +21,12 @@ extern "C" {
 #define DEV_SIZE        10
 #define MAX_BATC_DEV    0.5f
 #define BAT_C_DRAW      3.0f
-    
+
 #define PBAL_OFFSET     -50.0f // postive bias for control point
-#define PV_FULL_PWR     550.0f
+#define PV_FULL_PWR     400.0f
+
+#define COEF            8.0f
+#define COEFN           4.0f  
 
 #include <stdlib.h>
 #include <stdio.h> /* for printf() */
@@ -51,7 +54,7 @@ extern "C" {
     void bsoc_set_std_dev(double, uint32_t);
 
     double calculateStandardDeviation(uint32_t, double *);
-    
+
     bool bsoc_set_mode(double, bool);
 
 #ifdef __cplusplus
