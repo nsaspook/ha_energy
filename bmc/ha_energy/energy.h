@@ -47,6 +47,9 @@ extern "C" {
 
 #define MIN_BAT_KW_AC_HI    5000.0f
 #define MIN_BAT_KW_AC_LO    4500.0f
+    
+#define MIN_BAT_KW_BSOC_HI  5000.0f
+#define MIN_BAT_KW_BSOC_LO  4500.0f
 
 #define PV_PGAIN            0.25f
 #define PV_IGAIN            0.08f

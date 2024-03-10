@@ -168,7 +168,7 @@ bool bat_current_stable(void) {
 bool bsoc_set_mode(double target, bool mode) {
     bool bsoc_mode = false;
 
-    if (E.mvar[V_PWA] >= PV_FULL_PWR) {
+    if ((E.mvar[V_PWA] >= PV_FULL_PWR) && (E.mvar[V_FBEKW] >= MIN_BAT_KW_BSOC_HI)) {
         bsoc_mode = true;
     }
 

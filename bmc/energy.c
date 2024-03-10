@@ -13,7 +13,7 @@
 #include "ha_energy/mqtt_rec.h"
 #include "ha_energy/bsoc.h"
 
-#define LOG_VERSION     "V0.37"
+#define LOG_VERSION     "V0.38"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -43,6 +43,7 @@
  * V0.35 more refactors and global variable consolidation
  * V0.36 more command repeat fixes for ramp up/down dumpload commands
  * V0.37 Power feedback to use PV power to GTI and AC loads
+ * V0.38 signal filters to smooth large power swings in control optimization
  */
 
 /*
