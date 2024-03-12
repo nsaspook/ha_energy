@@ -111,7 +111,7 @@ struct energy_type E = {
     .mode.mode = true,
     .mode.in_control = false,
     .ac_sw_status = false,
-    .git_sw_status = false,
+    .gti_sw_status = false,
 };
 
 /*
@@ -250,11 +250,18 @@ int main(int argc, char *argv[]) {
                 E.speed_go = 0;
                 ha_flag_vars_ss.runner = false;
                 bsoc_data_collect();
-                if (bsoc_set_mode(PV_BIAS, true) && E.git_sw_status) {
+                if (bsoc_set_mode(PV_BIAS, true)) {
                     char gti_str[16];
                     int32_t error_drive;
 
                     if (E.gti_delay++ >= GTI_DELAY) {
+                        if (!E.mode.in_control) {
+                            mqtt_ha_switch(client_p, TOPIC_PDCC, true);
+                            E.gti_sw_status = true;
+                            usleep(100000); // wait
+                            mqtt_ha_switch(client_p, TOPIC_PACC, true);
+                            E.ac_sw_status = true;
+                        }
                         E.mode.in_control = true;
                         E.gti_delay = 0;
                         error_drive = (int32_t) E.mode.error; // PI feedback control signal
@@ -347,7 +354,7 @@ void ramp_up_gti(MQTTClient client_p, bool start) {
         E.once_gti = false;
         sequence = 0;
         mqtt_ha_switch(client_p, TOPIC_PDCC, true);
-        E.git_sw_status = true;
+        E.gti_sw_status = true;
         usleep(500000); // wait for voltage to ramp
     }
 
@@ -393,7 +400,7 @@ void ramp_down_gti(MQTTClient client_p, bool sw_off) {
     if (sw_off) {
         mqtt_ha_switch(client_p, TOPIC_PDCC, false);
         E.once_gti_zero = true;
-        E.git_sw_status = false;
+        E.gti_sw_status = false;
     }
     E.once_gti = true;
 

@@ -167,8 +167,15 @@ bool bat_current_stable(void) {
  */
 bool bsoc_set_mode(double target, bool mode) {
     bool bsoc_mode = false;
+    static double accum = 0.0f, vpwa=0.0f;
 
-    if ((E.mvar[V_PWA] >= PV_FULL_PWR) && (E.mvar[V_FBEKW] >= MIN_BAT_KW_BSOC_HI)) {
+    /*
+     * running avg filter
+     */
+    accum = accum - accum / COEFN + E.mvar[V_PWA];
+    vpwa = accum / COEFN;
+
+    if ((vpwa >= PV_FULL_PWR) && (E.mvar[V_FBEKW] >= MIN_BAT_KW_BSOC_HI)) {
         bsoc_mode = true;
     }
 
@@ -203,3 +210,4 @@ static double error_filter(double raw) {
     accum = accum - accum / coef + raw;
     return accum / coef;
 }
+

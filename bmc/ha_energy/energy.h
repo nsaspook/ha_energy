@@ -47,11 +47,11 @@ extern "C" {
 
 #define MIN_BAT_KW_AC_HI    5000.0f
 #define MIN_BAT_KW_AC_LO    4500.0f
-    
-#define MIN_BAT_KW_BSOC_HI  5000.0f
-#define MIN_BAT_KW_BSOC_LO  4500.0f
 
-#define PV_PGAIN            0.25f
+#define MIN_BAT_KW_BSOC_HI  4000.0f
+#define MIN_BAT_KW_BSOC_LO  3500.0f
+
+#define PV_PGAIN            0.28f
 #define PV_IGAIN            0.08f
 #define PV_IMAX             1400.0f
 #define PV_BIAS             100.0f
@@ -148,7 +148,7 @@ extern "C" {
         volatile double mvar[V_DLAST];
         volatile bool once_gti, once_ac, iammeter, fm80, dumpload, once_gti_zero;
         volatile double gti_low_adj, ac_low_adj;
-        volatile bool ac_sw_on, gti_sw_on, ac_sw_status, git_sw_status;
+        volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status;
         volatile uint32_t speed_go, rc, im_delay, im_display, gti_delay;
         pthread_mutex_t ha_lock;
         struct mode_type mode;
