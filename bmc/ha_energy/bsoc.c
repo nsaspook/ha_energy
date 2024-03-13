@@ -167,7 +167,8 @@ bool bat_current_stable(void) {
  */
 bool bsoc_set_mode(double target, bool mode) {
     bool bsoc_mode = false;
-    static double accum = 0.0f, vpwa=0.0f;
+    static bool bsoc_high = false;
+    static double accum = 0.0f, vpwa = 0.0f;
 
     /*
      * running avg filter
@@ -177,6 +178,15 @@ bool bsoc_set_mode(double target, bool mode) {
 
     if ((vpwa >= PV_FULL_PWR) && (E.mvar[V_FBEKW] >= MIN_BAT_KW_BSOC_HI)) {
         bsoc_mode = true;
+        bsoc_high = true;
+    } else {
+        if (bsoc_high) { // turn off at min limit power
+            if ((vpwa >= PV_MIN_PWR) && (E.mvar[V_FBEKW] >= MIN_BAT_KW_BSOC_HI)) {
+                bsoc_mode = true;
+            } else {
+                bsoc_high = false;
+            }
+        }
     }
 
     E.mode.gti_dumpload = (E.print_vars[L3_P]* -1.0f) + E.mvar[V_DPPV];
