@@ -13,7 +13,7 @@
 #include "ha_energy/mqtt_rec.h"
 #include "ha_energy/bsoc.h"
 
-#define LOG_VERSION     "V0.38"
+#define LOG_VERSION     "V0.39"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -44,6 +44,7 @@
  * V0.36 more command repeat fixes for ramp up/down dumpload commands
  * V0.37 Power feedback to use PV power to GTI and AC loads
  * V0.38 signal filters to smooth large power swings in control optimization
+ * V0.39 fix optimizer bugs and add AC load switching set-points in BSOC control
  */
 
 /*
@@ -114,6 +115,8 @@ struct energy_type E = {
     .gti_sw_status = false,
 };
 
+MQTTClient client_p, client_sd;
+
 /*
  * Async processing threads
  */
@@ -158,7 +161,7 @@ int main(int argc, char *argv[]) {
 
     time_t rawtime;
 
-    MQTTClient client_p, client_sd;
+
     MQTTClient_connectOptions conn_opts_p = MQTTClient_connectOptions_initializer,
             conn_opts_sd = MQTTClient_connectOptions_initializer;
     MQTTClient_message pubmsg = MQTTClient_message_initializer;
@@ -297,36 +300,36 @@ int main(int argc, char *argv[]) {
                             }
                         }
                     };
+                }
 #ifdef B_ADJ_DEBUG
-                    fprintf(fout, "\r\n LO ADJ: AC %8.2fWh, GTI %8.2fWh\r\n", MIN_BAT_KW_AC_LO + E.ac_low_adj, MIN_BAT_KW_GTI_LO + E.gti_low_adj);
+                fprintf(fout, "\r\n LO ADJ: AC %8.2fWh, GTI %8.2fWh\r\n", MIN_BAT_KW_AC_LO + E.ac_low_adj, MIN_BAT_KW_GTI_LO + E.gti_low_adj);
 #endif
 
-                    time(&rawtime);
+                time(&rawtime);
 
-                    if (E.im_delay++ >= IM_DELAY) {
-                        E.im_delay = 0;
-                        iammeter_read();
-                    }
-                    if (E.im_display++ >= IM_DISPLAY) {
-                        char buffer[80];
-                        uint32_t len;
+                if (E.im_delay++ >= IM_DELAY) {
+                    E.im_delay = 0;
+                    iammeter_read();
+                }
+                if (E.im_display++ >= IM_DISPLAY) {
+                    char buffer[80];
+                    uint32_t len;
 
-                        E.im_display = 0;
-                        mqtt_ha_pid(client_p, TOPIC_PPID);
-                        if (!(E.fm80 && E.dumpload && E.iammeter)) {
-                            fprintf(fout, "\r\n !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels\r\n", E.fm80, E.dumpload, E.fm80);
-                            fprintf(stderr, "\r\n !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels\r\n", E.fm80, E.dumpload, E.fm80);
-                        }
-                        sprintf(buffer, "%s", ctime(&rawtime));
-                        len = strlen(buffer);
-                        buffer[len - 1] = 0; // munge out the return character
-                        fprintf(fout, "%s ", buffer);
-                        E.fm80 = false;
-                        E.dumpload = false;
-                        E.iammeter = false;
-                        print_im_vars();
-                        print_mvar_vars();
+                    E.im_display = 0;
+                    mqtt_ha_pid(client_p, TOPIC_PPID);
+                    if (!(E.fm80 && E.dumpload && E.iammeter)) {
+                        fprintf(fout, "\r\n !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels\r\n", E.fm80, E.dumpload, E.fm80);
+                        fprintf(stderr, "\r\n !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels\r\n", E.fm80, E.dumpload, E.fm80);
                     }
+                    sprintf(buffer, "%s", ctime(&rawtime));
+                    len = strlen(buffer);
+                    buffer[len - 1] = 0; // munge out the return character
+                    fprintf(fout, "%s ", buffer);
+                    E.fm80 = false;
+                    E.dumpload = false;
+                    E.iammeter = false;
+                    print_im_vars();
+                    print_mvar_vars();
                     fprintf(fout, "%s\r", ctime(&rawtime));
                 }
             } else {
@@ -430,4 +433,14 @@ void ramp_down_ac(MQTTClient client_p, bool sw_off) {
         E.ac_sw_status = false;
     }
     E.once_ac = true;
+}
+
+void ha_ac_off(void) {
+    mqtt_ha_switch(client_p, TOPIC_PACC, false);
+    E.ac_sw_status = false;
+}
+
+void ha_ac_on(void) {
+    mqtt_ha_switch(client_p, TOPIC_PACC, true);
+    E.ac_sw_status = true;
 }

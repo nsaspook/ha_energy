@@ -51,10 +51,10 @@ extern "C" {
 #define MIN_BAT_KW_BSOC_HI  4000.0f
 #define MIN_BAT_KW_BSOC_LO  3500.0f
 
-#define PV_PGAIN            0.28f
-#define PV_IGAIN            0.08f
+#define PV_PGAIN            0.35f
+#define PV_IGAIN            0.12f
 #define PV_IMAX             1400.0f
-#define PV_BIAS             100.0f
+#define PV_BIAS             50.0f
 
 #define LOG_TO_FILE         "/store/logs/energy.log"
 
@@ -165,6 +165,8 @@ extern "C" {
     void ramp_up_ac(MQTTClient, bool);
     void ramp_down_gti(MQTTClient, bool);
     void ramp_down_ac(MQTTClient, bool);
+    void ha_ac_off(void);
+    void ha_ac_on(void);
 
     size_t iammeter_write_callback(char *, size_t, size_t, void *);
     void iammeter_read(void);

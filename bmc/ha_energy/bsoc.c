@@ -167,7 +167,7 @@ bool bat_current_stable(void) {
  */
 bool bsoc_set_mode(double target, bool mode) {
     bool bsoc_mode = false;
-    static bool bsoc_high = false;
+    static bool bsoc_high = false, ha_ac_mode = true;
     static double accum = 0.0f, vpwa = 0.0f;
 
     /*
@@ -177,14 +177,27 @@ bool bsoc_set_mode(double target, bool mode) {
     vpwa = accum / COEFN;
 
     if ((vpwa >= PV_FULL_PWR) && (E.mvar[V_FBEKW] >= MIN_BAT_KW_BSOC_HI)) {
+        if (!bsoc_mode) {
+            ResetPI(&E.mode.pid);
+        }
         bsoc_mode = true;
         bsoc_high = true;
+        if (!ha_ac_mode) {
+            ha_ac_on();
+            ha_ac_mode = true;
+        }
+
     } else {
         if (bsoc_high) { // turn off at min limit power
             if ((vpwa >= PV_MIN_PWR) && (E.mvar[V_FBEKW] >= MIN_BAT_KW_BSOC_HI)) {
                 bsoc_mode = true;
+                if (ha_ac_mode) {
+                    ha_ac_off();
+                    ha_ac_mode = false;
+                }
             } else {
                 bsoc_high = false;
+                ha_ac_mode = false;
             }
         }
     }
