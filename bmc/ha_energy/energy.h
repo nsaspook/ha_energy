@@ -152,6 +152,7 @@ extern "C" {
         volatile uint32_t speed_go, rc, im_delay, im_display, gti_delay;
         pthread_mutex_t ha_lock;
         struct mode_type mode;
+        MQTTClient client_p, client_sd;
     };
 
     extern struct energy_type E;

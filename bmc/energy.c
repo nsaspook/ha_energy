@@ -115,8 +115,6 @@ struct energy_type E = {
     .gti_sw_status = false,
 };
 
-MQTTClient client_p, client_sd;
-
 /*
  * Async processing threads
  */
@@ -189,25 +187,25 @@ int main(int argc, char *argv[]) {
     setitimer(ITIMER_REAL, &new_timer, &old_timer);
     signal(SIGALRM, timer_callback);
 
-    MQTTClient_create(&client_p, ADDRESS, CLIENTID1,
+    MQTTClient_create(&E.client_p, ADDRESS, CLIENTID1,
             MQTTCLIENT_PERSISTENCE_NONE, NULL);
     conn_opts_p.keepAliveInterval = 20;
     conn_opts_p.cleansession = 1;
 
-    MQTTClient_setCallbacks(client_p, &ha_flag_vars_ss, connlost, msgarrvd, delivered);
-    if ((E.rc = MQTTClient_connect(client_p, &conn_opts_p)) != MQTTCLIENT_SUCCESS) {
+    MQTTClient_setCallbacks(E.client_p, &ha_flag_vars_ss, connlost, msgarrvd, delivered);
+    if ((E.rc = MQTTClient_connect(E.client_p, &conn_opts_p)) != MQTTCLIENT_SUCCESS) {
         printf("Failed to connect, return code %d\n", E.rc);
         pthread_mutex_destroy(&E.ha_lock);
         exit(EXIT_FAILURE);
     }
 
-    MQTTClient_create(&client_sd, ADDRESS, CLIENTID2,
+    MQTTClient_create(&E.client_sd, ADDRESS, CLIENTID2,
             MQTTCLIENT_PERSISTENCE_NONE, NULL);
     conn_opts_sd.keepAliveInterval = 20;
     conn_opts_sd.cleansession = 1;
 
-    MQTTClient_setCallbacks(client_sd, &ha_flag_vars_sd, connlost, msgarrvd, delivered);
-    if ((E.rc = MQTTClient_connect(client_sd, &conn_opts_sd)) != MQTTCLIENT_SUCCESS) {
+    MQTTClient_setCallbacks(E.client_sd, &ha_flag_vars_sd, connlost, msgarrvd, delivered);
+    if ((E.rc = MQTTClient_connect(E.client_sd, &conn_opts_sd)) != MQTTCLIENT_SUCCESS) {
         printf("Failed to connect, return code %d\n", E.rc);
         pthread_mutex_destroy(&E.ha_lock);
         exit(EXIT_FAILURE);
@@ -216,8 +214,8 @@ int main(int argc, char *argv[]) {
     /*
      * on topic received data will trigger the msgarrvd function
      */
-    MQTTClient_subscribe(client_p, TOPIC_SS, QOS);
-    MQTTClient_subscribe(client_sd, TOPIC_SD, QOS);
+    MQTTClient_subscribe(E.client_p, TOPIC_SS, QOS);
+    MQTTClient_subscribe(E.client_sd, TOPIC_SD, QOS);
 
     pubmsg.payload = "online";
     pubmsg.payloadlen = strlen("online");
@@ -225,16 +223,16 @@ int main(int argc, char *argv[]) {
     pubmsg.retained = 0;
     ha_flag_vars_ss.deliveredtoken = 0;
     // notify HA we are running and controlling AC power plugs
-    MQTTClient_publishMessage(client_p, TOPIC_PACA, &pubmsg, &token);
-    MQTTClient_publishMessage(client_p, TOPIC_PDCA, &pubmsg, &token);
+    MQTTClient_publishMessage(E.client_p, TOPIC_PACA, &pubmsg, &token);
+    MQTTClient_publishMessage(E.client_p, TOPIC_PDCA, &pubmsg, &token);
 
     // sync HA power switches
-    mqtt_ha_switch(client_p, TOPIC_PDCC, false);
-    mqtt_ha_switch(client_p, TOPIC_PACC, false);
-    mqtt_ha_switch(client_p, TOPIC_PDCC, true);
-    mqtt_ha_switch(client_p, TOPIC_PACC, true);
-    mqtt_ha_switch(client_p, TOPIC_PDCC, false);
-    mqtt_ha_switch(client_p, TOPIC_PACC, false);
+    mqtt_ha_switch(E.client_p, TOPIC_PDCC, false);
+    mqtt_ha_switch(E.client_p, TOPIC_PACC, false);
+    mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
+    mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
+    mqtt_ha_switch(E.client_p, TOPIC_PDCC, false);
+    mqtt_ha_switch(E.client_p, TOPIC_PACC, false);
 
     /*
      * use libcurl to read AC power meter HTTP data
@@ -259,10 +257,10 @@ int main(int argc, char *argv[]) {
 
                     if (E.gti_delay++ >= GTI_DELAY) {
                         if (!E.mode.in_control) {
-                            mqtt_ha_switch(client_p, TOPIC_PDCC, true);
+                            mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
                             E.gti_sw_status = true;
                             usleep(100000); // wait
-                            mqtt_ha_switch(client_p, TOPIC_PACC, true);
+                            mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
                             E.ac_sw_status = true;
                         }
                         E.mode.in_control = true;
@@ -272,30 +270,30 @@ int main(int argc, char *argv[]) {
                             error_drive = PV_BIAS; // control wide power swings
                         }
                         snprintf(gti_str, 15, "V%04dX", error_drive); // format for dumpload controller gti power commands
-                        mqtt_gti_power(client_p, TOPIC_P, gti_str);
+                        mqtt_gti_power(E.client_p, TOPIC_P, gti_str);
                     }
                 } else {
                     if (E.mode.in_control) {
                         E.mode.in_control = false;
-                        ramp_down_gti(client_p, true);
-                        ramp_down_ac(client_p, true);
+                        ramp_down_gti(E.client_p, true);
+                        ramp_down_ac(E.client_p, true);
                     }
 
                     if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {
                         if (fm80_float() || (ac_test() > MIN_BAT_KW_AC_HI)) {
-                            ramp_up_ac(client_p, E.ac_sw_on);
+                            ramp_up_ac(E.client_p, E.ac_sw_on);
                             E.ac_sw_on = false;
                         }
                         if (ac_test() < (MIN_BAT_KW_AC_LO + E.ac_low_adj)) {
-                            ramp_down_ac(client_p, true);
+                            ramp_down_ac(E.client_p, true);
                             E.ac_sw_on = true;
                         }
                         if ((gti_test() > MIN_BAT_KW_GTI_HI)) {
-                            ramp_up_gti(client_p, E.gti_sw_on); // fixme on the ONCE code
+                            ramp_up_gti(E.client_p, E.gti_sw_on); // fixme on the ONCE code
                             E.gti_sw_on = false;
                         } else {
                             if (gti_test() < (MIN_BAT_KW_GTI_LO + E.gti_low_adj)) {
-                                ramp_down_gti(client_p, true);
+                                ramp_down_gti(E.client_p, true);
                                 E.gti_sw_on = true;
                             }
                         }
@@ -316,7 +314,7 @@ int main(int argc, char *argv[]) {
                     uint32_t len;
 
                     E.im_display = 0;
-                    mqtt_ha_pid(client_p, TOPIC_PPID);
+                    mqtt_ha_pid(E.client_p, TOPIC_PPID);
                     if (!(E.fm80 && E.dumpload && E.iammeter)) {
                         fprintf(fout, "\r\n !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels\r\n", E.fm80, E.dumpload, E.fm80);
                         fprintf(stderr, "\r\n !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels\r\n", E.fm80, E.dumpload, E.fm80);
@@ -436,11 +434,11 @@ void ramp_down_ac(MQTTClient client_p, bool sw_off) {
 }
 
 void ha_ac_off(void) {
-    mqtt_ha_switch(client_p, TOPIC_PACC, false);
+    mqtt_ha_switch(E.client_p, TOPIC_PACC, false);
     E.ac_sw_status = false;
 }
 
 void ha_ac_on(void) {
-    mqtt_ha_switch(client_p, TOPIC_PACC, true);
+    mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
     E.ac_sw_status = true;
 }
