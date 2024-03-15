@@ -37,8 +37,8 @@ extern "C" {
 
 #define NO_CYLON
 
-#define UNIT_TEST       0
-#define NORM_MODE       1
+#define UNIT_TEST       1
+#define NORM_MODE       0
 
 #define CMD_SEC         10
 
@@ -152,7 +152,7 @@ extern "C" {
         volatile double mvar[V_DLAST];
         volatile bool once_gti, once_ac, iammeter, fm80, dumpload, once_gti_zero;
         volatile double gti_low_adj, ac_low_adj;
-        volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown;
+        volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode;
         volatile uint32_t speed_go, rc, im_delay, im_display, gti_delay;
         pthread_mutex_t ha_lock;
         struct mode_type mode;

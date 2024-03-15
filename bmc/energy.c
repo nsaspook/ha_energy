@@ -69,7 +69,7 @@ struct ha_flag_type ha_flag_vars_ss = {
     .rec_ok = false,
     .ha_id = FM80_ID,
     .var_update = 0,
-    .energy_mode = UNIT_TEST,
+    .energy_mode = NORM_MODE,
 };
 
 // dumpload data from mbmc_k42
@@ -113,6 +113,8 @@ struct energy_type E = {
     .mode.in_control = false,
     .ac_sw_status = false,
     .gti_sw_status = false,
+    .solar_mode= false,
+    .solar_shutdown = false,
 };
 
 static bool solar_shutdown(void);
@@ -256,7 +258,10 @@ int main(int argc, char *argv[]) {
                 if (solar_shutdown()) {
                     time(&rawtime);
                     fprintf(fout, "%s\r\n", ctime(&rawtime));
-                    fprintf(fout, " SHUTDOWN Solar Energy\r\n");
+                    fprintf(fout, " SHUTDOWN Solar Energy ---");
+                    ramp_down_gti(E.client_p, true);
+                    ramp_down_ac(E.client_p, true);
+                    fprintf(fout, " Completed.\r\n");
                     fflush(fout);
                     while (solar_shutdown()) {
                         usleep(100000); // wait
@@ -294,7 +299,7 @@ int main(int argc, char *argv[]) {
                         ramp_down_ac(E.client_p, true);
                     }
 
-                    if (ha_flag_vars_ss.energy_mode == UNIT_TEST) {
+                    if (ha_flag_vars_ss.energy_mode == NORM_MODE) {
                         if (fm80_float() || (ac_test() > MIN_BAT_KW_AC_HI)) {
                             ramp_up_ac(E.client_p, E.ac_sw_on);
                             E.ac_sw_on = false;

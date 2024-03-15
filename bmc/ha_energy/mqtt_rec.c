@@ -165,6 +165,9 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
         if (i == V_HSHUT) {
             E.solar_shutdown = (bool) ((int32_t) E.mvar[i]);
         }
+        if (i == V_HMODE) {
+            ha_flag_vars_ss.energy_mode = (bool) ((int32_t) E.mvar[i]);
+        }
         ret = true;
     }
     return ret;
