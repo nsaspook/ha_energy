@@ -23,7 +23,7 @@ extern "C" {
 #define BAT_C_DRAW      3.0f
 
 #define PBAL_OFFSET     -50.0f // postive bias for control point
-#define PV_FULL_PWR     450.0f
+#define PV_FULL_PWR     400.0f
 #define PV_MIN_PWR      160.0f
 
 #define COEF            8.0f

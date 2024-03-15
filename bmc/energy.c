@@ -258,7 +258,7 @@ int main(int argc, char *argv[]) {
                 if (solar_shutdown()) {
                     time(&rawtime);
                     fprintf(fout, "%s\r\n", ctime(&rawtime));
-                    fprintf(fout, " SHUTDOWN Solar Energy ---");
+                    fprintf(fout, " SHUTDOWN Solar Energy ---> \r\n");
                     ramp_down_gti(E.client_p, true);
                     ramp_down_ac(E.client_p, true);
                     fprintf(fout, " Completed.\r\n");
@@ -275,6 +275,7 @@ int main(int argc, char *argv[]) {
                     char gti_str[16];
                     int32_t error_drive;
 
+                    ha_flag_vars_ss.energy_mode = PID_MODE;
                     if (E.gti_delay++ >= GTI_DELAY) {
                         if (!E.mode.in_control) {
                             mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
@@ -293,6 +294,7 @@ int main(int argc, char *argv[]) {
                         mqtt_gti_power(E.client_p, TOPIC_P, gti_str);
                     }
                 } else {
+                    ha_flag_vars_ss.energy_mode = ((int32_t) E.mvar[V_HMODE]);
                     if (E.mode.in_control) {
                         E.mode.in_control = false;
                         ramp_down_gti(E.client_p, true);

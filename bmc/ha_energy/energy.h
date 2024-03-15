@@ -37,8 +37,9 @@ extern "C" {
 
 #define NO_CYLON
 
-#define UNIT_TEST       1
+#define UNIT_TEST       2
 #define NORM_MODE       0
+#define PID_MODE        1
 
 #define CMD_SEC         10
 
