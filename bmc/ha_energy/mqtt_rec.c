@@ -12,6 +12,10 @@ const char* mqtt_name[V_DLAST] = {
     "benergy",
     "pwatts",
     "flast",
+    "HAdcsw",
+    "HAacsw",
+    "HAshut",
+    "HAmode",
     "DLv_pv",
     "DLp_pv",
     "DLp_bat",
@@ -79,7 +83,7 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
 #endif
         cJSON *data_result = json;
 
-        for (uint32_t i = V_DVPV; i < V_DLAST; i++) {
+        for (uint32_t i = V_HDCSW; i < V_DLAST; i++) {
             if (json_get_data(json, mqtt_name[i], data_result, i)) {
                 ha_flag->var_update++;
             }
@@ -137,6 +141,9 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
         E.mvar[i] = name->valuedouble;
         pthread_mutex_unlock(&E.ha_lock);
 
+        /*
+         * special processing for variables
+         */
         if (i == V_DCMPPT) {
             /*
              * load battery current standard deviation array bat_c_std_dev with data
@@ -145,6 +152,18 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
             if (j >= RDEV_SIZE) {
                 j = 0;
             }
+        }
+        /*
+         * update local sw status from HA
+         */
+        if (i == V_HDCSW) {
+            E.gti_sw_status = (bool) ((int32_t) E.mvar[i]);
+        }
+        if (i == V_HACSW) {
+            E.ac_sw_status = (bool) ((int32_t) E.mvar[i]);
+        }
+        if (i == V_HSHUT) {
+            E.solar_shutdown = (bool) ((int32_t) E.mvar[i]);
         }
         ret = true;
     }
@@ -155,8 +174,8 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
  * logging
  */
 void print_mvar_vars(void) {
-    fprintf(fout, ", AC Inverter %7.2fW, BAT Energy %7.2fWh, Solar E %7.2fWh, AC E %7.2fWh, PERR %7.2fW, PBAL %7.2fW, ST %7.2f, GDL %7.2f\r",
-            E.mvar[V_FLO], E.mvar[V_FBEKW], E.mvar[V_FSO], E.mvar[V_FACE], E.mode.error, E.mvar[V_BEN], E.mode.total_system, E.mode.gti_dumpload);
+    fprintf(fout, ", AC Inverter %7.2fW, BAT Energy %7.2fWh, Solar E %7.2fWh, AC E %7.2fWh, PERR %7.2fW, PBAL %7.2fW, ST %7.2f, GDL %7.2f, %d,%d\r",
+            E.mvar[V_FLO], E.mvar[V_FBEKW], E.mvar[V_FSO], E.mvar[V_FACE], E.mode.error, E.mvar[V_BEN], E.mode.total_system, E.mode.gti_dumpload, (int32_t) E.gti_sw_status, E.ac_sw_status);
 }
 
 /*

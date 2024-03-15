@@ -115,6 +115,8 @@ struct energy_type E = {
     .gti_sw_status = false,
 };
 
+static bool solar_shutdown(void);
+
 /*
  * Async processing threads
  */
@@ -251,6 +253,19 @@ int main(int argc, char *argv[]) {
                 E.speed_go = 0;
                 ha_flag_vars_ss.runner = false;
                 bsoc_data_collect();
+                if (solar_shutdown()) {
+                    time(&rawtime);
+                    fprintf(fout, "%s\r\n", ctime(&rawtime));
+                    fprintf(fout, " SHUTDOWN Solar Energy\r\n");
+                    fflush(fout);
+                    while (solar_shutdown()) {
+                        usleep(100000); // wait
+                    }
+                    time(&rawtime);
+                    fprintf(fout, "%s\r\n", ctime(&rawtime));
+                    fprintf(fout, " RESTART Solar Energy\r\n");
+                    fflush(fout);
+                }
                 if (bsoc_set_mode(PV_BIAS, true)) {
                     char gti_str[16];
                     int32_t error_drive;
@@ -441,4 +456,14 @@ void ha_ac_off(void) {
 void ha_ac_on(void) {
     mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
     E.ac_sw_status = true;
+}
+
+static bool solar_shutdown(void) {
+    static bool ret = false;
+    if (E.solar_shutdown) {
+        ret = true;
+    } else {
+        ret = false;
+    }
+    return ret;
 }

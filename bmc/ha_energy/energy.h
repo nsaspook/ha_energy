@@ -51,10 +51,10 @@ extern "C" {
 #define MIN_BAT_KW_BSOC_HI  4000.0f
 #define MIN_BAT_KW_BSOC_LO  3500.0f
 
-#define PV_PGAIN            0.35f
+#define PV_PGAIN            0.85f
 #define PV_IGAIN            0.12f
 #define PV_IMAX             1400.0f
-#define PV_BIAS             50.0f
+#define PV_BIAS             120.0f
 
 #define LOG_TO_FILE         "/store/logs/energy.log"
 
@@ -119,6 +119,10 @@ extern "C" {
         V_BEN,
         V_PWA,
         V_FLAST,
+        V_HDCSW,
+        V_HACSW,
+        V_HSHUT,
+        V_HMODE,
         // add other data ranges here
         V_DVPV,
         V_DPPV,
@@ -148,7 +152,7 @@ extern "C" {
         volatile double mvar[V_DLAST];
         volatile bool once_gti, once_ac, iammeter, fm80, dumpload, once_gti_zero;
         volatile double gti_low_adj, ac_low_adj;
-        volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status;
+        volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown;
         volatile uint32_t speed_go, rc, im_delay, im_display, gti_delay;
         pthread_mutex_t ha_lock;
         struct mode_type mode;
