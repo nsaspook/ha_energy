@@ -165,11 +165,19 @@ bool bat_current_stable(void) {
  * set mode to true to add GTI power to AC power for control power feedback
  * target is the positive power bias to keep the battery(s) charged
  */
-bool bsoc_set_mode(double target, bool mode) {
+bool bsoc_set_mode(double target, bool mode, bool init) {
     bool bsoc_mode = false;
     static bool bsoc_high = false, ha_ac_mode = true;
     static double accum = 0.0f, vpwa = 0.0f;
 
+    if (init) {
+        bsoc_mode = false;
+        bsoc_high = false;
+        ha_ac_mode = true;
+        accum = 0.0f;
+        vpwa = 0.0f;
+        return true;
+    }
     /*
      * running avg filter
      */

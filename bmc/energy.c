@@ -113,8 +113,9 @@ struct energy_type E = {
     .mode.in_control = false,
     .ac_sw_status = false,
     .gti_sw_status = false,
-    .solar_mode= false,
+    .solar_mode = false,
     .solar_shutdown = false,
+    .mode.pv_bias = PV_BIAS_LOW,
 };
 
 static bool solar_shutdown(void);
@@ -258,24 +259,31 @@ int main(int argc, char *argv[]) {
                 if (solar_shutdown()) {
                     time(&rawtime);
                     fprintf(fout, "%s\r\n", ctime(&rawtime));
-                    fprintf(fout, " SHUTDOWN Solar Energy ---> \r\n");
+                    fprintf(fout, " SHUTDOWN Solar Energy Control ---> \r\n");
                     ramp_down_gti(E.client_p, true);
+                    usleep(100000); // wait
                     ramp_down_ac(E.client_p, true);
-                    fprintf(fout, " Completed.\r\n");
+                    fprintf(fout, " Completed SHUTDOWN.\r\n");
                     fflush(fout);
                     while (solar_shutdown()) {
                         usleep(100000); // wait
                     }
                     time(&rawtime);
                     fprintf(fout, "%s\r\n", ctime(&rawtime));
-                    fprintf(fout, " RESTART Solar Energy\r\n");
+                    fprintf(fout, " RESTART Solar Energy Control\r\n");
                     fflush(fout);
+                    bsoc_set_mode(E.mode.pv_bias, true, true);
+                    mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
+                    usleep(100000); // wait
+                    E.gti_sw_status = true;
+                    ResetPI(&E.mode.pid);
+                    ha_flag_vars_ss.runner = true;
                 }
-                if (bsoc_set_mode(PV_BIAS, true)) {
+                if (bsoc_set_mode(E.mode.pv_bias, true, false)) {
                     char gti_str[16];
                     int32_t error_drive;
 
-                    ha_flag_vars_ss.energy_mode = PID_MODE;
+                    ha_flag_vars_ss.energy_mode = NORM_MODE;
                     if (E.gti_delay++ >= GTI_DELAY) {
                         if (!E.mode.in_control) {
                             mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
@@ -283,22 +291,24 @@ int main(int argc, char *argv[]) {
                             usleep(100000); // wait
                             mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
                             E.ac_sw_status = true;
+                            E.mode.pv_bias = PV_BIAS;
                         }
                         E.mode.in_control = true;
                         E.gti_delay = 0;
                         error_drive = (int32_t) E.mode.error; // PI feedback control signal
                         if (error_drive < 0) {
-                            error_drive = PV_BIAS; // control wide power swings
+                            error_drive = E.mode.pv_bias; // control wide power swings
                         }
                         snprintf(gti_str, 15, "V%04dX", error_drive); // format for dumpload controller gti power commands
                         mqtt_gti_power(E.client_p, TOPIC_P, gti_str);
                     }
                 } else {
-                    ha_flag_vars_ss.energy_mode = ((int32_t) E.mvar[V_HMODE]);
+                    //                    ha_flag_vars_ss.energy_mode = ((int32_t) E.mvar[V_HMODE]);
                     if (E.mode.in_control) {
                         E.mode.in_control = false;
                         ramp_down_gti(E.client_p, true);
                         ramp_down_ac(E.client_p, true);
+                        E.mode.pv_bias = PV_BIAS_LOW;
                     }
 
                     if (ha_flag_vars_ss.energy_mode == NORM_MODE) {

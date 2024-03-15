@@ -56,6 +56,7 @@ extern "C" {
 #define PV_IGAIN            0.12f
 #define PV_IMAX             1400.0f
 #define PV_BIAS             120.0f
+#define PV_BIAS_LOW         60.0f
 
 #define LOG_TO_FILE         "/store/logs/energy.log"
 
@@ -141,7 +142,7 @@ extern "C" {
 #define L3_P    L2_P+IA_LAST
 
     struct mode_type {
-        volatile double error, target, total_system, gti_dumpload;
+        volatile double error, target, total_system, gti_dumpload, pv_bias;
         volatile bool mode, in_control;
         volatile uint32_t mode_tmr;
         volatile struct SPid pid;
