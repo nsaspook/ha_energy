@@ -126,12 +126,6 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
         MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token); // run power commands
     } else {
         ret = false;
-#ifdef DEBUG_HA_CMD
-        if (spam) {
-            fprintf(fout, "HA GTI power set to zero\r\n");
-            spam = false;
-        }
-#endif
         pubmsg.payload = "Z#";
         pubmsg.payloadlen = strlen("Z#");
         if (!spam) {
@@ -139,6 +133,12 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
         } else {
             MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token); // only shutdown GTI power
         }
+#ifdef DEBUG_HA_CMD
+        if (spam) {
+            fprintf(fout, "HA GTI power set to zero\r\n");
+            spam = false;
+        }
+#endif
     }
 #endif
     // a busy, wait loop for the async delivery thread to complete
