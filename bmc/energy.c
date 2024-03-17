@@ -263,10 +263,21 @@ int main(int argc, char *argv[]) {
                     ramp_down_gti(E.client_p, true);
                     usleep(100000); // wait
                     ramp_down_ac(E.client_p, true);
-                    fprintf(fout, " Completed SHUTDOWN.\r\n");
+                    usleep(100000); // wait
+                    ramp_down_gti(E.client_p, true);
+                    usleep(100000); // wait
+                    ramp_down_ac(E.client_p, true);
+                    usleep(100000); // wait
+                    fprintf(fout, " Completed SHUTDOWN, Press again to RESTART.\r\n");
                     fflush(fout);
                     while (solar_shutdown()) {
-                        usleep(100000); // wait
+                        usleep(500000); // wait
+                        if (E.ac_sw_status) {
+                            ha_ac_off();
+                        }
+                        if (E.gti_sw_status) {
+                            ha_dc_off();
+                        }
                     }
                     time(&rawtime);
                     fprintf(fout, "%s\r\n", ctime(&rawtime));
@@ -473,6 +484,16 @@ void ha_ac_off(void) {
 void ha_ac_on(void) {
     mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
     E.ac_sw_status = true;
+}
+
+void ha_dc_off(void) {
+    mqtt_ha_switch(E.client_p, TOPIC_PDCC, false);
+    E.gti_sw_status = false;
+}
+
+void ha_dc_on(void) {
+    mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
+    E.gti_sw_status = true;
 }
 
 static bool solar_shutdown(void) {

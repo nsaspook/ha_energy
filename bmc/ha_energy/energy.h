@@ -174,6 +174,8 @@ extern "C" {
     void ramp_down_ac(MQTTClient, bool);
     void ha_ac_off(void);
     void ha_ac_on(void);
+    void ha_dc_off(void);
+    void ha_dc_on(void);
 
     size_t iammeter_write_callback(char *, size_t, size_t, void *);
     void iammeter_read(void);
