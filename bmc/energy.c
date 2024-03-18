@@ -272,10 +272,10 @@ int main(int argc, char *argv[]) {
                     fflush(fout);
                     while (solar_shutdown()) {
                         usleep(500000); // wait
-                        if (E.ac_sw_status) {
+                        if ((int32_t) E.mvar[V_HACSW]) {
                             ha_ac_off();
                         }
-                        if (E.gti_sw_status) {
+                        if ((int32_t) E.mvar[V_HDCSW]) {
                             ha_dc_off();
                         }
                     }
