@@ -117,9 +117,18 @@ struct energy_type E = {
     .solar_mode = false,
     .solar_shutdown = false,
     .mode.pv_bias = PV_BIAS_LOW,
+    .sane = S_DLAST,
 };
 
 static bool solar_shutdown(void);
+
+bool sanity_check() {
+    if (E.mvar[V_PWA] > PWA_SANE) {
+        E.sane = S_PWA;
+        return false;
+    }
+    return true;
+}
 
 /*
  * Async processing threads
@@ -257,6 +266,11 @@ int main(int argc, char *argv[]) {
                 E.speed_go = 0;
                 ha_flag_vars_ss.runner = false;
                 bsoc_data_collect();
+                if (!sanity_check()) {
+                    printf("\r\n Sanity Check error %d\r\n", E.sane);
+                    fprintf(fout, "\r\n Sanity Check error %d\r\n", E.sane);
+                }
+
                 if (solar_shutdown()) {
                     time(&rawtime);
                     fprintf(fout, "%s\r\n", ctime(&rawtime));
@@ -331,7 +345,7 @@ int main(int argc, char *argv[]) {
                             ramp_up_ac(E.client_p, E.ac_sw_on);
                             E.ac_sw_on = false;
                         }
-                        if (ac_test() < (MIN_BAT_KW_AC_LO + E.ac_low_adj)) {
+                        if ((ac_test() < (MIN_BAT_KW_AC_LO + E.ac_low_adj)) && !fm80_float()) {
                             ramp_down_ac(E.client_p, true);
                             E.ac_sw_on = true;
                         }

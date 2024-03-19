@@ -67,6 +67,11 @@ extern "C" {
 #define GTI_DELAY           1
 
     /*
+     * sane limits for system data elements
+     */
+#define PWA_SANE            1500.0f
+
+    /*
         Three Phase WiFi Energy Meter (WEM3080T)
     name	Unit	Description
     wem3080t_voltage_a	V	A phase voltage
@@ -135,6 +140,31 @@ extern "C" {
         V_DLAST,
     };
 
+    enum sane_vars {
+        S_FCCM,
+        S_FBEKW,
+        S_FRUNT,
+        S_FBV,
+        S_FLO,
+        S_FSO,
+        S_FACE,
+        S_BEN,
+        S_PWA,
+        S_FLAST,
+        S_HDCSW,
+        S_HACSW,
+        S_HSHUT,
+        S_HMODE,
+        // add other data ranges here
+        S_DVPV,
+        S_DPPV,
+        S_DPBAT,
+        S_DVBAT,
+        S_DCMPPT,
+        S_DGTI,
+        S_DLAST,
+    };
+
 #define MAX_IM_VAR  IA_LAST*PHASE_LAST
 
 #define L1_P    IA_POWER
@@ -155,7 +185,7 @@ extern "C" {
         volatile bool once_gti, once_ac, iammeter, fm80, dumpload, once_gti_zero;
         volatile double gti_low_adj, ac_low_adj;
         volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode;
-        volatile uint32_t speed_go, rc, im_delay, im_display, gti_delay;
+        volatile uint32_t speed_go, rc, im_delay, im_display, gti_delay, sane;
         pthread_mutex_t ha_lock;
         struct mode_type mode;
         MQTTClient client_p, client_sd;
@@ -182,6 +212,7 @@ extern "C" {
     void print_im_vars(void);
     void print_mvar_vars(void);
 
+    bool sanity_check(void);
 
 #ifdef __cplusplus
 }
