@@ -13,7 +13,7 @@
 #include "ha_energy/mqtt_rec.h"
 #include "ha_energy/bsoc.h"
 
-#define LOG_VERSION     "V0.39"
+#define LOG_VERSION     "V0.40"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -45,6 +45,7 @@
  * V0.37 Power feedback to use PV power to GTI and AC loads
  * V0.38 signal filters to smooth large power swings in control optimization
  * V0.39 fix optimizer bugs and add AC load switching set-points in BSOC control
+ * V0.40 shutdown and restart fixes
  */
 
 /*
@@ -289,6 +290,9 @@ int main(int argc, char *argv[]) {
                     E.gti_sw_status = true;
                     ResetPI(&E.mode.pid);
                     ha_flag_vars_ss.runner = true;
+                    E.fm80 = true;
+                    E.dumpload = true;
+                    E.iammeter = true;
                 }
                 if (bsoc_set_mode(E.mode.pv_bias, true, false)) {
                     char gti_str[16];
