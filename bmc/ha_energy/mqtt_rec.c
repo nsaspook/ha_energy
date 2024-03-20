@@ -11,6 +11,8 @@ const char* mqtt_name[V_DLAST] = {
     "acenergy",
     "benergy",
     "pwatts",
+    "pamps",
+    "pvolts",
     "flast",
     "HAdcsw",
     "HAacsw",

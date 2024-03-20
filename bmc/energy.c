@@ -127,6 +127,14 @@ bool sanity_check() {
         E.sane = S_PWA;
         return false;
     }
+    if (E.mvar[V_PAMPS] > PAMPS_SANE) {
+        E.sane = S_PAMPS;
+        return false;
+    }
+    if (E.mvar[V_PVOLTS] > PVOLTS_SANE) {
+        E.sane = S_PVOLTS;
+        return false;
+    }
     return true;
 }
 
@@ -267,8 +275,11 @@ int main(int argc, char *argv[]) {
                 ha_flag_vars_ss.runner = false;
                 bsoc_data_collect();
                 if (!sanity_check()) {
+                    time(&rawtime);
+                    fprintf(fout, "%s\r\n", ctime(&rawtime));
                     printf("\r\n Sanity Check error %d\r\n", E.sane);
                     fprintf(fout, "\r\n Sanity Check error %d\r\n", E.sane);
+                    fflush(fout);
                 }
 
                 if (solar_shutdown()) {
