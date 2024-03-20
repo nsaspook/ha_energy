@@ -70,8 +70,9 @@ extern "C" {
      * sane limits for system data elements
      */
 #define PWA_SANE            1500.0f
-#define PAMPS_SANE          75.0f
-#define PVOLTS_SANE         150.0f
+#define PAMPS_SANE          10.0f
+#define PVOLTS_SANE         145.0f
+#define BAMPS_SANE          70.0f
 
     /*
         Three Phase WiFi Energy Meter (WEM3080T)
@@ -121,6 +122,7 @@ extern "C" {
         V_FCCM,
         V_FBEKW,
         V_FRUNT,
+        V_FBAMPS,
         V_FBV,
         V_FLO,
         V_FSO,
@@ -148,6 +150,7 @@ extern "C" {
         S_FCCM,
         S_FBEKW,
         S_FRUNT,
+        S_FBAMPS,
         S_FBV,
         S_FLO,
         S_FSO,

@@ -135,6 +135,10 @@ bool sanity_check() {
         E.sane = S_PVOLTS;
         return false;
     }
+    if (E.mvar[V_FBAMPS] > BAMPS_SANE) {
+        E.sane = S_FBAMPS;
+        return false;
+    }
     return true;
 }
 

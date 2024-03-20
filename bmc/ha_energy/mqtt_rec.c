@@ -5,6 +5,7 @@ const char* mqtt_name[V_DLAST] = {
     "pccmode",
     "batenergykw",
     "runtime",
+    "bamps",
     "bvolts",
     "load",
     "solar",
