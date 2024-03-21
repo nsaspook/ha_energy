@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<analyzerinfo hash="4372775065980103066">
+        <error id="unusedVariable" severity="style" msg="Unused variable: sleep" verbose="Unused variable: sleep" cwe="563" file0="/store/solar_software/ha_energy/bmc/ha_energy/junk.c">
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/junk.c" line="32" column="9"/>
+            <symbol>sleep</symbol>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="main" lineNumber="9"/>
+    <functioncall functionName="delay_ms"/>
+    <functioncall functionName="start"/>
+  </FileInfo>
+</analyzerinfo>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<analyzerinfo hash="7210768598619852218">
+  <FileInfo check="ctu">
+<function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="2" file="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c" line="44" col="30" call-argexpr="phase_var" call-argvaluetype="0" call-argvalue="0">
+  <path file="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c" line="43" col="34" info="Assignment &apos;phase_var=0&apos;, assigned value is 0"/>
+</function-call><function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="3" file="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c" line="44" col="30" call-argexpr="phase" call-argvaluetype="0" call-argvalue="0">
+  <path file="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c" line="34" col="22" info="Assignment &apos;phase=0&apos;, assigned value is 0"/>
+</function-call>  </FileInfo>
+  <FileInfo check="ctu">
+<function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="2" file="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c" line="44" col="30" call-argexpr="phase_var" call-argvaluetype="0" call-argvalue="0">
+  <path file="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c" line="43" col="34" info="Assignment &apos;phase_var=0&apos;, assigned value is 0"/>
+</function-call><function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="3" file="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c" line="44" col="30" call-argexpr="phase" call-argvaluetype="0" call-argvalue="0">
+  <path file="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c" line="34" col="22" info="Assignment &apos;phase=0&apos;, assigned value is 0"/>
+</function-call>  </FileInfo>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="iammeter_write_callback" lineNumber="11"/>
+    <functiondecl functionName="iammeter_read" lineNumber="65"/>
+    <functiondecl functionName="iammeter_get_data" lineNumber="89"/>
+    <functiondecl functionName="print_im_vars" lineNumber="96"/>
+    <functiondecl functionName="iammeter_write_callback" lineNumber="11"/>
+    <functiondecl functionName="iammeter_read" lineNumber="65"/>
+    <functiondecl functionName="iammeter_get_data" lineNumber="89"/>
+    <functiondecl functionName="print_im_vars" lineNumber="96"/>
+    <functioncall functionName="CURLOPT_URL"/>
+    <functioncall functionName="CURLOPT_WRITEDATA"/>
+    <functioncall functionName="CURLOPT_WRITEFUNCTION"/>
+    <functioncall functionName="IA_LAST"/>
+    <functioncall functionName="IA_POWER"/>
+    <functioncall functionName="MQTTClient"/>
+    <functioncall functionName="PHASE_LAST"/>
+    <functioncall functionName="cJSON_ArrayForEach"/>
+    <functioncall functionName="cJSON_Delete"/>
+    <functioncall functionName="cJSON_GetErrorPtr"/>
+    <functioncall functionName="cJSON_GetObjectItemCaseSensitive"/>
+    <functioncall functionName="cJSON_ParseWithLength"/>
+    <functioncall functionName="curl_easy_cleanup"/>
+    <functioncall functionName="curl_easy_init"/>
+    <functioncall functionName="curl_easy_perform"/>
+    <functioncall functionName="curl_easy_setopt"/>
+    <functioncall functionName="curl_easy_strerror"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="fprintf"/>
+    <functioncall functionName="iammeter_exit"/>
+    <functioncall functionName="iammeter_get_data"/>
+    <functioncall functionName="iammeter_write_callback"/>
+    <functioncall functionName="stderr"/>
+    <functioncall functionName="strlen"/>
+    <functioncall functionName="true"/>
+  </FileInfo>
+</analyzerinfo>

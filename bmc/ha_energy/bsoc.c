@@ -4,7 +4,6 @@
 static volatile double ac_weight = 0.0f, gti_weight = 0.0f, pv_voltage = 0.0f, bat_current = 0.0f, batc_std_dev = 0.0f, bat_voltage = 0.0f;
 static double bat_c_std_dev[DEV_SIZE], coef = COEF;
 
-double calculateStandardDeviation(uint32_t, double *);
 static double error_filter(double);
 
 bool bsoc_init(void) {
@@ -75,7 +74,7 @@ double bsoc_ac(void) {
  */
 double bsoc_gti(void) {
 #ifdef BSOC_DEBUG
-    fprintf(fout, "pvp %f, gweight %f, aweight %f, batv, batc %f\r\n", pv_voltage, gti_weight, ac_weight, bat_voltage, bat_current);
+    fprintf(fout, "pvp %f, gweight %f, aweight %f, batv %f, batc %f\r\n", pv_voltage, gti_weight, ac_weight, bat_voltage, bat_current);
 #endif
     // check for 48VDC AC charger powered from the Solar battery bank AC inverter
     if ((pv_voltage < MIN_PV_VOLTS) || (bat_voltage < MIN_BAT_VOLTS)) {
@@ -110,7 +109,7 @@ double get_batc_dev(void) {
  * used to wait until GTI power ramps are stable
  * batc_std_dev needs to be under some standard value to continue power ramps
  */
-double calculateStandardDeviation(uint32_t N, double data[]) {
+double calculateStandardDeviation(uint32_t N, const double data[]) {
     // variable to store sum of the given data
     double sum = 0;
 

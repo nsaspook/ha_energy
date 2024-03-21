@@ -190,11 +190,12 @@ extern "C" {
     struct energy_type {
         volatile double print_vars[MAX_IM_VAR];
         volatile double im_vars[IA_LAST][PHASE_LAST];
-        volatile double mvar[V_DLAST];
+        volatile double mvar[V_DLAST+1];
         volatile bool once_gti, once_ac, iammeter, fm80, dumpload, once_gti_zero;
         volatile double gti_low_adj, ac_low_adj;
         volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode;
-        volatile uint32_t speed_go, rc, im_delay, im_display, gti_delay, sane;
+        volatile uint32_t speed_go, im_delay, im_display, gti_delay;
+        volatile int32_t rc, sane;
         pthread_mutex_t ha_lock;
         struct mode_type mode;
         MQTTClient client_p, client_sd;

@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<analyzerinfo hash="12243599686001913055">
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c">
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c" line="74" column="23" info="Shadow variable"/>
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c" line="34" column="13" info="Shadowed declaration"/>
+            <symbol>i</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c">
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c" line="88" column="23" info="Shadow variable"/>
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c" line="34" column="13" info="Shadowed declaration"/>
+            <symbol>i</symbol>
+        </error>
+  <FileInfo check="ctu">
+<function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.h:43:10" call-funcname="json_get_data" call-argnr="4" file="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c" line="75" col="30" call-argexpr="i" call-argvaluetype="0" call-argvalue="0">
+  <path file="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c" line="74" col="27" info="Assignment &apos;i=V_FCCM&apos;, assigned value is 0"/>
+</function-call>  </FileInfo>
+  <FileInfo check="Null pointer">
+    <unsafe-usage my-id="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.h:40:13" my-argnr="4" my-argname="message" file="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c" line="48" col="18" value="0"/>
+  </FileInfo>
+  <FileInfo check="Uninitialized variables">
+    <unsafe-usage my-id="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.h:40:13" my-argnr="4" my-argname="message" file="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c" line="48" col="18" value="0"/>
+  </FileInfo>
+  <FileInfo check="ctu">
+<function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.h:43:10" call-funcname="json_get_data" call-argnr="4" file="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c" line="75" col="30" call-argexpr="i" call-argvaluetype="0" call-argvalue="0">
+  <path file="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c" line="74" col="27" info="Assignment &apos;i=V_FCCM&apos;, assigned value is 0"/>
+</function-call>  </FileInfo>
+  <FileInfo check="Null pointer">
+    <unsafe-usage my-id="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.h:40:13" my-argnr="4" my-argname="message" file="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c" line="48" col="18" value="0"/>
+  </FileInfo>
+  <FileInfo check="Uninitialized variables">
+    <unsafe-usage my-id="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.h:40:13" my-argnr="4" my-argname="message" file="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c" line="48" col="18" value="0"/>
+  </FileInfo>
+  <FileInfo check="ctu">
+<function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.h:43:10" call-funcname="json_get_data" call-argnr="4" file="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c" line="75" col="30" call-argexpr="i" call-argvaluetype="0" call-argvalue="0">
+  <path file="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c" line="74" col="27" info="Assignment &apos;i=V_FCCM&apos;, assigned value is 0"/>
+</function-call>  </FileInfo>
+  <FileInfo check="Null pointer">
+    <unsafe-usage my-id="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.h:40:13" my-argnr="4" my-argname="message" file="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c" line="48" col="18" value="0"/>
+  </FileInfo>
+  <FileInfo check="Uninitialized variables">
+    <unsafe-usage my-id="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.h:40:13" my-argnr="4" my-argname="message" file="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c" line="48" col="18" value="0"/>
+  </FileInfo>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="msgarrvd" lineNumber="33"/>
+    <functiondecl functionName="delivered" lineNumber="110"/>
+    <functiondecl functionName="json_get_data" lineNumber="123"/>
+    <functiondecl functionName="print_mvar_vars" lineNumber="181"/>
+    <functiondecl functionName="fm80_float" lineNumber="189"/>
+    <functiondecl functionName="msgarrvd" lineNumber="33"/>
+    <functiondecl functionName="delivered" lineNumber="110"/>
+    <functiondecl functionName="json_get_data" lineNumber="123"/>
+    <functiondecl functionName="print_mvar_vars" lineNumber="181"/>
+    <functiondecl functionName="fm80_float" lineNumber="189"/>
+    <functiondecl functionName="msgarrvd" lineNumber="33"/>
+    <functiondecl functionName="delivered" lineNumber="110"/>
+    <functiondecl functionName="json_get_data" lineNumber="123"/>
+    <functiondecl functionName="print_mvar_vars" lineNumber="181"/>
+    <functiondecl functionName="fm80_float" lineNumber="189"/>
+    <functioncall functionName="IA_LAST"/>
+    <functioncall functionName="MQTTClient"/>
+    <functioncall functionName="MQTTClient_deliveryToken"/>
+    <functioncall functionName="MQTTClient_free"/>
+    <functioncall functionName="MQTTClient_freeMessage"/>
+    <functioncall functionName="PHASE_LAST"/>
+    <functioncall functionName="V_BEN"/>
+    <functioncall functionName="V_DLAST"/>
+    <functioncall functionName="V_FACE"/>
+    <functioncall functionName="V_FBEKW"/>
+    <functioncall functionName="V_FCCM"/>
+    <functioncall functionName="V_FLO"/>
+    <functioncall functionName="V_FSO"/>
+    <functioncall functionName="V_HACSW"/>
+    <functioncall functionName="V_HDCSW"/>
+    <functioncall functionName="V_HMODE"/>
+    <functioncall functionName="bsoc_set_std_dev"/>
+    <functioncall functionName="cJSON_Delete"/>
+    <functioncall functionName="cJSON_GetErrorPtr"/>
+    <functioncall functionName="cJSON_GetObjectItemCaseSensitive"/>
+    <functioncall functionName="cJSON_IsNumber"/>
+    <functioncall functionName="cJSON_IsString"/>
+    <functioncall functionName="cJSON_ParseWithLength"/>
+    <functioncall functionName="error_exit"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="fprintf"/>
+    <functioncall functionName="json_get_data"/>
+    <functioncall functionName="null_exit"/>
+    <functioncall functionName="pthread_mutex_lock"/>
+    <functioncall functionName="pthread_mutex_unlock"/>
+    <functioncall functionName="true"/>
+  </FileInfo>
+</analyzerinfo>

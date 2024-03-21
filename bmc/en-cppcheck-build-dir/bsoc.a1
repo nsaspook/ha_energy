@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<analyzerinfo hash="6942106588655633199">
+        <error id="unreadVariable" severity="style" msg="Variable &apos;bsoc_mode&apos; is assigned a value that is never used." verbose="Variable &apos;bsoc_mode&apos; is assigned a value that is never used." cwe="563" file0="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c">
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="173" column="19"/>
+            <symbol>bsoc_mode</symbol>
+        </error>
+  <FileInfo check="ctu">
+<function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.h:57:12" call-funcname="calculateStandardDeviation" call-argnr="2" file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="56" col="31" call-argexpr="bat_c_std_dev" call-argvaluetype="7" call-argvalue="80"/>  </FileInfo>
+  <FileInfo check="ctu">
+<function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.h:57:12" call-funcname="calculateStandardDeviation" call-argnr="2" file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="56" col="31" call-argexpr="bat_c_std_dev" call-argvaluetype="7" call-argvalue="80"/>  </FileInfo>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="bsoc_init" lineNumber="9"/>
+    <functiondecl functionName="bsoc_set_std_dev" lineNumber="22"/>
+    <functiondecl functionName="bsoc_data_collect" lineNumber="29"/>
+    <functiondecl functionName="bsoc_ac" lineNumber="67"/>
+    <functiondecl functionName="bsoc_gti" lineNumber="75"/>
+    <functiondecl functionName="gti_test" lineNumber="89"/>
+    <functiondecl functionName="ac_test" lineNumber="100"/>
+    <functiondecl functionName="get_batc_dev" lineNumber="104"/>
+    <functiondecl functionName="calculateStandardDeviation" lineNumber="112"/>
+    <functiondecl functionName="bat_current_stable" lineNumber="146"/>
+    <functiondecl functionName="bsoc_set_mode" lineNumber="167"/>
+    <functiondecl functionName="error_filter" lineNumber="238"/>
+    <functiondecl functionName="bsoc_init" lineNumber="9"/>
+    <functiondecl functionName="bsoc_set_std_dev" lineNumber="22"/>
+    <functiondecl functionName="bsoc_data_collect" lineNumber="29"/>
+    <functiondecl functionName="bsoc_ac" lineNumber="67"/>
+    <functiondecl functionName="bsoc_gti" lineNumber="75"/>
+    <functiondecl functionName="gti_test" lineNumber="89"/>
+    <functiondecl functionName="ac_test" lineNumber="100"/>
+    <functiondecl functionName="get_batc_dev" lineNumber="104"/>
+    <functiondecl functionName="calculateStandardDeviation" lineNumber="112"/>
+    <functiondecl functionName="bat_current_stable" lineNumber="146"/>
+    <functiondecl functionName="bsoc_set_mode" lineNumber="167"/>
+    <functiondecl functionName="error_filter" lineNumber="238"/>
+    <functioncall functionName="IA_LAST"/>
+    <functioncall functionName="MQTTClient"/>
+    <functioncall functionName="MQTTClient_deliveryToken"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="PHASE_LAST"/>
+    <functioncall functionName="ResetPI"/>
+    <functioncall functionName="UpdatePI"/>
+    <functioncall functionName="V_BEN"/>
+    <functioncall functionName="V_DCMPPT"/>
+    <functioncall functionName="V_DLAST"/>
+    <functioncall functionName="V_DPPV"/>
+    <functioncall functionName="V_DVBAT"/>
+    <functioncall functionName="V_DVPV"/>
+    <functioncall functionName="V_FACE"/>
+    <functioncall functionName="V_FBEKW"/>
+    <functioncall functionName="V_FLO"/>
+    <functioncall functionName="V_FSO"/>
+    <functioncall functionName="V_PWA"/>
+    <functioncall functionName="calculateStandardDeviation"/>
+    <functioncall functionName="error_filter"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="fprintf"/>
+    <functioncall functionName="ha_ac_off"/>
+    <functioncall functionName="ha_ac_on"/>
+    <functioncall functionName="pow"/>
+    <functioncall functionName="printf"/>
+    <functioncall functionName="pthread_mutex_init"/>
+    <functioncall functionName="pthread_mutex_lock"/>
+    <functioncall functionName="pthread_mutex_unlock"/>
+    <functioncall functionName="round"/>
+    <functioncall functionName="sqrt"/>
+    <functioncall functionName="true"/>
+  </FileInfo>
+</analyzerinfo>

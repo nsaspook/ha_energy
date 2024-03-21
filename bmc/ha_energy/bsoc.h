@@ -54,7 +54,7 @@ extern "C" {
     bool bat_current_stable(void);
     void bsoc_set_std_dev(double, uint32_t);
 
-    double calculateStandardDeviation(uint32_t, double *);
+    double calculateStandardDeviation(uint32_t, const double *);
 
     bool bsoc_set_mode(double, bool, bool);
 

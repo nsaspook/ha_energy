@@ -13,7 +13,7 @@
 #include "ha_energy/mqtt_rec.h"
 #include "ha_energy/bsoc.h"
 
-#define LOG_VERSION     "V0.40"
+#define LOG_VERSION     "V0.41"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -46,6 +46,7 @@
  * V0.38 signal filters to smooth large power swings in control optimization
  * V0.39 fix optimizer bugs and add AC load switching set-points in BSOC control
  * V0.40 shutdown and restart fixes
+ * V0.41 fix errors and warning per cppcheck
  */
 
 /*
@@ -83,9 +84,7 @@ struct ha_flag_type ha_flag_vars_sd = {
     .var_update = 0,
 };
 
-char *token;
 const char *board_name = "NO_BOARD", *driver_name = "NO_DRIVER";
-cJSON *json;
 
 FILE* fout;
 

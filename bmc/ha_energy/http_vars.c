@@ -24,8 +24,7 @@ size_t iammeter_write_callback(char *buffer, size_t size, size_t nitems, void *s
     fprintf(fout, "\n iammeter_read_callback %s \n", buffer);
 #endif
 
-    cJSON *data_result = json;
-    data_result = cJSON_GetObjectItemCaseSensitive(json, "Datas");
+    cJSON *data_result = cJSON_GetObjectItemCaseSensitive(json, "Datas");
 
     if (!data_result) {
         goto iammeter_exit;

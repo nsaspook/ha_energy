@@ -39,7 +39,6 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
     // bug-out if no context variables passed to callback
     if (context == NULL) {
         ret = -1;
-        ha_flag->rec_ok = false;
         goto null_exit;
     }
 
