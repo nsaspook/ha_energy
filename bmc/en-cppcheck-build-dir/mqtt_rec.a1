@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="12243599686001913055">
+<analyzerinfo hash="11389726826033025850">
         <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c">
             <location file="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c" line="74" column="23" info="Shadow variable"/>
             <location file="/store/solar_software/ha_energy/bmc/ha_energy/mqtt_rec.c" line="34" column="13" info="Shadowed declaration"/>

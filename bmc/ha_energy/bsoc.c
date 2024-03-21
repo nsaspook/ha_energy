@@ -165,7 +165,7 @@ bool bat_current_stable(void) {
  * target is the positive power bias to keep the battery(s) charged
  */
 bool bsoc_set_mode(double target, bool mode, bool init) {
-    bool bsoc_mode = false;
+    static bool bsoc_mode = false;
     static bool bsoc_high = false, ha_ac_mode = true;
     static double accum = 0.0f, vpwa = 0.0f;
 

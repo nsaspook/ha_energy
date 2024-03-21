@@ -13,23 +13,6 @@
 #include "ha_energy/mqtt_rec.h"
 #include "ha_energy/bsoc.h"
 
-#define LOG_VERSION     "V0.41"
-#define MQTT_VERSION    "V3.11"
-#define ADDRESS         "tcp://10.1.1.172:1883"
-#define CLIENTID1       "Energy_Mqtt_HA1"
-#define CLIENTID2       "Energy_Mqtt_HA2"
-#define TOPIC_P         "mateq84/data/gticmd"
-#define TOPIC_PACA      "home-assistant/gtiac/availability"
-#define TOPIC_PDCA      "home-assistant/gtidc/availability"
-#define TOPIC_PACC      "home-assistant/gtiac/contact"
-#define TOPIC_PDCC      "home-assistant/gtidc/contact"
-#define TOPIC_PPID      "home-assistant/solar/pid"
-#define TOPIC_SS        "mateq84/data/solar"
-#define TOPIC_SD        "mateq84/data/dumpload"
-#define QOS             1
-#define TIMEOUT         10000L
-#define SPACING_USEC    500 * 1000
-
 /*
  * V0.25 add Home Assistant Matter controlled utility power control switching
  * V0.26 BSOC weights for system condition for power diversion
@@ -146,11 +129,13 @@ bool sanity_check() {
  */
 
 /*
- * Comedi data update timer flag
+ * data update timer flag
+ * and 10 second software time clock
  */
 void timer_callback(int32_t signum) {
     signal(signum, timer_callback);
     ha_flag_vars_ss.runner = true;
+    E.ten_sec_clock++;
 }
 
 /*
@@ -323,11 +308,11 @@ int main(int argc, char *argv[]) {
                     E.iammeter = true;
                 }
                 if (bsoc_set_mode(E.mode.pv_bias, true, false)) {
-                    char gti_str[16];
-                    int32_t error_drive;
-
                     ha_flag_vars_ss.energy_mode = NORM_MODE;
                     if (E.gti_delay++ >= GTI_DELAY) {
+                        char gti_str[16];
+                        int32_t error_drive;
+
                         if (!E.mode.in_control) {
                             mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
                             E.gti_sw_status = true;

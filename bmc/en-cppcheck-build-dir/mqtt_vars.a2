@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="10749128946744851034">
+<analyzerinfo hash="10970632555991262142">
   <FileInfo check="CheckUnusedFunctions">
     <functiondecl functionName="mqtt_ha_pid" lineNumber="9"/>
     <functiondecl functionName="mqtt_ha_switch" lineNumber="48"/>

@@ -1,9 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="6942106588655633199">
-        <error id="unreadVariable" severity="style" msg="Variable &apos;bsoc_mode&apos; is assigned a value that is never used." verbose="Variable &apos;bsoc_mode&apos; is assigned a value that is never used." cwe="563" file0="ha_energy/bsoc.c">
-            <location file="ha_energy/bsoc.c" line="173" column="19"/>
-            <symbol>bsoc_mode</symbol>
-        </error>
+<analyzerinfo hash="4582874751261415648">
   <FileInfo check="ctu">
 <function-call call-id="ha_energy/bsoc.h:57:12" call-funcname="calculateStandardDeviation" call-argnr="2" file="ha_energy/bsoc.c" line="56" col="31" call-argexpr="bat_c_std_dev" call-argvaluetype="7" call-argvalue="80"/>  </FileInfo>
   <FileInfo check="ctu">

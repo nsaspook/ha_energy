@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="7210768598619852218">
+<analyzerinfo hash="4617010953392191392">
   <FileInfo check="ctu">
 <function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="2" file="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c" line="44" col="30" call-argexpr="phase_var" call-argvaluetype="0" call-argvalue="0">
   <path file="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c" line="43" col="34" info="Assignment &apos;phase_var=0&apos;, assigned value is 0"/>

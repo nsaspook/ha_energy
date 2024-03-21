@@ -29,6 +29,24 @@ extern "C" {
 #include "MQTTClient.h"
 #include "pid.h"
 
+    
+#define LOG_VERSION     "V0.41"
+#define MQTT_VERSION    "V3.11"
+#define ADDRESS         "tcp://10.1.1.172:1883"
+#define CLIENTID1       "Energy_Mqtt_HA1"
+#define CLIENTID2       "Energy_Mqtt_HA2"
+#define TOPIC_P         "mateq84/data/gticmd"
+#define TOPIC_PACA      "home-assistant/gtiac/availability"
+#define TOPIC_PDCA      "home-assistant/gtidc/availability"
+#define TOPIC_PACC      "home-assistant/gtiac/contact"
+#define TOPIC_PDCC      "home-assistant/gtidc/contact"
+#define TOPIC_PPID      "home-assistant/solar/pid"
+#define TOPIC_SS        "mateq84/data/solar"
+#define TOPIC_SD        "mateq84/data/dumpload"
+#define QOS             1
+#define TIMEOUT         10000L
+#define SPACING_USEC    500 * 1000
+
 #define DAQ_STR 32
 #define DAQ_STR_M DAQ_STR-1
 
@@ -196,6 +214,7 @@ extern "C" {
         volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode;
         volatile uint32_t speed_go, im_delay, im_display, gti_delay;
         volatile int32_t rc, sane;
+        volatile uint32_t ten_sec_clock;
         pthread_mutex_t ha_lock;
         struct mode_type mode;
         MQTTClient client_p, client_sd;

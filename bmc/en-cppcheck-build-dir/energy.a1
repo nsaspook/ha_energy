@@ -1,50 +1,42 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="5249987718738206968">
-        <error id="variableScope" severity="style" msg="The scope of the variable &apos;gti_str&apos; can be reduced." verbose="The scope of the variable &apos;gti_str&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="energy.c">
-            <location file="energy.c" line="326" column="26"/>
-            <symbol>gti_str</symbol>
-        </error>
-        <error id="variableScope" severity="style" msg="The scope of the variable &apos;error_drive&apos; can be reduced." verbose="The scope of the variable &apos;error_drive&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="energy.c">
-            <location file="energy.c" line="327" column="29"/>
-            <symbol>error_drive</symbol>
-        </error>
+<analyzerinfo hash="7249553905805342120">
   <FileInfo check="ctu">
-<function-call call-id="ha_energy/mqtt_vars.h:27:10" call-funcname="mqtt_gti_power" call-argnr="3" file="energy.c" line="346" col="39" call-argexpr="gti_str" call-argvaluetype="7" call-argvalue="16"/>  </FileInfo>
+<function-call call-id="ha_energy/mqtt_vars.h:27:10" call-funcname="mqtt_gti_power" call-argnr="3" file="energy.c" line="331" col="39" call-argexpr="gti_str" call-argvaluetype="7" call-argvalue="16"/>  </FileInfo>
   <FileInfo check="Null pointer">
-    <unsafe-usage my-id="ha_energy/energy.h:209:10" my-argnr="2" my-argname="cause" file="energy.c" line="170" col="36" value="0"/>
+    <unsafe-usage my-id="ha_energy/energy.h:228:10" my-argnr="2" my-argname="cause" file="energy.c" line="155" col="36" value="0"/>
   </FileInfo>
   <FileInfo check="ctu">
-<function-call call-id="ha_energy/mqtt_vars.h:27:10" call-funcname="mqtt_gti_power" call-argnr="3" file="energy.c" line="346" col="39" call-argexpr="gti_str" call-argvaluetype="7" call-argvalue="16"/>  </FileInfo>
+<function-call call-id="ha_energy/mqtt_vars.h:27:10" call-funcname="mqtt_gti_power" call-argnr="3" file="energy.c" line="331" col="39" call-argexpr="gti_str" call-argvaluetype="7" call-argvalue="16"/>  </FileInfo>
   <FileInfo check="Null pointer">
-    <unsafe-usage my-id="ha_energy/energy.h:209:10" my-argnr="2" my-argname="cause" file="energy.c" line="170" col="36" value="0"/>
+    <unsafe-usage my-id="ha_energy/energy.h:228:10" my-argnr="2" my-argname="cause" file="energy.c" line="155" col="36" value="0"/>
   </FileInfo>
   <FileInfo check="CheckUnusedFunctions">
-    <functiondecl functionName="sanity_check" lineNumber="124"/>
-    <functiondecl functionName="timer_callback" lineNumber="151"/>
-    <functiondecl functionName="connlost" lineNumber="159"/>
-    <functiondecl functionName="main" lineNumber="177"/>
-    <functiondecl functionName="ramp_up_gti" lineNumber="422"/>
-    <functiondecl functionName="ramp_down_gti" lineNumber="475"/>
-    <functiondecl functionName="ramp_up_ac" lineNumber="489"/>
-    <functiondecl functionName="ramp_down_ac" lineNumber="503"/>
-    <functiondecl functionName="ha_ac_off" lineNumber="511"/>
-    <functiondecl functionName="ha_ac_on" lineNumber="516"/>
-    <functiondecl functionName="ha_dc_off" lineNumber="521"/>
-    <functiondecl functionName="ha_dc_on" lineNumber="526"/>
-    <functiondecl functionName="solar_shutdown" lineNumber="531"/>
-    <functiondecl functionName="sanity_check" lineNumber="124"/>
-    <functiondecl functionName="timer_callback" lineNumber="151"/>
-    <functiondecl functionName="connlost" lineNumber="159"/>
-    <functiondecl functionName="main" lineNumber="177"/>
-    <functiondecl functionName="ramp_up_gti" lineNumber="422"/>
-    <functiondecl functionName="ramp_down_gti" lineNumber="475"/>
-    <functiondecl functionName="ramp_up_ac" lineNumber="489"/>
-    <functiondecl functionName="ramp_down_ac" lineNumber="503"/>
-    <functiondecl functionName="ha_ac_off" lineNumber="511"/>
-    <functiondecl functionName="ha_ac_on" lineNumber="516"/>
-    <functiondecl functionName="ha_dc_off" lineNumber="521"/>
-    <functiondecl functionName="ha_dc_on" lineNumber="526"/>
-    <functiondecl functionName="solar_shutdown" lineNumber="531"/>
+    <functiondecl functionName="sanity_check" lineNumber="107"/>
+    <functiondecl functionName="timer_callback" lineNumber="135"/>
+    <functiondecl functionName="connlost" lineNumber="144"/>
+    <functiondecl functionName="main" lineNumber="162"/>
+    <functiondecl functionName="ramp_up_gti" lineNumber="407"/>
+    <functiondecl functionName="ramp_down_gti" lineNumber="460"/>
+    <functiondecl functionName="ramp_up_ac" lineNumber="474"/>
+    <functiondecl functionName="ramp_down_ac" lineNumber="488"/>
+    <functiondecl functionName="ha_ac_off" lineNumber="496"/>
+    <functiondecl functionName="ha_ac_on" lineNumber="501"/>
+    <functiondecl functionName="ha_dc_off" lineNumber="506"/>
+    <functiondecl functionName="ha_dc_on" lineNumber="511"/>
+    <functiondecl functionName="solar_shutdown" lineNumber="516"/>
+    <functiondecl functionName="sanity_check" lineNumber="107"/>
+    <functiondecl functionName="timer_callback" lineNumber="135"/>
+    <functiondecl functionName="connlost" lineNumber="144"/>
+    <functiondecl functionName="main" lineNumber="162"/>
+    <functiondecl functionName="ramp_up_gti" lineNumber="407"/>
+    <functiondecl functionName="ramp_down_gti" lineNumber="460"/>
+    <functiondecl functionName="ramp_up_ac" lineNumber="474"/>
+    <functiondecl functionName="ramp_down_ac" lineNumber="488"/>
+    <functiondecl functionName="ha_ac_off" lineNumber="496"/>
+    <functiondecl functionName="ha_ac_on" lineNumber="501"/>
+    <functiondecl functionName="ha_dc_off" lineNumber="506"/>
+    <functiondecl functionName="ha_dc_on" lineNumber="511"/>
+    <functiondecl functionName="solar_shutdown" lineNumber="516"/>
     <functioncall functionName="DUMPLOAD_ID"/>
     <functioncall functionName="EXIT_FAILURE"/>
     <functioncall functionName="FM80_ID"/>
