@@ -265,8 +265,8 @@ int main(int argc, char *argv[]) {
                 if (!sanity_check()) {
                     time(&rawtime);
                     fprintf(fout, "%s\r\n", ctime(&rawtime));
-                    printf("\r\n Sanity Check error %d\r\n", E.sane);
-                    fprintf(fout, "\r\n Sanity Check error %d\r\n", E.sane);
+                    printf("\r\n Sanity Check error %d %s \r\n", E.sane, mqtt_name[E.sane]);
+                    fprintf(fout, "\r\n Sanity Check error %d %s \r\n", E.sane, mqtt_name[E.sane]);
                     fflush(fout);
                 }
 

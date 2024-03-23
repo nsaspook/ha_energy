@@ -89,7 +89,7 @@ extern "C" {
      */
 #define PWA_SANE            1500.0f
 #define PAMPS_SANE          10.0f
-#define PVOLTS_SANE         145.0f
+#define PVOLTS_SANE         149.0f
 #define BAMPS_SANE          70.0f
 
     /*
