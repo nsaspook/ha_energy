@@ -33,7 +33,16 @@ bool bsoc_data_collect(void) {
 
     ac_weight = E.mvar[V_FBEKW];
     gti_weight = E.mvar[V_FBEKW];
+#ifdef FAKE_VPV // no DUMPLOAD AC charger
+    if (E.gti_sw_on) {
+        pv_voltage = PV_V_NOM;
+    } else {
+        pv_voltage = PV_V_FAKE;
+    }
+    E.mvar[V_DVPV] = pv_voltage;
+#else
     pv_voltage = E.mvar[V_DVPV];
+#endif
     bat_voltage = E.mvar[V_DVBAT];
     bat_current = E.mvar[V_DCMPPT];
     E.ac_low_adj = E.mvar[V_FSO]* -0.5f;

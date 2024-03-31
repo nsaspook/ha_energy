@@ -30,6 +30,7 @@
  * V0.39 fix optimizer bugs and add AC load switching set-points in BSOC control
  * V0.40 shutdown and restart fixes
  * V0.41 fix errors and warning per cppcheck
+ * V0.42 fake ac charger for dumpload using FAKE_VPV define
  */
 
 /*
@@ -253,6 +254,11 @@ int main(int argc, char *argv[]) {
     {
         printf("\r\n Solar Energy AC power controller\r\n");
         fprintf(fout, "\r\n Solar Energy AC power controller\r\n");
+        
+#ifdef FAKE_VPV
+        printf("\r\n Faking dumpload PV voltage\r\n");
+        fprintf(fout, "\r\n Faking dumpload PV voltage\r\n");
+#endif
 
         while (true) {
 

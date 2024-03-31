@@ -29,8 +29,8 @@ extern "C" {
 #include "MQTTClient.h"
 #include "pid.h"
 
-    
-#define LOG_VERSION     "V0.41"
+
+#define LOG_VERSION     "V0.42"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -80,6 +80,8 @@ extern "C" {
 
     //#define IM_DEBUG            // WEM3080T LOGGING
     //#define B_ADJ_DEBUG
+#define FAKE_VPV                    // NO AC CHARGER for DUMPLOAD
+
 #define IM_DELAY            1   // tens of second updates    
 #define IM_DISPLAY          1
 #define GTI_DELAY           1
@@ -154,6 +156,14 @@ extern "C" {
         V_HACSW,
         V_HSHUT,
         V_HMODE,
+        V_HCON0,
+        V_HCON1,
+        V_HCON2,
+        V_HCON3,
+        V_HCON4,
+        V_HCON5,
+        V_HCON6,
+        V_HCON7,
         // add other data ranges here
         V_DVPV,
         V_DPPV,
@@ -200,7 +210,7 @@ extern "C" {
 
     struct mode_type {
         volatile double error, target, total_system, gti_dumpload, pv_bias;
-        volatile bool mode, in_control;
+        volatile bool mode, in_control, con0, con1, con2, con3, con4, con5, con6, con7;
         volatile uint32_t mode_tmr;
         volatile struct SPid pid;
     };
@@ -208,7 +218,7 @@ extern "C" {
     struct energy_type {
         volatile double print_vars[MAX_IM_VAR];
         volatile double im_vars[IA_LAST][PHASE_LAST];
-        volatile double mvar[V_DLAST+1];
+        volatile double mvar[V_DLAST + 1];
         volatile bool once_gti, once_ac, iammeter, fm80, dumpload, once_gti_zero;
         volatile double gti_low_adj, ac_low_adj;
         volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode;

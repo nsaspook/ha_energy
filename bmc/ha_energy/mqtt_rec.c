@@ -19,6 +19,14 @@ const char* mqtt_name[V_DLAST] = {
     "HAacsw",
     "HAshut",
     "HAmode",
+    "HAcon0",
+    "HAcon1",
+    "HAcon2",
+    "HAcon3",
+    "HAcon4",
+    "HAcon5",
+    "HAcon6",
+    "HAcon7",
     "DLv_pv",
     "DLp_pv",
     "DLp_bat",
@@ -169,6 +177,18 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
         }
         if (i == V_HMODE) {
             ha_flag_vars_ss.energy_mode = (bool) ((int32_t) E.mvar[i]);
+        }
+        if (i == V_HCON0) {
+            E.mode.con0 = (bool) ((int32_t) E.mvar[i]);
+        }
+        if (i == V_HCON1) {
+            E.mode.con1 = (bool) ((int32_t) E.mvar[i]);
+        }
+        if (i == V_HCON2) {
+            E.mode.con2 = (bool) ((int32_t) E.mvar[i]);
+        }
+        if (i == V_HCON3) {
+            E.mode.con3 = (bool) ((int32_t) E.mvar[i]);
         }
         ret = true;
     }

@@ -19,12 +19,14 @@ extern "C" {
 #define MIN_BAT_KW      4100.0f
 
 #define DEV_SIZE        10
-#define MAX_BATC_DEV    0.5f
+#define MAX_BATC_DEV    1.5f
 #define BAT_C_DRAW      3.0f
 
 #define PBAL_OFFSET     -50.0f // postive bias for control point
 #define PV_FULL_PWR     500.0f
 #define PV_MIN_PWR      160.0f
+#define PV_V_NOM        60.0f
+#define PV_V_FAKE       0.336699f
 
 #define COEF            8.0f
 #define COEFN           4.0f  
