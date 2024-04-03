@@ -190,6 +190,18 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
         if (i == V_HCON3) {
             E.mode.con3 = (bool) ((int32_t) E.mvar[i]);
         }
+        if (i == V_HCON4) {
+            E.mode.con4 = (bool) ((int32_t) E.mvar[i]);
+        }
+        if (i == V_HCON5) {
+            E.mode.con5 = (bool) ((int32_t) E.mvar[i]);
+        }
+        if (i == V_HCON6) { // HA Energy program idle
+            E.mode.con6 = (bool) ((int32_t) E.mvar[i]);
+        }
+        if (i == V_HCON7) { // HA Energy program exit
+            E.mode.con7 = (bool) ((int32_t) E.mvar[i]);
+        }
         ret = true;
     }
     return ret;

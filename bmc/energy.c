@@ -254,7 +254,7 @@ int main(int argc, char *argv[]) {
     {
         printf("\r\n Solar Energy AC power controller\r\n");
         fprintf(fout, "\r\n Solar Energy AC power controller\r\n");
-        
+
 #ifdef FAKE_VPV
         printf("\r\n Faking dumpload PV voltage\r\n");
         fprintf(fout, "\r\n Faking dumpload PV voltage\r\n");
@@ -345,18 +345,22 @@ int main(int argc, char *argv[]) {
                         E.mode.pv_bias = PV_BIAS_LOW;
                     }
 
-                    if (ha_flag_vars_ss.energy_mode == NORM_MODE) {
+                    if (ha_flag_vars_ss.energy_mode == NORM_MODE && !E.mode.con6) {
+#ifndef  FAKE_VPV
                         if (fm80_float() || (ac_test() > MIN_BAT_KW_AC_HI)) {
                             ramp_up_ac(E.client_p, E.ac_sw_on);
                             E.ac_sw_on = false;
                         }
+#endif
                         if ((ac_test() < (MIN_BAT_KW_AC_LO + E.ac_low_adj)) && !fm80_float()) {
                             ramp_down_ac(E.client_p, true);
                             E.ac_sw_on = true;
                         }
                         if ((gti_test() > MIN_BAT_KW_GTI_HI)) {
+#ifndef  FAKE_VPV                            
                             ramp_up_gti(E.client_p, E.gti_sw_on); // fixme on the ONCE code
                             E.gti_sw_on = false;
+#endif                            
                         } else {
                             if (gti_test() < (MIN_BAT_KW_GTI_LO + E.gti_low_adj)) {
                                 ramp_down_gti(E.client_p, true);
@@ -405,6 +409,9 @@ int main(int argc, char *argv[]) {
                 }
             }
             fflush(fout);
+            if (E.mode.con7) {
+                break;
+            }
         }
     }
     return 0;

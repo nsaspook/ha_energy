@@ -238,6 +238,10 @@ bool bsoc_set_mode(double target, bool mode, bool init) {
     }
     E.mode.target = target;
     E.mode.error = round(error_filter(E.mode.error));
+    if (E.mode.con6) {
+        ha_ac_mode = true;
+        bsoc_mode = false;
+    }
     return bsoc_mode;
 }
 

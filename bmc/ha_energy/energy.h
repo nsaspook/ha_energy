@@ -90,7 +90,7 @@ extern "C" {
      * sane limits for system data elements
      */
 #define PWA_SANE            1500.0f
-#define PAMPS_SANE          10.0f
+#define PAMPS_SANE          15.0f
 #define PVOLTS_SANE         149.0f
 #define BAMPS_SANE          70.0f
 
