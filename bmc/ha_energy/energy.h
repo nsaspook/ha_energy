@@ -30,7 +30,7 @@ extern "C" {
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.42"
+#define LOG_VERSION     "V0.43"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -73,14 +73,19 @@ extern "C" {
 #define PV_PGAIN            0.85f
 #define PV_IGAIN            0.12f
 #define PV_IMAX             1400.0f
-#define PV_BIAS             120.0f
+#define PV_BIAS             320.0f
 #define PV_BIAS_LOW         60.0f
+#define PV_BIAS_FLOAT       120.0f
+#define PV_DL_MPTT_MAX      700.0f
+#define PV_DL_MPTT_IDLE     57.0f
 
 #define LOG_TO_FILE         "/store/logs/energy.log"
 
     //#define IM_DEBUG            // WEM3080T LOGGING
     //#define B_ADJ_DEBUG
-#define FAKE_VPV                    // NO AC CHARGER for DUMPLOAD
+    //#define FAKE_VPV                    // NO AC CHARGER for DUMPLOAD
+
+    //#define AUTO_CHARGE         // turn on dumload charger during restarts
 
 #define IM_DELAY            1   // tens of second updates    
 #define IM_DISPLAY          1
@@ -170,6 +175,7 @@ extern "C" {
         V_DPBAT,
         V_DVBAT,
         V_DCMPPT,
+        V_DPMPPT,
         V_DGTI,
         V_DLAST,
     };
@@ -209,7 +215,7 @@ extern "C" {
 #define L3_P    L2_P+IA_LAST
 
     struct mode_type {
-        volatile double error, target, total_system, gti_dumpload, pv_bias;
+        volatile double error, target, total_system, gti_dumpload, pv_bias, dl_mqtt_max;
         volatile bool mode, in_control, con0, con1, con2, con3, con4, con5, con6, con7;
         volatile uint32_t mode_tmr;
         volatile struct SPid pid;
@@ -221,7 +227,7 @@ extern "C" {
         volatile double mvar[V_DLAST + 1];
         volatile bool once_gti, once_ac, iammeter, fm80, dumpload, once_gti_zero;
         volatile double gti_low_adj, ac_low_adj;
-        volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode;
+        volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode, startup;
         volatile uint32_t speed_go, im_delay, im_display, gti_delay;
         volatile int32_t rc, sane;
         volatile uint32_t ten_sec_clock;

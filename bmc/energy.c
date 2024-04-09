@@ -31,6 +31,7 @@
  * V0.40 shutdown and restart fixes
  * V0.41 fix errors and warning per cppcheck
  * V0.42 fake ac charger for dumpload using FAKE_VPV define
+ * V0.43 adjust PV_BIAS per float or charging status
  */
 
 /*
@@ -95,12 +96,14 @@ struct energy_type E = {
     .mode.mode_tmr = 0,
     .mode.mode = true,
     .mode.in_control = false,
+    .mode.dl_mqtt_max = PV_DL_MPTT_MAX,
     .ac_sw_status = false,
     .gti_sw_status = false,
     .solar_mode = false,
     .solar_shutdown = false,
     .mode.pv_bias = PV_BIAS_LOW,
     .sane = S_DLAST,
+    .startup = true,
 };
 
 static bool solar_shutdown(void);
@@ -278,8 +281,10 @@ int main(int argc, char *argv[]) {
 
                 if (solar_shutdown()) {
                     time(&rawtime);
-                    fprintf(fout, "%s\r\n", ctime(&rawtime));
-                    fprintf(fout, " SHUTDOWN Solar Energy Control ---> \r\n");
+                    if (!E.startup) {
+                        fprintf(fout, "%s\r\n", ctime(&rawtime));
+                        fprintf(fout, " SHUTDOWN Solar Energy Control ---> \r\n");
+                    }
                     ramp_down_gti(E.client_p, true);
                     usleep(100000); // wait
                     ramp_down_ac(E.client_p, true);
@@ -288,8 +293,11 @@ int main(int argc, char *argv[]) {
                     usleep(100000); // wait
                     ramp_down_ac(E.client_p, true);
                     usleep(100000); // wait
-                    fprintf(fout, " Completed SHUTDOWN, Press again to RESTART.\r\n");
+                    if (!E.startup) {
+                        fprintf(fout, " Completed SHUTDOWN, Press again to RESTART.\r\n");
+                    }
                     fflush(fout);
+                    E.startup = false;
                     while (solar_shutdown()) {
                         usleep(500000); // wait
                         if ((int32_t) E.mvar[V_HACSW]) {
@@ -304,7 +312,9 @@ int main(int argc, char *argv[]) {
                     fprintf(fout, " RESTART Solar Energy Control\r\n");
                     fflush(fout);
                     bsoc_set_mode(E.mode.pv_bias, true, true);
+#ifdef AUTO_CHARGE
                     mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
+#endif
                     usleep(100000); // wait
                     E.gti_sw_status = true;
                     ResetPI(&E.mode.pid);
@@ -326,6 +336,7 @@ int main(int argc, char *argv[]) {
                             mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
                             E.ac_sw_status = true;
                             E.mode.pv_bias = PV_BIAS;
+                            fm80_float();
                         }
                         E.mode.in_control = true;
                         E.gti_delay = 0;
@@ -333,6 +344,13 @@ int main(int argc, char *argv[]) {
                         if (error_drive < 0) {
                             error_drive = E.mode.pv_bias; // control wide power swings
                         }
+                        /*
+                         * reduce charging/diversion power to safe PS limits
+                         */
+                        if (E.mode.dl_mqtt_max > PV_DL_MPTT_MAX) {
+                            error_drive = PV_DL_MPTT_IDLE;
+                        }
+
                         snprintf(gti_str, 15, "V%04dX", error_drive); // format for dumpload controller gti power commands
                         mqtt_gti_power(E.client_p, TOPIC_P, gti_str);
                     }
@@ -528,7 +546,7 @@ void ha_dc_on(void) {
 
 static bool solar_shutdown(void) {
     static bool ret = false;
-    if (E.solar_shutdown) {
+    if (E.solar_shutdown || E.startup) {
         ret = true;
     } else {
         ret = false;

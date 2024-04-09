@@ -47,6 +47,7 @@ bool bsoc_data_collect(void) {
     bat_current = E.mvar[V_DCMPPT];
     E.ac_low_adj = E.mvar[V_FSO]* -0.5f;
     E.gti_low_adj = E.mvar[V_FACE] * -0.5f;
+    E.mode.dl_mqtt_max = E.mvar[V_DPMPPT];
 
     pthread_mutex_unlock(&E.ha_lock); // resume MQTT var updates
 

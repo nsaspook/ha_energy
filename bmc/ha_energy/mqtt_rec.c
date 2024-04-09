@@ -32,6 +32,7 @@ const char* mqtt_name[V_DLAST] = {
     "DLp_bat",
     "DLv_bat",
     "DLc_mppt",
+    "DLp_mppt",
     "DLgti",
 };
 
@@ -220,6 +221,7 @@ void print_mvar_vars(void) {
  */
 bool fm80_float(void) {
     if ((uint32_t) E.mvar[V_FCCM] == FLOAT_CODE) {
+        E.mode.pv_bias = PV_BIAS_FLOAT;
         return true;
     }
     return false;
