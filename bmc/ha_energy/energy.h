@@ -73,11 +73,12 @@ extern "C" {
 #define PV_PGAIN            0.85f
 #define PV_IGAIN            0.12f
 #define PV_IMAX             1400.0f
-#define PV_BIAS             320.0f
-#define PV_BIAS_LOW         60.0f
-#define PV_BIAS_FLOAT       120.0f
-#define PV_DL_MPTT_MAX      700.0f
+#define PV_BIAS             288.0f
+#define PV_BIAS_LOW         69.0f
+#define PV_BIAS_FLOAT       99.0f
+#define PV_DL_MPTT_MAX      750.0f
 #define PV_DL_MPTT_IDLE     57.0f
+#define PV_DL_BIAS_RATE     150.0f
 
 #define LOG_TO_FILE         "/store/logs/energy.log"
 
@@ -94,8 +95,8 @@ extern "C" {
     /*
      * sane limits for system data elements
      */
-#define PWA_SANE            1500.0f
-#define PAMPS_SANE          15.0f
+#define PWA_SANE            1700.0f
+#define PAMPS_SANE          16.0f
 #define PVOLTS_SANE         149.0f
 #define BAMPS_SANE          70.0f
 

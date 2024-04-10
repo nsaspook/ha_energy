@@ -340,7 +340,14 @@ int main(int argc, char *argv[]) {
                         }
                         E.mode.in_control = true;
                         E.gti_delay = 0;
-                        error_drive = (int32_t) E.mode.error; // PI feedback control signal
+                        /*
+                         * adjust power balance if battery charging energy is low
+                         */
+                        if (E.mvar[V_DPBAT] > PV_DL_BIAS_RATE) {
+                            error_drive = (int32_t) E.mode.error - E.mode.pv_bias; // PI feedback control signal
+                        } else {
+                            error_drive = (int32_t) E.mode.error - PV_BIAS_FLOAT;
+                        }
                         if (error_drive < 0) {
                             error_drive = E.mode.pv_bias; // control wide power swings
                         }
@@ -355,7 +362,6 @@ int main(int argc, char *argv[]) {
                         mqtt_gti_power(E.client_p, TOPIC_P, gti_str);
                     }
                 } else {
-                    //                    ha_flag_vars_ss.energy_mode = ((int32_t) E.mvar[V_HMODE]);
                     if (E.mode.in_control) {
                         E.mode.in_control = false;
                         ramp_down_gti(E.client_p, true);
