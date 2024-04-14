@@ -219,9 +219,9 @@ bool bsoc_set_mode(double target, bool mode, bool init) {
         }
     }
 
-    E.mode.gti_dumpload = (E.print_vars[L3_P]* -1.0f) + E.mvar[V_DPPV];
+    E.mode.gti_dumpload = (E.print_vars[L3_P]* -1.0f) + E.mvar[V_DPPV]; // use as a temp variable
     E.mode.total_system = (E.mvar[V_FLO] - E.mode.gti_dumpload) + E.mvar[V_DPPV] +(E.print_vars[L3_P]* -1.0f);
-    E.mode.gti_dumpload = (E.print_vars[L3_P]* -1.0f) - E.mvar[V_DPPV];
+    E.mode.gti_dumpload = (E.print_vars[L3_P]* -1.0f) - E.mvar[V_DPPV]; // use this value
 
     /*
      * look at system energy balance for power control drive
@@ -239,6 +239,9 @@ bool bsoc_set_mode(double target, bool mode, bool init) {
     }
     E.mode.target = target;
     E.mode.error = round(error_filter(E.mode.error));
+    /*
+     * check for idle flag from HA
+     */
     if (E.mode.con6) {
         ha_ac_mode = true;
         bsoc_mode = false;

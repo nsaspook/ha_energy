@@ -394,10 +394,12 @@ int main(int argc, char *argv[]) {
                         E.mode.pv_bias = PV_BIAS_LOW;
                     }
 
+                    /*
+                     * check for idle flag from HA
+                     */
                     if (ha_flag_vars_ss.energy_mode == NORM_MODE && !E.mode.con6) {
                         char gti_str[SBUF_SIZ];
                         int32_t error_drive = PV_DL_MPTT_IDLE;
-                        ;
 
                         if (E.mode.dl_mqtt_max > PV_DL_MPTT_MAX) {
                             snprintf(gti_str, SBUF_SIZ - 1, "V%04dX", error_drive); // format for dumpload controller gti power commands

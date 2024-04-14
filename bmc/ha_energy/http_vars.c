@@ -2,7 +2,6 @@
 
 static CURL *curl;
 static CURLcode res;
-
 static void iammeter_get_data(double, uint32_t, uint32_t);
 
 /*
@@ -27,11 +26,13 @@ size_t iammeter_write_callback(char *buffer, size_t size, size_t nitems, void *s
     cJSON *data_result = cJSON_GetObjectItemCaseSensitive(json, "Datas");
 
     if (!data_result) {
+        size = 0;
+        nitems = 0;
         goto iammeter_exit;
     }
 
     cJSON *jname;
-    uint32_t phase = 0;
+    uint32_t phase = PHASE_A;
 
     cJSON_ArrayForEach(jname, data_result) {
         cJSON *ianame;
@@ -40,7 +41,7 @@ size_t iammeter_write_callback(char *buffer, size_t size, size_t nitems, void *s
 #endif
 
         cJSON_ArrayForEach(ianame, jname) {
-            uint32_t phase_var = 0;
+            uint32_t phase_var = IA_VOLTAGE;
             iammeter_get_data(ianame->valuedouble, phase_var, phase);
             e->print_vars[next_var++] = ianame->valuedouble;
 #ifdef IM_DEBUG
