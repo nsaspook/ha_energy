@@ -49,6 +49,8 @@ extern "C" {
 
 #define DAQ_STR 32
 #define DAQ_STR_M DAQ_STR-1
+    
+#define SBUF_SIZ        16  // short buffer string size
 
 #define MQTT_TIMEOUT    400
 #define SW_QOS          1
@@ -67,7 +69,7 @@ extern "C" {
 #define MIN_BAT_KW_AC_HI    5000.0f
 #define MIN_BAT_KW_AC_LO    4500.0f
 
-#define MIN_BAT_KW_BSOC_HI  4000.0f
+#define MIN_BAT_KW_BSOC_HI  4450.0f
 #define MIN_BAT_KW_BSOC_LO  3500.0f
 
 #define PV_PGAIN            0.85f
@@ -75,18 +77,19 @@ extern "C" {
 #define PV_IMAX             1400.0f
 #define PV_BIAS             288.0f
 #define PV_BIAS_LOW         69.0f
-#define PV_BIAS_FLOAT       99.0f
+#define PV_BIAS_FLOAT       399.0f
+#define PV_BIAS_RATE        320.0f
 #define PV_DL_MPTT_MAX      750.0f
 #define PV_DL_MPTT_IDLE     57.0f
-#define PV_DL_BIAS_RATE     150.0f
+#define PV_DL_BIAS_RATE     75.0f
 
 #define LOG_TO_FILE         "/store/logs/energy.log"
 
-    //#define IM_DEBUG            // WEM3080T LOGGING
-    //#define B_ADJ_DEBUG
-    //#define FAKE_VPV                    // NO AC CHARGER for DUMPLOAD
+    //#define IM_DEBUG                      // WEM3080T LOGGING
+    //#define B_ADJ_DEBUG                   // debug printing
+    //#define FAKE_VPV                      // NO AC CHARGER for DUMPLOAD, batteries are cross-connected to a parallel bank
 
-    //#define AUTO_CHARGE         // turn on dumload charger during restarts
+    //#define AUTO_CHARGE                   // turn on dumload charger during restarts
 
 #define IM_DELAY            1   // tens of second updates    
 #define IM_DISPLAY          1
@@ -217,7 +220,7 @@ extern "C" {
 
     struct mode_type {
         volatile double error, target, total_system, gti_dumpload, pv_bias, dl_mqtt_max;
-        volatile bool mode, in_control, con0, con1, con2, con3, con4, con5, con6, con7;
+        volatile bool mode, in_pid_control, con0, con1, con2, con3, con4, con5, con6, con7;
         volatile uint32_t mode_tmr;
         volatile struct SPid pid;
     };

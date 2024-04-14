@@ -37,7 +37,7 @@ const char* mqtt_name[V_DLAST] = {
 };
 
 /*
- * data received on topic from the broker
+ * data received on topic from the broker, run processing thread
  */
 int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_message *message) {
     int32_t i, ret = 1;
