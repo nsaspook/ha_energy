@@ -32,6 +32,7 @@
  * V0.41 fix errors and warning per cppcheck
  * V0.42 fake ac charger for dumpload using FAKE_VPV define
  * V0.43 adjust PV_BIAS per float or charging status
+ * V0.44 tune for spring/summer solar conditions
  */
 
 /*
@@ -342,6 +343,10 @@ int main(int argc, char *argv[]) {
                             E.ac_sw_status = true;
                             E.mode.pv_bias = PV_BIAS;
                             fm80_float();
+                        } else {
+                            if (!fm80_float()) {
+                                E.mode.pv_bias = PV_BIAS;
+                            }
                         }
                         E.mode.in_pid_control = true;
                         E.gti_delay = 0;
@@ -357,7 +362,7 @@ int main(int argc, char *argv[]) {
                          * when main battery is in float, crank-up the power draw from the solar panels
                          */
                         if (fm80_float()) {
-                            error_drive = (int32_t) E.mode.error;
+                            error_drive = (int32_t) (E.mode.error + PV_BIAS);
                         }
                         /*
                          * don't drive to zero power
@@ -381,6 +386,9 @@ int main(int argc, char *argv[]) {
                      * reset the control mode from PID to simple switched power
                      */
                     if (E.mode.in_pid_control) {
+                        char gti_str[SBUF_SIZ];
+                        int32_t error_drive = PV_DL_MPTT_IDLE;
+
                         E.mode.in_pid_control = false;
                         ramp_down_gti(E.client_p, true);
                         usleep(100000); // wait
@@ -392,6 +400,8 @@ int main(int argc, char *argv[]) {
                         mqtt_ha_switch(E.client_p, TOPIC_PACC, false);
                         E.ac_sw_status = false;
                         E.mode.pv_bias = PV_BIAS_LOW;
+                        snprintf(gti_str, SBUF_SIZ - 1, "V%04dX", error_drive); // format for dumpload controller gti power commands
+                        mqtt_gti_power(E.client_p, TOPIC_P, gti_str);
                     }
 
                     /*
@@ -407,22 +417,22 @@ int main(int argc, char *argv[]) {
                         }
 
 #ifndef  FAKE_VPV
-                        if (fm80_float() || (ac_test() > MIN_BAT_KW_AC_HI)) {
+                        if (fm80_float() || ((E.mvar[V_BEN] > BAL_MAX_ENERGY_AC) && (ac_test() > MIN_BAT_KW_AC_HI))) {
                             ramp_up_ac(E.client_p, E.ac_sw_on);
                             E.ac_sw_on = false;
                         }
 #endif
-                        if ((ac_test() < (MIN_BAT_KW_AC_LO + E.ac_low_adj)) && !fm80_float()) {
-                            ramp_down_ac(E.client_p, true);
+                        if ((E.mvar[V_BEN] < BAL_MIN_ENERGY_AC) || ((ac_test() < (MIN_BAT_KW_AC_LO + E.ac_low_adj)) && !fm80_float())) {
+                            ha_ac_off();
                             E.ac_sw_on = true;
                         }
-                        if ((gti_test() > MIN_BAT_KW_GTI_HI)) {
+                        if ((E.mvar[V_BEN] > BAL_MAX_ENERGY_GTI) && (gti_test() > MIN_BAT_KW_GTI_HI)) {
 #ifndef  FAKE_VPV                            
                             ramp_up_gti(E.client_p, E.gti_sw_on); // fixme on the ONCE code
                             E.gti_sw_on = false;
 #endif                            
                         } else {
-                            if (gti_test() < (MIN_BAT_KW_GTI_LO + E.gti_low_adj)) {
+                            if ((E.mvar[V_BEN] < BAL_MIN_ENERGY_GTI) || (gti_test() < (MIN_BAT_KW_GTI_LO + E.gti_low_adj))) {
                                 ramp_down_gti(E.client_p, true);
                                 E.gti_sw_on = true;
                             }
@@ -562,6 +572,7 @@ void ramp_down_ac(MQTTClient client_p, bool sw_off) {
     if (sw_off) {
         mqtt_ha_switch(client_p, TOPIC_PACC, false);
         E.ac_sw_status = false;
+        usleep(500000); // wait for voltage to ramp
     }
     E.once_ac = true;
 }
