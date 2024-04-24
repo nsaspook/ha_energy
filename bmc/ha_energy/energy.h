@@ -135,6 +135,15 @@ extern "C" {
     wem3080t_pf_c	kWh	C phase power factor
      */
 
+    enum energy_state {
+        E_INIT,
+        E_RUN,
+        E_WAIT,
+        E_IDLE,
+        E_STOP,
+        E_LAST,
+    };      
+        
     enum iammeter_phase {
         PHASE_A,
         PHASE_B,
@@ -229,6 +238,7 @@ extern "C" {
         volatile bool mode, in_pid_control, con0, con1, con2, con3, con4, con5, con6, con7;
         volatile uint32_t mode_tmr;
         volatile struct SPid pid;
+        volatile enum energy_state E;
     };
 
     struct energy_type {
