@@ -289,6 +289,7 @@ int main(int argc, char *argv[]) {
                         fprintf(fout, "%s\r\n", ctime(&rawtime));
                         fprintf(fout, " SHUTDOWN Solar Energy Control ---> \r\n");
                     }
+                    fflush(fout);
                     ramp_down_gti(E.client_p, true);
                     usleep(100000); // wait
                     ramp_down_ac(E.client_p, true);
@@ -345,7 +346,7 @@ int main(int argc, char *argv[]) {
                             fm80_float();
                         } else {
                             if (!fm80_float()) {
-                                E.mode.pv_bias = PV_BIAS;
+                                E.mode.pv_bias = (int32_t) E.mode.error -PV_BIAS;
                             }
                         }
                         E.mode.in_pid_control = true;
@@ -368,7 +369,7 @@ int main(int argc, char *argv[]) {
                          * don't drive to zero power
                          */
                         if (error_drive < 0) {
-                            error_drive = E.mode.pv_bias; // control wide power swings
+                            error_drive = PV_BIAS_LOW; // control wide power swings
                         }
 
                         /*
@@ -603,6 +604,9 @@ static bool solar_shutdown(void) {
         ret = true;
     } else {
         ret = false;
+    }
+    if ((E.mvar[V_FBEKW] < BAT_CRITICAL) && !E.startup) { // special case for low battery
+        ret = true;
     }
     return ret;
 }
