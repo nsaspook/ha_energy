@@ -252,6 +252,9 @@ int main(int argc, char *argv[]) {
                 mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
                 mqtt_ha_switch(E.client_p, TOPIC_PDCC, false);
                 mqtt_ha_switch(E.client_p, TOPIC_PACC, false);
+                E.mode.in_pid_control = false;
+                E.ac_sw_on = true; // can be switched on once
+                E.gti_sw_on = true; // can be switched on once
 
                 /*
                  * use libcurl to read AC power meter HTTP data
@@ -331,6 +334,7 @@ int main(int argc, char *argv[]) {
                     E.fm80 = true;
                     E.dumpload = true;
                     E.iammeter = true;
+                    E.mode.in_pid_control = false;
                 }
                 if (ha_flag_vars_ss.receivedtoken) {
                     ha_flag_vars_ss.receivedtoken = false;
@@ -404,28 +408,22 @@ int main(int argc, char *argv[]) {
                  * check for idle flag from HA
                  */
                 if (ha_flag_vars_ss.energy_mode == NORM_MODE && !E.mode.con6) {
-                    char gti_str[SBUF_SIZ];
-                    int32_t error_drive = PV_DL_MPTT_IDLE;
-
-                    if (E.mode.dl_mqtt_max > PV_DL_MPTT_MAX) {
-                        snprintf(gti_str, SBUF_SIZ - 1, "V%04dX", error_drive); // format for dumpload controller gti power commands
-                        mqtt_gti_power(E.client_p, TOPIC_P, gti_str);
-                    }
-
 #ifndef  FAKE_VPV
                     if (fm80_float(true) || ((E.mvar[V_BEN] > BAL_MAX_ENERGY_AC) && (ac_test() > MIN_BAT_KW_AC_HI))) {
-                        ramp_up_ac(E.client_p, E.ac_sw_on);
-                        E.ac_sw_on = false;
+                        ramp_up_ac(E.client_p, E.ac_sw_on); // use once control
+                        E.ac_sw_on = false; // once flag
                     }
 #endif
                     if ((E.mvar[V_BEN] < BAL_MIN_ENERGY_AC) || ((ac_test() < (MIN_BAT_KW_AC_LO + E.ac_low_adj)) && !fm80_float(true))) {
-                        ha_ac_off();
+                        ramp_down_ac(E.client_p, E.ac_sw_status); // use once control
                         E.ac_sw_on = true;
                     }
+
+
                     if ((E.mvar[V_BEN] > BAL_MAX_ENERGY_GTI) && (gti_test() > MIN_BAT_KW_GTI_HI)) {
 #ifndef  FAKE_VPV                            
                         ramp_up_gti(E.client_p, E.gti_sw_on); // fixme on the ONCE code
-                        E.gti_sw_on = false;
+                        E.gti_sw_on = false; // once flag
 #endif                            
                     } else {
                         if ((E.mvar[V_BEN] < BAL_MIN_ENERGY_GTI) || (gti_test() < (MIN_BAT_KW_GTI_LO + E.gti_low_adj))) {
@@ -565,7 +563,7 @@ void ramp_down_ac(MQTTClient client_p, bool sw_off) {
     if (sw_off) {
         mqtt_ha_switch(client_p, TOPIC_PACC, false);
         E.ac_sw_status = false;
-        usleep(500000); // wait for voltage to ramp
+        usleep(500000);
     }
     E.once_ac = true;
 }
