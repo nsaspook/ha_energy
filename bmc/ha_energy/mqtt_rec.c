@@ -219,9 +219,12 @@ void print_mvar_vars(void) {
 /*
  * return float status of FM80 to trigger dumploads
  */
-bool fm80_float(void) {
+bool fm80_float(const bool set_bias) {
     if ((uint32_t) E.mvar[V_FCCM] == FLOAT_CODE) {
-        E.mode.pv_bias = PV_BIAS_FLOAT;
+        if (set_bias) {
+            E.mode.pv_bias = PV_BIAS_FLOAT;
+        }
+        E.mode.R = R_FLOAT;
         return true;
     }
     return false;

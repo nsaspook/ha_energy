@@ -30,7 +30,7 @@ extern "C" {
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.44"
+#define LOG_VERSION     "V0.50"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -49,7 +49,7 @@ extern "C" {
 
 #define DAQ_STR 32
 #define DAQ_STR_M DAQ_STR-1
-    
+
 #define SBUF_SIZ        16  // short buffer string size
 
 #define MQTT_TIMEOUT    400
@@ -83,7 +83,7 @@ extern "C" {
 #define PV_DL_MPTT_MAX      750.0f
 #define PV_DL_MPTT_IDLE     57.0f
 #define PV_DL_BIAS_RATE     75.0f
-    
+
 #define BAL_MIN_ENERGY_AC   -200.0f
 #define BAL_MAX_ENERGY_AC   200.0f
 #define BAL_MIN_ENERGY_GTI  -300.0f
@@ -142,8 +142,17 @@ extern "C" {
         E_IDLE,
         E_STOP,
         E_LAST,
-    };      
-        
+    };
+
+    enum running_state {
+        R_INIT,
+        R_FLOAT,
+        R_SLEEP,
+        R_RUN,
+        R_IDLE,
+        R_LAST,
+    };
+
     enum iammeter_phase {
         PHASE_A,
         PHASE_B,
@@ -239,6 +248,7 @@ extern "C" {
         volatile uint32_t mode_tmr;
         volatile struct SPid pid;
         volatile enum energy_state E;
+        volatile enum running_state R;
     };
 
     struct energy_type {
