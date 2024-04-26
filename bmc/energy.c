@@ -272,6 +272,7 @@ int main(int argc, char *argv[])
 			printf("\r\n Faking dumpload PV voltage\r\n");
 			fprintf(fout, "\r\n Faking dumpload PV voltage\r\n");
 #endif
+			ha_flag_vars_ss.energy_mode = NORM_MODE;
 			E.mode.E = E_WAIT;
 			break;
 		case E_WAIT:
@@ -362,11 +363,11 @@ int main(int argc, char *argv[])
 			/*
 			 * main state-machine update sequence
 			 */
-			bsoc_set_mode(E.mode.pv_bias, true, false);
-			ha_flag_vars_ss.energy_mode = NORM_MODE;
+			bsoc_set_mode(E.mode.pv_bias, true, false);			
 			if (E.gti_delay++ >= GTI_DELAY) {
 				char gti_str[SBUF_SIZ];
 				int32_t error_drive;
+				
 				/*
 				 * reset the control mode from simple switched power to PID control
 				 */
@@ -417,11 +418,10 @@ int main(int argc, char *argv[])
 				mqtt_gti_power(E.client_p, TOPIC_P, gti_str);
 			}
 
-
 			/*
 			 * check for idle flag from HA
 			 */
-			if (ha_flag_vars_ss.energy_mode == NORM_MODE && E.mode.R != R_IDLE) {
+			if (ha_flag_vars_ss.energy_mode == NORM_MODE) {
 #ifndef  FAKE_VPV
 				if (fm80_float(true) || ((E.mvar[V_BEN] > BAL_MAX_ENERGY_AC) && (ac_test() > MIN_BAT_KW_AC_HI))) {
 					ramp_up_ac(E.client_p, E.ac_sw_on); // use once control
