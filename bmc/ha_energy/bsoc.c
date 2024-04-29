@@ -76,7 +76,7 @@ bool bsoc_data_collect(void) {
  */
 double bsoc_ac(void) {
 
-    return ac_weight;
+    return ac0_filter(ac_weight);
 };
 
 /*
@@ -90,7 +90,7 @@ double bsoc_gti(void) {
     if ((pv_voltage < MIN_PV_VOLTS) || (bat_voltage < MIN_BAT_VOLTS)) {
         gti_weight = 0.0f; // reduce power to zero
     }
-    return gti_weight;
+    return dc0_filter(gti_weight);
 };
 
 /*
@@ -104,11 +104,11 @@ double gti_test(void) {
         fprintf(fout, "pvp %8.2f, gweight %8.2f, aweight %8.2f, batv %8.2f, batc %8.2f\r\n", pv_voltage, gti_weight, ac_weight, bat_voltage, bat_current);
 #endif
     }
-    return gti_weight;
+    return dc0_filter(gti_weight);
 }
 
 double ac_test(void) {
-    return ac_weight;
+    return ac0_filter(ac_weight);
 }
 
 double get_batc_dev(void) {
@@ -258,3 +258,44 @@ static double error_filter(double raw) {
     return accum / coef;
 }
 
+double ac0_filter(double raw) {
+    static double accum = 0.0f;
+    static double coef = COEFF;
+    accum = accum - accum / coef + raw;
+    return accum / coef;
+}
+
+double ac1_filter(double raw) {
+    static double accum = 0.0f;
+    static double coef = COEF;
+    accum = accum - accum / coef + raw;
+    return accum / coef;
+}
+
+double ac2_filter(double raw) {
+    static double accum = 0.0f;
+    static double coef = COEF;
+    accum = accum - accum / coef + raw;
+    return accum / coef;
+}
+
+double dc0_filter(double raw) {
+    static double accum = 0.0f;
+    static double coef = COEFF;
+    accum = accum - accum / coef + raw;
+    return accum / coef;
+}
+
+double dc1_filter(double raw) {
+    static double accum = 0.0f;
+    static double coef = COEF;
+    accum = accum - accum / coef + raw;
+    return accum / coef;
+}
+
+double dc2_filter(double raw) {
+    static double accum = 0.0f;
+    static double coef = COEF;
+    accum = accum - accum / coef + raw;
+    return accum / coef;
+}

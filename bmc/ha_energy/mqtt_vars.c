@@ -72,6 +72,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
 
 #ifdef DEBUG_HA_CMD
     if (spam) {
+        log_time(true);
         fprintf(fout, "HA switch command %s, %s\r\n", topic_p, json_str);
         if (!sw_state) {
             if (less_spam++ > 3) {
@@ -120,6 +121,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
 #else
     if (bsoc_gti() > MIN_BAT_KW) {
 #ifdef DEBUG_HA_CMD
+        log_time(true);
         fprintf(fout, "HA GTI power command %s, SDEV %5.2f\r\n", msg, get_batc_dev());
         spam = true;
 #endif
@@ -135,6 +137,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
         }
 #ifdef DEBUG_HA_CMD
         if (spam) {
+            log_time(true);
             fprintf(fout, "HA GTI power set to zero\r\n");
             spam = false;
         }

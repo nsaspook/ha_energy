@@ -30,7 +30,7 @@ extern "C" {
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.50"
+#define LOG_VERSION     "V0.51"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -51,6 +51,7 @@ extern "C" {
 #define DAQ_STR_M DAQ_STR-1
 
 #define SBUF_SIZ        16  // short buffer string size
+#define RBUF_SIZ        82
 
 #define MQTT_TIMEOUT    400
 #define SW_QOS          1
@@ -86,8 +87,8 @@ extern "C" {
 
 #define BAL_MIN_ENERGY_AC   -200.0f
 #define BAL_MAX_ENERGY_AC   200.0f
-#define BAL_MIN_ENERGY_GTI  -300.0f
-#define BAL_MAX_ENERGY_GTI  300.0f
+#define BAL_MIN_ENERGY_GTI  -800.0f
+#define BAL_MAX_ENERGY_GTI  200.0f
 
 #define LOG_TO_FILE         "/store/logs/energy.log"
 
@@ -288,6 +289,7 @@ extern "C" {
     void print_mvar_vars(void);
 
     bool sanity_check(void);
+    char * log_time(bool);
 
 #ifdef __cplusplus
 }
