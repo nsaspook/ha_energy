@@ -426,8 +426,10 @@ int main(int argc, char *argv[]) {
                         E.ac_sw_on = false; // once flag
                     }
 #endif
-                    if ((ac2_filter(E.mvar[V_BEN]) < BAL_MIN_ENERGY_AC) || ((ac_test() < (MIN_BAT_KW_AC_LO + E.ac_low_adj)) && !fm80_float(true))) {
-                        ramp_down_ac(E.client_p, E.ac_sw_status); // use once control
+                    if (((ac2_filter(E.mvar[V_BEN]) < BAL_MIN_ENERGY_AC) || ((ac_test() < (MIN_BAT_KW_AC_LO + E.ac_low_adj))))) {
+                        if (!fm80_float(true)) {
+                            ramp_down_ac(E.client_p, E.ac_sw_status); // use once control
+                        }
                         E.ac_sw_on = true;
                     }
 
