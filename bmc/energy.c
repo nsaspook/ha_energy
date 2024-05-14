@@ -102,6 +102,8 @@ struct energy_type E = {
     .mode.dl_mqtt_max = PV_DL_MPTT_MAX,
     .mode.E = E_INIT,
     .mode.R = R_INIT,
+    .mode.no_float = true,
+    .mode.data_error = false,
     .ac_sw_status = false,
     .gti_sw_status = false,
     .solar_mode = false,
@@ -253,7 +255,7 @@ int main(int argc, char *argv[]) {
                 mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
                 mqtt_ha_switch(E.client_p, TOPIC_PDCC, false);
                 mqtt_ha_switch(E.client_p, TOPIC_PACC, false);
-                E.mode.in_pid_control = false;
+                //                E.mode.in_pid_control = false;
                 E.ac_sw_on = true; // can be switched on once
                 E.gti_sw_on = true; // can be switched on once
 
@@ -342,6 +344,7 @@ int main(int argc, char *argv[]) {
                 }
                 break;
             case E_RUN:
+                usleep(100);
                 switch (E.mode.R) {
                     case R_INIT:
                         E.once_ac = true;
@@ -349,77 +352,94 @@ int main(int argc, char *argv[]) {
                         E.ac_sw_on = true;
                         E.gti_sw_on = true;
                         E.mode.R = R_RUN;
+                        E.mode.no_float = true;
                         break;
                     case R_FLOAT:
+                        if (E.mode.no_float) {
+                            E.gti_sw_status = false;
+                            E.ac_sw_status = false;
+                            E.mode.no_float = false;
+                        }
+                        if (!E.gti_sw_status) {
+                            mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
+                            E.gti_sw_status = true;
+                        }
+                        usleep(100000); // wait
+                        if (!E.ac_sw_status) {
+                            mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
+                            E.ac_sw_status = true;
+                        }
+                        E.mode.pv_bias = PV_BIAS;
+                        fm80_float(true);
                         break;
                     case R_RUN:
                     default:
                         E.mode.R = R_RUN;
+                        E.mode.no_float = true;
                         break;
                 }
-                usleep(100);
                 /*
                  * main state-machine update sequence
                  */
-                bsoc_set_mode(E.mode.pv_bias, true, false);
-                if (E.gti_delay++ >= GTI_DELAY) {
-                    char gti_str[SBUF_SIZ];
-                    int32_t error_drive;
-
-                    /*
-                     * reset the control mode from simple switched power to PID control
-                     */
-                    if (!E.mode.in_pid_control) {
-                        mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
-                        E.gti_sw_status = true;
-                        usleep(100000); // wait
-                        mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
-                        E.ac_sw_status = true;
-                        E.mode.pv_bias = PV_BIAS;
-                        fm80_float(true);
-                    } else {
-                        if (!fm80_float(true)) {
-                            E.mode.pv_bias = (int32_t) E.mode.error - PV_BIAS;
-                        }
-                    }
-                    E.mode.in_pid_control = true;
-                    E.gti_delay = 0;
-                    /*
-                     * adjust power balance if battery charging energy is low
-                     */
-                    if (E.mvar[V_DPBAT] > PV_DL_BIAS_RATE) {
-                        error_drive = (int32_t) E.mode.error - E.mode.pv_bias; // PI feedback control signal
-                    } else {
-                        error_drive = (int32_t) E.mode.error - PV_BIAS_RATE;
-                    }
-                    /*
-                     * when main battery is in float, crank-up the power draw from the solar panels
-                     */
-                    if (fm80_float(true)) {
-                        error_drive = (int32_t) (E.mode.error + PV_BIAS);
-                    }
-                    /*
-                     * don't drive to zero power
-                     */
-                    if (error_drive < 0) {
-                        error_drive = PV_BIAS_LOW; // control wide power swings
-                    }
-
-                    /*
-                     * reduce charging/diversion power to safe PS limits
-                     */
-                    if (E.mode.dl_mqtt_max > PV_DL_MPTT_MAX) {
-                        error_drive = PV_DL_MPTT_IDLE;
-                    }
-
-                    snprintf(gti_str, SBUF_SIZ - 1, "V%04dX", error_drive); // format for dumpload controller gti power commands
-                    mqtt_gti_power(E.client_p, TOPIC_P, gti_str);
-                }
-
                 /*
-                 * check for idle flag from HA
+                 * check for idle/data errors flags from sensors and HA
                  */
-                if (ha_flag_vars_ss.energy_mode == NORM_MODE) {
+                if (!E.mode.data_error) {
+                    bsoc_set_mode(E.mode.pv_bias, true, false);
+                    if (E.gti_delay++ >= GTI_DELAY) {
+                        char gti_str[SBUF_SIZ];
+                        int32_t error_drive;
+
+                        /*
+                         * reset the control mode from simple switched power to PID control
+                         */
+                        if (!E.mode.in_pid_control) {
+                            mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
+                            E.gti_sw_status = true;
+                            usleep(100000); // wait
+                            mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
+                            E.ac_sw_status = true;
+                            E.mode.pv_bias = PV_BIAS;
+                            fm80_float(true);
+                        } else {
+                            if (!fm80_float(true)) {
+                                E.mode.pv_bias = (int32_t) E.mode.error - PV_BIAS;
+                            }
+                        }
+                        E.mode.in_pid_control = true;
+                        E.gti_delay = 0;
+                        /*
+                         * adjust power balance if battery charging energy is low
+                         */
+                        if (E.mvar[V_DPBAT] > PV_DL_BIAS_RATE) {
+                            error_drive = (int32_t) E.mode.error - E.mode.pv_bias; // PI feedback control signal
+                        } else {
+                            error_drive = (int32_t) E.mode.error - PV_BIAS_RATE;
+                        }
+                        /*
+                         * when main battery is in float, crank-up the power draw from the solar panels
+                         */
+                        if (fm80_float(true)) {
+                            error_drive = (int32_t) (E.mode.error + PV_BIAS);
+                        }
+                        /*
+                         * don't drive to zero power
+                         */
+                        if (error_drive < 0) {
+                            error_drive = PV_BIAS_LOW; // control wide power swings
+                        }
+
+                        /*
+                         * reduce charging/diversion power to safe PS limits
+                         */
+                        if (E.mode.dl_mqtt_max > PV_DL_MPTT_MAX) {
+                            error_drive = PV_DL_MPTT_IDLE;
+                        }
+
+                        snprintf(gti_str, SBUF_SIZ - 1, "V%04dX", error_drive); // format for dumpload controller gti power commands
+                        mqtt_gti_power(E.client_p, TOPIC_P, gti_str);
+                    }
+
 #ifndef  FAKE_VPV
                     if (fm80_float(true) || ((ac1_filter(E.mvar[V_BEN]) > BAL_MAX_ENERGY_AC) && (ac_test() > MIN_BAT_KW_AC_HI))) {
                         ramp_up_ac(E.client_p, E.ac_sw_on); // use once control
@@ -466,6 +486,9 @@ int main(int argc, char *argv[]) {
                     if (!(E.fm80 && E.dumpload && E.iammeter)) {
                         fprintf(fout, "\r\n%s !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels\r\n", log_time(false), E.fm80, E.dumpload, E.fm80);
                         fprintf(stderr, "\r\n%s !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels\r\n", log_time(false), E.fm80, E.dumpload, E.fm80);
+                        E.mode.data_error = true;
+                    } else {
+                        E.mode.data_error = false;
                     }
                     sprintf(buffer, "%s", ctime(&rawtime));
                     len = strlen(buffer);

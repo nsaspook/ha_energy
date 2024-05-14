@@ -71,7 +71,7 @@ extern "C" {
 #define MIN_BAT_KW_AC_HI    5000.0f
 #define MIN_BAT_KW_AC_LO    4500.0f
 
-#define MIN_BAT_KW_BSOC_HI  4850.0f
+#define MIN_BAT_KW_BSOC_HI  4550.0f
 #define MIN_BAT_KW_BSOC_LO  3500.0f
 
 #define PV_PGAIN            0.85f
@@ -245,7 +245,7 @@ extern "C" {
 
     struct mode_type {
         volatile double error, target, total_system, gti_dumpload, pv_bias, dl_mqtt_max;
-        volatile bool mode, in_pid_control, con0, con1, con2, con3, con4, con5, con6, con7;
+        volatile bool mode, in_pid_control, con0, con1, con2, con3, con4, con5, con6, con7, no_float, data_error;
         volatile uint32_t mode_tmr;
         volatile struct SPid pid;
         volatile enum energy_state E;
