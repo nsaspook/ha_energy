@@ -363,11 +363,13 @@ int main(int argc, char *argv[]) {
                         if (!E.gti_sw_status) {
                             mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
                             E.gti_sw_status = true;
+                            fprintf(fout, "%s R_FLOAT DC switch true \r\n", log_time(false));
                         }
                         usleep(100000); // wait
                         if (!E.ac_sw_status) {
                             mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
                             E.ac_sw_status = true;
+                            fprintf(fout, "%s R_FLOAT AC switch true \r\n", log_time(false));
                         }
                         E.mode.pv_bias = PV_BIAS;
                         fm80_float(true);
@@ -400,6 +402,7 @@ int main(int argc, char *argv[]) {
                             mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
                             E.ac_sw_status = true;
                             E.mode.pv_bias = PV_BIAS;
+                            fprintf(fout, "%s in_pid_mode AC/DC switch true \r\n", log_time(false));
                             fm80_float(true);
                         } else {
                             if (!fm80_float(true)) {
@@ -443,12 +446,14 @@ int main(int argc, char *argv[]) {
 #ifndef  FAKE_VPV
                     if (fm80_float(true) || ((ac1_filter(E.mvar[V_BEN]) > BAL_MAX_ENERGY_AC) && (ac_test() > MIN_BAT_KW_AC_HI))) {
                         ramp_up_ac(E.client_p, E.ac_sw_on); // use once control
+                        fprintf(fout, "%s MIN_BAT_KW_AC_HI AC switch %d \r\n", log_time(false), E.ac_sw_on);
                         E.ac_sw_on = false; // once flag
                     }
 #endif
                     if (((ac2_filter(E.mvar[V_BEN]) < BAL_MIN_ENERGY_AC) || ((ac_test() < (MIN_BAT_KW_AC_LO + E.ac_low_adj))))) {
                         if (!fm80_float(true)) {
-                            ramp_down_ac(E.client_p, E.ac_sw_status); // use once control
+                            ramp_down_ac(E.client_p, E.ac_sw_on); // use once control
+                            fprintf(fout, "%s MIN_BAT_KW_AC_LO AC switch %d \r\n", log_time(false), E.ac_sw_on);
                         }
                         E.ac_sw_on = true;
                     }
@@ -457,11 +462,13 @@ int main(int argc, char *argv[]) {
                     if ((dc1_filter(E.mvar[V_BEN]) > BAL_MAX_ENERGY_GTI) && (gti_test() > MIN_BAT_KW_GTI_HI)) {
 #ifndef  FAKE_VPV                            
                         ramp_up_gti(E.client_p, E.gti_sw_on); // fixme on the ONCE code
+                        fprintf(fout, "%s MIN_BAT_KW_GTI_HI DC switch %d \r\n", log_time(false), E.gti_sw_on);
                         E.gti_sw_on = false; // once flag
 #endif                            
                     } else {
                         if ((dc2_filter(E.mvar[V_BEN]) < BAL_MIN_ENERGY_GTI) || (gti_test() < (MIN_BAT_KW_GTI_LO + E.gti_low_adj))) {
                             ramp_down_gti(E.client_p, true);
+                            fprintf(fout, "%s MIN_BAT_KW_GTI_LO DC switch %d \r\n", log_time(false), E.gti_sw_on);
                             E.gti_sw_on = true;
                         }
                     }
