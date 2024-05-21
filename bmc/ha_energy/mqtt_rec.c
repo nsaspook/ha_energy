@@ -233,6 +233,10 @@ bool fm80_float(const bool set_bias)
 			E.mode.R = R_FLOAT;
 		}
 		return true;
-	}
+	} else {
+            if (E.mode.R == R_FLOAT) {
+                E.mode.R = R_RUN;
+            }
+        }
 	return false;
 }
