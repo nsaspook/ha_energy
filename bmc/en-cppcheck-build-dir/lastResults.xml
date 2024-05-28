@@ -2,6 +2,47 @@
 <results version="2">
     <cppcheck version="2.10"/>
     <errors>
+        <error id="shadowVariable" severity="style" msg="Local variable &amp;#039;coef&amp;#039; shadows outer variable" verbose="Local variable &amp;#039;coef&amp;#039; shadows outer variable" cwe="398" file0="ha_energy/bsoc.c" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="263" info="Shadow variable"/>
+            <location file="ha_energy/bsoc.c" line="5" info="Shadowed declaration"/>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &amp;#039;coef&amp;#039; shadows outer variable" verbose="Local variable &amp;#039;coef&amp;#039; shadows outer variable" cwe="398" file0="ha_energy/bsoc.c" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="270" info="Shadow variable"/>
+            <location file="ha_energy/bsoc.c" line="5" info="Shadowed declaration"/>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &amp;#039;coef&amp;#039; shadows outer variable" verbose="Local variable &amp;#039;coef&amp;#039; shadows outer variable" cwe="398" file0="ha_energy/bsoc.c" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="277" info="Shadow variable"/>
+            <location file="ha_energy/bsoc.c" line="5" info="Shadowed declaration"/>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &amp;#039;coef&amp;#039; shadows outer variable" verbose="Local variable &amp;#039;coef&amp;#039; shadows outer variable" cwe="398" file0="ha_energy/bsoc.c" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="284" info="Shadow variable"/>
+            <location file="ha_energy/bsoc.c" line="5" info="Shadowed declaration"/>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &amp;#039;coef&amp;#039; shadows outer variable" verbose="Local variable &amp;#039;coef&amp;#039; shadows outer variable" cwe="398" file0="ha_energy/bsoc.c" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="291" info="Shadow variable"/>
+            <location file="ha_energy/bsoc.c" line="5" info="Shadowed declaration"/>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &amp;#039;coef&amp;#039; shadows outer variable" verbose="Local variable &amp;#039;coef&amp;#039; shadows outer variable" cwe="398" file0="ha_energy/bsoc.c" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="298" info="Shadow variable"/>
+            <location file="ha_energy/bsoc.c" line="5" info="Shadowed declaration"/>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &amp;#039;coef&amp;#039; shadows outer variable" verbose="Local variable &amp;#039;coef&amp;#039; shadows outer variable" cwe="398" file0="ha_energy/bsoc.c" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="305" info="Shadow variable"/>
+            <location file="ha_energy/bsoc.c" line="5" info="Shadowed declaration"/>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &amp;#039;coef&amp;#039; shadows outer variable" verbose="Local variable &amp;#039;coef&amp;#039; shadows outer variable" cwe="398" file0="ha_energy/bsoc.c" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="312" info="Shadow variable"/>
+            <location file="ha_energy/bsoc.c" line="5" info="Shadowed declaration"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;bsoc_ac&amp;#039; is never used." verbose="The function &amp;#039;bsoc_ac&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="77"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;drive0_filter&amp;#039; is never used." verbose="The function &amp;#039;drive0_filter&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="303"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;drive1_filter&amp;#039; is never used." verbose="The function &amp;#039;drive1_filter&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="310"/>
+        </error>
         <error id="unreachableCode" severity="style" msg="Statements following &amp;#039;return&amp;#039; will never be executed." verbose="Statements following &amp;#039;return&amp;#039; will never be executed." cwe="561" file0="ha_energy/daq.c" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="67"/>
         </error>
@@ -17,8 +58,55 @@
         <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;i&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;i&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:&#10;void f(int x)&#10;{&#10;    int i = 0;&#10;    if (x) {&#10;        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here&#10;        for (int n = 0; n &amp;lt; 10; ++n) {&#10;            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here&#10;            do_something(&amp;amp;i);&#10;        }&#10;    }&#10;}&#10;When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="ha_energy/daq.c" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="112"/>
         </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;adc_range&amp;#039; is never used." verbose="The function &amp;#039;adc_range&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/daq.c" line="149"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;dac_range&amp;#039; is never used." verbose="The function &amp;#039;dac_range&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/daq.c" line="159"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;get_adc_volts&amp;#039; is never used." verbose="The function &amp;#039;get_adc_volts&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/daq.c" line="194"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;get_data_sample&amp;#039; is never used." verbose="The function &amp;#039;get_data_sample&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/daq.c" line="306"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;init_dac&amp;#039; is never used." verbose="The function &amp;#039;init_dac&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/daq.c" line="111"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;init_daq&amp;#039; is never used." verbose="The function &amp;#039;init_daq&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/daq.c" line="47"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;init_dio&amp;#039; is never used." verbose="The function &amp;#039;init_dio&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/daq.c" line="248"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;lp_filter&amp;#039; is never used." verbose="The function &amp;#039;lp_filter&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/daq.c" line="332"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;set_dac_raw&amp;#039; is never used." verbose="The function &amp;#039;set_dac_raw&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/daq.c" line="183"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;set_dac_volts&amp;#039; is never used." verbose="The function &amp;#039;set_dac_volts&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/daq.c" line="169"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;set_dio_input&amp;#039; is never used." verbose="The function &amp;#039;set_dio_input&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/daq.c" line="215"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;set_dio_output&amp;#039; is never used." verbose="The function &amp;#039;set_dio_output&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/daq.c" line="208"/>
+        </error>
         <error id="unusedVariable" severity="style" msg="Unused variable: sleep" verbose="Unused variable: sleep" cwe="563" file0="ha_energy/junk.c" sinceDate="M/d/yy">
             <location file="ha_energy/junk.c" line="32"/>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &amp;#039;i&amp;#039; shadows outer variable" verbose="Local variable &amp;#039;i&amp;#039; shadows outer variable" cwe="398" file0="ha_energy/mqtt_rec.c" sinceDate="M/d/yy">
+            <location file="ha_energy/mqtt_rec.c" line="84" info="Shadow variable"/>
+            <location file="ha_energy/mqtt_rec.c" line="44" info="Shadowed declaration"/>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &amp;#039;i&amp;#039; shadows outer variable" verbose="Local variable &amp;#039;i&amp;#039; shadows outer variable" cwe="398" file0="ha_energy/mqtt_rec.c" sinceDate="M/d/yy">
+            <location file="ha_energy/mqtt_rec.c" line="98" info="Shadow variable"/>
+            <location file="ha_energy/mqtt_rec.c" line="44" info="Shadowed declaration"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ha_dc_on&amp;#039; is never used." verbose="The function &amp;#039;ha_dc_on&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="energy.c" line="639"/>
         </error>
     </errors>
 </results>

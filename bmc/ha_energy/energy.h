@@ -30,7 +30,7 @@ extern "C" {
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.51"
+#define LOG_VERSION     "V0.53"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -71,6 +71,7 @@ extern "C" {
 #define MIN_BAT_KW_AC_HI    5000.0f
 #define MIN_BAT_KW_AC_LO    4500.0f
 
+#define MIN_BAT_KW_BSOC_SLP 4800.0f
 #define MIN_BAT_KW_BSOC_HI  4550.0f
 #define MIN_BAT_KW_BSOC_LO  3500.0f
 
@@ -80,10 +81,12 @@ extern "C" {
 #define PV_BIAS             288.0f
 #define PV_BIAS_LOW         69.0f
 #define PV_BIAS_FLOAT       399.0f
+#define PV_BIAS_SLEEP       369.0f
 #define PV_BIAS_RATE        320.0f
-#define PV_DL_MPTT_MAX      750.0f
+#define PV_DL_MPTT_MAX      800.0f
 #define PV_DL_MPTT_IDLE     57.0f
 #define PV_DL_BIAS_RATE     75.0f
+#define PWA_SLEEP           300.0f
 
 #define BAL_MIN_ENERGY_AC   -200.0f
 #define BAL_MAX_ENERGY_AC   200.0f
@@ -258,7 +261,7 @@ extern "C" {
         volatile double mvar[V_DLAST + 1];
         volatile bool once_gti, once_ac, iammeter, fm80, dumpload, once_gti_zero;
         volatile double gti_low_adj, ac_low_adj;
-        volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode, startup;
+        volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode, startup, ac_mismatch, dc_mismatch, mode_mismatch;
         volatile uint32_t speed_go, im_delay, im_display, gti_delay;
         volatile int32_t rc, sane;
         volatile uint32_t ten_sec_clock;
@@ -290,6 +293,7 @@ extern "C" {
 
     bool sanity_check(void);
     char * log_time(bool);
+    bool sync_ha(void);
 
 #ifdef __cplusplus
 }

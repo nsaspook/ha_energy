@@ -1,44 +1,88 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="7249553905805342120">
+<analyzerinfo hash="7178150696794450787">
   <FileInfo check="ctu">
-<function-call call-id="ha_energy/mqtt_vars.h:27:10" call-funcname="mqtt_gti_power" call-argnr="3" file="energy.c" line="331" col="39" call-argexpr="gti_str" call-argvaluetype="7" call-argvalue="16"/>  </FileInfo>
+<function-call call-id="ha_energy/mqtt_vars.h:27:10" call-funcname="mqtt_gti_power" call-argnr="3" file="energy.c" line="449" col="39" call-argexpr="gti_str" call-argvaluetype="7" call-argvalue="16"/>  </FileInfo>
   <FileInfo check="Null pointer">
-    <unsafe-usage my-id="ha_energy/energy.h:228:10" my-argnr="2" my-argname="cause" file="energy.c" line="155" col="36" value="0"/>
+    <unsafe-usage my-id="ha_energy/energy.h:277:10" my-argnr="2" my-argname="cause" file="energy.c" line="167" col="36" value="0"/>
   </FileInfo>
   <FileInfo check="ctu">
-<function-call call-id="ha_energy/mqtt_vars.h:27:10" call-funcname="mqtt_gti_power" call-argnr="3" file="energy.c" line="331" col="39" call-argexpr="gti_str" call-argvaluetype="7" call-argvalue="16"/>  </FileInfo>
+<function-call call-id="ha_energy/mqtt_vars.h:27:10" call-funcname="mqtt_gti_power" call-argnr="3" file="energy.c" line="449" col="39" call-argexpr="gti_str" call-argvaluetype="7" call-argvalue="16"/>  </FileInfo>
   <FileInfo check="Null pointer">
-    <unsafe-usage my-id="ha_energy/energy.h:228:10" my-argnr="2" my-argname="cause" file="energy.c" line="155" col="36" value="0"/>
+    <unsafe-usage my-id="ha_energy/energy.h:277:10" my-argnr="2" my-argname="cause" file="energy.c" line="167" col="36" value="0"/>
+  </FileInfo>
+  <FileInfo check="ctu">
+<function-call call-id="ha_energy/mqtt_vars.h:27:10" call-funcname="mqtt_gti_power" call-argnr="3" file="energy.c" line="449" col="39" call-argexpr="gti_str" call-argvaluetype="7" call-argvalue="16"/>  </FileInfo>
+  <FileInfo check="Null pointer">
+    <unsafe-usage my-id="ha_energy/energy.h:277:10" my-argnr="2" my-argname="cause" file="energy.c" line="167" col="36" value="0"/>
+  </FileInfo>
+  <FileInfo check="ctu">
+<function-call call-id="ha_energy/mqtt_vars.h:27:10" call-funcname="mqtt_gti_power" call-argnr="3" file="energy.c" line="449" col="39" call-argexpr="gti_str" call-argvaluetype="7" call-argvalue="16"/>  </FileInfo>
+  <FileInfo check="Null pointer">
+    <unsafe-usage my-id="ha_energy/energy.h:277:10" my-argnr="2" my-argname="cause" file="energy.c" line="167" col="36" value="0"/>
   </FileInfo>
   <FileInfo check="CheckUnusedFunctions">
-    <functiondecl functionName="sanity_check" lineNumber="107"/>
-    <functiondecl functionName="timer_callback" lineNumber="135"/>
-    <functiondecl functionName="connlost" lineNumber="144"/>
-    <functiondecl functionName="main" lineNumber="162"/>
-    <functiondecl functionName="ramp_up_gti" lineNumber="407"/>
-    <functiondecl functionName="ramp_down_gti" lineNumber="460"/>
-    <functiondecl functionName="ramp_up_ac" lineNumber="474"/>
-    <functiondecl functionName="ramp_down_ac" lineNumber="488"/>
-    <functiondecl functionName="ha_ac_off" lineNumber="496"/>
-    <functiondecl functionName="ha_ac_on" lineNumber="501"/>
-    <functiondecl functionName="ha_dc_off" lineNumber="506"/>
-    <functiondecl functionName="ha_dc_on" lineNumber="511"/>
-    <functiondecl functionName="solar_shutdown" lineNumber="516"/>
-    <functiondecl functionName="sanity_check" lineNumber="107"/>
-    <functiondecl functionName="timer_callback" lineNumber="135"/>
-    <functiondecl functionName="connlost" lineNumber="144"/>
-    <functiondecl functionName="main" lineNumber="162"/>
-    <functiondecl functionName="ramp_up_gti" lineNumber="407"/>
-    <functiondecl functionName="ramp_down_gti" lineNumber="460"/>
-    <functiondecl functionName="ramp_up_ac" lineNumber="474"/>
-    <functiondecl functionName="ramp_down_ac" lineNumber="488"/>
-    <functiondecl functionName="ha_ac_off" lineNumber="496"/>
-    <functiondecl functionName="ha_ac_on" lineNumber="501"/>
-    <functiondecl functionName="ha_dc_off" lineNumber="506"/>
-    <functiondecl functionName="ha_dc_on" lineNumber="511"/>
-    <functiondecl functionName="solar_shutdown" lineNumber="516"/>
+    <functiondecl functionName="sanity_check" lineNumber="119"/>
+    <functiondecl functionName="timer_callback" lineNumber="147"/>
+    <functiondecl functionName="connlost" lineNumber="156"/>
+    <functiondecl functionName="main" lineNumber="174"/>
+    <functiondecl functionName="ramp_up_gti" lineNumber="534"/>
+    <functiondecl functionName="ramp_down_gti" lineNumber="587"/>
+    <functiondecl functionName="ramp_up_ac" lineNumber="601"/>
+    <functiondecl functionName="ramp_down_ac" lineNumber="615"/>
+    <functiondecl functionName="ha_ac_off" lineNumber="624"/>
+    <functiondecl functionName="ha_ac_on" lineNumber="629"/>
+    <functiondecl functionName="ha_dc_off" lineNumber="634"/>
+    <functiondecl functionName="ha_dc_on" lineNumber="639"/>
+    <functiondecl functionName="solar_shutdown" lineNumber="644"/>
+    <functiondecl functionName="log_time" lineNumber="657"/>
+    <functiondecl functionName="sanity_check" lineNumber="119"/>
+    <functiondecl functionName="timer_callback" lineNumber="147"/>
+    <functiondecl functionName="connlost" lineNumber="156"/>
+    <functiondecl functionName="main" lineNumber="174"/>
+    <functiondecl functionName="ramp_up_gti" lineNumber="534"/>
+    <functiondecl functionName="ramp_down_gti" lineNumber="587"/>
+    <functiondecl functionName="ramp_up_ac" lineNumber="601"/>
+    <functiondecl functionName="ramp_down_ac" lineNumber="615"/>
+    <functiondecl functionName="ha_ac_off" lineNumber="624"/>
+    <functiondecl functionName="ha_ac_on" lineNumber="629"/>
+    <functiondecl functionName="ha_dc_off" lineNumber="634"/>
+    <functiondecl functionName="ha_dc_on" lineNumber="639"/>
+    <functiondecl functionName="solar_shutdown" lineNumber="644"/>
+    <functiondecl functionName="log_time" lineNumber="657"/>
+    <functiondecl functionName="sanity_check" lineNumber="119"/>
+    <functiondecl functionName="timer_callback" lineNumber="147"/>
+    <functiondecl functionName="connlost" lineNumber="156"/>
+    <functiondecl functionName="main" lineNumber="174"/>
+    <functiondecl functionName="ramp_up_gti" lineNumber="534"/>
+    <functiondecl functionName="ramp_down_gti" lineNumber="587"/>
+    <functiondecl functionName="ramp_up_ac" lineNumber="601"/>
+    <functiondecl functionName="ramp_down_ac" lineNumber="615"/>
+    <functiondecl functionName="ha_ac_off" lineNumber="624"/>
+    <functiondecl functionName="ha_ac_on" lineNumber="629"/>
+    <functiondecl functionName="ha_dc_off" lineNumber="634"/>
+    <functiondecl functionName="ha_dc_on" lineNumber="639"/>
+    <functiondecl functionName="solar_shutdown" lineNumber="644"/>
+    <functiondecl functionName="log_time" lineNumber="657"/>
+    <functiondecl functionName="sanity_check" lineNumber="119"/>
+    <functiondecl functionName="timer_callback" lineNumber="147"/>
+    <functiondecl functionName="connlost" lineNumber="156"/>
+    <functiondecl functionName="main" lineNumber="174"/>
+    <functiondecl functionName="ramp_up_gti" lineNumber="534"/>
+    <functiondecl functionName="ramp_down_gti" lineNumber="587"/>
+    <functiondecl functionName="ramp_up_ac" lineNumber="601"/>
+    <functiondecl functionName="ramp_down_ac" lineNumber="615"/>
+    <functiondecl functionName="ha_ac_off" lineNumber="624"/>
+    <functiondecl functionName="ha_ac_on" lineNumber="629"/>
+    <functiondecl functionName="ha_dc_off" lineNumber="634"/>
+    <functiondecl functionName="ha_dc_on" lineNumber="639"/>
+    <functiondecl functionName="solar_shutdown" lineNumber="644"/>
+    <functiondecl functionName="log_time" lineNumber="657"/>
     <functioncall functionName="DUMPLOAD_ID"/>
     <functioncall functionName="EXIT_FAILURE"/>
+    <functioncall functionName="E_INIT"/>
+    <functioncall functionName="E_RUN"/>
+    <functioncall functionName="E_STOP"/>
+    <functioncall functionName="E_WAIT"/>
     <functioncall functionName="FM80_ID"/>
     <functioncall functionName="IA_LAST"/>
     <functioncall functionName="ITIMER_REAL"/>
@@ -55,6 +99,9 @@
     <functioncall functionName="NULL"/>
     <functioncall functionName="P8055_ID"/>
     <functioncall functionName="PHASE_LAST"/>
+    <functioncall functionName="R_IDLE"/>
+    <functioncall functionName="R_INIT"/>
+    <functioncall functionName="R_RUN"/>
     <functioncall functionName="ResetPI"/>
     <functioncall functionName="SIGALRM"/>
     <functioncall functionName="S_DLAST"/>
@@ -62,13 +109,18 @@
     <functioncall functionName="S_PAMPS"/>
     <functioncall functionName="S_PVOLTS"/>
     <functioncall functionName="S_PWA"/>
+    <functioncall functionName="V_BEN"/>
     <functioncall functionName="V_DLAST"/>
+    <functioncall functionName="V_DPBAT"/>
     <functioncall functionName="V_FBAMPS"/>
+    <functioncall functionName="V_FBEKW"/>
     <functioncall functionName="V_HACSW"/>
     <functioncall functionName="V_HDCSW"/>
     <functioncall functionName="V_PAMPS"/>
     <functioncall functionName="V_PVOLTS"/>
     <functioncall functionName="V_PWA"/>
+    <functioncall functionName="ac1_filter"/>
+    <functioncall functionName="ac2_filter"/>
     <functioncall functionName="ac_test"/>
     <functioncall functionName="bat_current_stable"/>
     <functioncall functionName="bsoc_data_collect"/>
@@ -76,17 +128,21 @@
     <functioncall functionName="bsoc_set_mode"/>
     <functioncall functionName="connlost"/>
     <functioncall functionName="ctime"/>
+    <functioncall functionName="dc1_filter"/>
+    <functioncall functionName="dc2_filter"/>
     <functioncall functionName="delivered"/>
     <functioncall functionName="exit"/>
     <functioncall functionName="false"/>
     <functioncall functionName="fflush"/>
     <functioncall functionName="fm80_float"/>
+    <functioncall functionName="fm80_sleep"/>
     <functioncall functionName="fopen"/>
     <functioncall functionName="fprintf"/>
     <functioncall functionName="gti_test"/>
     <functioncall functionName="ha_ac_off"/>
     <functioncall functionName="ha_dc_off"/>
     <functioncall functionName="iammeter_read"/>
+    <functioncall functionName="log_time"/>
     <functioncall functionName="mqtt_gti_power"/>
     <functioncall functionName="mqtt_ha_pid"/>
     <functioncall functionName="mqtt_ha_switch"/>

@@ -35,6 +35,8 @@
  * V0.44 tune for spring/summer solar conditions
  * V0.50 convert main loop code to FSM
  * V0.51 logging time additions
+ * V0.52 tune GTI inverter levels for better conversion efficiency
+ * V0.53 sync to HA back-end switch status
  */
 
 /*
@@ -111,6 +113,9 @@ struct energy_type E = {
     .mode.pv_bias = PV_BIAS_LOW,
     .sane = S_DLAST,
     .startup = true,
+    .ac_mismatch = false,
+    .dc_mismatch = false,
+    .mode_mismatch = false,
 };
 
 static bool solar_shutdown(void);
@@ -430,6 +435,11 @@ int main(int argc, char *argv[]) {
                          */
                         if (error_drive < 0) {
                             error_drive = PV_BIAS_LOW; // control wide power swings
+                            if (!fm80_sleep()) { // check for using sleep bias
+                                if ((E.mvar[V_FBEKW] > MIN_BAT_KW_BSOC_SLP) && (E.mvar[V_PWA] > PWA_SLEEP)) {
+                                    error_drive = PV_BIAS_SLEEP; // use higher power when we still have sun for better inverter efficiency
+                                }
+                            }
                         }
 
                         /*
@@ -504,6 +514,7 @@ int main(int argc, char *argv[]) {
                     E.fm80 = false;
                     E.dumpload = false;
                     E.iammeter = false;
+                    sync_ha();
                     print_im_vars();
                     print_mvar_vars();
                     fprintf(fout, "%s\r", ctime(&rawtime));
@@ -661,4 +672,21 @@ char * log_time(bool log) {
         fprintf(fout, "%s ", time_log);
     }
     return time_log;
+}
+
+bool sync_ha(void) {
+    bool sync = false;
+    if (E.gti_sw_status != (bool) ((int32_t) E.mvar[V_HDCSW])) {
+        mqtt_ha_switch(E.client_p, TOPIC_PDCC, (bool) ((int32_t) E.mvar[V_HDCSW]));
+        E.dc_mismatch = true;
+        sync = true;
+        fprintf(fout, "DC_MM ");
+    }
+    if (E.ac_sw_status != (bool) ((int32_t) E.mvar[V_HACSW])) {
+        mqtt_ha_switch(E.client_p, TOPIC_PACC, (bool) ((int32_t) E.mvar[V_HACSW]));
+        E.ac_mismatch = true;
+        fprintf(fout, "AC_MM ");
+        sync = true;
+    }
+    return sync;
 }

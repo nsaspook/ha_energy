@@ -1,34 +1,112 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="4582874751261415648">
+<analyzerinfo hash="13834450335014900942">
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;coef&apos; shadows outer variable" verbose="Local variable &apos;coef&apos; shadows outer variable" cwe="398" file0="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c">
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="263" column="19" info="Shadow variable"/>
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="5" column="40" info="Shadowed declaration"/>
+            <symbol>coef</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;coef&apos; shadows outer variable" verbose="Local variable &apos;coef&apos; shadows outer variable" cwe="398" file0="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c">
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="270" column="19" info="Shadow variable"/>
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="5" column="40" info="Shadowed declaration"/>
+            <symbol>coef</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;coef&apos; shadows outer variable" verbose="Local variable &apos;coef&apos; shadows outer variable" cwe="398" file0="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c">
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="277" column="19" info="Shadow variable"/>
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="5" column="40" info="Shadowed declaration"/>
+            <symbol>coef</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;coef&apos; shadows outer variable" verbose="Local variable &apos;coef&apos; shadows outer variable" cwe="398" file0="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c">
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="284" column="19" info="Shadow variable"/>
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="5" column="40" info="Shadowed declaration"/>
+            <symbol>coef</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;coef&apos; shadows outer variable" verbose="Local variable &apos;coef&apos; shadows outer variable" cwe="398" file0="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c">
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="291" column="19" info="Shadow variable"/>
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="5" column="40" info="Shadowed declaration"/>
+            <symbol>coef</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;coef&apos; shadows outer variable" verbose="Local variable &apos;coef&apos; shadows outer variable" cwe="398" file0="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c">
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="298" column="19" info="Shadow variable"/>
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="5" column="40" info="Shadowed declaration"/>
+            <symbol>coef</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;coef&apos; shadows outer variable" verbose="Local variable &apos;coef&apos; shadows outer variable" cwe="398" file0="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c">
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="305" column="19" info="Shadow variable"/>
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="5" column="40" info="Shadowed declaration"/>
+            <symbol>coef</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;coef&apos; shadows outer variable" verbose="Local variable &apos;coef&apos; shadows outer variable" cwe="398" file0="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c">
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="312" column="19" info="Shadow variable"/>
+            <location file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="5" column="40" info="Shadowed declaration"/>
+            <symbol>coef</symbol>
+        </error>
   <FileInfo check="ctu">
-<function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.h:57:12" call-funcname="calculateStandardDeviation" call-argnr="2" file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="56" col="31" call-argexpr="bat_c_std_dev" call-argvaluetype="7" call-argvalue="80"/>  </FileInfo>
+<function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.h:60:12" call-funcname="calculateStandardDeviation" call-argnr="2" file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="66" col="31" call-argexpr="bat_c_std_dev" call-argvaluetype="7" call-argvalue="80"/>  </FileInfo>
   <FileInfo check="ctu">
-<function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.h:57:12" call-funcname="calculateStandardDeviation" call-argnr="2" file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="56" col="31" call-argexpr="bat_c_std_dev" call-argvaluetype="7" call-argvalue="80"/>  </FileInfo>
+<function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.h:60:12" call-funcname="calculateStandardDeviation" call-argnr="2" file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="66" col="31" call-argexpr="bat_c_std_dev" call-argvaluetype="7" call-argvalue="80"/>  </FileInfo>
+  <FileInfo check="ctu">
+<function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.h:60:12" call-funcname="calculateStandardDeviation" call-argnr="2" file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="66" col="31" call-argexpr="bat_c_std_dev" call-argvaluetype="7" call-argvalue="80"/>  </FileInfo>
   <FileInfo check="CheckUnusedFunctions">
     <functiondecl functionName="bsoc_init" lineNumber="9"/>
     <functiondecl functionName="bsoc_set_std_dev" lineNumber="22"/>
     <functiondecl functionName="bsoc_data_collect" lineNumber="29"/>
-    <functiondecl functionName="bsoc_ac" lineNumber="67"/>
-    <functiondecl functionName="bsoc_gti" lineNumber="75"/>
-    <functiondecl functionName="gti_test" lineNumber="89"/>
-    <functiondecl functionName="ac_test" lineNumber="100"/>
-    <functiondecl functionName="get_batc_dev" lineNumber="104"/>
-    <functiondecl functionName="calculateStandardDeviation" lineNumber="112"/>
-    <functiondecl functionName="bat_current_stable" lineNumber="146"/>
-    <functiondecl functionName="bsoc_set_mode" lineNumber="167"/>
-    <functiondecl functionName="error_filter" lineNumber="238"/>
+    <functiondecl functionName="bsoc_ac" lineNumber="77"/>
+    <functiondecl functionName="bsoc_gti" lineNumber="85"/>
+    <functiondecl functionName="gti_test" lineNumber="99"/>
+    <functiondecl functionName="ac_test" lineNumber="110"/>
+    <functiondecl functionName="get_batc_dev" lineNumber="114"/>
+    <functiondecl functionName="calculateStandardDeviation" lineNumber="122"/>
+    <functiondecl functionName="bat_current_stable" lineNumber="156"/>
+    <functiondecl functionName="bsoc_set_mode" lineNumber="177"/>
+    <functiondecl functionName="error_filter" lineNumber="255"/>
+    <functiondecl functionName="ac0_filter" lineNumber="261"/>
+    <functiondecl functionName="ac1_filter" lineNumber="268"/>
+    <functiondecl functionName="ac2_filter" lineNumber="275"/>
+    <functiondecl functionName="dc0_filter" lineNumber="282"/>
+    <functiondecl functionName="dc1_filter" lineNumber="289"/>
+    <functiondecl functionName="dc2_filter" lineNumber="296"/>
+    <functiondecl functionName="drive0_filter" lineNumber="303"/>
+    <functiondecl functionName="drive1_filter" lineNumber="310"/>
     <functiondecl functionName="bsoc_init" lineNumber="9"/>
     <functiondecl functionName="bsoc_set_std_dev" lineNumber="22"/>
     <functiondecl functionName="bsoc_data_collect" lineNumber="29"/>
-    <functiondecl functionName="bsoc_ac" lineNumber="67"/>
-    <functiondecl functionName="bsoc_gti" lineNumber="75"/>
-    <functiondecl functionName="gti_test" lineNumber="89"/>
-    <functiondecl functionName="ac_test" lineNumber="100"/>
-    <functiondecl functionName="get_batc_dev" lineNumber="104"/>
-    <functiondecl functionName="calculateStandardDeviation" lineNumber="112"/>
-    <functiondecl functionName="bat_current_stable" lineNumber="146"/>
-    <functiondecl functionName="bsoc_set_mode" lineNumber="167"/>
-    <functiondecl functionName="error_filter" lineNumber="238"/>
+    <functiondecl functionName="bsoc_ac" lineNumber="77"/>
+    <functiondecl functionName="bsoc_gti" lineNumber="85"/>
+    <functiondecl functionName="gti_test" lineNumber="99"/>
+    <functiondecl functionName="ac_test" lineNumber="110"/>
+    <functiondecl functionName="get_batc_dev" lineNumber="114"/>
+    <functiondecl functionName="calculateStandardDeviation" lineNumber="122"/>
+    <functiondecl functionName="bat_current_stable" lineNumber="156"/>
+    <functiondecl functionName="bsoc_set_mode" lineNumber="177"/>
+    <functiondecl functionName="error_filter" lineNumber="255"/>
+    <functiondecl functionName="ac0_filter" lineNumber="261"/>
+    <functiondecl functionName="ac1_filter" lineNumber="268"/>
+    <functiondecl functionName="ac2_filter" lineNumber="275"/>
+    <functiondecl functionName="dc0_filter" lineNumber="282"/>
+    <functiondecl functionName="dc1_filter" lineNumber="289"/>
+    <functiondecl functionName="dc2_filter" lineNumber="296"/>
+    <functiondecl functionName="drive0_filter" lineNumber="303"/>
+    <functiondecl functionName="drive1_filter" lineNumber="310"/>
+    <functiondecl functionName="bsoc_init" lineNumber="9"/>
+    <functiondecl functionName="bsoc_set_std_dev" lineNumber="22"/>
+    <functiondecl functionName="bsoc_data_collect" lineNumber="29"/>
+    <functiondecl functionName="bsoc_ac" lineNumber="77"/>
+    <functiondecl functionName="bsoc_gti" lineNumber="85"/>
+    <functiondecl functionName="gti_test" lineNumber="99"/>
+    <functiondecl functionName="ac_test" lineNumber="110"/>
+    <functiondecl functionName="get_batc_dev" lineNumber="114"/>
+    <functiondecl functionName="calculateStandardDeviation" lineNumber="122"/>
+    <functiondecl functionName="bat_current_stable" lineNumber="156"/>
+    <functiondecl functionName="bsoc_set_mode" lineNumber="177"/>
+    <functiondecl functionName="error_filter" lineNumber="255"/>
+    <functiondecl functionName="ac0_filter" lineNumber="261"/>
+    <functiondecl functionName="ac1_filter" lineNumber="268"/>
+    <functiondecl functionName="ac2_filter" lineNumber="275"/>
+    <functiondecl functionName="dc0_filter" lineNumber="282"/>
+    <functiondecl functionName="dc1_filter" lineNumber="289"/>
+    <functiondecl functionName="dc2_filter" lineNumber="296"/>
+    <functiondecl functionName="drive0_filter" lineNumber="303"/>
+    <functiondecl functionName="drive1_filter" lineNumber="310"/>
     <functioncall functionName="IA_LAST"/>
     <functioncall functionName="MQTTClient"/>
     <functioncall functionName="MQTTClient_deliveryToken"/>
@@ -39,6 +117,7 @@
     <functioncall functionName="V_BEN"/>
     <functioncall functionName="V_DCMPPT"/>
     <functioncall functionName="V_DLAST"/>
+    <functioncall functionName="V_DPMPPT"/>
     <functioncall functionName="V_DPPV"/>
     <functioncall functionName="V_DVBAT"/>
     <functioncall functionName="V_DVPV"/>
@@ -47,7 +126,9 @@
     <functioncall functionName="V_FLO"/>
     <functioncall functionName="V_FSO"/>
     <functioncall functionName="V_PWA"/>
+    <functioncall functionName="ac0_filter"/>
     <functioncall functionName="calculateStandardDeviation"/>
+    <functioncall functionName="dc0_filter"/>
     <functioncall functionName="error_filter"/>
     <functioncall functionName="false"/>
     <functioncall functionName="fprintf"/>

@@ -299,3 +299,17 @@ double dc2_filter(double raw) {
     accum = accum - accum / coef + raw;
     return accum / coef;
 }
+
+double drive0_filter(double raw) {
+    static double accum = 0.0f;
+    static double coef = COEF;
+    accum = accum - accum / coef + raw;
+    return accum / coef;
+}
+
+double drive1_filter(double raw) {
+    static double accum = 0.0f;
+    static double coef = COEF;
+    accum = accum - accum / coef + raw;
+    return accum / coef;
+}

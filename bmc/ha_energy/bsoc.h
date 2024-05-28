@@ -60,13 +60,15 @@ extern "C" {
     double calculateStandardDeviation(uint32_t, const double *);
 
     bool bsoc_set_mode(double, bool, bool);
-    
+
     double ac0_filter(double);
     double ac1_filter(double);
     double ac2_filter(double);
     double dc0_filter(double);
     double dc1_filter(double);
     double dc2_filter(double);
+    double drive0_filter(double);
+    double drive1_filter(double);
 
 #ifdef __cplusplus
 }
