@@ -12,11 +12,14 @@ size_t iammeter_write_callback(char *buffer, size_t size, size_t nitems, void *s
     struct energy_type * e = stream;
     uint32_t next_var = 0;
 
+    E.link.iammeter_count++;
+
     if (json == NULL) {
         const char *error_ptr = cJSON_GetErrorPtr();
         if (error_ptr != NULL) {
             fprintf(fout, "Error: %s\n", error_ptr);
         }
+        E.link.iammeter_error++;
         goto iammeter_exit;
     }
 #ifdef IM_DEBUG
@@ -67,6 +70,7 @@ void iammeter_read(void) {
 
     curl = curl_easy_init();
     if (curl) {
+        E.link.iammeter_count++;
         curl_easy_setopt(curl, CURLOPT_URL, "http://10.1.1.101/monitorjson");
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, iammeter_write_callback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, E.print_vars); // external data array for iammeter values
@@ -77,6 +81,7 @@ void iammeter_read(void) {
             fprintf(stderr, "curl_easy_perform() failed: %s\n",
                     curl_easy_strerror(res));
             E.iammeter = false;
+            E.link.iammeter_error++;
         } else {
             E.iammeter = true;
         }

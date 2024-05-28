@@ -45,6 +45,7 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
     char buffer[1024];
     struct ha_flag_type *ha_flag = context;
 
+    E.link.mqtt_count++;
     // bug-out if no context variables passed to callback
     if (context == NULL) {
         ret = -1;
@@ -107,6 +108,7 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
 error_exit:
     // delete the JSON object
     cJSON_Delete(json);
+    E.link.mqtt_error++;
 null_exit:
     MQTTClient_freeMessage(&message);
     MQTTClient_free(topicName);

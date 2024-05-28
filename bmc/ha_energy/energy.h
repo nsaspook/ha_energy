@@ -246,6 +246,10 @@ extern "C" {
 #define L2_P    L1_P+IA_LAST
 #define L3_P    L2_P+IA_LAST
 
+    struct link_type {
+        volatile uint32_t iammeter_error, iammeter_count;
+        volatile uint32_t mqtt_error, mqtt_count;
+    };
     struct mode_type {
         volatile double error, target, total_system, gti_dumpload, pv_bias, dl_mqtt_max;
         volatile bool mode, in_pid_control, con0, con1, con2, con3, con4, con5, con6, con7, no_float, data_error;
@@ -267,6 +271,7 @@ extern "C" {
         volatile uint32_t ten_sec_clock;
         pthread_mutex_t ha_lock;
         struct mode_type mode;
+        struct link_type link;
         MQTTClient client_p, client_sd;
     };
 

@@ -13,6 +13,7 @@ void mqtt_ha_pid(MQTTClient client_p, const char * topic_p) {
     MQTTClient_deliveryToken token;
     ha_flag_vars_ss.deliveredtoken = 0;
 
+    E.link.mqtt_count++;
     json = cJSON_CreateObject();
     cJSON_AddNumberToObject(json, "piderror", E.mode.error);
     cJSON_AddNumberToObject(json, "totalsystem", E.mode.total_system);
@@ -54,6 +55,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
     MQTTClient_deliveryToken token;
     ha_flag_vars_ss.deliveredtoken = 0;
 
+    E.link.mqtt_count++;
     json = cJSON_CreateObject();
     if (sw_state) {
         cJSON_AddStringToObject(json, "state", "ON");
@@ -91,6 +93,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
             usleep(TOKEN_DELAY);
             if (waiting++ > MQTT_TIMEOUT) {
                 fprintf(fout, "\r\nSW Still Waiting, timeout\r\n");
+                E.link.mqtt_error++;
                 break;
             }
         };
@@ -111,6 +114,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
     ha_flag_vars_ss.deliveredtoken = 0;
     static bool spam = false;
 
+    E.link.mqtt_count++;
     pubmsg.payload = msg;
     pubmsg.payloadlen = strlen(msg);
     pubmsg.qos = QOS;
@@ -151,6 +155,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
             usleep(TOKEN_DELAY);
             if (waiting++ > MQTT_TIMEOUT) {
                 fprintf(fout, "\r\nGTI Still Waiting, timeout\r\n");
+                E.link.mqtt_error++;
                 break;
             }
         };
