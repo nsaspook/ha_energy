@@ -72,6 +72,7 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
         ha_flag->rec_ok = false;
         E.fm80 = false;
         E.dumpload = false;
+        E.link.mqtt_error++;
         goto error_exit;
     }
 
@@ -108,7 +109,6 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
 error_exit:
     // delete the JSON object
     cJSON_Delete(json);
-    E.link.mqtt_error++;
 null_exit:
     MQTTClient_freeMessage(&message);
     MQTTClient_free(topicName);

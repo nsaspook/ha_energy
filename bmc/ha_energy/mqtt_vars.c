@@ -93,7 +93,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
             usleep(TOKEN_DELAY);
             if (waiting++ > MQTT_TIMEOUT) {
                 fprintf(fout, "\r\nSW Still Waiting, timeout\r\n");
-                E.link.mqtt_error++;
+//                E.link.mqtt_error++;
                 break;
             }
         };
@@ -155,7 +155,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
             usleep(TOKEN_DELAY);
             if (waiting++ > MQTT_TIMEOUT) {
                 fprintf(fout, "\r\nGTI Still Waiting, timeout\r\n");
-                E.link.mqtt_error++;
+//                E.link.mqtt_error++;
                 break;
             }
         };
