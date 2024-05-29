@@ -36,6 +36,7 @@ extern "C" {
 #define CLIENTID1       "Energy_Mqtt_HA1"
 #define CLIENTID2       "Energy_Mqtt_HA2"
 #define TOPIC_P         "mateq84/data/gticmd"
+#define TOPIC_SPAM      "mateq84/data/spam"
 #define TOPIC_PACA      "home-assistant/gtiac/availability"
 #define TOPIC_PDCA      "home-assistant/gtidc/availability"
 #define TOPIC_PACC      "home-assistant/gtiac/contact"

@@ -93,7 +93,6 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state) {
             usleep(TOKEN_DELAY);
             if (waiting++ > MQTT_TIMEOUT) {
                 fprintf(fout, "\r\nSW Still Waiting, timeout\r\n");
-//                E.link.mqtt_error++;
                 break;
             }
         };
@@ -135,7 +134,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
         pubmsg.payload = "Z#";
         pubmsg.payloadlen = strlen("Z#");
         if (!spam) {
-            MQTTClient_publishMessage(client_p, "mateq84/data/gticmd_spam", &pubmsg, &token);
+            MQTTClient_publishMessage(client_p, TOPIC_SPAM, &pubmsg, &token);
         } else {
             MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token); // only shutdown GTI power
         }
@@ -155,7 +154,6 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg) {
             usleep(TOKEN_DELAY);
             if (waiting++ > MQTT_TIMEOUT) {
                 fprintf(fout, "\r\nGTI Still Waiting, timeout\r\n");
-//                E.link.mqtt_error++;
                 break;
             }
         };
