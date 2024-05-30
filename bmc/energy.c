@@ -501,6 +501,11 @@ int main(int argc, char *argv[]) {
                     E.im_display = 0;
                     mqtt_ha_pid(E.client_p, TOPIC_PPID);
                     if (!(E.fm80 && E.dumpload && E.iammeter)) {
+                        if (!E.iammeter) {
+                            E.link.iammeter_error++;
+                        } else {
+                            E.link.mqtt_error++;
+                        }
                         fprintf(fout, "\r\n%s !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels M %d,%d I %d,%d\r\n", log_time(false), E.fm80, E.dumpload, E.fm80,
                                 E.link.mqtt_count, E.link.mqtt_error, E.link.iammeter_count, E.link.iammeter_error);
                         fprintf(stderr, "\r\n%s !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels M %d,%d I %d,%d\r\n", log_time(false), E.fm80, E.dumpload, E.fm80,
