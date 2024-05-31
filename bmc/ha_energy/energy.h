@@ -80,7 +80,7 @@ extern "C" {
 #define PV_IGAIN            0.12f
 #define PV_IMAX             1400.0f
 #define PV_BIAS             288.0f
-#define PV_BIAS_LOW         69.0f
+#define PV_BIAS_LOW         222.0f
 #define PV_BIAS_FLOAT       399.0f
 #define PV_BIAS_SLEEP       369.0f
 #define PV_BIAS_RATE        320.0f
