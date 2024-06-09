@@ -30,7 +30,7 @@ extern "C" {
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.53"
+#define LOG_VERSION     "V0.54"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -47,6 +47,7 @@ extern "C" {
 #define QOS             1
 #define TIMEOUT         10000L
 #define SPACING_USEC    500 * 1000
+#define USEC_SEC        1000000L
 
 #define DAQ_STR 32
 #define DAQ_STR_M DAQ_STR-1
@@ -62,10 +63,12 @@ extern "C" {
 #define UNIT_TEST       2
 #define NORM_MODE       0
 #define PID_MODE        1
+#define MAX_ERROR       5
+#define IAM_DELAY       120
 
 #define CMD_SEC         10
 
-#define BAT_CRITICAL        500.0f
+#define BAT_CRITICAL        1000.0f
 #define MIN_BAT_KW_GTI_HI   5100.0f
 #define MIN_BAT_KW_GTI_LO   4650.0f
 
@@ -96,150 +99,152 @@ extern "C" {
 
 #define LOG_TO_FILE         "/store/logs/energy.log"
 
-    //#define IM_DEBUG                      // WEM3080T LOGGING
-    //#define B_ADJ_DEBUG                   // debug printing
-    //#define FAKE_VPV                      // NO AC CHARGER for DUMPLOAD, batteries are cross-connected to a parallel bank
+	//#define IM_DEBUG                      // WEM3080T LOGGING
+	//#define B_ADJ_DEBUG                   // debug printing
+	//#define FAKE_VPV                      // NO AC CHARGER for DUMPLOAD, batteries are cross-connected to a parallel bank
+	//#define PSW_DEBUG
+	//#define DEBUG_SHUTDOWN
 
-    //#define AUTO_CHARGE                   // turn on dumload charger during restarts
+	//#define AUTO_CHARGE                   // turn on dumpload charger during restarts
 
 #define IM_DELAY            1   // tens of second updates    
 #define IM_DISPLAY          1
 #define GTI_DELAY           1
 
-    /*
-     * sane limits for system data elements
-     */
+	/*
+	 * sane limits for system data elements
+	 */
 #define PWA_SANE            1700.0f
 #define PAMPS_SANE          16.0f
 #define PVOLTS_SANE         149.0f
 #define BAMPS_SANE          70.0f
 
-    /*
-        Three Phase WiFi Energy Meter (WEM3080T)
-    name	Unit	Description
-    wem3080t_voltage_a	V	A phase voltage
-    wem3080t_current_a	A	A phase current
-    wem3080t_power_a	W	A phase active power
-    wem3080t_importenergy_a	kWh	A phase import energy
-    wem3080t_exportgrid_a	kWh	A phase export energy
-    wem3080t_frequency_a	kWh	A phase frequency
-    wem3080t_pf_a	kWh	A phase power factor
-    wem3080t_voltage_b	V	B phase voltage
-    wem3080t_current_b	A	B phase current
-    wem3080t_power_b	W	B phase active power
-    wem3080t_importenergy_b	kWh	B phase import energy
-    wem3080t_exportgrid_b	kWh	B phase export energy
-    wem3080t_frequency_b	kWh	B phase frequency
-    wem3080t_pf_b	kWh	B phase power factor
-    wem3080t_voltage_c	V	C phase voltage
-    wem3080t_current_c	A	C phase current
-    wem3080t_power_c	W	C phase active power
-    wem3080t_importenergy_c	kWh	C phase import energy
-    wem3080t_exportgrid_c	kWh	C phase export energy
-    wem3080t_frequency_c	kWh	C phase frequency
-    wem3080t_pf_c	kWh	C phase power factor
-     */
+	/*
+	    Three Phase WiFi Energy Meter (WEM3080T)
+	name	Unit	Description
+	wem3080t_voltage_a	V	A phase voltage
+	wem3080t_current_a	A	A phase current
+	wem3080t_power_a	W	A phase active power
+	wem3080t_importenergy_a	kWh	A phase import energy
+	wem3080t_exportgrid_a	kWh	A phase export energy
+	wem3080t_frequency_a	kWh	A phase frequency
+	wem3080t_pf_a	kWh	A phase power factor
+	wem3080t_voltage_b	V	B phase voltage
+	wem3080t_current_b	A	B phase current
+	wem3080t_power_b	W	B phase active power
+	wem3080t_importenergy_b	kWh	B phase import energy
+	wem3080t_exportgrid_b	kWh	B phase export energy
+	wem3080t_frequency_b	kWh	B phase frequency
+	wem3080t_pf_b	kWh	B phase power factor
+	wem3080t_voltage_c	V	C phase voltage
+	wem3080t_current_c	A	C phase current
+	wem3080t_power_c	W	C phase active power
+	wem3080t_importenergy_c	kWh	C phase import energy
+	wem3080t_exportgrid_c	kWh	C phase export energy
+	wem3080t_frequency_c	kWh	C phase frequency
+	wem3080t_pf_c	kWh	C phase power factor
+	 */
 
-    enum energy_state {
-        E_INIT,
-        E_RUN,
-        E_WAIT,
-        E_IDLE,
-        E_STOP,
-        E_LAST,
-    };
+	enum energy_state {
+		E_INIT,
+		E_RUN,
+		E_WAIT,
+		E_IDLE,
+		E_STOP,
+		E_LAST,
+	};
 
-    enum running_state {
-        R_INIT,
-        R_FLOAT,
-        R_SLEEP,
-        R_RUN,
-        R_IDLE,
-        R_LAST,
-    };
+	enum running_state {
+		R_INIT,
+		R_FLOAT,
+		R_SLEEP,
+		R_RUN,
+		R_IDLE,
+		R_LAST,
+	};
 
-    enum iammeter_phase {
-        PHASE_A,
-        PHASE_B,
-        PHASE_C,
-        PHASE_LAST,
-    };
+	enum iammeter_phase {
+		PHASE_A,
+		PHASE_B,
+		PHASE_C,
+		PHASE_LAST,
+	};
 
-    enum iammeter_id {
-        IA_VOLTAGE,
-        IA_CURRENT,
-        IA_POWER,
-        IA_IMPORT,
-        IA_EXPORT,
-        IA_FREQ,
-        IA_PF,
-        IA_LAST,
-    };
+	enum iammeter_id {
+		IA_VOLTAGE,
+		IA_CURRENT,
+		IA_POWER,
+		IA_IMPORT,
+		IA_EXPORT,
+		IA_FREQ,
+		IA_PF,
+		IA_LAST,
+	};
 
-    enum mqtt_vars {
-        V_FCCM,
-        V_FBEKW,
-        V_FRUNT,
-        V_FBAMPS,
-        V_FBV,
-        V_FLO,
-        V_FSO,
-        V_FACE,
-        V_BEN,
-        V_PWA,
-        V_PAMPS,
-        V_PVOLTS,
-        V_FLAST,
-        V_HDCSW,
-        V_HACSW,
-        V_HSHUT,
-        V_HMODE,
-        V_HCON0,
-        V_HCON1,
-        V_HCON2,
-        V_HCON3,
-        V_HCON4,
-        V_HCON5,
-        V_HCON6,
-        V_HCON7,
-        // add other data ranges here
-        V_DVPV,
-        V_DPPV,
-        V_DPBAT,
-        V_DVBAT,
-        V_DCMPPT,
-        V_DPMPPT,
-        V_DGTI,
-        V_DLAST,
-    };
+	enum mqtt_vars {
+		V_FCCM,
+		V_FBEKW,
+		V_FRUNT,
+		V_FBAMPS,
+		V_FBV,
+		V_FLO,
+		V_FSO,
+		V_FACE,
+		V_BEN,
+		V_PWA,
+		V_PAMPS,
+		V_PVOLTS,
+		V_FLAST,
+		V_HDCSW,
+		V_HACSW,
+		V_HSHUT,
+		V_HMODE,
+		V_HCON0,
+		V_HCON1,
+		V_HCON2,
+		V_HCON3,
+		V_HCON4,
+		V_HCON5,
+		V_HCON6,
+		V_HCON7,
+		// add other data ranges here
+		V_DVPV,
+		V_DPPV,
+		V_DPBAT,
+		V_DVBAT,
+		V_DCMPPT,
+		V_DPMPPT,
+		V_DGTI,
+		V_DLAST,
+	};
 
-    enum sane_vars {
-        S_FCCM,
-        S_FBEKW,
-        S_FRUNT,
-        S_FBAMPS,
-        S_FBV,
-        S_FLO,
-        S_FSO,
-        S_FACE,
-        S_BEN,
-        S_PWA,
-        S_PAMPS,
-        S_PVOLTS,
-        S_FLAST,
-        S_HDCSW,
-        S_HACSW,
-        S_HSHUT,
-        S_HMODE,
-        // add other data ranges here
-        S_DVPV,
-        S_DPPV,
-        S_DPBAT,
-        S_DVBAT,
-        S_DCMPPT,
-        S_DGTI,
-        S_DLAST,
-    };
+	enum sane_vars {
+		S_FCCM,
+		S_FBEKW,
+		S_FRUNT,
+		S_FBAMPS,
+		S_FBV,
+		S_FLO,
+		S_FSO,
+		S_FACE,
+		S_BEN,
+		S_PWA,
+		S_PAMPS,
+		S_PVOLTS,
+		S_FLAST,
+		S_HDCSW,
+		S_HACSW,
+		S_HSHUT,
+		S_HMODE,
+		// add other data ranges here
+		S_DVPV,
+		S_DPPV,
+		S_DPBAT,
+		S_DVBAT,
+		S_DCMPPT,
+		S_DGTI,
+		S_DLAST,
+	};
 
 #define MAX_IM_VAR  IA_LAST*PHASE_LAST
 
@@ -247,59 +252,61 @@ extern "C" {
 #define L2_P    L1_P+IA_LAST
 #define L3_P    L2_P+IA_LAST
 
-    struct link_type {
-        volatile uint32_t iammeter_error, iammeter_count;
-        volatile uint32_t mqtt_error, mqtt_count;
-    };
-    struct mode_type {
-        volatile double error, target, total_system, gti_dumpload, pv_bias, dl_mqtt_max;
-        volatile bool mode, in_pid_control, con0, con1, con2, con3, con4, con5, con6, con7, no_float, data_error;
-        volatile uint32_t mode_tmr;
-        volatile struct SPid pid;
-        volatile enum energy_state E;
-        volatile enum running_state R;
-    };
+	struct link_type {
+		volatile uint32_t iammeter_error, iammeter_count;
+		volatile uint32_t mqtt_error, mqtt_count;
+		volatile uint32_t shutdown;
+	};
 
-    struct energy_type {
-        volatile double print_vars[MAX_IM_VAR];
-        volatile double im_vars[IA_LAST][PHASE_LAST];
-        volatile double mvar[V_DLAST + 1];
-        volatile bool once_gti, once_ac, iammeter, fm80, dumpload, once_gti_zero;
-        volatile double gti_low_adj, ac_low_adj;
-        volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode, startup, ac_mismatch, dc_mismatch, mode_mismatch;
-        volatile uint32_t speed_go, im_delay, im_display, gti_delay;
-        volatile int32_t rc, sane;
-        volatile uint32_t ten_sec_clock;
-        pthread_mutex_t ha_lock;
-        struct mode_type mode;
-        struct link_type link;
-        MQTTClient client_p, client_sd;
-    };
+	struct mode_type {
+		volatile double error, target, total_system, gti_dumpload, pv_bias, dl_mqtt_max;
+		volatile bool mode, in_pid_control, con0, con1, con2, con3, con4, con5, con6, con7, no_float, data_error;
+		volatile uint32_t mode_tmr;
+		volatile struct SPid pid;
+		volatile enum energy_state E;
+		volatile enum running_state R;
+	};
 
-    extern struct energy_type E;
-    extern struct ha_flag_type ha_flag_vars_ss;
-    extern FILE* fout;
+	struct energy_type {
+		volatile double print_vars[MAX_IM_VAR];
+		volatile double im_vars[IA_LAST][PHASE_LAST];
+		volatile double mvar[V_DLAST + 1];
+		volatile bool once_gti, once_ac, iammeter, fm80, dumpload, once_gti_zero;
+		volatile double gti_low_adj, ac_low_adj;
+		volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode, startup, ac_mismatch, dc_mismatch, mode_mismatch;
+		volatile uint32_t speed_go, im_delay, im_display, gti_delay;
+		volatile int32_t rc, sane;
+		volatile uint32_t ten_sec_clock;
+		pthread_mutex_t ha_lock;
+		struct mode_type mode;
+		struct link_type link;
+		MQTTClient client_p, client_sd;
+	};
 
-    void timer_callback(int32_t);
-    void connlost(void *, char *);
+	extern struct energy_type E;
+	extern struct ha_flag_type ha_flag_vars_ss;
+	extern FILE* fout;
 
-    void ramp_up_gti(MQTTClient, bool);
-    void ramp_up_ac(MQTTClient, bool);
-    void ramp_down_gti(MQTTClient, bool);
-    void ramp_down_ac(MQTTClient, bool);
-    void ha_ac_off(void);
-    void ha_ac_on(void);
-    void ha_dc_off(void);
-    void ha_dc_on(void);
+	void timer_callback(int32_t);
+	void connlost(void *, char *);
 
-    size_t iammeter_write_callback(char *, size_t, size_t, void *);
-    void iammeter_read(void);
-    void print_im_vars(void);
-    void print_mvar_vars(void);
+	void ramp_up_gti(MQTTClient, bool);
+	void ramp_up_ac(MQTTClient, bool);
+	void ramp_down_gti(MQTTClient, bool);
+	void ramp_down_ac(MQTTClient, bool);
+	void ha_ac_off(void);
+	void ha_ac_on(void);
+	void ha_dc_off(void);
+	void ha_dc_on(void);
 
-    bool sanity_check(void);
-    char * log_time(bool);
-    bool sync_ha(void);
+	size_t iammeter_write_callback(char *, size_t, size_t, void *);
+	void iammeter_read(void);
+	void print_im_vars(void);
+	void print_mvar_vars(void);
+
+	bool sanity_check(void);
+	char * log_time(bool);
+	bool sync_ha(void);
 
 #ifdef __cplusplus
 }
