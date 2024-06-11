@@ -553,6 +553,7 @@ int main(int argc, char *argv[])
 				len = strlen(buffer);
 				buffer[len - 1] = 0; // munge out the return character
 				fprintf(fout, "%s ", buffer);
+				fflush(fout);
 				E.fm80 = false;
 				E.dumpload = false;
 				E.iammeter = false;

@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   bmc.h
  * Author: root
  *
@@ -25,7 +25,7 @@ extern "C" {
 #include <errno.h>
 #include <cjson/cJSON.h>
 #include <curl/curl.h>
-#include <pthread.h> 
+#include <pthread.h>
 #include "MQTTClient.h"
 #include "pid.h"
 
@@ -91,6 +91,7 @@ extern "C" {
 #define PV_DL_MPTT_IDLE     57.0f
 #define PV_DL_BIAS_RATE     75.0f
 #define PWA_SLEEP           300.0f
+#define DL_AC_DC_EFF        1.24f
 
 #define BAL_MIN_ENERGY_AC   -200.0f
 #define BAL_MAX_ENERGY_AC   200.0f
@@ -107,7 +108,7 @@ extern "C" {
 
 	//#define AUTO_CHARGE                   // turn on dumpload charger during restarts
 
-#define IM_DELAY            1   // tens of second updates    
+#define IM_DELAY            1   // tens of second updates
 #define IM_DISPLAY          1
 #define GTI_DELAY           1
 
@@ -259,7 +260,7 @@ extern "C" {
 	};
 
 	struct mode_type {
-		volatile double error, target, total_system, gti_dumpload, pv_bias, dl_mqtt_max, off_grid;
+		volatile double error, target, total_system, gti_dumpload, pv_bias, dl_mqtt_max, off_grid, sequence;
 		volatile bool mode, in_pid_control, con0, con1, con2, con3, con4, con5, con6, con7, no_float, data_error;
 		volatile uint32_t mode_tmr;
 		volatile struct SPid pid;

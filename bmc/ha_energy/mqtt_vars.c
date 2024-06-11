@@ -15,12 +15,19 @@ void mqtt_ha_pid(MQTTClient client_p, const char * topic_p)
 	ha_flag_vars_ss.deliveredtoken = 0;
 
 	E.link.mqtt_count++;
+	E.mode.sequence++;
 	json = cJSON_CreateObject();
+	cJSON_AddStringToObject(json, "name", CLIENTID1);
+	cJSON_AddNumberToObject(json, "sequence", E.mode.sequence);
+	cJSON_AddNumberToObject(json, "mqtt_count", (double) E.link.mqtt_count);
+	cJSON_AddNumberToObject(json, "http_count", (double) E.link.iammeter_count);
 	cJSON_AddNumberToObject(json, "piderror", E.mode.error);
 	cJSON_AddNumberToObject(json, "totalsystem", E.mode.total_system);
 	cJSON_AddNumberToObject(json, "gtinet", E.mode.gti_dumpload);
+	cJSON_AddNumberToObject(json, "energy_state", (double) E.mode.E);
+	cJSON_AddNumberToObject(json, "run_state", (double) E.mode.R);
 	// correct for power sensed by GTI metering
-	E.mode.off_grid = (E.mvar[V_FLO] - E.mvar[V_DPPV]);
+	E.mode.off_grid = (E.mvar[V_FLO] - (E.mvar[V_DPPV] * DL_AC_DC_EFF));
 	if (E.mode.off_grid < 0.0f) { // only see power removed from grid usage
 		E.mode.off_grid = 0.0f;
 	}
