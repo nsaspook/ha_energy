@@ -38,6 +38,7 @@
  * V0.52 tune GTI inverter levels for better conversion efficiency
  * V0.53 sync to HA back-end switch status
  * V0.54 data source shutdown functions
+ * V0.55 off-grid inverter power tracking for HA
  */
 
 /*
@@ -341,8 +342,8 @@ int main(int argc, char *argv[])
 						E.dumpload = true;
 						E.iammeter = true;
 					}
-//					printf("\r\n%s Solar Energy AC power controller shutdown\r\n", log_time(false));
-//					fprintf(fout, "\r\n%s Solar Energy AC power controller shutdown\r\n", log_time(false));
+					//					printf("\r\n%s Solar Energy AC power controller shutdown\r\n", log_time(false));
+					//					fprintf(fout, "\r\n%s Solar Energy AC power controller shutdown\r\n", log_time(false));
 				}
 				E.link.shutdown = 0;
 				fprintf(fout, "%s RESTART Solar Energy Control\r\n", log_time(false));
@@ -744,6 +745,7 @@ char * log_time(bool log)
 	uint32_t len = 0;
 	time_t rawtime_log;
 
+	tzset();
 	time(&rawtime_log);
 	sprintf(time_log, "%s", ctime(&rawtime_log));
 	len = strlen(time_log);
