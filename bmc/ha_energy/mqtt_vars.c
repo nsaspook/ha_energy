@@ -3,6 +3,9 @@
 #include "energy.h"
 #include "bsoc.h"
 
+static const char *const FW_Date = __DATE__;
+static const char *const FW_Time = __TIME__;
+
 /*
  * send PID power control variables to Home Assistant
  */
@@ -32,6 +35,8 @@ void mqtt_ha_pid(MQTTClient client_p, const char * topic_p)
 		E.mode.off_grid = 0.0f;
 	}
 	cJSON_AddNumberToObject(json, "off_grid", E.mode.off_grid);
+	cJSON_AddStringToObject(json, "build_date", FW_Date);
+	cJSON_AddStringToObject(json, "build_time", FW_Time);
 	// convert the cJSON object to a JSON string
 	char *json_str = cJSON_Print(json);
 
