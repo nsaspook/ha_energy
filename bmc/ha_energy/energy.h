@@ -26,11 +26,13 @@ extern "C" {
 #include <cjson/cJSON.h>
 #include <curl/curl.h>
 #include <pthread.h>
+#include <sys/stat.h>
+#include <syslog.h>
 #include "MQTTClient.h"
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.55"
+#define LOG_VERSION     "V0.56"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -117,7 +119,7 @@ extern "C" {
 	 */
 #define PWA_SANE            1700.0f
 #define PAMPS_SANE          16.0f
-#define PVOLTS_SANE         149.0f
+#define PVOLTS_SANE         150.0f
 #define BAMPS_SANE          70.0f
 
 	/*

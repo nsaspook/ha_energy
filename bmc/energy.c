@@ -39,6 +39,7 @@
  * V0.53 sync to HA back-end switch status
  * V0.54 data source shutdown functions
  * V0.55 off-grid inverter power tracking for HA
+ * V0.56 run as Daemon in background
  */
 
 /*
@@ -124,6 +125,57 @@ struct energy_type E = {
 static uint8_t iam_delay = 0;
 static bool solar_shutdown(void);
 
+static void skeleton_daemon()
+{
+    pid_t pid;
+    
+    /* Fork off the parent process */
+    pid = fork();
+    
+    /* An error occurred */
+    if (pid < 0)
+        exit(EXIT_FAILURE);
+    
+     /* Success: Let the parent terminate */
+    if (pid > 0)
+        exit(EXIT_SUCCESS);
+    
+    /* On success: The child process becomes session leader */
+    if (setsid() < 0)
+        exit(EXIT_FAILURE);
+    
+    /* Catch, ignore and handle signals */
+    /*TODO: Implement a working signal handler */
+    signal(SIGCHLD, SIG_IGN);
+    signal(SIGHUP, SIG_IGN);
+    
+    /* Fork off for the second time*/
+    pid = fork();
+    
+    /* An error occurred */
+    if (pid < 0)
+        exit(EXIT_FAILURE);
+    
+    /* Success: Let the parent terminate */
+    if (pid > 0)
+        exit(EXIT_SUCCESS);
+    
+    /* Set new file permissions */
+    umask(0);
+    
+    /* Change the working directory to the root directory */
+    /* or another appropriated directory */
+    chdir("/");
+    
+    /* Close all open file descriptors */
+    int x;
+    for (x = sysconf(_SC_OPEN_MAX); x>=0; x--)
+    {
+        close (x);
+    }
+    
+}
+
 bool sanity_check()
 {
 	if (E.mvar[V_PWA] > PWA_SANE) {
@@ -180,7 +232,7 @@ void connlost(void *context, char *cause)
 }
 
 /*
- * Use MQTT to send/receive DAQ updates to a Comedi hardware device
+ * Use MQTT/HTTP to send/receive updates to a Solar hardware device
  */
 int main(int argc, char *argv[])
 {
@@ -197,6 +249,8 @@ int main(int argc, char *argv[])
 	MQTTClient_message pubmsg = MQTTClient_message_initializer;
 	MQTTClient_deliveryToken token;
 
+	skeleton_daemon();
+	
 	while (true) {
 		switch (E.mode.E) {
 		case E_INIT:
@@ -293,8 +347,6 @@ int main(int argc, char *argv[])
 				ha_flag_vars_ss.runner = false;
 				E.mode.E = E_RUN;
 			}
-			//			printf("\r\n%s Solar Energy AC power controller wait\r\n", log_time(false));
-			//			fprintf(fout, "\r\n%s Solar Energy AC power controller wait\r\n", log_time(false));
 
 			usleep(100);
 			/*
@@ -302,13 +354,9 @@ int main(int argc, char *argv[])
 			 */
 			bsoc_data_collect();
 			if (!sanity_check()) {
-				printf("\r\n%s Sanity Check error %d %s \r\n", log_time(false), E.sane, mqtt_name[E.sane]);
 				fprintf(fout, "\r\n%s Sanity Check error %d %s \r\n", log_time(false), E.sane, mqtt_name[E.sane]);
 				fflush(fout);
 			}
-
-			//			printf("\r\n%s Solar Energy AC power controller sane\r\n", log_time(false));
-			//			fprintf(fout, "\r\n%s Solar Energy AC power controller sane\r\n", log_time(false));
 
 			if (solar_shutdown()) {
 				if (!E.startup) {
@@ -342,8 +390,6 @@ int main(int argc, char *argv[])
 						E.dumpload = true;
 						E.iammeter = true;
 					}
-					//					printf("\r\n%s Solar Energy AC power controller shutdown\r\n", log_time(false));
-					//					fprintf(fout, "\r\n%s Solar Energy AC power controller shutdown\r\n", log_time(false));
 				}
 				E.link.shutdown = 0;
 				fprintf(fout, "%s RESTART Solar Energy Control\r\n", log_time(false));
@@ -391,15 +437,19 @@ int main(int argc, char *argv[])
 					E.mode.no_float = false;
 				}
 				if (!E.gti_sw_status) {
-					mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
-					E.gti_sw_status = true;
-					fprintf(fout, "%s R_FLOAT DC switch true \r\n", log_time(false));
+					if (gti_test() > MIN_BAT_KW_GTI_HI) {
+						mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
+						E.gti_sw_status = true;
+						fprintf(fout, "%s R_FLOAT DC switch true \r\n", log_time(false));
+					}
 				}
 				usleep(100000); // wait
 				if (!E.ac_sw_status) {
-					mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
-					E.ac_sw_status = true;
-					fprintf(fout, "%s R_FLOAT AC switch true \r\n", log_time(false));
+					if (ac_test() > MIN_BAT_KW_AC_HI) {
+						mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
+						E.ac_sw_status = true;
+						fprintf(fout, "%s R_FLOAT AC switch true \r\n", log_time(false));
+					}
 				}
 				E.mode.pv_bias = PV_BIAS;
 				fm80_float(true);
