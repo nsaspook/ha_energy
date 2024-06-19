@@ -78,7 +78,7 @@ void iammeter_read(void) {
         res = curl_easy_perform(curl);
         /* Check for errors */
         if (res != CURLE_OK) {
-            fprintf(stderr, "curl_easy_perform() failed: %s\n",
+            fprintf(fout, "curl_easy_perform() failed: %s\n",
                     curl_easy_strerror(res));
             E.iammeter = false;
             E.link.iammeter_error++;

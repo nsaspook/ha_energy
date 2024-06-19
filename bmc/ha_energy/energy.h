@@ -56,6 +56,7 @@ extern "C" {
 
 #define SBUF_SIZ        16  // short buffer string size
 #define RBUF_SIZ        82
+#define SYSLOG_SIZ	512
 
 #define MQTT_TIMEOUT    400
 #define SW_QOS          1

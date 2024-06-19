@@ -127,56 +127,55 @@ static bool solar_shutdown(void);
 
 static void skeleton_daemon()
 {
-    pid_t pid;
-    
-    /* Fork off the parent process */
-    pid = fork();
-    
-    /* An error occurred */
-    if (pid < 0)
-        exit(EXIT_FAILURE);
-    
-     /* Success: Let the parent terminate */
-    if (pid > 0)
-        exit(EXIT_SUCCESS);
-    
-    /* On success: The child process becomes session leader */
-    if (setsid() < 0)
-        exit(EXIT_FAILURE);
-    
-    /* Catch, ignore and handle signals */
-    /*TODO: Implement a working signal handler */
-    signal(SIGCHLD, SIG_IGN);
-    signal(SIGHUP, SIG_IGN);
-    
-    /* Fork off for the second time*/
-    pid = fork();
-    
-    /* An error occurred */
-    if (pid < 0)
-        exit(EXIT_FAILURE);
-    
-    /* Success: Let the parent terminate */
-    if (pid > 0)
-        exit(EXIT_SUCCESS);
-    
-    /* Set new file permissions */
-    umask(0);
-    
-    /* Change the working directory to the root directory */
-    /* or another appropriated directory */
-    chdir("/");
-    
-    /* Close all open file descriptors */
-    int x;
-    for (x = sysconf(_SC_OPEN_MAX); x>=0; x--)
-    {
-        close (x);
-    }
-    
+	pid_t pid;
+
+	/* Fork off the parent process */
+	pid = fork();
+
+	/* An error occurred */
+	if (pid < 0)
+		exit(EXIT_FAILURE);
+
+	/* Success: Let the parent terminate */
+	if (pid > 0)
+		exit(EXIT_SUCCESS);
+
+	/* On success: The child process becomes session leader */
+	if (setsid() < 0)
+		exit(EXIT_FAILURE);
+
+	/* Catch, ignore and handle signals */
+	/*TODO: Implement a working signal handler */
+	//    signal(SIGCHLD, SIG_IGN);
+	//    signal(SIGHUP, SIG_IGN);
+
+	/* Fork off for the second time*/
+	pid = fork();
+
+	/* An error occurred */
+	if (pid < 0)
+		exit(EXIT_FAILURE);
+
+	/* Success: Let the parent terminate */
+	if (pid > 0)
+		exit(EXIT_SUCCESS);
+
+	/* Set new file permissions */
+	umask(0);
+
+	/* Change the working directory to the root directory */
+	/* or another appropriated directory */
+	chdir("/");
+
+	/* Close all open file descriptors */
+	int x;
+	for (x = sysconf(_SC_OPEN_MAX); x >= 0; x--) {
+		close(x);
+	}
+
 }
 
-bool sanity_check()
+bool sanity_check(void)
 {
 	if (E.mvar[V_PWA] > PWA_SANE) {
 		E.sane = S_PWA;
@@ -250,7 +249,7 @@ int main(int argc, char *argv[])
 	MQTTClient_deliveryToken token;
 
 	skeleton_daemon();
-	
+
 	while (true) {
 		switch (E.mode.E) {
 		case E_INIT:
@@ -578,7 +577,7 @@ int main(int argc, char *argv[])
 				iammeter_read();
 			}
 			if (E.im_display++ >= IM_DISPLAY) {
-				char buffer[RBUF_SIZ];
+				char buffer[SYSLOG_SIZ];
 				uint32_t len;
 
 				E.im_display = 0;
@@ -592,14 +591,15 @@ int main(int argc, char *argv[])
 					E.link.shutdown++;
 					fprintf(fout, "\r\n%s !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels M %d,%d I %d,%d\r\n", log_time(false), E.fm80, E.dumpload, E.fm80,
 						E.link.mqtt_count, E.link.mqtt_error, E.link.iammeter_count, E.link.iammeter_error);
-					fprintf(stderr, "\r\n%s !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels M %d,%d I %d,%d\r\n", log_time(false), E.fm80, E.dumpload, E.fm80,
+					snprintf(buffer, SYSLOG_SIZ - 1, "\r\n%s !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels M %d,%d I %d,%d\r\n", log_time(false), E.fm80, E.dumpload, E.fm80,
 						E.link.mqtt_count, E.link.mqtt_error, E.link.iammeter_count, E.link.iammeter_error);
+					syslog(LOG_NOTICE, buffer);
 					E.mode.data_error = true;
 				} else {
 					E.mode.data_error = false;
 					E.link.shutdown = 0;
 				}
-				sprintf(buffer, "%s", ctime(&rawtime));
+				snprintf(buffer, RBUF_SIZ - 1, "%s", ctime(&rawtime));
 				len = strlen(buffer);
 				buffer[len - 1] = 0; // munge out the return character
 				fprintf(fout, "%s ", buffer);

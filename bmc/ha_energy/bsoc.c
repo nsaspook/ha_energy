@@ -309,7 +309,7 @@ double drive0_filter(double raw) {
 
 double drive1_filter(double raw) {
     static double accum = 0.0f;
-    static double coef = COEF;
+    static double coef = COEFF;
     accum = accum - accum / coef + raw;
     return accum / coef;
 }

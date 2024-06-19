@@ -31,6 +31,7 @@ void mqtt_ha_pid(MQTTClient client_p, const char * topic_p)
 	cJSON_AddNumberToObject(json, "run_state", (double) E.mode.R);
 	// correct for power sensed by GTI metering
 	E.mode.off_grid = (E.mvar[V_FLO] - (E.mvar[V_DPPV] * DL_AC_DC_EFF));
+	E.mode.off_grid = drive1_filter(E.mode.off_grid);
 	if (E.mode.off_grid < 0.0f) { // only see power removed from grid usage
 		E.mode.off_grid = 0.0f;
 	}
