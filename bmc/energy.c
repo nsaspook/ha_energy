@@ -7,6 +7,8 @@
  * This file may be freely modified, distributed, and combined with
  * other software, as long as proper attribution is given in the
  * source code.
+ * Daemon example code:
+ * https://github.com/pasce/daemon-skeleton-linux-c
  */
 #define _DEFAULT_SOURCE
 #include "ha_energy/energy.h"
@@ -589,9 +591,9 @@ int main(int argc, char *argv[])
 						E.link.mqtt_error++;
 					}
 					E.link.shutdown++;
-					fprintf(fout, "\r\n%s !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels M %d,%d I %d,%d\r\n", log_time(false), E.fm80, E.dumpload, E.fm80,
+					fprintf(fout, "\r\n%s !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels M %u,%u I %u,%u\r\n", log_time(false), E.fm80, E.dumpload, E.fm80,
 						E.link.mqtt_count, E.link.mqtt_error, E.link.iammeter_count, E.link.iammeter_error);
-					snprintf(buffer, SYSLOG_SIZ - 1, "\r\n%s !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels M %d,%d I %d,%d\r\n", log_time(false), E.fm80, E.dumpload, E.fm80,
+					snprintf(buffer, SYSLOG_SIZ - 1, "\r\n%s !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels M %u,%u I %u,%u\r\n", log_time(false), E.fm80, E.dumpload, E.fm80,
 						E.link.mqtt_count, E.link.mqtt_error, E.link.iammeter_count, E.link.iammeter_error);
 					syslog(LOG_NOTICE, buffer);
 					E.mode.data_error = true;
@@ -811,16 +813,20 @@ bool sync_ha(void)
 {
 	bool sync = false;
 	if (E.gti_sw_status != (bool) ((int32_t) E.mvar[V_HDCSW])) {
-		mqtt_ha_switch(E.client_p, TOPIC_PDCC, (bool) ((int32_t) E.mvar[V_HDCSW]));
+		mqtt_ha_switch(E.client_p, TOPIC_PDCC, !E.ac_sw_status);
 		E.dc_mismatch = true;
 		sync = true;
 		fprintf(fout, "DC_MM ");
+	} else {
+		E.dc_mismatch = false;
 	}
 	if (E.ac_sw_status != (bool) ((int32_t) E.mvar[V_HACSW])) {
-		mqtt_ha_switch(E.client_p, TOPIC_PACC, (bool) ((int32_t) E.mvar[V_HACSW]));
+		mqtt_ha_switch(E.client_p, TOPIC_PACC, !E.ac_sw_status);
 		E.ac_mismatch = true;
 		fprintf(fout, "AC_MM ");
 		sync = true;
+	} else {
+		E.ac_mismatch = false;
 	}
 	return sync;
 }

@@ -1,3 +1,3 @@
-mqtt_ha_pid global:[E,fout,ha_flag_vars_ss] call:[MQTTClient_publishMessage,cJSON_AddNumberToObject,cJSON_CreateObject,cJSON_Delete,cJSON_Print,cJSON_free,fprintf,strlen,usleep] noreturn:[cJSON_Delete]
-mqtt_ha_switch global:[fout,ha_flag_vars_ss] call:[MQTTClient_publishMessage,cJSON_AddStringToObject,cJSON_CreateObject,cJSON_Delete,cJSON_Print,cJSON_free,fprintf,log_time,strlen,usleep] noreturn:[cJSON_AddStringToObject,usleep]
-mqtt_gti_power global:[fout,ha_flag_vars_ss] call:[MQTTClient_publishMessage,fprintf,strlen,usleep]
+mqtt_ha_pid global:[E,FW_Date,FW_Time,fout,ha_flag_vars_ss] call:[MQTTClient_publishMessage,cJSON_AddNumberToObject,cJSON_AddStringToObject,cJSON_CreateObject,cJSON_Delete,cJSON_Print,cJSON_free,drive1_filter,fprintf,strlen,usleep] noreturn:[cJSON_Delete]
+mqtt_ha_switch global:[E,fout,ha_flag_vars_ss] call:[MQTTClient_publishMessage,cJSON_AddStringToObject,cJSON_CreateObject,cJSON_Delete,cJSON_Print,cJSON_free,fprintf,log_time,strlen,usleep] noreturn:[cJSON_AddStringToObject,usleep]
+mqtt_gti_power global:[E,fout,ha_flag_vars_ss] call:[MQTTClient_publishMessage,fprintf,strlen,usleep]

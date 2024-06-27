@@ -40,9 +40,6 @@
         <error id="unusedFunction" severity="style" msg="The function &amp;#039;drive0_filter&amp;#039; is never used." verbose="The function &amp;#039;drive0_filter&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/bsoc.c" line="303"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;drive1_filter&amp;#039; is never used." verbose="The function &amp;#039;drive1_filter&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
-            <location file="ha_energy/bsoc.c" line="310"/>
-        </error>
         <error id="unreachableCode" severity="style" msg="Statements following &amp;#039;return&amp;#039; will never be executed." verbose="Statements following &amp;#039;return&amp;#039; will never be executed." cwe="561" file0="ha_energy/daq.c" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="67"/>
         </error>
@@ -97,16 +94,24 @@
         <error id="unusedVariable" severity="style" msg="Unused variable: sleep" verbose="Unused variable: sleep" cwe="563" file0="ha_energy/junk.c" sinceDate="M/d/yy">
             <location file="ha_energy/junk.c" line="32"/>
         </error>
-        <error id="shadowVariable" severity="style" msg="Local variable &amp;#039;i&amp;#039; shadows outer variable" verbose="Local variable &amp;#039;i&amp;#039; shadows outer variable" cwe="398" file0="ha_energy/mqtt_rec.c" sinceDate="M/d/yy">
-            <location file="ha_energy/mqtt_rec.c" line="84" info="Shadow variable"/>
-            <location file="ha_energy/mqtt_rec.c" line="44" info="Shadowed declaration"/>
+        <error id="duplicateConditionalAssign" severity="style" msg="The statement &amp;#039;if (E.gti_sw_status!=(bool)((int32_t)E.mvar[i])) E.gti_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039; is logically equivalent to &amp;#039;E.gti_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039;." verbose="The statement &amp;#039;if (E.gti_sw_status!=(bool)((int32_t)E.mvar[i])) E.gti_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039; is logically equivalent to &amp;#039;E.gti_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039;." cwe="398" file0="ha_energy/mqtt_rec.c" sinceDate="M/d/yy">
+            <location file="ha_energy/mqtt_rec.c" line="173" info="Condition &amp;#039;E.gti_sw_status!=(bool)((int32_t)E.mvar[i])&amp;#039; is redundant"/>
+            <location file="ha_energy/mqtt_rec.c" line="174" info="Assignment &amp;#039;E.gti_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039;"/>
+        </error>
+        <error id="duplicateConditionalAssign" severity="style" msg="The statement &amp;#039;if (E.ac_sw_status!=(bool)((int32_t)E.mvar[i])) E.ac_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039; is logically equivalent to &amp;#039;E.ac_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039;." verbose="The statement &amp;#039;if (E.ac_sw_status!=(bool)((int32_t)E.mvar[i])) E.ac_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039; is logically equivalent to &amp;#039;E.ac_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039;." cwe="398" file0="ha_energy/mqtt_rec.c" sinceDate="M/d/yy">
+            <location file="ha_energy/mqtt_rec.c" line="180" info="Condition &amp;#039;E.ac_sw_status!=(bool)((int32_t)E.mvar[i])&amp;#039; is redundant"/>
+            <location file="ha_energy/mqtt_rec.c" line="181" info="Assignment &amp;#039;E.ac_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039;"/>
         </error>
         <error id="shadowVariable" severity="style" msg="Local variable &amp;#039;i&amp;#039; shadows outer variable" verbose="Local variable &amp;#039;i&amp;#039; shadows outer variable" cwe="398" file0="ha_energy/mqtt_rec.c" sinceDate="M/d/yy">
-            <location file="ha_energy/mqtt_rec.c" line="98" info="Shadow variable"/>
-            <location file="ha_energy/mqtt_rec.c" line="44" info="Shadowed declaration"/>
+            <location file="ha_energy/mqtt_rec.c" line="85" info="Shadow variable"/>
+            <location file="ha_energy/mqtt_rec.c" line="43" info="Shadowed declaration"/>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &amp;#039;i&amp;#039; shadows outer variable" verbose="Local variable &amp;#039;i&amp;#039; shadows outer variable" cwe="398" file0="ha_energy/mqtt_rec.c" sinceDate="M/d/yy">
+            <location file="ha_energy/mqtt_rec.c" line="99" info="Shadow variable"/>
+            <location file="ha_energy/mqtt_rec.c" line="43" info="Shadowed declaration"/>
         </error>
         <error id="unusedFunction" severity="style" msg="The function &amp;#039;ha_dc_on&amp;#039; is never used." verbose="The function &amp;#039;ha_dc_on&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
-            <location file="energy.c" line="639"/>
+            <location file="energy.c" line="746"/>
         </error>
     </errors>
 </results>
