@@ -761,6 +761,13 @@ static bool solar_shutdown(void)
 		return ret;
 	} else {
 		ret = false;
+
+		/*
+		 * FIXME
+		 * 
+		 */
+
+//		return ret;
 	}
 
 	if (E.solar_shutdown) {
@@ -771,7 +778,7 @@ static bool solar_shutdown(void)
 
 	if ((E.mvar[V_FBEKW] < BAT_CRITICAL) && !E.startup) { // special case for low battery
 		ret = true;
-#ifdef DEBUG_SHUTDOWN
+#ifdef CRITIAL_SHUTDOWN_LOG
 		fprintf(fout, "%s Solar BATTERY CRITICAL shutdown comms check ret = %d \r\n", log_time(false), ret);
 		fflush(fout);
 #endif

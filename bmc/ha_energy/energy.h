@@ -71,7 +71,8 @@ extern "C" {
 
 #define CMD_SEC         10
 
-#define BAT_CRITICAL        1000.0f
+#define BAT_CRITICAL        200.0f
+#define CRITIAL_SHUTDOWN_LOG
 #define MIN_BAT_KW_GTI_HI   5100.0f
 #define MIN_BAT_KW_GTI_LO   4650.0f
 
