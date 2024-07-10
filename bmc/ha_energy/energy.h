@@ -32,7 +32,7 @@ extern "C" {
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.56"
+#define LOG_VERSION     "V0.57"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -103,6 +103,7 @@ extern "C" {
 #define BAL_MAX_ENERGY_GTI  200.0f
 
 #define LOG_TO_FILE         "/store/logs/energy.log"
+#define LOG_TO_FILE_ALT     "/tmp/energy.log"
 
 	//#define IM_DEBUG                      // WEM3080T LOGGING
 	//#define B_ADJ_DEBUG                   // debug printing

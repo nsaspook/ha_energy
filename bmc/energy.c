@@ -135,16 +135,20 @@ static void skeleton_daemon()
 	pid = fork();
 
 	/* An error occurred */
-	if (pid < 0)
+	if (pid < 0) {
+		printf("\r\n%sDAEMON failure  LOG Version %s : MQTT Version %s\r\n", log_time(false), LOG_VERSION, MQTT_VERSION);
 		exit(EXIT_FAILURE);
+	}
 
 	/* Success: Let the parent terminate */
-	if (pid > 0)
+	if (pid > 0) {
 		exit(EXIT_SUCCESS);
+	}
 
 	/* On success: The child process becomes session leader */
-	if (setsid() < 0)
+	if (setsid() < 0) {
 		exit(EXIT_FAILURE);
+	}
 
 	/* Catch, ignore and handle signals */
 	/*TODO: Implement a working signal handler */
@@ -155,12 +159,14 @@ static void skeleton_daemon()
 	pid = fork();
 
 	/* An error occurred */
-	if (pid < 0)
+	if (pid < 0) {
 		exit(EXIT_FAILURE);
+	}
 
 	/* Success: Let the parent terminate */
-	if (pid > 0)
+	if (pid > 0) {
 		exit(EXIT_SUCCESS);
+	}
 
 	/* Set new file permissions */
 	umask(0);
@@ -227,8 +233,9 @@ void connlost(void *context, char *cause)
 	} else {
 		id_num = ha_flag->ha_id;
 	}
-	printf("\nConnection lost\n");
-	printf("     cause: %s, %d\n", cause, id_num);
+	fprintf(fout, "\n%s Connection lost\n", log_time(false));
+	fprintf(fout, "%s     cause: %s, %d\n", log_time(false), cause, id_num);
+	fflush(fout);
 	exit(EXIT_FAILURE);
 }
 
@@ -250,25 +257,31 @@ int main(int argc, char *argv[])
 	MQTTClient_message pubmsg = MQTTClient_message_initializer;
 	MQTTClient_deliveryToken token;
 
+	printf("\r\n%s  LOG Version %s : MQTT Version %s\r\n", log_time(false), LOG_VERSION, MQTT_VERSION);
 	skeleton_daemon();
 
 	while (true) {
 		switch (E.mode.E) {
 		case E_INIT:
-			printf("\r\n LOG Version %s : MQTT Version %s\r\n", LOG_VERSION, MQTT_VERSION);
 
 #ifdef LOG_TO_FILE
 			fout = fopen(LOG_TO_FILE, "a");
 			if (fout == NULL) {
-				fout = stdout;
-				printf("\r\nUnable to open LOG file %s \r\n", LOG_TO_FILE);
+				fout = fopen(LOG_TO_FILE_ALT, "a");
+				if (fout == NULL) {
+					fout = stdout;
+					printf("\r\n%s Unable to open LOG file %s \r\n", log_time(false), LOG_TO_FILE_ALT);
+				}
 			}
 #else
 			fout = stdout;
 #endif
 			fprintf(fout, "\r\n%s LOG Version %s : MQTT Version %s\r\n", log_time(false), LOG_VERSION, MQTT_VERSION);
+			fflush(fout);
 
 			if (!bsoc_init()) {
+				fprintf(fout, "\r\n%s bsoc_init failure \r\n", log_time(false));
+				fflush(fout);
 				exit(EXIT_FAILURE);
 			}
 			/*
@@ -282,9 +295,12 @@ int main(int argc, char *argv[])
 			conn_opts_p.keepAliveInterval = 20;
 			conn_opts_p.cleansession = 1;
 
+			fprintf(fout, "%s Connect MQTT server %s, %s\n", log_time(false), ADDRESS, CLIENTID1);
+			fflush(fout);
 			MQTTClient_setCallbacks(E.client_p, &ha_flag_vars_ss, connlost, msgarrvd, delivered);
 			if ((E.rc = MQTTClient_connect(E.client_p, &conn_opts_p)) != MQTTCLIENT_SUCCESS) {
-				printf("%s Failed to connect, return code %d\n", log_time(false), E.rc);
+				fprintf(fout, "%s Failed to connect MQTT server, return code %d %s, %s\n", log_time(false), E.rc, ADDRESS, CLIENTID1);
+				fflush(fout);
 				pthread_mutex_destroy(&E.ha_lock);
 				exit(EXIT_FAILURE);
 			}
@@ -294,9 +310,12 @@ int main(int argc, char *argv[])
 			conn_opts_sd.keepAliveInterval = 20;
 			conn_opts_sd.cleansession = 1;
 
+			fprintf(fout, "%s Connect MQTT server %s, %s\n", log_time(false), ADDRESS, CLIENTID2);
+			fflush(fout);
 			MQTTClient_setCallbacks(E.client_sd, &ha_flag_vars_sd, connlost, msgarrvd, delivered);
 			if ((E.rc = MQTTClient_connect(E.client_sd, &conn_opts_sd)) != MQTTCLIENT_SUCCESS) {
-				printf("%s Failed to connect, return code %d\n", log_time(false), E.rc);
+				fprintf(fout, "%s Failed to connect MQTT server, return code %d %s, %s\n", log_time(false), E.rc, ADDRESS, CLIENTID2);
+				fflush(fout);
 				pthread_mutex_destroy(&E.ha_lock);
 				exit(EXIT_FAILURE);
 			}
@@ -332,11 +351,9 @@ int main(int argc, char *argv[])
 			 */
 			iammeter_read();
 
-			printf("\r\n%s Solar Energy AC power controller\r\n", log_time(false));
 			fprintf(fout, "\r\n%s Solar Energy AC power controller\r\n", log_time(false));
 
 #ifdef FAKE_VPV
-			printf("\r\n Faking dumpload PV voltage\r\n");
 			fprintf(fout, "\r\n Faking dumpload PV voltage\r\n");
 #endif
 			ha_flag_vars_ss.energy_mode = NORM_MODE;
@@ -362,7 +379,6 @@ int main(int argc, char *argv[])
 			if (solar_shutdown()) {
 				if (!E.startup) {
 					fprintf(fout, "%s SHUTDOWN Solar Energy Control ---> \r\n", log_time(false));
-					printf("%s SHUTDOWN Solar Energy Control ---> \r\n", log_time(false));
 				}
 				fflush(fout);
 				ramp_down_gti(E.client_p, true);
@@ -375,6 +391,7 @@ int main(int argc, char *argv[])
 				usleep(100000); // wait
 				if (!E.startup) {
 					fprintf(fout, "%s Completed SHUTDOWN, Press again to RESTART.\r\n", log_time(false));
+					fflush(fout);
 				}
 				fflush(fout);
 				iam_delay = 0;
@@ -593,6 +610,7 @@ int main(int argc, char *argv[])
 					E.link.shutdown++;
 					fprintf(fout, "\r\n%s !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels M %u,%u I %u,%u\r\n", log_time(false), E.fm80, E.dumpload, E.fm80,
 						E.link.mqtt_count, E.link.mqtt_error, E.link.iammeter_count, E.link.iammeter_error);
+					fflush(fout);
 					snprintf(buffer, SYSLOG_SIZ - 1, "\r\n%s !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels M %u,%u I %u,%u\r\n", log_time(false), E.fm80, E.dumpload, E.fm80,
 						E.link.mqtt_count, E.link.mqtt_error, E.link.iammeter_count, E.link.iammeter_error);
 					syslog(LOG_NOTICE, buffer);
@@ -767,7 +785,7 @@ static bool solar_shutdown(void)
 		 * 
 		 */
 
-//		return ret;
+		//		return ret;
 	}
 
 	if (E.solar_shutdown) {

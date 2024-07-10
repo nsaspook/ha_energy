@@ -10,7 +10,7 @@ bool bsoc_init(void) {
     ac_weight = 0.0f;
     gti_weight = 0.0f;
     if (pthread_mutex_init(&E.ha_lock, NULL) != 0) {
-        printf("\n mutex init has failed\n");
+        fprintf(fout,"\n%s mutex init has failed\n", log_time(false));
         return false;
     }
     return true;
