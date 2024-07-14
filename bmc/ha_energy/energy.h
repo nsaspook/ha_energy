@@ -32,7 +32,7 @@ extern "C" {
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.57"
+#define LOG_VERSION     "V0.58"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
