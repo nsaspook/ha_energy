@@ -12,6 +12,7 @@ static const char *const FW_Time = __TIME__;
 void mqtt_ha_pid(MQTTClient client_p, const char * topic_p)
 {
 	cJSON *json;
+	time_t rawtime;
 
 	MQTTClient_message pubmsg = MQTTClient_message_initializer;
 	MQTTClient_deliveryToken token;
@@ -38,6 +39,8 @@ void mqtt_ha_pid(MQTTClient client_p, const char * topic_p)
 	cJSON_AddNumberToObject(json, "off_grid", E.mode.off_grid);
 	cJSON_AddStringToObject(json, "build_date", FW_Date);
 	cJSON_AddStringToObject(json, "build_time", FW_Time);
+	time(&rawtime);
+	cJSON_AddNumberToObject(json, "sequence_time", (double) rawtime);
 	// convert the cJSON object to a JSON string
 	char *json_str = cJSON_Print(json);
 
