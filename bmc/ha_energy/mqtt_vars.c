@@ -187,3 +187,33 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg)
 	return ret;
 }
 
+bool mqtt_gti_time(MQTTClient client_p, const char * topic_p, char * msg)
+{
+	bool ret = true;
+	MQTTClient_message pubmsg = MQTTClient_message_initializer;
+	MQTTClient_deliveryToken token;
+	ha_flag_vars_ss.deliveredtoken = 0;
+
+	E.link.mqtt_count++;
+	pubmsg.payload = msg;
+	pubmsg.payloadlen = strlen(msg);
+	pubmsg.qos = QOS;
+	pubmsg.retained = 0;
+
+	MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token); // run time commands
+
+	// a busy, wait loop for the async delivery thread to complete
+	{
+		uint32_t waiting = 0;
+		while (ha_flag_vars_ss.deliveredtoken != token) {
+			usleep(TOKEN_DELAY);
+			if (waiting++ > MQTT_TIMEOUT) {
+				fprintf(fout, "\r\nGTI Still Waiting, timeout\r\n");
+				break;
+			}
+		};
+	}
+	usleep(HA_SW_DELAY);
+	return ret;
+}
+

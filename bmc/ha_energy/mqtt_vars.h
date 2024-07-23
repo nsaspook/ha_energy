@@ -25,6 +25,7 @@ extern "C" {
     void mqtt_ha_switch(MQTTClient, const char *, bool);
     void mqtt_ha_pid(MQTTClient, const char *);
     bool mqtt_gti_power(MQTTClient, const char *, char *);
+    bool mqtt_gti_time(MQTTClient, const char *, char *);
 
 #ifdef __cplusplus
 }
