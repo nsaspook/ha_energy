@@ -820,17 +820,24 @@ static bool solar_shutdown(void)
 char * log_time(bool log)
 {
 	static char time_log[RBUF_SIZ] = {0};
-	uint32_t len = 0;
+	static uint32_t len = 0, sync_time = 0;
 	time_t rawtime_log;
 
 	tzset();
 	time(&rawtime_log);
+	if (sync_time++ > 36) {
+		sync_time = 0;
+		snprintf(time_log, RBUF_SIZ - 1, "VT%lut", rawtime_log); // format for dumpload controller gti power commands
+		mqtt_gti_power(E.client_p, TOPIC_P, time_log);
+	}
+
 	sprintf(time_log, "%s", ctime(&rawtime_log));
 	len = strlen(time_log);
 	time_log[len - 1] = 0; // munge out the return character
 	if (log) {
 		fprintf(fout, "%s ", time_log);
 	}
+
 	return time_log;
 }
 
