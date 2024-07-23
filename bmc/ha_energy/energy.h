@@ -70,7 +70,7 @@ extern "C" {
 #define IAM_DELAY       120
 
 #define CMD_SEC         10
-#define TIME_SYNC_SEC	10
+#define TIME_SYNC_SEC	25
 
 #define BAT_CRITICAL        200.0f
 #define CRITIAL_SHUTDOWN_LOG

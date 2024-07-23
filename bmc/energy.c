@@ -820,7 +820,7 @@ static bool solar_shutdown(void)
 char * log_time(bool log)
 {
 	static char time_log[RBUF_SIZ] = {0};
-	static uint32_t len = 0, sync_time = 9;
+	static uint32_t len = 0, sync_time = TIME_SYNC_SEC-1;
 	time_t rawtime_log;
 
 	tzset();
