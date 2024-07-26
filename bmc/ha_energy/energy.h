@@ -70,7 +70,7 @@ extern "C" {
 #define IAM_DELAY       120
 
 #define CMD_SEC         10
-#define TIME_SYNC_SEC	25
+#define TIME_SYNC_SEC	30
 
 #define BAT_CRITICAL        200.0f
 #define CRITIAL_SHUTDOWN_LOG
@@ -80,7 +80,7 @@ extern "C" {
 #define MIN_BAT_KW_AC_HI    5000.0f
 #define MIN_BAT_KW_AC_LO    4500.0f
 
-#define MIN_BAT_KW_BSOC_SLP 4800.0f
+#define MIN_BAT_KW_BSOC_SLP 4000.0f
 #define MIN_BAT_KW_BSOC_HI  4550.0f
 #define MIN_BAT_KW_BSOC_LO  3500.0f
 
@@ -90,12 +90,12 @@ extern "C" {
 #define PV_BIAS             288.0f
 #define PV_BIAS_LOW         222.0f
 #define PV_BIAS_FLOAT       399.0f
-#define PV_BIAS_SLEEP       369.0f
+#define PV_BIAS_SLEEP       480.0f
 #define PV_BIAS_RATE        320.0f
 #define PV_DL_MPTT_MAX      800.0f
 #define PV_DL_MPTT_IDLE     57.0f
 #define PV_DL_BIAS_RATE     75.0f
-#define PWA_SLEEP           300.0f
+#define PWA_SLEEP           200.0f
 #define DL_AC_DC_EFF        1.24f
 
 #define BAL_MIN_ENERGY_AC   -200.0f
