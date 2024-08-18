@@ -86,7 +86,13 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state)
 		spam = true;
 		less_spam = 0;
 	} else {
-		cJSON_AddStringToObject(json, "state", "OFF");
+		if ((uint32_t) E.mvar[V_FCCM] != FLOAT_CODE) { // use max power in FLOAT mode
+			cJSON_AddStringToObject(json, "state", "OFF");
+		} else {
+			cJSON_AddStringToObject(json, "state", "ON");
+			spam = true;
+			less_spam = 0;
+		}
 	}
 	// convert the cJSON object to a JSON string
 	char *json_str = cJSON_Print(json);
@@ -99,7 +105,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state)
 #ifdef DEBUG_HA_CMD
 	if (spam) {
 		log_time(true);
-		fprintf(fout, "HA switch command %s, %s\r\n", topic_p, json_str);
+		fprintf(fout, "HA switch command %s, %d\r\n", topic_p, sw_state);
 		if (!sw_state) {
 			if (less_spam++ > 3) {
 				spam = false;

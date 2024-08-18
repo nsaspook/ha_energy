@@ -42,6 +42,7 @@
  * V0.54 data source shutdown functions
  * V0.55 off-grid inverter power tracking for HA
  * V0.56 run as Daemon in background
+ * V0.62 adjust battery critical to keep making energy calculations
  */
 
 /*
@@ -122,6 +123,7 @@ struct energy_type E = {
 	.dc_mismatch = false,
 	.mode_mismatch = false,
 	.link.shutdown = 0,
+	.mode.bat_crit = false,
 };
 
 static uint8_t iam_delay = 0;
@@ -795,13 +797,19 @@ static bool solar_shutdown(void)
 	}
 
 	if ((E.mvar[V_FBEKW] < BAT_CRITICAL) && !E.startup) { // special case for low battery
-		ret = true;
+		if (!E.mode.bat_crit) {
+			ret = true;
 #ifdef CRITIAL_SHUTDOWN_LOG
-		fprintf(fout, "%s Solar BATTERY CRITICAL shutdown comms check ret = %d \r\n", log_time(false), ret);
-		fflush(fout);
+			fprintf(fout, "%s Solar BATTERY CRITICAL shutdown comms check ret = %d \r\n", log_time(false), ret);
+			fflush(fout);
 #endif
-		return ret;
+			E.mode.bat_crit = true;
+			return ret;
+		}
+	} else {
+		E.mode.bat_crit = false;
 	}
+
 	if (E.link.shutdown >= MAX_ERROR) {
 		ret = true;
 		if (E.fm80 && E.dumpload && E.iammeter) {
@@ -820,7 +828,7 @@ static bool solar_shutdown(void)
 char * log_time(bool log)
 {
 	static char time_log[RBUF_SIZ] = {0};
-	static uint32_t len = 0, sync_time = TIME_SYNC_SEC-1;
+	static uint32_t len = 0, sync_time = TIME_SYNC_SEC - 1;
 	time_t rawtime_log;
 
 	tzset();

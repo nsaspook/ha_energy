@@ -32,7 +32,7 @@ extern "C" {
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.61"
+#define LOG_VERSION     "V0.62"
 #define MQTT_VERSION    "V3.11"
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #define CLIENTID1       "Energy_Mqtt_HA1"
@@ -267,7 +267,7 @@ extern "C" {
 
 	struct mode_type {
 		volatile double error, target, total_system, gti_dumpload, pv_bias, dl_mqtt_max, off_grid, sequence;
-		volatile bool mode, in_pid_control, con0, con1, con2, con3, con4, con5, con6, con7, no_float, data_error;
+		volatile bool mode, in_pid_control, con0, con1, con2, con3, con4, con5, con6, con7, no_float, data_error, bat_crit;
 		volatile uint32_t mode_tmr;
 		volatile struct SPid pid;
 		volatile enum energy_state E;
