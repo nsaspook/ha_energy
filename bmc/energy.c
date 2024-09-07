@@ -844,6 +844,7 @@ char * log_time(bool log)
 	time_log[len - 1] = 0; // munge out the return character
 	if (log) {
 		fprintf(fout, "%s ", time_log);
+		fflush(fout);
 	}
 
 	return time_log;
@@ -857,6 +858,7 @@ bool sync_ha(void)
 		E.dc_mismatch = true;
 		sync = true;
 		fprintf(fout, "DC_MM ");
+		fflush(fout);
 	} else {
 		E.dc_mismatch = false;
 	}
@@ -864,6 +866,7 @@ bool sync_ha(void)
 		mqtt_ha_switch(E.client_p, TOPIC_PACC, !E.ac_sw_status);
 		E.ac_mismatch = true;
 		fprintf(fout, "AC_MM ");
+		fflush(fout);
 		sync = true;
 	} else {
 		E.ac_mismatch = false;

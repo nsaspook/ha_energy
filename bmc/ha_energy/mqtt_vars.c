@@ -106,6 +106,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state)
 	if (spam) {
 		log_time(true);
 		fprintf(fout, "HA switch command %s, %d\r\n", topic_p, sw_state);
+		fflush(fout);
 		if (!sw_state) {
 			if (less_spam++ > 3) {
 				spam = false;
@@ -157,6 +158,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg)
 #ifdef DEBUG_HA_CMD
 		log_time(true);
 		fprintf(fout, "HA GTI power command %s, SDEV %5.2f\r\n", msg, get_batc_dev());
+		fflush(fout);
 		spam = true;
 #endif
 		MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token); // run power commands
@@ -173,6 +175,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg)
 		if (spam) {
 			log_time(true);
 			fprintf(fout, "HA GTI power set to zero\r\n");
+			fflush(fout);
 			spam = false;
 		}
 #endif
