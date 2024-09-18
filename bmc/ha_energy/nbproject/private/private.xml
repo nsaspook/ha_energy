@@ -15,6 +15,7 @@
             <file>file:/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c</file>
             <file>file:/store/solar_software/ha_energy/bmc/energy.c</file>
             <file>file:/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c</file>
+            <file>file:/store/solar_software/ha_energy/bmc/ha_energy/nbproject/Makefile-Debug.mk</file>
         </group>
     </open-files>
 </project-private>
