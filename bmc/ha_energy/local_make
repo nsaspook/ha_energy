@@ -1,0 +1,2 @@
+/usr/bin/gmake -f Makefile CONF=Release clean
+/usr/bin/gmake -f Makefile CONF=Release
