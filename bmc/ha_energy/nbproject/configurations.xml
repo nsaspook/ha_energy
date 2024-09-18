@@ -49,7 +49,6 @@
       <compileType>
         <linkerTool>
           <linkerLibItems>
-            <linkerLibLibItem>comedi</linkerLibLibItem>
             <linkerLibStdlibItem>Mathematics</linkerLibStdlibItem>
             <linkerOptionItem>`pkg-config --libs libcjson`</linkerOptionItem>
           </linkerLibItems>

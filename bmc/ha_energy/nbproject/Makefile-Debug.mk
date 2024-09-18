@@ -57,7 +57,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lcomedi -lm `pkg-config --libs libcjson`  
+LDLIBSOPTIONS=-lm `pkg-config --libs libcjson`  
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
