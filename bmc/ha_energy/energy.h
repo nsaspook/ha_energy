@@ -34,7 +34,11 @@ extern "C" {
 
 #define LOG_VERSION     "V0.62"
 #define MQTT_VERSION    "V3.11"
+#ifdef __amd64
 #define ADDRESS         "tcp://10.1.1.172:1883"
+#else
+#define ADDRESS         "tcp://10.1.1.30:1883"
+#endif
 #define CLIENTID1       "Energy_Mqtt_HA1"
 #define CLIENTID2       "Energy_Mqtt_HA2"
 #define TOPIC_P         "mateq84/data/gticmd"
@@ -56,7 +60,7 @@ extern "C" {
 
 #define SBUF_SIZ        16  // short buffer string size
 #define RBUF_SIZ        82
-#define SYSLOG_SIZ	512
+#define SYSLOG_SIZ 512
 
 #define MQTT_TIMEOUT    400
 #define SW_QOS          1
@@ -70,7 +74,7 @@ extern "C" {
 #define IAM_DELAY       120
 
 #define CMD_SEC         10
-#define TIME_SYNC_SEC	30
+#define TIME_SYNC_SEC 30
 
 #define BAT_CRITICAL        200.0f
 #define CRITIAL_SHUTDOWN_LOG
