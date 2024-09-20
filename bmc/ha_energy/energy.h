@@ -28,11 +28,15 @@ extern "C" {
 #include <pthread.h>
 #include <sys/stat.h>
 #include <syslog.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include <ifaddrs.h>
 #include "MQTTClient.h"
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.62"
+#define LOG_VERSION     "V0.63"
 #define MQTT_VERSION    "V3.11"
 #ifdef __amd64
 #define ADDRESS         "tcp://10.1.1.172:1883"

@@ -43,6 +43,7 @@
  * V0.55 off-grid inverter power tracking for HA
  * V0.56 run as Daemon in background
  * V0.62 adjust battery critical to keep making energy calculations
+ * V0.63 add IP address logging
  */
 
 /*
@@ -128,6 +129,42 @@ struct energy_type E = {
 
 static uint8_t iam_delay = 0;
 static bool solar_shutdown(void);
+void showIP(void);
+
+void showIP(void)
+{
+    struct ifaddrs *ifaddr, *ifa;
+    int s;
+    char host[NI_MAXHOST];
+
+    if (getifaddrs(&ifaddr) == -1)
+    {
+        perror("getifaddrs");
+        exit(EXIT_FAILURE);
+    }
+
+
+    for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next)
+    {
+        if (ifa->ifa_addr == NULL)
+            continue;
+
+        s=getnameinfo(ifa->ifa_addr,sizeof(struct sockaddr_in),host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
+
+        if( /*(strcmp(ifa->ifa_name,"wlan0")==0)&&( */ ifa->ifa_addr->sa_family==AF_INET) // )
+        {
+            if (s != 0)
+            {
+//                printf("getnameinfo() failed: %s\n", gai_strerror(s));
+                exit(EXIT_FAILURE);
+            }
+            printf("\tInterface : <%s>\n",ifa->ifa_name );
+            printf("\t  Address : <%s>\n", host);
+        }
+    }
+
+    freeifaddrs(ifaddr);
+}
 
 static void skeleton_daemon()
 {
@@ -260,6 +297,7 @@ int main(int argc, char *argv[])
 	MQTTClient_deliveryToken token;
 
 	printf("\r\n%s  LOG Version %s : MQTT Version %s\r\n", log_time(false), LOG_VERSION, MQTT_VERSION);
+        showIP();
 	skeleton_daemon();
 
 	while (true) {
