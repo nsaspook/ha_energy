@@ -288,7 +288,7 @@ extern "C" {
 		volatile double mvar[V_DLAST + 1];
 		volatile bool once_gti, once_ac, iammeter, fm80, dumpload, once_gti_zero;
 		volatile double gti_low_adj, ac_low_adj;
-		volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode, startup, ac_mismatch, dc_mismatch, mode_mismatch;
+		volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode, startup, ac_mismatch, dc_mismatch, mode_mismatch, dl_excess;
 		volatile uint32_t speed_go, im_delay, im_display, gti_delay;
 		volatile int32_t rc, sane;
 		volatile uint32_t ten_sec_clock;
@@ -305,7 +305,7 @@ extern "C" {
 	void timer_callback(int32_t);
 	void connlost(void *, char *);
 
-	void ramp_up_gti(MQTTClient, bool);
+	void ramp_up_gti(MQTTClient, bool, bool);
 	void ramp_up_ac(MQTTClient, bool);
 	void ramp_down_gti(MQTTClient, bool);
 	void ramp_down_ac(MQTTClient, bool);

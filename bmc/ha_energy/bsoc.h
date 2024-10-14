@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 #include <math.h>
-    //#define BSOC_DEBUG
+	//#define BSOC_DEBUG
 
 #define MIN_PV_VOLTS    5.0f
 #define MIN_BAT_VOLTS   23.0f
@@ -47,28 +47,28 @@ extern "C" {
 #include <math.h>
 #include "pid.h"
 
-    bool bsoc_init(void);
-    bool bsoc_data_collect(void);
-    double bsoc_ac(void);
-    double bsoc_gti(void);
-    double gti_test(void);
-    double ac_test(void);
-    double get_batc_dev(void);
-    bool bat_current_stable(void);
-    void bsoc_set_std_dev(double, uint32_t);
+	bool bsoc_init(void);
+	bool bsoc_data_collect(void);
+	double bsoc_ac(void);
+	double bsoc_gti(void);
+	double gti_test(void);
+	double ac_test(void);
+	double get_batc_dev(void);
+	bool bat_current_stable(void);
+	void bsoc_set_std_dev(double, uint32_t);
 
-    double calculateStandardDeviation(uint32_t, const double *);
+	double calculateStandardDeviation(uint32_t, const double *);
 
-    bool bsoc_set_mode(double, bool, bool);
+	bool bsoc_set_mode(double, bool, bool);
 
-    double ac0_filter(double);
-    double ac1_filter(double);
-    double ac2_filter(double);
-    double dc0_filter(double);
-    double dc1_filter(double);
-    double dc2_filter(double);
-    double drive0_filter(double);
-    double drive1_filter(double);
+	double ac0_filter(double);
+	double ac1_filter(double);
+	double ac2_filter(double);
+	double dc0_filter(double);
+	double dc1_filter(double);
+	double dc2_filter(double);
+	double drive0_filter(double);
+	double drive1_filter(double);
 
 #ifdef __cplusplus
 }

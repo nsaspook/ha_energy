@@ -125,6 +125,7 @@ struct energy_type E = {
 	.mode_mismatch = false,
 	.link.shutdown = 0,
 	.mode.bat_crit = false,
+	.dl_excess = false,
 };
 
 static uint8_t iam_delay = 0;
@@ -133,37 +134,32 @@ void showIP(void);
 
 void showIP(void)
 {
-    struct ifaddrs *ifaddr, *ifa;
-    int s;
-    char host[NI_MAXHOST];
+	struct ifaddrs *ifaddr, *ifa;
+	int s;
+	char host[NI_MAXHOST];
 
-    if (getifaddrs(&ifaddr) == -1)
-    {
-        perror("getifaddrs");
-        exit(EXIT_FAILURE);
-    }
+	if (getifaddrs(&ifaddr) == -1) {
+		perror("getifaddrs");
+		exit(EXIT_FAILURE);
+	}
 
 
-    for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next)
-    {
-        if (ifa->ifa_addr == NULL)
-            continue;
+	for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) {
+		if (ifa->ifa_addr == NULL)
+			continue;
 
-        s=getnameinfo(ifa->ifa_addr,sizeof(struct sockaddr_in),host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
+		s = getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
 
-        if( /*(strcmp(ifa->ifa_name,"wlan0")==0)&&( */ ifa->ifa_addr->sa_family==AF_INET) // )
-        {
-            if (s != 0)
-            {
-//                printf("getnameinfo() failed: %s\n", gai_strerror(s));
-                exit(EXIT_FAILURE);
-            }
-            printf("\tInterface : <%s>\n",ifa->ifa_name );
-            printf("\t  Address : <%s>\n", host);
-        }
-    }
+		if (ifa->ifa_addr->sa_family == AF_INET) {
+			if (s != 0) {
+				exit(EXIT_FAILURE);
+			}
+			printf("\tInterface : <%s>\n", ifa->ifa_name);
+			printf("\t  Address : <%s>\n", host);
+		}
+	}
 
-    freeifaddrs(ifaddr);
+	freeifaddrs(ifaddr);
 }
 
 static void skeleton_daemon()
@@ -297,7 +293,7 @@ int main(int argc, char *argv[])
 	MQTTClient_deliveryToken token;
 
 	printf("\r\n%s  LOG Version %s : MQTT Version %s\r\n", log_time(false), LOG_VERSION, MQTT_VERSION);
-        showIP();
+	showIP();
 	skeleton_daemon();
 
 	while (true) {
@@ -608,7 +604,7 @@ int main(int argc, char *argv[])
 
 				if ((dc1_filter(E.mvar[V_BEN]) > BAL_MAX_ENERGY_GTI) && (gti_test() > MIN_BAT_KW_GTI_HI)) {
 #ifndef  FAKE_VPV                            
-					ramp_up_gti(E.client_p, E.gti_sw_on); // fixme on the ONCE code
+					ramp_up_gti(E.client_p, E.gti_sw_on, E.dl_excess); // fixme on the ONCE code
 #ifdef PSW_DEBUG
 					fprintf(fout, "%s MIN_BAT_KW_GTI_HI DC switch %d \r\n", log_time(false), E.gti_sw_on);
 #endif
@@ -689,7 +685,7 @@ int main(int argc, char *argv[])
 	}
 }
 
-void ramp_up_gti(MQTTClient client_p, bool start)
+void ramp_up_gti(MQTTClient client_p, bool start, bool excess)
 {
 	static uint32_t sequence = 0;
 
@@ -700,9 +696,11 @@ void ramp_up_gti(MQTTClient client_p, bool start)
 	if (E.once_gti) {
 		E.once_gti = false;
 		sequence = 0;
-		mqtt_ha_switch(client_p, TOPIC_PDCC, true);
-		E.gti_sw_status = true;
-		usleep(500000); // wait for voltage to ramp
+		if (!excess) {
+			mqtt_ha_switch(client_p, TOPIC_PDCC, true);
+			E.gti_sw_status = true;
+			usleep(500000); // wait for voltage to ramp
+		}
 	}
 
 	switch (sequence) {
