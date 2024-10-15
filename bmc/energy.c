@@ -608,6 +608,11 @@ int main(int argc, char *argv[])
 				 */
 				if (((dc1_filter(E.mvar[V_BEN]) > BAL_MAX_ENERGY_GTI) && (gti_test() > MIN_BAT_KW_GTI_HI)) || E.dl_excess) {
 #ifndef  FAKE_VPV                            
+#ifdef B_DLE_DEBUG
+					if (E.dl_excess) {
+						fprintf(fout, "%s DL excess ramp_up_gti \r\n", log_time(false));
+					}
+#endif
 					ramp_up_gti(E.client_p, E.gti_sw_on, E.dl_excess); // fixme on the ONCE code
 #ifdef PSW_DEBUG
 					fprintf(fout, "%s MIN_BAT_KW_GTI_HI DC switch %d \r\n", log_time(false), E.gti_sw_on);
