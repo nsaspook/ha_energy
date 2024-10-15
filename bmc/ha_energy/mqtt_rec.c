@@ -33,6 +33,7 @@ const char* mqtt_name[V_DLAST] = {
     "DLv_bat",
     "DLc_mppt",
     "DLp_mppt",
+    "DLah_bat",
     "DLgti",
 };
 

@@ -44,6 +44,7 @@
  * V0.56 run as Daemon in background
  * V0.62 adjust battery critical to keep making energy calculations
  * V0.63 add IP address logging
+ * V0.64 Dump Load excess load mode programming
  */
 
 /*
@@ -602,7 +603,10 @@ int main(int argc, char *argv[])
 				}
 
 
-				if ((dc1_filter(E.mvar[V_BEN]) > BAL_MAX_ENERGY_GTI) && (gti_test() > MIN_BAT_KW_GTI_HI)) {
+				/*
+				 * Dump Load Excess testing
+				 */
+				if (((dc1_filter(E.mvar[V_BEN]) > BAL_MAX_ENERGY_GTI) && (gti_test() > MIN_BAT_KW_GTI_HI)) || E.dl_excess) {
 #ifndef  FAKE_VPV                            
 					ramp_up_gti(E.client_p, E.gti_sw_on, E.dl_excess); // fixme on the ONCE code
 #ifdef PSW_DEBUG
@@ -623,6 +627,9 @@ int main(int argc, char *argv[])
 
 #ifdef B_ADJ_DEBUG
 			fprintf(fout, "\r\n LO ADJ: AC %8.2fWh, GTI %8.2fWh\r\n", MIN_BAT_KW_AC_LO + E.ac_low_adj, MIN_BAT_KW_GTI_LO + E.gti_low_adj);
+#endif
+#ifdef B_DLE_DEBUG
+			fprintf(fout, "%s DL excess vars from ha_energy %d %d : Flag %d\r\n", log_time(false), E.mode.con4, E.mode.con5, E.dl_excess);
 #endif
 
 			time(&rawtime);

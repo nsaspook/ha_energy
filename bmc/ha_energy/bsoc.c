@@ -95,7 +95,17 @@ double bsoc_gti(void)
 	// check for 48VDC AC charger powered from the Solar battery bank AC inverter unless E.dl_excess is TRUE
 	if (((pv_voltage < MIN_PV_VOLTS) && (!E.dl_excess)) || (bat_voltage < MIN_BAT_VOLTS)) {
 		gti_weight = 0.0f; // reduce power to zero
+	} else {
+		if (E.dl_excess) {
+			if (E.mvar[V_DAHBAT] > PV_DL_B_AH_LOW) {
+				gti_weight = PV_DL_EXCESS;
+			} else {
+				gti_weight = 0.0f; // reduce power to zero
+			}
+		}
 	}
+
+
 	return dc0_filter(gti_weight);
 };
 
@@ -110,6 +120,14 @@ double gti_test(void)
 #ifdef BSOC_DEBUG
 		fprintf(fout, "pvp %8.2f, gweight %8.2f, aweight %8.2f, batv %8.2f, batc %8.2f\r\n", pv_voltage, gti_weight, ac_weight, bat_voltage, bat_current);
 #endif
+	} else {
+		if (E.dl_excess) {
+			if (E.mvar[V_DAHBAT] > PV_DL_B_AH_LOW) {
+				gti_weight = PV_DL_EXCESS;
+			} else {
+				gti_weight = 0.0f; // reduce power to zero
+			}
+		}
 	}
 	return dc0_filter(gti_weight);
 }
