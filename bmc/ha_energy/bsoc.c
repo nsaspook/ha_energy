@@ -1,5 +1,41 @@
 #include "bsoc.h"
-#include "mqtt_rec.h"
+
+const char* mqtt_name[V_DLAST] = {
+	"pccmode",
+	"batenergykw",
+	"runtime",
+	"bamps",
+	"bvolts",
+	"load",
+	"solar",
+	"acenergy",
+	"benergy",
+	"pwatts",
+	"pamps",
+	"pvolts",
+	"flast",
+	"HAdcsw",
+	"HAacsw",
+	"HAshut",
+	"HAmode",
+	"HAcon0",
+	"HAcon1",
+	"HAcon2",
+	"HAcon3",
+	"HAcon4",
+	"HAcon5",
+	"HAcon6",
+	"HAcon7",
+	"DLv_pv",
+	"DLp_pv",
+	"DLp_bat",
+	"DLv_bat",
+	"DLc_mppt",
+	"DLp_mppt",
+	"DLah_bat",
+	"DLgti",
+};
+
 
 static volatile double ac_weight = 0.0f, gti_weight = 0.0f, pv_voltage = 0.0f, bat_current = 0.0f, batc_std_dev = 0.0f, bat_voltage = 0.0f;
 static double bat_c_std_dev[DEV_SIZE], coef = COEF;

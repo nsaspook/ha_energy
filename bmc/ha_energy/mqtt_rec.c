@@ -1,41 +1,5 @@
-#include "mqtt_rec.h"
 #include "bsoc.h"
 
-const char* mqtt_name[V_DLAST] = {
-    "pccmode",
-    "batenergykw",
-    "runtime",
-    "bamps",
-    "bvolts",
-    "load",
-    "solar",
-    "acenergy",
-    "benergy",
-    "pwatts",
-    "pamps",
-    "pvolts",
-    "flast",
-    "HAdcsw",
-    "HAacsw",
-    "HAshut",
-    "HAmode",
-    "HAcon0",
-    "HAcon1",
-    "HAcon2",
-    "HAcon3",
-    "HAcon4",
-    "HAcon5",
-    "HAcon6",
-    "HAcon7",
-    "DLv_pv",
-    "DLp_pv",
-    "DLp_bat",
-    "DLv_bat",
-    "DLc_mppt",
-    "DLp_mppt",
-    "DLah_bat",
-    "DLgti",
-};
 
 /*
  * data received on topic from the broker, run processing thread

@@ -46,7 +46,8 @@ extern "C" {
 #include <errno.h>
 #include <math.h>
 #include "pid.h"
-
+#include "mqtt_rec.h"
+	
 	bool bsoc_init(void);
 	bool bsoc_data_collect(void);
 	double bsoc_ac(void);
