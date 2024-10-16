@@ -577,6 +577,10 @@ int main(int argc, char *argv[])
 					 */
 					if (E.mode.dl_mqtt_max > PV_DL_MPTT_MAX) {
 						error_drive = PV_DL_MPTT_IDLE;
+					} else {
+						if (E.dl_excess) {
+							error_drive = PV_DL_EXCESS;
+						}
 					}
 
 					snprintf(gti_str, SBUF_SIZ - 1, "V%04dX", error_drive); // format for dumpload controller gti power commands
@@ -610,7 +614,7 @@ int main(int argc, char *argv[])
 #ifndef  FAKE_VPV                            
 #ifdef B_DLE_DEBUG
 					if (E.dl_excess) {
-						fprintf(fout, "%s DL excess ramp_up_gti \r\n", log_time(false));
+						fprintf(fout, "%s DL excess ramp_up_gti %d\r\n", log_time(false), E.gti_sw_on);
 					}
 #endif
 					ramp_up_gti(E.client_p, E.gti_sw_on, E.dl_excess); // fixme on the ONCE code
@@ -712,6 +716,8 @@ void ramp_up_gti(MQTTClient client_p, bool start, bool excess)
 			mqtt_ha_switch(client_p, TOPIC_PDCC, true);
 			E.gti_sw_status = true;
 			usleep(500000); // wait for voltage to ramp
+		} else {
+			sequence = 1;
 		}
 	}
 
@@ -723,7 +729,7 @@ void ramp_up_gti(MQTTClient client_p, bool start, bool excess)
 	case 2:
 	case 1:
 		E.once_gti_zero = true;
-		if (bat_current_stable()) { // check battery current std dev, stop 'motorboating'
+		if (bat_current_stable() || E.dl_excess) { // check battery current std dev, stop 'motorboating'
 			sequence++;
 			if (!mqtt_gti_power(client_p, TOPIC_P, "+#")) {
 				sequence = 0;

@@ -131,6 +131,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state)
 
 	cJSON_free(json_str);
 	cJSON_Delete(json);
+	fflush(fout);
 	usleep(HA_SW_DELAY);
 }
 
@@ -154,7 +155,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg)
 #ifdef GTI_NO_POWER
 	MQTTClient_publishMessage(client_p, "mateq84/data/gticmd_nopower", &pubmsg, &token);
 #else
-	if (bsoc_gti() > MIN_BAT_KW) {
+	if (bsoc_gti() > MIN_BAT_KW || E.dl_excess) {
 #ifdef DEBUG_HA_CMD
 		log_time(true);
 		fprintf(fout, "HA GTI power command %s, SDEV %5.2f\r\n", msg, get_batc_dev());
