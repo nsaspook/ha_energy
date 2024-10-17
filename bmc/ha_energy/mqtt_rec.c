@@ -1,6 +1,5 @@
 #include "bsoc.h"
 
-
 /*
  * data received on topic from the broker, run processing thread
  */

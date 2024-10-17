@@ -1,35 +1,93 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="17565741692331435568">
+<analyzerinfo hash="2902731408816755016">
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdlib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdlib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="14" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="15" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;unistd.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;unistd.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="16" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdint.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdint.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="17" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;string.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;string.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="18" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdbool.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdbool.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="19" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;signal.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;signal.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="20" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="21" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/wait.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/wait.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="22" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/types.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/types.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="23" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="24" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;errno.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;errno.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="25" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;cjson/cJSON.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;cjson/cJSON.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="26" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;curl/curl.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;curl/curl.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="27" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;pthread.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;pthread.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="28" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/stat.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/stat.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="29" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;syslog.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;syslog.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="30" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;arpa/inet.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;arpa/inet.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="31" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/socket.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/socket.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="32" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;netdb.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;netdb.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="33" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;ifaddrs.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;ifaddrs.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="34" column="0"/>
+        </error>
+        <error id="missingInclude" severity="information" msg="Include file: &quot;MQTTClient.h&quot; not found." verbose="Include file: &quot;MQTTClient.h&quot; not found.">
+            <location file="ha_energy/energy.h" line="35" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/http_vars.c" line="2" column="0"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;time_log&apos; can be reduced." verbose="The scope of the variable &apos;time_log&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="ha_energy/http_vars.c">
+            <location file="ha_energy/http_vars.c" line="112" column="14"/>
+            <symbol>time_log</symbol>
+        </error>
   <FileInfo check="ctu">
-<function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c:5:13" call-funcname="iammeter_get_data" call-argnr="2" file="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c" line="48" col="30" call-argexpr="phase_var" call-argvaluetype="0" call-argvalue="0">
-  <path file="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c" line="47" col="34" info="Assignment &apos;phase_var=IA_VOLTAGE&apos;, assigned value is 0"/>
-</function-call><function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c:5:13" call-funcname="iammeter_get_data" call-argnr="3" file="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c" line="48" col="30" call-argexpr="phase" call-argvaluetype="0" call-argvalue="0">
-  <path file="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c" line="38" col="22" info="Assignment &apos;phase=PHASE_A&apos;, assigned value is 0"/>
-</function-call>  </FileInfo>
-  <FileInfo check="ctu">
-<function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c:5:13" call-funcname="iammeter_get_data" call-argnr="2" file="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c" line="48" col="30" call-argexpr="phase_var" call-argvaluetype="0" call-argvalue="0">
-  <path file="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c" line="47" col="34" info="Assignment &apos;phase_var=IA_VOLTAGE&apos;, assigned value is 0"/>
-</function-call><function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c:5:13" call-funcname="iammeter_get_data" call-argnr="3" file="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c" line="48" col="30" call-argexpr="phase" call-argvaluetype="0" call-argvalue="0">
-  <path file="/store/solar_software/ha_energy/bmc/ha_energy/http_vars.c" line="38" col="22" info="Assignment &apos;phase=PHASE_A&apos;, assigned value is 0"/>
-</function-call>  </FileInfo>
+<function-call call-id="ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="2" file="ha_energy/http_vars.c" line="54" col="21" call-argexpr="phase_var" call-argvaluetype="0" call-argvalue="0">
+  <path file="ha_energy/http_vars.c" line="53" col="25" info="Assignment &apos;phase_var=IA_VOLTAGE&apos;, assigned value is 0"/>
+</function-call><function-call call-id="ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="3" file="ha_energy/http_vars.c" line="54" col="21" call-argexpr="phase" call-argvaluetype="0" call-argvalue="0">
+  <path file="ha_energy/http_vars.c" line="42" col="19" info="Assignment &apos;phase=PHASE_A&apos;, assigned value is 0"/>
+</function-call><function-call call-id="ha_energy/http_vars.c:8:6" call-funcname="mqtt_gti_time" call-argnr="3" file="ha_energy/http_vars.c" line="123" col="16" call-argexpr="time_log" call-argvaluetype="7" call-argvalue="82"/>  </FileInfo>
   <FileInfo check="CheckUnusedFunctions">
-    <functiondecl functionName="iammeter_write_callback" lineNumber="10"/>
-    <functiondecl functionName="iammeter_read" lineNumber="69"/>
-    <functiondecl functionName="iammeter_get_data" lineNumber="95"/>
-    <functiondecl functionName="print_im_vars" lineNumber="102"/>
-    <functiondecl functionName="iammeter_write_callback" lineNumber="10"/>
-    <functiondecl functionName="iammeter_read" lineNumber="69"/>
-    <functiondecl functionName="iammeter_get_data" lineNumber="95"/>
-    <functiondecl functionName="print_im_vars" lineNumber="102"/>
+    <functiondecl functionName="iammeter_write_callback" lineNumber="13"/>
+    <functiondecl functionName="iammeter_read" lineNumber="75"/>
+    <functiondecl functionName="iammeter_get_data" lineNumber="102"/>
+    <functiondecl functionName="print_im_vars" lineNumber="110"/>
     <functioncall functionName="CURLOPT_URL"/>
     <functioncall functionName="CURLOPT_WRITEDATA"/>
     <functioncall functionName="CURLOPT_WRITEFUNCTION"/>
-    <functioncall functionName="IA_LAST"/>
-    <functioncall functionName="IA_POWER"/>
-    <functioncall functionName="IA_VOLTAGE"/>
     <functioncall functionName="MQTTClient"/>
-    <functioncall functionName="PHASE_A"/>
-    <functioncall functionName="PHASE_LAST"/>
     <functioncall functionName="cJSON_ArrayForEach"/>
     <functioncall functionName="cJSON_Delete"/>
     <functioncall functionName="cJSON_GetErrorPtr"/>
@@ -41,11 +99,52 @@
     <functioncall functionName="curl_easy_setopt"/>
     <functioncall functionName="curl_easy_strerror"/>
     <functioncall functionName="false"/>
+    <functioncall functionName="fflush"/>
     <functioncall functionName="fprintf"/>
     <functioncall functionName="iammeter_exit"/>
     <functioncall functionName="iammeter_get_data"/>
     <functioncall functionName="iammeter_write_callback"/>
+    <functioncall functionName="mqtt_gti_time"/>
+    <functioncall functionName="snprintf"/>
     <functioncall functionName="strlen"/>
+    <functioncall functionName="time"/>
+    <functioncall functionName="true"/>
+  </FileInfo>
+  <FileInfo check="ctu">
+<function-call call-id="ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="2" file="ha_energy/http_vars.c" line="54" col="21" call-argexpr="phase_var" call-argvaluetype="0" call-argvalue="0">
+  <path file="ha_energy/http_vars.c" line="53" col="25" info="Assignment &apos;phase_var=IA_VOLTAGE&apos;, assigned value is 0"/>
+</function-call><function-call call-id="ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="3" file="ha_energy/http_vars.c" line="54" col="21" call-argexpr="phase" call-argvaluetype="0" call-argvalue="0">
+  <path file="ha_energy/http_vars.c" line="42" col="19" info="Assignment &apos;phase=PHASE_A&apos;, assigned value is 0"/>
+</function-call><function-call call-id="ha_energy/http_vars.c:8:6" call-funcname="mqtt_gti_time" call-argnr="3" file="ha_energy/http_vars.c" line="123" col="16" call-argexpr="time_log" call-argvaluetype="7" call-argvalue="82"/>  </FileInfo>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="iammeter_write_callback" lineNumber="13"/>
+    <functiondecl functionName="iammeter_read" lineNumber="75"/>
+    <functiondecl functionName="iammeter_get_data" lineNumber="102"/>
+    <functiondecl functionName="print_im_vars" lineNumber="110"/>
+    <functioncall functionName="CURLOPT_URL"/>
+    <functioncall functionName="CURLOPT_WRITEDATA"/>
+    <functioncall functionName="CURLOPT_WRITEFUNCTION"/>
+    <functioncall functionName="MQTTClient"/>
+    <functioncall functionName="cJSON_ArrayForEach"/>
+    <functioncall functionName="cJSON_Delete"/>
+    <functioncall functionName="cJSON_GetErrorPtr"/>
+    <functioncall functionName="cJSON_GetObjectItemCaseSensitive"/>
+    <functioncall functionName="cJSON_ParseWithLength"/>
+    <functioncall functionName="curl_easy_cleanup"/>
+    <functioncall functionName="curl_easy_init"/>
+    <functioncall functionName="curl_easy_perform"/>
+    <functioncall functionName="curl_easy_setopt"/>
+    <functioncall functionName="curl_easy_strerror"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="fflush"/>
+    <functioncall functionName="fprintf"/>
+    <functioncall functionName="iammeter_exit"/>
+    <functioncall functionName="iammeter_get_data"/>
+    <functioncall functionName="iammeter_write_callback"/>
+    <functioncall functionName="mqtt_gti_time"/>
+    <functioncall functionName="snprintf"/>
+    <functioncall functionName="strlen"/>
+    <functioncall functionName="time"/>
     <functioncall functionName="true"/>
   </FileInfo>
 </analyzerinfo>

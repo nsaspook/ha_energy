@@ -1,23 +1,80 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="2409853936862964472">
-        <error id="unreachableCode" severity="style" msg="Statements following &apos;return&apos; will never be executed." verbose="Statements following &apos;return&apos; will never be executed." cwe="561" file0="/store/solar_software/ha_energy/bmc/ha_energy/daq.c">
-            <location file="/store/solar_software/ha_energy/bmc/ha_energy/daq.c" line="67" column="9"/>
+<analyzerinfo hash="8931731814054238512">
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/daq.c" line="1" column="0"/>
         </error>
-        <error id="unreachableCode" severity="style" msg="Statements following &apos;return&apos; will never be executed." verbose="Statements following &apos;return&apos; will never be executed." cwe="561" file0="/store/solar_software/ha_energy/bmc/ha_energy/daq.c">
-            <location file="/store/solar_software/ha_energy/bmc/ha_energy/daq.c" line="265" column="9"/>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;unistd.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;unistd.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/daq.c" line="2" column="0"/>
         </error>
-        <error id="unreachableCode" severity="style" msg="Statements following &apos;return&apos; will never be executed." verbose="Statements following &apos;return&apos; will never be executed." cwe="561" file0="/store/solar_software/ha_energy/bmc/ha_energy/daq.c">
-            <location file="/store/solar_software/ha_energy/bmc/ha_energy/daq.c" line="270" column="9"/>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdbool.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdbool.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/daq.c" line="3" column="0"/>
         </error>
-        <error id="unreachableCode" severity="style" msg="Statements following &apos;return&apos; will never be executed." verbose="Statements following &apos;return&apos; will never be executed." cwe="561" file0="/store/solar_software/ha_energy/bmc/ha_energy/daq.c">
-            <location file="/store/solar_software/ha_energy/bmc/ha_energy/daq.c" line="276" column="9"/>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdint.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdint.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/daq.c" line="4" column="0"/>
         </error>
-        <error id="variableScope" severity="style" msg="The scope of the variable &apos;i&apos; can be reduced." verbose="The scope of the variable &apos;i&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="/store/solar_software/ha_energy/bmc/ha_energy/daq.c">
-            <location file="/store/solar_software/ha_energy/bmc/ha_energy/daq.c" line="112" column="9"/>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;comedilib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;comedilib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/daq.c" line="5" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdlib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdlib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/daq.h" line="15" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/daq.h" line="16" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;unistd.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;unistd.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/daq.h" line="17" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdint.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdint.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/daq.h" line="18" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;string.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;string.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/daq.h" line="19" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdbool.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdbool.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/daq.h" line="20" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;comedilib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;comedilib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/daq.h" line="21" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;signal.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;signal.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/daq.h" line="22" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/daq.h" line="23" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/wait.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/wait.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/daq.h" line="24" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/types.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/types.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/daq.h" line="25" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/daq.h" line="26" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;errno.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;errno.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/daq.h" line="27" column="0"/>
+        </error>
+        <error id="normalCheckLevelMaxBranches" severity="information" msg="Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches." verbose="Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches." file0="ha_energy/daq.c">
+            <location file="ha_energy/daq.c" line="0" column="0"/>
+        </error>
+        <error id="unreachableCode" severity="style" msg="Statements following &apos;return&apos; will never be executed." verbose="Statements following &apos;return&apos; will never be executed." cwe="561" file0="ha_energy/daq.c">
+            <location file="ha_energy/daq.c" line="67" column="9"/>
+        </error>
+        <error id="unreachableCode" severity="style" msg="Statements following &apos;return&apos; will never be executed." verbose="Statements following &apos;return&apos; will never be executed." cwe="561" file0="ha_energy/daq.c">
+            <location file="ha_energy/daq.c" line="265" column="9"/>
+        </error>
+        <error id="unreachableCode" severity="style" msg="Statements following &apos;return&apos; will never be executed." verbose="Statements following &apos;return&apos; will never be executed." cwe="561" file0="ha_energy/daq.c">
+            <location file="ha_energy/daq.c" line="270" column="9"/>
+        </error>
+        <error id="unreachableCode" severity="style" msg="Statements following &apos;return&apos; will never be executed." verbose="Statements following &apos;return&apos; will never be executed." cwe="561" file0="ha_energy/daq.c">
+            <location file="ha_energy/daq.c" line="276" column="9"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;i&apos; can be reduced." verbose="The scope of the variable &apos;i&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="ha_energy/daq.c">
+            <location file="ha_energy/daq.c" line="112" column="9"/>
             <symbol>i</symbol>
         </error>
   <FileInfo check="ctu">
-<function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/daq.h:80:9" call-funcname="get_dio_bit" call-argnr="1" file="/store/solar_software/ha_energy/bmc/ha_energy/daq.c" line="311" col="32" call-argexpr="0" call-argvaluetype="0" call-argvalue="0"/><function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/daq.h:81:9" call-funcname="put_dio_bit" call-argnr="1" file="/store/solar_software/ha_energy/bmc/ha_energy/daq.c" line="315" col="24" call-argexpr="0" call-argvaluetype="0" call-argvalue="0"/>  </FileInfo>
+<function-call call-id="ha_energy/daq.h:80:9" call-funcname="get_dio_bit" call-argnr="1" file="ha_energy/daq.c" line="311" col="32" call-argexpr="0" call-argvaluetype="0" call-argvalue="0"/><function-call call-id="ha_energy/daq.h:81:9" call-funcname="put_dio_bit" call-argnr="1" file="ha_energy/daq.c" line="315" col="24" call-argexpr="0" call-argvaluetype="0" call-argvalue="0"/>  </FileInfo>
   <FileInfo check="CheckUnusedFunctions">
     <functiondecl functionName="init_daq" lineNumber="47"/>
     <functiondecl functionName="init_dac" lineNumber="111"/>

@@ -57,7 +57,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lm `pkg-config --libs libcjson`  
+LDLIBSOPTIONS=-lm `pkg-config --libs libcjson` `pkg-config --libs libcurl` -lpaho-mqtt3c  
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -70,32 +70,32 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ha_energy: ${OBJECTFILES}
 ${OBJECTDIR}/_ext/5c0/energy.o: ../energy.c
 	${MKDIR} -p ${OBJECTDIR}/_ext/5c0
 	${RM} "$@.d"
-	$(COMPILE.c) -g `pkg-config --cflags libcjson`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/5c0/energy.o ../energy.c
+	$(COMPILE.c) -g `pkg-config --cflags libcjson` `pkg-config --cflags libcurl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/5c0/energy.o ../energy.c
 
 ${OBJECTDIR}/bsoc.o: bsoc.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g `pkg-config --cflags libcjson`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/bsoc.o bsoc.c
+	$(COMPILE.c) -g `pkg-config --cflags libcjson` `pkg-config --cflags libcurl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/bsoc.o bsoc.c
 
 ${OBJECTDIR}/http_vars.o: http_vars.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g `pkg-config --cflags libcjson`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/http_vars.o http_vars.c
+	$(COMPILE.c) -g `pkg-config --cflags libcjson` `pkg-config --cflags libcurl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/http_vars.o http_vars.c
 
 ${OBJECTDIR}/mqtt_rec.o: mqtt_rec.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g `pkg-config --cflags libcjson`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/mqtt_rec.o mqtt_rec.c
+	$(COMPILE.c) -g `pkg-config --cflags libcjson` `pkg-config --cflags libcurl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/mqtt_rec.o mqtt_rec.c
 
 ${OBJECTDIR}/mqtt_vars.o: mqtt_vars.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g `pkg-config --cflags libcjson`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/mqtt_vars.o mqtt_vars.c
+	$(COMPILE.c) -g `pkg-config --cflags libcjson` `pkg-config --cflags libcurl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/mqtt_vars.o mqtt_vars.c
 
 ${OBJECTDIR}/pid.o: pid.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g `pkg-config --cflags libcjson`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/pid.o pid.c
+	$(COMPILE.c) -g `pkg-config --cflags libcjson` `pkg-config --cflags libcurl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/pid.o pid.c
 
 # Subprojects
 .build-subprojects:

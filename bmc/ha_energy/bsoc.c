@@ -36,16 +36,27 @@ const char* mqtt_name[V_DLAST] = {
 	"DLgti",
 };
 
+struct local_type {
+	volatile double ac_weight, gti_weight, pv_voltage, bat_current, batc_std_dev, bat_voltage;
+	double bat_c_std_dev[DEV_SIZE], coef;
+};
 
-static volatile double ac_weight = 0.0f, gti_weight = 0.0f, pv_voltage = 0.0f, bat_current = 0.0f, batc_std_dev = 0.0f, bat_voltage = 0.0f;
-static double bat_c_std_dev[DEV_SIZE], coef = COEF;
+static struct local_type L = {
+	.ac_weight = 0.0f,
+	.bat_current = 0.0f,
+	.bat_voltage = 0.0f,
+	.batc_std_dev = 0.0f,
+	.coef = COEF,
+	.gti_weight = 0.0f,
+	.pv_voltage = 0.0f,
+};
 
 static double error_filter(double);
 
 bool bsoc_init(void)
 {
-	ac_weight = 0.0f;
-	gti_weight = 0.0f;
+	L.ac_weight = 0.0f;
+	L.gti_weight = 0.0f;
 	if (pthread_mutex_init(&E.ha_lock, NULL) != 0) {
 		fprintf(fout, "\n%s mutex init has failed\n", log_time(false));
 		return false;
@@ -58,7 +69,7 @@ bool bsoc_init(void)
  */
 void bsoc_set_std_dev(double value, uint32_t i)
 {
-	bat_c_std_dev[i] = value;
+	L.bat_c_std_dev[i] = value;
 }
 
 /*
@@ -70,8 +81,8 @@ bool bsoc_data_collect(void)
 	static uint32_t i = 0;
 	pthread_mutex_lock(&E.ha_lock); // lockout MQTT var updates
 
-	ac_weight = E.mvar[V_FBEKW];
-	gti_weight = E.mvar[V_FBEKW];
+	L.ac_weight = E.mvar[V_FBEKW];
+	L.gti_weight = E.mvar[V_FBEKW];
 #ifdef FAKE_VPV // no DUMPLOAD AC charger
 	if (E.gti_sw_on) {
 		pv_voltage = PV_V_NOM;
@@ -80,10 +91,10 @@ bool bsoc_data_collect(void)
 	}
 	E.mvar[V_DVPV] = pv_voltage;
 #else
-	pv_voltage = E.mvar[V_DVPV];
+	L.pv_voltage = E.mvar[V_DVPV];
 #endif
-	bat_voltage = E.mvar[V_DVBAT];
-	bat_current = E.mvar[V_DCMPPT];
+	L.bat_voltage = E.mvar[V_DVBAT];
+	L.bat_current = E.mvar[V_DCMPPT];
 	E.ac_low_adj = E.mvar[V_FSO]* -0.5f;
 	E.gti_low_adj = E.mvar[V_FACE] * -0.5f;
 	E.mode.dl_mqtt_max = E.mvar[V_DPMPPT];
@@ -97,12 +108,12 @@ bool bsoc_data_collect(void)
 		E.gti_low_adj = -2000.0f;
 	}
 
-	bat_c_std_dev[i++] = bat_current;
+	L.bat_c_std_dev[i++] = L.bat_current;
 	if (i >= DEV_SIZE) {
 		i = 0;
 	}
 
-	calculateStandardDeviation(DEV_SIZE, bat_c_std_dev);
+	calculateStandardDeviation(DEV_SIZE, L.bat_c_std_dev);
 
 #ifdef BSOC_DEBUG
 	fprintf(fout, "\r\nmqtt var bsoc update\r\n");
@@ -116,7 +127,7 @@ bool bsoc_data_collect(void)
 double bsoc_ac(void)
 {
 
-	return ac0_filter(ac_weight);
+	return ac0_filter(L.ac_weight);
 };
 
 /*
@@ -129,20 +140,20 @@ double bsoc_gti(void)
 	fprintf(fout, "pvp %f, gweight %f, aweight %f, batv %f, batc %f\r\n", pv_voltage, gti_weight, ac_weight, bat_voltage, bat_current);
 #endif
 	// check for 48VDC AC charger powered from the Solar battery bank AC inverter unless E.dl_excess is TRUE
-	if (((pv_voltage < MIN_PV_VOLTS) && (!E.dl_excess)) || (bat_voltage < MIN_BAT_VOLTS)) {
-		gti_weight = 0.0f; // reduce power to zero
+	if (((L.pv_voltage < MIN_PV_VOLTS) && (!E.dl_excess)) || (L.bat_voltage < MIN_BAT_VOLTS)) {
+		L.gti_weight = 0.0f; // reduce power to zero
 	} else {
 		if (E.dl_excess) {
 			if (E.mvar[V_DAHBAT] > PV_DL_B_AH_LOW) {
-				gti_weight = PV_DL_EXCESS + E.dl_excess_adj;
+				L.gti_weight = PV_DL_EXCESS + E.dl_excess_adj;
 			} else {
-				gti_weight = 0.0f; // reduce power to zero
+				L.gti_weight = 0.0f; // reduce power to zero
 			}
 		}
 	}
 
 
-	return dc0_filter(gti_weight);
+	return dc0_filter(L.gti_weight);
 };
 
 /*
@@ -151,31 +162,31 @@ double bsoc_gti(void)
 double gti_test(void)
 {
 	// check for 48VDC AC charger powered from the Solar battery bank AC inverter
-	if (((pv_voltage < MIN_PV_VOLTS) && (!E.dl_excess)) || (bat_voltage < MIN_BAT_VOLTS)) {
-		gti_weight = 0.0f; // reduce power to zero
+	if (((L.pv_voltage < MIN_PV_VOLTS) && (!E.dl_excess)) || (L.bat_voltage < MIN_BAT_VOLTS)) {
+		L.gti_weight = 0.0f; // reduce power to zero
 #ifdef BSOC_DEBUG
 		fprintf(fout, "pvp %8.2f, gweight %8.2f, aweight %8.2f, batv %8.2f, batc %8.2f\r\n", pv_voltage, gti_weight, ac_weight, bat_voltage, bat_current);
 #endif
 	} else {
 		if (E.dl_excess) {
 			if (E.mvar[V_DAHBAT] > PV_DL_B_AH_LOW) {
-				gti_weight = PV_DL_EXCESS + E.dl_excess_adj;
+				L.gti_weight = PV_DL_EXCESS + E.dl_excess_adj;
 			} else {
-				gti_weight = 0.0f; // reduce power to zero
+				L.gti_weight = 0.0f; // reduce power to zero
 			}
 		}
 	}
-	return dc0_filter(gti_weight);
+	return dc0_filter(L.gti_weight);
 }
 
 double ac_test(void)
 {
-	return ac0_filter(ac_weight);
+	return ac0_filter(L.ac_weight);
 }
 
 double get_batc_dev(void)
 {
-	return batc_std_dev;
+	return L.batc_std_dev;
 }
 
 /*
@@ -208,7 +219,7 @@ double calculateStandardDeviation(uint32_t N, const double data[])
 	// calculating standard deviation by finding square root
 	// of variance
 	double standardDeviation = sqrt(variance);
-	batc_std_dev = standardDeviation;
+	L.batc_std_dev = standardDeviation;
 
 #ifdef BSOC_DEBUG
 	// printing standard deviation
@@ -221,9 +232,9 @@ bool bat_current_stable(void)
 {
 	static double gap = 0.0f;
 
-	if (batc_std_dev <= (MAX_BATC_DEV + gap)) {
+	if (L.batc_std_dev <= (MAX_BATC_DEV + gap)) {
 		gap = MAX_BATC_DEV;
-		if (bat_c_std_dev[0] < BAT_C_DRAW) {
+		if (L.bat_c_std_dev[0] < BAT_C_DRAW) {
 			return true;
 		} else {
 			gap = 0.0f;
@@ -299,9 +310,9 @@ bool bsoc_set_mode(double target, bool mode, bool init)
 	}
 
 	if (E.mode.error > 0.0f) {
-		coef = COEF;
+		L.coef = COEF;
 	} else {
-		coef = COEFN;
+		L.coef = COEFN;
 	}
 	E.mode.target = target;
 	E.mode.error = round(error_filter(E.mode.error));
@@ -332,8 +343,8 @@ bool bsoc_set_mode(double target, bool mode, bool init)
 static double error_filter(double raw)
 {
 	static double accum = 0.0f;
-	accum = accum - accum / coef + raw;
-	return accum / coef;
+	accum = accum - accum / L.coef + raw;
+	return accum / L.coef;
 }
 
 double ac0_filter(double raw)

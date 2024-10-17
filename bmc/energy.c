@@ -131,7 +131,6 @@ struct energy_type E = {
 	.dl_excess_adj = 0.0f,
 };
 
-static uint8_t iam_delay = 0;
 static bool solar_shutdown(void);
 void showIP(void);
 
@@ -433,7 +432,8 @@ int main(int argc, char *argv[])
 					fflush(fout);
 				}
 				fflush(fout);
-				iam_delay = 0;
+
+				uint8_t iam_delay = 0;
 				while (solar_shutdown()) {
 					usleep(USEC_SEC); // wait
 					if ((int32_t) E.mvar[V_HACSW]) {

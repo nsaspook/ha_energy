@@ -1,6 +1,6 @@
 msgarrvd global:[E,fout,mqtt_name] call:[MQTTClient_free,MQTTClient_freeMessage,cJSON_Delete,cJSON_GetErrorPtr,cJSON_ParseWithLength,fprintf,json_get_data] noreturn:[fprintf]
 delivered
-json_get_data global:[E,fout,ha_flag_vars_ss] call:[bsoc_set_std_dev,cJSON_GetObjectItemCaseSensitive,cJSON_IsNumber,cJSON_IsString,fprintf,pthread_mutex_lock,pthread_mutex_unlock]
+json_get_data global:[E,ha_flag_vars_ss] call:[bsoc_set_std_dev,cJSON_GetObjectItemCaseSensitive,cJSON_IsNumber,cJSON_IsString,pthread_mutex_lock,pthread_mutex_unlock]
 print_mvar_vars global:[E,fout] call:[fprintf] noreturn:[fprintf]
 fm80_float global:[E]
 fm80_sleep global:[E]

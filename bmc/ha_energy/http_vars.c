@@ -20,10 +20,10 @@ size_t iammeter_write_callback(char *buffer, size_t size, size_t nitems, void *s
 
 	if (json == NULL) {
 		const char *error_ptr = cJSON_GetErrorPtr();
-		if (error_ptr != NULL) {
-			fprintf(fout, "Error: %s\n", error_ptr);
-		}
 		E.link.iammeter_error++;
+		if (error_ptr != NULL) {
+			fprintf(fout, "Error in iammeter_write_callback %u: %s\n", E.link.iammeter_error, error_ptr);
+		}
 		goto iammeter_exit;
 	}
 #ifdef IM_DEBUG
@@ -85,7 +85,7 @@ void iammeter_read(void)
 		res = curl_easy_perform(curl);
 		/* Check for errors */
 		if (res != CURLE_OK) {
-			fprintf(fout, "curl_easy_perform() failed: %s\n",
+			fprintf(fout, "curl_easy_perform() failed in iammeter_read: %s\n",
 				curl_easy_strerror(res));
 			E.iammeter = false;
 			E.link.iammeter_error++;
