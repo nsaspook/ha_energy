@@ -36,7 +36,7 @@ extern "C" {
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.64"
+#define LOG_VERSION     "V0.65"
 #define MQTT_VERSION    "V3.11"
 #ifdef __amd64
 #define ADDRESS         "tcp://10.1.1.172:1883"
@@ -103,9 +103,9 @@ extern "C" {
 #define PV_DL_MPTT_MAX      800.0f
 #define PV_DL_MPTT_IDLE     57.0f
 #define PV_DL_BIAS_RATE     75.0f
-#define PV_DL_EXCESS	    400.0f
-#define PV_DL_B_AH_LOW	    100.0F
-#define PWA_SLEEP           200.0f
+#define PV_DL_EXCESS       500.0f
+#define PV_DL_B_AH_LOW     125.0f
+#define PWA_SLEEP          200.0f
 #define DL_AC_DC_EFF        1.24f
 
 #define BAL_MIN_ENERGY_AC   -200.0f
@@ -123,7 +123,7 @@ extern "C" {
 	//#define DEBUG_SHUTDOWN
 
 	//#define AUTO_CHARGE                   // turn on dumpload charger during restarts
-#define B_DLE_DEBUG				// Dump Load debugging
+#define B_DLE_DEBUG    // Dump Load debugging
 
 #define IM_DELAY            1   // tens of second updates
 #define IM_DISPLAY          1
@@ -291,7 +291,7 @@ extern "C" {
 		volatile double im_vars[IA_LAST][PHASE_LAST];
 		volatile double mvar[V_DLAST + 1];
 		volatile bool once_gti, once_ac, iammeter, fm80, dumpload, once_gti_zero;
-		volatile double gti_low_adj, ac_low_adj;
+		volatile double gti_low_adj, ac_low_adj, dl_excess_adj;
 		volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode, startup, ac_mismatch, dc_mismatch, mode_mismatch, dl_excess;
 		volatile uint32_t speed_go, im_delay, im_display, gti_delay;
 		volatile int32_t rc, sane;

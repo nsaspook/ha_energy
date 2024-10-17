@@ -113,6 +113,7 @@ void print_im_vars(void)
 	static uint32_t sync_time = TIME_SYNC_SEC - 1;
 	time_t rawtime_log;
 
+	fflush(fout);
 	fprintf(fout, "House L1 %7.2fW, House L2 %7.2fW, GTI L1 %7.2fW", E.print_vars[L1_P], E.print_vars[L2_P], E.print_vars[L3_P]);
 	fflush(fout);
 	time(&rawtime_log);

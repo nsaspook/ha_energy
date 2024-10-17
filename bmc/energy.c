@@ -45,6 +45,7 @@
  * V0.62 adjust battery critical to keep making energy calculations
  * V0.63 add IP address logging
  * V0.64 Dump Load excess load mode programming
+ * V.065 DL excess logic tuning and power adjustments
  */
 
 /*
@@ -127,6 +128,7 @@ struct energy_type E = {
 	.link.shutdown = 0,
 	.mode.bat_crit = false,
 	.dl_excess = false,
+	.dl_excess_adj = 0.0f,
 };
 
 static uint8_t iam_delay = 0;
@@ -579,7 +581,7 @@ int main(int argc, char *argv[])
 						error_drive = PV_DL_MPTT_IDLE;
 					} else {
 						if (E.dl_excess) {
-							error_drive = PV_DL_EXCESS;
+							error_drive = PV_DL_EXCESS + E.dl_excess_adj;
 						}
 					}
 
@@ -614,7 +616,7 @@ int main(int argc, char *argv[])
 #ifndef  FAKE_VPV                            
 #ifdef B_DLE_DEBUG
 					if (E.dl_excess) {
-						fprintf(fout, "%s DL excess ramp_up_gti %d\r\n", log_time(false), E.gti_sw_on);
+						fprintf(fout, "%s DL excess ramp_up_gti, DC switch %d\r\n", log_time(false), E.gti_sw_on);
 					}
 #endif
 					ramp_up_gti(E.client_p, E.gti_sw_on, E.dl_excess); // fixme on the ONCE code
@@ -638,7 +640,9 @@ int main(int argc, char *argv[])
 			fprintf(fout, "\r\n LO ADJ: AC %8.2fWh, GTI %8.2fWh\r\n", MIN_BAT_KW_AC_LO + E.ac_low_adj, MIN_BAT_KW_GTI_LO + E.gti_low_adj);
 #endif
 #ifdef B_DLE_DEBUG
-			fprintf(fout, "%s DL excess vars from ha_energy %d %d : Flag %d\r\n", log_time(false), E.mode.con4, E.mode.con5, E.dl_excess);
+			if (E.dl_excess) {
+				fprintf(fout, "%s DL excess vars from ha_energy %d %d : Flag %d\r\n", log_time(false), E.mode.con4, E.mode.con5, E.dl_excess);
+			}
 #endif
 
 			time(&rawtime);

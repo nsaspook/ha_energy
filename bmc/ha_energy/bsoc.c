@@ -134,7 +134,7 @@ double bsoc_gti(void)
 	} else {
 		if (E.dl_excess) {
 			if (E.mvar[V_DAHBAT] > PV_DL_B_AH_LOW) {
-				gti_weight = PV_DL_EXCESS;
+				gti_weight = PV_DL_EXCESS + E.dl_excess_adj;
 			} else {
 				gti_weight = 0.0f; // reduce power to zero
 			}
@@ -159,7 +159,7 @@ double gti_test(void)
 	} else {
 		if (E.dl_excess) {
 			if (E.mvar[V_DAHBAT] > PV_DL_B_AH_LOW) {
-				gti_weight = PV_DL_EXCESS;
+				gti_weight = PV_DL_EXCESS + E.dl_excess_adj;
 			} else {
 				gti_weight = 0.0f; // reduce power to zero
 			}
@@ -315,10 +315,12 @@ bool bsoc_set_mode(double target, bool mode, bool init)
 
 	if (E.mode.con4) {
 		E.dl_excess = true;
+		E.mode.con4 = false;
 	}
 
 	if (E.mode.con5) {
 		E.dl_excess = false;
+		E.mode.con5 = false;
 	}
 
 	return bsoc_mode;
