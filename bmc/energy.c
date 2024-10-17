@@ -699,6 +699,9 @@ int main(int argc, char *argv[])
 			break;
 		case E_STOP:
 		default:
+			fflush(fout);
+			fprintf(fout, "\r\n%s HA Energy stopped and exited.\r\n", log_time(false));
+			fflush(fout);
 			return 0;
 			break;
 		}
