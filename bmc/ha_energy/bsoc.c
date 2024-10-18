@@ -33,6 +33,7 @@ const char* mqtt_name[V_DLAST] = {
 	"DLc_mppt",
 	"DLp_mppt",
 	"DLah_bat",
+	"DLccmode",
 	"DLgti",
 };
 
@@ -144,7 +145,7 @@ double bsoc_gti(void)
 		L.gti_weight = 0.0f; // reduce power to zero
 	} else {
 		if (E.dl_excess) {
-			if (E.mvar[V_DAHBAT] > PV_DL_B_AH_LOW) {
+			if (E.mvar[V_DAHBAT] > PV_DL_B_AH_MIN) {
 				L.gti_weight = PV_DL_EXCESS + E.dl_excess_adj;
 			} else {
 				L.gti_weight = 0.0f; // reduce power to zero
@@ -169,7 +170,7 @@ double gti_test(void)
 #endif
 	} else {
 		if (E.dl_excess) {
-			if (E.mvar[V_DAHBAT] > PV_DL_B_AH_LOW) {
+			if (E.mvar[V_DAHBAT] > PV_DL_B_AH_MIN) {
 				L.gti_weight = PV_DL_EXCESS + E.dl_excess_adj;
 			} else {
 				L.gti_weight = 0.0f; // reduce power to zero
@@ -324,13 +325,28 @@ bool bsoc_set_mode(double target, bool mode, bool init)
 		bsoc_mode = false;
 	}
 
+	/*
+	 * HA start excess button pressed
+	 */
 	if (E.mode.con4) {
 		E.dl_excess = true;
 		E.mode.con4 = false;
 	}
 
+	/*
+	 * HA stop excess button pressed
+	 */
 	if (E.mode.con5) {
 		E.dl_excess = false;
+		E.mode.con5 = false;
+	}
+
+	/*
+	 * DL buffer battery low set-point excess load shutdown
+	 */
+	if (E.mvar[V_DAHBAT] < PV_DL_B_AH_LOW) {
+		E.dl_excess = false;
+		E.mode.con4 = false;
 		E.mode.con5 = false;
 	}
 

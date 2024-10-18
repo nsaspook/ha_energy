@@ -14,7 +14,7 @@ extern "C" {
 
     //#define GTI_NO_POWER      // do we actually run power commands
 
-#define DEBUG_HA_CMD    // show debug text
+//#define DEBUG_HA_CMD    // show debug text
 #define HA_SW_DELAY     400000  // usecs
 #define TOKEN_DELAY     250
 

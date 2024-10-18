@@ -66,7 +66,7 @@ extern "C" {
 #define RBUF_SIZ        82
 #define SYSLOG_SIZ 512
 
-#define MQTT_TIMEOUT    400
+#define MQTT_TIMEOUT    900
 #define SW_QOS          1
 
 #define NO_CYLON
@@ -104,7 +104,8 @@ extern "C" {
 #define PV_DL_MPTT_IDLE     57.0f
 #define PV_DL_BIAS_RATE     75.0f
 #define PV_DL_EXCESS       500.0f
-#define PV_DL_B_AH_LOW     125.0f
+#define PV_DL_B_AH_LOW     100.0f
+#define PV_DL_B_AH_MIN     160.0f 
 #define PWA_SLEEP          200.0f
 #define DL_AC_DC_EFF        1.24f
 
@@ -123,7 +124,7 @@ extern "C" {
 	//#define DEBUG_SHUTDOWN
 
 	//#define AUTO_CHARGE                   // turn on dumpload charger during restarts
-#define B_DLE_DEBUG    // Dump Load debugging
+	//#define B_DLE_DEBUG    // Dump Load debugging
 
 #define IM_DELAY            1   // tens of second updates
 #define IM_DISPLAY          1
@@ -233,6 +234,7 @@ extern "C" {
 		V_DCMPPT,
 		V_DPMPPT,
 		V_DAHBAT,
+		V_DCCMODE,
 		V_DGTI,
 		V_DLAST,
 	};

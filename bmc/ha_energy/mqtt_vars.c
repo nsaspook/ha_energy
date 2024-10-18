@@ -37,6 +37,7 @@ void mqtt_ha_pid(MQTTClient client_p, const char * topic_p)
 		E.mode.off_grid = 0.0f;
 	}
 	cJSON_AddNumberToObject(json, "off_grid", E.mode.off_grid);
+	cJSON_AddNumberToObject(json, "excess_mode", (double) E.dl_excess);
 	cJSON_AddStringToObject(json, "build_date", FW_Date);
 	cJSON_AddStringToObject(json, "build_time", FW_Time);
 	time(&rawtime);
@@ -56,7 +57,7 @@ void mqtt_ha_pid(MQTTClient client_p, const char * topic_p)
 		while (ha_flag_vars_ss.deliveredtoken != token) {
 			usleep(TOKEN_DELAY);
 			if (waiting++ > MQTT_TIMEOUT) {
-				fprintf(fout, "\r\nSW Still Waiting, timeout\r\n");
+				fprintf(fout, "\r\n%s SW Still Waiting, timeout\r\n", log_time(false));
 				break;
 			}
 		};
@@ -72,8 +73,10 @@ void mqtt_ha_pid(MQTTClient client_p, const char * topic_p)
 void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state)
 {
 	cJSON *json;
+#ifdef DEBUG_HA_CMD
 	static bool spam = false;
 	static uint32_t less_spam = 0;
+#endif
 
 	MQTTClient_message pubmsg = MQTTClient_message_initializer;
 	MQTTClient_deliveryToken token;
@@ -83,15 +86,19 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state)
 	json = cJSON_CreateObject();
 	if (sw_state) {
 		cJSON_AddStringToObject(json, "state", "ON");
+#ifdef DEBUG_HA_CMD
 		spam = true;
 		less_spam = 0;
+#endif
 	} else {
 		if ((uint32_t) E.mvar[V_FCCM] != FLOAT_CODE) { // use max power in FLOAT mode
 			cJSON_AddStringToObject(json, "state", "OFF");
 		} else {
 			cJSON_AddStringToObject(json, "state", "ON");
+#ifdef DEBUG_HA_CMD
 			spam = true;
 			less_spam = 0;
+#endif
 		}
 	}
 	// convert the cJSON object to a JSON string
@@ -105,6 +112,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state)
 #ifdef DEBUG_HA_CMD
 	if (spam) {
 		log_time(true);
+		fflush(fout);
 		fprintf(fout, "HA switch command %s, %d\r\n", topic_p, sw_state);
 		fflush(fout);
 		if (!sw_state) {
@@ -123,7 +131,11 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state)
 		while (ha_flag_vars_ss.deliveredtoken != token) {
 			usleep(TOKEN_DELAY);
 			if (waiting++ > MQTT_TIMEOUT) {
+#ifdef DEBUG_HA_CMD
+				fflush(fout);
 				fprintf(fout, "\r\nSW Still Waiting, timeout\r\n");
+				fflush(fout);
+#endif
 				break;
 			}
 		};
@@ -131,8 +143,8 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state)
 
 	cJSON_free(json_str);
 	cJSON_Delete(json);
-	fflush(fout);
 	usleep(HA_SW_DELAY);
+	fflush(fout);
 }
 
 /*
@@ -188,7 +200,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg)
 		while (ha_flag_vars_ss.deliveredtoken != token) {
 			usleep(TOKEN_DELAY);
 			if (waiting++ > MQTT_TIMEOUT) {
-				fprintf(fout, "\r\nGTI Still Waiting, timeout\r\n");
+				fprintf(fout, "\r\n%s GTI Still Waiting, timeout\r\n", log_time(false));
 				break;
 			}
 		};
@@ -218,7 +230,7 @@ bool mqtt_gti_time(MQTTClient client_p, const char * topic_p, char * msg)
 		while (ha_flag_vars_ss.deliveredtoken != token) {
 			usleep(TOKEN_DELAY);
 			if (waiting++ > MQTT_TIMEOUT) {
-				fprintf(fout, "\r\nGTI Still Waiting, timeout\r\n");
+				fprintf(fout, "\r\n%s GTI Still Waiting, timeout\r\n", log_time(false));
 				break;
 			}
 		};
