@@ -38,6 +38,8 @@ extern "C" {
 
 #define LOG_VERSION     "V0.65"
 #define MQTT_VERSION    "V3.11"
+#define TNAME		"maint9"
+#define LADDRESS        "tcp://127.0.0.1:1883"
 #ifdef __amd64
 #define ADDRESS         "tcp://10.1.1.172:1883"
 #else

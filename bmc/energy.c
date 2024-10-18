@@ -293,8 +293,12 @@ int main(int argc, char *argv[])
 		conn_opts_sd = MQTTClient_connectOptions_initializer;
 	MQTTClient_message pubmsg = MQTTClient_message_initializer;
 	MQTTClient_deliveryToken token;
+	char hname[256];
+	size_t hname_len = 12;
 
-	printf("\r\n%s  LOG Version %s : MQTT Version %s\r\n", log_time(false), LOG_VERSION, MQTT_VERSION);
+	gethostname(hname, hname_len);
+	hname[12] = 0;
+	printf("\r\n%s  LOG Version %s : MQTT Version %s : Host Name %s\r\n", log_time(false), LOG_VERSION, MQTT_VERSION, hname);
 	showIP();
 	skeleton_daemon();
 
@@ -328,10 +332,17 @@ int main(int argc, char *argv[])
 			setitimer(ITIMER_REAL, &new_timer, &old_timer);
 			signal(SIGALRM, timer_callback);
 
-			MQTTClient_create(&E.client_p, ADDRESS, CLIENTID1,
-				MQTTCLIENT_PERSISTENCE_NONE, NULL);
-			conn_opts_p.keepAliveInterval = 20;
-			conn_opts_p.cleansession = 1;
+			if (strncmp(hname, TNAME, 5) == 0) {
+				MQTTClient_create(&E.client_p, LADDRESS, CLIENTID1,
+					MQTTCLIENT_PERSISTENCE_NONE, NULL);
+				conn_opts_p.keepAliveInterval = 20;
+				conn_opts_p.cleansession = 1;
+			} else {
+				MQTTClient_create(&E.client_p, ADDRESS, CLIENTID1,
+					MQTTCLIENT_PERSISTENCE_NONE, NULL);
+				conn_opts_p.keepAliveInterval = 20;
+				conn_opts_p.cleansession = 1;
+			}
 
 			fprintf(fout, "%s Connect MQTT server %s, %s\n", log_time(false), ADDRESS, CLIENTID1);
 			fflush(fout);
@@ -343,10 +354,17 @@ int main(int argc, char *argv[])
 				exit(EXIT_FAILURE);
 			}
 
-			MQTTClient_create(&E.client_sd, ADDRESS, CLIENTID2,
-				MQTTCLIENT_PERSISTENCE_NONE, NULL);
-			conn_opts_sd.keepAliveInterval = 20;
-			conn_opts_sd.cleansession = 1;
+			if (strncmp(hname, TNAME, 5) == 0) {
+				MQTTClient_create(&E.client_sd, LADDRESS, CLIENTID2,
+					MQTTCLIENT_PERSISTENCE_NONE, NULL);
+				conn_opts_p.keepAliveInterval = 20;
+				conn_opts_p.cleansession = 1;
+			} else {
+				MQTTClient_create(&E.client_sd, ADDRESS, CLIENTID2,
+					MQTTCLIENT_PERSISTENCE_NONE, NULL);
+				conn_opts_sd.keepAliveInterval = 20;
+				conn_opts_sd.cleansession = 1;
+			}
 
 			fprintf(fout, "%s Connect MQTT server %s, %s\n", log_time(false), ADDRESS, CLIENTID2);
 			fflush(fout);
