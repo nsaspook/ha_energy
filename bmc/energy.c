@@ -599,7 +599,13 @@ int main(int argc, char *argv[])
 					 * reduce charging/diversion power to safe PS limits
 					 */
 					if (E.mode.dl_mqtt_max > PV_DL_MPTT_MAX) {
-						error_drive = PV_DL_MPTT_IDLE;
+						if (!E.dl_excess) {
+							error_drive = PV_DL_MPTT_IDLE;
+						} else {
+							if (E.mode.dl_mqtt_max > PV_DL_MPTT_EXCESS) {
+								error_drive = PV_DL_MPTT_IDLE;
+							}
+						}
 					} else {
 						if (E.dl_excess) {
 							error_drive = PV_DL_EXCESS + E.dl_excess_adj;
@@ -648,11 +654,13 @@ int main(int argc, char *argv[])
 #endif                            
 				} else {
 					if ((dc2_filter(E.mvar[V_BEN]) < BAL_MIN_ENERGY_GTI) || (gti_test() < (MIN_BAT_KW_GTI_LO + E.gti_low_adj))) {
-						ramp_down_gti(E.client_p, true);
+						if (!E.dl_excess) {
+							ramp_down_gti(E.client_p, true);
 #ifdef PSW_DEBUG
-						fprintf(fout, "%s MIN_BAT_KW_GTI_LO DC switch %d \r\n", log_time(false), E.gti_sw_on);
+							fprintf(fout, "%s MIN_BAT_KW_GTI_LO DC switch %d \r\n", log_time(false), E.gti_sw_on);
 #endif
-						E.gti_sw_on = true;
+							E.gti_sw_on = true;
+						}
 					}
 				}
 			};
