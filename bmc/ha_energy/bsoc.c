@@ -337,6 +337,7 @@ bool bsoc_set_mode(double target, bool mode, bool init)
 	 * HA stop excess button pressed
 	 */
 	if (E.mode.con5) {
+		mqtt_gti_power(E.client_p, TOPIC_P, "Z#"); // zero power at excess shutdown
 		E.dl_excess = false;
 		E.mode.con5 = false;
 	}
@@ -345,6 +346,7 @@ bool bsoc_set_mode(double target, bool mode, bool init)
 	 * DL buffer battery low set-point excess load shutdown
 	 */
 	if (E.mvar[V_DAHBAT] < PV_DL_B_AH_LOW) {
+		mqtt_gti_power(E.client_p, TOPIC_P, "Z#"); // zero power at excess shutdown
 		E.dl_excess = false;
 		E.mode.con4 = false;
 		E.mode.con5 = false;

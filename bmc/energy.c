@@ -470,6 +470,7 @@ int main(int argc, char *argv[])
 				fprintf(fout, "%s RESTART Solar Energy Control\r\n", log_time(false));
 				fflush(fout);
 				bsoc_set_mode(E.mode.pv_bias, true, true);
+				mqtt_gti_power(E.client_p, TOPIC_P, "Z#"); // zero power at startup
 #ifdef AUTO_CHARGE
 				mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
 #endif

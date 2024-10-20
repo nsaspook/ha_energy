@@ -38,7 +38,7 @@ extern "C" {
 
 #define LOG_VERSION     "V0.65"
 #define MQTT_VERSION    "V3.11"
-#define TNAME		"maint9"
+#define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
 #ifdef __amd64
 #define ADDRESS         "tcp://10.1.1.172:1883"
@@ -106,7 +106,7 @@ extern "C" {
 #define PV_DL_MPTT_IDLE     57.0f
 #define PV_DL_BIAS_RATE     75.0f
 #define PV_DL_EXCESS       500.0f
-#define PV_DL_B_AH_LOW     100.0f
+#define PV_DL_B_AH_LOW     125.0f
 #define PV_DL_B_AH_MIN     160.0f 
 #define PWA_SLEEP          200.0f
 #define DL_AC_DC_EFF        1.24f

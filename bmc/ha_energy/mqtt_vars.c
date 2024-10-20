@@ -164,6 +164,9 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg)
 	pubmsg.qos = QOS;
 	pubmsg.retained = 0;
 
+	if (E.dl_excess) { // always run excess commands
+		spam = false;
+	}
 #ifdef GTI_NO_POWER
 	MQTTClient_publishMessage(client_p, "mateq84/data/gticmd_nopower", &pubmsg, &token);
 #else
