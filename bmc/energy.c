@@ -293,7 +293,7 @@ int main(int argc, char *argv[])
 		conn_opts_sd = MQTTClient_connectOptions_initializer;
 	MQTTClient_message pubmsg = MQTTClient_message_initializer;
 	MQTTClient_deliveryToken token;
-	char hname[256];
+	char hname[256], *hname_ptr = hname;
 	size_t hname_len = 12;
 
 	gethostname(hname, hname_len);
@@ -332,45 +332,49 @@ int main(int argc, char *argv[])
 			setitimer(ITIMER_REAL, &new_timer, &old_timer);
 			signal(SIGALRM, timer_callback);
 
-			if (strncmp(hname, TNAME, 5) == 0) {
+			if (strncmp(hname, TNAME, 6) == 0) {
 				MQTTClient_create(&E.client_p, LADDRESS, CLIENTID1,
 					MQTTCLIENT_PERSISTENCE_NONE, NULL);
 				conn_opts_p.keepAliveInterval = 20;
 				conn_opts_p.cleansession = 1;
+				hname_ptr = LADDRESS;
 			} else {
 				MQTTClient_create(&E.client_p, ADDRESS, CLIENTID1,
 					MQTTCLIENT_PERSISTENCE_NONE, NULL);
 				conn_opts_p.keepAliveInterval = 20;
 				conn_opts_p.cleansession = 1;
+				hname_ptr = ADDRESS;
 			}
 
-			fprintf(fout, "%s Connect MQTT server %s, %s\n", log_time(false), ADDRESS, CLIENTID1);
+			fprintf(fout, "%s Connect MQTT server %s, %s\n", log_time(false), hname_ptr, CLIENTID1);
 			fflush(fout);
 			MQTTClient_setCallbacks(E.client_p, &ha_flag_vars_ss, connlost, msgarrvd, delivered);
 			if ((E.rc = MQTTClient_connect(E.client_p, &conn_opts_p)) != MQTTCLIENT_SUCCESS) {
-				fprintf(fout, "%s Failed to connect MQTT server, return code %d %s, %s\n", log_time(false), E.rc, ADDRESS, CLIENTID1);
+				fprintf(fout, "%s Failed to connect MQTT server, return code %d %s, %s\n", log_time(false), E.rc, hname_ptr, CLIENTID1);
 				fflush(fout);
 				pthread_mutex_destroy(&E.ha_lock);
 				exit(EXIT_FAILURE);
 			}
 
-			if (strncmp(hname, TNAME, 5) == 0) {
+			if (strncmp(hname, TNAME, 6) == 0) {
 				MQTTClient_create(&E.client_sd, LADDRESS, CLIENTID2,
 					MQTTCLIENT_PERSISTENCE_NONE, NULL);
 				conn_opts_p.keepAliveInterval = 20;
 				conn_opts_p.cleansession = 1;
+				hname_ptr = LADDRESS;
 			} else {
 				MQTTClient_create(&E.client_sd, ADDRESS, CLIENTID2,
 					MQTTCLIENT_PERSISTENCE_NONE, NULL);
 				conn_opts_sd.keepAliveInterval = 20;
 				conn_opts_sd.cleansession = 1;
+				hname_ptr = ADDRESS;
 			}
 
-			fprintf(fout, "%s Connect MQTT server %s, %s\n", log_time(false), ADDRESS, CLIENTID2);
+			fprintf(fout, "%s Connect MQTT server %s, %s\n", log_time(false), hname_ptr, CLIENTID2);
 			fflush(fout);
 			MQTTClient_setCallbacks(E.client_sd, &ha_flag_vars_sd, connlost, msgarrvd, delivered);
 			if ((E.rc = MQTTClient_connect(E.client_sd, &conn_opts_sd)) != MQTTCLIENT_SUCCESS) {
-				fprintf(fout, "%s Failed to connect MQTT server, return code %d %s, %s\n", log_time(false), E.rc, ADDRESS, CLIENTID2);
+				fprintf(fout, "%s Failed to connect MQTT server, return code %d %s, %s\n", log_time(false), E.rc, hname_ptr, CLIENTID2);
 				fflush(fout);
 				pthread_mutex_destroy(&E.ha_lock);
 				exit(EXIT_FAILURE);
