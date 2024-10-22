@@ -102,8 +102,8 @@ extern "C" {
 #define PV_BIAS_FLOAT       399.0f
 #define PV_BIAS_SLEEP       480.0f
 #define PV_BIAS_RATE        320.0f
-#define PV_DL_MPTT_MAX      800.0f
-#define PV_DL_MPTT_EXCESS  1200.0f
+#define PV_DL_MPTT_MAX     1200.0f
+#define PV_DL_MPTT_EXCESS  1300.0f
 #define PV_DL_MPTT_IDLE     57.0f
 #define PV_DL_BIAS_RATE     75.0f
 #define PV_DL_EXCESS       500.0f
@@ -114,7 +114,7 @@ extern "C" {
 
 #define BAL_MIN_ENERGY_AC   -200.0f
 #define BAL_MAX_ENERGY_AC   200.0f
-#define BAL_MIN_ENERGY_GTI  -800.0f
+#define BAL_MIN_ENERGY_GTI  -1400.0f
 #define BAL_MAX_ENERGY_GTI  200.0f
 
 #define LOG_TO_FILE         "/store/logs/energy.log"
