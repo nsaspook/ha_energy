@@ -255,6 +255,7 @@ void timer_callback(int32_t signum)
 	ha_flag_vars_ss.runner = true;
 	E.ten_sec_clock++;
 	E.log_spam++;
+	E.log_time_reset++;
 	if (E.log_spam > MAX_LOG_SPAM) {
 		E.log_spam = 0;
 	}
@@ -635,12 +636,10 @@ int main(int argc, char *argv[])
 #endif
 				if (((ac2_filter(E.mvar[V_BEN]) < BAL_MIN_ENERGY_AC) || ((ac_test() < (MIN_BAT_KW_AC_LO + E.ac_low_adj))))) {
 					if (!fm80_float(true)) {
-						ramp_down_ac(E.client_p, E.ac_sw_on); // use once control
-#ifndef PSW_DEBUG_AC
-						if (E.log_spam < LOW_LOG_SPAM) {
+						ramp_down_ac(E.client_p, E.ac_sw_on);
+						if (log_timer()) {
 							fprintf(fout, "%s RAMP DOWN AC, MIN_BAT_KW_AC_LO AC switch %d \r\n", log_time(false), E.ac_sw_on);
 						}
-#endif
 					}
 					E.ac_sw_on = true;
 				}
@@ -656,12 +655,10 @@ int main(int argc, char *argv[])
 						fprintf(fout, "%s DL excess ramp_up_gti, DC switch %d\r\n", log_time(false), E.gti_sw_on);
 					}
 #endif
-					ramp_up_gti(E.client_p, E.gti_sw_on, E.dl_excess); // fixme on the ONCE code
-#ifndef PSW_DEBUG_DC
-					if (E.log_spam < LOW_LOG_SPAM) {
+					ramp_up_gti(E.client_p, E.gti_sw_on, E.dl_excess);
+					if (log_timer()) {
 						fprintf(fout, "%s RAMP DOWN DC, MIN_BAT_KW_GTI_HI DC switch %d \r\n", log_time(false), E.gti_sw_on);
 					}
-#endif
 					E.gti_sw_on = false; // once flag
 #endif                            
 				} else {
@@ -974,4 +971,19 @@ bool sync_ha(void)
 		E.ac_mismatch = false;
 	}
 	return sync;
+}
+
+bool log_timer(void)
+{
+	bool itstime = false;
+
+	if (E.log_spam < LOW_LOG_SPAM) {
+		E.log_time_reset = 0;
+		itstime = true;
+	}
+	if (E.log_time_reset > RESET_LOG_SPAM) {
+		E.log_spam = 0;
+		itstime = true;
+	}
+	return itstime;
 }

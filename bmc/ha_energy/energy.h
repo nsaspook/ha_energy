@@ -122,6 +122,7 @@ extern "C" {
 	
 #define MAX_LOG_SPAM		60
 #define LOW_LOG_SPAM		2
+#define RESET_LOG_SPAM		120
 
 	//#define IM_DEBUG                      // WEM3080T LOGGING
 	//#define B_ADJ_DEBUG                   // debug printing
@@ -303,7 +304,7 @@ extern "C" {
 		volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode, startup, ac_mismatch, dc_mismatch, mode_mismatch, dl_excess;
 		volatile uint32_t speed_go, im_delay, im_display, gti_delay;
 		volatile int32_t rc, sane;
-		volatile uint32_t ten_sec_clock, log_spam;
+		volatile uint32_t ten_sec_clock, log_spam, log_time_reset;
 		pthread_mutex_t ha_lock;
 		struct mode_type mode;
 		struct link_type link;
@@ -334,6 +335,7 @@ extern "C" {
 	bool sanity_check(void);
 	char * log_time(bool);
 	bool sync_ha(void);
+	bool log_timer(void);
 
 #ifdef __cplusplus
 }
