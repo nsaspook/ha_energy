@@ -254,6 +254,10 @@ void timer_callback(int32_t signum)
 	signal(signum, timer_callback);
 	ha_flag_vars_ss.runner = true;
 	E.ten_sec_clock++;
+	E.log_spam++;
+	if (E.log_spam > MAX_LOG_SPAM) {
+		E.log_spam = 0;
+	}
 }
 
 /*
@@ -632,8 +636,10 @@ int main(int argc, char *argv[])
 				if (((ac2_filter(E.mvar[V_BEN]) < BAL_MIN_ENERGY_AC) || ((ac_test() < (MIN_BAT_KW_AC_LO + E.ac_low_adj))))) {
 					if (!fm80_float(true)) {
 						ramp_down_ac(E.client_p, E.ac_sw_on); // use once control
-#ifdef PSW_DEBUG
-						fprintf(fout, "%s MIN_BAT_KW_AC_LO AC switch %d \r\n", log_time(false), E.ac_sw_on);
+#ifndef PSW_DEBUG_AC
+						if (E.log_spam < LOW_LOG_SPAM) {
+							fprintf(fout, "%s RAMP DOWN AC, MIN_BAT_KW_AC_LO AC switch %d \r\n", log_time(false), E.ac_sw_on);
+						}
 #endif
 					}
 					E.ac_sw_on = true;
@@ -651,8 +657,10 @@ int main(int argc, char *argv[])
 					}
 #endif
 					ramp_up_gti(E.client_p, E.gti_sw_on, E.dl_excess); // fixme on the ONCE code
-#ifdef PSW_DEBUG
-					fprintf(fout, "%s MIN_BAT_KW_GTI_HI DC switch %d \r\n", log_time(false), E.gti_sw_on);
+#ifndef PSW_DEBUG_DC
+					if (E.log_spam < LOW_LOG_SPAM) {
+						fprintf(fout, "%s RAMP DOWN DC, MIN_BAT_KW_GTI_HI DC switch %d \r\n", log_time(false), E.gti_sw_on);
+					}
 #endif
 					E.gti_sw_on = false; // once flag
 #endif                            

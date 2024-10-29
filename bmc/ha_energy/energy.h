@@ -119,6 +119,9 @@ extern "C" {
 
 #define LOG_TO_FILE         "/store/logs/energy.log"
 #define LOG_TO_FILE_ALT     "/tmp/energy.log"
+	
+#define MAX_LOG_SPAM		60
+#define LOW_LOG_SPAM		2
 
 	//#define IM_DEBUG                      // WEM3080T LOGGING
 	//#define B_ADJ_DEBUG                   // debug printing
@@ -300,7 +303,7 @@ extern "C" {
 		volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode, startup, ac_mismatch, dc_mismatch, mode_mismatch, dl_excess;
 		volatile uint32_t speed_go, im_delay, im_display, gti_delay;
 		volatile int32_t rc, sane;
-		volatile uint32_t ten_sec_clock;
+		volatile uint32_t ten_sec_clock, log_spam;
 		pthread_mutex_t ha_lock;
 		struct mode_type mode;
 		struct link_type link;
