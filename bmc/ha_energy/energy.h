@@ -36,7 +36,7 @@ extern "C" {
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.67"
+#define LOG_VERSION     "V0.68"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
@@ -72,6 +72,7 @@ extern "C" {
 #define SW_QOS          1
 
 #define NO_CYLON
+#define CRITIAL_SHUTDOWN_LOG
 
 #define UNIT_TEST       2
 #define NORM_MODE       0
@@ -82,18 +83,27 @@ extern "C" {
 #define CMD_SEC         10
 #define TIME_SYNC_SEC 30
 
+	/*
+	 * Battery SoC cycle limits parameters
+	 */
+#define BAT_M_KW            5120.0f
+#define BAT_SOC_TOP         0.98f
+#define BAT_SOC_HIGH        0.95f
+#define BAT_SOC_LOW         0.60f
 #define BAT_CRITICAL        200.0f
-#define CRITIAL_SHUTDOWN_LOG
-#define MIN_BAT_KW_GTI_HI   5100.0f
-#define MIN_BAT_KW_GTI_LO   4650.0f
-
-#define MIN_BAT_KW_AC_HI    5000.0f
-#define MIN_BAT_KW_AC_LO    4500.0f
-
 #define MIN_BAT_KW_BSOC_SLP 4000.0f
 #define MIN_BAT_KW_BSOC_HI  4550.0f
 #define MIN_BAT_KW_BSOC_LO  3500.0f
 
+#define MIN_BAT_KW_GTI_HI   BAT_M_KW*BAT_SOC_TOP
+#define MIN_BAT_KW_GTI_LO   MIN_BAT_KW_GTI_HI*BAT_SOC_LOW
+
+#define MIN_BAT_KW_AC_HI    BAT_M_KW*BAT_SOC_HIGH
+#define MIN_BAT_KW_AC_LO    MIN_BAT_KW_AC_HI*BAT_SOC_LOW
+
+	/*
+	 * PV panel cycle limits parameters
+	 */
 #define PV_PGAIN            0.85f
 #define PV_IGAIN            0.12f
 #define PV_IMAX             1400.0f
@@ -112,6 +122,9 @@ extern "C" {
 #define PWA_SLEEP          200.0f
 #define DL_AC_DC_EFF        1.24f
 
+	/*
+	 * Energy control loop parameters
+	 */
 #define BAL_MIN_ENERGY_AC   -200.0f
 #define BAL_MAX_ENERGY_AC   200.0f
 #define BAL_MIN_ENERGY_GTI  -1400.0f
@@ -119,10 +132,10 @@ extern "C" {
 
 #define LOG_TO_FILE         "/store/logs/energy.log"
 #define LOG_TO_FILE_ALT     "/tmp/energy.log"
-	
-#define MAX_LOG_SPAM		60
-#define LOW_LOG_SPAM		2
-#define RESET_LOG_SPAM		120
+
+#define MAX_LOG_SPAM  60
+#define LOW_LOG_SPAM  2
+#define RESET_LOG_SPAM  120
 
 	//#define IM_DEBUG                      // WEM3080T LOGGING
 	//#define B_ADJ_DEBUG                   // debug printing
