@@ -46,7 +46,7 @@
  * V0.63 add IP address logging
  * V0.64 Dump Load excess load mode programming
  * V.065 DL excess logic tuning and power adjustments
- * V.066-068 Various timing fixes to reduce spamming commands and logs
+ * V.066 -> V.068 Various timing fixes to reduce spamming commands and logs
  */
 
 /*
@@ -135,6 +135,9 @@ struct energy_type E = {
 static bool solar_shutdown(void);
 void showIP(void);
 
+/*
+ * show all assigned networking addresses and types
+ */
 void showIP(void)
 {
 	struct ifaddrs *ifaddr, *ifa;
@@ -165,6 +168,9 @@ void showIP(void)
 	freeifaddrs(ifaddr);
 }
 
+/*
+ * setup program to run as a background deamon
+ */
 static void skeleton_daemon()
 {
 	pid_t pid;
@@ -221,6 +227,9 @@ static void skeleton_daemon()
 
 }
 
+/*
+ * check for sensor range errors
+ */
 bool sanity_check(void)
 {
 	if (E.mvar[V_PWA] > PWA_SANE) {
@@ -284,6 +293,7 @@ void connlost(void *context, char *cause)
 
 /*
  * Use MQTT/HTTP to send/receive updates to a Solar hardware device
+ * and control energy is a optimized fashion
  */
 int main(int argc, char *argv[])
 {
@@ -871,8 +881,9 @@ void ha_dc_on(void)
 	E.gti_sw_status = true;
 }
 
-//#define DEBUG_SHUTDOWN
-
+/*
+ * Battery and system protection
+ */
 static bool solar_shutdown(void)
 {
 	static bool ret = false;
@@ -888,8 +899,6 @@ static bool solar_shutdown(void)
 		 * FIXME
 		 * 
 		 */
-
-		//		return ret;
 	}
 
 	if (E.solar_shutdown) {
@@ -927,6 +936,9 @@ static bool solar_shutdown(void)
 	return ret;
 }
 
+/*
+ * sent the current UTC to the Dump Load controller
+ */
 char * log_time(bool log)
 {
 	static char time_log[RBUF_SIZ] = {0};
@@ -952,6 +964,9 @@ char * log_time(bool log)
 	return time_log;
 }
 
+/*
+ * try to keep this programs switch status and HA in sync
+ */
 bool sync_ha(void)
 {
 	bool sync = false;
@@ -976,6 +991,9 @@ bool sync_ha(void)
 	return sync;
 }
 
+/*
+ * limits commands and log messages, check for proper functionality for each usage
+ */
 bool log_timer(void)
 {
 	bool itstime = false;
