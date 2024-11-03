@@ -46,6 +46,7 @@
  * V0.63 add IP address logging
  * V0.64 Dump Load excess load mode programming
  * V.065 DL excess logic tuning and power adjustments
+ * V.066-068 Various timing fixes to reduce spamming commands and logs
  */
 
 /*
@@ -664,10 +665,12 @@ int main(int argc, char *argv[])
 				} else {
 					if ((dc2_filter(E.mvar[V_BEN]) < BAL_MIN_ENERGY_GTI) || (gti_test() < (MIN_BAT_KW_GTI_LO + E.gti_low_adj))) {
 						if (!E.dl_excess) {
-							ramp_down_gti(E.client_p, true);
+							if (log_timer()) {
+								ramp_down_gti(E.client_p, true);
 #ifdef PSW_DEBUG
-							fprintf(fout, "%s MIN_BAT_KW_GTI_LO DC switch %d \r\n", log_time(false), E.gti_sw_on);
+								fprintf(fout, "%s MIN_BAT_KW_GTI_LO DC switch %d \r\n", log_time(false), E.gti_sw_on);
 #endif
+							}
 							E.gti_sw_on = true;
 						}
 					}
