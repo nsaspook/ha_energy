@@ -946,6 +946,8 @@ char * log_time(bool log)
 	time_t rawtime_log;
 
 	tzset();
+	timezone=0;
+	daylight=0;
 	time(&rawtime_log);
 	if (sync_time++ > TIME_SYNC_SEC) {
 		sync_time = 0;
