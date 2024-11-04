@@ -47,7 +47,7 @@ extern "C" {
 #include <math.h>
 #include "pid.h"
 #include "mqtt_rec.h"
-	
+
 	bool bsoc_init(void);
 	bool bsoc_data_collect(void);
 	double bsoc_ac(void);
@@ -56,20 +56,20 @@ extern "C" {
 	double ac_test(void);
 	double get_batc_dev(void);
 	bool bat_current_stable(void);
-	void bsoc_set_std_dev(double, uint32_t);
+	void bsoc_set_std_dev(const double, const uint32_t);
 
-	double calculateStandardDeviation(uint32_t, const double *);
+	double calculateStandardDeviation(const uint32_t, const double *);
 
-	bool bsoc_set_mode(double, bool, bool);
+	bool bsoc_set_mode(const double, const bool, const bool);
 
-	double ac0_filter(double);
-	double ac1_filter(double);
-	double ac2_filter(double);
-	double dc0_filter(double);
-	double dc1_filter(double);
-	double dc2_filter(double);
-	double drive0_filter(double);
-	double drive1_filter(double);
+	double ac0_filter(const double);
+	double ac1_filter(const double);
+	double ac2_filter(const double);
+	double dc0_filter(const double);
+	double dc1_filter(const double);
+	double dc2_filter(const double);
+	double drive0_filter(const double);
+	double drive1_filter(const double);
 
 #ifdef __cplusplus
 }

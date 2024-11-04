@@ -52,7 +52,7 @@ static struct local_type L = {
 	.pv_voltage = 0.0f,
 };
 
-static double error_filter(double);
+static double error_filter(const double);
 
 bool bsoc_init(void)
 {
@@ -68,7 +68,7 @@ bool bsoc_init(void)
 /*
  * set battery std dev array value
  */
-void bsoc_set_std_dev(double value, uint32_t i)
+void bsoc_set_std_dev(const double value, const uint32_t i)
 {
 	L.bat_c_std_dev[i] = value;
 }
@@ -194,7 +194,7 @@ double get_batc_dev(void)
  * used to wait until GTI power ramps are stable
  * batc_std_dev needs to be under some standard value to continue power ramps
  */
-double calculateStandardDeviation(uint32_t N, const double data[])
+double calculateStandardDeviation(const uint32_t N, const double data[])
 {
 	// variable to store sum of the given data
 	double sum = 0;
@@ -251,7 +251,7 @@ bool bat_current_stable(void)
  * set mode to true to add GTI power to AC power for control power feedback
  * target is the positive power bias to keep the battery(s) charged
  */
-bool bsoc_set_mode(double target, bool mode, bool init)
+bool bsoc_set_mode(const double target, const bool mode, const bool init)
 {
 	static bool bsoc_mode = false;
 	static bool bsoc_high = false, ha_ac_mode = true;
@@ -358,14 +358,14 @@ bool bsoc_set_mode(double target, bool mode, bool init)
 /*
  * power drive error signal smoothing
  */
-static double error_filter(double raw)
+static double error_filter(const double raw)
 {
 	static double accum = 0.0f;
 	accum = accum - accum / L.coef + raw;
 	return accum / L.coef;
 }
 
-double ac0_filter(double raw)
+double ac0_filter(const double raw)
 {
 	static double accum = 0.0f;
 	static double coef = COEFF;
@@ -373,7 +373,7 @@ double ac0_filter(double raw)
 	return accum / coef;
 }
 
-double ac1_filter(double raw)
+double ac1_filter(const double raw)
 {
 	static double accum = 0.0f;
 	static double coef = COEF;
@@ -381,7 +381,7 @@ double ac1_filter(double raw)
 	return accum / coef;
 }
 
-double ac2_filter(double raw)
+double ac2_filter(const double raw)
 {
 	static double accum = 0.0f;
 	static double coef = COEF;
@@ -389,7 +389,7 @@ double ac2_filter(double raw)
 	return accum / coef;
 }
 
-double dc0_filter(double raw)
+double dc0_filter(const double raw)
 {
 	static double accum = 0.0f;
 	static double coef = COEFF;
@@ -397,7 +397,7 @@ double dc0_filter(double raw)
 	return accum / coef;
 }
 
-double dc1_filter(double raw)
+double dc1_filter(const double raw)
 {
 	static double accum = 0.0f;
 	static double coef = COEF;
@@ -405,7 +405,7 @@ double dc1_filter(double raw)
 	return accum / coef;
 }
 
-double dc2_filter(double raw)
+double dc2_filter(const double raw)
 {
 	static double accum = 0.0f;
 	static double coef = COEF;
@@ -413,7 +413,7 @@ double dc2_filter(double raw)
 	return accum / coef;
 }
 
-double drive0_filter(double raw)
+double drive0_filter(const double raw)
 {
 	static double accum = 0.0f;
 	static double coef = COEF;
@@ -421,7 +421,7 @@ double drive0_filter(double raw)
 	return accum / coef;
 }
 
-double drive1_filter(double raw)
+double drive1_filter(const double raw)
 {
 	static double accum = 0.0f;
 	static double coef = COEFF;

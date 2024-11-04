@@ -3,7 +3,7 @@
 
 static CURL *curl;
 static CURLcode res;
-static void iammeter_get_data(double, uint32_t, uint32_t);
+static void iammeter_get_data(const double, const uint32_t, const uint32_t);
 
 bool mqtt_gti_time(MQTTClient, const char *, char *);
 
@@ -99,7 +99,7 @@ void iammeter_read(void)
 /*
  * move data into global state structure
  */
-static void iammeter_get_data(double valuedouble, uint32_t i, uint32_t j)
+static void iammeter_get_data(const double valuedouble, const uint32_t i, const uint32_t j)
 {
 	E.im_vars[i][j] = valuedouble;
 }

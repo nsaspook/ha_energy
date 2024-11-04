@@ -70,7 +70,7 @@ void mqtt_ha_pid(MQTTClient client_p, const char * topic_p)
 /*
  * turn on and off the Matter switches controlled by Home Assistant
  */
-void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, bool sw_state)
+void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, const bool sw_state)
 {
 	cJSON *json;
 #ifdef DEBUG_HA_CMD
