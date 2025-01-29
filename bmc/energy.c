@@ -47,6 +47,7 @@
  * V0.64 Dump Load excess load mode programming
  * V.065 DL excess logic tuning and power adjustments
  * V.066 -> V.068 Various timing fixes to reduce spamming commands and logs
+ * V.069 send MQTT showdown commands to HA when critical energy conditions are meet
  */
 
 /*
@@ -473,6 +474,7 @@ int main(int argc, char *argv[])
 
 				uint8_t iam_delay = 0;
 				while (solar_shutdown()) {
+					mqtt_ha_shutdown(E.client_p, TOPIC_SHUTDOWN);
 					usleep(USEC_SEC); // wait
 					if ((int32_t) E.mvar[V_HACSW]) {
 						ha_ac_off();
@@ -721,6 +723,7 @@ int main(int argc, char *argv[])
 					snprintf(buffer, SYSLOG_SIZ - 1, "\r\n%s !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels M %u,%u I %u,%u\r\n", log_time(false), E.fm80, E.dumpload, E.fm80,
 						E.link.mqtt_count, E.link.mqtt_error, E.link.iammeter_count, E.link.iammeter_error);
 					syslog(LOG_NOTICE, buffer);
+					mqtt_ha_shutdown(E.client_p, TOPIC_SHUTDOWN);
 					E.mode.data_error = true;
 				} else {
 					E.mode.data_error = false;
@@ -946,8 +949,8 @@ char * log_time(bool log)
 	time_t rawtime_log;
 
 	tzset();
-	timezone=0;
-	daylight=0;
+	timezone = 0;
+	daylight = 0;
 	time(&rawtime_log);
 	if (sync_time++ > TIME_SYNC_SEC) {
 		sync_time = 0;

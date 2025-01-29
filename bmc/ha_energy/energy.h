@@ -36,7 +36,7 @@ extern "C" {
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.68"
+#define LOG_VERSION     "V0.69"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
@@ -54,6 +54,7 @@ extern "C" {
 #define TOPIC_PACC      "home-assistant/gtiac/contact"
 #define TOPIC_PDCC      "home-assistant/gtidc/contact"
 #define TOPIC_PPID      "home-assistant/solar/pid"
+#define TOPIC_SHUTDOWN  "home-assistant/solar/shutdown"
 #define TOPIC_SS        "mateq84/data/solar"
 #define TOPIC_SD        "mateq84/data/dumpload"
 #define QOS             1

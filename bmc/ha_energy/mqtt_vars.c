@@ -7,6 +7,39 @@ static const char *const FW_Date = __DATE__;
 static const char *const FW_Time = __TIME__;
 
 /*
+ * send energy shutdown command to Home Assistant
+ */
+void mqtt_ha_shutdown(MQTTClient client_p, const char * topic_p)
+{
+	cJSON *json;
+	MQTTClient_message pubmsg = MQTTClient_message_initializer;
+	MQTTClient_deliveryToken token;
+	ha_flag_vars_ss.deliveredtoken = 0;
+
+	json = cJSON_CreateObject();
+	cJSON_AddStringToObject(json, "shutdown", CLIENTID1);
+	char *json_str = cJSON_Print(json);
+
+	pubmsg.payload = json_str;
+	pubmsg.payloadlen = strlen(json_str);
+	pubmsg.qos = QOS;
+	pubmsg.retained = 0;
+	
+	MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token);
+	// a busy, wait loop for the async delivery thread to complete
+	{
+		uint32_t waiting = 0;
+		while (ha_flag_vars_ss.deliveredtoken != token) {
+			usleep(TOKEN_DELAY);
+			if (waiting++ > MQTT_TIMEOUT) {
+				fprintf(fout, "\r\n%s SW Still Waiting, timeout\r\n", log_time(false));
+				break;
+			}
+		};
+	}
+}
+
+/*
  * send PID power control variables to Home Assistant
  */
 void mqtt_ha_pid(MQTTClient client_p, const char * topic_p)
