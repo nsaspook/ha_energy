@@ -85,6 +85,16 @@ struct ha_flag_type ha_flag_vars_sd = {
 	.var_update = 0,
 };
 
+// data from HA
+struct ha_flag_type ha_flag_vars_ha = {
+	.runner = false,
+	.receivedtoken = false,
+	.deliveredtoken = false,
+	.rec_ok = false,
+	.ha_id = HA_ID,
+	.var_update = 0,
+};
+
 const char *board_name = "NO_BOARD", *driver_name = "NO_DRIVER";
 
 FILE* fout;
@@ -96,6 +106,7 @@ struct energy_type E = {
 	.iammeter = false,
 	.fm80 = false,
 	.dumpload = false,
+	.homeassistant = false,
 	.ac_low_adj = 0.0f,
 	.gti_low_adj = 0.0f,
 	.ac_sw_on = true,
@@ -307,7 +318,8 @@ int main(int argc, char *argv[])
 	struct itimerval old_timer;
 	time_t rawtime;
 	MQTTClient_connectOptions conn_opts_p = MQTTClient_connectOptions_initializer,
-		conn_opts_sd = MQTTClient_connectOptions_initializer;
+		conn_opts_sd = MQTTClient_connectOptions_initializer,
+		conn_opts_ha = MQTTClient_connectOptions_initializer;
 	MQTTClient_message pubmsg = MQTTClient_message_initializer;
 	MQTTClient_deliveryToken token;
 	char hname[256], *hname_ptr = hname;
@@ -376,8 +388,8 @@ int main(int argc, char *argv[])
 			if (strncmp(hname, TNAME, 6) == 0) {
 				MQTTClient_create(&E.client_sd, LADDRESS, CLIENTID2,
 					MQTTCLIENT_PERSISTENCE_NONE, NULL);
-				conn_opts_p.keepAliveInterval = 20;
-				conn_opts_p.cleansession = 1;
+				conn_opts_sd.keepAliveInterval = 20;
+				conn_opts_sd.cleansession = 1;
 				hname_ptr = LADDRESS;
 			} else {
 				MQTTClient_create(&E.client_sd, ADDRESS, CLIENTID2,
@@ -398,10 +410,38 @@ int main(int argc, char *argv[])
 			}
 
 			/*
+			 * Home Assistant MQTT receive messages
+			 */
+			if (strncmp(hname, TNAME, 6) == 0) {
+				MQTTClient_create(&E.client_ha, LADDRESS, CLIENTID3,
+					MQTTCLIENT_PERSISTENCE_NONE, NULL);
+				conn_opts_ha.keepAliveInterval = 20;
+				conn_opts_ha.cleansession = 1;
+				hname_ptr = LADDRESS;
+			} else {
+				MQTTClient_create(&E.client_ha, ADDRESS, CLIENTID3,
+					MQTTCLIENT_PERSISTENCE_NONE, NULL);
+				conn_opts_ha.keepAliveInterval = 20;
+				conn_opts_ha.cleansession = 1;
+				hname_ptr = ADDRESS;
+			}
+
+			fprintf(fout, "%s Connect MQTT server %s, %s\n", log_time(false), hname_ptr, CLIENTID3);
+			fflush(fout);
+			MQTTClient_setCallbacks(E.client_ha, &ha_flag_vars_ha, connlost, msgarrvd, delivered);
+			if ((E.rc = MQTTClient_connect(E.client_ha, &conn_opts_ha)) != MQTTCLIENT_SUCCESS) {
+				fprintf(fout, "%s Failed to connect MQTT server, return code %d %s, %s\n", log_time(false), E.rc, hname_ptr, CLIENTID3);
+				fflush(fout);
+				pthread_mutex_destroy(&E.ha_lock);
+				exit(EXIT_FAILURE);
+			}
+
+			/*
 			 * on topic received data will trigger the msgarrvd function
 			 */
 			MQTTClient_subscribe(E.client_p, TOPIC_SS, QOS);
 			MQTTClient_subscribe(E.client_sd, TOPIC_SD, QOS);
+			MQTTClient_subscribe(E.client_ha, TOPIC_HA, QOS);
 
 			pubmsg.payload = "online";
 			pubmsg.payloadlen = strlen("online");
@@ -486,6 +526,7 @@ int main(int argc, char *argv[])
 						E.fm80 = true;
 						E.dumpload = true;
 						E.iammeter = true;
+						E.homeassistant = true;
 					}
 				}
 				E.link.shutdown = 0;
@@ -505,6 +546,7 @@ int main(int argc, char *argv[])
 				E.fm80 = true;
 				E.dumpload = true;
 				E.iammeter = true;
+				E.homeassistant = true;
 				E.mode.in_pid_control = false;
 				E.mode.R = R_INIT;
 			}
@@ -736,6 +778,7 @@ int main(int argc, char *argv[])
 				fflush(fout);
 				E.fm80 = false;
 				E.dumpload = false;
+				E.homeassistant = false;
 				E.iammeter = false;
 				sync_ha();
 				print_im_vars();
@@ -976,18 +1019,20 @@ bool sync_ha(void)
 {
 	bool sync = false;
 	if (E.gti_sw_status != (bool) ((int32_t) E.mvar[V_HDCSW])) {
-		mqtt_ha_switch(E.client_p, TOPIC_PDCC, !E.ac_sw_status);
+		fprintf(fout, "DC_MM %d %d ", (bool) E.gti_sw_status, (bool) ((int32_t) E.mvar[V_HDCSW]));
+		mqtt_ha_switch(E.client_p, TOPIC_PDCC, !E.gti_sw_status);
 		E.dc_mismatch = true;
-		sync = true;
-		fprintf(fout, "DC_MM ");
 		fflush(fout);
+		sync = true;
 	} else {
 		E.dc_mismatch = false;
 	}
+
+	E.ac_sw_status = (bool) ((int32_t) E.mvar[V_HACSW]); // TEMP FIX for MISmatch errors
 	if (E.ac_sw_status != (bool) ((int32_t) E.mvar[V_HACSW])) {
+		fprintf(fout, "AC_MM %d %d ", (bool) E.ac_sw_status, (bool) ((int32_t) E.mvar[V_HACSW]));
 		mqtt_ha_switch(E.client_p, TOPIC_PACC, !E.ac_sw_status);
 		E.ac_mismatch = true;
-		fprintf(fout, "AC_MM ");
 		fflush(fout);
 		sync = true;
 	} else {

@@ -47,6 +47,7 @@ extern "C" {
 #endif
 #define CLIENTID1       "Energy_Mqtt_HA1"
 #define CLIENTID2       "Energy_Mqtt_HA2"
+#define CLIENTID3       "Energy_Mqtt_HA3"	
 #define TOPIC_P         "mateq84/data/gticmd"
 #define TOPIC_SPAM      "mateq84/data/spam"
 #define TOPIC_PACA      "home-assistant/gtiac/availability"
@@ -57,6 +58,7 @@ extern "C" {
 #define TOPIC_SHUTDOWN  "home-assistant/solar/shutdown"
 #define TOPIC_SS        "mateq84/data/solar"
 #define TOPIC_SD        "mateq84/data/dumpload"
+#define TOPIC_HA        "home-assistant/status/switch"
 #define QOS             1
 #define TIMEOUT         10000L
 #define SPACING_USEC    500 * 1000
@@ -313,7 +315,7 @@ extern "C" {
 		volatile double print_vars[MAX_IM_VAR];
 		volatile double im_vars[IA_LAST][PHASE_LAST];
 		volatile double mvar[V_DLAST + 1];
-		volatile bool once_gti, once_ac, iammeter, fm80, dumpload, once_gti_zero;
+		volatile bool once_gti, once_ac, iammeter, fm80, dumpload, homeassistant, once_gti_zero;
 		volatile double gti_low_adj, ac_low_adj, dl_excess_adj;
 		volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode, startup, ac_mismatch, dc_mismatch, mode_mismatch, dl_excess;
 		volatile uint32_t speed_go, im_delay, im_display, gti_delay;
@@ -322,7 +324,7 @@ extern "C" {
 		pthread_mutex_t ha_lock;
 		struct mode_type mode;
 		struct link_type link;
-		MQTTClient client_p, client_sd;
+		MQTTClient client_p, client_sd, client_ha;
 	};
 
 	extern struct energy_type E;

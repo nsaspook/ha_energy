@@ -26,6 +26,7 @@ extern "C" {
         P8055_ID,
         FM80_ID,
         DUMPLOAD_ID,
+	HA_ID,
         LAST_MQTT_ID,
     };
 
