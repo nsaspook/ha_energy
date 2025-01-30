@@ -21,6 +21,8 @@ extern "C" {
 #define FLOAT_CODE      1
     //#define DEBUG_REC
     //#define GET_DEBUG
+	
+#define MBMQTT		1024
 
     enum mqtt_id {
         P8055_ID,

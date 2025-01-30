@@ -36,7 +36,7 @@ extern "C" {
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.69"
+#define LOG_VERSION     "V0.70"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
@@ -47,7 +47,7 @@ extern "C" {
 #endif
 #define CLIENTID1       "Energy_Mqtt_HA1"
 #define CLIENTID2       "Energy_Mqtt_HA2"
-#define CLIENTID3       "Energy_Mqtt_HA3"	
+#define CLIENTID3       "Energy_Mqtt_HA3" 
 #define TOPIC_P         "mateq84/data/gticmd"
 #define TOPIC_SPAM      "mateq84/data/spam"
 #define TOPIC_PACA      "home-assistant/gtiac/availability"
@@ -69,7 +69,7 @@ extern "C" {
 
 #define SBUF_SIZ        16  // short buffer string size
 #define RBUF_SIZ        82
-#define SYSLOG_SIZ 512
+#define SYSLOG_SIZ      512
 
 #define MQTT_TIMEOUT    900
 #define SW_QOS          1
@@ -84,7 +84,7 @@ extern "C" {
 #define IAM_DELAY       120
 
 #define CMD_SEC         10
-#define TIME_SYNC_SEC 30
+#define TIME_SYNC_SEC   30
 
 	/*
 	 * Battery SoC cycle limits parameters
@@ -120,8 +120,8 @@ extern "C" {
 #define PV_DL_MPTT_IDLE     57.0f
 #define PV_DL_BIAS_RATE     75.0f
 #define PV_DL_EXCESS       500.0f
-#define PV_DL_B_AH_LOW     125.0f
-#define PV_DL_B_AH_MIN     160.0f 
+#define PV_DL_B_AH_LOW     425.0f
+#define PV_DL_B_AH_MIN     460.0f 
 #define PWA_SLEEP          200.0f
 #define DL_AC_DC_EFF        1.24f
 

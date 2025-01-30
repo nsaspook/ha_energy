@@ -2,12 +2,13 @@
 
 /*
  * data received on topic from the broker, run processing thread
+ * max message length set by MBMQTT
  */
 int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_message *message)
 {
 	int32_t i, ret = 1;
 	char* payloadptr;
-	char buffer[1024];
+	char buffer[MBMQTT];
 	struct ha_flag_type *ha_flag = context;
 
 	E.link.mqtt_count++;
@@ -20,13 +21,16 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
 #ifdef DEBUG_REC
 	fprintf(fout, "Message arrived\n");
 #endif
+	/*
+	 * move the received message into a processing holding buffer
+	 */
 	payloadptr = message->payload;
 	for (i = 0; i < message->payloadlen; i++) {
 		buffer[i] = *payloadptr++;
 	}
-	buffer[i] = 0; // make C string
+	buffer[i] = 0; // make a null terminated C string
 
-	// parse the JSON data
+	// parse the JSON data in the holding buffer
 	cJSON *json = cJSON_ParseWithLength(buffer, message->payloadlen);
 	if (json == NULL) {
 		const char *error_ptr = cJSON_GetErrorPtr();
@@ -42,6 +46,9 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
 		goto error_exit;
 	}
 
+	/*
+	 * MQTT messages from the FM80 Q84 interface
+	 */
 	if (ha_flag->ha_id == FM80_ID) {
 #ifdef DEBUG_REC
 		fprintf(fout, "FM80 MQTT data\r\n");
@@ -56,6 +63,9 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
 		E.fm80 = true;
 	}
 
+	/*
+	 * MQTT messages from the K42 dumpload/gti interface
+	 */
 	if (ha_flag->ha_id == DUMPLOAD_ID) {
 #ifdef DEBUG_REC
 		fprintf(fout, "DUMPLOAD MQTT data\r\n");
@@ -70,6 +80,9 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
 		E.dumpload = true;
 	}
 
+	/*
+	 * MQTT messages from the Linux HA_ENERGY interface
+	 */
 	if (ha_flag->ha_id == HA_ID) {
 #ifdef DEBUG_REC
 		fprintf(fout, "Home Assistant MQTT data\r\n");
@@ -79,16 +92,25 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
 		if (json_get_data(json, mqtt_name[V_HACSW], data_result, V_HACSW)) {
 			ha_flag->var_update++;
 		}
+		data_result = json;
+		if (json_get_data(json, mqtt_name[V_HDCSW], data_result, V_HDCSW)) {
+			ha_flag->var_update++;
+		}
 
 		E.homeassistant = true;
 	}
 
+	// done with processing MQTT async message, set state flags
 	ha_flag->receivedtoken = true;
 	ha_flag->rec_ok = true;
+	/*
+	 * exit and delete/free resources. In steps depending of possible error conditions
+	 */
 error_exit:
 	// delete the JSON object
 	cJSON_Delete(json);
 null_exit:
+	// free the MQTT objects
 	MQTTClient_freeMessage(&message);
 	MQTTClient_free(topicName);
 	return ret;
@@ -109,34 +131,45 @@ void delivered(void *context, MQTTClient_deliveryToken dt)
 }
 
 /*
- * lock and load mqtt thread received data into buffered program data array
+ * lock and load MQTT thread received data into buffered program data array
+ * for main program thread processing using a mutex_lock
  */
 bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t i)
 {
 	bool ret = false;
 	static uint32_t j = 0;
 
-	// access the JSON data
+	// access the JSON data using the lookup string passed in data_id
 	name = cJSON_GetObjectItemCaseSensitive(json_src, data_id);
+	
+	/*
+	 * process string values
+	 */		
 	if (cJSON_IsString(name) && (name->valuestring != NULL)) {
 #ifdef GET_DEBUG
 		fprintf(fout, "%s Name: %s\n", data_id, name->valuestring);
 #endif
 		ret = true;
 	}
+	
+	/*
+	 * process numeric values
+	 */
 	if (cJSON_IsNumber(name)) {
 #ifdef GET_DEBUG
 		fprintf(fout, "%s Value: %f\n", data_id, name->valuedouble);
 #endif
-		if (i > V_DLAST) {
+		if (i > V_DLAST) { // check for out-of-range index
 			i = V_DLAST;
 		}
+		
+		// lock the main value array during updates
 		pthread_mutex_lock(&E.ha_lock);
 		E.mvar[i] = name->valuedouble;
 		pthread_mutex_unlock(&E.ha_lock);
 
 		/*
-		 * special processing for variables
+		 * special processing for variable data received
 		 */
 		if (i == V_DCMPPT) {
 			/*
@@ -148,7 +181,7 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
 			}
 		}
 		/*
-		 * update local sw status from HA
+		 * update local MATTER switch status from HA
 		 */
 		if (i == V_HDCSW) {
 			if (E.gti_sw_status != (bool) ((int32_t) E.mvar[i])) {
@@ -164,9 +197,11 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
 			E.ac_mismatch = false;
 		}
 
+		// command HA_ENERGY to shutdown mode
 		if (i == V_HSHUT) {
 			E.solar_shutdown = (bool) ((int32_t) E.mvar[i]);
 		}
+		// set HA_ENERGY energy processing mode
 		if (i == V_HMODE) {
 			ha_flag_vars_ss.energy_mode = (bool) ((int32_t) E.mvar[i]);
 		}
@@ -200,7 +235,7 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
 }
 
 /*
- * logging
+ * logging to system log file
  */
 void print_mvar_vars(void)
 {
@@ -210,7 +245,7 @@ void print_mvar_vars(void)
 }
 
 /*
- * return float status of FM80 to trigger dumploads
+ * return float status of FM80 to trigger excess energy modes
  */
 bool fm80_float(const bool set_bias)
 {
@@ -231,7 +266,8 @@ bool fm80_float(const bool set_bias)
 }
 
 /*
- * return sleep status of FM80 to trigger dumploads
+ * return sleep status of FM80 to select solar production or 'night' modes
+ * by adjusting load drive bias
  */
 bool fm80_sleep(void)
 {

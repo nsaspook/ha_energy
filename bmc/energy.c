@@ -48,6 +48,7 @@
  * V.065 DL excess logic tuning and power adjustments
  * V.066 -> V.068 Various timing fixes to reduce spamming commands and logs
  * V.069 send MQTT showdown commands to HA when critical energy conditions are meet
+ * V.070 process Home Assistant MQTT commands sent from automations
  */
 
 /*
