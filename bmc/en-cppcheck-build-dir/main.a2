@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<analyzerinfo hash="6004102322088312780">
-  <FileInfo check="CheckUnusedFunctions">
-    <functiondecl functionName="main" lineNumber="15"/>
-  </FileInfo>
-</analyzerinfo>

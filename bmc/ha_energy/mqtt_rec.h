@@ -17,14 +17,18 @@ extern "C" {
 
 #define RDEV_SIZE        10
 
+#define SLEEP_CODE      0
 #define FLOAT_CODE      1
     //#define DEBUG_REC
     //#define GET_DEBUG
+	
+#define MBMQTT		1024
 
     enum mqtt_id {
         P8055_ID,
         FM80_ID,
         DUMPLOAD_ID,
+	HA_ID,
         LAST_MQTT_ID,
     };
 
@@ -42,6 +46,7 @@ extern "C" {
 
     bool json_get_data(cJSON *, const char *, cJSON *, uint32_t);
     bool fm80_float(const bool set_bias);
+    bool fm80_sleep(void);
 
 #ifdef __cplusplus
 }

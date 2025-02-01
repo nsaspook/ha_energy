@@ -1,63 +1,247 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="4582874751261415648">
-  <FileInfo check="ctu">
-<function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.h:57:12" call-funcname="calculateStandardDeviation" call-argnr="2" file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="56" col="31" call-argexpr="bat_c_std_dev" call-argvaluetype="7" call-argvalue="80"/>  </FileInfo>
-  <FileInfo check="ctu">
-<function-call call-id="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.h:57:12" call-funcname="calculateStandardDeviation" call-argnr="2" file="/store/solar_software/ha_energy/bmc/ha_energy/bsoc.c" line="56" col="31" call-argexpr="bat_c_std_dev" call-argvaluetype="7" call-argvalue="80"/>  </FileInfo>
+<analyzerinfo hash="18287013628118571023">
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;math.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;math.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/bsoc.h" line="14" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdlib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdlib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/bsoc.h" line="35" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/bsoc.h" line="36" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;unistd.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;unistd.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/bsoc.h" line="37" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdint.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdint.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/bsoc.h" line="38" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;string.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;string.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/bsoc.h" line="39" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdbool.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdbool.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/bsoc.h" line="40" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;signal.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;signal.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/bsoc.h" line="41" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/bsoc.h" line="42" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/wait.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/wait.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/bsoc.h" line="43" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/types.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/types.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/bsoc.h" line="44" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/bsoc.h" line="45" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;errno.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;errno.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/bsoc.h" line="46" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;math.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;math.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/bsoc.h" line="47" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdlib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdlib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="14" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="15" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;unistd.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;unistd.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="16" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdint.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdint.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="17" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;string.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;string.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="18" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdbool.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdbool.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="19" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;signal.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;signal.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="20" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="21" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/wait.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/wait.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="22" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/types.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/types.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="23" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="24" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;errno.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;errno.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="25" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;cjson/cJSON.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;cjson/cJSON.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="26" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;curl/curl.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;curl/curl.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="27" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;pthread.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;pthread.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="28" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/stat.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/stat.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="29" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;syslog.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;syslog.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="30" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;arpa/inet.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;arpa/inet.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="31" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/socket.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/socket.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="32" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;netdb.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;netdb.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="33" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;ifaddrs.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;ifaddrs.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="ha_energy/energy.h" line="34" column="0"/>
+        </error>
+        <error id="missingInclude" severity="information" msg="Include file: &quot;MQTTClient.h&quot; not found." verbose="Include file: &quot;MQTTClient.h&quot; not found.">
+            <location file="ha_energy/energy.h" line="35" column="0"/>
+        </error>
+        <error id="normalCheckLevelMaxBranches" severity="information" msg="Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches." verbose="Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches." file0="ha_energy/bsoc.c">
+            <location file="ha_energy/bsoc.c" line="0" column="0"/>
+        </error>
   <FileInfo check="CheckUnusedFunctions">
-    <functiondecl functionName="bsoc_init" lineNumber="9"/>
-    <functiondecl functionName="bsoc_set_std_dev" lineNumber="22"/>
-    <functiondecl functionName="bsoc_data_collect" lineNumber="29"/>
-    <functiondecl functionName="bsoc_ac" lineNumber="67"/>
-    <functiondecl functionName="bsoc_gti" lineNumber="75"/>
-    <functiondecl functionName="gti_test" lineNumber="89"/>
-    <functiondecl functionName="ac_test" lineNumber="100"/>
-    <functiondecl functionName="get_batc_dev" lineNumber="104"/>
-    <functiondecl functionName="calculateStandardDeviation" lineNumber="112"/>
-    <functiondecl functionName="bat_current_stable" lineNumber="146"/>
-    <functiondecl functionName="bsoc_set_mode" lineNumber="167"/>
-    <functiondecl functionName="error_filter" lineNumber="238"/>
-    <functiondecl functionName="bsoc_init" lineNumber="9"/>
-    <functiondecl functionName="bsoc_set_std_dev" lineNumber="22"/>
-    <functiondecl functionName="bsoc_data_collect" lineNumber="29"/>
-    <functiondecl functionName="bsoc_ac" lineNumber="67"/>
-    <functiondecl functionName="bsoc_gti" lineNumber="75"/>
-    <functiondecl functionName="gti_test" lineNumber="89"/>
-    <functiondecl functionName="ac_test" lineNumber="100"/>
-    <functiondecl functionName="get_batc_dev" lineNumber="104"/>
-    <functiondecl functionName="calculateStandardDeviation" lineNumber="112"/>
-    <functiondecl functionName="bat_current_stable" lineNumber="146"/>
-    <functiondecl functionName="bsoc_set_mode" lineNumber="167"/>
-    <functiondecl functionName="error_filter" lineNumber="238"/>
-    <functioncall functionName="IA_LAST"/>
+    <functiondecl functionName="bsoc_init" lineNumber="56"/>
+    <functiondecl functionName="bsoc_set_std_dev" lineNumber="70"/>
+    <functiondecl functionName="bsoc_data_collect" lineNumber="78"/>
+    <functiondecl functionName="bsoc_ac" lineNumber="127"/>
+    <functiondecl functionName="bsoc_gti" lineNumber="137"/>
+    <functiondecl functionName="gti_test" lineNumber="162"/>
+    <functiondecl functionName="ac_test" lineNumber="182"/>
+    <functiondecl functionName="get_batc_dev" lineNumber="187"/>
+    <functiondecl functionName="calculateStandardDeviation" lineNumber="196"/>
+    <functiondecl functionName="bat_current_stable" lineNumber="231"/>
+    <functiondecl functionName="bsoc_set_mode" lineNumber="253"/>
+    <functiondecl functionName="error_filter" lineNumber="343"/>
+    <functiondecl functionName="ac0_filter" lineNumber="350"/>
+    <functiondecl functionName="ac1_filter" lineNumber="358"/>
+    <functiondecl functionName="ac2_filter" lineNumber="366"/>
+    <functiondecl functionName="dc0_filter" lineNumber="374"/>
+    <functiondecl functionName="dc1_filter" lineNumber="382"/>
+    <functiondecl functionName="dc2_filter" lineNumber="390"/>
+    <functiondecl functionName="drive0_filter" lineNumber="398"/>
+    <functiondecl functionName="drive1_filter" lineNumber="406"/>
     <functioncall functionName="MQTTClient"/>
     <functioncall functionName="MQTTClient_deliveryToken"/>
     <functioncall functionName="NULL"/>
-    <functioncall functionName="PHASE_LAST"/>
     <functioncall functionName="ResetPI"/>
     <functioncall functionName="UpdatePI"/>
-    <functioncall functionName="V_BEN"/>
-    <functioncall functionName="V_DCMPPT"/>
-    <functioncall functionName="V_DLAST"/>
-    <functioncall functionName="V_DPPV"/>
-    <functioncall functionName="V_DVBAT"/>
-    <functioncall functionName="V_DVPV"/>
-    <functioncall functionName="V_FACE"/>
-    <functioncall functionName="V_FBEKW"/>
-    <functioncall functionName="V_FLO"/>
-    <functioncall functionName="V_FSO"/>
-    <functioncall functionName="V_PWA"/>
+    <functioncall functionName="ac0_filter"/>
     <functioncall functionName="calculateStandardDeviation"/>
+    <functioncall functionName="dc0_filter"/>
     <functioncall functionName="error_filter"/>
     <functioncall functionName="false"/>
     <functioncall functionName="fprintf"/>
     <functioncall functionName="ha_ac_off"/>
     <functioncall functionName="ha_ac_on"/>
+    <functioncall functionName="log_time"/>
     <functioncall functionName="pow"/>
-    <functioncall functionName="printf"/>
     <functioncall functionName="pthread_mutex_init"/>
     <functioncall functionName="pthread_mutex_lock"/>
     <functioncall functionName="pthread_mutex_unlock"/>
+    <functioncall functionName="round"/>
+    <functioncall functionName="sqrt"/>
+    <functioncall functionName="true"/>
+  </FileInfo>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="bsoc_init" lineNumber="56"/>
+    <functiondecl functionName="bsoc_set_std_dev" lineNumber="70"/>
+    <functiondecl functionName="bsoc_data_collect" lineNumber="78"/>
+    <functiondecl functionName="bsoc_ac" lineNumber="127"/>
+    <functiondecl functionName="bsoc_gti" lineNumber="137"/>
+    <functiondecl functionName="gti_test" lineNumber="162"/>
+    <functiondecl functionName="ac_test" lineNumber="182"/>
+    <functiondecl functionName="get_batc_dev" lineNumber="187"/>
+    <functiondecl functionName="calculateStandardDeviation" lineNumber="196"/>
+    <functiondecl functionName="bat_current_stable" lineNumber="231"/>
+    <functiondecl functionName="bsoc_set_mode" lineNumber="253"/>
+    <functiondecl functionName="error_filter" lineNumber="343"/>
+    <functiondecl functionName="ac0_filter" lineNumber="350"/>
+    <functiondecl functionName="ac1_filter" lineNumber="358"/>
+    <functiondecl functionName="ac2_filter" lineNumber="366"/>
+    <functiondecl functionName="dc0_filter" lineNumber="374"/>
+    <functiondecl functionName="dc1_filter" lineNumber="382"/>
+    <functiondecl functionName="dc2_filter" lineNumber="390"/>
+    <functiondecl functionName="drive0_filter" lineNumber="398"/>
+    <functiondecl functionName="drive1_filter" lineNumber="406"/>
+    <functioncall functionName="MQTTClient"/>
+    <functioncall functionName="MQTTClient_deliveryToken"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="ResetPI"/>
+    <functioncall functionName="UpdatePI"/>
+    <functioncall functionName="ac0_filter"/>
+    <functioncall functionName="ac_weight"/>
+    <functioncall functionName="bat_current"/>
+    <functioncall functionName="bat_voltage"/>
+    <functioncall functionName="calculateStandardDeviation"/>
+    <functioncall functionName="dc0_filter"/>
+    <functioncall functionName="error_filter"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="fprintf"/>
+    <functioncall functionName="gti_weight"/>
+    <functioncall functionName="ha_ac_off"/>
+    <functioncall functionName="ha_ac_on"/>
+    <functioncall functionName="log_time"/>
+    <functioncall functionName="pow"/>
+    <functioncall functionName="pthread_mutex_init"/>
+    <functioncall functionName="pthread_mutex_lock"/>
+    <functioncall functionName="pthread_mutex_unlock"/>
+    <functioncall functionName="pv_voltage"/>
+    <functioncall functionName="round"/>
+    <functioncall functionName="sqrt"/>
+    <functioncall functionName="true"/>
+  </FileInfo>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="bsoc_init" lineNumber="56"/>
+    <functiondecl functionName="bsoc_set_std_dev" lineNumber="70"/>
+    <functiondecl functionName="bsoc_data_collect" lineNumber="78"/>
+    <functiondecl functionName="bsoc_ac" lineNumber="127"/>
+    <functiondecl functionName="bsoc_gti" lineNumber="137"/>
+    <functiondecl functionName="gti_test" lineNumber="162"/>
+    <functiondecl functionName="ac_test" lineNumber="182"/>
+    <functiondecl functionName="get_batc_dev" lineNumber="187"/>
+    <functiondecl functionName="calculateStandardDeviation" lineNumber="196"/>
+    <functiondecl functionName="bat_current_stable" lineNumber="231"/>
+    <functiondecl functionName="bsoc_set_mode" lineNumber="253"/>
+    <functiondecl functionName="error_filter" lineNumber="343"/>
+    <functiondecl functionName="ac0_filter" lineNumber="350"/>
+    <functiondecl functionName="ac1_filter" lineNumber="358"/>
+    <functiondecl functionName="ac2_filter" lineNumber="366"/>
+    <functiondecl functionName="dc0_filter" lineNumber="374"/>
+    <functiondecl functionName="dc1_filter" lineNumber="382"/>
+    <functiondecl functionName="dc2_filter" lineNumber="390"/>
+    <functiondecl functionName="drive0_filter" lineNumber="398"/>
+    <functiondecl functionName="drive1_filter" lineNumber="406"/>
+    <functioncall functionName="MQTTClient"/>
+    <functioncall functionName="MQTTClient_deliveryToken"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="ResetPI"/>
+    <functioncall functionName="UpdatePI"/>
+    <functioncall functionName="ac0_filter"/>
+    <functioncall functionName="calculateStandardDeviation"/>
+    <functioncall functionName="dc0_filter"/>
+    <functioncall functionName="error_filter"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="fprintf"/>
+    <functioncall functionName="ha_ac_off"/>
+    <functioncall functionName="ha_ac_on"/>
+    <functioncall functionName="log_time"/>
+    <functioncall functionName="pow"/>
+    <functioncall functionName="pthread_mutex_init"/>
+    <functioncall functionName="pthread_mutex_lock"/>
+    <functioncall functionName="pthread_mutex_unlock"/>
+    <functioncall functionName="pv_voltage"/>
     <functioncall functionName="round"/>
     <functioncall functionName="sqrt"/>
     <functioncall functionName="true"/>

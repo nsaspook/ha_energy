@@ -1,24 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <results version="2">
-    <cppcheck version="2.10"/>
-    <errors>
-        <error id="unreachableCode" severity="style" msg="Statements following &amp;#039;return&amp;#039; will never be executed." verbose="Statements following &amp;#039;return&amp;#039; will never be executed." cwe="561" file0="ha_energy/daq.c" sinceDate="M/d/yy">
-            <location file="ha_energy/daq.c" line="67"/>
-        </error>
-        <error id="unreachableCode" severity="style" msg="Statements following &amp;#039;return&amp;#039; will never be executed." verbose="Statements following &amp;#039;return&amp;#039; will never be executed." cwe="561" file0="ha_energy/daq.c" sinceDate="M/d/yy">
-            <location file="ha_energy/daq.c" line="265"/>
-        </error>
-        <error id="unreachableCode" severity="style" msg="Statements following &amp;#039;return&amp;#039; will never be executed." verbose="Statements following &amp;#039;return&amp;#039; will never be executed." cwe="561" file0="ha_energy/daq.c" sinceDate="M/d/yy">
-            <location file="ha_energy/daq.c" line="270"/>
-        </error>
-        <error id="unreachableCode" severity="style" msg="Statements following &amp;#039;return&amp;#039; will never be executed." verbose="Statements following &amp;#039;return&amp;#039; will never be executed." cwe="561" file0="ha_energy/daq.c" sinceDate="M/d/yy">
-            <location file="ha_energy/daq.c" line="276"/>
-        </error>
-        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;i&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;i&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:&#10;void f(int x)&#10;{&#10;    int i = 0;&#10;    if (x) {&#10;        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here&#10;        for (int n = 0; n &amp;lt; 10; ++n) {&#10;            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here&#10;            do_something(&amp;amp;i);&#10;        }&#10;    }&#10;}&#10;When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="ha_energy/daq.c" sinceDate="M/d/yy">
-            <location file="ha_energy/daq.c" line="112"/>
-        </error>
-        <error id="unusedVariable" severity="style" msg="Unused variable: sleep" verbose="Unused variable: sleep" cwe="563" file0="ha_energy/junk.c" sinceDate="M/d/yy">
-            <location file="ha_energy/junk.c" line="32"/>
-        </error>
-    </errors>
+    <cppcheck version="2.15.0"/>
+    <errors/>
 </results>

@@ -1,7 +1,7 @@
-build/Release/GNU-Linux/mqtt_rec.o: mqtt_rec.c mqtt_rec.h energy.h pid.h \
- mqtt_vars.h bsoc.h
+build/Release/GNU-Linux/mqtt_rec.o: mqtt_rec.c bsoc.h pid.h mqtt_rec.h \
+ energy.h mqtt_vars.h
+bsoc.h:
+pid.h:
 mqtt_rec.h:
 energy.h:
-pid.h:
 mqtt_vars.h:
-bsoc.h:
