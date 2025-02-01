@@ -314,7 +314,7 @@ void connlost(void *context, char *cause)
 /*
  * HA_ENERGY
  * 
- * Use MQTT/HTTP to send/receive updates to a Solar hardware devices
+ * Use MQTT/HTTP to send/receive updates to Solar hardware devices
  * and control energy in an optimized fashion to reduce electrical energy costs
  */
 int main(int argc, char *argv[])
@@ -470,7 +470,7 @@ int main(int argc, char *argv[])
 			mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
 			mqtt_ha_switch(E.client_p, TOPIC_PDCC, false);
 			mqtt_ha_switch(E.client_p, TOPIC_PACC, false);
-			
+
 			E.ac_sw_on = true; // can be switched on once
 			E.gti_sw_on = true; // can be switched on once
 

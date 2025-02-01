@@ -7,7 +7,7 @@
 int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_message *message)
 {
 	int32_t i, ret = 1;
-	char* payloadptr;
+	const char* payloadptr;
 	char buffer[MBMQTT];
 	struct ha_flag_type *ha_flag = context;
 
@@ -55,8 +55,8 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
 #endif
 		cJSON *data_result = json;
 
-		for (uint32_t i = V_FCCM; i < V_FLAST; i++) {
-			if (json_get_data(json, mqtt_name[i], data_result, i)) {
+		for (uint32_t ii = V_FCCM; ii < V_FLAST; ii++) {
+			if (json_get_data(json, mqtt_name[ii], data_result, ii)) {
 				ha_flag->var_update++;
 			}
 		}
@@ -72,8 +72,8 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
 #endif
 		cJSON *data_result = json;
 
-		for (uint32_t i = V_HDCSW; i < V_DLAST; i++) {
-			if (json_get_data(json, mqtt_name[i], data_result, i)) {
+		for (uint32_t ii = V_HDCSW; ii < V_DLAST; ii++) {
+			if (json_get_data(json, mqtt_name[ii], data_result, ii)) {
 				ha_flag->var_update++;
 			}
 		}
@@ -184,16 +184,16 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
 		 * update local MATTER switch status from HA
 		 */
 		if (i == V_HDCSW) {
-			if (E.gti_sw_status != (bool) ((int32_t) E.mvar[i])) {
+//			if (E.gti_sw_status != (bool) ((int32_t) E.mvar[i])) {
 				E.gti_sw_status = (bool) ((int32_t) E.mvar[i]);
-			}
+//			}
 			E.dc_mismatch = false;
 		}
 
 		if (i == V_HACSW) {
-			if (E.ac_sw_status != (bool) ((int32_t) E.mvar[i])) {
+//			if (E.ac_sw_status != (bool) ((int32_t) E.mvar[i])) {
 				E.ac_sw_status = (bool) ((int32_t) E.mvar[i]);
-			}
+//			}
 			E.ac_mismatch = false;
 		}
 

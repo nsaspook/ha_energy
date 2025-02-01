@@ -8,7 +8,7 @@ ac_test global:[L] call:[ac0_filter] noreturn:[ac0_filter]
 get_batc_dev global:[L]
 calculateStandardDeviation global:[L] call:[pow,sqrt] noreturn:[pow]
 bat_current_stable global:[L]
-bsoc_set_mode global:[E,L] call:[ResetPI,UpdatePI,error_filter,ha_ac_off,ha_ac_on,round] noreturn:[ResetPI,UpdatePI]
+bsoc_set_mode global:[E,L] call:[ResetPI,UpdatePI,error_filter,ha_ac_off,ha_ac_on,mqtt_gti_power,round] noreturn:[ResetPI,UpdatePI]
 error_filter global:[L]
 ac0_filter
 ac1_filter
