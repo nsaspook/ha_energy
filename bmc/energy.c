@@ -1,6 +1,6 @@
 /*
  * HA Energy control using MQTT JSON and HTTP format data from various energy monitor sources
- * asynchronous mode using threads
+ * asynchronous mode using threads in a background process
  * 
  * long life HA token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI2OTczODQyMGZlMDU0MjVmYjk1OWY0YjM3Mjg4NjRkOSIsImlhdCI6MTcwODg3NzA1OSwiZXhwIjoyMDI0MjM3MDU5fQ.5vfW85qQ2DO3vAyM_lcm1YyNqIX2O8JlTqoYKLdxf6M
  *
@@ -49,13 +49,14 @@
  * V.066 -> V.068 Various timing fixes to reduce spamming commands and logs
  * V.069 send MQTT showdown commands to HA when critical energy conditions are meet
  * V.070 process Home Assistant MQTT commands sent from automations
+ * V.071 comment additions and logging improvements
  */
 
 /*
  * for the publish and subscribe topic pair
  * passed as a context variable
  */
-// for local device Comedi device control
+// for local device Comedi hardware I/O device control
 struct ha_flag_type ha_flag_vars_pc = {
 	.runner = false,
 	.receivedtoken = false,
@@ -96,10 +97,12 @@ struct ha_flag_type ha_flag_vars_ha = {
 	.var_update = 0,
 };
 
+// Comedi I/O device type
 const char *board_name = "NO_BOARD", *driver_name = "NO_DRIVER";
 
-FILE* fout;
+FILE* fout; // logging stream
 
+// energy state structure
 struct energy_type E = {
 	.once_gti = true,
 	.once_ac = true,
@@ -150,6 +153,7 @@ void showIP(void);
 
 /*
  * show all assigned networking addresses and types
+ * on the current machine
  */
 void showIP(void)
 {
@@ -182,7 +186,8 @@ void showIP(void)
 }
 
 /*
- * setup program to run as a background deamon
+ * setup ha_energy program to run as a background deamon
+ * disconnect and exit foreground startup process
  */
 static void skeleton_daemon()
 {
@@ -241,7 +246,8 @@ static void skeleton_daemon()
 }
 
 /*
- * check for sensor range errors
+ * check for sensor range errors for some critical data points
+ * look for bad data on the high side
  */
 bool sanity_check(void)
 {
@@ -285,7 +291,7 @@ void timer_callback(int32_t signum)
 }
 
 /*
- * Broker errors
+ * MQTT Broker errors are fatal
  */
 void connlost(void *context, char *cause)
 {
@@ -298,15 +304,18 @@ void connlost(void *context, char *cause)
 	} else {
 		id_num = ha_flag->ha_id;
 	}
-	fprintf(fout, "\n%s Connection lost\n", log_time(false));
+	fprintf(fout, "\n%s Connection lost, exit ha_energy program\n", log_time(false));
 	fprintf(fout, "%s     cause: %s, %d\n", log_time(false), cause, id_num);
+	fprintf(fout, "%sDAEMON failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
 	fflush(fout);
 	exit(EXIT_FAILURE);
 }
 
 /*
- * Use MQTT/HTTP to send/receive updates to a Solar hardware device
- * and control energy is a optimized fashion
+ * HA_ENERGY
+ * 
+ * Use MQTT/HTTP to send/receive updates to a Solar hardware devices
+ * and control energy in an optimized fashion to reduce electrical energy costs
  */
 int main(int argc, char *argv[])
 {
@@ -328,7 +337,7 @@ int main(int argc, char *argv[])
 
 	gethostname(hname, hname_len);
 	hname[12] = 0;
-	printf("\r\n%s  LOG Version %s : MQTT Version %s : Host Name %s\r\n", log_time(false), LOG_VERSION, MQTT_VERSION, hname);
+	printf("\r\n  LOG Version %s : MQTT Version %s : Host Name %s\r\n", LOG_VERSION, MQTT_VERSION, hname);
 	showIP();
 	skeleton_daemon();
 
@@ -358,6 +367,7 @@ int main(int argc, char *argv[])
 			}
 			/*
 			 * set the timer for MQTT publishing sample speed
+			 * CMD_SEC         10
 			 */
 			setitimer(ITIMER_REAL, &new_timer, &old_timer);
 			signal(SIGALRM, timer_callback);
@@ -440,9 +450,9 @@ int main(int argc, char *argv[])
 			/*
 			 * on topic received data will trigger the msgarrvd function
 			 */
-			MQTTClient_subscribe(E.client_p, TOPIC_SS, QOS);
-			MQTTClient_subscribe(E.client_sd, TOPIC_SD, QOS);
-			MQTTClient_subscribe(E.client_ha, TOPIC_HA, QOS);
+			MQTTClient_subscribe(E.client_p, TOPIC_SS, QOS); // FM80 Q84
+			MQTTClient_subscribe(E.client_sd, TOPIC_SD, QOS); // DUMPLOAD K42
+			MQTTClient_subscribe(E.client_ha, TOPIC_HA, QOS); // Home Assistant Linux AMD64  and ARM64
 
 			pubmsg.payload = "online";
 			pubmsg.payloadlen = strlen("online");
@@ -460,15 +470,19 @@ int main(int argc, char *argv[])
 			mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
 			mqtt_ha_switch(E.client_p, TOPIC_PDCC, false);
 			mqtt_ha_switch(E.client_p, TOPIC_PACC, false);
-			//                E.mode.in_pid_control = false;
+			
 			E.ac_sw_on = true; // can be switched on once
 			E.gti_sw_on = true; // can be switched on once
 
 			/*
 			 * use libcurl to read AC power meter HTTP data
+			 * iammeter connected for split single phase monitoring and one leg GTI power exporting
 			 */
 			iammeter_read();
 
+			/*
+			 * start the main energy monitoring loop
+			 */
 			fprintf(fout, "\r\n%s Solar Energy AC power controller\r\n", log_time(false));
 
 #ifdef FAKE_VPV
@@ -494,6 +508,10 @@ int main(int argc, char *argv[])
 				fflush(fout);
 			}
 
+			/*
+			 * stop and restart the energy control processing
+			 * from inside the program or from a remote Home Assistant command
+			 */
 			if (solar_shutdown()) {
 				if (!E.startup) {
 					fprintf(fout, "%s SHUTDOWN Solar Energy Control ---> \r\n", log_time(false));
@@ -548,7 +566,7 @@ int main(int argc, char *argv[])
 				E.dumpload = true;
 				E.iammeter = true;
 				E.homeassistant = true;
-				E.mode.in_pid_control = false;
+				E.mode.in_pid_control = false; // shutdown auto energy control
 				E.mode.R = R_INIT;
 			}
 			if (ha_flag_vars_ss.receivedtoken) {
@@ -604,7 +622,7 @@ int main(int argc, char *argv[])
 				break;
 			}
 			/*
-			 * main state-machine update sequence
+			 * main state-machine update sequence and control logic
 			 */
 			/*
 			 * check for idle/data errors flags from sensors and HA
@@ -632,6 +650,9 @@ int main(int argc, char *argv[])
 							E.mode.pv_bias = (int32_t) E.mode.error - PV_BIAS;
 						}
 					}
+					/*
+					 * use PID style set-point error correction
+					 */
 					E.mode.in_pid_control = true;
 					E.gti_delay = 0;
 					/*
@@ -703,6 +724,7 @@ int main(int argc, char *argv[])
 
 				/*
 				 * Dump Load Excess testing
+				 * send excess power into the home power grid taking care not to export energy to the utility grid
 				 */
 				if (((dc1_filter(E.mvar[V_BEN]) > BAL_MAX_ENERGY_GTI) && (gti_test() > MIN_BAT_KW_GTI_HI)) || E.dl_excess) {
 #ifndef  FAKE_VPV                            
@@ -806,6 +828,9 @@ int main(int argc, char *argv[])
 	}
 }
 
+/*
+ * send energy to the house grid
+ */
 void ramp_up_gti(MQTTClient client_p, bool start, bool excess)
 {
 	static uint32_t sequence = 0;
@@ -864,6 +889,9 @@ void ramp_up_gti(MQTTClient client_p, bool start, bool excess)
 	}
 }
 
+/*
+ * showdown energy to the house grid
+ */
 void ramp_down_gti(MQTTClient client_p, bool sw_off)
 {
 	if (sw_off) {
@@ -879,6 +907,9 @@ void ramp_down_gti(MQTTClient client_p, bool sw_off)
 	}
 }
 
+/*
+ * control power from the off-grid AC inverter
+ */
 void ramp_up_ac(MQTTClient client_p, bool start)
 {
 
@@ -916,6 +947,9 @@ void ha_ac_on(void)
 	E.ac_sw_status = true;
 }
 
+/*
+ * control power from the GTI inverters to the house grid
+ */
 void ha_dc_off(void)
 {
 	mqtt_ha_switch(E.client_p, TOPIC_PDCC, false);
