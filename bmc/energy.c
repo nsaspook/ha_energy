@@ -337,7 +337,7 @@ int main(int argc, char *argv[])
 
 	gethostname(hname, hname_len);
 	hname[12] = 0;
-	printf("\r\n%s  LOG Version %s : MQTT Version %s : Host Name %s\r\n", log_time(false), LOG_VERSION, MQTT_VERSION, hname);
+	printf("\r\n  LOG Version %s : MQTT Version %s : Host Name %s\r\n", LOG_VERSION, MQTT_VERSION, hname);
 	showIP();
 	skeleton_daemon();
 
