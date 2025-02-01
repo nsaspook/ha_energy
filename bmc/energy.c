@@ -49,7 +49,7 @@
  * V.066 -> V.068 Various timing fixes to reduce spamming commands and logs
  * V.069 send MQTT showdown commands to HA when critical energy conditions are meet
  * V.070 process Home Assistant MQTT commands sent from automations
- * V.071 comment additions and logging improvements
+ * V.071 comment additions, logging improvements and code cleanups
  */
 
 /*
