@@ -698,6 +698,13 @@ int main(int argc, char *argv[])
 						}
 					}
 
+					/*
+					 * shutdown power at low DL battery 
+					 */
+					if (E.mvar[V_DAHBAT] < PV_DL_B_AH_LOW) { 
+						error_drive = PV_BIAS_ZERO;
+					}
+
 					snprintf(gti_str, SBUF_SIZ - 1, "V%04dX", error_drive); // format for dumpload controller gti power commands
 					mqtt_gti_power(E.client_p, TOPIC_P, gti_str, 2);
 				}
