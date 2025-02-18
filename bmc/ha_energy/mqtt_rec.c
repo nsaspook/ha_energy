@@ -35,7 +35,7 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
 	if (json == NULL) {
 		const char *error_ptr = cJSON_GetErrorPtr();
 		if (error_ptr != NULL) {
-			fprintf(fout, "Error: %s\n", error_ptr);
+			fprintf(fout, "%s Error: %s NULL cJSON pointer\n", log_time(false), error_ptr);
 		}
 		ret = -1;
 		ha_flag->rec_ok = false;
@@ -141,17 +141,17 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
 
 	// access the JSON data using the lookup string passed in data_id
 	name = cJSON_GetObjectItemCaseSensitive(json_src, data_id);
-	
+
 	/*
 	 * process string values
-	 */		
+	 */
 	if (cJSON_IsString(name) && (name->valuestring != NULL)) {
 #ifdef GET_DEBUG
 		fprintf(fout, "%s Name: %s\n", data_id, name->valuestring);
 #endif
 		ret = true;
 	}
-	
+
 	/*
 	 * process numeric values
 	 */
@@ -162,7 +162,7 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
 		if (i > V_DLAST) { // check for out-of-range index
 			i = V_DLAST;
 		}
-		
+
 		// lock the main value array during updates
 		pthread_mutex_lock(&E.ha_lock);
 		E.mvar[i] = name->valuedouble;
@@ -184,16 +184,12 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
 		 * update local MATTER switch status from HA
 		 */
 		if (i == V_HDCSW) {
-//			if (E.gti_sw_status != (bool) ((int32_t) E.mvar[i])) {
-				E.gti_sw_status = (bool) ((int32_t) E.mvar[i]);
-//			}
+			E.gti_sw_status = (bool) ((int32_t) E.mvar[i]);
 			E.dc_mismatch = false;
 		}
 
 		if (i == V_HACSW) {
-//			if (E.ac_sw_status != (bool) ((int32_t) E.mvar[i])) {
-				E.ac_sw_status = (bool) ((int32_t) E.mvar[i]);
-//			}
+			E.ac_sw_status = (bool) ((int32_t) E.mvar[i]);
 			E.ac_mismatch = false;
 		}
 
