@@ -1,6 +1,6 @@
 /*
  * HA Energy control using MQTT JSON and HTTP format data from various energy monitor sources
- * asynchronous mode using threads
+ * asynchronous mode using threads in a background process
  * 
  * long life HA token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI2OTczODQyMGZlMDU0MjVmYjk1OWY0YjM3Mjg4NjRkOSIsImlhdCI6MTcwODg3NzA1OSwiZXhwIjoyMDI0MjM3MDU5fQ.5vfW85qQ2DO3vAyM_lcm1YyNqIX2O8JlTqoYKLdxf6M
  *
@@ -47,13 +47,16 @@
  * V0.64 Dump Load excess load mode programming
  * V.065 DL excess logic tuning and power adjustments
  * V.066 -> V.068 Various timing fixes to reduce spamming commands and logs
+ * V.069 send MQTT showdown commands to HA when critical energy conditions are meet
+ * V.070 process Home Assistant MQTT commands sent from automations
+ * V.071 comment additions, logging improvements and code cleanups
  */
 
 /*
  * for the publish and subscribe topic pair
  * passed as a context variable
  */
-// for local device Comedi device control
+// for local device Comedi hardware I/O device control
 struct ha_flag_type ha_flag_vars_pc = {
 	.runner = false,
 	.receivedtoken = false,
@@ -84,10 +87,22 @@ struct ha_flag_type ha_flag_vars_sd = {
 	.var_update = 0,
 };
 
+// data from HA
+struct ha_flag_type ha_flag_vars_ha = {
+	.runner = false,
+	.receivedtoken = false,
+	.deliveredtoken = false,
+	.rec_ok = false,
+	.ha_id = HA_ID,
+	.var_update = 0,
+};
+
+// Comedi I/O device type
 const char *board_name = "NO_BOARD", *driver_name = "NO_DRIVER";
 
-FILE* fout;
+FILE* fout; // logging stream
 
+// energy state structure
 struct energy_type E = {
 	.once_gti = true,
 	.once_ac = true,
@@ -95,6 +110,7 @@ struct energy_type E = {
 	.iammeter = false,
 	.fm80 = false,
 	.dumpload = false,
+	.homeassistant = false,
 	.ac_low_adj = 0.0f,
 	.gti_low_adj = 0.0f,
 	.ac_sw_on = true,
@@ -137,6 +153,7 @@ void showIP(void);
 
 /*
  * show all assigned networking addresses and types
+ * on the current machine
  */
 void showIP(void)
 {
@@ -169,7 +186,8 @@ void showIP(void)
 }
 
 /*
- * setup program to run as a background deamon
+ * setup ha_energy program to run as a background deamon
+ * disconnect and exit foreground startup process
  */
 static void skeleton_daemon()
 {
@@ -228,7 +246,8 @@ static void skeleton_daemon()
 }
 
 /*
- * check for sensor range errors
+ * check for sensor range errors for some critical data points
+ * look for bad data on the high side
  */
 bool sanity_check(void)
 {
@@ -272,7 +291,7 @@ void timer_callback(int32_t signum)
 }
 
 /*
- * Broker errors
+ * MQTT Broker errors are fatal
  */
 void connlost(void *context, char *cause)
 {
@@ -285,15 +304,18 @@ void connlost(void *context, char *cause)
 	} else {
 		id_num = ha_flag->ha_id;
 	}
-	fprintf(fout, "\n%s Connection lost\n", log_time(false));
+	fprintf(fout, "\n%s Connection lost, exit ha_energy program\n", log_time(false));
 	fprintf(fout, "%s     cause: %s, %d\n", log_time(false), cause, id_num);
+	fprintf(fout, "%sDAEMON failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
 	fflush(fout);
 	exit(EXIT_FAILURE);
 }
 
 /*
- * Use MQTT/HTTP to send/receive updates to a Solar hardware device
- * and control energy is a optimized fashion
+ * HA_ENERGY
+ * 
+ * Use MQTT/HTTP to send/receive updates to Solar hardware devices
+ * and control energy in an optimized fashion to reduce electrical energy costs
  */
 int main(int argc, char *argv[])
 {
@@ -306,7 +328,8 @@ int main(int argc, char *argv[])
 	struct itimerval old_timer;
 	time_t rawtime;
 	MQTTClient_connectOptions conn_opts_p = MQTTClient_connectOptions_initializer,
-		conn_opts_sd = MQTTClient_connectOptions_initializer;
+		conn_opts_sd = MQTTClient_connectOptions_initializer,
+		conn_opts_ha = MQTTClient_connectOptions_initializer;
 	MQTTClient_message pubmsg = MQTTClient_message_initializer;
 	MQTTClient_deliveryToken token;
 	char hname[256], *hname_ptr = hname;
@@ -314,7 +337,7 @@ int main(int argc, char *argv[])
 
 	gethostname(hname, hname_len);
 	hname[12] = 0;
-	printf("\r\n%s  LOG Version %s : MQTT Version %s : Host Name %s\r\n", log_time(false), LOG_VERSION, MQTT_VERSION, hname);
+	printf("\r\n  LOG Version %s : MQTT Version %s : Host Name %s\r\n", LOG_VERSION, MQTT_VERSION, hname);
 	showIP();
 	skeleton_daemon();
 
@@ -344,6 +367,7 @@ int main(int argc, char *argv[])
 			}
 			/*
 			 * set the timer for MQTT publishing sample speed
+			 * CMD_SEC         10
 			 */
 			setitimer(ITIMER_REAL, &new_timer, &old_timer);
 			signal(SIGALRM, timer_callback);
@@ -375,8 +399,8 @@ int main(int argc, char *argv[])
 			if (strncmp(hname, TNAME, 6) == 0) {
 				MQTTClient_create(&E.client_sd, LADDRESS, CLIENTID2,
 					MQTTCLIENT_PERSISTENCE_NONE, NULL);
-				conn_opts_p.keepAliveInterval = 20;
-				conn_opts_p.cleansession = 1;
+				conn_opts_sd.keepAliveInterval = 20;
+				conn_opts_sd.cleansession = 1;
 				hname_ptr = LADDRESS;
 			} else {
 				MQTTClient_create(&E.client_sd, ADDRESS, CLIENTID2,
@@ -397,10 +421,38 @@ int main(int argc, char *argv[])
 			}
 
 			/*
+			 * Home Assistant MQTT receive messages
+			 */
+			if (strncmp(hname, TNAME, 6) == 0) {
+				MQTTClient_create(&E.client_ha, LADDRESS, CLIENTID3,
+					MQTTCLIENT_PERSISTENCE_NONE, NULL);
+				conn_opts_ha.keepAliveInterval = 20;
+				conn_opts_ha.cleansession = 1;
+				hname_ptr = LADDRESS;
+			} else {
+				MQTTClient_create(&E.client_ha, ADDRESS, CLIENTID3,
+					MQTTCLIENT_PERSISTENCE_NONE, NULL);
+				conn_opts_ha.keepAliveInterval = 20;
+				conn_opts_ha.cleansession = 1;
+				hname_ptr = ADDRESS;
+			}
+
+			fprintf(fout, "%s Connect MQTT server %s, %s\n", log_time(false), hname_ptr, CLIENTID3);
+			fflush(fout);
+			MQTTClient_setCallbacks(E.client_ha, &ha_flag_vars_ha, connlost, msgarrvd, delivered);
+			if ((E.rc = MQTTClient_connect(E.client_ha, &conn_opts_ha)) != MQTTCLIENT_SUCCESS) {
+				fprintf(fout, "%s Failed to connect MQTT server, return code %d %s, %s\n", log_time(false), E.rc, hname_ptr, CLIENTID3);
+				fflush(fout);
+				pthread_mutex_destroy(&E.ha_lock);
+				exit(EXIT_FAILURE);
+			}
+
+			/*
 			 * on topic received data will trigger the msgarrvd function
 			 */
-			MQTTClient_subscribe(E.client_p, TOPIC_SS, QOS);
-			MQTTClient_subscribe(E.client_sd, TOPIC_SD, QOS);
+			MQTTClient_subscribe(E.client_p, TOPIC_SS, QOS); // FM80 Q84
+			MQTTClient_subscribe(E.client_sd, TOPIC_SD, QOS); // DUMPLOAD K42
+			MQTTClient_subscribe(E.client_ha, TOPIC_HA, QOS); // Home Assistant Linux AMD64  and ARM64
 
 			pubmsg.payload = "online";
 			pubmsg.payloadlen = strlen("online");
@@ -418,15 +470,19 @@ int main(int argc, char *argv[])
 			mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
 			mqtt_ha_switch(E.client_p, TOPIC_PDCC, false);
 			mqtt_ha_switch(E.client_p, TOPIC_PACC, false);
-			//                E.mode.in_pid_control = false;
+
 			E.ac_sw_on = true; // can be switched on once
 			E.gti_sw_on = true; // can be switched on once
 
 			/*
 			 * use libcurl to read AC power meter HTTP data
+			 * iammeter connected for split single phase monitoring and one leg GTI power exporting
 			 */
 			iammeter_read();
 
+			/*
+			 * start the main energy monitoring loop
+			 */
 			fprintf(fout, "\r\n%s Solar Energy AC power controller\r\n", log_time(false));
 
 #ifdef FAKE_VPV
@@ -452,6 +508,10 @@ int main(int argc, char *argv[])
 				fflush(fout);
 			}
 
+			/*
+			 * stop and restart the energy control processing
+			 * from inside the program or from a remote Home Assistant command
+			 */
 			if (solar_shutdown()) {
 				if (!E.startup) {
 					fprintf(fout, "%s SHUTDOWN Solar Energy Control ---> \r\n", log_time(false));
@@ -473,6 +533,7 @@ int main(int argc, char *argv[])
 
 				uint8_t iam_delay = 0;
 				while (solar_shutdown()) {
+					mqtt_ha_shutdown(E.client_p, TOPIC_SHUTDOWN);
 					usleep(USEC_SEC); // wait
 					if ((int32_t) E.mvar[V_HACSW]) {
 						ha_ac_off();
@@ -484,6 +545,7 @@ int main(int argc, char *argv[])
 						E.fm80 = true;
 						E.dumpload = true;
 						E.iammeter = true;
+						E.homeassistant = true;
 					}
 				}
 				E.link.shutdown = 0;
@@ -491,7 +553,7 @@ int main(int argc, char *argv[])
 				fflush(fout);
 				bsoc_set_mode(E.mode.pv_bias, true, true);
 				E.dl_excess = true;
-				mqtt_gti_power(E.client_p, TOPIC_P, "Z#"); // zero power at startup
+				mqtt_gti_power(E.client_p, TOPIC_P, "Z#", 1); // zero power at startup
 				E.dl_excess = false;
 #ifdef AUTO_CHARGE
 				mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
@@ -503,7 +565,8 @@ int main(int argc, char *argv[])
 				E.fm80 = true;
 				E.dumpload = true;
 				E.iammeter = true;
-				E.mode.in_pid_control = false;
+				E.homeassistant = true;
+				E.mode.in_pid_control = false; // shutdown auto energy control
 				E.mode.R = R_INIT;
 			}
 			if (ha_flag_vars_ss.receivedtoken) {
@@ -559,7 +622,7 @@ int main(int argc, char *argv[])
 				break;
 			}
 			/*
-			 * main state-machine update sequence
+			 * main state-machine update sequence and control logic
 			 */
 			/*
 			 * check for idle/data errors flags from sensors and HA
@@ -587,6 +650,9 @@ int main(int argc, char *argv[])
 							E.mode.pv_bias = (int32_t) E.mode.error - PV_BIAS;
 						}
 					}
+					/*
+					 * use PID style set-point error correction
+					 */
 					E.mode.in_pid_control = true;
 					E.gti_delay = 0;
 					/*
@@ -633,7 +699,7 @@ int main(int argc, char *argv[])
 					}
 
 					snprintf(gti_str, SBUF_SIZ - 1, "V%04dX", error_drive); // format for dumpload controller gti power commands
-					mqtt_gti_power(E.client_p, TOPIC_P, gti_str);
+					mqtt_gti_power(E.client_p, TOPIC_P, gti_str, 2);
 				}
 
 #ifndef  FAKE_VPV
@@ -658,6 +724,7 @@ int main(int argc, char *argv[])
 
 				/*
 				 * Dump Load Excess testing
+				 * send excess power into the home power grid taking care not to export energy to the utility grid
 				 */
 				if (((dc1_filter(E.mvar[V_BEN]) > BAL_MAX_ENERGY_GTI) && (gti_test() > MIN_BAT_KW_GTI_HI)) || E.dl_excess) {
 #ifndef  FAKE_VPV                            
@@ -721,6 +788,7 @@ int main(int argc, char *argv[])
 					snprintf(buffer, SYSLOG_SIZ - 1, "\r\n%s !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels M %u,%u I %u,%u\r\n", log_time(false), E.fm80, E.dumpload, E.fm80,
 						E.link.mqtt_count, E.link.mqtt_error, E.link.iammeter_count, E.link.iammeter_error);
 					syslog(LOG_NOTICE, buffer);
+					mqtt_ha_shutdown(E.client_p, TOPIC_SHUTDOWN);
 					E.mode.data_error = true;
 				} else {
 					E.mode.data_error = false;
@@ -733,6 +801,7 @@ int main(int argc, char *argv[])
 				fflush(fout);
 				E.fm80 = false;
 				E.dumpload = false;
+				E.homeassistant = false;
 				E.iammeter = false;
 				sync_ha();
 				print_im_vars();
@@ -759,6 +828,9 @@ int main(int argc, char *argv[])
 	}
 }
 
+/*
+ * send energy to the house grid
+ */
 void ramp_up_gti(MQTTClient client_p, bool start, bool excess)
 {
 	static uint32_t sequence = 0;
@@ -789,13 +861,13 @@ void ramp_up_gti(MQTTClient client_p, bool start, bool excess)
 		E.once_gti_zero = true;
 		if (bat_current_stable() || E.dl_excess) { // check battery current std dev, stop 'motorboating'
 			sequence++;
-			if (!mqtt_gti_power(client_p, TOPIC_P, "+#")) {
+			if (!mqtt_gti_power(client_p, TOPIC_P, "+#", 3)) {
 				sequence = 0;
 			}; // +100W power
 		} else {
 			usleep(500000); // wait a bit more for power to be stable
 			sequence = 1; // do power ramps when ready
-			if (!mqtt_gti_power(client_p, TOPIC_P, "-#")) {
+			if (!mqtt_gti_power(client_p, TOPIC_P, "-#", 4)) {
 				sequence = 0;
 			}; // - 100W power
 		}
@@ -803,13 +875,13 @@ void ramp_up_gti(MQTTClient client_p, bool start, bool excess)
 	case 0:
 		sequence++;
 		if (E.once_gti_zero) {
-			mqtt_gti_power(client_p, TOPIC_P, "Z#"); // zero power
+			mqtt_gti_power(client_p, TOPIC_P, "Z#", 5); // zero power
 			E.once_gti_zero = false;
 		}
 		break;
 	default:
 		if (E.once_gti_zero) {
-			mqtt_gti_power(client_p, TOPIC_P, "Z#"); // zero power
+			mqtt_gti_power(client_p, TOPIC_P, "Z#", 6); // zero power
 			E.once_gti_zero = false;
 		}
 		sequence = 0;
@@ -817,6 +889,9 @@ void ramp_up_gti(MQTTClient client_p, bool start, bool excess)
 	}
 }
 
+/*
+ * showdown energy to the house grid
+ */
 void ramp_down_gti(MQTTClient client_p, bool sw_off)
 {
 	if (sw_off) {
@@ -827,11 +902,14 @@ void ramp_down_gti(MQTTClient client_p, bool sw_off)
 	E.once_gti = true;
 
 	if (E.once_gti_zero) {
-		mqtt_gti_power(client_p, TOPIC_P, "Z#"); // zero power
+		mqtt_gti_power(client_p, TOPIC_P, "Z#", 7); // zero power
 		E.once_gti_zero = false;
 	}
 }
 
+/*
+ * control power from the off-grid AC inverter
+ */
 void ramp_up_ac(MQTTClient client_p, bool start)
 {
 
@@ -869,6 +947,9 @@ void ha_ac_on(void)
 	E.ac_sw_status = true;
 }
 
+/*
+ * control power from the GTI inverters to the house grid
+ */
 void ha_dc_off(void)
 {
 	mqtt_ha_switch(E.client_p, TOPIC_PDCC, false);
@@ -946,8 +1027,8 @@ char * log_time(bool log)
 	time_t rawtime_log;
 
 	tzset();
-	timezone=0;
-	daylight=0;
+	timezone = 0;
+	daylight = 0;
 	time(&rawtime_log);
 	if (sync_time++ > TIME_SYNC_SEC) {
 		sync_time = 0;
@@ -973,18 +1054,20 @@ bool sync_ha(void)
 {
 	bool sync = false;
 	if (E.gti_sw_status != (bool) ((int32_t) E.mvar[V_HDCSW])) {
-		mqtt_ha_switch(E.client_p, TOPIC_PDCC, !E.ac_sw_status);
+		fprintf(fout, "DC_MM %d %d ", (bool) E.gti_sw_status, (bool) ((int32_t) E.mvar[V_HDCSW]));
+		mqtt_ha_switch(E.client_p, TOPIC_PDCC, !E.gti_sw_status);
 		E.dc_mismatch = true;
-		sync = true;
-		fprintf(fout, "DC_MM ");
 		fflush(fout);
+		sync = true;
 	} else {
 		E.dc_mismatch = false;
 	}
+
+	E.ac_sw_status = (bool) ((int32_t) E.mvar[V_HACSW]); // TEMP FIX for MISmatch errors
 	if (E.ac_sw_status != (bool) ((int32_t) E.mvar[V_HACSW])) {
+		fprintf(fout, "AC_MM %d %d ", (bool) E.ac_sw_status, (bool) ((int32_t) E.mvar[V_HACSW]));
 		mqtt_ha_switch(E.client_p, TOPIC_PACC, !E.ac_sw_status);
 		E.ac_mismatch = true;
-		fprintf(fout, "AC_MM ");
 		fflush(fout);
 		sync = true;
 	} else {

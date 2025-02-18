@@ -6,5 +6,5 @@ main.a1::ha_energy/main.cpp
 mqtt_rec.a1::ha_energy/mqtt_rec.c
 mqtt_vars.a1::ha_energy/mqtt_vars.c
 pid.a1::ha_energy/pid.c
-c_standard_headers_indexer.a1::/root/ha_energy/bmc/ha_energy/nbproject/private/c_standard_headers_indexer.c
-cpp_standard_headers_indexer.a1::/root/ha_energy/bmc/ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp
+c_standard_headers_indexer.a1::/store/solar_software/ha_energy/bmc/ha_energy/nbproject/private/c_standard_headers_indexer.c
+cpp_standard_headers_indexer.a1::/store/solar_software/ha_energy/bmc/ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp

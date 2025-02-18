@@ -7,6 +7,39 @@ static const char *const FW_Date = __DATE__;
 static const char *const FW_Time = __TIME__;
 
 /*
+ * send energy shutdown command to Home Assistant
+ */
+void mqtt_ha_shutdown(MQTTClient client_p, const char * topic_p)
+{
+	cJSON *json;
+	MQTTClient_message pubmsg = MQTTClient_message_initializer;
+	MQTTClient_deliveryToken token;
+	ha_flag_vars_ss.deliveredtoken = 0;
+
+	json = cJSON_CreateObject();
+	cJSON_AddStringToObject(json, "shutdown", CLIENTID1);
+	char *json_str = cJSON_Print(json);
+
+	pubmsg.payload = json_str;
+	pubmsg.payloadlen = strlen(json_str);
+	pubmsg.qos = QOS;
+	pubmsg.retained = 0;
+
+	MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token);
+	// a busy, wait loop for the async delivery thread to complete
+	{
+		uint32_t waiting = 0;
+		while (ha_flag_vars_ss.deliveredtoken != token) {
+			usleep(TOKEN_DELAY);
+			if (waiting++ > MQTT_TIMEOUT) {
+				fprintf(fout, "\r\n%s SW Still Waiting, timeout\r\n", log_time(false));
+				break;
+			}
+		};
+	}
+}
+
+/*
  * send PID power control variables to Home Assistant
  */
 void mqtt_ha_pid(MQTTClient client_p, const char * topic_p)
@@ -150,7 +183,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, const bool sw_sta
 /*
  * send mqtt messages to the dumpload GTI controller
  */
-bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg)
+bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg, uint32_t trace)
 {
 	bool ret = true;
 	MQTTClient_message pubmsg = MQTTClient_message_initializer;
@@ -173,7 +206,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg)
 	if (bsoc_gti() > MIN_BAT_KW || E.dl_excess) {
 #ifdef DEBUG_HA_CMD
 		log_time(true);
-		fprintf(fout, "HA GTI power command %s, SDEV %5.2f\r\n", msg, get_batc_dev());
+		fprintf(fout, "HA GTI power command %s, SDEV %5.2f trace %u\r\n", msg, get_batc_dev(), trace);
 		fflush(fout);
 		spam = true;
 #endif
@@ -190,7 +223,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg)
 #ifdef DEBUG_HA_CMD
 		if (spam) {
 			log_time(true);
-			fprintf(fout, "HA GTI power set to zero\r\n");
+			fprintf(fout, "HA GTI power set to zero, trace %u\r\n", trace);
 			fflush(fout);
 			spam = false;
 		}
@@ -203,7 +236,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg)
 		while (ha_flag_vars_ss.deliveredtoken != token) {
 			usleep(TOKEN_DELAY);
 			if (waiting++ > MQTT_TIMEOUT) {
-				fprintf(fout, "\r\n%s GTI Still Waiting, timeout\r\n", log_time(false));
+				fprintf(fout, "\r\n%s GTI Power Still Waiting, timeout\r\n", log_time(false));
 				break;
 			}
 		};
@@ -231,9 +264,9 @@ bool mqtt_gti_time(MQTTClient client_p, const char * topic_p, char * msg)
 	{
 		uint32_t waiting = 0;
 		while (ha_flag_vars_ss.deliveredtoken != token) {
-			usleep(TOKEN_DELAY);
+			usleep(GTI_TOKEN_DELAY);
 			if (waiting++ > MQTT_TIMEOUT) {
-				fprintf(fout, "\r\n%s GTI Still Waiting, timeout\r\n", log_time(false));
+				fprintf(fout, "\r\n%s GTI Time Still Waiting, timeout\r\n", log_time(false));
 				break;
 			}
 		};

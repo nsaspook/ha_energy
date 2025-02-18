@@ -54,10 +54,14 @@ static struct local_type L = {
 
 static double error_filter(const double);
 
+/*
+ * setup basic start state for BSOC functions
+ */
 bool bsoc_init(void)
 {
 	L.ac_weight = 0.0f;
 	L.gti_weight = 0.0f;
+	// use MUTEX locks for message passing between remote programs
 	if (pthread_mutex_init(&E.ha_lock, NULL) != 0) {
 		fprintf(fout, "\n%s mutex init has failed\n", log_time(false));
 		return false;
@@ -75,11 +79,14 @@ void bsoc_set_std_dev(const double value, const uint32_t i)
 
 /*
  * move the data into work variables from the receive threads array
+ * MUTEX lock data array updates from ASYNC mqtt received data and main
+ * process reads form the main data array
  */
 bool bsoc_data_collect(void)
 {
 	bool ret = false;
 	static uint32_t i = 0;
+	// lockout threaded updates
 	pthread_mutex_lock(&E.ha_lock); // lockout MQTT var updates
 
 	L.ac_weight = E.mvar[V_FBEKW];
@@ -100,7 +107,7 @@ bool bsoc_data_collect(void)
 	E.gti_low_adj = E.mvar[V_FACE] * -0.5f;
 	E.mode.dl_mqtt_max = E.mvar[V_DPMPPT];
 
-	pthread_mutex_unlock(&E.ha_lock); // resume MQTT var updates
+	pthread_mutex_unlock(&E.ha_lock); // resume remote MQTT var updates
 
 	if (E.ac_low_adj < -2000.0f) {
 		E.ac_low_adj = -2000.0f;
@@ -337,7 +344,7 @@ bool bsoc_set_mode(const double target, const bool mode, const bool init)
 	 * HA stop excess button pressed
 	 */
 	if (E.mode.con5) {
-		mqtt_gti_power(E.client_p, TOPIC_P, "Z#"); // zero power at excess shutdown
+		mqtt_gti_power(E.client_p, TOPIC_P, "Z#", 9); // zero power at excess shutdown
 		E.dl_excess = false;
 		E.mode.con5 = false;
 	}
@@ -346,7 +353,7 @@ bool bsoc_set_mode(const double target, const bool mode, const bool init)
 	 * DL buffer battery low set-point excess load shutdown
 	 */
 	if (E.mvar[V_DAHBAT] < PV_DL_B_AH_LOW) {
-		mqtt_gti_power(E.client_p, TOPIC_P, "Z#"); // zero power at excess shutdown
+		mqtt_gti_power(E.client_p, TOPIC_P, "Z#", 10); // zero power at excess shutdown
 		E.dl_excess = false;
 		E.mode.con4 = false;
 		E.mode.con5 = false;

@@ -1,8 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="13188576299291687632">
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;cstdlib&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;cstdlib&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/main.cpp" line="8" column="0"/>
-        </error>
+<analyzerinfo hash="6004102322088312780">
   <FileInfo check="CheckUnusedFunctions">
     <functiondecl functionName="main" lineNumber="15"/>
   </FileInfo>
