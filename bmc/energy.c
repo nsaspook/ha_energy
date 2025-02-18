@@ -553,7 +553,7 @@ int main(int argc, char *argv[])
 				fflush(fout);
 				bsoc_set_mode(E.mode.pv_bias, true, true);
 				E.dl_excess = true;
-				mqtt_gti_power(E.client_p, TOPIC_P, "Z#"); // zero power at startup
+				mqtt_gti_power(E.client_p, TOPIC_P, "Z#", 1); // zero power at startup
 				E.dl_excess = false;
 #ifdef AUTO_CHARGE
 				mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
@@ -699,7 +699,7 @@ int main(int argc, char *argv[])
 					}
 
 					snprintf(gti_str, SBUF_SIZ - 1, "V%04dX", error_drive); // format for dumpload controller gti power commands
-					mqtt_gti_power(E.client_p, TOPIC_P, gti_str);
+					mqtt_gti_power(E.client_p, TOPIC_P, gti_str, 2);
 				}
 
 #ifndef  FAKE_VPV
@@ -861,13 +861,13 @@ void ramp_up_gti(MQTTClient client_p, bool start, bool excess)
 		E.once_gti_zero = true;
 		if (bat_current_stable() || E.dl_excess) { // check battery current std dev, stop 'motorboating'
 			sequence++;
-			if (!mqtt_gti_power(client_p, TOPIC_P, "+#")) {
+			if (!mqtt_gti_power(client_p, TOPIC_P, "+#", 3)) {
 				sequence = 0;
 			}; // +100W power
 		} else {
 			usleep(500000); // wait a bit more for power to be stable
 			sequence = 1; // do power ramps when ready
-			if (!mqtt_gti_power(client_p, TOPIC_P, "-#")) {
+			if (!mqtt_gti_power(client_p, TOPIC_P, "-#", 4)) {
 				sequence = 0;
 			}; // - 100W power
 		}
@@ -875,13 +875,13 @@ void ramp_up_gti(MQTTClient client_p, bool start, bool excess)
 	case 0:
 		sequence++;
 		if (E.once_gti_zero) {
-			mqtt_gti_power(client_p, TOPIC_P, "Z#"); // zero power
+			mqtt_gti_power(client_p, TOPIC_P, "Z#", 5); // zero power
 			E.once_gti_zero = false;
 		}
 		break;
 	default:
 		if (E.once_gti_zero) {
-			mqtt_gti_power(client_p, TOPIC_P, "Z#"); // zero power
+			mqtt_gti_power(client_p, TOPIC_P, "Z#", 6); // zero power
 			E.once_gti_zero = false;
 		}
 		sequence = 0;
@@ -902,7 +902,7 @@ void ramp_down_gti(MQTTClient client_p, bool sw_off)
 	E.once_gti = true;
 
 	if (E.once_gti_zero) {
-		mqtt_gti_power(client_p, TOPIC_P, "Z#"); // zero power
+		mqtt_gti_power(client_p, TOPIC_P, "Z#", 7); // zero power
 		E.once_gti_zero = false;
 	}
 }

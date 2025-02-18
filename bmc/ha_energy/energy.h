@@ -36,7 +36,7 @@ extern "C" {
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.71"
+#define LOG_VERSION     "V0.72"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
@@ -120,8 +120,8 @@ extern "C" {
 #define PV_DL_MPTT_IDLE     57.0f
 #define PV_DL_BIAS_RATE     75.0f
 #define PV_DL_EXCESS       500.0f
-#define PV_DL_B_AH_LOW     425.0f
-#define PV_DL_B_AH_MIN     460.0f 
+#define PV_DL_B_AH_LOW     80.0f
+#define PV_DL_B_AH_MIN     150.0f // DL battery should be at least 175Ah
 #define PWA_SLEEP          200.0f
 #define DL_AC_DC_EFF        1.24f
 
@@ -148,6 +148,8 @@ extern "C" {
 
 	//#define AUTO_CHARGE                   // turn on dumpload charger during restarts
 	//#define B_DLE_DEBUG    // Dump Load debugging
+	//#define BSOC_DEGUB
+	//#define DEBUG_HA_CMD
 
 #define IM_DELAY            1   // tens of second updates
 #define IM_DISPLAY          1
@@ -286,6 +288,9 @@ extern "C" {
 		S_DPBAT,
 		S_DVBAT,
 		S_DCMPPT,
+		S_DPMPPT,
+		S_DAHBAT,
+		S_DCCMODE,
 		S_DGTI,
 		S_DLAST,
 	};
