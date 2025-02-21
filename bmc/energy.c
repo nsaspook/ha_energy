@@ -699,9 +699,9 @@ int main(int argc, char *argv[])
 					}
 
 					/*
-					 * shutdown power at low DL battery 
+					 * shutdown GTI power at low DL battery Ah or Voltage
 					 */
-					if (E.mvar[V_DAHBAT] < PV_DL_B_AH_LOW) { 
+					if ((E.mvar[V_DAHBAT] < PV_DL_B_AH_LOW) || (E.mvar[V_DVBAT] < PV_DL_B_V_LOW)) {
 						error_drive = PV_BIAS_ZERO;
 					}
 
