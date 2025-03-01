@@ -1,0 +1,227 @@
+\hypertarget{http__vars_8c}{}\doxysection{ha\+\_\+energy/http\+\_\+vars.c File Reference}
+\label{http__vars_8c}\index{ha\_energy/http\_vars.c@{ha\_energy/http\_vars.c}}
+{\ttfamily \#include \char`\"{}http\+\_\+vars.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+Include dependency graph for http\+\_\+vars.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{http__vars_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{http__vars_8c_adbf9cd5b8ee26136ef6d0b4f954e64be}{iammeter\+\_\+get\+\_\+data}} (const double, const uint32\+\_\+t, const uint32\+\_\+t)
+\item 
+bool \mbox{\hyperlink{http__vars_8c_addadf78316d3819a2b8fc271ffd97fc9}{mqtt\+\_\+gti\+\_\+time}} (MQTTClient, const char $\ast$, char $\ast$)
+\item 
+size\+\_\+t \mbox{\hyperlink{http__vars_8c_aabb25f42dea94453d721073f265c0063}{iammeter\+\_\+write\+\_\+callback}} (char $\ast$buffer, size\+\_\+t size, size\+\_\+t nitems, void $\ast$stream)
+\item 
+void \mbox{\hyperlink{http__vars_8c_a34d485627939300ea5e51b765f599b9a}{iammeter\+\_\+read}} (void)
+\item 
+void \mbox{\hyperlink{http__vars_8c_a8b0aebb679cfaa2c1c7f70e477e396a5}{print\+\_\+im\+\_\+vars}} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static CURL $\ast$ \mbox{\hyperlink{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}{curl}}
+\item 
+static CURLcode \mbox{\hyperlink{http__vars_8c_acf1ea240303dba3184f1f87a13202862}{res}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{http__vars_8c_adbf9cd5b8ee26136ef6d0b4f954e64be}\label{http__vars_8c_adbf9cd5b8ee26136ef6d0b4f954e64be}} 
+\index{http\_vars.c@{http\_vars.c}!iammeter\_get\_data@{iammeter\_get\_data}}
+\index{iammeter\_get\_data@{iammeter\_get\_data}!http\_vars.c@{http\_vars.c}}
+\doxysubsubsection{\texorpdfstring{iammeter\_get\_data()}{iammeter\_get\_data()}}
+{\footnotesize\ttfamily static void iammeter\+\_\+get\+\_\+data (\begin{DoxyParamCaption}\item[{const double}]{valuedouble,  }\item[{const uint32\+\_\+t}]{i,  }\item[{const uint32\+\_\+t}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{103 \{}
+\DoxyCodeLine{104     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a61e594f5bba7e386b9bc2dee37eabb56}{im\_vars}}[i][j] = valuedouble;}
+\DoxyCodeLine{105 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{http__vars_8c_a34d485627939300ea5e51b765f599b9a}\label{http__vars_8c_a34d485627939300ea5e51b765f599b9a}} 
+\index{http\_vars.c@{http\_vars.c}!iammeter\_read@{iammeter\_read}}
+\index{iammeter\_read@{iammeter\_read}!http\_vars.c@{http\_vars.c}}
+\doxysubsubsection{\texorpdfstring{iammeter\_read()}{iammeter\_read()}}
+{\footnotesize\ttfamily void iammeter\+\_\+read (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{76 \{}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78     \mbox{\hyperlink{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}{curl}} = curl\_easy\_init();}
+\DoxyCodeLine{79     \textcolor{keywordflow}{if} (\mbox{\hyperlink{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}{curl}}) \{}
+\DoxyCodeLine{80         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_af96503924386a5fa3723e667ef4c57df}{iammeter\_count}}++;}
+\DoxyCodeLine{81         curl\_easy\_setopt(\mbox{\hyperlink{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}{curl}}, CURLOPT\_URL, \textcolor{stringliteral}{"{}http://10.1.1.101/monitorjson"{}});}
+\DoxyCodeLine{82         curl\_easy\_setopt(\mbox{\hyperlink{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}{curl}}, CURLOPT\_WRITEFUNCTION, \mbox{\hyperlink{http__vars_8c_aabb25f42dea94453d721073f265c0063}{iammeter\_write\_callback}});}
+\DoxyCodeLine{83         curl\_easy\_setopt(\mbox{\hyperlink{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}{curl}}, CURLOPT\_WRITEDATA, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_aa7198c879bedfbb1db35874b4ef079dd}{print\_vars}}); \textcolor{comment}{// external data array for iammeter values}}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85         \mbox{\hyperlink{http__vars_8c_acf1ea240303dba3184f1f87a13202862}{res}} = curl\_easy\_perform(\mbox{\hyperlink{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}{curl}});}
+\DoxyCodeLine{86         \textcolor{comment}{/* Check for errors */}}
+\DoxyCodeLine{87         \textcolor{keywordflow}{if} (\mbox{\hyperlink{http__vars_8c_acf1ea240303dba3184f1f87a13202862}{res}} != CURLE\_OK) \{}
+\DoxyCodeLine{88             fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}curl\_easy\_perform() failed in iammeter\_read: \%s\(\backslash\)n"{}},}
+\DoxyCodeLine{89                 curl\_easy\_strerror(\mbox{\hyperlink{http__vars_8c_acf1ea240303dba3184f1f87a13202862}{res}}));}
+\DoxyCodeLine{90             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae9aa060b6fa02493a02a9a2ce5bb7658}{iammeter}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{91             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_ae120ea132c18d0baf98a393c1e06ce20}{iammeter\_error}}++;}
+\DoxyCodeLine{92         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{93             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae9aa060b6fa02493a02a9a2ce5bb7658}{iammeter}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{94         \}}
+\DoxyCodeLine{95         curl\_easy\_cleanup(\mbox{\hyperlink{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}{curl}});}
+\DoxyCodeLine{96     \}}
+\DoxyCodeLine{97 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{http__vars_8c_aabb25f42dea94453d721073f265c0063}\label{http__vars_8c_aabb25f42dea94453d721073f265c0063}} 
+\index{http\_vars.c@{http\_vars.c}!iammeter\_write\_callback@{iammeter\_write\_callback}}
+\index{iammeter\_write\_callback@{iammeter\_write\_callback}!http\_vars.c@{http\_vars.c}}
+\doxysubsubsection{\texorpdfstring{iammeter\_write\_callback()}{iammeter\_write\_callback()}}
+{\footnotesize\ttfamily size\+\_\+t iammeter\+\_\+write\+\_\+callback (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer,  }\item[{size\+\_\+t}]{size,  }\item[{size\+\_\+t}]{nitems,  }\item[{void $\ast$}]{stream }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{14 \{}
+\DoxyCodeLine{15     cJSON *json = cJSON\_ParseWithLength(buffer, strlen(buffer));}
+\DoxyCodeLine{16     \textcolor{keyword}{struct }\mbox{\hyperlink{structenergy__type}{energy\_type}} * e = stream;}
+\DoxyCodeLine{17     uint32\_t next\_var = 0;}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_af96503924386a5fa3723e667ef4c57df}{iammeter\_count}}++;}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \textcolor{keywordflow}{if} (json == NULL) \{}
+\DoxyCodeLine{22         \textcolor{keyword}{const} \textcolor{keywordtype}{char} *error\_ptr = cJSON\_GetErrorPtr();}
+\DoxyCodeLine{23         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_ae120ea132c18d0baf98a393c1e06ce20}{iammeter\_error}}++;}
+\DoxyCodeLine{24         \textcolor{keywordflow}{if} (error\_ptr != NULL) \{}
+\DoxyCodeLine{25             fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}Error in iammeter\_write\_callback \%u: \%s\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_ae120ea132c18d0baf98a393c1e06ce20}{iammeter\_error}}, error\_ptr);}
+\DoxyCodeLine{26         \}}
+\DoxyCodeLine{27         \textcolor{keywordflow}{goto} iammeter\_exit;}
+\DoxyCodeLine{28     \}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#ifdef IM\_DEBUG}}
+\DoxyCodeLine{30     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)n iammeter\_read\_callback \%s \(\backslash\)n"{}}, buffer);}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     cJSON *data\_result = cJSON\_GetObjectItemCaseSensitive(json, \textcolor{stringliteral}{"{}Datas"{}});}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \textcolor{keywordflow}{if} (!data\_result) \{}
+\DoxyCodeLine{36         size = 0;}
+\DoxyCodeLine{37         nitems = 0;}
+\DoxyCodeLine{38         \textcolor{keywordflow}{goto} iammeter\_exit;}
+\DoxyCodeLine{39     \}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     cJSON *jname;}
+\DoxyCodeLine{42     uint32\_t phase = \mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323a8825a1a26ae9bf551b490741d7ae280a}{PHASE\_A}};}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44     cJSON\_ArrayForEach(jname, data\_result)}
+\DoxyCodeLine{45     \{}
+\DoxyCodeLine{46         cJSON *ianame;}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#ifdef IM\_DEBUG}}
+\DoxyCodeLine{48         fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)n iammeter variables "{}});}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51         cJSON\_ArrayForEach(ianame, jname)}
+\DoxyCodeLine{52         \{}
+\DoxyCodeLine{53             uint32\_t phase\_var = \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a6ee579d3dc53ac798b03bf17c52e7da0}{IA\_VOLTAGE}};}
+\DoxyCodeLine{54             \mbox{\hyperlink{http__vars_8c_adbf9cd5b8ee26136ef6d0b4f954e64be}{iammeter\_get\_data}}(ianame-\/>valuedouble, phase\_var, phase);}
+\DoxyCodeLine{55             e-\/>\mbox{\hyperlink{structenergy__type_aa7198c879bedfbb1db35874b4ef079dd}{print\_vars}}[next\_var++] = ianame-\/>valuedouble;}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#ifdef IM\_DEBUG}}
+\DoxyCodeLine{57             fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%8.2f "{}}, \mbox{\hyperlink{structenergy__type_a61e594f5bba7e386b9bc2dee37eabb56}{im\_vars}}[phase\_var][phase]);}
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{59             phase\_var++;}
+\DoxyCodeLine{60         \}}
+\DoxyCodeLine{61         phase++;}
+\DoxyCodeLine{62     \}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#ifdef IM\_DEBUG}}
+\DoxyCodeLine{64     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 iammeter\_exit:}
+\DoxyCodeLine{68     cJSON\_Delete(json);}
+\DoxyCodeLine{69     \textcolor{keywordflow}{return} size * nitems;}
+\DoxyCodeLine{70 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{http__vars_8c_addadf78316d3819a2b8fc271ffd97fc9}\label{http__vars_8c_addadf78316d3819a2b8fc271ffd97fc9}} 
+\index{http\_vars.c@{http\_vars.c}!mqtt\_gti\_time@{mqtt\_gti\_time}}
+\index{mqtt\_gti\_time@{mqtt\_gti\_time}!http\_vars.c@{http\_vars.c}}
+\doxysubsubsection{\texorpdfstring{mqtt\_gti\_time()}{mqtt\_gti\_time()}}
+{\footnotesize\ttfamily bool mqtt\+\_\+gti\+\_\+time (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p,  }\item[{const char $\ast$}]{topic\+\_\+p,  }\item[{char $\ast$}]{msg }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{249 \{}
+\DoxyCodeLine{250     \textcolor{keywordtype}{bool} ret = \textcolor{keyword}{true};}
+\DoxyCodeLine{251     MQTTClient\_message pubmsg = MQTTClient\_message\_initializer;}
+\DoxyCodeLine{252     MQTTClient\_deliveryToken token;}
+\DoxyCodeLine{253     \mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_ae72ab39aa9936edc5d464a42a17ebc60}{deliveredtoken}} = 0;}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{255     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_aa820e79717719cfe77f6b2b2bada58ae}{mqtt\_count}}++;}
+\DoxyCodeLine{256     pubmsg.payload = msg;}
+\DoxyCodeLine{257     pubmsg.payloadlen = strlen(msg);}
+\DoxyCodeLine{258     pubmsg.qos = \mbox{\hyperlink{energy_8h_a1e5759eb3f87b00bf4acf6579f9034d5}{QOS}};}
+\DoxyCodeLine{259     pubmsg.retained = 0;}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261     MQTTClient\_publishMessage(client\_p, topic\_p, \&pubmsg, \&token); \textcolor{comment}{// run time commands}}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263     \textcolor{comment}{// a busy, wait loop for the async delivery thread to complete}}
+\DoxyCodeLine{264     \{}
+\DoxyCodeLine{265         uint32\_t waiting = 0;}
+\DoxyCodeLine{266         \textcolor{keywordflow}{while} (\mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_ae72ab39aa9936edc5d464a42a17ebc60}{deliveredtoken}} != token) \{}
+\DoxyCodeLine{267             usleep(\mbox{\hyperlink{mqtt__vars_8h_a3b56fe91c8a470ff1bb013066d4c38ea}{GTI\_TOKEN\_DELAY}});}
+\DoxyCodeLine{268             \textcolor{keywordflow}{if} (waiting++ > \mbox{\hyperlink{energy_8h_adc31fee63bd07cbfbb61fd111b95fa99}{MQTT\_TIMEOUT}}) \{}
+\DoxyCodeLine{269                 fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s GTI Time Still Waiting, timeout\(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}));}
+\DoxyCodeLine{270                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{271             \}}
+\DoxyCodeLine{272         \};}
+\DoxyCodeLine{273     \}}
+\DoxyCodeLine{274     usleep(\mbox{\hyperlink{mqtt__vars_8h_a172e6f71f2afd9c262e77086d452abec}{HA\_SW\_DELAY}});}
+\DoxyCodeLine{275     \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{276 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{http__vars_8c_a8b0aebb679cfaa2c1c7f70e477e396a5}\label{http__vars_8c_a8b0aebb679cfaa2c1c7f70e477e396a5}} 
+\index{http\_vars.c@{http\_vars.c}!print\_im\_vars@{print\_im\_vars}}
+\index{print\_im\_vars@{print\_im\_vars}!http\_vars.c@{http\_vars.c}}
+\doxysubsubsection{\texorpdfstring{print\_im\_vars()}{print\_im\_vars()}}
+{\footnotesize\ttfamily void print\+\_\+im\+\_\+vars (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{111 \{}
+\DoxyCodeLine{112     \textcolor{keyword}{static} \textcolor{keywordtype}{char} time\_log[\mbox{\hyperlink{energy_8h_a0c85192a1fc4b17a7c63d0c0f6f61625}{RBUF\_SIZ}}] = \{0\};}
+\DoxyCodeLine{113     \textcolor{keyword}{static} uint32\_t sync\_time = \mbox{\hyperlink{energy_8h_ae1b9e27b004bee7dcaecf4ee4778e0bd}{TIME\_SYNC\_SEC}} -\/ 1;}
+\DoxyCodeLine{114     time\_t rawtime\_log;}
+\DoxyCodeLine{115     \textcolor{keywordtype}{char} imvars[\mbox{\hyperlink{energy_8h_a52c3aaa9470287b78eee2ca241454fcb}{SYSLOG\_SIZ}}];}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117     fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{118     snprintf(imvars, \mbox{\hyperlink{energy_8h_a52c3aaa9470287b78eee2ca241454fcb}{SYSLOG\_SIZ}}-\/1, \textcolor{stringliteral}{"{}House L1 \%7.2fW, House L2 \%7.2fW, GTI L1 \%7.2fW"{}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_aa7198c879bedfbb1db35874b4ef079dd}{print\_vars}}[\mbox{\hyperlink{energy_8h_afddaf9e33dbc732f31ced2b378f11748}{L1\_P}}], \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_aa7198c879bedfbb1db35874b4ef079dd}{print\_vars}}[\mbox{\hyperlink{energy_8h_a492bcf1cf0c61ce5dfbf5d1825b09946}{L2\_P}}], \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_aa7198c879bedfbb1db35874b4ef079dd}{print\_vars}}[\mbox{\hyperlink{energy_8h_a5a73f316e17083fb4d7cbf348494322a}{L3\_P}}]);}
+\DoxyCodeLine{119     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s"{}}, imvars);}
+\DoxyCodeLine{120     fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{121     time(\&rawtime\_log);}
+\DoxyCodeLine{122     \textcolor{keywordflow}{if} (sync\_time++ > \mbox{\hyperlink{energy_8h_ae1b9e27b004bee7dcaecf4ee4778e0bd}{TIME\_SYNC\_SEC}}) \{}
+\DoxyCodeLine{123         sync\_time = 0;}
+\DoxyCodeLine{124         snprintf(time\_log, \mbox{\hyperlink{energy_8h_a0c85192a1fc4b17a7c63d0c0f6f61625}{RBUF\_SIZ}} -\/ 1, \textcolor{stringliteral}{"{}VT\%lut"{}}, rawtime\_log); \textcolor{comment}{// format for dumpload controller gti time commands}}
+\DoxyCodeLine{125         \mbox{\hyperlink{http__vars_8c_addadf78316d3819a2b8fc271ffd97fc9}{mqtt\_gti\_time}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}{TOPIC\_P}}, time\_log);}
+\DoxyCodeLine{126     \}}
+\DoxyCodeLine{127 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}\label{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}} 
+\index{http\_vars.c@{http\_vars.c}!curl@{curl}}
+\index{curl@{curl}!http\_vars.c@{http\_vars.c}}
+\doxysubsubsection{\texorpdfstring{curl}{curl}}
+{\footnotesize\ttfamily CURL$\ast$ curl\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{http__vars_8c_acf1ea240303dba3184f1f87a13202862}\label{http__vars_8c_acf1ea240303dba3184f1f87a13202862}} 
+\index{http\_vars.c@{http\_vars.c}!res@{res}}
+\index{res@{res}!http\_vars.c@{http\_vars.c}}
+\doxysubsubsection{\texorpdfstring{res}{res}}
+{\footnotesize\ttfamily CURLcode res\hspace{0.3cm}{\ttfamily [static]}}
+

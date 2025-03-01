@@ -1,0 +1,39 @@
+\hypertarget{pid_8h_source}{}\doxysection{pid.\+h}
+\label{pid_8h_source}\index{ha\_energy/pid.h@{ha\_energy/pid.h}}
+\mbox{\hyperlink{pid_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* }}
+\DoxyCodeLine{2 \textcolor{comment}{ * File:   pid.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ * Author: root}}
+\DoxyCodeLine{4 \textcolor{comment}{ *}}
+\DoxyCodeLine{5 \textcolor{comment}{ * Created on March 6, 2024, 7:03 AM}}
+\DoxyCodeLine{6 \textcolor{comment}{ */}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#ifndef PID\_H}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#define PID\_H}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{12 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15     \textcolor{keyword}{struct }\mbox{\hyperlink{structSPid}{SPid}} \{}
+\DoxyCodeLine{16         \textcolor{keywordtype}{double} \mbox{\hyperlink{structSPid_a22766300397f1a8142fa6c59f2271afb}{dState}}; \textcolor{comment}{// Last position input}}
+\DoxyCodeLine{17         \textcolor{keywordtype}{double} \mbox{\hyperlink{structSPid_ad502ddb8dc5b7ac847997f99ccd74f52}{iState}}; \textcolor{comment}{// Integrator state}}
+\DoxyCodeLine{18         \textcolor{keywordtype}{double} \mbox{\hyperlink{structSPid_a86f9ea8e7eaae2bb49fc2193a5b9f9bc}{iMax}}, \mbox{\hyperlink{structSPid_afc9b495402e50376fb5e477e3db5da5a}{iMin}}; \textcolor{comment}{// Maximum and minimum allowable integrator state}}
+\DoxyCodeLine{19         \textcolor{keywordtype}{double} \mbox{\hyperlink{structSPid_a5030d3c149262e9e2c65481bebebde4a}{iGain}}, \textcolor{comment}{// integral gain}}
+\DoxyCodeLine{20         \mbox{\hyperlink{structSPid_aa96bfc5bff3eddf38c1fcdba7d775105}{pGain}}, \textcolor{comment}{// proportional gain}}
+\DoxyCodeLine{21         \mbox{\hyperlink{structSPid_aa08733dedce47a5062fda5e8adf1ff50}{dGain}}; \textcolor{comment}{// derivative gain}}
+\DoxyCodeLine{22     \};}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24     \textcolor{keywordtype}{double} \mbox{\hyperlink{pid_8h_a645e907ddaa465c826a196abb2044981}{UpdatePI}}(\textcolor{keyword}{volatile} \textcolor{keyword}{struct} \mbox{\hyperlink{structSPid}{SPid}} * \textcolor{keyword}{const}, \textcolor{keyword}{const} \textcolor{keywordtype}{double});}
+\DoxyCodeLine{25     \textcolor{keywordtype}{void} \mbox{\hyperlink{pid_8h_a4942e19ff67ab179fa2f4e5977290613}{ResetPI}}(\textcolor{keyword}{volatile} \textcolor{keyword}{struct} \mbox{\hyperlink{structSPid}{SPid}} * \textcolor{keyword}{const});}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{29 \}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PID\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{33 }
+
+\end{DoxyCode}

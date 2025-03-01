@@ -1,0 +1,11 @@
+<map id="ha_energy/energy.h" name="ha_energy/energy.h">
+<area shape="rect" id="node1" title=" " alt="" coords="173,5,322,32"/>
+<area shape="rect" id="node2" href="$energy_8c.html" title=" " alt="" coords="5,229,81,256"/>
+<area shape="rect" id="node3" href="$http__vars_8h.html" title=" " alt="" coords="51,80,217,107"/>
+<area shape="rect" id="node5" href="$mqtt__rec_8h.html" title=" " alt="" coords="251,80,415,107"/>
+<area shape="rect" id="node9" href="$mqtt__vars_8c.html" title=" " alt="" coords="451,229,622,256"/>
+<area shape="rect" id="node4" href="$http__vars_8c.html" title=" " alt="" coords="41,155,208,181"/>
+<area shape="rect" id="node6" href="$bsoc_8h.html" title=" " alt="" coords="283,155,419,181"/>
+<area shape="rect" id="node7" href="$bsoc_8c.html" title=" " alt="" coords="105,229,240,256"/>
+<area shape="rect" id="node8" href="$mqtt__rec_8c.html" title=" " alt="" coords="265,229,427,256"/>
+</map>

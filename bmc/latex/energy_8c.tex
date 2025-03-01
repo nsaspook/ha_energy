@@ -1,0 +1,1229 @@
+\hypertarget{energy_8c}{}\doxysection{energy.\+c File Reference}
+\label{energy_8c}\index{energy.c@{energy.c}}
+{\ttfamily \#include \char`\"{}ha\+\_\+energy/energy.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ha\+\_\+energy/mqtt\+\_\+rec.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ha\+\_\+energy/bsoc.\+h\char`\"{}}\newline
+Include dependency graph for energy.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{energy_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{energy_8c_a8fb447618db946a9e2a596d9ea18763f}{\+\_\+\+DEFAULT\+\_\+\+SOURCE}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{energy_8c_a5db80d060a0e5e2905e748f97ce54f80}{solar\+\_\+shutdown}} (void)
+\item 
+void \mbox{\hyperlink{energy_8c_a0e3152830cd54954f6745ba7ae42ff42}{show\+IP}} (void)
+\item 
+static void \mbox{\hyperlink{energy_8c_ac6b8bef7c0921e591a31d844e13d24e8}{skeleton\+\_\+daemon}} ()
+\item 
+bool \mbox{\hyperlink{energy_8c_a014b7e7feb1f7f94f1947d2961e58534}{sanity\+\_\+check}} (void)
+\item 
+void \mbox{\hyperlink{energy_8c_aa39b8400b702a022ed3aaa4940cf4e15}{timer\+\_\+callback}} (int32\+\_\+t signum)
+\item 
+void \mbox{\hyperlink{energy_8c_a2a87ef47168dc639b307a285b8cb4462}{connlost}} (void $\ast$context, char $\ast$cause)
+\item 
+int \mbox{\hyperlink{energy_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\item 
+void \mbox{\hyperlink{energy_8c_aaa8441f14022457063db591bed50fe62}{ramp\+\_\+up\+\_\+gti}} (MQTTClient client\+\_\+p, bool start, bool excess)
+\item 
+void \mbox{\hyperlink{energy_8c_aa02b759a5ba02eb2d0083c02dcbe4834}{ramp\+\_\+down\+\_\+gti}} (MQTTClient client\+\_\+p, bool sw\+\_\+off)
+\item 
+void \mbox{\hyperlink{energy_8c_a28b7bbb5fe37666136a84c7cded51e2e}{ramp\+\_\+up\+\_\+ac}} (MQTTClient client\+\_\+p, bool start)
+\item 
+void \mbox{\hyperlink{energy_8c_a92077e5f551e509dad279a8d2be4b21d}{ramp\+\_\+down\+\_\+ac}} (MQTTClient client\+\_\+p, bool sw\+\_\+off)
+\item 
+void \mbox{\hyperlink{energy_8c_a2c6c70b9a184aa76393a677b08954c81}{ha\+\_\+ac\+\_\+off}} (void)
+\item 
+void \mbox{\hyperlink{energy_8c_a9a2e9166d49137eb9230625ac072807d}{ha\+\_\+ac\+\_\+on}} (void)
+\item 
+void \mbox{\hyperlink{energy_8c_a200b8cfedca58c43dc888d70d83342d2}{ha\+\_\+dc\+\_\+off}} (void)
+\item 
+void \mbox{\hyperlink{energy_8c_ada6758833529a18e073775d997a3833b}{ha\+\_\+dc\+\_\+on}} (void)
+\item 
+char $\ast$ \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\+\_\+time}} (bool log)
+\item 
+bool \mbox{\hyperlink{energy_8c_a2533146394b65b382653eff2cd6f2106}{sync\+\_\+ha}} (void)
+\item 
+bool \mbox{\hyperlink{energy_8c_ae7020228b3ccca216927caec73938554}{log\+\_\+timer}} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structha__flag__type}{ha\+\_\+flag\+\_\+type}} \mbox{\hyperlink{energy_8c_ae0a8ca490b1331a13666dbedf7175bd9}{ha\+\_\+flag\+\_\+vars\+\_\+pc}}
+\item 
+struct \mbox{\hyperlink{structha__flag__type}{ha\+\_\+flag\+\_\+type}} \mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\+\_\+flag\+\_\+vars\+\_\+ss}}
+\item 
+struct \mbox{\hyperlink{structha__flag__type}{ha\+\_\+flag\+\_\+type}} \mbox{\hyperlink{energy_8c_a04a99d06cea1265d7193a122288d83a0}{ha\+\_\+flag\+\_\+vars\+\_\+sd}}
+\item 
+struct \mbox{\hyperlink{structha__flag__type}{ha\+\_\+flag\+\_\+type}} \mbox{\hyperlink{energy_8c_ab9a22fb7b17a1ebe54668d617b8d7226}{ha\+\_\+flag\+\_\+vars\+\_\+ha}}
+\item 
+const char $\ast$ \mbox{\hyperlink{energy_8c_ae54230f3933b19460113c7aeac29cec7}{board\+\_\+name}} = \char`\"{}NO\+\_\+\+BOARD\char`\"{}
+\item 
+const char $\ast$ \mbox{\hyperlink{energy_8c_aec275271b98c5dd5cbe9a33ea5081893}{driver\+\_\+name}} = \char`\"{}NO\+\_\+\+DRIVER\char`\"{}
+\item 
+FILE $\ast$ \mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}
+\item 
+struct \mbox{\hyperlink{structenergy__type}{energy\+\_\+type}} \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{energy_8c_a8fb447618db946a9e2a596d9ea18763f}\label{energy_8c_a8fb447618db946a9e2a596d9ea18763f}} 
+\index{energy.c@{energy.c}!\_DEFAULT\_SOURCE@{\_DEFAULT\_SOURCE}}
+\index{\_DEFAULT\_SOURCE@{\_DEFAULT\_SOURCE}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{\_DEFAULT\_SOURCE}{\_DEFAULT\_SOURCE}}
+{\footnotesize\ttfamily \#define \+\_\+\+DEFAULT\+\_\+\+SOURCE}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{energy_8c_a2a87ef47168dc639b307a285b8cb4462}\label{energy_8c_a2a87ef47168dc639b307a285b8cb4462}} 
+\index{energy.c@{energy.c}!connlost@{connlost}}
+\index{connlost@{connlost}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{connlost()}{connlost()}}
+{\footnotesize\ttfamily void connlost (\begin{DoxyParamCaption}\item[{void $\ast$}]{context,  }\item[{char $\ast$}]{cause }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{297 \{}
+\DoxyCodeLine{298     \textcolor{keyword}{struct }\mbox{\hyperlink{structha__flag__type}{ha\_flag\_type}} *ha\_flag = context;}
+\DoxyCodeLine{299     int32\_t id\_num;}
+\DoxyCodeLine{300 }
+\DoxyCodeLine{301     \textcolor{comment}{// bug-\/out if no context variables passed to callback}}
+\DoxyCodeLine{302     \textcolor{keywordflow}{if} (context == NULL) \{}
+\DoxyCodeLine{303         id\_num = -\/1;}
+\DoxyCodeLine{304     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{305         id\_num = ha\_flag-\/>\mbox{\hyperlink{structha__flag__type_a0756e3e6519823c23b8711864a70460c}{ha\_id}};}
+\DoxyCodeLine{306     \}}
+\DoxyCodeLine{307     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)n\%s Connection lost, exit ha\_energy program\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}));}
+\DoxyCodeLine{308     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s     cause: \%s, \%d\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), cause, id\_num);}
+\DoxyCodeLine{309     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%sDAEMON failure  LOG Version \%s : MQTT Version \%s\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), \mbox{\hyperlink{energy_8h_aa48b2017856a8a9c33a9935afe604c8d}{LOG\_VERSION}}, \mbox{\hyperlink{energy_8h_a702197a21870dfd505d92530b27754ac}{MQTT\_VERSION}});}
+\DoxyCodeLine{310     fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{311     exit(EXIT\_FAILURE);}
+\DoxyCodeLine{312 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_a2c6c70b9a184aa76393a677b08954c81}\label{energy_8c_a2c6c70b9a184aa76393a677b08954c81}} 
+\index{energy.c@{energy.c}!ha\_ac\_off@{ha\_ac\_off}}
+\index{ha\_ac\_off@{ha\_ac\_off}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{ha\_ac\_off()}{ha\_ac\_off()}}
+{\footnotesize\ttfamily void ha\+\_\+ac\+\_\+off (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{946 \{}
+\DoxyCodeLine{947     \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_ab741d14c77c3f7326b0c05d0be7a4330}{TOPIC\_PACC}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{948     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{949 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_a9a2e9166d49137eb9230625ac072807d}\label{energy_8c_a9a2e9166d49137eb9230625ac072807d}} 
+\index{energy.c@{energy.c}!ha\_ac\_on@{ha\_ac\_on}}
+\index{ha\_ac\_on@{ha\_ac\_on}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{ha\_ac\_on()}{ha\_ac\_on()}}
+{\footnotesize\ttfamily void ha\+\_\+ac\+\_\+on (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{952 \{}
+\DoxyCodeLine{953     \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_ab741d14c77c3f7326b0c05d0be7a4330}{TOPIC\_PACC}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{954     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{955 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_a200b8cfedca58c43dc888d70d83342d2}\label{energy_8c_a200b8cfedca58c43dc888d70d83342d2}} 
+\index{energy.c@{energy.c}!ha\_dc\_off@{ha\_dc\_off}}
+\index{ha\_dc\_off@{ha\_dc\_off}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{ha\_dc\_off()}{ha\_dc\_off()}}
+{\footnotesize\ttfamily void ha\+\_\+dc\+\_\+off (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{961 \{}
+\DoxyCodeLine{962     \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a6bbafe078803d99cb34f62c659e58cbc}{TOPIC\_PDCC}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{963     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{964 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_ada6758833529a18e073775d997a3833b}\label{energy_8c_ada6758833529a18e073775d997a3833b}} 
+\index{energy.c@{energy.c}!ha\_dc\_on@{ha\_dc\_on}}
+\index{ha\_dc\_on@{ha\_dc\_on}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{ha\_dc\_on()}{ha\_dc\_on()}}
+{\footnotesize\ttfamily void ha\+\_\+dc\+\_\+on (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{967 \{}
+\DoxyCodeLine{968     \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a6bbafe078803d99cb34f62c659e58cbc}{TOPIC\_PDCC}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{969     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{970 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}\label{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}} 
+\index{energy.c@{energy.c}!log\_time@{log\_time}}
+\index{log\_time@{log\_time}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{log\_time()}{log\_time()}}
+{\footnotesize\ttfamily char $\ast$ log\+\_\+time (\begin{DoxyParamCaption}\item[{bool}]{log }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1031 \{}
+\DoxyCodeLine{1032     \textcolor{keyword}{static} \textcolor{keywordtype}{char} time\_log[\mbox{\hyperlink{energy_8h_a0c85192a1fc4b17a7c63d0c0f6f61625}{RBUF\_SIZ}}] = \{0\};}
+\DoxyCodeLine{1033     \textcolor{keyword}{static} uint32\_t len = 0, sync\_time = \mbox{\hyperlink{energy_8h_ae1b9e27b004bee7dcaecf4ee4778e0bd}{TIME\_SYNC\_SEC}} -\/ 1;}
+\DoxyCodeLine{1034     time\_t rawtime\_log;}
+\DoxyCodeLine{1035 }
+\DoxyCodeLine{1036     tzset();}
+\DoxyCodeLine{1037     timezone = 0;}
+\DoxyCodeLine{1038     daylight = 0;}
+\DoxyCodeLine{1039     time(\&rawtime\_log);}
+\DoxyCodeLine{1040     \textcolor{keywordflow}{if} (sync\_time++ > \mbox{\hyperlink{energy_8h_ae1b9e27b004bee7dcaecf4ee4778e0bd}{TIME\_SYNC\_SEC}}) \{}
+\DoxyCodeLine{1041         sync\_time = 0;}
+\DoxyCodeLine{1042         snprintf(time\_log, \mbox{\hyperlink{energy_8h_a0c85192a1fc4b17a7c63d0c0f6f61625}{RBUF\_SIZ}} -\/ 1, \textcolor{stringliteral}{"{}VT\%lut"{}}, rawtime\_log); \textcolor{comment}{// format for dumpload controller gti time commands}}
+\DoxyCodeLine{1043         \mbox{\hyperlink{http__vars_8c_addadf78316d3819a2b8fc271ffd97fc9}{mqtt\_gti\_time}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}{TOPIC\_P}}, time\_log);}
+\DoxyCodeLine{1044     \}}
+\DoxyCodeLine{1045 }
+\DoxyCodeLine{1046     sprintf(time\_log, \textcolor{stringliteral}{"{}\%s"{}}, ctime(\&rawtime\_log));}
+\DoxyCodeLine{1047     len = strlen(time\_log);}
+\DoxyCodeLine{1048     time\_log[len -\/ 1] = 0; \textcolor{comment}{// munge out the return character}}
+\DoxyCodeLine{1049     \textcolor{keywordflow}{if} (log) \{}
+\DoxyCodeLine{1050         fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s "{}}, time\_log);}
+\DoxyCodeLine{1051         fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{1052     \}}
+\DoxyCodeLine{1053 }
+\DoxyCodeLine{1054     \textcolor{keywordflow}{return} time\_log;}
+\DoxyCodeLine{1055 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_ae7020228b3ccca216927caec73938554}\label{energy_8c_ae7020228b3ccca216927caec73938554}} 
+\index{energy.c@{energy.c}!log\_timer@{log\_timer}}
+\index{log\_timer@{log\_timer}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{log\_timer()}{log\_timer()}}
+{\footnotesize\ttfamily bool log\+\_\+timer (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1090 \{}
+\DoxyCodeLine{1091     \textcolor{keywordtype}{bool} itstime = \textcolor{keyword}{false};}
+\DoxyCodeLine{1092 }
+\DoxyCodeLine{1093     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ad0ad0d30b04f4fdfed27e78f5fe02151}{log\_spam}} < \mbox{\hyperlink{energy_8h_a764c3b6aadcbcacb53eca948eeb75bdf}{LOW\_LOG\_SPAM}}) \{}
+\DoxyCodeLine{1094         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a03488578b49639581f7fddf8db3076de}{log\_time\_reset}} = 0;}
+\DoxyCodeLine{1095         itstime = \textcolor{keyword}{true};}
+\DoxyCodeLine{1096     \}}
+\DoxyCodeLine{1097     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a03488578b49639581f7fddf8db3076de}{log\_time\_reset}} > \mbox{\hyperlink{energy_8h_a3af0cc0b4b28d3cecd3a7d1daf772804}{RESET\_LOG\_SPAM}}) \{}
+\DoxyCodeLine{1098         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ad0ad0d30b04f4fdfed27e78f5fe02151}{log\_spam}} = 0;}
+\DoxyCodeLine{1099         itstime = \textcolor{keyword}{true};}
+\DoxyCodeLine{1100     \}}
+\DoxyCodeLine{1101     \textcolor{keywordflow}{return} itstime;}
+\DoxyCodeLine{1102 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{energy_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{energy.c@{energy.c}!main@{main}}
+\index{main@{main}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{321 \{}
+\DoxyCodeLine{322     \textcolor{keyword}{struct }itimerval new\_timer = \{}
+\DoxyCodeLine{323         .it\_value.tv\_sec = \mbox{\hyperlink{energy_8h_af1013b321ed7dc7a7940e27f03eb5bf9}{CMD\_SEC}},}
+\DoxyCodeLine{324         .it\_value.tv\_usec = 0,}
+\DoxyCodeLine{325         .it\_interval.tv\_sec = \mbox{\hyperlink{energy_8h_af1013b321ed7dc7a7940e27f03eb5bf9}{CMD\_SEC}},}
+\DoxyCodeLine{326         .it\_interval.tv\_usec = 0,}
+\DoxyCodeLine{327     \};}
+\DoxyCodeLine{328     \textcolor{keyword}{struct }itimerval old\_timer;}
+\DoxyCodeLine{329     time\_t rawtime;}
+\DoxyCodeLine{330     MQTTClient\_connectOptions conn\_opts\_p = MQTTClient\_connectOptions\_initializer,}
+\DoxyCodeLine{331         conn\_opts\_sd = MQTTClient\_connectOptions\_initializer,}
+\DoxyCodeLine{332         conn\_opts\_ha = MQTTClient\_connectOptions\_initializer;}
+\DoxyCodeLine{333     MQTTClient\_message pubmsg = MQTTClient\_message\_initializer;}
+\DoxyCodeLine{334     MQTTClient\_deliveryToken token;}
+\DoxyCodeLine{335     \textcolor{keywordtype}{char} hname[256], *hname\_ptr = hname;}
+\DoxyCodeLine{336     \textcolor{keywordtype}{size\_t} hname\_len = 12;}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{338     gethostname(hname, hname\_len);}
+\DoxyCodeLine{339     hname[12] = 0;}
+\DoxyCodeLine{340     printf(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n  LOG Version \%s : MQTT Version \%s : Host Name \%s\(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8h_aa48b2017856a8a9c33a9935afe604c8d}{LOG\_VERSION}}, \mbox{\hyperlink{energy_8h_a702197a21870dfd505d92530b27754ac}{MQTT\_VERSION}}, hname);}
+\DoxyCodeLine{341     \mbox{\hyperlink{energy_8c_a0e3152830cd54954f6745ba7ae42ff42}{showIP}}();}
+\DoxyCodeLine{342     \mbox{\hyperlink{energy_8c_ac6b8bef7c0921e591a31d844e13d24e8}{skeleton\_daemon}}();}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{344     \textcolor{keywordflow}{while} (\textcolor{keyword}{true}) \{}
+\DoxyCodeLine{345         \textcolor{keywordflow}{switch} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a780dd9555747fafe2a0456c20405d32b}{E}}) \{}
+\DoxyCodeLine{346         \textcolor{keywordflow}{case} \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415fae5b17a6cbef319f39c92c567338e03ac}{E\_INIT}}:}
+\DoxyCodeLine{347 }
+\DoxyCodeLine{348 \textcolor{preprocessor}{\#ifdef LOG\_TO\_FILE}}
+\DoxyCodeLine{349             \mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}} = fopen(\mbox{\hyperlink{energy_8h_a2d9257ecbf4951d3877398f752d47ae6}{LOG\_TO\_FILE}}, \textcolor{stringliteral}{"{}a"{}});}
+\DoxyCodeLine{350             \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}} == NULL) \{}
+\DoxyCodeLine{351                 \mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}} = fopen(\mbox{\hyperlink{energy_8h_aacdc926f0a34006e13fe0ddc3398deee}{LOG\_TO\_FILE\_ALT}}, \textcolor{stringliteral}{"{}a"{}});}
+\DoxyCodeLine{352                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}} == NULL) \{}
+\DoxyCodeLine{353                     \mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}} = stdout;}
+\DoxyCodeLine{354                     printf(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s Unable to open LOG file \%s \(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), \mbox{\hyperlink{energy_8h_aacdc926f0a34006e13fe0ddc3398deee}{LOG\_TO\_FILE\_ALT}});}
+\DoxyCodeLine{355                 \}}
+\DoxyCodeLine{356             \}}
+\DoxyCodeLine{357 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{358             \mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}} = stdout;}
+\DoxyCodeLine{359 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{360             fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s LOG Version \%s : MQTT Version \%s\(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), \mbox{\hyperlink{energy_8h_aa48b2017856a8a9c33a9935afe604c8d}{LOG\_VERSION}}, \mbox{\hyperlink{energy_8h_a702197a21870dfd505d92530b27754ac}{MQTT\_VERSION}});}
+\DoxyCodeLine{361             fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{362 }
+\DoxyCodeLine{363             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{bsoc_8c_a571a7c60ba1a2a6c569427c21c829733}{bsoc\_init}}()) \{}
+\DoxyCodeLine{364                 fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s bsoc\_init failure \(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}));}
+\DoxyCodeLine{365                 fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{366                 exit(EXIT\_FAILURE);}
+\DoxyCodeLine{367             \}}
+\DoxyCodeLine{368             \textcolor{comment}{/*}}
+\DoxyCodeLine{369 \textcolor{comment}{             * set the timer for MQTT publishing sample speed}}
+\DoxyCodeLine{370 \textcolor{comment}{             * CMD\_SEC         10}}
+\DoxyCodeLine{371 \textcolor{comment}{             */}}
+\DoxyCodeLine{372             setitimer(ITIMER\_REAL, \&new\_timer, \&old\_timer);}
+\DoxyCodeLine{373             signal(SIGALRM, \mbox{\hyperlink{energy_8c_aa39b8400b702a022ed3aaa4940cf4e15}{timer\_callback}});}
+\DoxyCodeLine{374 }
+\DoxyCodeLine{375             \textcolor{keywordflow}{if} (strncmp(hname, \mbox{\hyperlink{energy_8h_af7dd188b7e9a8592e394e37ba6272a90}{TNAME}}, 6) == 0) \{}
+\DoxyCodeLine{376                 MQTTClient\_create(\&\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a16d272bc422b8cccde66c643763a9070}{LADDRESS}}, \mbox{\hyperlink{energy_8h_aca843921281fc0385b402ca1e700f13b}{CLIENTID1}},}
+\DoxyCodeLine{377                     MQTTCLIENT\_PERSISTENCE\_NONE, NULL);}
+\DoxyCodeLine{378                 conn\_opts\_p.keepAliveInterval = 20;}
+\DoxyCodeLine{379                 conn\_opts\_p.cleansession = 1;}
+\DoxyCodeLine{380                 hname\_ptr = \mbox{\hyperlink{energy_8h_a16d272bc422b8cccde66c643763a9070}{LADDRESS}};}
+\DoxyCodeLine{381             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{382                 MQTTClient\_create(\&\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a280feb883e9d4a7edcc69c8bcb9f38f2}{ADDRESS}}, \mbox{\hyperlink{energy_8h_aca843921281fc0385b402ca1e700f13b}{CLIENTID1}},}
+\DoxyCodeLine{383                     MQTTCLIENT\_PERSISTENCE\_NONE, NULL);}
+\DoxyCodeLine{384                 conn\_opts\_p.keepAliveInterval = 20;}
+\DoxyCodeLine{385                 conn\_opts\_p.cleansession = 1;}
+\DoxyCodeLine{386                 hname\_ptr = \mbox{\hyperlink{energy_8h_a280feb883e9d4a7edcc69c8bcb9f38f2}{ADDRESS}};}
+\DoxyCodeLine{387             \}}
+\DoxyCodeLine{388 }
+\DoxyCodeLine{389             fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s Connect MQTT server \%s, \%s\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), hname\_ptr, \mbox{\hyperlink{energy_8h_aca843921281fc0385b402ca1e700f13b}{CLIENTID1}});}
+\DoxyCodeLine{390             fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{391             MQTTClient\_setCallbacks(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \&\mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}, \mbox{\hyperlink{energy_8c_a2a87ef47168dc639b307a285b8cb4462}{connlost}}, \mbox{\hyperlink{mqtt__rec_8c_aeb7f1edb73f2b51c6df601678ca4df22}{msgarrvd}}, \mbox{\hyperlink{mqtt__rec_8c_a4a79780b9057489f0740020d6bae250f}{delivered}});}
+\DoxyCodeLine{392             \textcolor{keywordflow}{if} ((\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a35d3b586620259d48e14fab8bcf7a19c}{rc}} = MQTTClient\_connect(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \&conn\_opts\_p)) != MQTTCLIENT\_SUCCESS) \{}
+\DoxyCodeLine{393                 fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s Failed to connect MQTT server, return code \%d \%s, \%s\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a35d3b586620259d48e14fab8bcf7a19c}{rc}}, hname\_ptr, \mbox{\hyperlink{energy_8h_aca843921281fc0385b402ca1e700f13b}{CLIENTID1}});}
+\DoxyCodeLine{394                 fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{395                 pthread\_mutex\_destroy(\&\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a35ae999887cbeb701800e498f4e1721a}{ha\_lock}});}
+\DoxyCodeLine{396                 exit(EXIT\_FAILURE);}
+\DoxyCodeLine{397             \}}
+\DoxyCodeLine{398 }
+\DoxyCodeLine{399             \textcolor{keywordflow}{if} (strncmp(hname, \mbox{\hyperlink{energy_8h_af7dd188b7e9a8592e394e37ba6272a90}{TNAME}}, 6) == 0) \{}
+\DoxyCodeLine{400                 MQTTClient\_create(\&\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ab09ee25ad79a65947d6d11182b017fd0}{client\_sd}}, \mbox{\hyperlink{energy_8h_a16d272bc422b8cccde66c643763a9070}{LADDRESS}}, \mbox{\hyperlink{energy_8h_a7adb4fde27aaf399c290536e96e41df7}{CLIENTID2}},}
+\DoxyCodeLine{401                     MQTTCLIENT\_PERSISTENCE\_NONE, NULL);}
+\DoxyCodeLine{402                 conn\_opts\_sd.keepAliveInterval = 20;}
+\DoxyCodeLine{403                 conn\_opts\_sd.cleansession = 1;}
+\DoxyCodeLine{404                 hname\_ptr = \mbox{\hyperlink{energy_8h_a16d272bc422b8cccde66c643763a9070}{LADDRESS}};}
+\DoxyCodeLine{405             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{406                 MQTTClient\_create(\&\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ab09ee25ad79a65947d6d11182b017fd0}{client\_sd}}, \mbox{\hyperlink{energy_8h_a280feb883e9d4a7edcc69c8bcb9f38f2}{ADDRESS}}, \mbox{\hyperlink{energy_8h_a7adb4fde27aaf399c290536e96e41df7}{CLIENTID2}},}
+\DoxyCodeLine{407                     MQTTCLIENT\_PERSISTENCE\_NONE, NULL);}
+\DoxyCodeLine{408                 conn\_opts\_sd.keepAliveInterval = 20;}
+\DoxyCodeLine{409                 conn\_opts\_sd.cleansession = 1;}
+\DoxyCodeLine{410                 hname\_ptr = \mbox{\hyperlink{energy_8h_a280feb883e9d4a7edcc69c8bcb9f38f2}{ADDRESS}};}
+\DoxyCodeLine{411             \}}
+\DoxyCodeLine{412 }
+\DoxyCodeLine{413             fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s Connect MQTT server \%s, \%s\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), hname\_ptr, \mbox{\hyperlink{energy_8h_a7adb4fde27aaf399c290536e96e41df7}{CLIENTID2}});}
+\DoxyCodeLine{414             fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{415             MQTTClient\_setCallbacks(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ab09ee25ad79a65947d6d11182b017fd0}{client\_sd}}, \&\mbox{\hyperlink{energy_8c_a04a99d06cea1265d7193a122288d83a0}{ha\_flag\_vars\_sd}}, \mbox{\hyperlink{energy_8c_a2a87ef47168dc639b307a285b8cb4462}{connlost}}, \mbox{\hyperlink{mqtt__rec_8c_aeb7f1edb73f2b51c6df601678ca4df22}{msgarrvd}}, \mbox{\hyperlink{mqtt__rec_8c_a4a79780b9057489f0740020d6bae250f}{delivered}});}
+\DoxyCodeLine{416             \textcolor{keywordflow}{if} ((\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a35d3b586620259d48e14fab8bcf7a19c}{rc}} = MQTTClient\_connect(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ab09ee25ad79a65947d6d11182b017fd0}{client\_sd}}, \&conn\_opts\_sd)) != MQTTCLIENT\_SUCCESS) \{}
+\DoxyCodeLine{417                 fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s Failed to connect MQTT server, return code \%d \%s, \%s\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a35d3b586620259d48e14fab8bcf7a19c}{rc}}, hname\_ptr, \mbox{\hyperlink{energy_8h_a7adb4fde27aaf399c290536e96e41df7}{CLIENTID2}});}
+\DoxyCodeLine{418                 fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{419                 pthread\_mutex\_destroy(\&\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a35ae999887cbeb701800e498f4e1721a}{ha\_lock}});}
+\DoxyCodeLine{420                 exit(EXIT\_FAILURE);}
+\DoxyCodeLine{421             \}}
+\DoxyCodeLine{422 }
+\DoxyCodeLine{423             \textcolor{comment}{/*}}
+\DoxyCodeLine{424 \textcolor{comment}{             * Home Assistant MQTT receive messages}}
+\DoxyCodeLine{425 \textcolor{comment}{             */}}
+\DoxyCodeLine{426             \textcolor{keywordflow}{if} (strncmp(hname, \mbox{\hyperlink{energy_8h_af7dd188b7e9a8592e394e37ba6272a90}{TNAME}}, 6) == 0) \{}
+\DoxyCodeLine{427                 MQTTClient\_create(\&\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ab5ecb547482ba3b0a4dcb70bae5ac770}{client\_ha}}, \mbox{\hyperlink{energy_8h_a16d272bc422b8cccde66c643763a9070}{LADDRESS}}, \mbox{\hyperlink{energy_8h_a080e92b01476c8d6861e405c4ac3bae5}{CLIENTID3}},}
+\DoxyCodeLine{428                     MQTTCLIENT\_PERSISTENCE\_NONE, NULL);}
+\DoxyCodeLine{429                 conn\_opts\_ha.keepAliveInterval = 20;}
+\DoxyCodeLine{430                 conn\_opts\_ha.cleansession = 1;}
+\DoxyCodeLine{431                 hname\_ptr = \mbox{\hyperlink{energy_8h_a16d272bc422b8cccde66c643763a9070}{LADDRESS}};}
+\DoxyCodeLine{432             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{433                 MQTTClient\_create(\&\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ab5ecb547482ba3b0a4dcb70bae5ac770}{client\_ha}}, \mbox{\hyperlink{energy_8h_a280feb883e9d4a7edcc69c8bcb9f38f2}{ADDRESS}}, \mbox{\hyperlink{energy_8h_a080e92b01476c8d6861e405c4ac3bae5}{CLIENTID3}},}
+\DoxyCodeLine{434                     MQTTCLIENT\_PERSISTENCE\_NONE, NULL);}
+\DoxyCodeLine{435                 conn\_opts\_ha.keepAliveInterval = 20;}
+\DoxyCodeLine{436                 conn\_opts\_ha.cleansession = 1;}
+\DoxyCodeLine{437                 hname\_ptr = \mbox{\hyperlink{energy_8h_a280feb883e9d4a7edcc69c8bcb9f38f2}{ADDRESS}};}
+\DoxyCodeLine{438             \}}
+\DoxyCodeLine{439 }
+\DoxyCodeLine{440             fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s Connect MQTT server \%s, \%s\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), hname\_ptr, \mbox{\hyperlink{energy_8h_a080e92b01476c8d6861e405c4ac3bae5}{CLIENTID3}});}
+\DoxyCodeLine{441             fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{442             MQTTClient\_setCallbacks(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ab5ecb547482ba3b0a4dcb70bae5ac770}{client\_ha}}, \&\mbox{\hyperlink{energy_8c_ab9a22fb7b17a1ebe54668d617b8d7226}{ha\_flag\_vars\_ha}}, \mbox{\hyperlink{energy_8c_a2a87ef47168dc639b307a285b8cb4462}{connlost}}, \mbox{\hyperlink{mqtt__rec_8c_aeb7f1edb73f2b51c6df601678ca4df22}{msgarrvd}}, \mbox{\hyperlink{mqtt__rec_8c_a4a79780b9057489f0740020d6bae250f}{delivered}});}
+\DoxyCodeLine{443             \textcolor{keywordflow}{if} ((\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a35d3b586620259d48e14fab8bcf7a19c}{rc}} = MQTTClient\_connect(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ab5ecb547482ba3b0a4dcb70bae5ac770}{client\_ha}}, \&conn\_opts\_ha)) != MQTTCLIENT\_SUCCESS) \{}
+\DoxyCodeLine{444                 fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s Failed to connect MQTT server, return code \%d \%s, \%s\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a35d3b586620259d48e14fab8bcf7a19c}{rc}}, hname\_ptr, \mbox{\hyperlink{energy_8h_a080e92b01476c8d6861e405c4ac3bae5}{CLIENTID3}});}
+\DoxyCodeLine{445                 fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{446                 pthread\_mutex\_destroy(\&\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a35ae999887cbeb701800e498f4e1721a}{ha\_lock}});}
+\DoxyCodeLine{447                 exit(EXIT\_FAILURE);}
+\DoxyCodeLine{448             \}}
+\DoxyCodeLine{449 }
+\DoxyCodeLine{450             \textcolor{comment}{/*}}
+\DoxyCodeLine{451 \textcolor{comment}{             * on topic received data will trigger the msgarrvd function}}
+\DoxyCodeLine{452 \textcolor{comment}{             */}}
+\DoxyCodeLine{453             MQTTClient\_subscribe(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a08b3494e502966f0b67ef43c0060b4a4}{TOPIC\_SS}}, \mbox{\hyperlink{energy_8h_a1e5759eb3f87b00bf4acf6579f9034d5}{QOS}}); \textcolor{comment}{// FM80 Q84}}
+\DoxyCodeLine{454             MQTTClient\_subscribe(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ab09ee25ad79a65947d6d11182b017fd0}{client\_sd}}, \mbox{\hyperlink{energy_8h_a42eda1760ac7eb3904f71b170d6eace0}{TOPIC\_SD}}, \mbox{\hyperlink{energy_8h_a1e5759eb3f87b00bf4acf6579f9034d5}{QOS}}); \textcolor{comment}{// DUMPLOAD K42}}
+\DoxyCodeLine{455             MQTTClient\_subscribe(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ab5ecb547482ba3b0a4dcb70bae5ac770}{client\_ha}}, \mbox{\hyperlink{energy_8h_a2361cc9e2cb27aa89335ae62571ef94f}{TOPIC\_HA}}, \mbox{\hyperlink{energy_8h_a1e5759eb3f87b00bf4acf6579f9034d5}{QOS}}); \textcolor{comment}{// Home Assistant Linux AMD64  and ARM64}}
+\DoxyCodeLine{456 }
+\DoxyCodeLine{457             pubmsg.payload = \textcolor{stringliteral}{"{}online"{}};}
+\DoxyCodeLine{458             pubmsg.payloadlen = strlen(\textcolor{stringliteral}{"{}online"{}});}
+\DoxyCodeLine{459             pubmsg.qos = \mbox{\hyperlink{energy_8h_a1e5759eb3f87b00bf4acf6579f9034d5}{QOS}};}
+\DoxyCodeLine{460             pubmsg.retained = 0;}
+\DoxyCodeLine{461             \mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_ae72ab39aa9936edc5d464a42a17ebc60}{deliveredtoken}} = 0;}
+\DoxyCodeLine{462             \textcolor{comment}{// notify HA we are running and controlling AC power plugs}}
+\DoxyCodeLine{463             MQTTClient\_publishMessage(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a75b4efd61045ccc11560697d90941f3f}{TOPIC\_PACA}}, \&pubmsg, \&token);}
+\DoxyCodeLine{464             MQTTClient\_publishMessage(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a7a785b1b0c69e86f3dd28b94bb393fca}{TOPIC\_PDCA}}, \&pubmsg, \&token);}
+\DoxyCodeLine{465 }
+\DoxyCodeLine{466             \textcolor{comment}{// sync HA power switches}}
+\DoxyCodeLine{467             \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a6bbafe078803d99cb34f62c659e58cbc}{TOPIC\_PDCC}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{468             \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_ab741d14c77c3f7326b0c05d0be7a4330}{TOPIC\_PACC}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{469             \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a6bbafe078803d99cb34f62c659e58cbc}{TOPIC\_PDCC}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{470             \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_ab741d14c77c3f7326b0c05d0be7a4330}{TOPIC\_PACC}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{471             \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a6bbafe078803d99cb34f62c659e58cbc}{TOPIC\_PDCC}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{472             \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_ab741d14c77c3f7326b0c05d0be7a4330}{TOPIC\_PACC}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{473 }
+\DoxyCodeLine{474             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afb1d89fed19279747b421ffad6412e5b}{ac\_sw\_on}} = \textcolor{keyword}{true}; \textcolor{comment}{// can be switched on once}}
+\DoxyCodeLine{475             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a72305a9f4d6761d0144244638ef0c98d}{gti\_sw\_on}} = \textcolor{keyword}{true}; \textcolor{comment}{// can be switched on once}}
+\DoxyCodeLine{476 }
+\DoxyCodeLine{477             \textcolor{comment}{/*}}
+\DoxyCodeLine{478 \textcolor{comment}{             * use libcurl to read AC power meter HTTP data}}
+\DoxyCodeLine{479 \textcolor{comment}{             * iammeter connected for split single phase monitoring and one leg GTI power exporting}}
+\DoxyCodeLine{480 \textcolor{comment}{             */}}
+\DoxyCodeLine{481             \mbox{\hyperlink{energy_8h_a34d485627939300ea5e51b765f599b9a}{iammeter\_read}}();}
+\DoxyCodeLine{482 }
+\DoxyCodeLine{483             \textcolor{comment}{/*}}
+\DoxyCodeLine{484 \textcolor{comment}{             * start the main energy monitoring loop}}
+\DoxyCodeLine{485 \textcolor{comment}{             */}}
+\DoxyCodeLine{486             fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s Solar Energy AC power controller\(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}));}
+\DoxyCodeLine{487 }
+\DoxyCodeLine{488 \textcolor{preprocessor}{\#ifdef FAKE\_VPV}}
+\DoxyCodeLine{489             fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n Faking dumpload PV voltage\(\backslash\)r\(\backslash\)n"{}});}
+\DoxyCodeLine{490 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{491             \mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_ae45c3d1ac1128c2a27f3ee9c0545ea10}{energy\_mode}} = \mbox{\hyperlink{energy_8h_a2e6d97095eb0e18b2a11eee97c1c67af}{NORM\_MODE}};}
+\DoxyCodeLine{492             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a780dd9555747fafe2a0456c20405d32b}{E}} = \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415faa19a96871d41a61ea3b7b279f5d4b1d6}{E\_WAIT}};}
+\DoxyCodeLine{493             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{494         \textcolor{keywordflow}{case} \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415faa19a96871d41a61ea3b7b279f5d4b1d6}{E\_WAIT}}:}
+\DoxyCodeLine{495             \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_a9d886e966396198df5116e8fa9d9265d}{runner}} || \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a68c49223dbc954a5dba7f9318f81e7b1}{speed\_go}}++ > 1500000) \{}
+\DoxyCodeLine{496                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a68c49223dbc954a5dba7f9318f81e7b1}{speed\_go}} = 0;}
+\DoxyCodeLine{497                 \mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_a9d886e966396198df5116e8fa9d9265d}{runner}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{498                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a780dd9555747fafe2a0456c20405d32b}{E}} = \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415fae3ecaae4eeb09e4ca74c68185041e15b}{E\_RUN}};}
+\DoxyCodeLine{499             \}}
+\DoxyCodeLine{500 }
+\DoxyCodeLine{501             usleep(100);}
+\DoxyCodeLine{502             \textcolor{comment}{/*}}
+\DoxyCodeLine{503 \textcolor{comment}{             * main state-\/machine update sequence}}
+\DoxyCodeLine{504 \textcolor{comment}{             */}}
+\DoxyCodeLine{505             \mbox{\hyperlink{bsoc_8c_a4c8b6884b4cae5d49a0d4141ce516372}{bsoc\_data\_collect}}();}
+\DoxyCodeLine{506             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{energy_8c_a014b7e7feb1f7f94f1947d2961e58534}{sanity\_check}}()) \{}
+\DoxyCodeLine{507                 fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s Sanity Check error \%d \%s \(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a008fd62f4467127b77deea88813be694}{sane}}, \mbox{\hyperlink{bsoc_8c_ae6b57480d8cda466cfc65b9bfc47b255}{mqtt\_name}}[\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a008fd62f4467127b77deea88813be694}{sane}}]);}
+\DoxyCodeLine{508                 fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{509             \}}
+\DoxyCodeLine{510 }
+\DoxyCodeLine{511             \textcolor{comment}{/*}}
+\DoxyCodeLine{512 \textcolor{comment}{             * stop and restart the energy control processing}}
+\DoxyCodeLine{513 \textcolor{comment}{             * from inside the program or from a remote Home Assistant command}}
+\DoxyCodeLine{514 \textcolor{comment}{             */}}
+\DoxyCodeLine{515             \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_a5db80d060a0e5e2905e748f97ce54f80}{solar\_shutdown}}()) \{}
+\DoxyCodeLine{516                 \textcolor{keywordflow}{if} (!\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a5301e38b7a1fbd2cf6973c3a2b6af5d2}{startup}}) \{}
+\DoxyCodeLine{517                     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s SHUTDOWN Solar Energy Control -\/-\/-\/> \(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}));}
+\DoxyCodeLine{518                 \}}
+\DoxyCodeLine{519                 fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{520                 \mbox{\hyperlink{energy_8c_aa02b759a5ba02eb2d0083c02dcbe4834}{ramp\_down\_gti}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{521                 usleep(100000); \textcolor{comment}{// wait}}
+\DoxyCodeLine{522                 \mbox{\hyperlink{energy_8c_a92077e5f551e509dad279a8d2be4b21d}{ramp\_down\_ac}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{523                 usleep(100000); \textcolor{comment}{// wait}}
+\DoxyCodeLine{524                 \mbox{\hyperlink{energy_8c_aa02b759a5ba02eb2d0083c02dcbe4834}{ramp\_down\_gti}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{525                 usleep(100000); \textcolor{comment}{// wait}}
+\DoxyCodeLine{526                 \mbox{\hyperlink{energy_8c_a92077e5f551e509dad279a8d2be4b21d}{ramp\_down\_ac}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{527                 usleep(100000); \textcolor{comment}{// wait}}
+\DoxyCodeLine{528                 \textcolor{keywordflow}{if} (!\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a5301e38b7a1fbd2cf6973c3a2b6af5d2}{startup}}) \{}
+\DoxyCodeLine{529                     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s Completed SHUTDOWN, Press again to RESTART.\(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}));}
+\DoxyCodeLine{530                     fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{531                 \}}
+\DoxyCodeLine{532                 fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{533 }
+\DoxyCodeLine{534                 uint8\_t iam\_delay = 0;}
+\DoxyCodeLine{535                 \textcolor{keywordflow}{while} (\mbox{\hyperlink{energy_8c_a5db80d060a0e5e2905e748f97ce54f80}{solar\_shutdown}}()) \{}
+\DoxyCodeLine{536                     \mbox{\hyperlink{mqtt__vars_8c_a8cae358dc3a23f274454a9dc9d10443e}{mqtt\_ha\_shutdown}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_ac1a01dc509505d2a44781caffa5c071a}{TOPIC\_SHUTDOWN}});}
+\DoxyCodeLine{537                     usleep(\mbox{\hyperlink{energy_8h_ae1c44b0e06f13991804a91e98022ad1c}{USEC\_SEC}}); \textcolor{comment}{// wait}}
+\DoxyCodeLine{538                     \textcolor{keywordflow}{if} ((int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a61c580ff6ce646f13228dc2dcad390c1}{V\_HACSW}}]) \{}
+\DoxyCodeLine{539                         \mbox{\hyperlink{energy_8c_a2c6c70b9a184aa76393a677b08954c81}{ha\_ac\_off}}();}
+\DoxyCodeLine{540                     \}}
+\DoxyCodeLine{541                     \textcolor{keywordflow}{if} ((int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a7391c358a2241e66cdf9f1e953184521}{V\_HDCSW}}]) \{}
+\DoxyCodeLine{542                         \mbox{\hyperlink{energy_8c_a200b8cfedca58c43dc888d70d83342d2}{ha\_dc\_off}}();}
+\DoxyCodeLine{543                     \}}
+\DoxyCodeLine{544                     \textcolor{keywordflow}{if} ((iam\_delay++ > \mbox{\hyperlink{energy_8h_a5b7b3aec1ddee0f87659a37569eda53c}{IAM\_DELAY}}) \&\& \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_a1abbe2fce463bf7ab00fc2caff39af1f}{shutdown}}) \{}
+\DoxyCodeLine{545                         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a60190fd48a28f964be8d030fe88a19a3}{fm80}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{546                         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a87a24fa58fbe692b797c0081bf28df28}{dumpload}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{547                         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae9aa060b6fa02493a02a9a2ce5bb7658}{iammeter}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{548                         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af080199f34d74e822ff98c6a9fc8c976}{homeassistant}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{549                     \}}
+\DoxyCodeLine{550                 \}}
+\DoxyCodeLine{551                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_a1abbe2fce463bf7ab00fc2caff39af1f}{shutdown}} = 0;}
+\DoxyCodeLine{552                 fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s RESTART Solar Energy Control\(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}));}
+\DoxyCodeLine{553                 fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{554                 \mbox{\hyperlink{bsoc_8c_a49c1e06b8059a63a9ed7c7d729e59d90}{bsoc\_set\_mode}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a713653ba952f067a6184ed4e10b89bcb}{pv\_bias}}, \textcolor{keyword}{true}, \textcolor{keyword}{true});}
+\DoxyCodeLine{555                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{556                 \mbox{\hyperlink{mqtt__vars_8c_a3fc1eb9cd6b570d96277f671de9e979a}{mqtt\_gti\_power}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}{TOPIC\_P}}, \textcolor{stringliteral}{"{}Z\#"{}}, 1); \textcolor{comment}{// zero power at startup}}
+\DoxyCodeLine{557                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{558 \textcolor{preprocessor}{\#ifdef AUTO\_CHARGE}}
+\DoxyCodeLine{559                 \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a6bbafe078803d99cb34f62c659e58cbc}{TOPIC\_PDCC}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{560 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{561                 usleep(100000); \textcolor{comment}{// wait}}
+\DoxyCodeLine{562                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{563                 \mbox{\hyperlink{pid_8c_a2845499736d4daabdc6bfcb637203535}{ResetPI}}(\&\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a7d5455aeb7e7424974a31670d0d14c28}{pid}});}
+\DoxyCodeLine{564                 \mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_a9d886e966396198df5116e8fa9d9265d}{runner}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{565                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a60190fd48a28f964be8d030fe88a19a3}{fm80}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{566                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a87a24fa58fbe692b797c0081bf28df28}{dumpload}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{567                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae9aa060b6fa02493a02a9a2ce5bb7658}{iammeter}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{568                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af080199f34d74e822ff98c6a9fc8c976}{homeassistant}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{569                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_abab6e3e71b5927837e930fbf58c55ff3}{in\_pid\_control}} = \textcolor{keyword}{false}; \textcolor{comment}{// shutdown auto energy control}}
+\DoxyCodeLine{570                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_ab140168a45baf835fb208f93983bc794}{R}} = \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a3c0e911dee8c0c9acea4848d7493829e}{R\_INIT}};}
+\DoxyCodeLine{571             \}}
+\DoxyCodeLine{572             \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_ab70820f3deb59737344c41114223330b}{receivedtoken}}) \{}
+\DoxyCodeLine{573                 \mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_ab70820f3deb59737344c41114223330b}{receivedtoken}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{574             \}}
+\DoxyCodeLine{575             \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_a04a99d06cea1265d7193a122288d83a0}{ha\_flag\_vars\_sd}}.\mbox{\hyperlink{structha__flag__type_ab70820f3deb59737344c41114223330b}{receivedtoken}}) \{}
+\DoxyCodeLine{576                 \mbox{\hyperlink{energy_8c_a04a99d06cea1265d7193a122288d83a0}{ha\_flag\_vars\_sd}}.\mbox{\hyperlink{structha__flag__type_ab70820f3deb59737344c41114223330b}{receivedtoken}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{577             \}}
+\DoxyCodeLine{578             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{579         \textcolor{keywordflow}{case} \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415fae3ecaae4eeb09e4ca74c68185041e15b}{E\_RUN}}:}
+\DoxyCodeLine{580             usleep(100);}
+\DoxyCodeLine{581             \textcolor{keywordflow}{switch} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_ab140168a45baf835fb208f93983bc794}{R}}) \{}
+\DoxyCodeLine{582             \textcolor{keywordflow}{case} \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a3c0e911dee8c0c9acea4848d7493829e}{R\_INIT}}:}
+\DoxyCodeLine{583                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af480c852a1d03dcbf94c0ed4025888e6}{once\_ac}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{584                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a8a63100b110f46b7835687ed198477a0}{once\_gti}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{585                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afb1d89fed19279747b421ffad6412e5b}{ac\_sw\_on}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{586                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a72305a9f4d6761d0144244638ef0c98d}{gti\_sw\_on}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{587                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_ab140168a45baf835fb208f93983bc794}{R}} = \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a53eae320dbcd86f620fa75b630f13c79}{R\_RUN}};}
+\DoxyCodeLine{588                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a4b76244ec2f7b8db75f35b46c2952c4a}{no\_float}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{589                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{590             \textcolor{keywordflow}{case} \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a1474a7d3758281b3a8fdfcfda8147bab}{R\_FLOAT}}:}
+\DoxyCodeLine{591                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a4b76244ec2f7b8db75f35b46c2952c4a}{no\_float}}) \{}
+\DoxyCodeLine{592                     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af480c852a1d03dcbf94c0ed4025888e6}{once\_ac}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{593                     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a8a63100b110f46b7835687ed198477a0}{once\_gti}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{594                     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afb1d89fed19279747b421ffad6412e5b}{ac\_sw\_on}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{595                     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a72305a9f4d6761d0144244638ef0c98d}{gti\_sw\_on}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{596                     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{597                     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{598                     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a4b76244ec2f7b8db75f35b46c2952c4a}{no\_float}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{599                 \}}
+\DoxyCodeLine{600                 \textcolor{keywordflow}{if} (!\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}}) \{}
+\DoxyCodeLine{601                     \textcolor{keywordflow}{if} (\mbox{\hyperlink{bsoc_8c_ade03000a21b56a5527367c81e7219c99}{gti\_test}}() > \mbox{\hyperlink{energy_8h_a05cb74467763c662c93c0197d2ebb502}{MIN\_BAT\_KW\_GTI\_HI}}) \{}
+\DoxyCodeLine{602                         \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a6bbafe078803d99cb34f62c659e58cbc}{TOPIC\_PDCC}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{603                         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{604                         fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s R\_FLOAT DC switch true \(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}));}
+\DoxyCodeLine{605                     \}}
+\DoxyCodeLine{606                 \}}
+\DoxyCodeLine{607                 usleep(100000); \textcolor{comment}{// wait}}
+\DoxyCodeLine{608                 \textcolor{keywordflow}{if} (!\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}}) \{}
+\DoxyCodeLine{609                     \textcolor{keywordflow}{if} (\mbox{\hyperlink{bsoc_8c_a413c5066cb43aae0039adba36593129a}{ac\_test}}() > \mbox{\hyperlink{energy_8h_acba28bf1765e9924790cc957b23ece2f}{MIN\_BAT\_KW\_AC\_HI}}) \{}
+\DoxyCodeLine{610                         \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_ab741d14c77c3f7326b0c05d0be7a4330}{TOPIC\_PACC}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{611                         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{612                         fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s R\_FLOAT AC switch true \(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}));}
+\DoxyCodeLine{613                     \}}
+\DoxyCodeLine{614                 \}}
+\DoxyCodeLine{615                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a713653ba952f067a6184ed4e10b89bcb}{pv\_bias}} = \mbox{\hyperlink{energy_8h_abb832d8acc3779b9d179bc5577a3787d}{PV\_BIAS}};}
+\DoxyCodeLine{616                 \mbox{\hyperlink{mqtt__rec_8c_ab3219c1d482ea970a00a713bc9631eb6}{fm80\_float}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{617                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{618             \textcolor{keywordflow}{case} \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a53eae320dbcd86f620fa75b630f13c79}{R\_RUN}}:}
+\DoxyCodeLine{619             \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{620                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_ab140168a45baf835fb208f93983bc794}{R}} = \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a53eae320dbcd86f620fa75b630f13c79}{R\_RUN}};}
+\DoxyCodeLine{621                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a4b76244ec2f7b8db75f35b46c2952c4a}{no\_float}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{622                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{623             \}}
+\DoxyCodeLine{624             \textcolor{comment}{/*}}
+\DoxyCodeLine{625 \textcolor{comment}{             * main state-\/machine update sequence and control logic}}
+\DoxyCodeLine{626 \textcolor{comment}{             */}}
+\DoxyCodeLine{627             \textcolor{comment}{/*}}
+\DoxyCodeLine{628 \textcolor{comment}{             * check for idle/data errors flags from sensors and HA}}
+\DoxyCodeLine{629 \textcolor{comment}{             */}}
+\DoxyCodeLine{630             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a75872939e963724e50084458672f847a}{data\_error}}) \{}
+\DoxyCodeLine{631                 \mbox{\hyperlink{bsoc_8c_a49c1e06b8059a63a9ed7c7d729e59d90}{bsoc\_set\_mode}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a713653ba952f067a6184ed4e10b89bcb}{pv\_bias}}, \textcolor{keyword}{true}, \textcolor{keyword}{false});}
+\DoxyCodeLine{632                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a4b53102a89a8283ca859cdd25720f5e5}{gti\_delay}}++ >= \mbox{\hyperlink{energy_8h_a5b916c6432aad3657a5787da32a7a086}{GTI\_DELAY}}) \{}
+\DoxyCodeLine{633                     \textcolor{keywordtype}{char} gti\_str[\mbox{\hyperlink{energy_8h_a6d4040fa8211c8fdb91258c7a0fbe994}{SBUF\_SIZ}}];}
+\DoxyCodeLine{634                     int32\_t error\_drive;}
+\DoxyCodeLine{635 }
+\DoxyCodeLine{636                     \textcolor{comment}{/*}}
+\DoxyCodeLine{637 \textcolor{comment}{                     * reset the control mode from simple switched power to PID control}}
+\DoxyCodeLine{638 \textcolor{comment}{                     */}}
+\DoxyCodeLine{639                     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_abab6e3e71b5927837e930fbf58c55ff3}{in\_pid\_control}}) \{}
+\DoxyCodeLine{640                         \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a6bbafe078803d99cb34f62c659e58cbc}{TOPIC\_PDCC}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{641                         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{642                         usleep(100000); \textcolor{comment}{// wait}}
+\DoxyCodeLine{643                         \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_ab741d14c77c3f7326b0c05d0be7a4330}{TOPIC\_PACC}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{644                         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{645                         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a713653ba952f067a6184ed4e10b89bcb}{pv\_bias}} = \mbox{\hyperlink{energy_8h_abb832d8acc3779b9d179bc5577a3787d}{PV\_BIAS}};}
+\DoxyCodeLine{646                         fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s in\_pid\_mode AC/DC switch true \(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}));}
+\DoxyCodeLine{647                         \mbox{\hyperlink{mqtt__rec_8c_ab3219c1d482ea970a00a713bc9631eb6}{fm80\_float}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{648                     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{649                         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{mqtt__rec_8c_ab3219c1d482ea970a00a713bc9631eb6}{fm80\_float}}(\textcolor{keyword}{true})) \{}
+\DoxyCodeLine{650                             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a713653ba952f067a6184ed4e10b89bcb}{pv\_bias}} = (int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a430a4ad1dc3ff1be380549424b79d7ca}{error}} -\/ \mbox{\hyperlink{energy_8h_abb832d8acc3779b9d179bc5577a3787d}{PV\_BIAS}};}
+\DoxyCodeLine{651                         \}}
+\DoxyCodeLine{652                     \}}
+\DoxyCodeLine{653                     \textcolor{comment}{/*}}
+\DoxyCodeLine{654 \textcolor{comment}{                     * use PID style set-\/point error correction}}
+\DoxyCodeLine{655 \textcolor{comment}{                     */}}
+\DoxyCodeLine{656                     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_abab6e3e71b5927837e930fbf58c55ff3}{in\_pid\_control}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{657                     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a4b53102a89a8283ca859cdd25720f5e5}{gti\_delay}} = 0;}
+\DoxyCodeLine{658                     \textcolor{comment}{/*}}
+\DoxyCodeLine{659 \textcolor{comment}{                     * adjust power balance if battery charging energy is low}}
+\DoxyCodeLine{660 \textcolor{comment}{                     */}}
+\DoxyCodeLine{661                     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072acbf8b0bfb8d6b7f05e44120ab817a788}{V\_DPBAT}}] > \mbox{\hyperlink{energy_8h_ae8e7f559c64b5c3fced213da7eced7da}{PV\_DL\_BIAS\_RATE}}) \{}
+\DoxyCodeLine{662                         error\_drive = (int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a430a4ad1dc3ff1be380549424b79d7ca}{error}} -\/ \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a713653ba952f067a6184ed4e10b89bcb}{pv\_bias}}; \textcolor{comment}{// PI feedback control signal}}
+\DoxyCodeLine{663                     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{664                         error\_drive = (int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a430a4ad1dc3ff1be380549424b79d7ca}{error}} -\/ \mbox{\hyperlink{energy_8h_ad478547f5632a840af219749a4e22e79}{PV\_BIAS\_RATE}};}
+\DoxyCodeLine{665                     \}}
+\DoxyCodeLine{666                     \textcolor{comment}{/*}}
+\DoxyCodeLine{667 \textcolor{comment}{                     * when main battery is in float, crank-\/up the power draw from the solar panels}}
+\DoxyCodeLine{668 \textcolor{comment}{                     */}}
+\DoxyCodeLine{669                     \textcolor{keywordflow}{if} (\mbox{\hyperlink{mqtt__rec_8c_ab3219c1d482ea970a00a713bc9631eb6}{fm80\_float}}(\textcolor{keyword}{true})) \{}
+\DoxyCodeLine{670                         error\_drive = (int32\_t) (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a430a4ad1dc3ff1be380549424b79d7ca}{error}} + \mbox{\hyperlink{energy_8h_abb832d8acc3779b9d179bc5577a3787d}{PV\_BIAS}});}
+\DoxyCodeLine{671                     \}}
+\DoxyCodeLine{672                     \textcolor{comment}{/*}}
+\DoxyCodeLine{673 \textcolor{comment}{                     * don't drive to zero power}}
+\DoxyCodeLine{674 \textcolor{comment}{                     */}}
+\DoxyCodeLine{675                     \textcolor{keywordflow}{if} (error\_drive < 0) \{}
+\DoxyCodeLine{676                         error\_drive = \mbox{\hyperlink{energy_8h_a72a8935085093a655db2a9c36bc7a419}{PV\_BIAS\_LOW}}; \textcolor{comment}{// control wide power swings}}
+\DoxyCodeLine{677                         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{mqtt__rec_8c_a218d78ec87cc0f9067283f98bace529f}{fm80\_sleep}}()) \{ \textcolor{comment}{// check for using sleep bias}}
+\DoxyCodeLine{678                             \textcolor{keywordflow}{if} ((\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a821ba4dacc502ba41ec0c17aff5c42d3}{V\_FBEKW}}] > \mbox{\hyperlink{energy_8h_a10405061b85ae1918bd02d110e958920}{MIN\_BAT\_KW\_BSOC\_SLP}}) \&\& (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072ad5c883c864f682ae706402bbcbe385cf}{V\_PWA}}] > \mbox{\hyperlink{energy_8h_aa0fd7bf782c78012ac9a5e7defb1bbc9}{PWA\_SLEEP}})) \{}
+\DoxyCodeLine{679                                 error\_drive = \mbox{\hyperlink{energy_8h_a1fc05643e83a06afc4a0522013007589}{PV\_BIAS\_SLEEP}}; \textcolor{comment}{// use higher power when we still have sun for better inverter efficiency}}
+\DoxyCodeLine{680                             \}}
+\DoxyCodeLine{681                         \}}
+\DoxyCodeLine{682                     \}}
+\DoxyCodeLine{683 }
+\DoxyCodeLine{684                     \textcolor{comment}{/*}}
+\DoxyCodeLine{685 \textcolor{comment}{                     * reduce charging/diversion power to safe PS limits}}
+\DoxyCodeLine{686 \textcolor{comment}{                     */}}
+\DoxyCodeLine{687                     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_aa813aa79ee962c4dde4572602d60ae69}{dl\_mqtt\_max}} > \mbox{\hyperlink{energy_8h_afb56edb8a8e45a993924e0582035e7f3}{PV\_DL\_MPTT\_MAX}}) \{}
+\DoxyCodeLine{688                         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}}) \{}
+\DoxyCodeLine{689                             error\_drive = \mbox{\hyperlink{energy_8h_a7aaac0669e9aba0830f4d4180ba932ab}{PV\_DL\_MPTT\_IDLE}};}
+\DoxyCodeLine{690                         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{691                             \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_aa813aa79ee962c4dde4572602d60ae69}{dl\_mqtt\_max}} > \mbox{\hyperlink{energy_8h_a8948540a345057786acbc6b5347157b5}{PV\_DL\_MPTT\_EXCESS}}) \{}
+\DoxyCodeLine{692                                 error\_drive = \mbox{\hyperlink{energy_8h_a7aaac0669e9aba0830f4d4180ba932ab}{PV\_DL\_MPTT\_IDLE}};}
+\DoxyCodeLine{693                             \}}
+\DoxyCodeLine{694                         \}}
+\DoxyCodeLine{695                     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{696                         \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}}) \{}
+\DoxyCodeLine{697                             error\_drive = \mbox{\hyperlink{energy_8h_a821e3aa59b88068f6ee5d1b8a922bd43}{PV\_DL\_EXCESS}} + \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a4324cb84eff8589a0765143e8acbc114}{dl\_excess\_adj}};}
+\DoxyCodeLine{698                         \}}
+\DoxyCodeLine{699                     \}}
+\DoxyCodeLine{700 }
+\DoxyCodeLine{701                     \textcolor{comment}{/*}}
+\DoxyCodeLine{702 \textcolor{comment}{                     * shutdown GTI power at low DL battery Ah or Voltage}}
+\DoxyCodeLine{703 \textcolor{comment}{                     */}}
+\DoxyCodeLine{704                     \textcolor{keywordflow}{if} ((\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a79eef89bbb62af24bc79c04f29d0ad97}{V\_DAHBAT}}] < \mbox{\hyperlink{energy_8h_aa475e97af32e6972baba4dd1a61f48df}{PV\_DL\_B\_AH\_LOW}}) || (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a313329bdfc449d61aa60f11b31432e1f}{V\_DVBAT}}] < \mbox{\hyperlink{energy_8h_a536a0eb3b3062d965ce65b5972f6f84e}{PV\_DL\_B\_V\_LOW}})) \{}
+\DoxyCodeLine{705                         error\_drive = \mbox{\hyperlink{energy_8h_a49ebc838f3910dacd095678db5c985f7}{PV\_BIAS\_ZERO}};}
+\DoxyCodeLine{706                     \}}
+\DoxyCodeLine{707 }
+\DoxyCodeLine{708                     snprintf(gti\_str, \mbox{\hyperlink{energy_8h_a6d4040fa8211c8fdb91258c7a0fbe994}{SBUF\_SIZ}} -\/ 1, \textcolor{stringliteral}{"{}V\%04dX"{}}, error\_drive); \textcolor{comment}{// format for dumpload controller gti power commands}}
+\DoxyCodeLine{709                     \mbox{\hyperlink{mqtt__vars_8c_a3fc1eb9cd6b570d96277f671de9e979a}{mqtt\_gti\_power}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}{TOPIC\_P}}, gti\_str, 2);}
+\DoxyCodeLine{710                 \}}
+\DoxyCodeLine{711 }
+\DoxyCodeLine{712 \textcolor{preprocessor}{\#ifndef  FAKE\_VPV}}
+\DoxyCodeLine{713                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{mqtt__rec_8c_ab3219c1d482ea970a00a713bc9631eb6}{fm80\_float}}(\textcolor{keyword}{true}) || ((\mbox{\hyperlink{bsoc_8c_a4ec0fe226796da34c999530046265c3a}{ac1\_filter}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a47acb84856d0db6447de2c99171d654d}{V\_BEN}}]) > \mbox{\hyperlink{energy_8h_a8996e9908d95419bf7493943eb495da1}{BAL\_MAX\_ENERGY\_AC}}) \&\& (\mbox{\hyperlink{bsoc_8c_a413c5066cb43aae0039adba36593129a}{ac\_test}}() > \mbox{\hyperlink{energy_8h_acba28bf1765e9924790cc957b23ece2f}{MIN\_BAT\_KW\_AC\_HI}}))) \{}
+\DoxyCodeLine{714                     \mbox{\hyperlink{energy_8c_a28b7bbb5fe37666136a84c7cded51e2e}{ramp\_up\_ac}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afb1d89fed19279747b421ffad6412e5b}{ac\_sw\_on}}); \textcolor{comment}{// use once control}}
+\DoxyCodeLine{715 \textcolor{preprocessor}{\#ifdef PSW\_DEBUG}}
+\DoxyCodeLine{716                     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s MIN\_BAT\_KW\_AC\_HI AC switch \%d \(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afb1d89fed19279747b421ffad6412e5b}{ac\_sw\_on}});}
+\DoxyCodeLine{717 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{718                     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afb1d89fed19279747b421ffad6412e5b}{ac\_sw\_on}} = \textcolor{keyword}{false}; \textcolor{comment}{// once flag}}
+\DoxyCodeLine{719                 \}}
+\DoxyCodeLine{720 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{721                 \textcolor{keywordflow}{if} (((\mbox{\hyperlink{bsoc_8c_aa933af2d3df8ce390f6f95900df4b525}{ac2\_filter}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a47acb84856d0db6447de2c99171d654d}{V\_BEN}}]) < \mbox{\hyperlink{energy_8h_a83055b2860263c3ebcea7deaaf48f0cf}{BAL\_MIN\_ENERGY\_AC}}) || ((\mbox{\hyperlink{bsoc_8c_a413c5066cb43aae0039adba36593129a}{ac\_test}}() < (\mbox{\hyperlink{energy_8h_acf488256aa0ed5070518a3e3e66400eb}{MIN\_BAT\_KW\_AC\_LO}} + \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a01cced1053900a4f380da28e1153906f}{ac\_low\_adj}}))))) \{}
+\DoxyCodeLine{722                     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{mqtt__rec_8c_ab3219c1d482ea970a00a713bc9631eb6}{fm80\_float}}(\textcolor{keyword}{true})) \{}
+\DoxyCodeLine{723                         \mbox{\hyperlink{energy_8c_a92077e5f551e509dad279a8d2be4b21d}{ramp\_down\_ac}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afb1d89fed19279747b421ffad6412e5b}{ac\_sw\_on}});}
+\DoxyCodeLine{724                         \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_ae7020228b3ccca216927caec73938554}{log\_timer}}()) \{}
+\DoxyCodeLine{725                             fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s RAMP DOWN AC, MIN\_BAT\_KW\_AC\_LO AC switch \%d \(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afb1d89fed19279747b421ffad6412e5b}{ac\_sw\_on}});}
+\DoxyCodeLine{726                         \}}
+\DoxyCodeLine{727                     \}}
+\DoxyCodeLine{728                     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afb1d89fed19279747b421ffad6412e5b}{ac\_sw\_on}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{729                 \}}
+\DoxyCodeLine{730 }
+\DoxyCodeLine{731 }
+\DoxyCodeLine{732                 \textcolor{comment}{/*}}
+\DoxyCodeLine{733 \textcolor{comment}{                 * Dump Load Excess testing}}
+\DoxyCodeLine{734 \textcolor{comment}{                 * send excess power into the home power grid taking care not to export energy to the utility grid}}
+\DoxyCodeLine{735 \textcolor{comment}{                 */}}
+\DoxyCodeLine{736                 \textcolor{keywordflow}{if} (((\mbox{\hyperlink{bsoc_8c_a623a5ccd411eeeba8acd1132a33a15e8}{dc1\_filter}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a47acb84856d0db6447de2c99171d654d}{V\_BEN}}]) > \mbox{\hyperlink{energy_8h_a6c83f780e5e47e63325d47269958403e}{BAL\_MAX\_ENERGY\_GTI}}) \&\& (\mbox{\hyperlink{bsoc_8c_ade03000a21b56a5527367c81e7219c99}{gti\_test}}() > \mbox{\hyperlink{energy_8h_a05cb74467763c662c93c0197d2ebb502}{MIN\_BAT\_KW\_GTI\_HI}})) || \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}}) \{}
+\DoxyCodeLine{737 \textcolor{preprocessor}{\#ifndef  FAKE\_VPV                            }}
+\DoxyCodeLine{738 \textcolor{preprocessor}{\#ifdef B\_DLE\_DEBUG}}
+\DoxyCodeLine{739                     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}}) \{}
+\DoxyCodeLine{740                         fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s DL excess ramp\_up\_gti, DC switch \%d\(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a72305a9f4d6761d0144244638ef0c98d}{gti\_sw\_on}});}
+\DoxyCodeLine{741                     \}}
+\DoxyCodeLine{742 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{743                     \mbox{\hyperlink{energy_8c_aaa8441f14022457063db591bed50fe62}{ramp\_up\_gti}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a72305a9f4d6761d0144244638ef0c98d}{gti\_sw\_on}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}});}
+\DoxyCodeLine{744                     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_ae7020228b3ccca216927caec73938554}{log\_timer}}()) \{}
+\DoxyCodeLine{745                         fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s RAMP DOWN DC, MIN\_BAT\_KW\_GTI\_HI DC switch \%d \(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a72305a9f4d6761d0144244638ef0c98d}{gti\_sw\_on}});}
+\DoxyCodeLine{746                     \}}
+\DoxyCodeLine{747                     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a72305a9f4d6761d0144244638ef0c98d}{gti\_sw\_on}} = \textcolor{keyword}{false}; \textcolor{comment}{// once flag}}
+\DoxyCodeLine{748 \textcolor{preprocessor}{\#endif                            }}
+\DoxyCodeLine{749                 \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{750                     \textcolor{keywordflow}{if} ((\mbox{\hyperlink{bsoc_8c_a4846561257bfbb8d753328d1fe7a1c07}{dc2\_filter}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a47acb84856d0db6447de2c99171d654d}{V\_BEN}}]) < \mbox{\hyperlink{energy_8h_a42beedc428820d4934ee117f71e382c8}{BAL\_MIN\_ENERGY\_GTI}}) || (\mbox{\hyperlink{bsoc_8c_ade03000a21b56a5527367c81e7219c99}{gti\_test}}() < (\mbox{\hyperlink{energy_8h_a26d8cf1cdbb4c06adfe113dcfc99d002}{MIN\_BAT\_KW\_GTI\_LO}} + \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1945c4d2c3ef6600d32ff0d6f6a52df6}{gti\_low\_adj}}))) \{}
+\DoxyCodeLine{751                         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}}) \{}
+\DoxyCodeLine{752                             \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_ae7020228b3ccca216927caec73938554}{log\_timer}}()) \{}
+\DoxyCodeLine{753                                 \mbox{\hyperlink{energy_8c_aa02b759a5ba02eb2d0083c02dcbe4834}{ramp\_down\_gti}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{754 \textcolor{preprocessor}{\#ifdef PSW\_DEBUG}}
+\DoxyCodeLine{755                                 fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s MIN\_BAT\_KW\_GTI\_LO DC switch \%d \(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a72305a9f4d6761d0144244638ef0c98d}{gti\_sw\_on}});}
+\DoxyCodeLine{756 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{757                             \}}
+\DoxyCodeLine{758                             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a72305a9f4d6761d0144244638ef0c98d}{gti\_sw\_on}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{759                         \}}
+\DoxyCodeLine{760                     \}}
+\DoxyCodeLine{761                 \}}
+\DoxyCodeLine{762             \};}
+\DoxyCodeLine{763 }
+\DoxyCodeLine{764 \textcolor{preprocessor}{\#ifdef B\_ADJ\_DEBUG}}
+\DoxyCodeLine{765             fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n LO ADJ: AC \%8.2fWh, GTI \%8.2fWh\(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8h_acf488256aa0ed5070518a3e3e66400eb}{MIN\_BAT\_KW\_AC\_LO}} + \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a01cced1053900a4f380da28e1153906f}{ac\_low\_adj}}, \mbox{\hyperlink{energy_8h_a26d8cf1cdbb4c06adfe113dcfc99d002}{MIN\_BAT\_KW\_GTI\_LO}} + \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1945c4d2c3ef6600d32ff0d6f6a52df6}{gti\_low\_adj}});}
+\DoxyCodeLine{766 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{767 \textcolor{preprocessor}{\#ifdef B\_DLE\_DEBUG}}
+\DoxyCodeLine{768             \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}}) \{}
+\DoxyCodeLine{769                 fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s DL excess vars from ha\_energy \%d \%d : Flag \%d\(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a0cc3a15a994a67eb849733193e05fa06}{con4}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a5ca43a1420ba47e4f37857bca5c11938}{con5}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}});}
+\DoxyCodeLine{770             \}}
+\DoxyCodeLine{771 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{772 }
+\DoxyCodeLine{773             time(\&rawtime);}
+\DoxyCodeLine{774 }
+\DoxyCodeLine{775             \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a04682ad09259856378d892992d12a0d8}{im\_delay}}++ >= \mbox{\hyperlink{energy_8h_a18b5f37719f22d3f499db9ec0370f9b6}{IM\_DELAY}}) \{}
+\DoxyCodeLine{776                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a04682ad09259856378d892992d12a0d8}{im\_delay}} = 0;}
+\DoxyCodeLine{777                 \mbox{\hyperlink{energy_8h_a34d485627939300ea5e51b765f599b9a}{iammeter\_read}}();}
+\DoxyCodeLine{778             \}}
+\DoxyCodeLine{779             \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a816826d7826eda53a9301e89e14837da}{im\_display}}++ >= \mbox{\hyperlink{energy_8h_acd44706ab6bf5f575743818ab69a0cd4}{IM\_DISPLAY}}) \{}
+\DoxyCodeLine{780                 \textcolor{keywordtype}{char} buffer[\mbox{\hyperlink{energy_8h_a52c3aaa9470287b78eee2ca241454fcb}{SYSLOG\_SIZ}}];}
+\DoxyCodeLine{781                 uint32\_t len;}
+\DoxyCodeLine{782 }
+\DoxyCodeLine{783                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a816826d7826eda53a9301e89e14837da}{im\_display}} = 0;}
+\DoxyCodeLine{784                 \mbox{\hyperlink{mqtt__vars_8c_aca0d9fca85baa3d4690a22e16e1b53ce}{mqtt\_ha\_pid}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a5ec6c2a3e382c3bc460c59010e1287a4}{TOPIC\_PPID}});}
+\DoxyCodeLine{785                 \textcolor{keywordflow}{if} (!(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a60190fd48a28f964be8d030fe88a19a3}{fm80}} \&\& \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a87a24fa58fbe692b797c0081bf28df28}{dumpload}} \&\& \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae9aa060b6fa02493a02a9a2ce5bb7658}{iammeter}})) \{}
+\DoxyCodeLine{786                     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae9aa060b6fa02493a02a9a2ce5bb7658}{iammeter}}) \{}
+\DoxyCodeLine{787                         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_ae120ea132c18d0baf98a393c1e06ce20}{iammeter\_error}}++;}
+\DoxyCodeLine{788                     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{789                         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_a17d70f7dd45e005f9cda9562d56a9fa0}{mqtt\_error}}++;}
+\DoxyCodeLine{790                     \}}
+\DoxyCodeLine{791                     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_a1abbe2fce463bf7ab00fc2caff39af1f}{shutdown}}++;}
+\DoxyCodeLine{792                     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s !!!! Source data update error !!!! , check FM80 \%i, DUMPLOAD \%i, IAMMETER \%i channels M \%u,\%u I \%u,\%u\(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a60190fd48a28f964be8d030fe88a19a3}{fm80}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a87a24fa58fbe692b797c0081bf28df28}{dumpload}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a60190fd48a28f964be8d030fe88a19a3}{fm80}},}
+\DoxyCodeLine{793                         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_aa820e79717719cfe77f6b2b2bada58ae}{mqtt\_count}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_a17d70f7dd45e005f9cda9562d56a9fa0}{mqtt\_error}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_af96503924386a5fa3723e667ef4c57df}{iammeter\_count}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_ae120ea132c18d0baf98a393c1e06ce20}{iammeter\_error}});}
+\DoxyCodeLine{794                     fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{795                     snprintf(buffer, \mbox{\hyperlink{energy_8h_a52c3aaa9470287b78eee2ca241454fcb}{SYSLOG\_SIZ}} -\/ 1, \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s !!!! Source data update error !!!! , check FM80 \%i, DUMPLOAD \%i, IAMMETER \%i channels M \%u,\%u I \%u,\%u\(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a60190fd48a28f964be8d030fe88a19a3}{fm80}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a87a24fa58fbe692b797c0081bf28df28}{dumpload}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a60190fd48a28f964be8d030fe88a19a3}{fm80}},}
+\DoxyCodeLine{796                         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_aa820e79717719cfe77f6b2b2bada58ae}{mqtt\_count}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_a17d70f7dd45e005f9cda9562d56a9fa0}{mqtt\_error}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_af96503924386a5fa3723e667ef4c57df}{iammeter\_count}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_ae120ea132c18d0baf98a393c1e06ce20}{iammeter\_error}});}
+\DoxyCodeLine{797                     syslog(LOG\_NOTICE, buffer);}
+\DoxyCodeLine{798                     \mbox{\hyperlink{mqtt__vars_8c_a8cae358dc3a23f274454a9dc9d10443e}{mqtt\_ha\_shutdown}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_ac1a01dc509505d2a44781caffa5c071a}{TOPIC\_SHUTDOWN}});}
+\DoxyCodeLine{799                     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a75872939e963724e50084458672f847a}{data\_error}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{800                 \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{801                     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a75872939e963724e50084458672f847a}{data\_error}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{802                     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_a1abbe2fce463bf7ab00fc2caff39af1f}{shutdown}} = 0;}
+\DoxyCodeLine{803                 \}}
+\DoxyCodeLine{804                 snprintf(buffer, \mbox{\hyperlink{energy_8h_a0c85192a1fc4b17a7c63d0c0f6f61625}{RBUF\_SIZ}} -\/ 1, \textcolor{stringliteral}{"{}\%s"{}}, ctime(\&rawtime));}
+\DoxyCodeLine{805                 len = strlen(buffer);}
+\DoxyCodeLine{806                 buffer[len -\/ 1] = 0; \textcolor{comment}{// munge out the return character}}
+\DoxyCodeLine{807                 fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s "{}}, buffer);}
+\DoxyCodeLine{808                 fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{809                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a60190fd48a28f964be8d030fe88a19a3}{fm80}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{810                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a87a24fa58fbe692b797c0081bf28df28}{dumpload}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{811                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af080199f34d74e822ff98c6a9fc8c976}{homeassistant}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{812                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae9aa060b6fa02493a02a9a2ce5bb7658}{iammeter}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{813                 \mbox{\hyperlink{energy_8c_a2533146394b65b382653eff2cd6f2106}{sync\_ha}}();}
+\DoxyCodeLine{814                 \mbox{\hyperlink{energy_8h_a8b0aebb679cfaa2c1c7f70e477e396a5}{print\_im\_vars}}();}
+\DoxyCodeLine{815                 \mbox{\hyperlink{energy_8h_a7ce8be1d4c8d4c9881d482bed4933512}{print\_mvar\_vars}}();}
+\DoxyCodeLine{816                 fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s\(\backslash\)r"{}}, ctime(\&rawtime));}
+\DoxyCodeLine{817             \}}
+\DoxyCodeLine{818             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a780dd9555747fafe2a0456c20405d32b}{E}} = \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415faa19a96871d41a61ea3b7b279f5d4b1d6}{E\_WAIT}};}
+\DoxyCodeLine{819             fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{820             \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a3bc6b3f9a6c3a06dc7875133321aba62}{con6}}) \{}
+\DoxyCodeLine{821                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_ab140168a45baf835fb208f93983bc794}{R}} = \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a63581c61e8680cb3c6be0310a4e19e81}{R\_IDLE}};}
+\DoxyCodeLine{822             \}}
+\DoxyCodeLine{823             \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a1ec5332759a6ff98ca880fedddd32bf9}{con7}}) \{}
+\DoxyCodeLine{824                 \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a780dd9555747fafe2a0456c20405d32b}{E}} = \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415fa4d5e6303dba6960140ca6bf4bab1e5ac}{E\_STOP}};}
+\DoxyCodeLine{825             \}}
+\DoxyCodeLine{826             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{827         \textcolor{keywordflow}{case} \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415fa4d5e6303dba6960140ca6bf4bab1e5ac}{E\_STOP}}:}
+\DoxyCodeLine{828         \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{829             fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{830             fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s HA Energy stopped and exited.\(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}));}
+\DoxyCodeLine{831             fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{832             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{833             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{834         \}}
+\DoxyCodeLine{835     \}}
+\DoxyCodeLine{836 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_a92077e5f551e509dad279a8d2be4b21d}\label{energy_8c_a92077e5f551e509dad279a8d2be4b21d}} 
+\index{energy.c@{energy.c}!ramp\_down\_ac@{ramp\_down\_ac}}
+\index{ramp\_down\_ac@{ramp\_down\_ac}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{ramp\_down\_ac()}{ramp\_down\_ac()}}
+{\footnotesize\ttfamily void ramp\+\_\+down\+\_\+ac (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p,  }\item[{bool}]{sw\+\_\+off }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{936 \{}
+\DoxyCodeLine{937     \textcolor{keywordflow}{if} (sw\_off) \{}
+\DoxyCodeLine{938         \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(client\_p, \mbox{\hyperlink{energy_8h_ab741d14c77c3f7326b0c05d0be7a4330}{TOPIC\_PACC}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{939         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{940         usleep(500000);}
+\DoxyCodeLine{941     \}}
+\DoxyCodeLine{942     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af480c852a1d03dcbf94c0ed4025888e6}{once\_ac}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{943 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_aa02b759a5ba02eb2d0083c02dcbe4834}\label{energy_8c_aa02b759a5ba02eb2d0083c02dcbe4834}} 
+\index{energy.c@{energy.c}!ramp\_down\_gti@{ramp\_down\_gti}}
+\index{ramp\_down\_gti@{ramp\_down\_gti}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{ramp\_down\_gti()}{ramp\_down\_gti()}}
+{\footnotesize\ttfamily void ramp\+\_\+down\+\_\+gti (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p,  }\item[{bool}]{sw\+\_\+off }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{903 \{}
+\DoxyCodeLine{904     \textcolor{keywordflow}{if} (sw\_off) \{}
+\DoxyCodeLine{905         \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(client\_p, \mbox{\hyperlink{energy_8h_a6bbafe078803d99cb34f62c659e58cbc}{TOPIC\_PDCC}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{906         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af0f10b5a348da41d79645310f3caa98a}{once\_gti\_zero}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{907         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{908     \}}
+\DoxyCodeLine{909     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a8a63100b110f46b7835687ed198477a0}{once\_gti}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{910 }
+\DoxyCodeLine{911     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af0f10b5a348da41d79645310f3caa98a}{once\_gti\_zero}}) \{}
+\DoxyCodeLine{912         \mbox{\hyperlink{mqtt__vars_8c_a3fc1eb9cd6b570d96277f671de9e979a}{mqtt\_gti\_power}}(client\_p, \mbox{\hyperlink{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}{TOPIC\_P}}, \textcolor{stringliteral}{"{}Z\#"{}}, 7); \textcolor{comment}{// zero power}}
+\DoxyCodeLine{913         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af0f10b5a348da41d79645310f3caa98a}{once\_gti\_zero}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{914     \}}
+\DoxyCodeLine{915 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_a28b7bbb5fe37666136a84c7cded51e2e}\label{energy_8c_a28b7bbb5fe37666136a84c7cded51e2e}} 
+\index{energy.c@{energy.c}!ramp\_up\_ac@{ramp\_up\_ac}}
+\index{ramp\_up\_ac@{ramp\_up\_ac}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{ramp\_up\_ac()}{ramp\_up\_ac()}}
+{\footnotesize\ttfamily void ramp\+\_\+up\+\_\+ac (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p,  }\item[{bool}]{start }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{921 \{}
+\DoxyCodeLine{922 }
+\DoxyCodeLine{923     \textcolor{keywordflow}{if} (start) \{}
+\DoxyCodeLine{924         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af480c852a1d03dcbf94c0ed4025888e6}{once\_ac}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{925     \}}
+\DoxyCodeLine{926 }
+\DoxyCodeLine{927     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af480c852a1d03dcbf94c0ed4025888e6}{once\_ac}}) \{}
+\DoxyCodeLine{928         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af480c852a1d03dcbf94c0ed4025888e6}{once\_ac}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{929         \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(client\_p, \mbox{\hyperlink{energy_8h_ab741d14c77c3f7326b0c05d0be7a4330}{TOPIC\_PACC}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{930         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{931         usleep(500000); \textcolor{comment}{// wait for voltage to ramp}}
+\DoxyCodeLine{932     \}}
+\DoxyCodeLine{933 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_aaa8441f14022457063db591bed50fe62}\label{energy_8c_aaa8441f14022457063db591bed50fe62}} 
+\index{energy.c@{energy.c}!ramp\_up\_gti@{ramp\_up\_gti}}
+\index{ramp\_up\_gti@{ramp\_up\_gti}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{ramp\_up\_gti()}{ramp\_up\_gti()}}
+{\footnotesize\ttfamily void ramp\+\_\+up\+\_\+gti (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p,  }\item[{bool}]{start,  }\item[{bool}]{excess }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{842 \{}
+\DoxyCodeLine{843     \textcolor{keyword}{static} uint32\_t sequence = 0;}
+\DoxyCodeLine{844 }
+\DoxyCodeLine{845     \textcolor{keywordflow}{if} (start) \{}
+\DoxyCodeLine{846         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a8a63100b110f46b7835687ed198477a0}{once\_gti}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{847     \}}
+\DoxyCodeLine{848 }
+\DoxyCodeLine{849     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a8a63100b110f46b7835687ed198477a0}{once\_gti}}) \{}
+\DoxyCodeLine{850         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a8a63100b110f46b7835687ed198477a0}{once\_gti}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{851         sequence = 0;}
+\DoxyCodeLine{852         \textcolor{keywordflow}{if} (!excess) \{}
+\DoxyCodeLine{853             \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(client\_p, \mbox{\hyperlink{energy_8h_a6bbafe078803d99cb34f62c659e58cbc}{TOPIC\_PDCC}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{854             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{855             usleep(500000); \textcolor{comment}{// wait for voltage to ramp}}
+\DoxyCodeLine{856         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{857             sequence = 1;}
+\DoxyCodeLine{858         \}}
+\DoxyCodeLine{859     \}}
+\DoxyCodeLine{860 }
+\DoxyCodeLine{861     \textcolor{keywordflow}{switch} (sequence) \{}
+\DoxyCodeLine{862     \textcolor{keywordflow}{case} 4:}
+\DoxyCodeLine{863         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af0f10b5a348da41d79645310f3caa98a}{once\_gti\_zero}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{864         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{865     \textcolor{keywordflow}{case} 3:}
+\DoxyCodeLine{866     \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{867     \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{868         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af0f10b5a348da41d79645310f3caa98a}{once\_gti\_zero}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{869         \textcolor{keywordflow}{if} (\mbox{\hyperlink{bsoc_8c_a4ff1d7778a0780a0f1c029a738322513}{bat\_current\_stable}}() || \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}}) \{ \textcolor{comment}{// check battery current std dev, stop 'motorboating'}}
+\DoxyCodeLine{870             sequence++;}
+\DoxyCodeLine{871             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{mqtt__vars_8c_a3fc1eb9cd6b570d96277f671de9e979a}{mqtt\_gti\_power}}(client\_p, \mbox{\hyperlink{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}{TOPIC\_P}}, \textcolor{stringliteral}{"{}+\#"{}}, 3)) \{}
+\DoxyCodeLine{872                 sequence = 0;}
+\DoxyCodeLine{873             \}; \textcolor{comment}{// +100W power}}
+\DoxyCodeLine{874         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{875             usleep(500000); \textcolor{comment}{// wait a bit more for power to be stable}}
+\DoxyCodeLine{876             sequence = 1; \textcolor{comment}{// do power ramps when ready}}
+\DoxyCodeLine{877             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{mqtt__vars_8c_a3fc1eb9cd6b570d96277f671de9e979a}{mqtt\_gti\_power}}(client\_p, \mbox{\hyperlink{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}{TOPIC\_P}}, \textcolor{stringliteral}{"{}-\/\#"{}}, 4)) \{}
+\DoxyCodeLine{878                 sequence = 0;}
+\DoxyCodeLine{879             \}; \textcolor{comment}{// -\/ 100W power}}
+\DoxyCodeLine{880         \}}
+\DoxyCodeLine{881         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{882     \textcolor{keywordflow}{case} 0:}
+\DoxyCodeLine{883         sequence++;}
+\DoxyCodeLine{884         \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af0f10b5a348da41d79645310f3caa98a}{once\_gti\_zero}}) \{}
+\DoxyCodeLine{885             \mbox{\hyperlink{mqtt__vars_8c_a3fc1eb9cd6b570d96277f671de9e979a}{mqtt\_gti\_power}}(client\_p, \mbox{\hyperlink{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}{TOPIC\_P}}, \textcolor{stringliteral}{"{}Z\#"{}}, 5); \textcolor{comment}{// zero power}}
+\DoxyCodeLine{886             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af0f10b5a348da41d79645310f3caa98a}{once\_gti\_zero}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{887         \}}
+\DoxyCodeLine{888         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{889     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{890         \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af0f10b5a348da41d79645310f3caa98a}{once\_gti\_zero}}) \{}
+\DoxyCodeLine{891             \mbox{\hyperlink{mqtt__vars_8c_a3fc1eb9cd6b570d96277f671de9e979a}{mqtt\_gti\_power}}(client\_p, \mbox{\hyperlink{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}{TOPIC\_P}}, \textcolor{stringliteral}{"{}Z\#"{}}, 6); \textcolor{comment}{// zero power}}
+\DoxyCodeLine{892             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af0f10b5a348da41d79645310f3caa98a}{once\_gti\_zero}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{893         \}}
+\DoxyCodeLine{894         sequence = 0;}
+\DoxyCodeLine{895         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{896     \}}
+\DoxyCodeLine{897 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_a014b7e7feb1f7f94f1947d2961e58534}\label{energy_8c_a014b7e7feb1f7f94f1947d2961e58534}} 
+\index{energy.c@{energy.c}!sanity\_check@{sanity\_check}}
+\index{sanity\_check@{sanity\_check}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{sanity\_check()}{sanity\_check()}}
+{\footnotesize\ttfamily bool sanity\+\_\+check (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{253 \{}
+\DoxyCodeLine{254     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072ad5c883c864f682ae706402bbcbe385cf}{V\_PWA}}] > \mbox{\hyperlink{energy_8h_a1080c8ca712e9dc1addd48d9ae40b007}{PWA\_SANE}}) \{}
+\DoxyCodeLine{255         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a008fd62f4467127b77deea88813be694}{sane}} = \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7af1d6fa8de1e28a2b6d8539f3b98fce4e}{S\_PWA}};}
+\DoxyCodeLine{256         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{257     \}}
+\DoxyCodeLine{258     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a3c4c2533613529ed910d3b0698e89335}{V\_PAMPS}}] > \mbox{\hyperlink{energy_8h_abdf0a79062ee811bfb1da544d1876e67}{PAMPS\_SANE}}) \{}
+\DoxyCodeLine{259         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a008fd62f4467127b77deea88813be694}{sane}} = \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a25f0992e8e1881acf87ad1beb51150b8}{S\_PAMPS}};}
+\DoxyCodeLine{260         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{261     \}}
+\DoxyCodeLine{262     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aaf767b3b90d0f2566062e8ea9aa77d74}{V\_PVOLTS}}] > \mbox{\hyperlink{energy_8h_aa92d0d3c6e77fb8c158bd4c098ad07ac}{PVOLTS\_SANE}}) \{}
+\DoxyCodeLine{263         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a008fd62f4467127b77deea88813be694}{sane}} = \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a240ee28d7f55ca0e4a3c4b29f06c4e21}{S\_PVOLTS}};}
+\DoxyCodeLine{264         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{265     \}}
+\DoxyCodeLine{266     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a9f8ddad7002f6868f6bf77c46b11e686}{V\_FBAMPS}}] > \mbox{\hyperlink{energy_8h_a36849bf632f6907ce2826cf4f4f7f70a}{BAMPS\_SANE}}) \{}
+\DoxyCodeLine{267         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a008fd62f4467127b77deea88813be694}{sane}} = \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a3ba317a28cd9bbd8a72e138b88fe8d7a}{S\_FBAMPS}};}
+\DoxyCodeLine{268         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{269     \}}
+\DoxyCodeLine{270     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{271 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_a0e3152830cd54954f6745ba7ae42ff42}\label{energy_8c_a0e3152830cd54954f6745ba7ae42ff42}} 
+\index{energy.c@{energy.c}!showIP@{showIP}}
+\index{showIP@{showIP}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{showIP()}{showIP()}}
+{\footnotesize\ttfamily void show\+IP (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{159 \{}
+\DoxyCodeLine{160     \textcolor{keyword}{struct }ifaddrs *ifaddr, *ifa;}
+\DoxyCodeLine{161     \textcolor{keywordtype}{int} s;}
+\DoxyCodeLine{162     \textcolor{keywordtype}{char} host[NI\_MAXHOST];}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164     \textcolor{keywordflow}{if} (getifaddrs(\&ifaddr) == -\/1) \{}
+\DoxyCodeLine{165         perror(\textcolor{stringliteral}{"{}getifaddrs"{}});}
+\DoxyCodeLine{166         exit(EXIT\_FAILURE);}
+\DoxyCodeLine{167     \}}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170     \textcolor{keywordflow}{for} (ifa = ifaddr; ifa != NULL; ifa = ifa-\/>ifa\_next) \{}
+\DoxyCodeLine{171         \textcolor{keywordflow}{if} (ifa-\/>ifa\_addr == NULL)}
+\DoxyCodeLine{172             \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174         s = getnameinfo(ifa-\/>ifa\_addr, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} sockaddr\_in), host, NI\_MAXHOST, NULL, 0, NI\_NUMERICHOST);}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176         \textcolor{keywordflow}{if} (ifa-\/>ifa\_addr-\/>sa\_family == AF\_INET) \{}
+\DoxyCodeLine{177             \textcolor{keywordflow}{if} (s != 0) \{}
+\DoxyCodeLine{178                 exit(EXIT\_FAILURE);}
+\DoxyCodeLine{179             \}}
+\DoxyCodeLine{180             printf(\textcolor{stringliteral}{"{}\(\backslash\)tInterface : <\%s>\(\backslash\)n"{}}, ifa-\/>ifa\_name);}
+\DoxyCodeLine{181             printf(\textcolor{stringliteral}{"{}\(\backslash\)t  Address : <\%s>\(\backslash\)n"{}}, host);}
+\DoxyCodeLine{182         \}}
+\DoxyCodeLine{183     \}}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{185     freeifaddrs(ifaddr);}
+\DoxyCodeLine{186 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_ac6b8bef7c0921e591a31d844e13d24e8}\label{energy_8c_ac6b8bef7c0921e591a31d844e13d24e8}} 
+\index{energy.c@{energy.c}!skeleton\_daemon@{skeleton\_daemon}}
+\index{skeleton\_daemon@{skeleton\_daemon}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{skeleton\_daemon()}{skeleton\_daemon()}}
+{\footnotesize\ttfamily static void skeleton\+\_\+daemon (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{193 \{}
+\DoxyCodeLine{194     pid\_t pid;}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196     \textcolor{comment}{/* Fork off the parent process */}}
+\DoxyCodeLine{197     pid = fork();}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199     \textcolor{comment}{/* An error occurred */}}
+\DoxyCodeLine{200     \textcolor{keywordflow}{if} (pid < 0) \{}
+\DoxyCodeLine{201         printf(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%sDAEMON failure  LOG Version \%s : MQTT Version \%s\(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), \mbox{\hyperlink{energy_8h_aa48b2017856a8a9c33a9935afe604c8d}{LOG\_VERSION}}, \mbox{\hyperlink{energy_8h_a702197a21870dfd505d92530b27754ac}{MQTT\_VERSION}});}
+\DoxyCodeLine{202         exit(EXIT\_FAILURE);}
+\DoxyCodeLine{203     \}}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205     \textcolor{comment}{/* Success: Let the parent terminate */}}
+\DoxyCodeLine{206     \textcolor{keywordflow}{if} (pid > 0) \{}
+\DoxyCodeLine{207         exit(EXIT\_SUCCESS);}
+\DoxyCodeLine{208     \}}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210     \textcolor{comment}{/* On success: The child process becomes session leader */}}
+\DoxyCodeLine{211     \textcolor{keywordflow}{if} (setsid() < 0) \{}
+\DoxyCodeLine{212         exit(EXIT\_FAILURE);}
+\DoxyCodeLine{213     \}}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215     \textcolor{comment}{/* Catch, ignore and handle signals */}}
+\DoxyCodeLine{216     \textcolor{comment}{/*TODO: Implement a working signal handler */}}
+\DoxyCodeLine{217     \textcolor{comment}{//    signal(SIGCHLD, SIG\_IGN);}}
+\DoxyCodeLine{218     \textcolor{comment}{//    signal(SIGHUP, SIG\_IGN);}}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{220     \textcolor{comment}{/* Fork off for the second time*/}}
+\DoxyCodeLine{221     pid = fork();}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{223     \textcolor{comment}{/* An error occurred */}}
+\DoxyCodeLine{224     \textcolor{keywordflow}{if} (pid < 0) \{}
+\DoxyCodeLine{225         exit(EXIT\_FAILURE);}
+\DoxyCodeLine{226     \}}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{228     \textcolor{comment}{/* Success: Let the parent terminate */}}
+\DoxyCodeLine{229     \textcolor{keywordflow}{if} (pid > 0) \{}
+\DoxyCodeLine{230         exit(EXIT\_SUCCESS);}
+\DoxyCodeLine{231     \}}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233     \textcolor{comment}{/* Set new file permissions */}}
+\DoxyCodeLine{234     umask(0);}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{236     \textcolor{comment}{/* Change the working directory to the root directory */}}
+\DoxyCodeLine{237     \textcolor{comment}{/* or another appropriated directory */}}
+\DoxyCodeLine{238     chdir(\textcolor{stringliteral}{"{}/"{}});}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240     \textcolor{comment}{/* Close all open file descriptors */}}
+\DoxyCodeLine{241     \textcolor{keywordtype}{int} x;}
+\DoxyCodeLine{242     \textcolor{keywordflow}{for} (x = sysconf(\_SC\_OPEN\_MAX); x >= 0; x-\/-\/) \{}
+\DoxyCodeLine{243         close(x);}
+\DoxyCodeLine{244     \}}
+\DoxyCodeLine{245 }
+\DoxyCodeLine{246 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_a5db80d060a0e5e2905e748f97ce54f80}\label{energy_8c_a5db80d060a0e5e2905e748f97ce54f80}} 
+\index{energy.c@{energy.c}!solar\_shutdown@{solar\_shutdown}}
+\index{solar\_shutdown@{solar\_shutdown}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{solar\_shutdown()}{solar\_shutdown()}}
+{\footnotesize\ttfamily static bool solar\+\_\+shutdown (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{976 \{}
+\DoxyCodeLine{977     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} ret = \textcolor{keyword}{false};}
+\DoxyCodeLine{978 }
+\DoxyCodeLine{979     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a5301e38b7a1fbd2cf6973c3a2b6af5d2}{startup}}) \{}
+\DoxyCodeLine{980         ret = \textcolor{keyword}{true};}
+\DoxyCodeLine{981         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a5301e38b7a1fbd2cf6973c3a2b6af5d2}{startup}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{982         \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{983     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{984         ret = \textcolor{keyword}{false};}
+\DoxyCodeLine{985 }
+\DoxyCodeLine{986         \textcolor{comment}{/*}}
+\DoxyCodeLine{987 \textcolor{comment}{         * FIXME}}
+\DoxyCodeLine{988 \textcolor{comment}{         * }}
+\DoxyCodeLine{989 \textcolor{comment}{         */}}
+\DoxyCodeLine{990     \}}
+\DoxyCodeLine{991 }
+\DoxyCodeLine{992     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a752af707f8caa7b882f983a0c89f0339}{solar\_shutdown}}) \{}
+\DoxyCodeLine{993         ret = \textcolor{keyword}{true};}
+\DoxyCodeLine{994     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{995         ret = \textcolor{keyword}{false};}
+\DoxyCodeLine{996     \}}
+\DoxyCodeLine{997 }
+\DoxyCodeLine{998     \textcolor{keywordflow}{if} ((\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a821ba4dacc502ba41ec0c17aff5c42d3}{V\_FBEKW}}] < \mbox{\hyperlink{energy_8h_a5a4b955055b337ef5f4f21af51eccb03}{BAT\_CRITICAL}}) \&\& !\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a5301e38b7a1fbd2cf6973c3a2b6af5d2}{startup}}) \{ \textcolor{comment}{// special case for low battery}}
+\DoxyCodeLine{999         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a6824c1a0deef177206003e0dfc050ed1}{bat\_crit}}) \{}
+\DoxyCodeLine{1000             ret = \textcolor{keyword}{true};}
+\DoxyCodeLine{1001 \textcolor{preprocessor}{\#ifdef CRITIAL\_SHUTDOWN\_LOG}}
+\DoxyCodeLine{1002             fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s Solar BATTERY CRITICAL shutdown comms check ret = \%d \(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), ret);}
+\DoxyCodeLine{1003             fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{1004 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1005             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a6824c1a0deef177206003e0dfc050ed1}{bat\_crit}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{1006             \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{1007         \}}
+\DoxyCodeLine{1008     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{1009         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a6824c1a0deef177206003e0dfc050ed1}{bat\_crit}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{1010     \}}
+\DoxyCodeLine{1011 }
+\DoxyCodeLine{1012     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_a1abbe2fce463bf7ab00fc2caff39af1f}{shutdown}} >= \mbox{\hyperlink{energy_8h_a7c213cc89d01ec9cdbaa3356698a86ce}{MAX\_ERROR}}) \{}
+\DoxyCodeLine{1013         ret = \textcolor{keyword}{true};}
+\DoxyCodeLine{1014         \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a60190fd48a28f964be8d030fe88a19a3}{fm80}} \&\& \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a87a24fa58fbe692b797c0081bf28df28}{dumpload}} \&\& \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae9aa060b6fa02493a02a9a2ce5bb7658}{iammeter}}) \{}
+\DoxyCodeLine{1015             ret = \textcolor{keyword}{false};}
+\DoxyCodeLine{1016             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_a1abbe2fce463bf7ab00fc2caff39af1f}{shutdown}} = 0;}
+\DoxyCodeLine{1017         \}}
+\DoxyCodeLine{1018 }
+\DoxyCodeLine{1019 \textcolor{preprocessor}{\#ifdef DEBUG\_SHUTDOWN}}
+\DoxyCodeLine{1020         fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s Solar shutdown comms check ret = \%d \(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), ret);}
+\DoxyCodeLine{1021         fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{1022 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1023     \}}
+\DoxyCodeLine{1024     \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{1025 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_a2533146394b65b382653eff2cd6f2106}\label{energy_8c_a2533146394b65b382653eff2cd6f2106}} 
+\index{energy.c@{energy.c}!sync\_ha@{sync\_ha}}
+\index{sync\_ha@{sync\_ha}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{sync\_ha()}{sync\_ha()}}
+{\footnotesize\ttfamily bool sync\+\_\+ha (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1061 \{}
+\DoxyCodeLine{1062     \textcolor{keywordtype}{bool} sync = \textcolor{keyword}{false};}
+\DoxyCodeLine{1063     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}} != (\textcolor{keywordtype}{bool}) ((int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a7391c358a2241e66cdf9f1e953184521}{V\_HDCSW}}])) \{}
+\DoxyCodeLine{1064         fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}DC\_MM \%d \%d "{}}, (\textcolor{keywordtype}{bool}) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}}, (\textcolor{keywordtype}{bool}) ((int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a7391c358a2241e66cdf9f1e953184521}{V\_HDCSW}}]));}
+\DoxyCodeLine{1065         \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a6bbafe078803d99cb34f62c659e58cbc}{TOPIC\_PDCC}}, !\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}});}
+\DoxyCodeLine{1066         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_aa3b4f7217fce683caf7e64a3211a294a}{dc\_mismatch}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{1067         fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{1068         sync = \textcolor{keyword}{true};}
+\DoxyCodeLine{1069     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{1070         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_aa3b4f7217fce683caf7e64a3211a294a}{dc\_mismatch}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{1071     \}}
+\DoxyCodeLine{1072 }
+\DoxyCodeLine{1073     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}} = (bool) ((int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a61c580ff6ce646f13228dc2dcad390c1}{V\_HACSW}}]); \textcolor{comment}{// TEMP FIX for MISmatch errors}}
+\DoxyCodeLine{1074     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}} != (\textcolor{keywordtype}{bool}) ((int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a61c580ff6ce646f13228dc2dcad390c1}{V\_HACSW}}])) \{}
+\DoxyCodeLine{1075         fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}AC\_MM \%d \%d "{}}, (\textcolor{keywordtype}{bool}) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}}, (\textcolor{keywordtype}{bool}) ((int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a61c580ff6ce646f13228dc2dcad390c1}{V\_HACSW}}]));}
+\DoxyCodeLine{1076         \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_ab741d14c77c3f7326b0c05d0be7a4330}{TOPIC\_PACC}}, !\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}});}
+\DoxyCodeLine{1077         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a077335b41dbccfa620e40cd9d8512bcb}{ac\_mismatch}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{1078         fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{1079         sync = \textcolor{keyword}{true};}
+\DoxyCodeLine{1080     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{1081         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a077335b41dbccfa620e40cd9d8512bcb}{ac\_mismatch}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{1082     \}}
+\DoxyCodeLine{1083     \textcolor{keywordflow}{return} sync;}
+\DoxyCodeLine{1084 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_aa39b8400b702a022ed3aaa4940cf4e15}\label{energy_8c_aa39b8400b702a022ed3aaa4940cf4e15}} 
+\index{energy.c@{energy.c}!timer\_callback@{timer\_callback}}
+\index{timer\_callback@{timer\_callback}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{timer\_callback()}{timer\_callback()}}
+{\footnotesize\ttfamily void timer\+\_\+callback (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{signum }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{282 \{}
+\DoxyCodeLine{283     signal(signum, \mbox{\hyperlink{energy_8c_aa39b8400b702a022ed3aaa4940cf4e15}{timer\_callback}});}
+\DoxyCodeLine{284     \mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_a9d886e966396198df5116e8fa9d9265d}{runner}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{285     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a14806e6a839ea53f76d69dd9053b33ee}{ten\_sec\_clock}}++;}
+\DoxyCodeLine{286     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ad0ad0d30b04f4fdfed27e78f5fe02151}{log\_spam}}++;}
+\DoxyCodeLine{287     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a03488578b49639581f7fddf8db3076de}{log\_time\_reset}}++;}
+\DoxyCodeLine{288     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ad0ad0d30b04f4fdfed27e78f5fe02151}{log\_spam}} > \mbox{\hyperlink{energy_8h_ab0b8ba6aa93ebd10e13799409927e3d5}{MAX\_LOG\_SPAM}}) \{}
+\DoxyCodeLine{289         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ad0ad0d30b04f4fdfed27e78f5fe02151}{log\_spam}} = 0;}
+\DoxyCodeLine{290     \}}
+\DoxyCodeLine{291 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{energy_8c_ae54230f3933b19460113c7aeac29cec7}\label{energy_8c_ae54230f3933b19460113c7aeac29cec7}} 
+\index{energy.c@{energy.c}!board\_name@{board\_name}}
+\index{board\_name@{board\_name}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{board\_name}{board\_name}}
+{\footnotesize\ttfamily const char$\ast$ board\+\_\+name = \char`\"{}NO\+\_\+\+BOARD\char`\"{}}
+
+\mbox{\Hypertarget{energy_8c_aec275271b98c5dd5cbe9a33ea5081893}\label{energy_8c_aec275271b98c5dd5cbe9a33ea5081893}} 
+\index{energy.c@{energy.c}!driver\_name@{driver\_name}}
+\index{driver\_name@{driver\_name}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{driver\_name}{driver\_name}}
+{\footnotesize\ttfamily const char $\ast$ driver\+\_\+name = \char`\"{}NO\+\_\+\+DRIVER\char`\"{}}
+
+\mbox{\Hypertarget{energy_8c_aae3805c63e28abac1e41ffd7b623596e}\label{energy_8c_aae3805c63e28abac1e41ffd7b623596e}} 
+\index{energy.c@{energy.c}!E@{E}}
+\index{E@{E}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{E}{E}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structenergy__type}{energy\+\_\+type}} E}
+
+\mbox{\Hypertarget{energy_8c_acec19516a59050bb447192fe318e6a9c}\label{energy_8c_acec19516a59050bb447192fe318e6a9c}} 
+\index{energy.c@{energy.c}!fout@{fout}}
+\index{fout@{fout}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{fout}{fout}}
+{\footnotesize\ttfamily FILE$\ast$ fout}
+
+\mbox{\Hypertarget{energy_8c_ab9a22fb7b17a1ebe54668d617b8d7226}\label{energy_8c_ab9a22fb7b17a1ebe54668d617b8d7226}} 
+\index{energy.c@{energy.c}!ha\_flag\_vars\_ha@{ha\_flag\_vars\_ha}}
+\index{ha\_flag\_vars\_ha@{ha\_flag\_vars\_ha}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{ha\_flag\_vars\_ha}{ha\_flag\_vars\_ha}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structha__flag__type}{ha\+\_\+flag\+\_\+type}} ha\+\_\+flag\+\_\+vars\+\_\+ha}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    .runner = \textcolor{keyword}{false},}
+\DoxyCodeLine{    .receivedtoken = \textcolor{keyword}{false},}
+\DoxyCodeLine{    .deliveredtoken = \textcolor{keyword}{false},}
+\DoxyCodeLine{    .rec\_ok = \textcolor{keyword}{false},}
+\DoxyCodeLine{    .ha\_id = \mbox{\hyperlink{mqtt__rec_8h_a84a88b7d95b225fcc5f008c474558219ae3e04e0389b1b12a4cf2738165b4ce77}{HA\_ID}},}
+\DoxyCodeLine{    .var\_update = 0,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_ae0a8ca490b1331a13666dbedf7175bd9}\label{energy_8c_ae0a8ca490b1331a13666dbedf7175bd9}} 
+\index{energy.c@{energy.c}!ha\_flag\_vars\_pc@{ha\_flag\_vars\_pc}}
+\index{ha\_flag\_vars\_pc@{ha\_flag\_vars\_pc}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{ha\_flag\_vars\_pc}{ha\_flag\_vars\_pc}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structha__flag__type}{ha\+\_\+flag\+\_\+type}} ha\+\_\+flag\+\_\+vars\+\_\+pc}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    .runner = \textcolor{keyword}{false},}
+\DoxyCodeLine{    .receivedtoken = \textcolor{keyword}{false},}
+\DoxyCodeLine{    .deliveredtoken = \textcolor{keyword}{false},}
+\DoxyCodeLine{    .rec\_ok = \textcolor{keyword}{false},}
+\DoxyCodeLine{    .ha\_id = \mbox{\hyperlink{mqtt__rec_8h_a84a88b7d95b225fcc5f008c474558219a2d5f3027ac999fa6e1382a8fc85e48ba}{P8055\_ID}},}
+\DoxyCodeLine{    .var\_update = 0,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_a04a99d06cea1265d7193a122288d83a0}\label{energy_8c_a04a99d06cea1265d7193a122288d83a0}} 
+\index{energy.c@{energy.c}!ha\_flag\_vars\_sd@{ha\_flag\_vars\_sd}}
+\index{ha\_flag\_vars\_sd@{ha\_flag\_vars\_sd}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{ha\_flag\_vars\_sd}{ha\_flag\_vars\_sd}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structha__flag__type}{ha\+\_\+flag\+\_\+type}} ha\+\_\+flag\+\_\+vars\+\_\+sd}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    .runner = \textcolor{keyword}{false},}
+\DoxyCodeLine{    .receivedtoken = \textcolor{keyword}{false},}
+\DoxyCodeLine{    .deliveredtoken = \textcolor{keyword}{false},}
+\DoxyCodeLine{    .rec\_ok = \textcolor{keyword}{false},}
+\DoxyCodeLine{    .ha\_id = \mbox{\hyperlink{mqtt__rec_8h_a84a88b7d95b225fcc5f008c474558219ab5fb8e8dcac9113aa99bb13518a8eecb}{DUMPLOAD\_ID}},}
+\DoxyCodeLine{    .var\_update = 0,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}\label{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}} 
+\index{energy.c@{energy.c}!ha\_flag\_vars\_ss@{ha\_flag\_vars\_ss}}
+\index{ha\_flag\_vars\_ss@{ha\_flag\_vars\_ss}!energy.c@{energy.c}}
+\doxysubsubsection{\texorpdfstring{ha\_flag\_vars\_ss}{ha\_flag\_vars\_ss}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structha__flag__type}{ha\+\_\+flag\+\_\+type}} ha\+\_\+flag\+\_\+vars\+\_\+ss}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    .runner = \textcolor{keyword}{false},}
+\DoxyCodeLine{    .receivedtoken = \textcolor{keyword}{false},}
+\DoxyCodeLine{    .deliveredtoken = \textcolor{keyword}{false},}
+\DoxyCodeLine{    .rec\_ok = \textcolor{keyword}{false},}
+\DoxyCodeLine{    .ha\_id = \mbox{\hyperlink{mqtt__rec_8h_a84a88b7d95b225fcc5f008c474558219a5f245782cbe7efbe181ea485eb5932a5}{FM80\_ID}},}
+\DoxyCodeLine{    .var\_update = 0,}
+\DoxyCodeLine{    .energy\_mode = \mbox{\hyperlink{energy_8h_a2e6d97095eb0e18b2a11eee97c1c67af}{NORM\_MODE}},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

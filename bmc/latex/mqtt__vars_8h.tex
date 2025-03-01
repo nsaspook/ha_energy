@@ -1,0 +1,375 @@
+\hypertarget{mqtt__vars_8h}{}\doxysection{ha\+\_\+energy/mqtt\+\_\+vars.h File Reference}
+\label{mqtt__vars_8h}\index{ha\_energy/mqtt\_vars.h@{ha\_energy/mqtt\_vars.h}}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mqtt__vars_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{mqtt__vars_8h_a172e6f71f2afd9c262e77086d452abec}{HA\+\_\+\+SW\+\_\+\+DELAY}}~400000
+\item 
+\#define \mbox{\hyperlink{mqtt__vars_8h_a4de10aca7534ad88a1c019c1ef09828d}{TOKEN\+\_\+\+DELAY}}~250
+\item 
+\#define \mbox{\hyperlink{mqtt__vars_8h_a3b56fe91c8a470ff1bb013066d4c38ea}{GTI\+\_\+\+TOKEN\+\_\+\+DELAY}}~300
+\item 
+\#define \mbox{\hyperlink{mqtt__vars_8h_a1e5759eb3f87b00bf4acf6579f9034d5}{QOS}}~1
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{mqtt__vars_8h_aab5ca8d3e1d7415f7030eb876fad046d}{mqtt\+\_\+ha\+\_\+switch}} (MQTTClient, const char $\ast$, const bool)
+\item 
+void \mbox{\hyperlink{mqtt__vars_8h_aca832cbd10235e2e3570c7c7a7809328}{mqtt\+\_\+ha\+\_\+pid}} (MQTTClient, const char $\ast$)
+\item 
+void \mbox{\hyperlink{mqtt__vars_8h_a256bc3a26b1a547b3f5d94507173d69b}{mqtt\+\_\+ha\+\_\+shutdown}} (MQTTClient, const char $\ast$)
+\item 
+bool \mbox{\hyperlink{mqtt__vars_8h_a15c4be99c9cfa1cc07ef79746b2411b7}{mqtt\+\_\+gti\+\_\+power}} (MQTTClient, const char $\ast$, char $\ast$, uint32\+\_\+t)
+\item 
+bool \mbox{\hyperlink{mqtt__vars_8h_addadf78316d3819a2b8fc271ffd97fc9}{mqtt\+\_\+gti\+\_\+time}} (MQTTClient, const char $\ast$, char $\ast$)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \mbox{\hyperlink{mqtt__vars_8h_ae6b57480d8cda466cfc65b9bfc47b255}{mqtt\+\_\+name}} \mbox{[}\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072ab183b38bd716ecf9405c4546e3bd6870}{V\+\_\+\+DLAST}}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{mqtt__vars_8h_a3b56fe91c8a470ff1bb013066d4c38ea}\label{mqtt__vars_8h_a3b56fe91c8a470ff1bb013066d4c38ea}} 
+\index{mqtt\_vars.h@{mqtt\_vars.h}!GTI\_TOKEN\_DELAY@{GTI\_TOKEN\_DELAY}}
+\index{GTI\_TOKEN\_DELAY@{GTI\_TOKEN\_DELAY}!mqtt\_vars.h@{mqtt\_vars.h}}
+\doxysubsubsection{\texorpdfstring{GTI\_TOKEN\_DELAY}{GTI\_TOKEN\_DELAY}}
+{\footnotesize\ttfamily \#define GTI\+\_\+\+TOKEN\+\_\+\+DELAY~300}
+
+\mbox{\Hypertarget{mqtt__vars_8h_a172e6f71f2afd9c262e77086d452abec}\label{mqtt__vars_8h_a172e6f71f2afd9c262e77086d452abec}} 
+\index{mqtt\_vars.h@{mqtt\_vars.h}!HA\_SW\_DELAY@{HA\_SW\_DELAY}}
+\index{HA\_SW\_DELAY@{HA\_SW\_DELAY}!mqtt\_vars.h@{mqtt\_vars.h}}
+\doxysubsubsection{\texorpdfstring{HA\_SW\_DELAY}{HA\_SW\_DELAY}}
+{\footnotesize\ttfamily \#define HA\+\_\+\+SW\+\_\+\+DELAY~400000}
+
+\mbox{\Hypertarget{mqtt__vars_8h_a1e5759eb3f87b00bf4acf6579f9034d5}\label{mqtt__vars_8h_a1e5759eb3f87b00bf4acf6579f9034d5}} 
+\index{mqtt\_vars.h@{mqtt\_vars.h}!QOS@{QOS}}
+\index{QOS@{QOS}!mqtt\_vars.h@{mqtt\_vars.h}}
+\doxysubsubsection{\texorpdfstring{QOS}{QOS}}
+{\footnotesize\ttfamily \#define QOS~1}
+
+\mbox{\Hypertarget{mqtt__vars_8h_a4de10aca7534ad88a1c019c1ef09828d}\label{mqtt__vars_8h_a4de10aca7534ad88a1c019c1ef09828d}} 
+\index{mqtt\_vars.h@{mqtt\_vars.h}!TOKEN\_DELAY@{TOKEN\_DELAY}}
+\index{TOKEN\_DELAY@{TOKEN\_DELAY}!mqtt\_vars.h@{mqtt\_vars.h}}
+\doxysubsubsection{\texorpdfstring{TOKEN\_DELAY}{TOKEN\_DELAY}}
+{\footnotesize\ttfamily \#define TOKEN\+\_\+\+DELAY~250}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{mqtt__vars_8h_a15c4be99c9cfa1cc07ef79746b2411b7}\label{mqtt__vars_8h_a15c4be99c9cfa1cc07ef79746b2411b7}} 
+\index{mqtt\_vars.h@{mqtt\_vars.h}!mqtt\_gti\_power@{mqtt\_gti\_power}}
+\index{mqtt\_gti\_power@{mqtt\_gti\_power}!mqtt\_vars.h@{mqtt\_vars.h}}
+\doxysubsubsection{\texorpdfstring{mqtt\_gti\_power()}{mqtt\_gti\_power()}}
+{\footnotesize\ttfamily bool mqtt\+\_\+gti\+\_\+power (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p,  }\item[{const char $\ast$}]{topic\+\_\+p,  }\item[{char $\ast$}]{msg,  }\item[{uint32\+\_\+t}]{trace }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{187 \{}
+\DoxyCodeLine{188     \textcolor{keywordtype}{bool} ret = \textcolor{keyword}{true};}
+\DoxyCodeLine{189     MQTTClient\_message pubmsg = MQTTClient\_message\_initializer;}
+\DoxyCodeLine{190     MQTTClient\_deliveryToken token;}
+\DoxyCodeLine{191     \mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_ae72ab39aa9936edc5d464a42a17ebc60}{deliveredtoken}} = 0;}
+\DoxyCodeLine{192     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} spam = \textcolor{keyword}{false};}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_aa820e79717719cfe77f6b2b2bada58ae}{mqtt\_count}}++;}
+\DoxyCodeLine{195     pubmsg.payload = msg;}
+\DoxyCodeLine{196     pubmsg.payloadlen = strlen(msg);}
+\DoxyCodeLine{197     pubmsg.qos = \mbox{\hyperlink{energy_8h_a1e5759eb3f87b00bf4acf6579f9034d5}{QOS}};}
+\DoxyCodeLine{198     pubmsg.retained = 0;}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}}) \{ \textcolor{comment}{// always run excess commands}}
+\DoxyCodeLine{201         spam = \textcolor{keyword}{false};}
+\DoxyCodeLine{202     \}}
+\DoxyCodeLine{203 \textcolor{preprocessor}{\#ifdef GTI\_NO\_POWER}}
+\DoxyCodeLine{204     MQTTClient\_publishMessage(client\_p, \textcolor{stringliteral}{"{}mateq84/data/gticmd\_nopower"{}}, \&pubmsg, \&token);}
+\DoxyCodeLine{205 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{206     \textcolor{keywordflow}{if} (\mbox{\hyperlink{bsoc_8c_ab9a97f08a9166d16e45b2025c3887eab}{bsoc\_gti}}() > \mbox{\hyperlink{bsoc_8h_a1216e5b24895f5cf2f376ceea0b68690}{MIN\_BAT\_KW}} || \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}}) \{}
+\DoxyCodeLine{207 \textcolor{preprocessor}{\#ifdef DEBUG\_HA\_CMD}}
+\DoxyCodeLine{208         \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{209         fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}HA GTI power command \%s, SDEV \%5.2f trace \%u\(\backslash\)r\(\backslash\)n"{}}, msg, \mbox{\hyperlink{bsoc_8c_a8f6e0fd4594d467a89005d81038aa602}{get\_batc\_dev}}(), trace);}
+\DoxyCodeLine{210         fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{211         spam = \textcolor{keyword}{true};}
+\DoxyCodeLine{212 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{213         MQTTClient\_publishMessage(client\_p, topic\_p, \&pubmsg, \&token); \textcolor{comment}{// run power commands}}
+\DoxyCodeLine{214     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{215         ret = \textcolor{keyword}{false};}
+\DoxyCodeLine{216         pubmsg.payload = \textcolor{stringliteral}{"{}Z\#"{}};}
+\DoxyCodeLine{217         pubmsg.payloadlen = strlen(\textcolor{stringliteral}{"{}Z\#"{}});}
+\DoxyCodeLine{218         \textcolor{keywordflow}{if} (!spam) \{}
+\DoxyCodeLine{219             MQTTClient\_publishMessage(client\_p, \mbox{\hyperlink{energy_8h_a1b65e9caf02a5c504b9bdbce82b687fd}{TOPIC\_SPAM}}, \&pubmsg, \&token);}
+\DoxyCodeLine{220         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{221             MQTTClient\_publishMessage(client\_p, topic\_p, \&pubmsg, \&token); \textcolor{comment}{// only shutdown GTI power}}
+\DoxyCodeLine{222         \}}
+\DoxyCodeLine{223 \textcolor{preprocessor}{\#ifdef DEBUG\_HA\_CMD}}
+\DoxyCodeLine{224         \textcolor{keywordflow}{if} (spam) \{}
+\DoxyCodeLine{225             \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{226             fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}HA GTI power set to zero, trace \%u\(\backslash\)r\(\backslash\)n"{}}, trace);}
+\DoxyCodeLine{227             fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{228             spam = \textcolor{keyword}{false};}
+\DoxyCodeLine{229         \}}
+\DoxyCodeLine{230 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{231     \}}
+\DoxyCodeLine{232 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{233     \textcolor{comment}{// a busy, wait loop for the async delivery thread to complete}}
+\DoxyCodeLine{234     \{}
+\DoxyCodeLine{235         uint32\_t waiting = 0;}
+\DoxyCodeLine{236         \textcolor{keywordflow}{while} (\mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_ae72ab39aa9936edc5d464a42a17ebc60}{deliveredtoken}} != token) \{}
+\DoxyCodeLine{237             usleep(\mbox{\hyperlink{mqtt__vars_8h_a4de10aca7534ad88a1c019c1ef09828d}{TOKEN\_DELAY}});}
+\DoxyCodeLine{238             \textcolor{keywordflow}{if} (waiting++ > \mbox{\hyperlink{energy_8h_adc31fee63bd07cbfbb61fd111b95fa99}{MQTT\_TIMEOUT}}) \{}
+\DoxyCodeLine{239                 fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s GTI Power Still Waiting, timeout\(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}));}
+\DoxyCodeLine{240                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{241             \}}
+\DoxyCodeLine{242         \};}
+\DoxyCodeLine{243     \}}
+\DoxyCodeLine{244     usleep(\mbox{\hyperlink{mqtt__vars_8h_a172e6f71f2afd9c262e77086d452abec}{HA\_SW\_DELAY}});}
+\DoxyCodeLine{245     \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{246 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__vars_8h_addadf78316d3819a2b8fc271ffd97fc9}\label{mqtt__vars_8h_addadf78316d3819a2b8fc271ffd97fc9}} 
+\index{mqtt\_vars.h@{mqtt\_vars.h}!mqtt\_gti\_time@{mqtt\_gti\_time}}
+\index{mqtt\_gti\_time@{mqtt\_gti\_time}!mqtt\_vars.h@{mqtt\_vars.h}}
+\doxysubsubsection{\texorpdfstring{mqtt\_gti\_time()}{mqtt\_gti\_time()}}
+{\footnotesize\ttfamily bool mqtt\+\_\+gti\+\_\+time (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p,  }\item[{const char $\ast$}]{topic\+\_\+p,  }\item[{char $\ast$}]{msg }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{249 \{}
+\DoxyCodeLine{250     \textcolor{keywordtype}{bool} ret = \textcolor{keyword}{true};}
+\DoxyCodeLine{251     MQTTClient\_message pubmsg = MQTTClient\_message\_initializer;}
+\DoxyCodeLine{252     MQTTClient\_deliveryToken token;}
+\DoxyCodeLine{253     \mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_ae72ab39aa9936edc5d464a42a17ebc60}{deliveredtoken}} = 0;}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{255     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_aa820e79717719cfe77f6b2b2bada58ae}{mqtt\_count}}++;}
+\DoxyCodeLine{256     pubmsg.payload = msg;}
+\DoxyCodeLine{257     pubmsg.payloadlen = strlen(msg);}
+\DoxyCodeLine{258     pubmsg.qos = \mbox{\hyperlink{energy_8h_a1e5759eb3f87b00bf4acf6579f9034d5}{QOS}};}
+\DoxyCodeLine{259     pubmsg.retained = 0;}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261     MQTTClient\_publishMessage(client\_p, topic\_p, \&pubmsg, \&token); \textcolor{comment}{// run time commands}}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263     \textcolor{comment}{// a busy, wait loop for the async delivery thread to complete}}
+\DoxyCodeLine{264     \{}
+\DoxyCodeLine{265         uint32\_t waiting = 0;}
+\DoxyCodeLine{266         \textcolor{keywordflow}{while} (\mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_ae72ab39aa9936edc5d464a42a17ebc60}{deliveredtoken}} != token) \{}
+\DoxyCodeLine{267             usleep(\mbox{\hyperlink{mqtt__vars_8h_a3b56fe91c8a470ff1bb013066d4c38ea}{GTI\_TOKEN\_DELAY}});}
+\DoxyCodeLine{268             \textcolor{keywordflow}{if} (waiting++ > \mbox{\hyperlink{energy_8h_adc31fee63bd07cbfbb61fd111b95fa99}{MQTT\_TIMEOUT}}) \{}
+\DoxyCodeLine{269                 fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s GTI Time Still Waiting, timeout\(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}));}
+\DoxyCodeLine{270                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{271             \}}
+\DoxyCodeLine{272         \};}
+\DoxyCodeLine{273     \}}
+\DoxyCodeLine{274     usleep(\mbox{\hyperlink{mqtt__vars_8h_a172e6f71f2afd9c262e77086d452abec}{HA\_SW\_DELAY}});}
+\DoxyCodeLine{275     \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{276 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__vars_8h_aca832cbd10235e2e3570c7c7a7809328}\label{mqtt__vars_8h_aca832cbd10235e2e3570c7c7a7809328}} 
+\index{mqtt\_vars.h@{mqtt\_vars.h}!mqtt\_ha\_pid@{mqtt\_ha\_pid}}
+\index{mqtt\_ha\_pid@{mqtt\_ha\_pid}!mqtt\_vars.h@{mqtt\_vars.h}}
+\doxysubsubsection{\texorpdfstring{mqtt\_ha\_pid()}{mqtt\_ha\_pid()}}
+{\footnotesize\ttfamily void mqtt\+\_\+ha\+\_\+pid (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p,  }\item[{const char $\ast$}]{topic\+\_\+p }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{46 \{}
+\DoxyCodeLine{47     cJSON *json;}
+\DoxyCodeLine{48     time\_t rawtime;}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     MQTTClient\_message pubmsg = MQTTClient\_message\_initializer;}
+\DoxyCodeLine{51     MQTTClient\_deliveryToken token;}
+\DoxyCodeLine{52     \mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_ae72ab39aa9936edc5d464a42a17ebc60}{deliveredtoken}} = 0;}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_aa820e79717719cfe77f6b2b2bada58ae}{mqtt\_count}}++;}
+\DoxyCodeLine{55     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a8600776450cef753228a443f80f90c71}{sequence}}++;}
+\DoxyCodeLine{56     json = cJSON\_CreateObject();}
+\DoxyCodeLine{57     cJSON\_AddStringToObject(json, \textcolor{stringliteral}{"{}name"{}}, \mbox{\hyperlink{energy_8h_aca843921281fc0385b402ca1e700f13b}{CLIENTID1}});}
+\DoxyCodeLine{58     cJSON\_AddNumberToObject(json, \textcolor{stringliteral}{"{}sequence"{}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a8600776450cef753228a443f80f90c71}{sequence}});}
+\DoxyCodeLine{59     cJSON\_AddNumberToObject(json, \textcolor{stringliteral}{"{}mqtt\_count"{}}, (\textcolor{keywordtype}{double}) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_aa820e79717719cfe77f6b2b2bada58ae}{mqtt\_count}});}
+\DoxyCodeLine{60     cJSON\_AddNumberToObject(json, \textcolor{stringliteral}{"{}http\_count"{}}, (\textcolor{keywordtype}{double}) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_af96503924386a5fa3723e667ef4c57df}{iammeter\_count}});}
+\DoxyCodeLine{61     cJSON\_AddNumberToObject(json, \textcolor{stringliteral}{"{}piderror"{}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a430a4ad1dc3ff1be380549424b79d7ca}{error}});}
+\DoxyCodeLine{62     cJSON\_AddNumberToObject(json, \textcolor{stringliteral}{"{}totalsystem"{}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a48f0bfcac4f5cc565e07896e94221a48}{total\_system}});}
+\DoxyCodeLine{63     cJSON\_AddNumberToObject(json, \textcolor{stringliteral}{"{}gtinet"{}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a42c49feb06f42f31cd1d2dcc68c07bf8}{gti\_dumpload}});}
+\DoxyCodeLine{64     cJSON\_AddNumberToObject(json, \textcolor{stringliteral}{"{}energy\_state"{}}, (\textcolor{keywordtype}{double}) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a780dd9555747fafe2a0456c20405d32b}{E}});}
+\DoxyCodeLine{65     cJSON\_AddNumberToObject(json, \textcolor{stringliteral}{"{}run\_state"{}}, (\textcolor{keywordtype}{double}) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_ab140168a45baf835fb208f93983bc794}{R}});}
+\DoxyCodeLine{66     \textcolor{comment}{// correct for power sensed by GTI metering}}
+\DoxyCodeLine{67     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_abbb5fc565ddf4a7a613a76871767afb9}{off\_grid}} = (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a1e904f1377abb70e57726e114ff22765}{V\_FLO}}] -\/ (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a78658cf8e5d2393c6d0148b279287efc}{V\_DPPV}}] * \mbox{\hyperlink{energy_8h_a72d43cca0100ee56d41326523daf179a}{DL\_AC\_DC\_EFF}}));}
+\DoxyCodeLine{68     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_abbb5fc565ddf4a7a613a76871767afb9}{off\_grid}} = \mbox{\hyperlink{bsoc_8c_a9cf492c9b858a53133af1b29b9f68708}{drive1\_filter}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_abbb5fc565ddf4a7a613a76871767afb9}{off\_grid}});}
+\DoxyCodeLine{69     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_abbb5fc565ddf4a7a613a76871767afb9}{off\_grid}} < 0.0f) \{ \textcolor{comment}{// only see power removed from grid usage}}
+\DoxyCodeLine{70         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_abbb5fc565ddf4a7a613a76871767afb9}{off\_grid}} = 0.0f;}
+\DoxyCodeLine{71     \}}
+\DoxyCodeLine{72     cJSON\_AddNumberToObject(json, \textcolor{stringliteral}{"{}off\_grid"{}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_abbb5fc565ddf4a7a613a76871767afb9}{off\_grid}});}
+\DoxyCodeLine{73     cJSON\_AddNumberToObject(json, \textcolor{stringliteral}{"{}excess\_mode"{}}, (\textcolor{keywordtype}{double}) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}});}
+\DoxyCodeLine{74     cJSON\_AddStringToObject(json, \textcolor{stringliteral}{"{}build\_date"{}}, \mbox{\hyperlink{mqtt__vars_8c_ab4828b8efa6bac71f6aef967fb50e42b}{FW\_Date}});}
+\DoxyCodeLine{75     cJSON\_AddStringToObject(json, \textcolor{stringliteral}{"{}build\_time"{}}, \mbox{\hyperlink{mqtt__vars_8c_aacd97d62982976b38276c48612efabd5}{FW\_Time}});}
+\DoxyCodeLine{76     time(\&rawtime);}
+\DoxyCodeLine{77     cJSON\_AddNumberToObject(json, \textcolor{stringliteral}{"{}sequence\_time"{}}, (\textcolor{keywordtype}{double}) rawtime);}
+\DoxyCodeLine{78     \textcolor{comment}{// convert the cJSON object to a JSON string}}
+\DoxyCodeLine{79     \textcolor{keywordtype}{char} *json\_str = cJSON\_Print(json);}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81     pubmsg.payload = json\_str;}
+\DoxyCodeLine{82     pubmsg.payloadlen = strlen(json\_str);}
+\DoxyCodeLine{83     pubmsg.qos = \mbox{\hyperlink{energy_8h_a1e5759eb3f87b00bf4acf6579f9034d5}{QOS}};}
+\DoxyCodeLine{84     pubmsg.retained = 0;}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86     MQTTClient\_publishMessage(client\_p, topic\_p, \&pubmsg, \&token);}
+\DoxyCodeLine{87     \textcolor{comment}{// a busy, wait loop for the async delivery thread to complete}}
+\DoxyCodeLine{88     \{}
+\DoxyCodeLine{89         uint32\_t waiting = 0;}
+\DoxyCodeLine{90         \textcolor{keywordflow}{while} (\mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_ae72ab39aa9936edc5d464a42a17ebc60}{deliveredtoken}} != token) \{}
+\DoxyCodeLine{91             usleep(\mbox{\hyperlink{mqtt__vars_8h_a4de10aca7534ad88a1c019c1ef09828d}{TOKEN\_DELAY}});}
+\DoxyCodeLine{92             \textcolor{keywordflow}{if} (waiting++ > \mbox{\hyperlink{energy_8h_adc31fee63bd07cbfbb61fd111b95fa99}{MQTT\_TIMEOUT}}) \{}
+\DoxyCodeLine{93                 fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s SW Still Waiting, timeout\(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}));}
+\DoxyCodeLine{94                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{95             \}}
+\DoxyCodeLine{96         \};}
+\DoxyCodeLine{97     \}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99     cJSON\_free(json\_str);}
+\DoxyCodeLine{100     cJSON\_Delete(json);}
+\DoxyCodeLine{101 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__vars_8h_a256bc3a26b1a547b3f5d94507173d69b}\label{mqtt__vars_8h_a256bc3a26b1a547b3f5d94507173d69b}} 
+\index{mqtt\_vars.h@{mqtt\_vars.h}!mqtt\_ha\_shutdown@{mqtt\_ha\_shutdown}}
+\index{mqtt\_ha\_shutdown@{mqtt\_ha\_shutdown}!mqtt\_vars.h@{mqtt\_vars.h}}
+\doxysubsubsection{\texorpdfstring{mqtt\_ha\_shutdown()}{mqtt\_ha\_shutdown()}}
+{\footnotesize\ttfamily void mqtt\+\_\+ha\+\_\+shutdown (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p,  }\item[{const char $\ast$}]{topic\+\_\+p }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{13 \{}
+\DoxyCodeLine{14     cJSON *json;}
+\DoxyCodeLine{15     MQTTClient\_message pubmsg = MQTTClient\_message\_initializer;}
+\DoxyCodeLine{16     MQTTClient\_deliveryToken token;}
+\DoxyCodeLine{17     \mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_ae72ab39aa9936edc5d464a42a17ebc60}{deliveredtoken}} = 0;}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19     json = cJSON\_CreateObject();}
+\DoxyCodeLine{20     cJSON\_AddStringToObject(json, \textcolor{stringliteral}{"{}shutdown"{}}, \mbox{\hyperlink{energy_8h_aca843921281fc0385b402ca1e700f13b}{CLIENTID1}});}
+\DoxyCodeLine{21     \textcolor{keywordtype}{char} *json\_str = cJSON\_Print(json);}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23     pubmsg.payload = json\_str;}
+\DoxyCodeLine{24     pubmsg.payloadlen = strlen(json\_str);}
+\DoxyCodeLine{25     pubmsg.qos = \mbox{\hyperlink{energy_8h_a1e5759eb3f87b00bf4acf6579f9034d5}{QOS}};}
+\DoxyCodeLine{26     pubmsg.retained = 0;}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28     MQTTClient\_publishMessage(client\_p, topic\_p, \&pubmsg, \&token);}
+\DoxyCodeLine{29     \textcolor{comment}{// a busy, wait loop for the async delivery thread to complete}}
+\DoxyCodeLine{30     \{}
+\DoxyCodeLine{31         uint32\_t waiting = 0;}
+\DoxyCodeLine{32         \textcolor{keywordflow}{while} (\mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_ae72ab39aa9936edc5d464a42a17ebc60}{deliveredtoken}} != token) \{}
+\DoxyCodeLine{33             usleep(\mbox{\hyperlink{mqtt__vars_8h_a4de10aca7534ad88a1c019c1ef09828d}{TOKEN\_DELAY}});}
+\DoxyCodeLine{34             \textcolor{keywordflow}{if} (waiting++ > \mbox{\hyperlink{energy_8h_adc31fee63bd07cbfbb61fd111b95fa99}{MQTT\_TIMEOUT}}) \{}
+\DoxyCodeLine{35                 fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s SW Still Waiting, timeout\(\backslash\)r\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}));}
+\DoxyCodeLine{36                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{37             \}}
+\DoxyCodeLine{38         \};}
+\DoxyCodeLine{39     \}}
+\DoxyCodeLine{40 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__vars_8h_aab5ca8d3e1d7415f7030eb876fad046d}\label{mqtt__vars_8h_aab5ca8d3e1d7415f7030eb876fad046d}} 
+\index{mqtt\_vars.h@{mqtt\_vars.h}!mqtt\_ha\_switch@{mqtt\_ha\_switch}}
+\index{mqtt\_ha\_switch@{mqtt\_ha\_switch}!mqtt\_vars.h@{mqtt\_vars.h}}
+\doxysubsubsection{\texorpdfstring{mqtt\_ha\_switch()}{mqtt\_ha\_switch()}}
+{\footnotesize\ttfamily void mqtt\+\_\+ha\+\_\+switch (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p,  }\item[{const char $\ast$}]{topic\+\_\+p,  }\item[{const bool}]{sw\+\_\+state }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{107 \{}
+\DoxyCodeLine{108     cJSON *json;}
+\DoxyCodeLine{109 \textcolor{preprocessor}{\#ifdef DEBUG\_HA\_CMD}}
+\DoxyCodeLine{110     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} spam = \textcolor{keyword}{false};}
+\DoxyCodeLine{111     \textcolor{keyword}{static} uint32\_t less\_spam = 0;}
+\DoxyCodeLine{112 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114     MQTTClient\_message pubmsg = MQTTClient\_message\_initializer;}
+\DoxyCodeLine{115     MQTTClient\_deliveryToken token;}
+\DoxyCodeLine{116     \mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_ae72ab39aa9936edc5d464a42a17ebc60}{deliveredtoken}} = 0;}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_aa820e79717719cfe77f6b2b2bada58ae}{mqtt\_count}}++;}
+\DoxyCodeLine{119     json = cJSON\_CreateObject();}
+\DoxyCodeLine{120     \textcolor{keywordflow}{if} (sw\_state) \{}
+\DoxyCodeLine{121         cJSON\_AddStringToObject(json, \textcolor{stringliteral}{"{}state"{}}, \textcolor{stringliteral}{"{}ON"{}});}
+\DoxyCodeLine{122 \textcolor{preprocessor}{\#ifdef DEBUG\_HA\_CMD}}
+\DoxyCodeLine{123         spam = \textcolor{keyword}{true};}
+\DoxyCodeLine{124         less\_spam = 0;}
+\DoxyCodeLine{125 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{126     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{127         \textcolor{keywordflow}{if} ((uint32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aab958e15de9756ae2b2f9c1eb7bfbc58}{V\_FCCM}}] != \mbox{\hyperlink{mqtt__rec_8h_a3a284e729efe694efdccf514d4f1e8e5}{FLOAT\_CODE}}) \{ \textcolor{comment}{// use max power in FLOAT mode}}
+\DoxyCodeLine{128             cJSON\_AddStringToObject(json, \textcolor{stringliteral}{"{}state"{}}, \textcolor{stringliteral}{"{}OFF"{}});}
+\DoxyCodeLine{129         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{130             cJSON\_AddStringToObject(json, \textcolor{stringliteral}{"{}state"{}}, \textcolor{stringliteral}{"{}ON"{}});}
+\DoxyCodeLine{131 \textcolor{preprocessor}{\#ifdef DEBUG\_HA\_CMD}}
+\DoxyCodeLine{132             spam = \textcolor{keyword}{true};}
+\DoxyCodeLine{133             less\_spam = 0;}
+\DoxyCodeLine{134 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{135         \}}
+\DoxyCodeLine{136     \}}
+\DoxyCodeLine{137     \textcolor{comment}{// convert the cJSON object to a JSON string}}
+\DoxyCodeLine{138     \textcolor{keywordtype}{char} *json\_str = cJSON\_Print(json);}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140     pubmsg.payload = json\_str;}
+\DoxyCodeLine{141     pubmsg.payloadlen = strlen(json\_str);}
+\DoxyCodeLine{142     pubmsg.qos = \mbox{\hyperlink{energy_8h_a1e5759eb3f87b00bf4acf6579f9034d5}{QOS}};}
+\DoxyCodeLine{143     pubmsg.retained = 0;}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145 \textcolor{preprocessor}{\#ifdef DEBUG\_HA\_CMD}}
+\DoxyCodeLine{146     \textcolor{keywordflow}{if} (spam) \{}
+\DoxyCodeLine{147         \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{148         fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{149         fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}HA switch command \%s, \%d\(\backslash\)r\(\backslash\)n"{}}, topic\_p, sw\_state);}
+\DoxyCodeLine{150         fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{151         \textcolor{keywordflow}{if} (!sw\_state) \{}
+\DoxyCodeLine{152             \textcolor{keywordflow}{if} (less\_spam++ > 3) \{}
+\DoxyCodeLine{153                 spam = \textcolor{keyword}{false};}
+\DoxyCodeLine{154                 less\_spam = 0;}
+\DoxyCodeLine{155             \}}
+\DoxyCodeLine{156         \}}
+\DoxyCodeLine{157     \}}
+\DoxyCodeLine{158 \textcolor{preprocessor}{\#endif    }}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160     MQTTClient\_publishMessage(client\_p, topic\_p, \&pubmsg, \&token);}
+\DoxyCodeLine{161     \textcolor{comment}{// a busy, wait loop for the async delivery thread to complete}}
+\DoxyCodeLine{162     \{}
+\DoxyCodeLine{163         uint32\_t waiting = 0;}
+\DoxyCodeLine{164         \textcolor{keywordflow}{while} (\mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_ae72ab39aa9936edc5d464a42a17ebc60}{deliveredtoken}} != token) \{}
+\DoxyCodeLine{165             usleep(\mbox{\hyperlink{mqtt__vars_8h_a4de10aca7534ad88a1c019c1ef09828d}{TOKEN\_DELAY}});}
+\DoxyCodeLine{166             \textcolor{keywordflow}{if} (waiting++ > \mbox{\hyperlink{energy_8h_adc31fee63bd07cbfbb61fd111b95fa99}{MQTT\_TIMEOUT}}) \{}
+\DoxyCodeLine{167 \textcolor{preprocessor}{\#ifdef DEBUG\_HA\_CMD}}
+\DoxyCodeLine{168                 fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{169                 fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)nSW Still Waiting, timeout\(\backslash\)r\(\backslash\)n"{}});}
+\DoxyCodeLine{170                 fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{171 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{172                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{173             \}}
+\DoxyCodeLine{174         \};}
+\DoxyCodeLine{175     \}}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177     cJSON\_free(json\_str);}
+\DoxyCodeLine{178     cJSON\_Delete(json);}
+\DoxyCodeLine{179     usleep(\mbox{\hyperlink{mqtt__vars_8h_a172e6f71f2afd9c262e77086d452abec}{HA\_SW\_DELAY}});}
+\DoxyCodeLine{180     fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{181 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{mqtt__vars_8h_ae6b57480d8cda466cfc65b9bfc47b255}\label{mqtt__vars_8h_ae6b57480d8cda466cfc65b9bfc47b255}} 
+\index{mqtt\_vars.h@{mqtt\_vars.h}!mqtt\_name@{mqtt\_name}}
+\index{mqtt\_name@{mqtt\_name}!mqtt\_vars.h@{mqtt\_vars.h}}
+\doxysubsubsection{\texorpdfstring{mqtt\_name}{mqtt\_name}}
+{\footnotesize\ttfamily const char$\ast$ mqtt\+\_\+name\mbox{[}\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072ab183b38bd716ecf9405c4546e3bd6870}{V\+\_\+\+DLAST}}\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+

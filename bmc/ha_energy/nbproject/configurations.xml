@@ -10,7 +10,6 @@
       <itemPath>mqtt_rec.h</itemPath>
       <itemPath>mqtt_vars.h</itemPath>
       <itemPath>pid.h</itemPath>
-      <itemPath>sine_table.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -80,8 +79,6 @@
       </item>
       <item path="pid.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="sine_table.h" ex="false" tool="3" flavor2="0">
-      </item>
     </conf>
     <conf name="Release" type="1">
       <toolsSet>
@@ -136,8 +133,6 @@
       <item path="pid.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="pid.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="sine_table.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
