@@ -10,5 +10,6 @@ var searchData=
   ['bat_5fm_5fkw_7',['BAT_M_KW',['../energy_8h.html#ac9d8c1bf3deadb93373645fa86fe4e55',1,'energy.h']]],
   ['bat_5fsoc_5fhigh_8',['BAT_SOC_HIGH',['../energy_8h.html#a79455500ab09cb1afed79130e2f25cb6',1,'energy.h']]],
   ['bat_5fsoc_5flow_9',['BAT_SOC_LOW',['../energy_8h.html#a3657cb94075ba688f423c0e2a00324fa',1,'energy.h']]],
-  ['bat_5fsoc_5ftop_10',['BAT_SOC_TOP',['../energy_8h.html#a84266ec03c0f5a1e0bad318724e64f30',1,'energy.h']]]
+  ['bat_5fsoc_5flow_5fac_10',['BAT_SOC_LOW_AC',['../energy_8h.html#a5a1af43e015999e54c67ee9f2a24a921',1,'energy.h']]],
+  ['bat_5fsoc_5ftop_11',['BAT_SOC_TOP',['../energy_8h.html#a84266ec03c0f5a1e0bad318724e64f30',1,'energy.h']]]
 ];

@@ -36,7 +36,7 @@ extern "C" {
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.72"
+#define LOG_VERSION     "V0.73"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
@@ -92,17 +92,17 @@ extern "C" {
 #define BAT_M_KW            5120.0f
 #define BAT_SOC_TOP         0.98f
 #define BAT_SOC_HIGH        0.95f
-#define BAT_SOC_LOW         0.60f
+#define BAT_SOC_LOW         0.64f
+#define BAT_SOC_LOW_AC      0.70f	
 #define BAT_CRITICAL        200.0f
 #define MIN_BAT_KW_BSOC_SLP 4000.0f
 #define MIN_BAT_KW_BSOC_HI  4550.0f
-#define MIN_BAT_KW_BSOC_LO  3500.0f
 
 #define MIN_BAT_KW_GTI_HI   BAT_M_KW*BAT_SOC_TOP
-#define MIN_BAT_KW_GTI_LO   MIN_BAT_KW_GTI_HI*BAT_SOC_LOW
+#define MIN_BAT_KW_GTI_LO   BAT_M_KW*BAT_SOC_LOW
 
 #define MIN_BAT_KW_AC_HI    BAT_M_KW*BAT_SOC_HIGH
-#define MIN_BAT_KW_AC_LO    MIN_BAT_KW_AC_HI*BAT_SOC_LOW
+#define MIN_BAT_KW_AC_LO    BAT_M_KW*BAT_SOC_LOW_AC
 
 	/*
 	 * PV panel cycle limits parameters

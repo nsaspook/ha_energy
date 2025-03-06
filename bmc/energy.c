@@ -50,6 +50,7 @@
  * V.069 send MQTT showdown commands to HA when critical energy conditions are meet
  * V.070 process Home Assistant MQTT commands sent from automations
  * V.071 comment additions, logging improvements and code cleanups
+ * V.072 -> V.073 fine tune GTI and AC power lower limits
  */
 
 /*

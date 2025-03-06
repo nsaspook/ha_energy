@@ -40,7 +40,7 @@
 \DoxyCodeLine{36 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{pid_8h}{pid.h}}"{}}}
 \DoxyCodeLine{37 }
 \DoxyCodeLine{38 }
-\DoxyCodeLine{39 \textcolor{preprocessor}{\#define LOG\_VERSION     "{}V0.72"{}}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#define LOG\_VERSION     "{}V0.73"{}}}
 \DoxyCodeLine{40 \textcolor{preprocessor}{\#define MQTT\_VERSION    "{}V3.11"{}}}
 \DoxyCodeLine{41 \textcolor{preprocessor}{\#define TNAME  "{}maint9"{}}}
 \DoxyCodeLine{42 \textcolor{preprocessor}{\#define LADDRESS        "{}tcp://127.0.0.1:1883"{}}}
@@ -96,17 +96,17 @@
 \DoxyCodeLine{92 \textcolor{preprocessor}{\#define BAT\_M\_KW            5120.0f}}
 \DoxyCodeLine{93 \textcolor{preprocessor}{\#define BAT\_SOC\_TOP         0.98f}}
 \DoxyCodeLine{94 \textcolor{preprocessor}{\#define BAT\_SOC\_HIGH        0.95f}}
-\DoxyCodeLine{95 \textcolor{preprocessor}{\#define BAT\_SOC\_LOW         0.60f}}
-\DoxyCodeLine{96 \textcolor{preprocessor}{\#define BAT\_CRITICAL        200.0f}}
-\DoxyCodeLine{97 \textcolor{preprocessor}{\#define MIN\_BAT\_KW\_BSOC\_SLP 4000.0f}}
-\DoxyCodeLine{98 \textcolor{preprocessor}{\#define MIN\_BAT\_KW\_BSOC\_HI  4550.0f}}
-\DoxyCodeLine{99 \textcolor{preprocessor}{\#define MIN\_BAT\_KW\_BSOC\_LO  3500.0f}}
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#define BAT\_SOC\_LOW         0.64f}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#define BAT\_SOC\_LOW\_AC      0.70f   }}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#define BAT\_CRITICAL        200.0f}}
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#define MIN\_BAT\_KW\_BSOC\_SLP 4000.0f}}
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#define MIN\_BAT\_KW\_BSOC\_HI  4550.0f}}
 \DoxyCodeLine{100 }
 \DoxyCodeLine{101 \textcolor{preprocessor}{\#define MIN\_BAT\_KW\_GTI\_HI   BAT\_M\_KW*BAT\_SOC\_TOP}}
-\DoxyCodeLine{102 \textcolor{preprocessor}{\#define MIN\_BAT\_KW\_GTI\_LO   MIN\_BAT\_KW\_GTI\_HI*BAT\_SOC\_LOW}}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#define MIN\_BAT\_KW\_GTI\_LO   BAT\_M\_KW*BAT\_SOC\_LOW}}
 \DoxyCodeLine{103 }
 \DoxyCodeLine{104 \textcolor{preprocessor}{\#define MIN\_BAT\_KW\_AC\_HI    BAT\_M\_KW*BAT\_SOC\_HIGH}}
-\DoxyCodeLine{105 \textcolor{preprocessor}{\#define MIN\_BAT\_KW\_AC\_LO    MIN\_BAT\_KW\_AC\_HI*BAT\_SOC\_LOW}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#define MIN\_BAT\_KW\_AC\_LO    BAT\_M\_KW*BAT\_SOC\_LOW\_AC}}
 \DoxyCodeLine{106 }
 \DoxyCodeLine{107     \textcolor{comment}{/*}}
 \DoxyCodeLine{108 \textcolor{comment}{     * PV panel cycle limits parameters}}
