@@ -24,7 +24,7 @@ void mqtt_ha_shutdown(MQTTClient client_p, const char * topic_p)
 	pubmsg.payloadlen = strlen(json_str);
 	pubmsg.qos = QOS;
 	pubmsg.retained = 0;
-	
+
 	MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token);
 	// a busy, wait loop for the async delivery thread to complete
 	{
@@ -183,7 +183,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, const bool sw_sta
 /*
  * send mqtt messages to the dumpload GTI controller
  */
-bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg)
+bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg, uint32_t trace)
 {
 	bool ret = true;
 	MQTTClient_message pubmsg = MQTTClient_message_initializer;
@@ -206,7 +206,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg)
 	if (bsoc_gti() > MIN_BAT_KW || E.dl_excess) {
 #ifdef DEBUG_HA_CMD
 		log_time(true);
-		fprintf(fout, "HA GTI power command %s, SDEV %5.2f\r\n", msg, get_batc_dev());
+		fprintf(fout, "HA GTI power command %s, SDEV %5.2f trace %u\r\n", msg, get_batc_dev(), trace);
 		fflush(fout);
 		spam = true;
 #endif
@@ -223,7 +223,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg)
 #ifdef DEBUG_HA_CMD
 		if (spam) {
 			log_time(true);
-			fprintf(fout, "HA GTI power set to zero\r\n");
+			fprintf(fout, "HA GTI power set to zero, trace %u\r\n", trace);
 			fflush(fout);
 			spam = false;
 		}

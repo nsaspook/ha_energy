@@ -1,116 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="12908466247593898118">
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;math.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;math.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/bsoc.h" line="14" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdlib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdlib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/bsoc.h" line="35" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/bsoc.h" line="36" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;unistd.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;unistd.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/bsoc.h" line="37" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdint.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdint.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/bsoc.h" line="38" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;string.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;string.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/bsoc.h" line="39" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdbool.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdbool.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/bsoc.h" line="40" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;signal.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;signal.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/bsoc.h" line="41" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/bsoc.h" line="42" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/wait.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/wait.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/bsoc.h" line="43" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/types.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/types.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/bsoc.h" line="44" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/bsoc.h" line="45" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;errno.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;errno.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/bsoc.h" line="46" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;math.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;math.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/bsoc.h" line="47" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdlib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdlib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="14" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="15" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;unistd.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;unistd.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="16" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdint.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdint.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="17" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;string.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;string.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="18" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdbool.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdbool.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="19" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;signal.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;signal.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="20" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="21" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/wait.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/wait.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="22" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/types.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/types.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="23" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/time.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="24" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;errno.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;errno.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="25" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;cjson/cJSON.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;cjson/cJSON.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="26" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;curl/curl.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;curl/curl.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="27" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;pthread.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;pthread.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="28" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/stat.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/stat.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="29" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;syslog.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;syslog.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="30" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;arpa/inet.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;arpa/inet.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="31" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sys/socket.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sys/socket.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="32" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;netdb.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;netdb.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="33" column="0"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;ifaddrs.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;ifaddrs.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="ha_energy/energy.h" line="34" column="0"/>
-        </error>
-        <error id="missingInclude" severity="information" msg="Include file: &quot;MQTTClient.h&quot; not found." verbose="Include file: &quot;MQTTClient.h&quot; not found.">
-            <location file="ha_energy/energy.h" line="35" column="0"/>
-        </error>
-        <error id="normalCheckLevelMaxBranches" severity="information" msg="Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches." verbose="Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches." file0="ha_energy/mqtt_rec.c">
-            <location file="ha_energy/mqtt_rec.c" line="0" column="0"/>
-        </error>
+<analyzerinfo hash="5358006491237322729">
         <error id="duplicateConditionalAssign" severity="style" msg="The statement &apos;if (E.gti_sw_status!=(bool)((int32_t)E.mvar[i])) E.gti_sw_status=(bool)((int32_t)E.mvar[i])&apos; is logically equivalent to &apos;E.gti_sw_status=(bool)((int32_t)E.mvar[i])&apos;." verbose="The statement &apos;if (E.gti_sw_status!=(bool)((int32_t)E.mvar[i])) E.gti_sw_status=(bool)((int32_t)E.mvar[i])&apos; is logically equivalent to &apos;E.gti_sw_status=(bool)((int32_t)E.mvar[i])&apos;." cwe="398" file0="ha_energy/mqtt_rec.c">
             <location file="ha_energy/mqtt_rec.c" line="187" column="24" info="Condition &apos;E.gti_sw_status!=(bool)((int32_t)E.mvar[i])&apos; is redundant"/>
             <location file="ha_energy/mqtt_rec.c" line="188" column="21" info="Assignment &apos;E.gti_sw_status=(bool)((int32_t)E.mvar[i])&apos;"/>
@@ -118,11 +7,6 @@
         <error id="duplicateConditionalAssign" severity="style" msg="The statement &apos;if (E.ac_sw_status!=(bool)((int32_t)E.mvar[i])) E.ac_sw_status=(bool)((int32_t)E.mvar[i])&apos; is logically equivalent to &apos;E.ac_sw_status=(bool)((int32_t)E.mvar[i])&apos;." verbose="The statement &apos;if (E.ac_sw_status!=(bool)((int32_t)E.mvar[i])) E.ac_sw_status=(bool)((int32_t)E.mvar[i])&apos; is logically equivalent to &apos;E.ac_sw_status=(bool)((int32_t)E.mvar[i])&apos;." cwe="398" file0="ha_energy/mqtt_rec.c">
             <location file="ha_energy/mqtt_rec.c" line="194" column="23" info="Condition &apos;E.ac_sw_status!=(bool)((int32_t)E.mvar[i])&apos; is redundant"/>
             <location file="ha_energy/mqtt_rec.c" line="195" column="20" info="Assignment &apos;E.ac_sw_status=(bool)((int32_t)E.mvar[i])&apos;"/>
-        </error>
-        <error id="redundantAssignment" severity="style" msg="Variable &apos;data_result&apos; is assigned an expression that holds the same value." verbose="Variable &apos;data_result&apos; is assigned an expression that holds the same value." cwe="563" file0="ha_energy/mqtt_rec.c">
-            <location file="ha_energy/mqtt_rec.c" line="95" column="3"/>
-            <location file="ha_energy/mqtt_rec.c" line="90" column="22" info="data_result is assigned &apos;json&apos; here."/>
-            <symbol>data_result</symbol>
         </error>
         <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="ha_energy/mqtt_rec.c">
             <location file="ha_energy/mqtt_rec.c" line="58" column="17" info="Shadow variable"/>
@@ -134,10 +18,6 @@
             <location file="ha_energy/mqtt_rec.c" line="9" column="10" info="Shadowed declaration"/>
             <symbol>i</symbol>
         </error>
-        <error id="constVariablePointer" severity="style" msg="Variable &apos;payloadptr&apos; can be declared as pointer to const" verbose="Variable &apos;payloadptr&apos; can be declared as pointer to const" cwe="398" file0="ha_energy/mqtt_rec.c">
-            <location file="ha_energy/mqtt_rec.c" line="10" column="8" info="Variable &apos;payloadptr&apos; can be declared as pointer to const"/>
-            <symbol>payloadptr</symbol>
-        </error>
   <FileInfo check="ctu">
 <function-call call-id="ha_energy/mqtt_rec.h:47:10" call-funcname="json_get_data" call-argnr="4" file="ha_energy/mqtt_rec.c" line="59" col="21" call-argexpr="i" call-argvaluetype="0" call-argvalue="0">
   <path file="ha_energy/mqtt_rec.c" line="58" col="21" info="Assignment &apos;i=V_FCCM&apos;, assigned value is 0"/>
@@ -148,32 +28,15 @@
   <FileInfo check="Uninitialized variables">
     <unsafe-usage my-id="ha_energy/mqtt_rec.h:44:13" my-argnr="4" my-argname="message" file="ha_energy/mqtt_rec.c" line="27" col="15" value="0"/>
   </FileInfo>
-  <FileInfo check="CheckUnusedFunctions">
-    <functiondecl file="ha_energy/mqtt_rec.c" functionName="msgarrvd" lineNumber="7"/>
-    <functiondecl file="ha_energy/mqtt_rec.c" functionName="delivered" lineNumber="122"/>
-    <functiondecl file="ha_energy/mqtt_rec.c" functionName="json_get_data" lineNumber="137"/>
-    <functiondecl file="ha_energy/mqtt_rec.c" functionName="print_mvar_vars" lineNumber="240"/>
-    <functiondecl file="ha_energy/mqtt_rec.c" functionName="fm80_float" lineNumber="250"/>
-    <functiondecl file="ha_energy/mqtt_rec.c" functionName="fm80_sleep" lineNumber="272"/>
-    <functioncall functionName="MQTTClient"/>
-    <functioncall functionName="MQTTClient_deliveryToken"/>
-    <functioncall functionName="MQTTClient_free"/>
-    <functioncall functionName="MQTTClient_freeMessage"/>
-    <functioncall functionName="bsoc_set_std_dev"/>
-    <functioncall functionName="cJSON_Delete"/>
-    <functioncall functionName="cJSON_GetErrorPtr"/>
-    <functioncall functionName="cJSON_GetObjectItemCaseSensitive"/>
-    <functioncall functionName="cJSON_IsNumber"/>
-    <functioncall functionName="cJSON_IsString"/>
-    <functioncall functionName="cJSON_ParseWithLength"/>
-    <functioncall functionName="error_exit"/>
-    <functioncall functionName="false"/>
-    <functioncall functionName="fprintf"/>
-    <functioncall functionName="json_get_data"/>
-    <functioncall functionName="null_exit"/>
-    <functioncall functionName="pthread_mutex_lock"/>
-    <functioncall functionName="pthread_mutex_unlock"/>
-    <functioncall functionName="true"/>
+  <FileInfo check="ctu">
+<function-call call-id="ha_energy/mqtt_rec.h:47:10" call-funcname="json_get_data" call-argnr="4" file="ha_energy/mqtt_rec.c" line="59" col="21" call-argexpr="i" call-argvaluetype="0" call-argvalue="0">
+  <path file="ha_energy/mqtt_rec.c" line="58" col="21" info="Assignment &apos;i=V_FCCM&apos;, assigned value is 0"/>
+</function-call>  </FileInfo>
+  <FileInfo check="Null pointer">
+    <unsafe-usage my-id="ha_energy/mqtt_rec.h:44:13" my-argnr="4" my-argname="message" file="ha_energy/mqtt_rec.c" line="27" col="15" value="0"/>
+  </FileInfo>
+  <FileInfo check="Uninitialized variables">
+    <unsafe-usage my-id="ha_energy/mqtt_rec.h:44:13" my-argnr="4" my-argname="message" file="ha_energy/mqtt_rec.c" line="27" col="15" value="0"/>
   </FileInfo>
   <FileInfo check="ctu">
 <function-call call-id="ha_energy/mqtt_rec.h:47:10" call-funcname="json_get_data" call-argnr="4" file="ha_energy/mqtt_rec.c" line="59" col="21" call-argexpr="i" call-argvaluetype="0" call-argvalue="0">
@@ -186,53 +49,42 @@
     <unsafe-usage my-id="ha_energy/mqtt_rec.h:44:13" my-argnr="4" my-argname="message" file="ha_energy/mqtt_rec.c" line="27" col="15" value="0"/>
   </FileInfo>
   <FileInfo check="CheckUnusedFunctions">
-    <functiondecl file="ha_energy/mqtt_rec.c" functionName="msgarrvd" lineNumber="7"/>
-    <functiondecl file="ha_energy/mqtt_rec.c" functionName="delivered" lineNumber="122"/>
-    <functiondecl file="ha_energy/mqtt_rec.c" functionName="json_get_data" lineNumber="137"/>
-    <functiondecl file="ha_energy/mqtt_rec.c" functionName="print_mvar_vars" lineNumber="240"/>
-    <functiondecl file="ha_energy/mqtt_rec.c" functionName="fm80_float" lineNumber="250"/>
-    <functiondecl file="ha_energy/mqtt_rec.c" functionName="fm80_sleep" lineNumber="272"/>
+    <functiondecl functionName="msgarrvd" lineNumber="7"/>
+    <functiondecl functionName="delivered" lineNumber="122"/>
+    <functiondecl functionName="json_get_data" lineNumber="137"/>
+    <functiondecl functionName="print_mvar_vars" lineNumber="240"/>
+    <functiondecl functionName="fm80_float" lineNumber="250"/>
+    <functiondecl functionName="fm80_sleep" lineNumber="272"/>
+    <functiondecl functionName="msgarrvd" lineNumber="7"/>
+    <functiondecl functionName="delivered" lineNumber="122"/>
+    <functiondecl functionName="json_get_data" lineNumber="137"/>
+    <functiondecl functionName="print_mvar_vars" lineNumber="240"/>
+    <functiondecl functionName="fm80_float" lineNumber="250"/>
+    <functiondecl functionName="fm80_sleep" lineNumber="272"/>
+    <functiondecl functionName="msgarrvd" lineNumber="7"/>
+    <functiondecl functionName="delivered" lineNumber="122"/>
+    <functiondecl functionName="json_get_data" lineNumber="137"/>
+    <functiondecl functionName="print_mvar_vars" lineNumber="240"/>
+    <functiondecl functionName="fm80_float" lineNumber="250"/>
+    <functiondecl functionName="fm80_sleep" lineNumber="272"/>
+    <functioncall functionName="IA_LAST"/>
     <functioncall functionName="MQTTClient"/>
     <functioncall functionName="MQTTClient_deliveryToken"/>
     <functioncall functionName="MQTTClient_free"/>
     <functioncall functionName="MQTTClient_freeMessage"/>
-    <functioncall functionName="bsoc_set_std_dev"/>
-    <functioncall functionName="cJSON_Delete"/>
-    <functioncall functionName="cJSON_GetErrorPtr"/>
-    <functioncall functionName="cJSON_GetObjectItemCaseSensitive"/>
-    <functioncall functionName="cJSON_IsNumber"/>
-    <functioncall functionName="cJSON_IsString"/>
-    <functioncall functionName="cJSON_ParseWithLength"/>
-    <functioncall functionName="error_exit"/>
-    <functioncall functionName="false"/>
-    <functioncall functionName="fprintf"/>
-    <functioncall functionName="json_get_data"/>
-    <functioncall functionName="null_exit"/>
-    <functioncall functionName="pthread_mutex_lock"/>
-    <functioncall functionName="pthread_mutex_unlock"/>
-    <functioncall functionName="true"/>
-  </FileInfo>
-  <FileInfo check="ctu">
-<function-call call-id="ha_energy/mqtt_rec.h:47:10" call-funcname="json_get_data" call-argnr="4" file="ha_energy/mqtt_rec.c" line="59" col="21" call-argexpr="i" call-argvaluetype="0" call-argvalue="0">
-  <path file="ha_energy/mqtt_rec.c" line="58" col="21" info="Assignment &apos;i=V_FCCM&apos;, assigned value is 0"/>
-</function-call>  </FileInfo>
-  <FileInfo check="Null pointer">
-    <unsafe-usage my-id="ha_energy/mqtt_rec.h:44:13" my-argnr="4" my-argname="message" file="ha_energy/mqtt_rec.c" line="27" col="15" value="0"/>
-  </FileInfo>
-  <FileInfo check="Uninitialized variables">
-    <unsafe-usage my-id="ha_energy/mqtt_rec.h:44:13" my-argnr="4" my-argname="message" file="ha_energy/mqtt_rec.c" line="27" col="15" value="0"/>
-  </FileInfo>
-  <FileInfo check="CheckUnusedFunctions">
-    <functiondecl file="ha_energy/mqtt_rec.c" functionName="msgarrvd" lineNumber="7"/>
-    <functiondecl file="ha_energy/mqtt_rec.c" functionName="delivered" lineNumber="122"/>
-    <functiondecl file="ha_energy/mqtt_rec.c" functionName="json_get_data" lineNumber="137"/>
-    <functiondecl file="ha_energy/mqtt_rec.c" functionName="print_mvar_vars" lineNumber="240"/>
-    <functiondecl file="ha_energy/mqtt_rec.c" functionName="fm80_float" lineNumber="250"/>
-    <functiondecl file="ha_energy/mqtt_rec.c" functionName="fm80_sleep" lineNumber="272"/>
-    <functioncall functionName="MQTTClient"/>
-    <functioncall functionName="MQTTClient_deliveryToken"/>
-    <functioncall functionName="MQTTClient_free"/>
-    <functioncall functionName="MQTTClient_freeMessage"/>
+    <functioncall functionName="PHASE_LAST"/>
+    <functioncall functionName="R_FLOAT"/>
+    <functioncall functionName="R_RUN"/>
+    <functioncall functionName="V_BEN"/>
+    <functioncall functionName="V_DLAST"/>
+    <functioncall functionName="V_FACE"/>
+    <functioncall functionName="V_FBEKW"/>
+    <functioncall functionName="V_FCCM"/>
+    <functioncall functionName="V_FLO"/>
+    <functioncall functionName="V_FSO"/>
+    <functioncall functionName="V_HACSW"/>
+    <functioncall functionName="V_HDCSW"/>
+    <functioncall functionName="V_HMODE"/>
     <functioncall functionName="bsoc_set_std_dev"/>
     <functioncall functionName="cJSON_Delete"/>
     <functioncall functionName="cJSON_GetErrorPtr"/>

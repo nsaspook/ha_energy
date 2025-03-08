@@ -1,0 +1,374 @@
+\hypertarget{energy_8h_source}{}\doxysection{energy.\+h}
+\label{energy_8h_source}\index{ha\_energy/energy.h@{ha\_energy/energy.h}}
+\mbox{\hyperlink{energy_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * File:   bmc.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ * Author: root}}
+\DoxyCodeLine{4 \textcolor{comment}{ *}}
+\DoxyCodeLine{5 \textcolor{comment}{ * Created on September 21, 2012, 12:54 PM}}
+\DoxyCodeLine{6 \textcolor{comment}{ */}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#ifndef BMC\_H}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#define BMC\_H}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{12 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <stdio.h>} \textcolor{comment}{/* for printf() */}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <stdint.h>}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <string.h>}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <stdbool.h>}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <signal.h>}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <time.h>}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include <sys/wait.h>}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include <sys/types.h>}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include <sys/time.h>}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#include <errno.h>}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#include <cjson/cJSON.h>}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#include <curl/curl.h>}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#include <pthread.h>}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#include <sys/stat.h>}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#include <syslog.h>}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#include <arpa/inet.h>}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#include <sys/socket.h>}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#include <netdb.h>}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#include <ifaddrs.h>}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#include "{}MQTTClient.h"{}}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{pid_8h}{pid.h}}"{}}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#define LOG\_VERSION     "{}V0.73"{}}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#define MQTT\_VERSION    "{}V3.11"{}}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#define TNAME  "{}maint9"{}}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#define LADDRESS        "{}tcp://127.0.0.1:1883"{}}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#ifdef \_\_amd64}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#define ADDRESS         "{}tcp://10.1.1.172:1883"{}}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#define ADDRESS         "{}tcp://10.1.1.30:1883"{}}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#define CLIENTID1       "{}Energy\_Mqtt\_HA1"{}}}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#define CLIENTID2       "{}Energy\_Mqtt\_HA2"{}}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#define CLIENTID3       "{}Energy\_Mqtt\_HA3"{}} }
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#define TOPIC\_P         "{}mateq84/data/gticmd"{}}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#define TOPIC\_SPAM      "{}mateq84/data/spam"{}}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#define TOPIC\_PACA      "{}home-\/assistant/gtiac/availability"{}}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#define TOPIC\_PDCA      "{}home-\/assistant/gtidc/availability"{}}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#define TOPIC\_PACC      "{}home-\/assistant/gtiac/contact"{}}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#define TOPIC\_PDCC      "{}home-\/assistant/gtidc/contact"{}}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#define TOPIC\_PPID      "{}home-\/assistant/solar/pid"{}}}
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#define TOPIC\_SHUTDOWN  "{}home-\/assistant/solar/shutdown"{}}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#define TOPIC\_SS        "{}mateq84/data/solar"{}}}
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#define TOPIC\_SD        "{}mateq84/data/dumpload"{}}}
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#define TOPIC\_HA        "{}home-\/assistant/status/switch"{}}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#define QOS             1}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#define TIMEOUT         10000L}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#define SPACING\_USEC    500 * 1000}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#define USEC\_SEC        1000000L}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \textcolor{preprocessor}{\#define DAQ\_STR 32}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#define DAQ\_STR\_M DAQ\_STR-\/1}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#define SBUF\_SIZ        16  }\textcolor{comment}{// short buffer string size}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#define RBUF\_SIZ        82}}
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#define SYSLOG\_SIZ      512}}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#define MQTT\_TIMEOUT    900}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#define SW\_QOS          1}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#define NO\_CYLON}}
+\DoxyCodeLine{78 \textcolor{preprocessor}{\#define CRITIAL\_SHUTDOWN\_LOG}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#define UNIT\_TEST       2}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#define NORM\_MODE       0}}
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#define PID\_MODE        1}}
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#define MAX\_ERROR       5}}
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#define IAM\_DELAY       120}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#define CMD\_SEC         10}}
+\DoxyCodeLine{87 \textcolor{preprocessor}{\#define TIME\_SYNC\_SEC   30}}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89     \textcolor{comment}{/*}}
+\DoxyCodeLine{90 \textcolor{comment}{     * Battery SoC cycle limits parameters}}
+\DoxyCodeLine{91 \textcolor{comment}{     */}}
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#define BAT\_M\_KW            5120.0f}}
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#define BAT\_SOC\_TOP         0.98f}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#define BAT\_SOC\_HIGH        0.95f}}
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#define BAT\_SOC\_LOW         0.64f}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#define BAT\_SOC\_LOW\_AC      0.70f   }}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#define BAT\_CRITICAL        200.0f}}
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#define MIN\_BAT\_KW\_BSOC\_SLP 4000.0f}}
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#define MIN\_BAT\_KW\_BSOC\_HI  4550.0f}}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#define MIN\_BAT\_KW\_GTI\_HI   BAT\_M\_KW*BAT\_SOC\_TOP}}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#define MIN\_BAT\_KW\_GTI\_LO   BAT\_M\_KW*BAT\_SOC\_LOW}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{preprocessor}{\#define MIN\_BAT\_KW\_AC\_HI    BAT\_M\_KW*BAT\_SOC\_HIGH}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#define MIN\_BAT\_KW\_AC\_LO    BAT\_M\_KW*BAT\_SOC\_LOW\_AC}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107     \textcolor{comment}{/*}}
+\DoxyCodeLine{108 \textcolor{comment}{     * PV panel cycle limits parameters}}
+\DoxyCodeLine{109 \textcolor{comment}{     */}}
+\DoxyCodeLine{110 \textcolor{preprocessor}{\#define PV\_PGAIN            0.85f}}
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#define PV\_IGAIN            0.12f}}
+\DoxyCodeLine{112 \textcolor{preprocessor}{\#define PV\_IMAX             1400.0f}}
+\DoxyCodeLine{113 \textcolor{preprocessor}{\#define PV\_BIAS             288.0f}}
+\DoxyCodeLine{114 \textcolor{preprocessor}{\#define PV\_BIAS\_ZERO          0.0f}}
+\DoxyCodeLine{115 \textcolor{preprocessor}{\#define PV\_BIAS\_LOW         222.0f}}
+\DoxyCodeLine{116 \textcolor{preprocessor}{\#define PV\_BIAS\_FLOAT       399.0f}}
+\DoxyCodeLine{117 \textcolor{preprocessor}{\#define PV\_BIAS\_SLEEP       480.0f}}
+\DoxyCodeLine{118 \textcolor{preprocessor}{\#define PV\_BIAS\_RATE        320.0f}}
+\DoxyCodeLine{119 \textcolor{preprocessor}{\#define PV\_DL\_MPTT\_MAX     1200.0f}}
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#define PV\_DL\_MPTT\_EXCESS  1300.0f}}
+\DoxyCodeLine{121 \textcolor{preprocessor}{\#define PV\_DL\_MPTT\_IDLE     57.0f}}
+\DoxyCodeLine{122 \textcolor{preprocessor}{\#define PV\_DL\_BIAS\_RATE     75.0f}}
+\DoxyCodeLine{123 \textcolor{preprocessor}{\#define PV\_DL\_EXCESS       500.0f}}
+\DoxyCodeLine{124 \textcolor{preprocessor}{\#define PV\_DL\_B\_AH\_LOW     100.0f}}
+\DoxyCodeLine{125 \textcolor{preprocessor}{\#define PV\_DL\_B\_AH\_MIN     150.0f }\textcolor{comment}{// DL battery should be at least 175Ah}}
+\DoxyCodeLine{126 \textcolor{preprocessor}{\#define PV\_DL\_B\_V\_LOW       23.8f }\textcolor{comment}{// Battery low-\/voltqage cutoff}}
+\DoxyCodeLine{127 \textcolor{preprocessor}{\#define PWA\_SLEEP          200.0f}}
+\DoxyCodeLine{128 \textcolor{preprocessor}{\#define DL\_AC\_DC\_EFF        1.24f}}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130     \textcolor{comment}{/*}}
+\DoxyCodeLine{131 \textcolor{comment}{     * Energy control loop parameters}}
+\DoxyCodeLine{132 \textcolor{comment}{     */}}
+\DoxyCodeLine{133 \textcolor{preprocessor}{\#define BAL\_MIN\_ENERGY\_AC   -\/200.0f}}
+\DoxyCodeLine{134 \textcolor{preprocessor}{\#define BAL\_MAX\_ENERGY\_AC   200.0f}}
+\DoxyCodeLine{135 \textcolor{preprocessor}{\#define BAL\_MIN\_ENERGY\_GTI  -\/1400.0f}}
+\DoxyCodeLine{136 \textcolor{preprocessor}{\#define BAL\_MAX\_ENERGY\_GTI  200.0f}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138 \textcolor{preprocessor}{\#define LOG\_TO\_FILE         "{}/store/logs/energy.log"{}}}
+\DoxyCodeLine{139 \textcolor{preprocessor}{\#define LOG\_TO\_FILE\_ALT     "{}/tmp/energy.log"{}}}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141 \textcolor{preprocessor}{\#define MAX\_LOG\_SPAM  60}}
+\DoxyCodeLine{142 \textcolor{preprocessor}{\#define LOW\_LOG\_SPAM  2}}
+\DoxyCodeLine{143 \textcolor{preprocessor}{\#define RESET\_LOG\_SPAM  120}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145     \textcolor{comment}{//\#define IM\_DEBUG                      // WEM3080T LOGGING}}
+\DoxyCodeLine{146     \textcolor{comment}{//\#define B\_ADJ\_DEBUG                   // debug printing}}
+\DoxyCodeLine{147     \textcolor{comment}{//\#define FAKE\_VPV                      // NO AC CHARGER for DUMPLOAD, batteries are cross-\/connected to a parallel bank}}
+\DoxyCodeLine{148     \textcolor{comment}{//\#define PSW\_DEBUG}}
+\DoxyCodeLine{149     \textcolor{comment}{//\#define DEBUG\_SHUTDOWN}}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151     \textcolor{comment}{//\#define AUTO\_CHARGE                   // turn on dumpload charger during restarts}}
+\DoxyCodeLine{152     \textcolor{comment}{//\#define B\_DLE\_DEBUG    // Dump Load debugging}}
+\DoxyCodeLine{153     \textcolor{comment}{//\#define BSOC\_DEGUB}}
+\DoxyCodeLine{154     \textcolor{comment}{//\#define DEBUG\_HA\_CMD}}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156 \textcolor{preprocessor}{\#define IM\_DELAY            1   }\textcolor{comment}{// tens of second updates}}
+\DoxyCodeLine{157 \textcolor{preprocessor}{\#define IM\_DISPLAY          1}}
+\DoxyCodeLine{158 \textcolor{preprocessor}{\#define GTI\_DELAY           1}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160     \textcolor{comment}{/*}}
+\DoxyCodeLine{161 \textcolor{comment}{     * sane limits for system data elements}}
+\DoxyCodeLine{162 \textcolor{comment}{     */}}
+\DoxyCodeLine{163 \textcolor{preprocessor}{\#define PWA\_SANE            1700.0f}}
+\DoxyCodeLine{164 \textcolor{preprocessor}{\#define PAMPS\_SANE          16.0f}}
+\DoxyCodeLine{165 \textcolor{preprocessor}{\#define PVOLTS\_SANE         150.0f}}
+\DoxyCodeLine{166 \textcolor{preprocessor}{\#define BAMPS\_SANE          70.0f}}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168     \textcolor{comment}{/*}}
+\DoxyCodeLine{169 \textcolor{comment}{        Three Phase WiFi Energy Meter (WEM3080T)}}
+\DoxyCodeLine{170 \textcolor{comment}{    name    Unit    Description}}
+\DoxyCodeLine{171 \textcolor{comment}{    wem3080t\_voltage\_a  V   A phase voltage}}
+\DoxyCodeLine{172 \textcolor{comment}{    wem3080t\_current\_a  A   A phase current}}
+\DoxyCodeLine{173 \textcolor{comment}{    wem3080t\_power\_a    W   A phase active power}}
+\DoxyCodeLine{174 \textcolor{comment}{    wem3080t\_importenergy\_a kWh A phase import energy}}
+\DoxyCodeLine{175 \textcolor{comment}{    wem3080t\_exportgrid\_a   kWh A phase export energy}}
+\DoxyCodeLine{176 \textcolor{comment}{    wem3080t\_frequency\_a    kWh A phase frequency}}
+\DoxyCodeLine{177 \textcolor{comment}{    wem3080t\_pf\_a   kWh A phase power factor}}
+\DoxyCodeLine{178 \textcolor{comment}{    wem3080t\_voltage\_b  V   B phase voltage}}
+\DoxyCodeLine{179 \textcolor{comment}{    wem3080t\_current\_b  A   B phase current}}
+\DoxyCodeLine{180 \textcolor{comment}{    wem3080t\_power\_b    W   B phase active power}}
+\DoxyCodeLine{181 \textcolor{comment}{    wem3080t\_importenergy\_b kWh B phase import energy}}
+\DoxyCodeLine{182 \textcolor{comment}{    wem3080t\_exportgrid\_b   kWh B phase export energy}}
+\DoxyCodeLine{183 \textcolor{comment}{    wem3080t\_frequency\_b    kWh B phase frequency}}
+\DoxyCodeLine{184 \textcolor{comment}{    wem3080t\_pf\_b   kWh B phase power factor}}
+\DoxyCodeLine{185 \textcolor{comment}{    wem3080t\_voltage\_c  V   C phase voltage}}
+\DoxyCodeLine{186 \textcolor{comment}{    wem3080t\_current\_c  A   C phase current}}
+\DoxyCodeLine{187 \textcolor{comment}{    wem3080t\_power\_c    W   C phase active power}}
+\DoxyCodeLine{188 \textcolor{comment}{    wem3080t\_importenergy\_c kWh C phase import energy}}
+\DoxyCodeLine{189 \textcolor{comment}{    wem3080t\_exportgrid\_c   kWh C phase export energy}}
+\DoxyCodeLine{190 \textcolor{comment}{    wem3080t\_frequency\_c    kWh C phase frequency}}
+\DoxyCodeLine{191 \textcolor{comment}{    wem3080t\_pf\_c   kWh C phase power factor}}
+\DoxyCodeLine{192 \textcolor{comment}{     */}}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194     \textcolor{keyword}{enum} \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415f}{energy\_state}} \{}
+\DoxyCodeLine{195         \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415fae5b17a6cbef319f39c92c567338e03ac}{E\_INIT}},}
+\DoxyCodeLine{196         \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415fae3ecaae4eeb09e4ca74c68185041e15b}{E\_RUN}},}
+\DoxyCodeLine{197         \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415faa19a96871d41a61ea3b7b279f5d4b1d6}{E\_WAIT}},}
+\DoxyCodeLine{198         \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415faeffa62ca88ca7da081e62824f4e4be4f}{E\_IDLE}},}
+\DoxyCodeLine{199         \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415fa4d5e6303dba6960140ca6bf4bab1e5ac}{E\_STOP}},}
+\DoxyCodeLine{200         \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415fadc7160cbe8f72ca012e9a629941ab20b}{E\_LAST}},}
+\DoxyCodeLine{201     \};}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203     \textcolor{keyword}{enum} \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69}{running\_state}} \{}
+\DoxyCodeLine{204         \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a3c0e911dee8c0c9acea4848d7493829e}{R\_INIT}},}
+\DoxyCodeLine{205         \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a1474a7d3758281b3a8fdfcfda8147bab}{R\_FLOAT}},}
+\DoxyCodeLine{206         \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a6166ec142c964c3119e6ed447db505ce}{R\_SLEEP}},}
+\DoxyCodeLine{207         \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a53eae320dbcd86f620fa75b630f13c79}{R\_RUN}},}
+\DoxyCodeLine{208         \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a63581c61e8680cb3c6be0310a4e19e81}{R\_IDLE}},}
+\DoxyCodeLine{209         \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69ad7916c14edfe14a68b52c69ca1d0d503}{R\_LAST}},}
+\DoxyCodeLine{210     \};}
+\DoxyCodeLine{211 }
+\DoxyCodeLine{212     \textcolor{keyword}{enum} \mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323}{iammeter\_phase}} \{}
+\DoxyCodeLine{213         \mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323a8825a1a26ae9bf551b490741d7ae280a}{PHASE\_A}},}
+\DoxyCodeLine{214         \mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323ac9590e77e32637ec7e053fe2690876bf}{PHASE\_B}},}
+\DoxyCodeLine{215         \mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323aa40453ff9dcc9108a8f76456fd68c464}{PHASE\_C}},}
+\DoxyCodeLine{216         \mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323a9c3c3d6da2d651af717baeec2fd1bbcc}{PHASE\_LAST}},}
+\DoxyCodeLine{217     \};}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219     \textcolor{keyword}{enum} \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184}{iammeter\_id}} \{}
+\DoxyCodeLine{220         \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a6ee579d3dc53ac798b03bf17c52e7da0}{IA\_VOLTAGE}},}
+\DoxyCodeLine{221         \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a5f6a11ed664db7f00c393c0e3559c157}{IA\_CURRENT}},}
+\DoxyCodeLine{222         \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184aae657495f8fa90a809c8515a05d020f3}{IA\_POWER}},}
+\DoxyCodeLine{223         \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a508e5d4bafeca47cef4ba1067a856b02}{IA\_IMPORT}},}
+\DoxyCodeLine{224         \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a2978ac440b0eceae0eb9be73f1046498}{IA\_EXPORT}},}
+\DoxyCodeLine{225         \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184aca6004de3fd917189b2d1b869d8bed13}{IA\_FREQ}},}
+\DoxyCodeLine{226         \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184ac800df5711733943f4afc9f74cc1f13a}{IA\_PF}},}
+\DoxyCodeLine{227         \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a6506e105a36f1b6b533674bfabc64a6e}{IA\_LAST}},}
+\DoxyCodeLine{228     \};}
+\DoxyCodeLine{229 }
+\DoxyCodeLine{230     \textcolor{keyword}{enum} \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072}{mqtt\_vars}} \{}
+\DoxyCodeLine{231         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aab958e15de9756ae2b2f9c1eb7bfbc58}{V\_FCCM}},}
+\DoxyCodeLine{232         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a821ba4dacc502ba41ec0c17aff5c42d3}{V\_FBEKW}},}
+\DoxyCodeLine{233         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a0a62fd1eb1d3f07001a6dd40f6b4550c}{V\_FRUNT}},}
+\DoxyCodeLine{234         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a9f8ddad7002f6868f6bf77c46b11e686}{V\_FBAMPS}},}
+\DoxyCodeLine{235         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a6bc30a34eca575bd44acf625beddf070}{V\_FBV}},}
+\DoxyCodeLine{236         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a1e904f1377abb70e57726e114ff22765}{V\_FLO}},}
+\DoxyCodeLine{237         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aea8f7852e1fb2fb07ea23c17aaed223e}{V\_FSO}},}
+\DoxyCodeLine{238         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072af52d8a89895cb70ab99159fcad262585}{V\_FACE}},}
+\DoxyCodeLine{239         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a47acb84856d0db6447de2c99171d654d}{V\_BEN}},}
+\DoxyCodeLine{240         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072ad5c883c864f682ae706402bbcbe385cf}{V\_PWA}},}
+\DoxyCodeLine{241         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a3c4c2533613529ed910d3b0698e89335}{V\_PAMPS}},}
+\DoxyCodeLine{242         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aaf767b3b90d0f2566062e8ea9aa77d74}{V\_PVOLTS}},}
+\DoxyCodeLine{243         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072abb8be725d4da006153726eea397593e9}{V\_FLAST}},}
+\DoxyCodeLine{244         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a7391c358a2241e66cdf9f1e953184521}{V\_HDCSW}},}
+\DoxyCodeLine{245         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a61c580ff6ce646f13228dc2dcad390c1}{V\_HACSW}},}
+\DoxyCodeLine{246         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a71180ffbf74111c506a7c74e46a11dba}{V\_HSHUT}},}
+\DoxyCodeLine{247         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a972a1c6b6a2288d8dd88d6cde959086c}{V\_HMODE}},}
+\DoxyCodeLine{248         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aa2a2d376137d4017052d0bf5ceeebf3d}{V\_HCON0}},}
+\DoxyCodeLine{249         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a50be71dd4aec439fc0394cb17e66a189}{V\_HCON1}},}
+\DoxyCodeLine{250         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a4d96c96a3fe5386e70009f7651adab78}{V\_HCON2}},}
+\DoxyCodeLine{251         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a682e786afbba8dc1e112013ad16da1c6}{V\_HCON3}},}
+\DoxyCodeLine{252         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a0be3335391f5cd47a8e92fdc04f0927f}{V\_HCON4}},}
+\DoxyCodeLine{253         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a8a6eb97b0e27737572161095bdccc22f}{V\_HCON5}},}
+\DoxyCodeLine{254         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a7833386896850525de2b48c57d4595b7}{V\_HCON6}},}
+\DoxyCodeLine{255         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072ad6f25d2f08b07b163f622f9a6c5c1d29}{V\_HCON7}},}
+\DoxyCodeLine{256         \textcolor{comment}{// add other data ranges here}}
+\DoxyCodeLine{257         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aea100527e1fc47fec8e53ea94b738b75}{V\_DVPV}},}
+\DoxyCodeLine{258         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a78658cf8e5d2393c6d0148b279287efc}{V\_DPPV}},}
+\DoxyCodeLine{259         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072acbf8b0bfb8d6b7f05e44120ab817a788}{V\_DPBAT}},}
+\DoxyCodeLine{260         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a313329bdfc449d61aa60f11b31432e1f}{V\_DVBAT}},}
+\DoxyCodeLine{261         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a2dd8cb6e7c42be6b299e5d3d6617d7c2}{V\_DCMPPT}},}
+\DoxyCodeLine{262         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a966e201afd63441eacdb3f18b7dcd592}{V\_DPMPPT}},}
+\DoxyCodeLine{263         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a79eef89bbb62af24bc79c04f29d0ad97}{V\_DAHBAT}},}
+\DoxyCodeLine{264         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aee01915eb35a0177a207a2316f4c9c59}{V\_DCCMODE}},}
+\DoxyCodeLine{265         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a2545eefc21c84f066d1a211386006be0}{V\_DGTI}},}
+\DoxyCodeLine{266         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072ab183b38bd716ecf9405c4546e3bd6870}{V\_DLAST}},}
+\DoxyCodeLine{267     \};}
+\DoxyCodeLine{268 }
+\DoxyCodeLine{269     \textcolor{keyword}{enum} \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7}{sane\_vars}} \{}
+\DoxyCodeLine{270         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a30f5dd18a164c592c677e2d519ba873c}{S\_FCCM}},}
+\DoxyCodeLine{271         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a0a9a68ba3a5cf2659e3acd86dd625e57}{S\_FBEKW}},}
+\DoxyCodeLine{272         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a65776ec50d670eaaf182c8e38336b786}{S\_FRUNT}},}
+\DoxyCodeLine{273         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a3ba317a28cd9bbd8a72e138b88fe8d7a}{S\_FBAMPS}},}
+\DoxyCodeLine{274         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a773182a61f1d37bcdfe40f71483c7951}{S\_FBV}},}
+\DoxyCodeLine{275         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a865767395547a8fed198ff270c28153d}{S\_FLO}},}
+\DoxyCodeLine{276         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a66729169c4c4d13cbd79f6253f4f11cd}{S\_FSO}},}
+\DoxyCodeLine{277         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7ab9749107eb8f7d4769de8dd895ca60c7}{S\_FACE}},}
+\DoxyCodeLine{278         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7aa1630e798b5aa1b580f12df3cfc5a879}{S\_BEN}},}
+\DoxyCodeLine{279         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7af1d6fa8de1e28a2b6d8539f3b98fce4e}{S\_PWA}},}
+\DoxyCodeLine{280         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a25f0992e8e1881acf87ad1beb51150b8}{S\_PAMPS}},}
+\DoxyCodeLine{281         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a240ee28d7f55ca0e4a3c4b29f06c4e21}{S\_PVOLTS}},}
+\DoxyCodeLine{282         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7aacdedd7435bbee835519a843a8112b92}{S\_FLAST}},}
+\DoxyCodeLine{283         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a75f8b3e725951ebbaec82a0d558d25c0}{S\_HDCSW}},}
+\DoxyCodeLine{284         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9c35836722d274f703e5e0dfb6d9ed3a}{S\_HACSW}},}
+\DoxyCodeLine{285         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a21567f46c8dbf8549a99aaff2f982660}{S\_HSHUT}},}
+\DoxyCodeLine{286         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a15847c968cbea0db5c4fb80a9fce1b08}{S\_HMODE}},}
+\DoxyCodeLine{287         \textcolor{comment}{// add other data ranges here}}
+\DoxyCodeLine{288         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9ce1e82d08b8572b71f30cc1a5fe860c}{S\_DVPV}},}
+\DoxyCodeLine{289         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9743dab6f31754cb4b91ad6c8fd8fb80}{S\_DPPV}},}
+\DoxyCodeLine{290         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7ab2f60d55ba3f9b048b8d5598e2c8493c}{S\_DPBAT}},}
+\DoxyCodeLine{291         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7ab7f940cb7a55a33ba5b608f5f9b3b973}{S\_DVBAT}},}
+\DoxyCodeLine{292         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a23ce49be9fc3257c3e2f4b67307a158c}{S\_DCMPPT}},}
+\DoxyCodeLine{293         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9b78927d045879058f9457cc99714fef}{S\_DPMPPT}},}
+\DoxyCodeLine{294         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7adc706815dece89ac605932b800e9f587}{S\_DAHBAT}},}
+\DoxyCodeLine{295         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a5ba1557e498d8d5cf8e2afdfdb033b30}{S\_DCCMODE}},}
+\DoxyCodeLine{296         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a393bdea87b5aeb92c17a6b8e0407d71b}{S\_DGTI}},}
+\DoxyCodeLine{297         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a8ceda6b0a239be9845967fae9f846736}{S\_DLAST}},}
+\DoxyCodeLine{298     \};}
+\DoxyCodeLine{299 }
+\DoxyCodeLine{300 \textcolor{preprocessor}{\#define MAX\_IM\_VAR  IA\_LAST*PHASE\_LAST}}
+\DoxyCodeLine{301 }
+\DoxyCodeLine{302 \textcolor{preprocessor}{\#define L1\_P    IA\_POWER}}
+\DoxyCodeLine{303 \textcolor{preprocessor}{\#define L2\_P    L1\_P+IA\_LAST}}
+\DoxyCodeLine{304 \textcolor{preprocessor}{\#define L3\_P    L2\_P+IA\_LAST}}
+\DoxyCodeLine{305 }
+\DoxyCodeLine{306     \textcolor{keyword}{struct }\mbox{\hyperlink{structlink__type}{link\_type}} \{}
+\DoxyCodeLine{307         \textcolor{keyword}{volatile} uint32\_t \mbox{\hyperlink{structlink__type_ae120ea132c18d0baf98a393c1e06ce20}{iammeter\_error}}, \mbox{\hyperlink{structlink__type_af96503924386a5fa3723e667ef4c57df}{iammeter\_count}};}
+\DoxyCodeLine{308         \textcolor{keyword}{volatile} uint32\_t \mbox{\hyperlink{structlink__type_a17d70f7dd45e005f9cda9562d56a9fa0}{mqtt\_error}}, \mbox{\hyperlink{structlink__type_aa820e79717719cfe77f6b2b2bada58ae}{mqtt\_count}};}
+\DoxyCodeLine{309         \textcolor{keyword}{volatile} uint32\_t \mbox{\hyperlink{structlink__type_a1abbe2fce463bf7ab00fc2caff39af1f}{shutdown}};}
+\DoxyCodeLine{310     \};}
+\DoxyCodeLine{311 }
+\DoxyCodeLine{312     \textcolor{keyword}{struct }\mbox{\hyperlink{structmode__type}{mode\_type}} \{}
+\DoxyCodeLine{313         \textcolor{keyword}{volatile} \textcolor{keywordtype}{double} \mbox{\hyperlink{structmode__type_a430a4ad1dc3ff1be380549424b79d7ca}{error}}, \mbox{\hyperlink{structmode__type_adad7f08a8839f1d7fdddcb33d667d2ff}{target}}, \mbox{\hyperlink{structmode__type_a48f0bfcac4f5cc565e07896e94221a48}{total\_system}}, \mbox{\hyperlink{structmode__type_a42c49feb06f42f31cd1d2dcc68c07bf8}{gti\_dumpload}}, \mbox{\hyperlink{structmode__type_a713653ba952f067a6184ed4e10b89bcb}{pv\_bias}}, \mbox{\hyperlink{structmode__type_aa813aa79ee962c4dde4572602d60ae69}{dl\_mqtt\_max}}, \mbox{\hyperlink{structmode__type_abbb5fc565ddf4a7a613a76871767afb9}{off\_grid}}, \mbox{\hyperlink{structmode__type_a8600776450cef753228a443f80f90c71}{sequence}};}
+\DoxyCodeLine{314         \textcolor{keyword}{volatile} \textcolor{keywordtype}{bool} \mbox{\hyperlink{structmode__type_a7b0d7b340c26a7ec4dfec96b3606a687}{mode}}, \mbox{\hyperlink{structmode__type_abab6e3e71b5927837e930fbf58c55ff3}{in\_pid\_control}}, \mbox{\hyperlink{structmode__type_a305fc93f61bf3dc4210604687adceac4}{con0}}, \mbox{\hyperlink{structmode__type_a0b4b030068e0b059ded48a0e95e3aedd}{con1}}, \mbox{\hyperlink{structmode__type_ad4f177aacff3d61c46ac124b5f8a4cd8}{con2}}, \mbox{\hyperlink{structmode__type_adf0a03511fe0fa91adc32e7479bb632b}{con3}}, \mbox{\hyperlink{structmode__type_a0cc3a15a994a67eb849733193e05fa06}{con4}}, \mbox{\hyperlink{structmode__type_a5ca43a1420ba47e4f37857bca5c11938}{con5}}, \mbox{\hyperlink{structmode__type_a3bc6b3f9a6c3a06dc7875133321aba62}{con6}}, \mbox{\hyperlink{structmode__type_a1ec5332759a6ff98ca880fedddd32bf9}{con7}}, \mbox{\hyperlink{structmode__type_a4b76244ec2f7b8db75f35b46c2952c4a}{no\_float}}, \mbox{\hyperlink{structmode__type_a75872939e963724e50084458672f847a}{data\_error}}, \mbox{\hyperlink{structmode__type_a6824c1a0deef177206003e0dfc050ed1}{bat\_crit}};}
+\DoxyCodeLine{315         \textcolor{keyword}{volatile} uint32\_t \mbox{\hyperlink{structmode__type_ac979c35916a6a535f0bf817098ae3fe7}{mode\_tmr}};}
+\DoxyCodeLine{316         \textcolor{keyword}{volatile} \textcolor{keyword}{struct }\mbox{\hyperlink{structSPid}{SPid}} \mbox{\hyperlink{structmode__type_a7d5455aeb7e7424974a31670d0d14c28}{pid}};}
+\DoxyCodeLine{317         \textcolor{keyword}{volatile} \textcolor{keyword}{enum} \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415f}{energy\_state}} \mbox{\hyperlink{structmode__type_a780dd9555747fafe2a0456c20405d32b}{E}};}
+\DoxyCodeLine{318         \textcolor{keyword}{volatile} \textcolor{keyword}{enum} \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69}{running\_state}} \mbox{\hyperlink{structmode__type_ab140168a45baf835fb208f93983bc794}{R}};}
+\DoxyCodeLine{319     \};}
+\DoxyCodeLine{320 }
+\DoxyCodeLine{321     \textcolor{keyword}{struct }\mbox{\hyperlink{structenergy__type}{energy\_type}} \{}
+\DoxyCodeLine{322         \textcolor{keyword}{volatile} \textcolor{keywordtype}{double} \mbox{\hyperlink{structenergy__type_aa7198c879bedfbb1db35874b4ef079dd}{print\_vars}}[\mbox{\hyperlink{energy_8h_a79672f46174e51a679c5910274fd66a3}{MAX\_IM\_VAR}}];}
+\DoxyCodeLine{323         \textcolor{keyword}{volatile} \textcolor{keywordtype}{double} \mbox{\hyperlink{structenergy__type_a61e594f5bba7e386b9bc2dee37eabb56}{im\_vars}}[\mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a6506e105a36f1b6b533674bfabc64a6e}{IA\_LAST}}][\mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323a9c3c3d6da2d651af717baeec2fd1bbcc}{PHASE\_LAST}}];}
+\DoxyCodeLine{324         \textcolor{keyword}{volatile} \textcolor{keywordtype}{double} \mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072ab183b38bd716ecf9405c4546e3bd6870}{V\_DLAST}} + 1];}
+\DoxyCodeLine{325         \textcolor{keyword}{volatile} \textcolor{keywordtype}{bool} \mbox{\hyperlink{structenergy__type_a8a63100b110f46b7835687ed198477a0}{once\_gti}}, \mbox{\hyperlink{structenergy__type_af480c852a1d03dcbf94c0ed4025888e6}{once\_ac}}, \mbox{\hyperlink{structenergy__type_ae9aa060b6fa02493a02a9a2ce5bb7658}{iammeter}}, \mbox{\hyperlink{structenergy__type_a60190fd48a28f964be8d030fe88a19a3}{fm80}}, \mbox{\hyperlink{structenergy__type_a87a24fa58fbe692b797c0081bf28df28}{dumpload}}, \mbox{\hyperlink{structenergy__type_af080199f34d74e822ff98c6a9fc8c976}{homeassistant}}, \mbox{\hyperlink{structenergy__type_af0f10b5a348da41d79645310f3caa98a}{once\_gti\_zero}};}
+\DoxyCodeLine{326         \textcolor{keyword}{volatile} \textcolor{keywordtype}{double} \mbox{\hyperlink{structenergy__type_a1945c4d2c3ef6600d32ff0d6f6a52df6}{gti\_low\_adj}}, \mbox{\hyperlink{structenergy__type_a01cced1053900a4f380da28e1153906f}{ac\_low\_adj}}, \mbox{\hyperlink{structenergy__type_a4324cb84eff8589a0765143e8acbc114}{dl\_excess\_adj}};}
+\DoxyCodeLine{327         \textcolor{keyword}{volatile} \textcolor{keywordtype}{bool} \mbox{\hyperlink{structenergy__type_afb1d89fed19279747b421ffad6412e5b}{ac\_sw\_on}}, \mbox{\hyperlink{structenergy__type_a72305a9f4d6761d0144244638ef0c98d}{gti\_sw\_on}}, \mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}}, \mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}}, \mbox{\hyperlink{structenergy__type_a752af707f8caa7b882f983a0c89f0339}{solar\_shutdown}}, \mbox{\hyperlink{structenergy__type_a5be164dbd8ee3d5249eba02241d745ca}{solar\_mode}}, \mbox{\hyperlink{structenergy__type_a5301e38b7a1fbd2cf6973c3a2b6af5d2}{startup}}, \mbox{\hyperlink{structenergy__type_a077335b41dbccfa620e40cd9d8512bcb}{ac\_mismatch}}, \mbox{\hyperlink{structenergy__type_aa3b4f7217fce683caf7e64a3211a294a}{dc\_mismatch}}, \mbox{\hyperlink{structenergy__type_ae6f9ecf1f4ff70034b34e614356052a4}{mode\_mismatch}}, \mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}};}
+\DoxyCodeLine{328         \textcolor{keyword}{volatile} uint32\_t \mbox{\hyperlink{structenergy__type_a68c49223dbc954a5dba7f9318f81e7b1}{speed\_go}}, \mbox{\hyperlink{structenergy__type_a04682ad09259856378d892992d12a0d8}{im\_delay}}, \mbox{\hyperlink{structenergy__type_a816826d7826eda53a9301e89e14837da}{im\_display}}, \mbox{\hyperlink{structenergy__type_a4b53102a89a8283ca859cdd25720f5e5}{gti\_delay}};}
+\DoxyCodeLine{329         \textcolor{keyword}{volatile} int32\_t \mbox{\hyperlink{structenergy__type_a35d3b586620259d48e14fab8bcf7a19c}{rc}}, \mbox{\hyperlink{structenergy__type_a008fd62f4467127b77deea88813be694}{sane}};}
+\DoxyCodeLine{330         \textcolor{keyword}{volatile} uint32\_t \mbox{\hyperlink{structenergy__type_a14806e6a839ea53f76d69dd9053b33ee}{ten\_sec\_clock}}, \mbox{\hyperlink{structenergy__type_ad0ad0d30b04f4fdfed27e78f5fe02151}{log\_spam}}, \mbox{\hyperlink{structenergy__type_a03488578b49639581f7fddf8db3076de}{log\_time\_reset}};}
+\DoxyCodeLine{331         pthread\_mutex\_t \mbox{\hyperlink{structenergy__type_a35ae999887cbeb701800e498f4e1721a}{ha\_lock}};}
+\DoxyCodeLine{332         \textcolor{keyword}{struct }\mbox{\hyperlink{structmode__type}{mode\_type}} \mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}};}
+\DoxyCodeLine{333         \textcolor{keyword}{struct }\mbox{\hyperlink{structlink__type}{link\_type}} \mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}};}
+\DoxyCodeLine{334         MQTTClient \mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{structenergy__type_ab09ee25ad79a65947d6d11182b017fd0}{client\_sd}}, \mbox{\hyperlink{structenergy__type_ab5ecb547482ba3b0a4dcb70bae5ac770}{client\_ha}};}
+\DoxyCodeLine{335     \};}
+\DoxyCodeLine{336 }
+\DoxyCodeLine{337     \textcolor{keyword}{extern} \textcolor{keyword}{struct }\mbox{\hyperlink{structenergy__type}{energy\_type}} \mbox{\hyperlink{energy_8h_aae3805c63e28abac1e41ffd7b623596e}{E}};}
+\DoxyCodeLine{338     \textcolor{keyword}{extern} \textcolor{keyword}{struct }\mbox{\hyperlink{structha__flag__type}{ha\_flag\_type}} \mbox{\hyperlink{energy_8h_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}};}
+\DoxyCodeLine{339     \textcolor{keyword}{extern} FILE* \mbox{\hyperlink{energy_8h_acec19516a59050bb447192fe318e6a9c}{fout}};}
+\DoxyCodeLine{340 }
+\DoxyCodeLine{341     \textcolor{keywordtype}{void} \mbox{\hyperlink{energy_8h_a16c43fcb061651421cdf377a01de5802}{timer\_callback}}(int32\_t);}
+\DoxyCodeLine{342     \textcolor{keywordtype}{void} \mbox{\hyperlink{energy_8h_acac721db1f1fabfc32db2d76683f6584}{connlost}}(\textcolor{keywordtype}{void} *, \textcolor{keywordtype}{char} *);}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{344     \textcolor{keywordtype}{void} \mbox{\hyperlink{energy_8h_aec7b6ceb0e44a7b4cc2ddcad8af63961}{ramp\_up\_gti}}(MQTTClient, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{345     \textcolor{keywordtype}{void} \mbox{\hyperlink{energy_8h_a83dff61732d4ce6a5f659dab11d86c0d}{ramp\_up\_ac}}(MQTTClient, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{346     \textcolor{keywordtype}{void} \mbox{\hyperlink{energy_8h_a921d1b16c4cd888e365414602e256ba8}{ramp\_down\_gti}}(MQTTClient, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{347     \textcolor{keywordtype}{void} \mbox{\hyperlink{energy_8h_a46e17290c238de32216da16a2cd5951b}{ramp\_down\_ac}}(MQTTClient, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{348     \textcolor{keywordtype}{void} \mbox{\hyperlink{energy_8h_a2c6c70b9a184aa76393a677b08954c81}{ha\_ac\_off}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{349     \textcolor{keywordtype}{void} \mbox{\hyperlink{energy_8h_a9a2e9166d49137eb9230625ac072807d}{ha\_ac\_on}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{350     \textcolor{keywordtype}{void} \mbox{\hyperlink{energy_8h_a200b8cfedca58c43dc888d70d83342d2}{ha\_dc\_off}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{351     \textcolor{keywordtype}{void} \mbox{\hyperlink{energy_8h_ada6758833529a18e073775d997a3833b}{ha\_dc\_on}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{352 }
+\DoxyCodeLine{353     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{energy_8h_a29cd5a6b609c70451dc93083c9244125}{iammeter\_write\_callback}}(\textcolor{keywordtype}{char} *, \textcolor{keywordtype}{size\_t}, \textcolor{keywordtype}{size\_t}, \textcolor{keywordtype}{void} *);}
+\DoxyCodeLine{354     \textcolor{keywordtype}{void} \mbox{\hyperlink{energy_8h_a34d485627939300ea5e51b765f599b9a}{iammeter\_read}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{355     \textcolor{keywordtype}{void} \mbox{\hyperlink{energy_8h_a8b0aebb679cfaa2c1c7f70e477e396a5}{print\_im\_vars}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{356     \textcolor{keywordtype}{void} \mbox{\hyperlink{energy_8h_a7ce8be1d4c8d4c9881d482bed4933512}{print\_mvar\_vars}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{357 }
+\DoxyCodeLine{358     \textcolor{keywordtype}{bool} \mbox{\hyperlink{energy_8h_a014b7e7feb1f7f94f1947d2961e58534}{sanity\_check}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{359     \textcolor{keywordtype}{char} * \mbox{\hyperlink{energy_8h_aa6c4cd39da4bcd29a41c0aec2fc3596b}{log\_time}}(\textcolor{keywordtype}{bool});}
+\DoxyCodeLine{360     \textcolor{keywordtype}{bool} \mbox{\hyperlink{energy_8h_a2533146394b65b382653eff2cd6f2106}{sync\_ha}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{361     \textcolor{keywordtype}{bool} \mbox{\hyperlink{energy_8h_ae7020228b3ccca216927caec73938554}{log\_timer}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{362 }
+\DoxyCodeLine{363 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{364 \}}
+\DoxyCodeLine{365 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{366 }
+\DoxyCodeLine{367 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* BMC\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{368 }
+
+\end{DoxyCode}

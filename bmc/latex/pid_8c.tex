@@ -1,0 +1,67 @@
+\hypertarget{pid_8c}{}\doxysection{ha\+\_\+energy/pid.c File Reference}
+\label{pid_8c}\index{ha\_energy/pid.c@{ha\_energy/pid.c}}
+{\ttfamily \#include \char`\"{}pid.\+h\char`\"{}}\newline
+Include dependency graph for pid.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=174pt]{pid_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{pid_8c_a87884a0dc8b50e94a38729d4a911e780}{Update\+PI}} (volatile struct \mbox{\hyperlink{structSPid}{SPid}} $\ast$const pid, double const error)
+\item 
+void \mbox{\hyperlink{pid_8c_a2845499736d4daabdc6bfcb637203535}{Reset\+PI}} (volatile struct \mbox{\hyperlink{structSPid}{SPid}} $\ast$const pid)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{pid_8c_a2845499736d4daabdc6bfcb637203535}\label{pid_8c_a2845499736d4daabdc6bfcb637203535}} 
+\index{pid.c@{pid.c}!ResetPI@{ResetPI}}
+\index{ResetPI@{ResetPI}!pid.c@{pid.c}}
+\doxysubsubsection{\texorpdfstring{ResetPI()}{ResetPI()}}
+{\footnotesize\ttfamily void Reset\+PI (\begin{DoxyParamCaption}\item[{volatile struct \mbox{\hyperlink{structSPid}{SPid}} $\ast$const}]{pid }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{30                                                \{}
+\DoxyCodeLine{31     pid-\/>dState = 0.0; \textcolor{comment}{// not used but cleared}}
+\DoxyCodeLine{32     pid-\/>iState = 0.0;}
+\DoxyCodeLine{33 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{pid_8c_a87884a0dc8b50e94a38729d4a911e780}\label{pid_8c_a87884a0dc8b50e94a38729d4a911e780}} 
+\index{pid.c@{pid.c}!UpdatePI@{UpdatePI}}
+\index{UpdatePI@{UpdatePI}!pid.c@{pid.c}}
+\doxysubsubsection{\texorpdfstring{UpdatePI()}{UpdatePI()}}
+{\footnotesize\ttfamily double Update\+PI (\begin{DoxyParamCaption}\item[{volatile struct \mbox{\hyperlink{structSPid}{SPid}} $\ast$const}]{pid,  }\item[{double const}]{error }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{6                                                                       \{}
+\DoxyCodeLine{7     \textcolor{keywordtype}{double} pTerm, iTerm;}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9     pTerm = pid-\/>pGain * error; \textcolor{comment}{// calculate the proportional term}}
+\DoxyCodeLine{10     \textcolor{comment}{// calculate the integral state with appropriate limiting}}
+\DoxyCodeLine{11     pid-\/>iState += error;}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13     \textcolor{keywordflow}{if} (pid-\/>iState > pid-\/>iMax) \{}
+\DoxyCodeLine{14         pid-\/>iState = pid-\/>iMax;}
+\DoxyCodeLine{15     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (pid-\/>iState < pid-\/>iMin) \{}
+\DoxyCodeLine{16         pid-\/>iState = pid-\/>iMin;}
+\DoxyCodeLine{17     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19     \}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     iTerm = (pid-\/>iGain * pid-\/>iState); \textcolor{comment}{// calculate the integral term}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23     \textcolor{keywordflow}{if} ((pTerm + iTerm) > pid-\/>iMax) \{}
+\DoxyCodeLine{24         iTerm = 0.0f;}
+\DoxyCodeLine{25         pTerm = pid-\/>iMax;}
+\DoxyCodeLine{26     \}}
+\DoxyCodeLine{27     \textcolor{keywordflow}{return} pTerm + iTerm;}
+\DoxyCodeLine{28 \}}
+
+\end{DoxyCode}

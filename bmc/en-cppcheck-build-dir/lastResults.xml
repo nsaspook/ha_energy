@@ -1,676 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <results version="2">
-    <cppcheck version="2.16.0"/>
+    <cppcheck version="2.10"/>
     <errors>
-        <error id="normalCheckLevelMaxBranches" severity="information" msg="Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches." verbose="Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches." file0="ha_energy/bsoc.c" sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.c" line="0"/>
-        </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ac1_filter&amp;#039; is never used." verbose="The function &amp;#039;ac1_filter&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.c" line="383"/>
-        </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ac2_filter&amp;#039; is never used." verbose="The function &amp;#039;ac2_filter&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.c" line="391"/>
-        </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ac_test&amp;#039; is never used." verbose="The function &amp;#039;ac_test&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.c" line="190"/>
-        </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;bat_current_stable&amp;#039; is never used." verbose="The function &amp;#039;bat_current_stable&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.c" line="239"/>
-        </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;bsoc_ac&amp;#039; is never used." verbose="The function &amp;#039;bsoc_ac&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.c" line="135"/>
-        </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;bsoc_data_collect&amp;#039; is never used." verbose="The function &amp;#039;bsoc_data_collect&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.c" line="85"/>
-        </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;bsoc_init&amp;#039; is never used." verbose="The function &amp;#039;bsoc_init&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.c" line="60"/>
-        </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;bsoc_set_mode&amp;#039; is never used." verbose="The function &amp;#039;bsoc_set_mode&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.c" line="261"/>
-        </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;dc1_filter&amp;#039; is never used." verbose="The function &amp;#039;dc1_filter&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.c" line="407"/>
-        </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;dc2_filter&amp;#039; is never used." verbose="The function &amp;#039;dc2_filter&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.c" line="415"/>
-        </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;drive0_filter&amp;#039; is never used." verbose="The function &amp;#039;drive0_filter&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.c" line="423"/>
-        </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;gti_test&amp;#039; is never used." verbose="The function &amp;#039;gti_test&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.c" line="170"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdio.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdio.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/daq.c" line="1"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;unistd.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;unistd.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/daq.c" line="2"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdbool.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdbool.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/daq.c" line="3"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdint.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdint.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/daq.c" line="4"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;comedilib.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;comedilib.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/daq.c" line="5"/>
-        </error>
-        <error id="normalCheckLevelMaxBranches" severity="information" msg="Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches." verbose="Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches." file0="ha_energy/daq.c" sinceDate="1/31/25">
-            <location file="ha_energy/daq.c" line="0"/>
-        </error>
-        <error id="unreachableCode" severity="style" msg="Statements following &amp;#039;return&amp;#039; will never be executed." verbose="Statements following &amp;#039;return&amp;#039; will never be executed." cwe="561" file0="ha_energy/daq.c" sinceDate="1/31/25">
+        <error id="unreachableCode" severity="style" msg="Statements following &amp;#039;return&amp;#039; will never be executed." verbose="Statements following &amp;#039;return&amp;#039; will never be executed." cwe="561" file0="ha_energy/daq.c" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="67"/>
         </error>
-        <error id="unreachableCode" severity="style" msg="Statements following &amp;#039;return&amp;#039; will never be executed." verbose="Statements following &amp;#039;return&amp;#039; will never be executed." cwe="561" file0="ha_energy/daq.c" sinceDate="1/31/25">
+        <error id="unreachableCode" severity="style" msg="Statements following &amp;#039;return&amp;#039; will never be executed." verbose="Statements following &amp;#039;return&amp;#039; will never be executed." cwe="561" file0="ha_energy/daq.c" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="265"/>
         </error>
-        <error id="unreachableCode" severity="style" msg="Statements following &amp;#039;return&amp;#039; will never be executed." verbose="Statements following &amp;#039;return&amp;#039; will never be executed." cwe="561" file0="ha_energy/daq.c" sinceDate="1/31/25">
+        <error id="unreachableCode" severity="style" msg="Statements following &amp;#039;return&amp;#039; will never be executed." verbose="Statements following &amp;#039;return&amp;#039; will never be executed." cwe="561" file0="ha_energy/daq.c" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="270"/>
         </error>
-        <error id="unreachableCode" severity="style" msg="Statements following &amp;#039;return&amp;#039; will never be executed." verbose="Statements following &amp;#039;return&amp;#039; will never be executed." cwe="561" file0="ha_energy/daq.c" sinceDate="1/31/25">
+        <error id="unreachableCode" severity="style" msg="Statements following &amp;#039;return&amp;#039; will never be executed." verbose="Statements following &amp;#039;return&amp;#039; will never be executed." cwe="561" file0="ha_energy/daq.c" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="276"/>
         </error>
-        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;i&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;i&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:&#10;void f(int x)&#10;{&#10;    int i = 0;&#10;    if (x) {&#10;        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here&#10;        for (int n = 0; n &amp;lt; 10; ++n) {&#10;            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here&#10;            do_something(&amp;amp;i);&#10;        }&#10;    }&#10;}&#10;When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="ha_energy/daq.c" sinceDate="1/31/25">
+        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;i&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;i&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:&#10;void f(int x)&#10;{&#10;    int i = 0;&#10;    if (x) {&#10;        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here&#10;        for (int n = 0; n &amp;lt; 10; ++n) {&#10;            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here&#10;            do_something(&amp;amp;i);&#10;        }&#10;    }&#10;}&#10;When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="ha_energy/daq.c" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="112"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;adc_range&amp;#039; is never used." verbose="The function &amp;#039;adc_range&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;adc_range&amp;#039; is never used." verbose="The function &amp;#039;adc_range&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="149"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;dac_range&amp;#039; is never used." verbose="The function &amp;#039;dac_range&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;dac_range&amp;#039; is never used." verbose="The function &amp;#039;dac_range&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="159"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;get_adc_volts&amp;#039; is never used." verbose="The function &amp;#039;get_adc_volts&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;get_adc_volts&amp;#039; is never used." verbose="The function &amp;#039;get_adc_volts&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="194"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;get_data_sample&amp;#039; is never used." verbose="The function &amp;#039;get_data_sample&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;get_data_sample&amp;#039; is never used." verbose="The function &amp;#039;get_data_sample&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="306"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;init_dac&amp;#039; is never used." verbose="The function &amp;#039;init_dac&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;init_dac&amp;#039; is never used." verbose="The function &amp;#039;init_dac&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="111"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;init_daq&amp;#039; is never used." verbose="The function &amp;#039;init_daq&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;init_daq&amp;#039; is never used." verbose="The function &amp;#039;init_daq&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="47"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;init_dio&amp;#039; is never used." verbose="The function &amp;#039;init_dio&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;init_dio&amp;#039; is never used." verbose="The function &amp;#039;init_dio&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="248"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;lp_filter&amp;#039; is never used." verbose="The function &amp;#039;lp_filter&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;lp_filter&amp;#039; is never used." verbose="The function &amp;#039;lp_filter&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="332"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;set_dac_raw&amp;#039; is never used." verbose="The function &amp;#039;set_dac_raw&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;set_dac_raw&amp;#039; is never used." verbose="The function &amp;#039;set_dac_raw&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="183"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;set_dac_volts&amp;#039; is never used." verbose="The function &amp;#039;set_dac_volts&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;set_dac_volts&amp;#039; is never used." verbose="The function &amp;#039;set_dac_volts&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="169"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;set_dio_input&amp;#039; is never used." verbose="The function &amp;#039;set_dio_input&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;set_dio_input&amp;#039; is never used." verbose="The function &amp;#039;set_dio_input&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="215"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;set_dio_output&amp;#039; is never used." verbose="The function &amp;#039;set_dio_output&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;set_dio_output&amp;#039; is never used." verbose="The function &amp;#039;set_dio_output&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/daq.c" line="208"/>
         </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdlib.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdlib.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/daq.h" line="15"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdio.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdio.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/daq.h" line="16"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;unistd.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;unistd.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/daq.h" line="17"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdint.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdint.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/daq.h" line="18"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;string.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;string.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/daq.h" line="19"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdbool.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdbool.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/daq.h" line="20"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;comedilib.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;comedilib.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/daq.h" line="21"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;signal.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;signal.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/daq.h" line="22"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;time.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;time.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/daq.h" line="23"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;sys/wait.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;sys/wait.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/daq.h" line="24"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;sys/types.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;sys/types.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/daq.h" line="25"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;sys/time.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;sys/time.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/daq.h" line="26"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;errno.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;errno.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/daq.h" line="27"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdlib.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdlib.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="14"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdio.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdio.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="15"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;unistd.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;unistd.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="16"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdint.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdint.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="17"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;string.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;string.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="18"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdbool.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdbool.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="19"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;signal.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;signal.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="20"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;time.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;time.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="21"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;sys/wait.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;sys/wait.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="22"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;sys/types.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;sys/types.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="23"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;sys/time.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;sys/time.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="24"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;errno.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;errno.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="25"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cjson/cJSON.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cjson/cJSON.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="26"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;curl/curl.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;curl/curl.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="27"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;pthread.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;pthread.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="28"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;sys/stat.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;sys/stat.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="29"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;syslog.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;syslog.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="30"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;arpa/inet.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;arpa/inet.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="31"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;sys/socket.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;sys/socket.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="32"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;netdb.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;netdb.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="33"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;ifaddrs.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;ifaddrs.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="34"/>
-        </error>
-        <error id="missingInclude" severity="information" msg="Include file: &amp;quot;MQTTClient.h&amp;quot; not found." verbose="Include file: &amp;quot;MQTTClient.h&amp;quot; not found." sinceDate="1/31/25">
-            <location file="ha_energy/energy.h" line="35"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;time.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;time.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/http_vars.c" line="2"/>
-        </error>
-        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;time_log&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;time_log&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:&#10;void f(int x)&#10;{&#10;    int i = 0;&#10;    if (x) {&#10;        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here&#10;        for (int n = 0; n &amp;lt; 10; ++n) {&#10;            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here&#10;            do_something(&amp;amp;i);&#10;        }&#10;    }&#10;}&#10;When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="ha_energy/http_vars.c" sinceDate="1/31/25">
+        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;time_log&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;time_log&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:&#10;void f(int x)&#10;{&#10;    int i = 0;&#10;    if (x) {&#10;        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here&#10;        for (int n = 0; n &amp;lt; 10; ++n) {&#10;            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here&#10;            do_something(&amp;amp;i);&#10;        }&#10;    }&#10;}&#10;When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="ha_energy/http_vars.c" sinceDate="M/d/yy">
             <location file="ha_energy/http_vars.c" line="112"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;iammeter_read&amp;#039; is never used." verbose="The function &amp;#039;iammeter_read&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;iammeter_read&amp;#039; is never used." verbose="The function &amp;#039;iammeter_read&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/http_vars.c" line="75"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;print_im_vars&amp;#039; is never used." verbose="The function &amp;#039;print_im_vars&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;print_im_vars&amp;#039; is never used." verbose="The function &amp;#039;print_im_vars&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/http_vars.c" line="110"/>
         </error>
-        <error id="unusedVariable" severity="style" msg="Unused variable: sleep" verbose="Unused variable: sleep" cwe="563" file0="ha_energy/junk.c" sinceDate="1/31/25">
+        <error id="unusedVariable" severity="style" msg="Unused variable: sleep" verbose="Unused variable: sleep" cwe="563" file0="ha_energy/junk.c" sinceDate="M/d/yy">
             <location file="ha_energy/junk.c" line="32"/>
         </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cstdlib&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cstdlib&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/main.cpp" line="8"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;math.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;math.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.h" line="14"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdlib.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdlib.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.h" line="35"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdio.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdio.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.h" line="36"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;unistd.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;unistd.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.h" line="37"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdint.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdint.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.h" line="38"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;string.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;string.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.h" line="39"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdbool.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdbool.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.h" line="40"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;signal.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;signal.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.h" line="41"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;time.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;time.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.h" line="42"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;sys/wait.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;sys/wait.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.h" line="43"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;sys/types.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;sys/types.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.h" line="44"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;sys/time.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;sys/time.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.h" line="45"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;errno.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;errno.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.h" line="46"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;math.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;math.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/bsoc.h" line="47"/>
-        </error>
-        <error id="normalCheckLevelMaxBranches" severity="information" msg="Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches." verbose="Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches." file0="ha_energy/mqtt_rec.c" sinceDate="1/31/25">
-            <location file="ha_energy/mqtt_rec.c" line="0"/>
-        </error>
-        <error id="duplicateConditionalAssign" severity="style" msg="The statement &amp;#039;if (E.gti_sw_status!=(bool)((int32_t)E.mvar[i])) E.gti_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039; is logically equivalent to &amp;#039;E.gti_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039;." verbose="The statement &amp;#039;if (E.gti_sw_status!=(bool)((int32_t)E.mvar[i])) E.gti_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039; is logically equivalent to &amp;#039;E.gti_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039;." cwe="398" file0="ha_energy/mqtt_rec.c" sinceDate="1/31/25">
+        <error id="duplicateConditionalAssign" severity="style" msg="The statement &amp;#039;if (E.gti_sw_status!=(bool)((int32_t)E.mvar[i])) E.gti_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039; is logically equivalent to &amp;#039;E.gti_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039;." verbose="The statement &amp;#039;if (E.gti_sw_status!=(bool)((int32_t)E.mvar[i])) E.gti_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039; is logically equivalent to &amp;#039;E.gti_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039;." cwe="398" file0="ha_energy/mqtt_rec.c" sinceDate="M/d/yy">
             <location file="ha_energy/mqtt_rec.c" line="187" info="Condition &amp;#039;E.gti_sw_status!=(bool)((int32_t)E.mvar[i])&amp;#039; is redundant"/>
             <location file="ha_energy/mqtt_rec.c" line="188" info="Assignment &amp;#039;E.gti_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039;"/>
         </error>
-        <error id="duplicateConditionalAssign" severity="style" msg="The statement &amp;#039;if (E.ac_sw_status!=(bool)((int32_t)E.mvar[i])) E.ac_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039; is logically equivalent to &amp;#039;E.ac_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039;." verbose="The statement &amp;#039;if (E.ac_sw_status!=(bool)((int32_t)E.mvar[i])) E.ac_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039; is logically equivalent to &amp;#039;E.ac_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039;." cwe="398" file0="ha_energy/mqtt_rec.c" sinceDate="1/31/25">
+        <error id="duplicateConditionalAssign" severity="style" msg="The statement &amp;#039;if (E.ac_sw_status!=(bool)((int32_t)E.mvar[i])) E.ac_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039; is logically equivalent to &amp;#039;E.ac_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039;." verbose="The statement &amp;#039;if (E.ac_sw_status!=(bool)((int32_t)E.mvar[i])) E.ac_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039; is logically equivalent to &amp;#039;E.ac_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039;." cwe="398" file0="ha_energy/mqtt_rec.c" sinceDate="M/d/yy">
             <location file="ha_energy/mqtt_rec.c" line="194" info="Condition &amp;#039;E.ac_sw_status!=(bool)((int32_t)E.mvar[i])&amp;#039; is redundant"/>
             <location file="ha_energy/mqtt_rec.c" line="195" info="Assignment &amp;#039;E.ac_sw_status=(bool)((int32_t)E.mvar[i])&amp;#039;"/>
         </error>
-        <error id="redundantAssignment" severity="style" msg="Variable &amp;#039;data_result&amp;#039; is assigned an expression that holds the same value." verbose="Variable &amp;#039;data_result&amp;#039; is assigned an expression that holds the same value." cwe="563" file0="ha_energy/mqtt_rec.c" sinceDate="1/31/25">
-            <location file="ha_energy/mqtt_rec.c" line="95" info=""/>
-            <location file="ha_energy/mqtt_rec.c" line="90" info="data_result is assigned &amp;#039;json&amp;#039; here."/>
-        </error>
-        <error id="shadowVariable" severity="style" msg="Local variable &amp;#039;i&amp;#039; shadows outer variable" verbose="Local variable &amp;#039;i&amp;#039; shadows outer variable" cwe="398" file0="ha_energy/mqtt_rec.c" sinceDate="1/31/25">
+        <error id="shadowVariable" severity="style" msg="Local variable &amp;#039;i&amp;#039; shadows outer variable" verbose="Local variable &amp;#039;i&amp;#039; shadows outer variable" cwe="398" file0="ha_energy/mqtt_rec.c" sinceDate="M/d/yy">
             <location file="ha_energy/mqtt_rec.c" line="58" info="Shadow variable"/>
             <location file="ha_energy/mqtt_rec.c" line="9" info="Shadowed declaration"/>
         </error>
-        <error id="shadowVariable" severity="style" msg="Local variable &amp;#039;i&amp;#039; shadows outer variable" verbose="Local variable &amp;#039;i&amp;#039; shadows outer variable" cwe="398" file0="ha_energy/mqtt_rec.c" sinceDate="1/31/25">
+        <error id="shadowVariable" severity="style" msg="Local variable &amp;#039;i&amp;#039; shadows outer variable" verbose="Local variable &amp;#039;i&amp;#039; shadows outer variable" cwe="398" file0="ha_energy/mqtt_rec.c" sinceDate="M/d/yy">
             <location file="ha_energy/mqtt_rec.c" line="75" info="Shadow variable"/>
             <location file="ha_energy/mqtt_rec.c" line="9" info="Shadowed declaration"/>
         </error>
-        <error id="constVariablePointer" severity="style" msg="Variable &amp;#039;payloadptr&amp;#039; can be declared as pointer to const" verbose="Variable &amp;#039;payloadptr&amp;#039; can be declared as pointer to const" cwe="398" file0="ha_energy/mqtt_rec.c" sinceDate="1/31/25">
-            <location file="ha_energy/mqtt_rec.c" line="10"/>
-        </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;delivered&amp;#039; is never used." verbose="The function &amp;#039;delivered&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;delivered&amp;#039; is never used." verbose="The function &amp;#039;delivered&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/mqtt_rec.c" line="122"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;fm80_float&amp;#039; is never used." verbose="The function &amp;#039;fm80_float&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;fm80_float&amp;#039; is never used." verbose="The function &amp;#039;fm80_float&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/mqtt_rec.c" line="250"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;fm80_sleep&amp;#039; is never used." verbose="The function &amp;#039;fm80_sleep&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;fm80_sleep&amp;#039; is never used." verbose="The function &amp;#039;fm80_sleep&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/mqtt_rec.c" line="272"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;msgarrvd&amp;#039; is never used." verbose="The function &amp;#039;msgarrvd&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;msgarrvd&amp;#039; is never used." verbose="The function &amp;#039;msgarrvd&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/mqtt_rec.c" line="7"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;print_mvar_vars&amp;#039; is never used." verbose="The function &amp;#039;print_mvar_vars&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;print_mvar_vars&amp;#039; is never used." verbose="The function &amp;#039;print_mvar_vars&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/mqtt_rec.c" line="240"/>
         </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;assert.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;assert.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="43"/>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ac1_filter&amp;#039; is never used." verbose="The function &amp;#039;ac1_filter&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="383"/>
         </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;ctype.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;ctype.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="44"/>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ac2_filter&amp;#039; is never used." verbose="The function &amp;#039;ac2_filter&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="391"/>
         </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;errno.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;errno.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="45"/>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ac_test&amp;#039; is never used." verbose="The function &amp;#039;ac_test&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="190"/>
         </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;float.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;float.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="46"/>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;bat_current_stable&amp;#039; is never used." verbose="The function &amp;#039;bat_current_stable&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="239"/>
         </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;limits.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;limits.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="47"/>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;bsoc_ac&amp;#039; is never used." verbose="The function &amp;#039;bsoc_ac&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="135"/>
         </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;locale.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;locale.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="48"/>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;bsoc_data_collect&amp;#039; is never used." verbose="The function &amp;#039;bsoc_data_collect&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="85"/>
         </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;math.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;math.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="49"/>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;bsoc_init&amp;#039; is never used." verbose="The function &amp;#039;bsoc_init&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="60"/>
         </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;setjmp.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;setjmp.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="50"/>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;bsoc_set_mode&amp;#039; is never used." verbose="The function &amp;#039;bsoc_set_mode&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="261"/>
         </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;signal.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;signal.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="51"/>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;dc1_filter&amp;#039; is never used." verbose="The function &amp;#039;dc1_filter&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="407"/>
         </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdarg.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdarg.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="52"/>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;dc2_filter&amp;#039; is never used." verbose="The function &amp;#039;dc2_filter&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="415"/>
         </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stddef.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stddef.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="53"/>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;drive0_filter&amp;#039; is never used." verbose="The function &amp;#039;drive0_filter&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="423"/>
         </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdio.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdio.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="54"/>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;gti_test&amp;#039; is never used." verbose="The function &amp;#039;gti_test&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
+            <location file="ha_energy/bsoc.c" line="170"/>
         </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;string.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;string.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="55"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdlib.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdlib.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="56"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;time.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;time.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="57"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;iso646.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;iso646.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="58"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;wchar.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;wchar.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="59"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;wctype.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;wctype.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="60"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdalign.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdalign.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="70"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdatomic.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdatomic.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="71"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdnoreturn.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdnoreturn.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="72"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;threads.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;threads.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="73"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;uchar.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;uchar.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="74"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;complex.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;complex.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="62"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;fenv.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;fenv.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="63"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;inttypes.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;inttypes.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="64"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdbool.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdbool.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="65"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdint.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdint.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="66"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;tgmath.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;tgmath.h&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/c_standard_headers_indexer.c" line="67"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cstdlib&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cstdlib&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="43"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;csignal&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;csignal&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="44"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;csetjmp&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;csetjmp&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="45"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cstdarg&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cstdarg&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="46"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;typeinfo&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;typeinfo&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="47"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;bitset&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;bitset&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="48"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;functional&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;functional&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="49"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;utility&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;utility&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="50"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;ctime&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;ctime&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="51"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cstddef&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cstddef&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="52"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;new&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;new&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="53"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;memory&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;memory&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="54"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;climits&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;climits&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="55"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cfloat&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cfloat&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="56"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;limits&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;limits&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="57"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;exception&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;exception&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="58"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stdexcept&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stdexcept&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="59"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cassert&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cassert&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="60"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cerrno&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cerrno&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="61"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cctype&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cctype&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="62"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cwctype&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cwctype&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="63"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cstring&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cstring&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="64"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cwchar&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cwchar&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="65"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;string&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;string&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="66"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;vector&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;vector&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="67"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;deque&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;deque&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="68"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;list&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;list&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="69"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;set&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;set&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="70"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;map&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;map&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="71"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;stack&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;stack&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="72"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;queue&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;queue&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="73"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;algorithm&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;algorithm&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="74"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;iterator&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;iterator&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="75"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cmath&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cmath&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="76"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;complex&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;complex&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="77"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;valarray&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;valarray&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="78"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;numeric&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;numeric&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="79"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;iosfwd&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;iosfwd&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="80"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;ios&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;ios&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="81"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;istream&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;istream&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="82"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;ostream&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;ostream&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="83"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;iostream&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;iostream&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="84"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;fstream&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;fstream&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="85"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;sstream&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;sstream&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="86"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;strstream&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;strstream&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="87"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;iomanip&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;iomanip&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="88"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;streambuf&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;streambuf&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="89"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cstdio&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cstdio&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="90"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;locale&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;locale&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="91"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;clocale&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;clocale&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="92"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;ciso646&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;ciso646&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="93"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;typeindex&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;typeindex&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="95"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;type_traits&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;type_traits&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="96"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;chrono&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;chrono&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="97"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;initializer_list&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;initializer_list&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="98"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;tuple&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;tuple&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="99"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;scoped_allocator&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;scoped_allocator&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="100"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cstdint&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cstdint&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="101"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cinttypes&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cinttypes&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="102"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;system_error&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;system_error&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="103"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cuchar&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cuchar&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="104"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;array&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;array&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="105"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;forward_list&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;forward_list&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="106"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;unordered_set&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;unordered_set&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="107"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;unordered_map&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;unordered_map&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="108"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;random&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;random&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="109"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;ratio&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;ratio&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="110"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cfenv&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cfenv&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="111"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;codecvt&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;codecvt&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="112"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;regex&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;regex&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="113"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;atomic&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;atomic&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="114"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;ccomplex&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;ccomplex&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="115"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;ctgmath&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;ctgmath&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="116"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cstdalign&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cstdalign&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="117"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;cstdbool&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;cstdbool&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="118"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;thread&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;thread&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="119"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;mutex&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;mutex&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="120"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;future&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;future&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="121"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;condition_variable&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;condition_variable&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="122"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;shared_mutex&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;shared_mutex&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="125"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;any&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;any&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="128"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;optional&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;optional&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="129"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;variant&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;variant&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="130"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;memory_resource&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;memory_resource&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="131"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;string_view&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;string_view&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="132"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;execution&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;execution&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="133"/>
-        </error>
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &amp;lt;filesystem&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &amp;lt;filesystem&amp;gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." sinceDate="1/31/25">
-            <location file="ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp" line="134"/>
-        </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;mqtt_ha_pid&amp;#039; is never used." verbose="The function &amp;#039;mqtt_ha_pid&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;mqtt_ha_pid&amp;#039; is never used." verbose="The function &amp;#039;mqtt_ha_pid&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/mqtt_vars.c" line="45"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;mqtt_ha_shutdown&amp;#039; is never used." verbose="The function &amp;#039;mqtt_ha_shutdown&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;mqtt_ha_shutdown&amp;#039; is never used." verbose="The function &amp;#039;mqtt_ha_shutdown&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/mqtt_vars.c" line="12"/>
         </error>
-        <error id="unusedFunction" severity="style" msg="The function &amp;#039;mqtt_ha_switch&amp;#039; is never used." verbose="The function &amp;#039;mqtt_ha_switch&amp;#039; is never used." cwe="561" sinceDate="1/31/25">
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;mqtt_ha_switch&amp;#039; is never used." verbose="The function &amp;#039;mqtt_ha_switch&amp;#039; is never used." cwe="561" sinceDate="M/d/yy">
             <location file="ha_energy/mqtt_vars.c" line="106"/>
         </error>
     </errors>

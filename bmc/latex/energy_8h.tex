@@ -1,0 +1,1982 @@
+\hypertarget{energy_8h}{}\doxysection{ha\+\_\+energy/energy.h File Reference}
+\label{energy_8h}\index{ha\_energy/energy.h@{ha\_energy/energy.h}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/time.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$cjson/c\+JSON.\+h$>$}\newline
+{\ttfamily \#include $<$curl/curl.\+h$>$}\newline
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$syslog.\+h$>$}\newline
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\newline
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include $<$netdb.\+h$>$}\newline
+{\ttfamily \#include $<$ifaddrs.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}MQTTClient.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pid.\+h\char`\"{}}\newline
+Include dependency graph for energy.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{energy_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{energy_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structlink__type}{link\+\_\+type}}
+\item 
+struct \mbox{\hyperlink{structmode__type}{mode\+\_\+type}}
+\item 
+struct \mbox{\hyperlink{structenergy__type}{energy\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{energy_8h_aa48b2017856a8a9c33a9935afe604c8d}{LOG\+\_\+\+VERSION}}~\char`\"{}V0.\+73\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_a702197a21870dfd505d92530b27754ac}{MQTT\+\_\+\+VERSION}}~\char`\"{}V3.\+11\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_af7dd188b7e9a8592e394e37ba6272a90}{TNAME}}~\char`\"{}maint9\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_a16d272bc422b8cccde66c643763a9070}{LADDRESS}}~\char`\"{}tcp\+://127.\+0.\+0.\+1\+:1883\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_a280feb883e9d4a7edcc69c8bcb9f38f2}{ADDRESS}}~\char`\"{}tcp\+://10.\+1.\+1.\+30\+:1883\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_aca843921281fc0385b402ca1e700f13b}{CLIENTID1}}~\char`\"{}Energy\+\_\+\+Mqtt\+\_\+\+HA1\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_a7adb4fde27aaf399c290536e96e41df7}{CLIENTID2}}~\char`\"{}Energy\+\_\+\+Mqtt\+\_\+\+HA2\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_a080e92b01476c8d6861e405c4ac3bae5}{CLIENTID3}}~\char`\"{}Energy\+\_\+\+Mqtt\+\_\+\+HA3\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}{TOPIC\+\_\+P}}~\char`\"{}mateq84/data/gticmd\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_a1b65e9caf02a5c504b9bdbce82b687fd}{TOPIC\+\_\+\+SPAM}}~\char`\"{}mateq84/data/spam\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_a75b4efd61045ccc11560697d90941f3f}{TOPIC\+\_\+\+PACA}}~\char`\"{}home-\/assistant/gtiac/availability\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_a7a785b1b0c69e86f3dd28b94bb393fca}{TOPIC\+\_\+\+PDCA}}~\char`\"{}home-\/assistant/gtidc/availability\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_ab741d14c77c3f7326b0c05d0be7a4330}{TOPIC\+\_\+\+PACC}}~\char`\"{}home-\/assistant/gtiac/contact\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_a6bbafe078803d99cb34f62c659e58cbc}{TOPIC\+\_\+\+PDCC}}~\char`\"{}home-\/assistant/gtidc/contact\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_a5ec6c2a3e382c3bc460c59010e1287a4}{TOPIC\+\_\+\+PPID}}~\char`\"{}home-\/assistant/solar/pid\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_ac1a01dc509505d2a44781caffa5c071a}{TOPIC\+\_\+\+SHUTDOWN}}~\char`\"{}home-\/assistant/solar/shutdown\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_a08b3494e502966f0b67ef43c0060b4a4}{TOPIC\+\_\+\+SS}}~\char`\"{}mateq84/data/solar\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_a42eda1760ac7eb3904f71b170d6eace0}{TOPIC\+\_\+\+SD}}~\char`\"{}mateq84/data/dumpload\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_a2361cc9e2cb27aa89335ae62571ef94f}{TOPIC\+\_\+\+HA}}~\char`\"{}home-\/assistant/status/switch\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_a1e5759eb3f87b00bf4acf6579f9034d5}{QOS}}~1
+\item 
+\#define \mbox{\hyperlink{energy_8h_a45ba202b05caf39795aeca91b0ae547e}{TIMEOUT}}~10000L
+\item 
+\#define \mbox{\hyperlink{energy_8h_a528b7d17d2b8f25733d0629af28d929c}{SPACING\+\_\+\+USEC}}~500 $\ast$ 1000
+\item 
+\#define \mbox{\hyperlink{energy_8h_ae1c44b0e06f13991804a91e98022ad1c}{USEC\+\_\+\+SEC}}~1000000L
+\item 
+\#define \mbox{\hyperlink{energy_8h_a1e04b677ffb8dd7609cad8e446f21111}{DAQ\+\_\+\+STR}}~32
+\item 
+\#define \mbox{\hyperlink{energy_8h_a194d0b205e6fa0225c96c64d1824064a}{DAQ\+\_\+\+STR\+\_\+M}}~\mbox{\hyperlink{energy_8h_a1e04b677ffb8dd7609cad8e446f21111}{DAQ\+\_\+\+STR}}-\/1
+\item 
+\#define \mbox{\hyperlink{energy_8h_a6d4040fa8211c8fdb91258c7a0fbe994}{SBUF\+\_\+\+SIZ}}~16
+\item 
+\#define \mbox{\hyperlink{energy_8h_a0c85192a1fc4b17a7c63d0c0f6f61625}{RBUF\+\_\+\+SIZ}}~82
+\item 
+\#define \mbox{\hyperlink{energy_8h_a52c3aaa9470287b78eee2ca241454fcb}{SYSLOG\+\_\+\+SIZ}}~512
+\item 
+\#define \mbox{\hyperlink{energy_8h_adc31fee63bd07cbfbb61fd111b95fa99}{MQTT\+\_\+\+TIMEOUT}}~900
+\item 
+\#define \mbox{\hyperlink{energy_8h_ab746f6546d2e3f1b423bcb4d347a1911}{SW\+\_\+\+QOS}}~1
+\item 
+\#define \mbox{\hyperlink{energy_8h_ab8dddbde9afb7c4d8a8cb9da5d88318a}{NO\+\_\+\+CYLON}}
+\item 
+\#define \mbox{\hyperlink{energy_8h_aef6259a38c50d4047533b3f90b514dd5}{CRITIAL\+\_\+\+SHUTDOWN\+\_\+\+LOG}}
+\item 
+\#define \mbox{\hyperlink{energy_8h_a68f824d33c675c8bb6e1337a14812a8d}{UNIT\+\_\+\+TEST}}~2
+\item 
+\#define \mbox{\hyperlink{energy_8h_a2e6d97095eb0e18b2a11eee97c1c67af}{NORM\+\_\+\+MODE}}~0
+\item 
+\#define \mbox{\hyperlink{energy_8h_a1e885e72e7ad11061ec0b4b95cc01049}{PID\+\_\+\+MODE}}~1
+\item 
+\#define \mbox{\hyperlink{energy_8h_a7c213cc89d01ec9cdbaa3356698a86ce}{MAX\+\_\+\+ERROR}}~5
+\item 
+\#define \mbox{\hyperlink{energy_8h_a5b7b3aec1ddee0f87659a37569eda53c}{IAM\+\_\+\+DELAY}}~120
+\item 
+\#define \mbox{\hyperlink{energy_8h_af1013b321ed7dc7a7940e27f03eb5bf9}{CMD\+\_\+\+SEC}}~10
+\item 
+\#define \mbox{\hyperlink{energy_8h_ae1b9e27b004bee7dcaecf4ee4778e0bd}{TIME\+\_\+\+SYNC\+\_\+\+SEC}}~30
+\item 
+\#define \mbox{\hyperlink{energy_8h_ac9d8c1bf3deadb93373645fa86fe4e55}{BAT\+\_\+\+M\+\_\+\+KW}}~5120.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a84266ec03c0f5a1e0bad318724e64f30}{BAT\+\_\+\+SOC\+\_\+\+TOP}}~0.\+98f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a79455500ab09cb1afed79130e2f25cb6}{BAT\+\_\+\+SOC\+\_\+\+HIGH}}~0.\+95f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a3657cb94075ba688f423c0e2a00324fa}{BAT\+\_\+\+SOC\+\_\+\+LOW}}~0.\+64f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a5a1af43e015999e54c67ee9f2a24a921}{BAT\+\_\+\+SOC\+\_\+\+LOW\+\_\+\+AC}}~0.\+70f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a5a4b955055b337ef5f4f21af51eccb03}{BAT\+\_\+\+CRITICAL}}~200.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a10405061b85ae1918bd02d110e958920}{MIN\+\_\+\+BAT\+\_\+\+KW\+\_\+\+BSOC\+\_\+\+SLP}}~4000.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_ad844217bc1ad213a7424c3edc9f3ccbd}{MIN\+\_\+\+BAT\+\_\+\+KW\+\_\+\+BSOC\+\_\+\+HI}}~4550.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a05cb74467763c662c93c0197d2ebb502}{MIN\+\_\+\+BAT\+\_\+\+KW\+\_\+\+GTI\+\_\+\+HI}}~\mbox{\hyperlink{energy_8h_ac9d8c1bf3deadb93373645fa86fe4e55}{BAT\+\_\+\+M\+\_\+\+KW}}$\ast$\mbox{\hyperlink{energy_8h_a84266ec03c0f5a1e0bad318724e64f30}{BAT\+\_\+\+SOC\+\_\+\+TOP}}
+\item 
+\#define \mbox{\hyperlink{energy_8h_a26d8cf1cdbb4c06adfe113dcfc99d002}{MIN\+\_\+\+BAT\+\_\+\+KW\+\_\+\+GTI\+\_\+\+LO}}~\mbox{\hyperlink{energy_8h_ac9d8c1bf3deadb93373645fa86fe4e55}{BAT\+\_\+\+M\+\_\+\+KW}}$\ast$\mbox{\hyperlink{energy_8h_a3657cb94075ba688f423c0e2a00324fa}{BAT\+\_\+\+SOC\+\_\+\+LOW}}
+\item 
+\#define \mbox{\hyperlink{energy_8h_acba28bf1765e9924790cc957b23ece2f}{MIN\+\_\+\+BAT\+\_\+\+KW\+\_\+\+AC\+\_\+\+HI}}~\mbox{\hyperlink{energy_8h_ac9d8c1bf3deadb93373645fa86fe4e55}{BAT\+\_\+\+M\+\_\+\+KW}}$\ast$\mbox{\hyperlink{energy_8h_a79455500ab09cb1afed79130e2f25cb6}{BAT\+\_\+\+SOC\+\_\+\+HIGH}}
+\item 
+\#define \mbox{\hyperlink{energy_8h_acf488256aa0ed5070518a3e3e66400eb}{MIN\+\_\+\+BAT\+\_\+\+KW\+\_\+\+AC\+\_\+\+LO}}~\mbox{\hyperlink{energy_8h_ac9d8c1bf3deadb93373645fa86fe4e55}{BAT\+\_\+\+M\+\_\+\+KW}}$\ast$\mbox{\hyperlink{energy_8h_a5a1af43e015999e54c67ee9f2a24a921}{BAT\+\_\+\+SOC\+\_\+\+LOW\+\_\+\+AC}}
+\item 
+\#define \mbox{\hyperlink{energy_8h_add82739b7510bb56bf067db225588165}{PV\+\_\+\+PGAIN}}~0.\+85f
+\item 
+\#define \mbox{\hyperlink{energy_8h_aeb2366dfac41f8b6c707e5f46ae12f42}{PV\+\_\+\+IGAIN}}~0.\+12f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a34904b7b50e61da00fececcde810eed6}{PV\+\_\+\+IMAX}}~1400.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_abb832d8acc3779b9d179bc5577a3787d}{PV\+\_\+\+BIAS}}~288.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a49ebc838f3910dacd095678db5c985f7}{PV\+\_\+\+BIAS\+\_\+\+ZERO}}~0.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a72a8935085093a655db2a9c36bc7a419}{PV\+\_\+\+BIAS\+\_\+\+LOW}}~222.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a1059832ae84ae61706dbb73c6f6ad35d}{PV\+\_\+\+BIAS\+\_\+\+FLOAT}}~399.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a1fc05643e83a06afc4a0522013007589}{PV\+\_\+\+BIAS\+\_\+\+SLEEP}}~480.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_ad478547f5632a840af219749a4e22e79}{PV\+\_\+\+BIAS\+\_\+\+RATE}}~320.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_afb56edb8a8e45a993924e0582035e7f3}{PV\+\_\+\+DL\+\_\+\+MPTT\+\_\+\+MAX}}~1200.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a8948540a345057786acbc6b5347157b5}{PV\+\_\+\+DL\+\_\+\+MPTT\+\_\+\+EXCESS}}~1300.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a7aaac0669e9aba0830f4d4180ba932ab}{PV\+\_\+\+DL\+\_\+\+MPTT\+\_\+\+IDLE}}~57.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_ae8e7f559c64b5c3fced213da7eced7da}{PV\+\_\+\+DL\+\_\+\+BIAS\+\_\+\+RATE}}~75.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a821e3aa59b88068f6ee5d1b8a922bd43}{PV\+\_\+\+DL\+\_\+\+EXCESS}}~500.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_aa475e97af32e6972baba4dd1a61f48df}{PV\+\_\+\+DL\+\_\+\+B\+\_\+\+AH\+\_\+\+LOW}}~100.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a69ba8a83d257f96478010c24eccc1627}{PV\+\_\+\+DL\+\_\+\+B\+\_\+\+AH\+\_\+\+MIN}}~150.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a536a0eb3b3062d965ce65b5972f6f84e}{PV\+\_\+\+DL\+\_\+\+B\+\_\+\+V\+\_\+\+LOW}}~23.\+8f
+\item 
+\#define \mbox{\hyperlink{energy_8h_aa0fd7bf782c78012ac9a5e7defb1bbc9}{PWA\+\_\+\+SLEEP}}~200.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a72d43cca0100ee56d41326523daf179a}{DL\+\_\+\+AC\+\_\+\+DC\+\_\+\+EFF}}~1.\+24f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a83055b2860263c3ebcea7deaaf48f0cf}{BAL\+\_\+\+MIN\+\_\+\+ENERGY\+\_\+\+AC}}~-\/200.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a8996e9908d95419bf7493943eb495da1}{BAL\+\_\+\+MAX\+\_\+\+ENERGY\+\_\+\+AC}}~200.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a42beedc428820d4934ee117f71e382c8}{BAL\+\_\+\+MIN\+\_\+\+ENERGY\+\_\+\+GTI}}~-\/1400.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a6c83f780e5e47e63325d47269958403e}{BAL\+\_\+\+MAX\+\_\+\+ENERGY\+\_\+\+GTI}}~200.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a2d9257ecbf4951d3877398f752d47ae6}{LOG\+\_\+\+TO\+\_\+\+FILE}}~\char`\"{}/store/logs/energy.\+log\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_aacdc926f0a34006e13fe0ddc3398deee}{LOG\+\_\+\+TO\+\_\+\+FILE\+\_\+\+ALT}}~\char`\"{}/tmp/energy.\+log\char`\"{}
+\item 
+\#define \mbox{\hyperlink{energy_8h_ab0b8ba6aa93ebd10e13799409927e3d5}{MAX\+\_\+\+LOG\+\_\+\+SPAM}}~60
+\item 
+\#define \mbox{\hyperlink{energy_8h_a764c3b6aadcbcacb53eca948eeb75bdf}{LOW\+\_\+\+LOG\+\_\+\+SPAM}}~2
+\item 
+\#define \mbox{\hyperlink{energy_8h_a3af0cc0b4b28d3cecd3a7d1daf772804}{RESET\+\_\+\+LOG\+\_\+\+SPAM}}~120
+\item 
+\#define \mbox{\hyperlink{energy_8h_a18b5f37719f22d3f499db9ec0370f9b6}{IM\+\_\+\+DELAY}}~1
+\item 
+\#define \mbox{\hyperlink{energy_8h_acd44706ab6bf5f575743818ab69a0cd4}{IM\+\_\+\+DISPLAY}}~1
+\item 
+\#define \mbox{\hyperlink{energy_8h_a5b916c6432aad3657a5787da32a7a086}{GTI\+\_\+\+DELAY}}~1
+\item 
+\#define \mbox{\hyperlink{energy_8h_a1080c8ca712e9dc1addd48d9ae40b007}{PWA\+\_\+\+SANE}}~1700.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_abdf0a79062ee811bfb1da544d1876e67}{PAMPS\+\_\+\+SANE}}~16.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_aa92d0d3c6e77fb8c158bd4c098ad07ac}{PVOLTS\+\_\+\+SANE}}~150.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a36849bf632f6907ce2826cf4f4f7f70a}{BAMPS\+\_\+\+SANE}}~70.\+0f
+\item 
+\#define \mbox{\hyperlink{energy_8h_a79672f46174e51a679c5910274fd66a3}{MAX\+\_\+\+IM\+\_\+\+VAR}}~\mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a6506e105a36f1b6b533674bfabc64a6e}{IA\+\_\+\+LAST}}$\ast$\mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323a9c3c3d6da2d651af717baeec2fd1bbcc}{PHASE\+\_\+\+LAST}}
+\item 
+\#define \mbox{\hyperlink{energy_8h_afddaf9e33dbc732f31ced2b378f11748}{L1\+\_\+P}}~\mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184aae657495f8fa90a809c8515a05d020f3}{IA\+\_\+\+POWER}}
+\item 
+\#define \mbox{\hyperlink{energy_8h_a492bcf1cf0c61ce5dfbf5d1825b09946}{L2\+\_\+P}}~\mbox{\hyperlink{energy_8h_afddaf9e33dbc732f31ced2b378f11748}{L1\+\_\+P}}+\mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a6506e105a36f1b6b533674bfabc64a6e}{IA\+\_\+\+LAST}}
+\item 
+\#define \mbox{\hyperlink{energy_8h_a5a73f316e17083fb4d7cbf348494322a}{L3\+\_\+P}}~\mbox{\hyperlink{energy_8h_a492bcf1cf0c61ce5dfbf5d1825b09946}{L2\+\_\+P}}+\mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a6506e105a36f1b6b533674bfabc64a6e}{IA\+\_\+\+LAST}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415f}{energy\+\_\+state}} \{ \newline
+\mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415fae5b17a6cbef319f39c92c567338e03ac}{E\+\_\+\+INIT}}
+, \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415fae3ecaae4eeb09e4ca74c68185041e15b}{E\+\_\+\+RUN}}
+, \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415faa19a96871d41a61ea3b7b279f5d4b1d6}{E\+\_\+\+WAIT}}
+, \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415faeffa62ca88ca7da081e62824f4e4be4f}{E\+\_\+\+IDLE}}
+, \newline
+\mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415fa4d5e6303dba6960140ca6bf4bab1e5ac}{E\+\_\+\+STOP}}
+, \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415fadc7160cbe8f72ca012e9a629941ab20b}{E\+\_\+\+LAST}}
+ \}
+\item 
+enum \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69}{running\+\_\+state}} \{ \newline
+\mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a3c0e911dee8c0c9acea4848d7493829e}{R\+\_\+\+INIT}}
+, \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a1474a7d3758281b3a8fdfcfda8147bab}{R\+\_\+\+FLOAT}}
+, \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a6166ec142c964c3119e6ed447db505ce}{R\+\_\+\+SLEEP}}
+, \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a53eae320dbcd86f620fa75b630f13c79}{R\+\_\+\+RUN}}
+, \newline
+\mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a63581c61e8680cb3c6be0310a4e19e81}{R\+\_\+\+IDLE}}
+, \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69ad7916c14edfe14a68b52c69ca1d0d503}{R\+\_\+\+LAST}}
+ \}
+\item 
+enum \mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323}{iammeter\+\_\+phase}} \{ \mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323a8825a1a26ae9bf551b490741d7ae280a}{PHASE\+\_\+A}}
+, \mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323ac9590e77e32637ec7e053fe2690876bf}{PHASE\+\_\+B}}
+, \mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323aa40453ff9dcc9108a8f76456fd68c464}{PHASE\+\_\+C}}
+, \mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323a9c3c3d6da2d651af717baeec2fd1bbcc}{PHASE\+\_\+\+LAST}}
+ \}
+\item 
+enum \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184}{iammeter\+\_\+id}} \{ \newline
+\mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a6ee579d3dc53ac798b03bf17c52e7da0}{IA\+\_\+\+VOLTAGE}}
+, \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a5f6a11ed664db7f00c393c0e3559c157}{IA\+\_\+\+CURRENT}}
+, \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184aae657495f8fa90a809c8515a05d020f3}{IA\+\_\+\+POWER}}
+, \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a508e5d4bafeca47cef4ba1067a856b02}{IA\+\_\+\+IMPORT}}
+, \newline
+\mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a2978ac440b0eceae0eb9be73f1046498}{IA\+\_\+\+EXPORT}}
+, \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184aca6004de3fd917189b2d1b869d8bed13}{IA\+\_\+\+FREQ}}
+, \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184ac800df5711733943f4afc9f74cc1f13a}{IA\+\_\+\+PF}}
+, \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a6506e105a36f1b6b533674bfabc64a6e}{IA\+\_\+\+LAST}}
+ \}
+\item 
+enum \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072}{mqtt\+\_\+vars}} \{ \newline
+\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aab958e15de9756ae2b2f9c1eb7bfbc58}{V\+\_\+\+FCCM}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a821ba4dacc502ba41ec0c17aff5c42d3}{V\+\_\+\+FBEKW}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a0a62fd1eb1d3f07001a6dd40f6b4550c}{V\+\_\+\+FRUNT}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a9f8ddad7002f6868f6bf77c46b11e686}{V\+\_\+\+FBAMPS}}
+, \newline
+\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a6bc30a34eca575bd44acf625beddf070}{V\+\_\+\+FBV}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a1e904f1377abb70e57726e114ff22765}{V\+\_\+\+FLO}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aea8f7852e1fb2fb07ea23c17aaed223e}{V\+\_\+\+FSO}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072af52d8a89895cb70ab99159fcad262585}{V\+\_\+\+FACE}}
+, \newline
+\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a47acb84856d0db6447de2c99171d654d}{V\+\_\+\+BEN}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072ad5c883c864f682ae706402bbcbe385cf}{V\+\_\+\+PWA}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a3c4c2533613529ed910d3b0698e89335}{V\+\_\+\+PAMPS}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aaf767b3b90d0f2566062e8ea9aa77d74}{V\+\_\+\+PVOLTS}}
+, \newline
+\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072abb8be725d4da006153726eea397593e9}{V\+\_\+\+FLAST}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a7391c358a2241e66cdf9f1e953184521}{V\+\_\+\+HDCSW}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a61c580ff6ce646f13228dc2dcad390c1}{V\+\_\+\+HACSW}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a71180ffbf74111c506a7c74e46a11dba}{V\+\_\+\+HSHUT}}
+, \newline
+\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a972a1c6b6a2288d8dd88d6cde959086c}{V\+\_\+\+HMODE}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aa2a2d376137d4017052d0bf5ceeebf3d}{V\+\_\+\+HCON0}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a50be71dd4aec439fc0394cb17e66a189}{V\+\_\+\+HCON1}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a4d96c96a3fe5386e70009f7651adab78}{V\+\_\+\+HCON2}}
+, \newline
+\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a682e786afbba8dc1e112013ad16da1c6}{V\+\_\+\+HCON3}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a0be3335391f5cd47a8e92fdc04f0927f}{V\+\_\+\+HCON4}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a8a6eb97b0e27737572161095bdccc22f}{V\+\_\+\+HCON5}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a7833386896850525de2b48c57d4595b7}{V\+\_\+\+HCON6}}
+, \newline
+\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072ad6f25d2f08b07b163f622f9a6c5c1d29}{V\+\_\+\+HCON7}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aea100527e1fc47fec8e53ea94b738b75}{V\+\_\+\+DVPV}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a78658cf8e5d2393c6d0148b279287efc}{V\+\_\+\+DPPV}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072acbf8b0bfb8d6b7f05e44120ab817a788}{V\+\_\+\+DPBAT}}
+, \newline
+\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a313329bdfc449d61aa60f11b31432e1f}{V\+\_\+\+DVBAT}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a2dd8cb6e7c42be6b299e5d3d6617d7c2}{V\+\_\+\+DCMPPT}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a966e201afd63441eacdb3f18b7dcd592}{V\+\_\+\+DPMPPT}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a79eef89bbb62af24bc79c04f29d0ad97}{V\+\_\+\+DAHBAT}}
+, \newline
+\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aee01915eb35a0177a207a2316f4c9c59}{V\+\_\+\+DCCMODE}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a2545eefc21c84f066d1a211386006be0}{V\+\_\+\+DGTI}}
+, \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072ab183b38bd716ecf9405c4546e3bd6870}{V\+\_\+\+DLAST}}
+ \}
+\item 
+enum \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7}{sane\+\_\+vars}} \{ \newline
+\mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a30f5dd18a164c592c677e2d519ba873c}{S\+\_\+\+FCCM}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a0a9a68ba3a5cf2659e3acd86dd625e57}{S\+\_\+\+FBEKW}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a65776ec50d670eaaf182c8e38336b786}{S\+\_\+\+FRUNT}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a3ba317a28cd9bbd8a72e138b88fe8d7a}{S\+\_\+\+FBAMPS}}
+, \newline
+\mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a773182a61f1d37bcdfe40f71483c7951}{S\+\_\+\+FBV}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a865767395547a8fed198ff270c28153d}{S\+\_\+\+FLO}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a66729169c4c4d13cbd79f6253f4f11cd}{S\+\_\+\+FSO}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7ab9749107eb8f7d4769de8dd895ca60c7}{S\+\_\+\+FACE}}
+, \newline
+\mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7aa1630e798b5aa1b580f12df3cfc5a879}{S\+\_\+\+BEN}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7af1d6fa8de1e28a2b6d8539f3b98fce4e}{S\+\_\+\+PWA}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a25f0992e8e1881acf87ad1beb51150b8}{S\+\_\+\+PAMPS}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a240ee28d7f55ca0e4a3c4b29f06c4e21}{S\+\_\+\+PVOLTS}}
+, \newline
+\mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7aacdedd7435bbee835519a843a8112b92}{S\+\_\+\+FLAST}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a75f8b3e725951ebbaec82a0d558d25c0}{S\+\_\+\+HDCSW}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9c35836722d274f703e5e0dfb6d9ed3a}{S\+\_\+\+HACSW}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a21567f46c8dbf8549a99aaff2f982660}{S\+\_\+\+HSHUT}}
+, \newline
+\mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a15847c968cbea0db5c4fb80a9fce1b08}{S\+\_\+\+HMODE}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9ce1e82d08b8572b71f30cc1a5fe860c}{S\+\_\+\+DVPV}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9743dab6f31754cb4b91ad6c8fd8fb80}{S\+\_\+\+DPPV}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7ab2f60d55ba3f9b048b8d5598e2c8493c}{S\+\_\+\+DPBAT}}
+, \newline
+\mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7ab7f940cb7a55a33ba5b608f5f9b3b973}{S\+\_\+\+DVBAT}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a23ce49be9fc3257c3e2f4b67307a158c}{S\+\_\+\+DCMPPT}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9b78927d045879058f9457cc99714fef}{S\+\_\+\+DPMPPT}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7adc706815dece89ac605932b800e9f587}{S\+\_\+\+DAHBAT}}
+, \newline
+\mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a5ba1557e498d8d5cf8e2afdfdb033b30}{S\+\_\+\+DCCMODE}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a393bdea87b5aeb92c17a6b8e0407d71b}{S\+\_\+\+DGTI}}
+, \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a8ceda6b0a239be9845967fae9f846736}{S\+\_\+\+DLAST}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{energy_8h_a16c43fcb061651421cdf377a01de5802}{timer\+\_\+callback}} (int32\+\_\+t)
+\item 
+void \mbox{\hyperlink{energy_8h_acac721db1f1fabfc32db2d76683f6584}{connlost}} (void $\ast$, char $\ast$)
+\item 
+void \mbox{\hyperlink{energy_8h_aec7b6ceb0e44a7b4cc2ddcad8af63961}{ramp\+\_\+up\+\_\+gti}} (MQTTClient, bool, bool)
+\item 
+void \mbox{\hyperlink{energy_8h_a83dff61732d4ce6a5f659dab11d86c0d}{ramp\+\_\+up\+\_\+ac}} (MQTTClient, bool)
+\item 
+void \mbox{\hyperlink{energy_8h_a921d1b16c4cd888e365414602e256ba8}{ramp\+\_\+down\+\_\+gti}} (MQTTClient, bool)
+\item 
+void \mbox{\hyperlink{energy_8h_a46e17290c238de32216da16a2cd5951b}{ramp\+\_\+down\+\_\+ac}} (MQTTClient, bool)
+\item 
+void \mbox{\hyperlink{energy_8h_a2c6c70b9a184aa76393a677b08954c81}{ha\+\_\+ac\+\_\+off}} (void)
+\item 
+void \mbox{\hyperlink{energy_8h_a9a2e9166d49137eb9230625ac072807d}{ha\+\_\+ac\+\_\+on}} (void)
+\item 
+void \mbox{\hyperlink{energy_8h_a200b8cfedca58c43dc888d70d83342d2}{ha\+\_\+dc\+\_\+off}} (void)
+\item 
+void \mbox{\hyperlink{energy_8h_ada6758833529a18e073775d997a3833b}{ha\+\_\+dc\+\_\+on}} (void)
+\item 
+size\+\_\+t \mbox{\hyperlink{energy_8h_a29cd5a6b609c70451dc93083c9244125}{iammeter\+\_\+write\+\_\+callback}} (char $\ast$, size\+\_\+t, size\+\_\+t, void $\ast$)
+\item 
+void \mbox{\hyperlink{energy_8h_a34d485627939300ea5e51b765f599b9a}{iammeter\+\_\+read}} (void)
+\item 
+void \mbox{\hyperlink{energy_8h_a8b0aebb679cfaa2c1c7f70e477e396a5}{print\+\_\+im\+\_\+vars}} (void)
+\item 
+void \mbox{\hyperlink{energy_8h_a7ce8be1d4c8d4c9881d482bed4933512}{print\+\_\+mvar\+\_\+vars}} (void)
+\item 
+bool \mbox{\hyperlink{energy_8h_a014b7e7feb1f7f94f1947d2961e58534}{sanity\+\_\+check}} (void)
+\item 
+char $\ast$ \mbox{\hyperlink{energy_8h_aa6c4cd39da4bcd29a41c0aec2fc3596b}{log\+\_\+time}} (bool)
+\item 
+bool \mbox{\hyperlink{energy_8h_a2533146394b65b382653eff2cd6f2106}{sync\+\_\+ha}} (void)
+\item 
+bool \mbox{\hyperlink{energy_8h_ae7020228b3ccca216927caec73938554}{log\+\_\+timer}} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structenergy__type}{energy\+\_\+type}} \mbox{\hyperlink{energy_8h_aae3805c63e28abac1e41ffd7b623596e}{E}}
+\item 
+struct \mbox{\hyperlink{structha__flag__type}{ha\+\_\+flag\+\_\+type}} \mbox{\hyperlink{energy_8h_a300fe8f759de831a9cf50f5a86c85e23}{ha\+\_\+flag\+\_\+vars\+\_\+ss}}
+\item 
+FILE $\ast$ \mbox{\hyperlink{energy_8h_acec19516a59050bb447192fe318e6a9c}{fout}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{energy_8h_a280feb883e9d4a7edcc69c8bcb9f38f2}\label{energy_8h_a280feb883e9d4a7edcc69c8bcb9f38f2}} 
+\index{energy.h@{energy.h}!ADDRESS@{ADDRESS}}
+\index{ADDRESS@{ADDRESS}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{ADDRESS}{ADDRESS}}
+{\footnotesize\ttfamily \#define ADDRESS~\char`\"{}tcp\+://10.\+1.\+1.\+30\+:1883\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_a8996e9908d95419bf7493943eb495da1}\label{energy_8h_a8996e9908d95419bf7493943eb495da1}} 
+\index{energy.h@{energy.h}!BAL\_MAX\_ENERGY\_AC@{BAL\_MAX\_ENERGY\_AC}}
+\index{BAL\_MAX\_ENERGY\_AC@{BAL\_MAX\_ENERGY\_AC}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{BAL\_MAX\_ENERGY\_AC}{BAL\_MAX\_ENERGY\_AC}}
+{\footnotesize\ttfamily \#define BAL\+\_\+\+MAX\+\_\+\+ENERGY\+\_\+\+AC~200.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a6c83f780e5e47e63325d47269958403e}\label{energy_8h_a6c83f780e5e47e63325d47269958403e}} 
+\index{energy.h@{energy.h}!BAL\_MAX\_ENERGY\_GTI@{BAL\_MAX\_ENERGY\_GTI}}
+\index{BAL\_MAX\_ENERGY\_GTI@{BAL\_MAX\_ENERGY\_GTI}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{BAL\_MAX\_ENERGY\_GTI}{BAL\_MAX\_ENERGY\_GTI}}
+{\footnotesize\ttfamily \#define BAL\+\_\+\+MAX\+\_\+\+ENERGY\+\_\+\+GTI~200.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a83055b2860263c3ebcea7deaaf48f0cf}\label{energy_8h_a83055b2860263c3ebcea7deaaf48f0cf}} 
+\index{energy.h@{energy.h}!BAL\_MIN\_ENERGY\_AC@{BAL\_MIN\_ENERGY\_AC}}
+\index{BAL\_MIN\_ENERGY\_AC@{BAL\_MIN\_ENERGY\_AC}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{BAL\_MIN\_ENERGY\_AC}{BAL\_MIN\_ENERGY\_AC}}
+{\footnotesize\ttfamily \#define BAL\+\_\+\+MIN\+\_\+\+ENERGY\+\_\+\+AC~-\/200.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a42beedc428820d4934ee117f71e382c8}\label{energy_8h_a42beedc428820d4934ee117f71e382c8}} 
+\index{energy.h@{energy.h}!BAL\_MIN\_ENERGY\_GTI@{BAL\_MIN\_ENERGY\_GTI}}
+\index{BAL\_MIN\_ENERGY\_GTI@{BAL\_MIN\_ENERGY\_GTI}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{BAL\_MIN\_ENERGY\_GTI}{BAL\_MIN\_ENERGY\_GTI}}
+{\footnotesize\ttfamily \#define BAL\+\_\+\+MIN\+\_\+\+ENERGY\+\_\+\+GTI~-\/1400.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a36849bf632f6907ce2826cf4f4f7f70a}\label{energy_8h_a36849bf632f6907ce2826cf4f4f7f70a}} 
+\index{energy.h@{energy.h}!BAMPS\_SANE@{BAMPS\_SANE}}
+\index{BAMPS\_SANE@{BAMPS\_SANE}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{BAMPS\_SANE}{BAMPS\_SANE}}
+{\footnotesize\ttfamily \#define BAMPS\+\_\+\+SANE~70.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a5a4b955055b337ef5f4f21af51eccb03}\label{energy_8h_a5a4b955055b337ef5f4f21af51eccb03}} 
+\index{energy.h@{energy.h}!BAT\_CRITICAL@{BAT\_CRITICAL}}
+\index{BAT\_CRITICAL@{BAT\_CRITICAL}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{BAT\_CRITICAL}{BAT\_CRITICAL}}
+{\footnotesize\ttfamily \#define BAT\+\_\+\+CRITICAL~200.\+0f}
+
+\mbox{\Hypertarget{energy_8h_ac9d8c1bf3deadb93373645fa86fe4e55}\label{energy_8h_ac9d8c1bf3deadb93373645fa86fe4e55}} 
+\index{energy.h@{energy.h}!BAT\_M\_KW@{BAT\_M\_KW}}
+\index{BAT\_M\_KW@{BAT\_M\_KW}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{BAT\_M\_KW}{BAT\_M\_KW}}
+{\footnotesize\ttfamily \#define BAT\+\_\+\+M\+\_\+\+KW~5120.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a79455500ab09cb1afed79130e2f25cb6}\label{energy_8h_a79455500ab09cb1afed79130e2f25cb6}} 
+\index{energy.h@{energy.h}!BAT\_SOC\_HIGH@{BAT\_SOC\_HIGH}}
+\index{BAT\_SOC\_HIGH@{BAT\_SOC\_HIGH}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{BAT\_SOC\_HIGH}{BAT\_SOC\_HIGH}}
+{\footnotesize\ttfamily \#define BAT\+\_\+\+SOC\+\_\+\+HIGH~0.\+95f}
+
+\mbox{\Hypertarget{energy_8h_a3657cb94075ba688f423c0e2a00324fa}\label{energy_8h_a3657cb94075ba688f423c0e2a00324fa}} 
+\index{energy.h@{energy.h}!BAT\_SOC\_LOW@{BAT\_SOC\_LOW}}
+\index{BAT\_SOC\_LOW@{BAT\_SOC\_LOW}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{BAT\_SOC\_LOW}{BAT\_SOC\_LOW}}
+{\footnotesize\ttfamily \#define BAT\+\_\+\+SOC\+\_\+\+LOW~0.\+64f}
+
+\mbox{\Hypertarget{energy_8h_a5a1af43e015999e54c67ee9f2a24a921}\label{energy_8h_a5a1af43e015999e54c67ee9f2a24a921}} 
+\index{energy.h@{energy.h}!BAT\_SOC\_LOW\_AC@{BAT\_SOC\_LOW\_AC}}
+\index{BAT\_SOC\_LOW\_AC@{BAT\_SOC\_LOW\_AC}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{BAT\_SOC\_LOW\_AC}{BAT\_SOC\_LOW\_AC}}
+{\footnotesize\ttfamily \#define BAT\+\_\+\+SOC\+\_\+\+LOW\+\_\+\+AC~0.\+70f}
+
+\mbox{\Hypertarget{energy_8h_a84266ec03c0f5a1e0bad318724e64f30}\label{energy_8h_a84266ec03c0f5a1e0bad318724e64f30}} 
+\index{energy.h@{energy.h}!BAT\_SOC\_TOP@{BAT\_SOC\_TOP}}
+\index{BAT\_SOC\_TOP@{BAT\_SOC\_TOP}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{BAT\_SOC\_TOP}{BAT\_SOC\_TOP}}
+{\footnotesize\ttfamily \#define BAT\+\_\+\+SOC\+\_\+\+TOP~0.\+98f}
+
+\mbox{\Hypertarget{energy_8h_aca843921281fc0385b402ca1e700f13b}\label{energy_8h_aca843921281fc0385b402ca1e700f13b}} 
+\index{energy.h@{energy.h}!CLIENTID1@{CLIENTID1}}
+\index{CLIENTID1@{CLIENTID1}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{CLIENTID1}{CLIENTID1}}
+{\footnotesize\ttfamily \#define CLIENTID1~\char`\"{}Energy\+\_\+\+Mqtt\+\_\+\+HA1\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_a7adb4fde27aaf399c290536e96e41df7}\label{energy_8h_a7adb4fde27aaf399c290536e96e41df7}} 
+\index{energy.h@{energy.h}!CLIENTID2@{CLIENTID2}}
+\index{CLIENTID2@{CLIENTID2}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{CLIENTID2}{CLIENTID2}}
+{\footnotesize\ttfamily \#define CLIENTID2~\char`\"{}Energy\+\_\+\+Mqtt\+\_\+\+HA2\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_a080e92b01476c8d6861e405c4ac3bae5}\label{energy_8h_a080e92b01476c8d6861e405c4ac3bae5}} 
+\index{energy.h@{energy.h}!CLIENTID3@{CLIENTID3}}
+\index{CLIENTID3@{CLIENTID3}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{CLIENTID3}{CLIENTID3}}
+{\footnotesize\ttfamily \#define CLIENTID3~\char`\"{}Energy\+\_\+\+Mqtt\+\_\+\+HA3\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_af1013b321ed7dc7a7940e27f03eb5bf9}\label{energy_8h_af1013b321ed7dc7a7940e27f03eb5bf9}} 
+\index{energy.h@{energy.h}!CMD\_SEC@{CMD\_SEC}}
+\index{CMD\_SEC@{CMD\_SEC}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{CMD\_SEC}{CMD\_SEC}}
+{\footnotesize\ttfamily \#define CMD\+\_\+\+SEC~10}
+
+\mbox{\Hypertarget{energy_8h_aef6259a38c50d4047533b3f90b514dd5}\label{energy_8h_aef6259a38c50d4047533b3f90b514dd5}} 
+\index{energy.h@{energy.h}!CRITIAL\_SHUTDOWN\_LOG@{CRITIAL\_SHUTDOWN\_LOG}}
+\index{CRITIAL\_SHUTDOWN\_LOG@{CRITIAL\_SHUTDOWN\_LOG}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{CRITIAL\_SHUTDOWN\_LOG}{CRITIAL\_SHUTDOWN\_LOG}}
+{\footnotesize\ttfamily \#define CRITIAL\+\_\+\+SHUTDOWN\+\_\+\+LOG}
+
+\mbox{\Hypertarget{energy_8h_a1e04b677ffb8dd7609cad8e446f21111}\label{energy_8h_a1e04b677ffb8dd7609cad8e446f21111}} 
+\index{energy.h@{energy.h}!DAQ\_STR@{DAQ\_STR}}
+\index{DAQ\_STR@{DAQ\_STR}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{DAQ\_STR}{DAQ\_STR}}
+{\footnotesize\ttfamily \#define DAQ\+\_\+\+STR~32}
+
+\mbox{\Hypertarget{energy_8h_a194d0b205e6fa0225c96c64d1824064a}\label{energy_8h_a194d0b205e6fa0225c96c64d1824064a}} 
+\index{energy.h@{energy.h}!DAQ\_STR\_M@{DAQ\_STR\_M}}
+\index{DAQ\_STR\_M@{DAQ\_STR\_M}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{DAQ\_STR\_M}{DAQ\_STR\_M}}
+{\footnotesize\ttfamily \#define DAQ\+\_\+\+STR\+\_\+M~\mbox{\hyperlink{energy_8h_a1e04b677ffb8dd7609cad8e446f21111}{DAQ\+\_\+\+STR}}-\/1}
+
+\mbox{\Hypertarget{energy_8h_a72d43cca0100ee56d41326523daf179a}\label{energy_8h_a72d43cca0100ee56d41326523daf179a}} 
+\index{energy.h@{energy.h}!DL\_AC\_DC\_EFF@{DL\_AC\_DC\_EFF}}
+\index{DL\_AC\_DC\_EFF@{DL\_AC\_DC\_EFF}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{DL\_AC\_DC\_EFF}{DL\_AC\_DC\_EFF}}
+{\footnotesize\ttfamily \#define DL\+\_\+\+AC\+\_\+\+DC\+\_\+\+EFF~1.\+24f}
+
+\mbox{\Hypertarget{energy_8h_a5b916c6432aad3657a5787da32a7a086}\label{energy_8h_a5b916c6432aad3657a5787da32a7a086}} 
+\index{energy.h@{energy.h}!GTI\_DELAY@{GTI\_DELAY}}
+\index{GTI\_DELAY@{GTI\_DELAY}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{GTI\_DELAY}{GTI\_DELAY}}
+{\footnotesize\ttfamily \#define GTI\+\_\+\+DELAY~1}
+
+\mbox{\Hypertarget{energy_8h_a5b7b3aec1ddee0f87659a37569eda53c}\label{energy_8h_a5b7b3aec1ddee0f87659a37569eda53c}} 
+\index{energy.h@{energy.h}!IAM\_DELAY@{IAM\_DELAY}}
+\index{IAM\_DELAY@{IAM\_DELAY}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{IAM\_DELAY}{IAM\_DELAY}}
+{\footnotesize\ttfamily \#define IAM\+\_\+\+DELAY~120}
+
+\mbox{\Hypertarget{energy_8h_a18b5f37719f22d3f499db9ec0370f9b6}\label{energy_8h_a18b5f37719f22d3f499db9ec0370f9b6}} 
+\index{energy.h@{energy.h}!IM\_DELAY@{IM\_DELAY}}
+\index{IM\_DELAY@{IM\_DELAY}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{IM\_DELAY}{IM\_DELAY}}
+{\footnotesize\ttfamily \#define IM\+\_\+\+DELAY~1}
+
+\mbox{\Hypertarget{energy_8h_acd44706ab6bf5f575743818ab69a0cd4}\label{energy_8h_acd44706ab6bf5f575743818ab69a0cd4}} 
+\index{energy.h@{energy.h}!IM\_DISPLAY@{IM\_DISPLAY}}
+\index{IM\_DISPLAY@{IM\_DISPLAY}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{IM\_DISPLAY}{IM\_DISPLAY}}
+{\footnotesize\ttfamily \#define IM\+\_\+\+DISPLAY~1}
+
+\mbox{\Hypertarget{energy_8h_afddaf9e33dbc732f31ced2b378f11748}\label{energy_8h_afddaf9e33dbc732f31ced2b378f11748}} 
+\index{energy.h@{energy.h}!L1\_P@{L1\_P}}
+\index{L1\_P@{L1\_P}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{L1\_P}{L1\_P}}
+{\footnotesize\ttfamily \#define L1\+\_\+P~\mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184aae657495f8fa90a809c8515a05d020f3}{IA\+\_\+\+POWER}}}
+
+\mbox{\Hypertarget{energy_8h_a492bcf1cf0c61ce5dfbf5d1825b09946}\label{energy_8h_a492bcf1cf0c61ce5dfbf5d1825b09946}} 
+\index{energy.h@{energy.h}!L2\_P@{L2\_P}}
+\index{L2\_P@{L2\_P}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{L2\_P}{L2\_P}}
+{\footnotesize\ttfamily \#define L2\+\_\+P~\mbox{\hyperlink{energy_8h_afddaf9e33dbc732f31ced2b378f11748}{L1\+\_\+P}}+\mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a6506e105a36f1b6b533674bfabc64a6e}{IA\+\_\+\+LAST}}}
+
+\mbox{\Hypertarget{energy_8h_a5a73f316e17083fb4d7cbf348494322a}\label{energy_8h_a5a73f316e17083fb4d7cbf348494322a}} 
+\index{energy.h@{energy.h}!L3\_P@{L3\_P}}
+\index{L3\_P@{L3\_P}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{L3\_P}{L3\_P}}
+{\footnotesize\ttfamily \#define L3\+\_\+P~\mbox{\hyperlink{energy_8h_a492bcf1cf0c61ce5dfbf5d1825b09946}{L2\+\_\+P}}+\mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a6506e105a36f1b6b533674bfabc64a6e}{IA\+\_\+\+LAST}}}
+
+\mbox{\Hypertarget{energy_8h_a16d272bc422b8cccde66c643763a9070}\label{energy_8h_a16d272bc422b8cccde66c643763a9070}} 
+\index{energy.h@{energy.h}!LADDRESS@{LADDRESS}}
+\index{LADDRESS@{LADDRESS}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{LADDRESS}{LADDRESS}}
+{\footnotesize\ttfamily \#define LADDRESS~\char`\"{}tcp\+://127.\+0.\+0.\+1\+:1883\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_a2d9257ecbf4951d3877398f752d47ae6}\label{energy_8h_a2d9257ecbf4951d3877398f752d47ae6}} 
+\index{energy.h@{energy.h}!LOG\_TO\_FILE@{LOG\_TO\_FILE}}
+\index{LOG\_TO\_FILE@{LOG\_TO\_FILE}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{LOG\_TO\_FILE}{LOG\_TO\_FILE}}
+{\footnotesize\ttfamily \#define LOG\+\_\+\+TO\+\_\+\+FILE~\char`\"{}/store/logs/energy.\+log\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_aacdc926f0a34006e13fe0ddc3398deee}\label{energy_8h_aacdc926f0a34006e13fe0ddc3398deee}} 
+\index{energy.h@{energy.h}!LOG\_TO\_FILE\_ALT@{LOG\_TO\_FILE\_ALT}}
+\index{LOG\_TO\_FILE\_ALT@{LOG\_TO\_FILE\_ALT}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{LOG\_TO\_FILE\_ALT}{LOG\_TO\_FILE\_ALT}}
+{\footnotesize\ttfamily \#define LOG\+\_\+\+TO\+\_\+\+FILE\+\_\+\+ALT~\char`\"{}/tmp/energy.\+log\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_aa48b2017856a8a9c33a9935afe604c8d}\label{energy_8h_aa48b2017856a8a9c33a9935afe604c8d}} 
+\index{energy.h@{energy.h}!LOG\_VERSION@{LOG\_VERSION}}
+\index{LOG\_VERSION@{LOG\_VERSION}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{LOG\_VERSION}{LOG\_VERSION}}
+{\footnotesize\ttfamily \#define LOG\+\_\+\+VERSION~\char`\"{}V0.\+73\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_a764c3b6aadcbcacb53eca948eeb75bdf}\label{energy_8h_a764c3b6aadcbcacb53eca948eeb75bdf}} 
+\index{energy.h@{energy.h}!LOW\_LOG\_SPAM@{LOW\_LOG\_SPAM}}
+\index{LOW\_LOG\_SPAM@{LOW\_LOG\_SPAM}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{LOW\_LOG\_SPAM}{LOW\_LOG\_SPAM}}
+{\footnotesize\ttfamily \#define LOW\+\_\+\+LOG\+\_\+\+SPAM~2}
+
+\mbox{\Hypertarget{energy_8h_a7c213cc89d01ec9cdbaa3356698a86ce}\label{energy_8h_a7c213cc89d01ec9cdbaa3356698a86ce}} 
+\index{energy.h@{energy.h}!MAX\_ERROR@{MAX\_ERROR}}
+\index{MAX\_ERROR@{MAX\_ERROR}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_ERROR}{MAX\_ERROR}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+ERROR~5}
+
+\mbox{\Hypertarget{energy_8h_a79672f46174e51a679c5910274fd66a3}\label{energy_8h_a79672f46174e51a679c5910274fd66a3}} 
+\index{energy.h@{energy.h}!MAX\_IM\_VAR@{MAX\_IM\_VAR}}
+\index{MAX\_IM\_VAR@{MAX\_IM\_VAR}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_IM\_VAR}{MAX\_IM\_VAR}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+IM\+\_\+\+VAR~\mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a6506e105a36f1b6b533674bfabc64a6e}{IA\+\_\+\+LAST}}$\ast$\mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323a9c3c3d6da2d651af717baeec2fd1bbcc}{PHASE\+\_\+\+LAST}}}
+
+\mbox{\Hypertarget{energy_8h_ab0b8ba6aa93ebd10e13799409927e3d5}\label{energy_8h_ab0b8ba6aa93ebd10e13799409927e3d5}} 
+\index{energy.h@{energy.h}!MAX\_LOG\_SPAM@{MAX\_LOG\_SPAM}}
+\index{MAX\_LOG\_SPAM@{MAX\_LOG\_SPAM}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_LOG\_SPAM}{MAX\_LOG\_SPAM}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+LOG\+\_\+\+SPAM~60}
+
+\mbox{\Hypertarget{energy_8h_acba28bf1765e9924790cc957b23ece2f}\label{energy_8h_acba28bf1765e9924790cc957b23ece2f}} 
+\index{energy.h@{energy.h}!MIN\_BAT\_KW\_AC\_HI@{MIN\_BAT\_KW\_AC\_HI}}
+\index{MIN\_BAT\_KW\_AC\_HI@{MIN\_BAT\_KW\_AC\_HI}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{MIN\_BAT\_KW\_AC\_HI}{MIN\_BAT\_KW\_AC\_HI}}
+{\footnotesize\ttfamily \#define MIN\+\_\+\+BAT\+\_\+\+KW\+\_\+\+AC\+\_\+\+HI~\mbox{\hyperlink{energy_8h_ac9d8c1bf3deadb93373645fa86fe4e55}{BAT\+\_\+\+M\+\_\+\+KW}}$\ast$\mbox{\hyperlink{energy_8h_a79455500ab09cb1afed79130e2f25cb6}{BAT\+\_\+\+SOC\+\_\+\+HIGH}}}
+
+\mbox{\Hypertarget{energy_8h_acf488256aa0ed5070518a3e3e66400eb}\label{energy_8h_acf488256aa0ed5070518a3e3e66400eb}} 
+\index{energy.h@{energy.h}!MIN\_BAT\_KW\_AC\_LO@{MIN\_BAT\_KW\_AC\_LO}}
+\index{MIN\_BAT\_KW\_AC\_LO@{MIN\_BAT\_KW\_AC\_LO}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{MIN\_BAT\_KW\_AC\_LO}{MIN\_BAT\_KW\_AC\_LO}}
+{\footnotesize\ttfamily \#define MIN\+\_\+\+BAT\+\_\+\+KW\+\_\+\+AC\+\_\+\+LO~\mbox{\hyperlink{energy_8h_ac9d8c1bf3deadb93373645fa86fe4e55}{BAT\+\_\+\+M\+\_\+\+KW}}$\ast$\mbox{\hyperlink{energy_8h_a5a1af43e015999e54c67ee9f2a24a921}{BAT\+\_\+\+SOC\+\_\+\+LOW\+\_\+\+AC}}}
+
+\mbox{\Hypertarget{energy_8h_ad844217bc1ad213a7424c3edc9f3ccbd}\label{energy_8h_ad844217bc1ad213a7424c3edc9f3ccbd}} 
+\index{energy.h@{energy.h}!MIN\_BAT\_KW\_BSOC\_HI@{MIN\_BAT\_KW\_BSOC\_HI}}
+\index{MIN\_BAT\_KW\_BSOC\_HI@{MIN\_BAT\_KW\_BSOC\_HI}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{MIN\_BAT\_KW\_BSOC\_HI}{MIN\_BAT\_KW\_BSOC\_HI}}
+{\footnotesize\ttfamily \#define MIN\+\_\+\+BAT\+\_\+\+KW\+\_\+\+BSOC\+\_\+\+HI~4550.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a10405061b85ae1918bd02d110e958920}\label{energy_8h_a10405061b85ae1918bd02d110e958920}} 
+\index{energy.h@{energy.h}!MIN\_BAT\_KW\_BSOC\_SLP@{MIN\_BAT\_KW\_BSOC\_SLP}}
+\index{MIN\_BAT\_KW\_BSOC\_SLP@{MIN\_BAT\_KW\_BSOC\_SLP}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{MIN\_BAT\_KW\_BSOC\_SLP}{MIN\_BAT\_KW\_BSOC\_SLP}}
+{\footnotesize\ttfamily \#define MIN\+\_\+\+BAT\+\_\+\+KW\+\_\+\+BSOC\+\_\+\+SLP~4000.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a05cb74467763c662c93c0197d2ebb502}\label{energy_8h_a05cb74467763c662c93c0197d2ebb502}} 
+\index{energy.h@{energy.h}!MIN\_BAT\_KW\_GTI\_HI@{MIN\_BAT\_KW\_GTI\_HI}}
+\index{MIN\_BAT\_KW\_GTI\_HI@{MIN\_BAT\_KW\_GTI\_HI}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{MIN\_BAT\_KW\_GTI\_HI}{MIN\_BAT\_KW\_GTI\_HI}}
+{\footnotesize\ttfamily \#define MIN\+\_\+\+BAT\+\_\+\+KW\+\_\+\+GTI\+\_\+\+HI~\mbox{\hyperlink{energy_8h_ac9d8c1bf3deadb93373645fa86fe4e55}{BAT\+\_\+\+M\+\_\+\+KW}}$\ast$\mbox{\hyperlink{energy_8h_a84266ec03c0f5a1e0bad318724e64f30}{BAT\+\_\+\+SOC\+\_\+\+TOP}}}
+
+\mbox{\Hypertarget{energy_8h_a26d8cf1cdbb4c06adfe113dcfc99d002}\label{energy_8h_a26d8cf1cdbb4c06adfe113dcfc99d002}} 
+\index{energy.h@{energy.h}!MIN\_BAT\_KW\_GTI\_LO@{MIN\_BAT\_KW\_GTI\_LO}}
+\index{MIN\_BAT\_KW\_GTI\_LO@{MIN\_BAT\_KW\_GTI\_LO}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{MIN\_BAT\_KW\_GTI\_LO}{MIN\_BAT\_KW\_GTI\_LO}}
+{\footnotesize\ttfamily \#define MIN\+\_\+\+BAT\+\_\+\+KW\+\_\+\+GTI\+\_\+\+LO~\mbox{\hyperlink{energy_8h_ac9d8c1bf3deadb93373645fa86fe4e55}{BAT\+\_\+\+M\+\_\+\+KW}}$\ast$\mbox{\hyperlink{energy_8h_a3657cb94075ba688f423c0e2a00324fa}{BAT\+\_\+\+SOC\+\_\+\+LOW}}}
+
+\mbox{\Hypertarget{energy_8h_adc31fee63bd07cbfbb61fd111b95fa99}\label{energy_8h_adc31fee63bd07cbfbb61fd111b95fa99}} 
+\index{energy.h@{energy.h}!MQTT\_TIMEOUT@{MQTT\_TIMEOUT}}
+\index{MQTT\_TIMEOUT@{MQTT\_TIMEOUT}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{MQTT\_TIMEOUT}{MQTT\_TIMEOUT}}
+{\footnotesize\ttfamily \#define MQTT\+\_\+\+TIMEOUT~900}
+
+\mbox{\Hypertarget{energy_8h_a702197a21870dfd505d92530b27754ac}\label{energy_8h_a702197a21870dfd505d92530b27754ac}} 
+\index{energy.h@{energy.h}!MQTT\_VERSION@{MQTT\_VERSION}}
+\index{MQTT\_VERSION@{MQTT\_VERSION}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{MQTT\_VERSION}{MQTT\_VERSION}}
+{\footnotesize\ttfamily \#define MQTT\+\_\+\+VERSION~\char`\"{}V3.\+11\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_ab8dddbde9afb7c4d8a8cb9da5d88318a}\label{energy_8h_ab8dddbde9afb7c4d8a8cb9da5d88318a}} 
+\index{energy.h@{energy.h}!NO\_CYLON@{NO\_CYLON}}
+\index{NO\_CYLON@{NO\_CYLON}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{NO\_CYLON}{NO\_CYLON}}
+{\footnotesize\ttfamily \#define NO\+\_\+\+CYLON}
+
+\mbox{\Hypertarget{energy_8h_a2e6d97095eb0e18b2a11eee97c1c67af}\label{energy_8h_a2e6d97095eb0e18b2a11eee97c1c67af}} 
+\index{energy.h@{energy.h}!NORM\_MODE@{NORM\_MODE}}
+\index{NORM\_MODE@{NORM\_MODE}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{NORM\_MODE}{NORM\_MODE}}
+{\footnotesize\ttfamily \#define NORM\+\_\+\+MODE~0}
+
+\mbox{\Hypertarget{energy_8h_abdf0a79062ee811bfb1da544d1876e67}\label{energy_8h_abdf0a79062ee811bfb1da544d1876e67}} 
+\index{energy.h@{energy.h}!PAMPS\_SANE@{PAMPS\_SANE}}
+\index{PAMPS\_SANE@{PAMPS\_SANE}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PAMPS\_SANE}{PAMPS\_SANE}}
+{\footnotesize\ttfamily \#define PAMPS\+\_\+\+SANE~16.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a1e885e72e7ad11061ec0b4b95cc01049}\label{energy_8h_a1e885e72e7ad11061ec0b4b95cc01049}} 
+\index{energy.h@{energy.h}!PID\_MODE@{PID\_MODE}}
+\index{PID\_MODE@{PID\_MODE}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PID\_MODE}{PID\_MODE}}
+{\footnotesize\ttfamily \#define PID\+\_\+\+MODE~1}
+
+\mbox{\Hypertarget{energy_8h_abb832d8acc3779b9d179bc5577a3787d}\label{energy_8h_abb832d8acc3779b9d179bc5577a3787d}} 
+\index{energy.h@{energy.h}!PV\_BIAS@{PV\_BIAS}}
+\index{PV\_BIAS@{PV\_BIAS}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PV\_BIAS}{PV\_BIAS}}
+{\footnotesize\ttfamily \#define PV\+\_\+\+BIAS~288.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a1059832ae84ae61706dbb73c6f6ad35d}\label{energy_8h_a1059832ae84ae61706dbb73c6f6ad35d}} 
+\index{energy.h@{energy.h}!PV\_BIAS\_FLOAT@{PV\_BIAS\_FLOAT}}
+\index{PV\_BIAS\_FLOAT@{PV\_BIAS\_FLOAT}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PV\_BIAS\_FLOAT}{PV\_BIAS\_FLOAT}}
+{\footnotesize\ttfamily \#define PV\+\_\+\+BIAS\+\_\+\+FLOAT~399.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a72a8935085093a655db2a9c36bc7a419}\label{energy_8h_a72a8935085093a655db2a9c36bc7a419}} 
+\index{energy.h@{energy.h}!PV\_BIAS\_LOW@{PV\_BIAS\_LOW}}
+\index{PV\_BIAS\_LOW@{PV\_BIAS\_LOW}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PV\_BIAS\_LOW}{PV\_BIAS\_LOW}}
+{\footnotesize\ttfamily \#define PV\+\_\+\+BIAS\+\_\+\+LOW~222.\+0f}
+
+\mbox{\Hypertarget{energy_8h_ad478547f5632a840af219749a4e22e79}\label{energy_8h_ad478547f5632a840af219749a4e22e79}} 
+\index{energy.h@{energy.h}!PV\_BIAS\_RATE@{PV\_BIAS\_RATE}}
+\index{PV\_BIAS\_RATE@{PV\_BIAS\_RATE}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PV\_BIAS\_RATE}{PV\_BIAS\_RATE}}
+{\footnotesize\ttfamily \#define PV\+\_\+\+BIAS\+\_\+\+RATE~320.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a1fc05643e83a06afc4a0522013007589}\label{energy_8h_a1fc05643e83a06afc4a0522013007589}} 
+\index{energy.h@{energy.h}!PV\_BIAS\_SLEEP@{PV\_BIAS\_SLEEP}}
+\index{PV\_BIAS\_SLEEP@{PV\_BIAS\_SLEEP}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PV\_BIAS\_SLEEP}{PV\_BIAS\_SLEEP}}
+{\footnotesize\ttfamily \#define PV\+\_\+\+BIAS\+\_\+\+SLEEP~480.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a49ebc838f3910dacd095678db5c985f7}\label{energy_8h_a49ebc838f3910dacd095678db5c985f7}} 
+\index{energy.h@{energy.h}!PV\_BIAS\_ZERO@{PV\_BIAS\_ZERO}}
+\index{PV\_BIAS\_ZERO@{PV\_BIAS\_ZERO}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PV\_BIAS\_ZERO}{PV\_BIAS\_ZERO}}
+{\footnotesize\ttfamily \#define PV\+\_\+\+BIAS\+\_\+\+ZERO~0.\+0f}
+
+\mbox{\Hypertarget{energy_8h_aa475e97af32e6972baba4dd1a61f48df}\label{energy_8h_aa475e97af32e6972baba4dd1a61f48df}} 
+\index{energy.h@{energy.h}!PV\_DL\_B\_AH\_LOW@{PV\_DL\_B\_AH\_LOW}}
+\index{PV\_DL\_B\_AH\_LOW@{PV\_DL\_B\_AH\_LOW}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PV\_DL\_B\_AH\_LOW}{PV\_DL\_B\_AH\_LOW}}
+{\footnotesize\ttfamily \#define PV\+\_\+\+DL\+\_\+\+B\+\_\+\+AH\+\_\+\+LOW~100.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a69ba8a83d257f96478010c24eccc1627}\label{energy_8h_a69ba8a83d257f96478010c24eccc1627}} 
+\index{energy.h@{energy.h}!PV\_DL\_B\_AH\_MIN@{PV\_DL\_B\_AH\_MIN}}
+\index{PV\_DL\_B\_AH\_MIN@{PV\_DL\_B\_AH\_MIN}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PV\_DL\_B\_AH\_MIN}{PV\_DL\_B\_AH\_MIN}}
+{\footnotesize\ttfamily \#define PV\+\_\+\+DL\+\_\+\+B\+\_\+\+AH\+\_\+\+MIN~150.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a536a0eb3b3062d965ce65b5972f6f84e}\label{energy_8h_a536a0eb3b3062d965ce65b5972f6f84e}} 
+\index{energy.h@{energy.h}!PV\_DL\_B\_V\_LOW@{PV\_DL\_B\_V\_LOW}}
+\index{PV\_DL\_B\_V\_LOW@{PV\_DL\_B\_V\_LOW}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PV\_DL\_B\_V\_LOW}{PV\_DL\_B\_V\_LOW}}
+{\footnotesize\ttfamily \#define PV\+\_\+\+DL\+\_\+\+B\+\_\+\+V\+\_\+\+LOW~23.\+8f}
+
+\mbox{\Hypertarget{energy_8h_ae8e7f559c64b5c3fced213da7eced7da}\label{energy_8h_ae8e7f559c64b5c3fced213da7eced7da}} 
+\index{energy.h@{energy.h}!PV\_DL\_BIAS\_RATE@{PV\_DL\_BIAS\_RATE}}
+\index{PV\_DL\_BIAS\_RATE@{PV\_DL\_BIAS\_RATE}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PV\_DL\_BIAS\_RATE}{PV\_DL\_BIAS\_RATE}}
+{\footnotesize\ttfamily \#define PV\+\_\+\+DL\+\_\+\+BIAS\+\_\+\+RATE~75.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a821e3aa59b88068f6ee5d1b8a922bd43}\label{energy_8h_a821e3aa59b88068f6ee5d1b8a922bd43}} 
+\index{energy.h@{energy.h}!PV\_DL\_EXCESS@{PV\_DL\_EXCESS}}
+\index{PV\_DL\_EXCESS@{PV\_DL\_EXCESS}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PV\_DL\_EXCESS}{PV\_DL\_EXCESS}}
+{\footnotesize\ttfamily \#define PV\+\_\+\+DL\+\_\+\+EXCESS~500.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a8948540a345057786acbc6b5347157b5}\label{energy_8h_a8948540a345057786acbc6b5347157b5}} 
+\index{energy.h@{energy.h}!PV\_DL\_MPTT\_EXCESS@{PV\_DL\_MPTT\_EXCESS}}
+\index{PV\_DL\_MPTT\_EXCESS@{PV\_DL\_MPTT\_EXCESS}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PV\_DL\_MPTT\_EXCESS}{PV\_DL\_MPTT\_EXCESS}}
+{\footnotesize\ttfamily \#define PV\+\_\+\+DL\+\_\+\+MPTT\+\_\+\+EXCESS~1300.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a7aaac0669e9aba0830f4d4180ba932ab}\label{energy_8h_a7aaac0669e9aba0830f4d4180ba932ab}} 
+\index{energy.h@{energy.h}!PV\_DL\_MPTT\_IDLE@{PV\_DL\_MPTT\_IDLE}}
+\index{PV\_DL\_MPTT\_IDLE@{PV\_DL\_MPTT\_IDLE}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PV\_DL\_MPTT\_IDLE}{PV\_DL\_MPTT\_IDLE}}
+{\footnotesize\ttfamily \#define PV\+\_\+\+DL\+\_\+\+MPTT\+\_\+\+IDLE~57.\+0f}
+
+\mbox{\Hypertarget{energy_8h_afb56edb8a8e45a993924e0582035e7f3}\label{energy_8h_afb56edb8a8e45a993924e0582035e7f3}} 
+\index{energy.h@{energy.h}!PV\_DL\_MPTT\_MAX@{PV\_DL\_MPTT\_MAX}}
+\index{PV\_DL\_MPTT\_MAX@{PV\_DL\_MPTT\_MAX}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PV\_DL\_MPTT\_MAX}{PV\_DL\_MPTT\_MAX}}
+{\footnotesize\ttfamily \#define PV\+\_\+\+DL\+\_\+\+MPTT\+\_\+\+MAX~1200.\+0f}
+
+\mbox{\Hypertarget{energy_8h_aeb2366dfac41f8b6c707e5f46ae12f42}\label{energy_8h_aeb2366dfac41f8b6c707e5f46ae12f42}} 
+\index{energy.h@{energy.h}!PV\_IGAIN@{PV\_IGAIN}}
+\index{PV\_IGAIN@{PV\_IGAIN}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PV\_IGAIN}{PV\_IGAIN}}
+{\footnotesize\ttfamily \#define PV\+\_\+\+IGAIN~0.\+12f}
+
+\mbox{\Hypertarget{energy_8h_a34904b7b50e61da00fececcde810eed6}\label{energy_8h_a34904b7b50e61da00fececcde810eed6}} 
+\index{energy.h@{energy.h}!PV\_IMAX@{PV\_IMAX}}
+\index{PV\_IMAX@{PV\_IMAX}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PV\_IMAX}{PV\_IMAX}}
+{\footnotesize\ttfamily \#define PV\+\_\+\+IMAX~1400.\+0f}
+
+\mbox{\Hypertarget{energy_8h_add82739b7510bb56bf067db225588165}\label{energy_8h_add82739b7510bb56bf067db225588165}} 
+\index{energy.h@{energy.h}!PV\_PGAIN@{PV\_PGAIN}}
+\index{PV\_PGAIN@{PV\_PGAIN}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PV\_PGAIN}{PV\_PGAIN}}
+{\footnotesize\ttfamily \#define PV\+\_\+\+PGAIN~0.\+85f}
+
+\mbox{\Hypertarget{energy_8h_aa92d0d3c6e77fb8c158bd4c098ad07ac}\label{energy_8h_aa92d0d3c6e77fb8c158bd4c098ad07ac}} 
+\index{energy.h@{energy.h}!PVOLTS\_SANE@{PVOLTS\_SANE}}
+\index{PVOLTS\_SANE@{PVOLTS\_SANE}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PVOLTS\_SANE}{PVOLTS\_SANE}}
+{\footnotesize\ttfamily \#define PVOLTS\+\_\+\+SANE~150.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a1080c8ca712e9dc1addd48d9ae40b007}\label{energy_8h_a1080c8ca712e9dc1addd48d9ae40b007}} 
+\index{energy.h@{energy.h}!PWA\_SANE@{PWA\_SANE}}
+\index{PWA\_SANE@{PWA\_SANE}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PWA\_SANE}{PWA\_SANE}}
+{\footnotesize\ttfamily \#define PWA\+\_\+\+SANE~1700.\+0f}
+
+\mbox{\Hypertarget{energy_8h_aa0fd7bf782c78012ac9a5e7defb1bbc9}\label{energy_8h_aa0fd7bf782c78012ac9a5e7defb1bbc9}} 
+\index{energy.h@{energy.h}!PWA\_SLEEP@{PWA\_SLEEP}}
+\index{PWA\_SLEEP@{PWA\_SLEEP}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{PWA\_SLEEP}{PWA\_SLEEP}}
+{\footnotesize\ttfamily \#define PWA\+\_\+\+SLEEP~200.\+0f}
+
+\mbox{\Hypertarget{energy_8h_a1e5759eb3f87b00bf4acf6579f9034d5}\label{energy_8h_a1e5759eb3f87b00bf4acf6579f9034d5}} 
+\index{energy.h@{energy.h}!QOS@{QOS}}
+\index{QOS@{QOS}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{QOS}{QOS}}
+{\footnotesize\ttfamily \#define QOS~1}
+
+\mbox{\Hypertarget{energy_8h_a0c85192a1fc4b17a7c63d0c0f6f61625}\label{energy_8h_a0c85192a1fc4b17a7c63d0c0f6f61625}} 
+\index{energy.h@{energy.h}!RBUF\_SIZ@{RBUF\_SIZ}}
+\index{RBUF\_SIZ@{RBUF\_SIZ}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{RBUF\_SIZ}{RBUF\_SIZ}}
+{\footnotesize\ttfamily \#define RBUF\+\_\+\+SIZ~82}
+
+\mbox{\Hypertarget{energy_8h_a3af0cc0b4b28d3cecd3a7d1daf772804}\label{energy_8h_a3af0cc0b4b28d3cecd3a7d1daf772804}} 
+\index{energy.h@{energy.h}!RESET\_LOG\_SPAM@{RESET\_LOG\_SPAM}}
+\index{RESET\_LOG\_SPAM@{RESET\_LOG\_SPAM}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{RESET\_LOG\_SPAM}{RESET\_LOG\_SPAM}}
+{\footnotesize\ttfamily \#define RESET\+\_\+\+LOG\+\_\+\+SPAM~120}
+
+\mbox{\Hypertarget{energy_8h_a6d4040fa8211c8fdb91258c7a0fbe994}\label{energy_8h_a6d4040fa8211c8fdb91258c7a0fbe994}} 
+\index{energy.h@{energy.h}!SBUF\_SIZ@{SBUF\_SIZ}}
+\index{SBUF\_SIZ@{SBUF\_SIZ}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{SBUF\_SIZ}{SBUF\_SIZ}}
+{\footnotesize\ttfamily \#define SBUF\+\_\+\+SIZ~16}
+
+\mbox{\Hypertarget{energy_8h_a528b7d17d2b8f25733d0629af28d929c}\label{energy_8h_a528b7d17d2b8f25733d0629af28d929c}} 
+\index{energy.h@{energy.h}!SPACING\_USEC@{SPACING\_USEC}}
+\index{SPACING\_USEC@{SPACING\_USEC}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{SPACING\_USEC}{SPACING\_USEC}}
+{\footnotesize\ttfamily \#define SPACING\+\_\+\+USEC~500 $\ast$ 1000}
+
+\mbox{\Hypertarget{energy_8h_ab746f6546d2e3f1b423bcb4d347a1911}\label{energy_8h_ab746f6546d2e3f1b423bcb4d347a1911}} 
+\index{energy.h@{energy.h}!SW\_QOS@{SW\_QOS}}
+\index{SW\_QOS@{SW\_QOS}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{SW\_QOS}{SW\_QOS}}
+{\footnotesize\ttfamily \#define SW\+\_\+\+QOS~1}
+
+\mbox{\Hypertarget{energy_8h_a52c3aaa9470287b78eee2ca241454fcb}\label{energy_8h_a52c3aaa9470287b78eee2ca241454fcb}} 
+\index{energy.h@{energy.h}!SYSLOG\_SIZ@{SYSLOG\_SIZ}}
+\index{SYSLOG\_SIZ@{SYSLOG\_SIZ}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{SYSLOG\_SIZ}{SYSLOG\_SIZ}}
+{\footnotesize\ttfamily \#define SYSLOG\+\_\+\+SIZ~512}
+
+\mbox{\Hypertarget{energy_8h_ae1b9e27b004bee7dcaecf4ee4778e0bd}\label{energy_8h_ae1b9e27b004bee7dcaecf4ee4778e0bd}} 
+\index{energy.h@{energy.h}!TIME\_SYNC\_SEC@{TIME\_SYNC\_SEC}}
+\index{TIME\_SYNC\_SEC@{TIME\_SYNC\_SEC}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{TIME\_SYNC\_SEC}{TIME\_SYNC\_SEC}}
+{\footnotesize\ttfamily \#define TIME\+\_\+\+SYNC\+\_\+\+SEC~30}
+
+\mbox{\Hypertarget{energy_8h_a45ba202b05caf39795aeca91b0ae547e}\label{energy_8h_a45ba202b05caf39795aeca91b0ae547e}} 
+\index{energy.h@{energy.h}!TIMEOUT@{TIMEOUT}}
+\index{TIMEOUT@{TIMEOUT}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{TIMEOUT}{TIMEOUT}}
+{\footnotesize\ttfamily \#define TIMEOUT~10000L}
+
+\mbox{\Hypertarget{energy_8h_af7dd188b7e9a8592e394e37ba6272a90}\label{energy_8h_af7dd188b7e9a8592e394e37ba6272a90}} 
+\index{energy.h@{energy.h}!TNAME@{TNAME}}
+\index{TNAME@{TNAME}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{TNAME}{TNAME}}
+{\footnotesize\ttfamily \#define TNAME~\char`\"{}maint9\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_a2361cc9e2cb27aa89335ae62571ef94f}\label{energy_8h_a2361cc9e2cb27aa89335ae62571ef94f}} 
+\index{energy.h@{energy.h}!TOPIC\_HA@{TOPIC\_HA}}
+\index{TOPIC\_HA@{TOPIC\_HA}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{TOPIC\_HA}{TOPIC\_HA}}
+{\footnotesize\ttfamily \#define TOPIC\+\_\+\+HA~\char`\"{}home-\/assistant/status/switch\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}\label{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}} 
+\index{energy.h@{energy.h}!TOPIC\_P@{TOPIC\_P}}
+\index{TOPIC\_P@{TOPIC\_P}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{TOPIC\_P}{TOPIC\_P}}
+{\footnotesize\ttfamily \#define TOPIC\+\_\+P~\char`\"{}mateq84/data/gticmd\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_a75b4efd61045ccc11560697d90941f3f}\label{energy_8h_a75b4efd61045ccc11560697d90941f3f}} 
+\index{energy.h@{energy.h}!TOPIC\_PACA@{TOPIC\_PACA}}
+\index{TOPIC\_PACA@{TOPIC\_PACA}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{TOPIC\_PACA}{TOPIC\_PACA}}
+{\footnotesize\ttfamily \#define TOPIC\+\_\+\+PACA~\char`\"{}home-\/assistant/gtiac/availability\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_ab741d14c77c3f7326b0c05d0be7a4330}\label{energy_8h_ab741d14c77c3f7326b0c05d0be7a4330}} 
+\index{energy.h@{energy.h}!TOPIC\_PACC@{TOPIC\_PACC}}
+\index{TOPIC\_PACC@{TOPIC\_PACC}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{TOPIC\_PACC}{TOPIC\_PACC}}
+{\footnotesize\ttfamily \#define TOPIC\+\_\+\+PACC~\char`\"{}home-\/assistant/gtiac/contact\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_a7a785b1b0c69e86f3dd28b94bb393fca}\label{energy_8h_a7a785b1b0c69e86f3dd28b94bb393fca}} 
+\index{energy.h@{energy.h}!TOPIC\_PDCA@{TOPIC\_PDCA}}
+\index{TOPIC\_PDCA@{TOPIC\_PDCA}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{TOPIC\_PDCA}{TOPIC\_PDCA}}
+{\footnotesize\ttfamily \#define TOPIC\+\_\+\+PDCA~\char`\"{}home-\/assistant/gtidc/availability\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_a6bbafe078803d99cb34f62c659e58cbc}\label{energy_8h_a6bbafe078803d99cb34f62c659e58cbc}} 
+\index{energy.h@{energy.h}!TOPIC\_PDCC@{TOPIC\_PDCC}}
+\index{TOPIC\_PDCC@{TOPIC\_PDCC}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{TOPIC\_PDCC}{TOPIC\_PDCC}}
+{\footnotesize\ttfamily \#define TOPIC\+\_\+\+PDCC~\char`\"{}home-\/assistant/gtidc/contact\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_a5ec6c2a3e382c3bc460c59010e1287a4}\label{energy_8h_a5ec6c2a3e382c3bc460c59010e1287a4}} 
+\index{energy.h@{energy.h}!TOPIC\_PPID@{TOPIC\_PPID}}
+\index{TOPIC\_PPID@{TOPIC\_PPID}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{TOPIC\_PPID}{TOPIC\_PPID}}
+{\footnotesize\ttfamily \#define TOPIC\+\_\+\+PPID~\char`\"{}home-\/assistant/solar/pid\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_a42eda1760ac7eb3904f71b170d6eace0}\label{energy_8h_a42eda1760ac7eb3904f71b170d6eace0}} 
+\index{energy.h@{energy.h}!TOPIC\_SD@{TOPIC\_SD}}
+\index{TOPIC\_SD@{TOPIC\_SD}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{TOPIC\_SD}{TOPIC\_SD}}
+{\footnotesize\ttfamily \#define TOPIC\+\_\+\+SD~\char`\"{}mateq84/data/dumpload\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_ac1a01dc509505d2a44781caffa5c071a}\label{energy_8h_ac1a01dc509505d2a44781caffa5c071a}} 
+\index{energy.h@{energy.h}!TOPIC\_SHUTDOWN@{TOPIC\_SHUTDOWN}}
+\index{TOPIC\_SHUTDOWN@{TOPIC\_SHUTDOWN}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{TOPIC\_SHUTDOWN}{TOPIC\_SHUTDOWN}}
+{\footnotesize\ttfamily \#define TOPIC\+\_\+\+SHUTDOWN~\char`\"{}home-\/assistant/solar/shutdown\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_a1b65e9caf02a5c504b9bdbce82b687fd}\label{energy_8h_a1b65e9caf02a5c504b9bdbce82b687fd}} 
+\index{energy.h@{energy.h}!TOPIC\_SPAM@{TOPIC\_SPAM}}
+\index{TOPIC\_SPAM@{TOPIC\_SPAM}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{TOPIC\_SPAM}{TOPIC\_SPAM}}
+{\footnotesize\ttfamily \#define TOPIC\+\_\+\+SPAM~\char`\"{}mateq84/data/spam\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_a08b3494e502966f0b67ef43c0060b4a4}\label{energy_8h_a08b3494e502966f0b67ef43c0060b4a4}} 
+\index{energy.h@{energy.h}!TOPIC\_SS@{TOPIC\_SS}}
+\index{TOPIC\_SS@{TOPIC\_SS}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{TOPIC\_SS}{TOPIC\_SS}}
+{\footnotesize\ttfamily \#define TOPIC\+\_\+\+SS~\char`\"{}mateq84/data/solar\char`\"{}}
+
+\mbox{\Hypertarget{energy_8h_a68f824d33c675c8bb6e1337a14812a8d}\label{energy_8h_a68f824d33c675c8bb6e1337a14812a8d}} 
+\index{energy.h@{energy.h}!UNIT\_TEST@{UNIT\_TEST}}
+\index{UNIT\_TEST@{UNIT\_TEST}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{UNIT\_TEST}{UNIT\_TEST}}
+{\footnotesize\ttfamily \#define UNIT\+\_\+\+TEST~2}
+
+\mbox{\Hypertarget{energy_8h_ae1c44b0e06f13991804a91e98022ad1c}\label{energy_8h_ae1c44b0e06f13991804a91e98022ad1c}} 
+\index{energy.h@{energy.h}!USEC\_SEC@{USEC\_SEC}}
+\index{USEC\_SEC@{USEC\_SEC}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{USEC\_SEC}{USEC\_SEC}}
+{\footnotesize\ttfamily \#define USEC\+\_\+\+SEC~1000000L}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{energy_8h_a3b2b2ba876738909ea41ffc29311415f}\label{energy_8h_a3b2b2ba876738909ea41ffc29311415f}} 
+\index{energy.h@{energy.h}!energy\_state@{energy\_state}}
+\index{energy\_state@{energy\_state}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{energy\_state}{energy\_state}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415f}{energy\+\_\+state}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E\_INIT@{E\_INIT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!E\_INIT@{E\_INIT}}}\mbox{\Hypertarget{energy_8h_a3b2b2ba876738909ea41ffc29311415fae5b17a6cbef319f39c92c567338e03ac}\label{energy_8h_a3b2b2ba876738909ea41ffc29311415fae5b17a6cbef319f39c92c567338e03ac}} 
+E\+\_\+\+INIT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E\_RUN@{E\_RUN}!energy.h@{energy.h}}\index{energy.h@{energy.h}!E\_RUN@{E\_RUN}}}\mbox{\Hypertarget{energy_8h_a3b2b2ba876738909ea41ffc29311415fae3ecaae4eeb09e4ca74c68185041e15b}\label{energy_8h_a3b2b2ba876738909ea41ffc29311415fae3ecaae4eeb09e4ca74c68185041e15b}} 
+E\+\_\+\+RUN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E\_WAIT@{E\_WAIT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!E\_WAIT@{E\_WAIT}}}\mbox{\Hypertarget{energy_8h_a3b2b2ba876738909ea41ffc29311415faa19a96871d41a61ea3b7b279f5d4b1d6}\label{energy_8h_a3b2b2ba876738909ea41ffc29311415faa19a96871d41a61ea3b7b279f5d4b1d6}} 
+E\+\_\+\+WAIT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E\_IDLE@{E\_IDLE}!energy.h@{energy.h}}\index{energy.h@{energy.h}!E\_IDLE@{E\_IDLE}}}\mbox{\Hypertarget{energy_8h_a3b2b2ba876738909ea41ffc29311415faeffa62ca88ca7da081e62824f4e4be4f}\label{energy_8h_a3b2b2ba876738909ea41ffc29311415faeffa62ca88ca7da081e62824f4e4be4f}} 
+E\+\_\+\+IDLE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E\_STOP@{E\_STOP}!energy.h@{energy.h}}\index{energy.h@{energy.h}!E\_STOP@{E\_STOP}}}\mbox{\Hypertarget{energy_8h_a3b2b2ba876738909ea41ffc29311415fa4d5e6303dba6960140ca6bf4bab1e5ac}\label{energy_8h_a3b2b2ba876738909ea41ffc29311415fa4d5e6303dba6960140ca6bf4bab1e5ac}} 
+E\+\_\+\+STOP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E\_LAST@{E\_LAST}!energy.h@{energy.h}}\index{energy.h@{energy.h}!E\_LAST@{E\_LAST}}}\mbox{\Hypertarget{energy_8h_a3b2b2ba876738909ea41ffc29311415fadc7160cbe8f72ca012e9a629941ab20b}\label{energy_8h_a3b2b2ba876738909ea41ffc29311415fadc7160cbe8f72ca012e9a629941ab20b}} 
+E\+\_\+\+LAST&\\
+\hline
+
+\end{DoxyEnumFields}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{194                       \{}
+\DoxyCodeLine{195         \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415fae5b17a6cbef319f39c92c567338e03ac}{E\_INIT}},}
+\DoxyCodeLine{196         \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415fae3ecaae4eeb09e4ca74c68185041e15b}{E\_RUN}},}
+\DoxyCodeLine{197         \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415faa19a96871d41a61ea3b7b279f5d4b1d6}{E\_WAIT}},}
+\DoxyCodeLine{198         \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415faeffa62ca88ca7da081e62824f4e4be4f}{E\_IDLE}},}
+\DoxyCodeLine{199         \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415fa4d5e6303dba6960140ca6bf4bab1e5ac}{E\_STOP}},}
+\DoxyCodeLine{200         \mbox{\hyperlink{energy_8h_a3b2b2ba876738909ea41ffc29311415fadc7160cbe8f72ca012e9a629941ab20b}{E\_LAST}},}
+\DoxyCodeLine{201     \};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_a9221f2a245e5eb6eb3034802aa882184}\label{energy_8h_a9221f2a245e5eb6eb3034802aa882184}} 
+\index{energy.h@{energy.h}!iammeter\_id@{iammeter\_id}}
+\index{iammeter\_id@{iammeter\_id}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{iammeter\_id}{iammeter\_id}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184}{iammeter\+\_\+id}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IA\_VOLTAGE@{IA\_VOLTAGE}!energy.h@{energy.h}}\index{energy.h@{energy.h}!IA\_VOLTAGE@{IA\_VOLTAGE}}}\mbox{\Hypertarget{energy_8h_a9221f2a245e5eb6eb3034802aa882184a6ee579d3dc53ac798b03bf17c52e7da0}\label{energy_8h_a9221f2a245e5eb6eb3034802aa882184a6ee579d3dc53ac798b03bf17c52e7da0}} 
+IA\+\_\+\+VOLTAGE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IA\_CURRENT@{IA\_CURRENT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!IA\_CURRENT@{IA\_CURRENT}}}\mbox{\Hypertarget{energy_8h_a9221f2a245e5eb6eb3034802aa882184a5f6a11ed664db7f00c393c0e3559c157}\label{energy_8h_a9221f2a245e5eb6eb3034802aa882184a5f6a11ed664db7f00c393c0e3559c157}} 
+IA\+\_\+\+CURRENT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IA\_POWER@{IA\_POWER}!energy.h@{energy.h}}\index{energy.h@{energy.h}!IA\_POWER@{IA\_POWER}}}\mbox{\Hypertarget{energy_8h_a9221f2a245e5eb6eb3034802aa882184aae657495f8fa90a809c8515a05d020f3}\label{energy_8h_a9221f2a245e5eb6eb3034802aa882184aae657495f8fa90a809c8515a05d020f3}} 
+IA\+\_\+\+POWER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IA\_IMPORT@{IA\_IMPORT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!IA\_IMPORT@{IA\_IMPORT}}}\mbox{\Hypertarget{energy_8h_a9221f2a245e5eb6eb3034802aa882184a508e5d4bafeca47cef4ba1067a856b02}\label{energy_8h_a9221f2a245e5eb6eb3034802aa882184a508e5d4bafeca47cef4ba1067a856b02}} 
+IA\+\_\+\+IMPORT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IA\_EXPORT@{IA\_EXPORT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!IA\_EXPORT@{IA\_EXPORT}}}\mbox{\Hypertarget{energy_8h_a9221f2a245e5eb6eb3034802aa882184a2978ac440b0eceae0eb9be73f1046498}\label{energy_8h_a9221f2a245e5eb6eb3034802aa882184a2978ac440b0eceae0eb9be73f1046498}} 
+IA\+\_\+\+EXPORT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IA\_FREQ@{IA\_FREQ}!energy.h@{energy.h}}\index{energy.h@{energy.h}!IA\_FREQ@{IA\_FREQ}}}\mbox{\Hypertarget{energy_8h_a9221f2a245e5eb6eb3034802aa882184aca6004de3fd917189b2d1b869d8bed13}\label{energy_8h_a9221f2a245e5eb6eb3034802aa882184aca6004de3fd917189b2d1b869d8bed13}} 
+IA\+\_\+\+FREQ&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IA\_PF@{IA\_PF}!energy.h@{energy.h}}\index{energy.h@{energy.h}!IA\_PF@{IA\_PF}}}\mbox{\Hypertarget{energy_8h_a9221f2a245e5eb6eb3034802aa882184ac800df5711733943f4afc9f74cc1f13a}\label{energy_8h_a9221f2a245e5eb6eb3034802aa882184ac800df5711733943f4afc9f74cc1f13a}} 
+IA\+\_\+\+PF&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IA\_LAST@{IA\_LAST}!energy.h@{energy.h}}\index{energy.h@{energy.h}!IA\_LAST@{IA\_LAST}}}\mbox{\Hypertarget{energy_8h_a9221f2a245e5eb6eb3034802aa882184a6506e105a36f1b6b533674bfabc64a6e}\label{energy_8h_a9221f2a245e5eb6eb3034802aa882184a6506e105a36f1b6b533674bfabc64a6e}} 
+IA\+\_\+\+LAST&\\
+\hline
+
+\end{DoxyEnumFields}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{219                      \{}
+\DoxyCodeLine{220         \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a6ee579d3dc53ac798b03bf17c52e7da0}{IA\_VOLTAGE}},}
+\DoxyCodeLine{221         \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a5f6a11ed664db7f00c393c0e3559c157}{IA\_CURRENT}},}
+\DoxyCodeLine{222         \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184aae657495f8fa90a809c8515a05d020f3}{IA\_POWER}},}
+\DoxyCodeLine{223         \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a508e5d4bafeca47cef4ba1067a856b02}{IA\_IMPORT}},}
+\DoxyCodeLine{224         \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a2978ac440b0eceae0eb9be73f1046498}{IA\_EXPORT}},}
+\DoxyCodeLine{225         \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184aca6004de3fd917189b2d1b869d8bed13}{IA\_FREQ}},}
+\DoxyCodeLine{226         \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184ac800df5711733943f4afc9f74cc1f13a}{IA\_PF}},}
+\DoxyCodeLine{227         \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a6506e105a36f1b6b533674bfabc64a6e}{IA\_LAST}},}
+\DoxyCodeLine{228     \};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_a43ff9d577152831837f2de48199c0323}\label{energy_8h_a43ff9d577152831837f2de48199c0323}} 
+\index{energy.h@{energy.h}!iammeter\_phase@{iammeter\_phase}}
+\index{iammeter\_phase@{iammeter\_phase}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{iammeter\_phase}{iammeter\_phase}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323}{iammeter\+\_\+phase}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PHASE\_A@{PHASE\_A}!energy.h@{energy.h}}\index{energy.h@{energy.h}!PHASE\_A@{PHASE\_A}}}\mbox{\Hypertarget{energy_8h_a43ff9d577152831837f2de48199c0323a8825a1a26ae9bf551b490741d7ae280a}\label{energy_8h_a43ff9d577152831837f2de48199c0323a8825a1a26ae9bf551b490741d7ae280a}} 
+PHASE\+\_\+A&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PHASE\_B@{PHASE\_B}!energy.h@{energy.h}}\index{energy.h@{energy.h}!PHASE\_B@{PHASE\_B}}}\mbox{\Hypertarget{energy_8h_a43ff9d577152831837f2de48199c0323ac9590e77e32637ec7e053fe2690876bf}\label{energy_8h_a43ff9d577152831837f2de48199c0323ac9590e77e32637ec7e053fe2690876bf}} 
+PHASE\+\_\+B&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PHASE\_C@{PHASE\_C}!energy.h@{energy.h}}\index{energy.h@{energy.h}!PHASE\_C@{PHASE\_C}}}\mbox{\Hypertarget{energy_8h_a43ff9d577152831837f2de48199c0323aa40453ff9dcc9108a8f76456fd68c464}\label{energy_8h_a43ff9d577152831837f2de48199c0323aa40453ff9dcc9108a8f76456fd68c464}} 
+PHASE\+\_\+C&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PHASE\_LAST@{PHASE\_LAST}!energy.h@{energy.h}}\index{energy.h@{energy.h}!PHASE\_LAST@{PHASE\_LAST}}}\mbox{\Hypertarget{energy_8h_a43ff9d577152831837f2de48199c0323a9c3c3d6da2d651af717baeec2fd1bbcc}\label{energy_8h_a43ff9d577152831837f2de48199c0323a9c3c3d6da2d651af717baeec2fd1bbcc}} 
+PHASE\+\_\+\+LAST&\\
+\hline
+
+\end{DoxyEnumFields}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{212                         \{}
+\DoxyCodeLine{213         \mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323a8825a1a26ae9bf551b490741d7ae280a}{PHASE\_A}},}
+\DoxyCodeLine{214         \mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323ac9590e77e32637ec7e053fe2690876bf}{PHASE\_B}},}
+\DoxyCodeLine{215         \mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323aa40453ff9dcc9108a8f76456fd68c464}{PHASE\_C}},}
+\DoxyCodeLine{216         \mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323a9c3c3d6da2d651af717baeec2fd1bbcc}{PHASE\_LAST}},}
+\DoxyCodeLine{217     \};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072}} 
+\index{energy.h@{energy.h}!mqtt\_vars@{mqtt\_vars}}
+\index{mqtt\_vars@{mqtt\_vars}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{mqtt\_vars}{mqtt\_vars}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072}{mqtt\+\_\+vars}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_FCCM@{V\_FCCM}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_FCCM@{V\_FCCM}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072aab958e15de9756ae2b2f9c1eb7bfbc58}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072aab958e15de9756ae2b2f9c1eb7bfbc58}} 
+V\+\_\+\+FCCM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_FBEKW@{V\_FBEKW}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_FBEKW@{V\_FBEKW}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a821ba4dacc502ba41ec0c17aff5c42d3}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a821ba4dacc502ba41ec0c17aff5c42d3}} 
+V\+\_\+\+FBEKW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_FRUNT@{V\_FRUNT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_FRUNT@{V\_FRUNT}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a0a62fd1eb1d3f07001a6dd40f6b4550c}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a0a62fd1eb1d3f07001a6dd40f6b4550c}} 
+V\+\_\+\+FRUNT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_FBAMPS@{V\_FBAMPS}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_FBAMPS@{V\_FBAMPS}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a9f8ddad7002f6868f6bf77c46b11e686}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a9f8ddad7002f6868f6bf77c46b11e686}} 
+V\+\_\+\+FBAMPS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_FBV@{V\_FBV}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_FBV@{V\_FBV}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a6bc30a34eca575bd44acf625beddf070}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a6bc30a34eca575bd44acf625beddf070}} 
+V\+\_\+\+FBV&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_FLO@{V\_FLO}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_FLO@{V\_FLO}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a1e904f1377abb70e57726e114ff22765}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a1e904f1377abb70e57726e114ff22765}} 
+V\+\_\+\+FLO&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_FSO@{V\_FSO}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_FSO@{V\_FSO}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072aea8f7852e1fb2fb07ea23c17aaed223e}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072aea8f7852e1fb2fb07ea23c17aaed223e}} 
+V\+\_\+\+FSO&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_FACE@{V\_FACE}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_FACE@{V\_FACE}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072af52d8a89895cb70ab99159fcad262585}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072af52d8a89895cb70ab99159fcad262585}} 
+V\+\_\+\+FACE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_BEN@{V\_BEN}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_BEN@{V\_BEN}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a47acb84856d0db6447de2c99171d654d}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a47acb84856d0db6447de2c99171d654d}} 
+V\+\_\+\+BEN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_PWA@{V\_PWA}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_PWA@{V\_PWA}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072ad5c883c864f682ae706402bbcbe385cf}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072ad5c883c864f682ae706402bbcbe385cf}} 
+V\+\_\+\+PWA&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_PAMPS@{V\_PAMPS}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_PAMPS@{V\_PAMPS}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a3c4c2533613529ed910d3b0698e89335}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a3c4c2533613529ed910d3b0698e89335}} 
+V\+\_\+\+PAMPS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_PVOLTS@{V\_PVOLTS}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_PVOLTS@{V\_PVOLTS}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072aaf767b3b90d0f2566062e8ea9aa77d74}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072aaf767b3b90d0f2566062e8ea9aa77d74}} 
+V\+\_\+\+PVOLTS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_FLAST@{V\_FLAST}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_FLAST@{V\_FLAST}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072abb8be725d4da006153726eea397593e9}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072abb8be725d4da006153726eea397593e9}} 
+V\+\_\+\+FLAST&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_HDCSW@{V\_HDCSW}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_HDCSW@{V\_HDCSW}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a7391c358a2241e66cdf9f1e953184521}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a7391c358a2241e66cdf9f1e953184521}} 
+V\+\_\+\+HDCSW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_HACSW@{V\_HACSW}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_HACSW@{V\_HACSW}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a61c580ff6ce646f13228dc2dcad390c1}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a61c580ff6ce646f13228dc2dcad390c1}} 
+V\+\_\+\+HACSW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_HSHUT@{V\_HSHUT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_HSHUT@{V\_HSHUT}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a71180ffbf74111c506a7c74e46a11dba}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a71180ffbf74111c506a7c74e46a11dba}} 
+V\+\_\+\+HSHUT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_HMODE@{V\_HMODE}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_HMODE@{V\_HMODE}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a972a1c6b6a2288d8dd88d6cde959086c}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a972a1c6b6a2288d8dd88d6cde959086c}} 
+V\+\_\+\+HMODE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_HCON0@{V\_HCON0}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_HCON0@{V\_HCON0}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072aa2a2d376137d4017052d0bf5ceeebf3d}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072aa2a2d376137d4017052d0bf5ceeebf3d}} 
+V\+\_\+\+HCON0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_HCON1@{V\_HCON1}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_HCON1@{V\_HCON1}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a50be71dd4aec439fc0394cb17e66a189}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a50be71dd4aec439fc0394cb17e66a189}} 
+V\+\_\+\+HCON1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_HCON2@{V\_HCON2}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_HCON2@{V\_HCON2}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a4d96c96a3fe5386e70009f7651adab78}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a4d96c96a3fe5386e70009f7651adab78}} 
+V\+\_\+\+HCON2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_HCON3@{V\_HCON3}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_HCON3@{V\_HCON3}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a682e786afbba8dc1e112013ad16da1c6}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a682e786afbba8dc1e112013ad16da1c6}} 
+V\+\_\+\+HCON3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_HCON4@{V\_HCON4}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_HCON4@{V\_HCON4}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a0be3335391f5cd47a8e92fdc04f0927f}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a0be3335391f5cd47a8e92fdc04f0927f}} 
+V\+\_\+\+HCON4&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_HCON5@{V\_HCON5}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_HCON5@{V\_HCON5}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a8a6eb97b0e27737572161095bdccc22f}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a8a6eb97b0e27737572161095bdccc22f}} 
+V\+\_\+\+HCON5&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_HCON6@{V\_HCON6}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_HCON6@{V\_HCON6}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a7833386896850525de2b48c57d4595b7}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a7833386896850525de2b48c57d4595b7}} 
+V\+\_\+\+HCON6&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_HCON7@{V\_HCON7}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_HCON7@{V\_HCON7}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072ad6f25d2f08b07b163f622f9a6c5c1d29}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072ad6f25d2f08b07b163f622f9a6c5c1d29}} 
+V\+\_\+\+HCON7&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_DVPV@{V\_DVPV}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_DVPV@{V\_DVPV}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072aea100527e1fc47fec8e53ea94b738b75}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072aea100527e1fc47fec8e53ea94b738b75}} 
+V\+\_\+\+DVPV&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_DPPV@{V\_DPPV}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_DPPV@{V\_DPPV}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a78658cf8e5d2393c6d0148b279287efc}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a78658cf8e5d2393c6d0148b279287efc}} 
+V\+\_\+\+DPPV&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_DPBAT@{V\_DPBAT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_DPBAT@{V\_DPBAT}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072acbf8b0bfb8d6b7f05e44120ab817a788}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072acbf8b0bfb8d6b7f05e44120ab817a788}} 
+V\+\_\+\+DPBAT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_DVBAT@{V\_DVBAT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_DVBAT@{V\_DVBAT}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a313329bdfc449d61aa60f11b31432e1f}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a313329bdfc449d61aa60f11b31432e1f}} 
+V\+\_\+\+DVBAT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_DCMPPT@{V\_DCMPPT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_DCMPPT@{V\_DCMPPT}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a2dd8cb6e7c42be6b299e5d3d6617d7c2}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a2dd8cb6e7c42be6b299e5d3d6617d7c2}} 
+V\+\_\+\+DCMPPT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_DPMPPT@{V\_DPMPPT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_DPMPPT@{V\_DPMPPT}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a966e201afd63441eacdb3f18b7dcd592}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a966e201afd63441eacdb3f18b7dcd592}} 
+V\+\_\+\+DPMPPT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_DAHBAT@{V\_DAHBAT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_DAHBAT@{V\_DAHBAT}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a79eef89bbb62af24bc79c04f29d0ad97}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a79eef89bbb62af24bc79c04f29d0ad97}} 
+V\+\_\+\+DAHBAT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_DCCMODE@{V\_DCCMODE}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_DCCMODE@{V\_DCCMODE}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072aee01915eb35a0177a207a2316f4c9c59}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072aee01915eb35a0177a207a2316f4c9c59}} 
+V\+\_\+\+DCCMODE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_DGTI@{V\_DGTI}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_DGTI@{V\_DGTI}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072a2545eefc21c84f066d1a211386006be0}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072a2545eefc21c84f066d1a211386006be0}} 
+V\+\_\+\+DGTI&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\_DLAST@{V\_DLAST}!energy.h@{energy.h}}\index{energy.h@{energy.h}!V\_DLAST@{V\_DLAST}}}\mbox{\Hypertarget{energy_8h_a4798b70da5e09a128bfc682db0b65072ab183b38bd716ecf9405c4546e3bd6870}\label{energy_8h_a4798b70da5e09a128bfc682db0b65072ab183b38bd716ecf9405c4546e3bd6870}} 
+V\+\_\+\+DLAST&\\
+\hline
+
+\end{DoxyEnumFields}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{230                    \{}
+\DoxyCodeLine{231         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aab958e15de9756ae2b2f9c1eb7bfbc58}{V\_FCCM}},}
+\DoxyCodeLine{232         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a821ba4dacc502ba41ec0c17aff5c42d3}{V\_FBEKW}},}
+\DoxyCodeLine{233         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a0a62fd1eb1d3f07001a6dd40f6b4550c}{V\_FRUNT}},}
+\DoxyCodeLine{234         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a9f8ddad7002f6868f6bf77c46b11e686}{V\_FBAMPS}},}
+\DoxyCodeLine{235         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a6bc30a34eca575bd44acf625beddf070}{V\_FBV}},}
+\DoxyCodeLine{236         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a1e904f1377abb70e57726e114ff22765}{V\_FLO}},}
+\DoxyCodeLine{237         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aea8f7852e1fb2fb07ea23c17aaed223e}{V\_FSO}},}
+\DoxyCodeLine{238         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072af52d8a89895cb70ab99159fcad262585}{V\_FACE}},}
+\DoxyCodeLine{239         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a47acb84856d0db6447de2c99171d654d}{V\_BEN}},}
+\DoxyCodeLine{240         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072ad5c883c864f682ae706402bbcbe385cf}{V\_PWA}},}
+\DoxyCodeLine{241         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a3c4c2533613529ed910d3b0698e89335}{V\_PAMPS}},}
+\DoxyCodeLine{242         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aaf767b3b90d0f2566062e8ea9aa77d74}{V\_PVOLTS}},}
+\DoxyCodeLine{243         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072abb8be725d4da006153726eea397593e9}{V\_FLAST}},}
+\DoxyCodeLine{244         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a7391c358a2241e66cdf9f1e953184521}{V\_HDCSW}},}
+\DoxyCodeLine{245         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a61c580ff6ce646f13228dc2dcad390c1}{V\_HACSW}},}
+\DoxyCodeLine{246         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a71180ffbf74111c506a7c74e46a11dba}{V\_HSHUT}},}
+\DoxyCodeLine{247         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a972a1c6b6a2288d8dd88d6cde959086c}{V\_HMODE}},}
+\DoxyCodeLine{248         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aa2a2d376137d4017052d0bf5ceeebf3d}{V\_HCON0}},}
+\DoxyCodeLine{249         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a50be71dd4aec439fc0394cb17e66a189}{V\_HCON1}},}
+\DoxyCodeLine{250         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a4d96c96a3fe5386e70009f7651adab78}{V\_HCON2}},}
+\DoxyCodeLine{251         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a682e786afbba8dc1e112013ad16da1c6}{V\_HCON3}},}
+\DoxyCodeLine{252         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a0be3335391f5cd47a8e92fdc04f0927f}{V\_HCON4}},}
+\DoxyCodeLine{253         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a8a6eb97b0e27737572161095bdccc22f}{V\_HCON5}},}
+\DoxyCodeLine{254         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a7833386896850525de2b48c57d4595b7}{V\_HCON6}},}
+\DoxyCodeLine{255         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072ad6f25d2f08b07b163f622f9a6c5c1d29}{V\_HCON7}},}
+\DoxyCodeLine{256         \textcolor{comment}{// add other data ranges here}}
+\DoxyCodeLine{257         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aea100527e1fc47fec8e53ea94b738b75}{V\_DVPV}},}
+\DoxyCodeLine{258         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a78658cf8e5d2393c6d0148b279287efc}{V\_DPPV}},}
+\DoxyCodeLine{259         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072acbf8b0bfb8d6b7f05e44120ab817a788}{V\_DPBAT}},}
+\DoxyCodeLine{260         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a313329bdfc449d61aa60f11b31432e1f}{V\_DVBAT}},}
+\DoxyCodeLine{261         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a2dd8cb6e7c42be6b299e5d3d6617d7c2}{V\_DCMPPT}},}
+\DoxyCodeLine{262         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a966e201afd63441eacdb3f18b7dcd592}{V\_DPMPPT}},}
+\DoxyCodeLine{263         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a79eef89bbb62af24bc79c04f29d0ad97}{V\_DAHBAT}},}
+\DoxyCodeLine{264         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aee01915eb35a0177a207a2316f4c9c59}{V\_DCCMODE}},}
+\DoxyCodeLine{265         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a2545eefc21c84f066d1a211386006be0}{V\_DGTI}},}
+\DoxyCodeLine{266         \mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072ab183b38bd716ecf9405c4546e3bd6870}{V\_DLAST}},}
+\DoxyCodeLine{267     \};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69}\label{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69}} 
+\index{energy.h@{energy.h}!running\_state@{running\_state}}
+\index{running\_state@{running\_state}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{running\_state}{running\_state}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69}{running\+\_\+state}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\_INIT@{R\_INIT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!R\_INIT@{R\_INIT}}}\mbox{\Hypertarget{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a3c0e911dee8c0c9acea4848d7493829e}\label{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a3c0e911dee8c0c9acea4848d7493829e}} 
+R\+\_\+\+INIT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\_FLOAT@{R\_FLOAT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!R\_FLOAT@{R\_FLOAT}}}\mbox{\Hypertarget{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a1474a7d3758281b3a8fdfcfda8147bab}\label{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a1474a7d3758281b3a8fdfcfda8147bab}} 
+R\+\_\+\+FLOAT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\_SLEEP@{R\_SLEEP}!energy.h@{energy.h}}\index{energy.h@{energy.h}!R\_SLEEP@{R\_SLEEP}}}\mbox{\Hypertarget{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a6166ec142c964c3119e6ed447db505ce}\label{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a6166ec142c964c3119e6ed447db505ce}} 
+R\+\_\+\+SLEEP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\_RUN@{R\_RUN}!energy.h@{energy.h}}\index{energy.h@{energy.h}!R\_RUN@{R\_RUN}}}\mbox{\Hypertarget{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a53eae320dbcd86f620fa75b630f13c79}\label{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a53eae320dbcd86f620fa75b630f13c79}} 
+R\+\_\+\+RUN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\_IDLE@{R\_IDLE}!energy.h@{energy.h}}\index{energy.h@{energy.h}!R\_IDLE@{R\_IDLE}}}\mbox{\Hypertarget{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a63581c61e8680cb3c6be0310a4e19e81}\label{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a63581c61e8680cb3c6be0310a4e19e81}} 
+R\+\_\+\+IDLE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\_LAST@{R\_LAST}!energy.h@{energy.h}}\index{energy.h@{energy.h}!R\_LAST@{R\_LAST}}}\mbox{\Hypertarget{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69ad7916c14edfe14a68b52c69ca1d0d503}\label{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69ad7916c14edfe14a68b52c69ca1d0d503}} 
+R\+\_\+\+LAST&\\
+\hline
+
+\end{DoxyEnumFields}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{203                        \{}
+\DoxyCodeLine{204         \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a3c0e911dee8c0c9acea4848d7493829e}{R\_INIT}},}
+\DoxyCodeLine{205         \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a1474a7d3758281b3a8fdfcfda8147bab}{R\_FLOAT}},}
+\DoxyCodeLine{206         \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a6166ec142c964c3119e6ed447db505ce}{R\_SLEEP}},}
+\DoxyCodeLine{207         \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a53eae320dbcd86f620fa75b630f13c79}{R\_RUN}},}
+\DoxyCodeLine{208         \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69a63581c61e8680cb3c6be0310a4e19e81}{R\_IDLE}},}
+\DoxyCodeLine{209         \mbox{\hyperlink{energy_8h_a1bdad092c5c23a62d1b0d20c6ce63d69ad7916c14edfe14a68b52c69ca1d0d503}{R\_LAST}},}
+\DoxyCodeLine{210     \};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7}} 
+\index{energy.h@{energy.h}!sane\_vars@{sane\_vars}}
+\index{sane\_vars@{sane\_vars}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{sane\_vars}{sane\_vars}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7}{sane\+\_\+vars}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_FCCM@{S\_FCCM}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_FCCM@{S\_FCCM}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a30f5dd18a164c592c677e2d519ba873c}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a30f5dd18a164c592c677e2d519ba873c}} 
+S\+\_\+\+FCCM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_FBEKW@{S\_FBEKW}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_FBEKW@{S\_FBEKW}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a0a9a68ba3a5cf2659e3acd86dd625e57}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a0a9a68ba3a5cf2659e3acd86dd625e57}} 
+S\+\_\+\+FBEKW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_FRUNT@{S\_FRUNT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_FRUNT@{S\_FRUNT}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a65776ec50d670eaaf182c8e38336b786}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a65776ec50d670eaaf182c8e38336b786}} 
+S\+\_\+\+FRUNT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_FBAMPS@{S\_FBAMPS}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_FBAMPS@{S\_FBAMPS}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a3ba317a28cd9bbd8a72e138b88fe8d7a}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a3ba317a28cd9bbd8a72e138b88fe8d7a}} 
+S\+\_\+\+FBAMPS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_FBV@{S\_FBV}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_FBV@{S\_FBV}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a773182a61f1d37bcdfe40f71483c7951}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a773182a61f1d37bcdfe40f71483c7951}} 
+S\+\_\+\+FBV&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_FLO@{S\_FLO}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_FLO@{S\_FLO}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a865767395547a8fed198ff270c28153d}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a865767395547a8fed198ff270c28153d}} 
+S\+\_\+\+FLO&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_FSO@{S\_FSO}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_FSO@{S\_FSO}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a66729169c4c4d13cbd79f6253f4f11cd}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a66729169c4c4d13cbd79f6253f4f11cd}} 
+S\+\_\+\+FSO&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_FACE@{S\_FACE}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_FACE@{S\_FACE}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7ab9749107eb8f7d4769de8dd895ca60c7}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7ab9749107eb8f7d4769de8dd895ca60c7}} 
+S\+\_\+\+FACE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_BEN@{S\_BEN}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_BEN@{S\_BEN}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7aa1630e798b5aa1b580f12df3cfc5a879}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7aa1630e798b5aa1b580f12df3cfc5a879}} 
+S\+\_\+\+BEN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_PWA@{S\_PWA}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_PWA@{S\_PWA}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7af1d6fa8de1e28a2b6d8539f3b98fce4e}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7af1d6fa8de1e28a2b6d8539f3b98fce4e}} 
+S\+\_\+\+PWA&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_PAMPS@{S\_PAMPS}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_PAMPS@{S\_PAMPS}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a25f0992e8e1881acf87ad1beb51150b8}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a25f0992e8e1881acf87ad1beb51150b8}} 
+S\+\_\+\+PAMPS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_PVOLTS@{S\_PVOLTS}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_PVOLTS@{S\_PVOLTS}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a240ee28d7f55ca0e4a3c4b29f06c4e21}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a240ee28d7f55ca0e4a3c4b29f06c4e21}} 
+S\+\_\+\+PVOLTS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_FLAST@{S\_FLAST}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_FLAST@{S\_FLAST}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7aacdedd7435bbee835519a843a8112b92}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7aacdedd7435bbee835519a843a8112b92}} 
+S\+\_\+\+FLAST&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_HDCSW@{S\_HDCSW}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_HDCSW@{S\_HDCSW}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a75f8b3e725951ebbaec82a0d558d25c0}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a75f8b3e725951ebbaec82a0d558d25c0}} 
+S\+\_\+\+HDCSW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_HACSW@{S\_HACSW}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_HACSW@{S\_HACSW}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9c35836722d274f703e5e0dfb6d9ed3a}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9c35836722d274f703e5e0dfb6d9ed3a}} 
+S\+\_\+\+HACSW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_HSHUT@{S\_HSHUT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_HSHUT@{S\_HSHUT}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a21567f46c8dbf8549a99aaff2f982660}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a21567f46c8dbf8549a99aaff2f982660}} 
+S\+\_\+\+HSHUT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_HMODE@{S\_HMODE}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_HMODE@{S\_HMODE}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a15847c968cbea0db5c4fb80a9fce1b08}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a15847c968cbea0db5c4fb80a9fce1b08}} 
+S\+\_\+\+HMODE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_DVPV@{S\_DVPV}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_DVPV@{S\_DVPV}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9ce1e82d08b8572b71f30cc1a5fe860c}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9ce1e82d08b8572b71f30cc1a5fe860c}} 
+S\+\_\+\+DVPV&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_DPPV@{S\_DPPV}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_DPPV@{S\_DPPV}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9743dab6f31754cb4b91ad6c8fd8fb80}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9743dab6f31754cb4b91ad6c8fd8fb80}} 
+S\+\_\+\+DPPV&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_DPBAT@{S\_DPBAT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_DPBAT@{S\_DPBAT}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7ab2f60d55ba3f9b048b8d5598e2c8493c}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7ab2f60d55ba3f9b048b8d5598e2c8493c}} 
+S\+\_\+\+DPBAT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_DVBAT@{S\_DVBAT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_DVBAT@{S\_DVBAT}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7ab7f940cb7a55a33ba5b608f5f9b3b973}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7ab7f940cb7a55a33ba5b608f5f9b3b973}} 
+S\+\_\+\+DVBAT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_DCMPPT@{S\_DCMPPT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_DCMPPT@{S\_DCMPPT}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a23ce49be9fc3257c3e2f4b67307a158c}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a23ce49be9fc3257c3e2f4b67307a158c}} 
+S\+\_\+\+DCMPPT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_DPMPPT@{S\_DPMPPT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_DPMPPT@{S\_DPMPPT}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9b78927d045879058f9457cc99714fef}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9b78927d045879058f9457cc99714fef}} 
+S\+\_\+\+DPMPPT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_DAHBAT@{S\_DAHBAT}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_DAHBAT@{S\_DAHBAT}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7adc706815dece89ac605932b800e9f587}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7adc706815dece89ac605932b800e9f587}} 
+S\+\_\+\+DAHBAT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_DCCMODE@{S\_DCCMODE}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_DCCMODE@{S\_DCCMODE}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a5ba1557e498d8d5cf8e2afdfdb033b30}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a5ba1557e498d8d5cf8e2afdfdb033b30}} 
+S\+\_\+\+DCCMODE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_DGTI@{S\_DGTI}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_DGTI@{S\_DGTI}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a393bdea87b5aeb92c17a6b8e0407d71b}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a393bdea87b5aeb92c17a6b8e0407d71b}} 
+S\+\_\+\+DGTI&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\_DLAST@{S\_DLAST}!energy.h@{energy.h}}\index{energy.h@{energy.h}!S\_DLAST@{S\_DLAST}}}\mbox{\Hypertarget{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a8ceda6b0a239be9845967fae9f846736}\label{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a8ceda6b0a239be9845967fae9f846736}} 
+S\+\_\+\+DLAST&\\
+\hline
+
+\end{DoxyEnumFields}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{269                    \{}
+\DoxyCodeLine{270         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a30f5dd18a164c592c677e2d519ba873c}{S\_FCCM}},}
+\DoxyCodeLine{271         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a0a9a68ba3a5cf2659e3acd86dd625e57}{S\_FBEKW}},}
+\DoxyCodeLine{272         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a65776ec50d670eaaf182c8e38336b786}{S\_FRUNT}},}
+\DoxyCodeLine{273         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a3ba317a28cd9bbd8a72e138b88fe8d7a}{S\_FBAMPS}},}
+\DoxyCodeLine{274         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a773182a61f1d37bcdfe40f71483c7951}{S\_FBV}},}
+\DoxyCodeLine{275         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a865767395547a8fed198ff270c28153d}{S\_FLO}},}
+\DoxyCodeLine{276         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a66729169c4c4d13cbd79f6253f4f11cd}{S\_FSO}},}
+\DoxyCodeLine{277         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7ab9749107eb8f7d4769de8dd895ca60c7}{S\_FACE}},}
+\DoxyCodeLine{278         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7aa1630e798b5aa1b580f12df3cfc5a879}{S\_BEN}},}
+\DoxyCodeLine{279         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7af1d6fa8de1e28a2b6d8539f3b98fce4e}{S\_PWA}},}
+\DoxyCodeLine{280         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a25f0992e8e1881acf87ad1beb51150b8}{S\_PAMPS}},}
+\DoxyCodeLine{281         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a240ee28d7f55ca0e4a3c4b29f06c4e21}{S\_PVOLTS}},}
+\DoxyCodeLine{282         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7aacdedd7435bbee835519a843a8112b92}{S\_FLAST}},}
+\DoxyCodeLine{283         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a75f8b3e725951ebbaec82a0d558d25c0}{S\_HDCSW}},}
+\DoxyCodeLine{284         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9c35836722d274f703e5e0dfb6d9ed3a}{S\_HACSW}},}
+\DoxyCodeLine{285         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a21567f46c8dbf8549a99aaff2f982660}{S\_HSHUT}},}
+\DoxyCodeLine{286         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a15847c968cbea0db5c4fb80a9fce1b08}{S\_HMODE}},}
+\DoxyCodeLine{287         \textcolor{comment}{// add other data ranges here}}
+\DoxyCodeLine{288         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9ce1e82d08b8572b71f30cc1a5fe860c}{S\_DVPV}},}
+\DoxyCodeLine{289         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9743dab6f31754cb4b91ad6c8fd8fb80}{S\_DPPV}},}
+\DoxyCodeLine{290         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7ab2f60d55ba3f9b048b8d5598e2c8493c}{S\_DPBAT}},}
+\DoxyCodeLine{291         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7ab7f940cb7a55a33ba5b608f5f9b3b973}{S\_DVBAT}},}
+\DoxyCodeLine{292         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a23ce49be9fc3257c3e2f4b67307a158c}{S\_DCMPPT}},}
+\DoxyCodeLine{293         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a9b78927d045879058f9457cc99714fef}{S\_DPMPPT}},}
+\DoxyCodeLine{294         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7adc706815dece89ac605932b800e9f587}{S\_DAHBAT}},}
+\DoxyCodeLine{295         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a5ba1557e498d8d5cf8e2afdfdb033b30}{S\_DCCMODE}},}
+\DoxyCodeLine{296         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a393bdea87b5aeb92c17a6b8e0407d71b}{S\_DGTI}},}
+\DoxyCodeLine{297         \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a8ceda6b0a239be9845967fae9f846736}{S\_DLAST}},}
+\DoxyCodeLine{298     \};}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{energy_8h_acac721db1f1fabfc32db2d76683f6584}\label{energy_8h_acac721db1f1fabfc32db2d76683f6584}} 
+\index{energy.h@{energy.h}!connlost@{connlost}}
+\index{connlost@{connlost}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{connlost()}{connlost()}}
+{\footnotesize\ttfamily void connlost (\begin{DoxyParamCaption}\item[{void $\ast$}]{context,  }\item[{char $\ast$}]{cause }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{298 \{}
+\DoxyCodeLine{299     \textcolor{keyword}{struct }\mbox{\hyperlink{structha__flag__type}{ha\_flag\_type}} *ha\_flag = context;}
+\DoxyCodeLine{300     int32\_t id\_num;}
+\DoxyCodeLine{301 }
+\DoxyCodeLine{302     \textcolor{comment}{// bug-\/out if no context variables passed to callback}}
+\DoxyCodeLine{303     \textcolor{keywordflow}{if} (context == NULL) \{}
+\DoxyCodeLine{304         id\_num = -\/1;}
+\DoxyCodeLine{305     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{306         id\_num = ha\_flag-\/>\mbox{\hyperlink{structha__flag__type_a0756e3e6519823c23b8711864a70460c}{ha\_id}};}
+\DoxyCodeLine{307     \}}
+\DoxyCodeLine{308     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)n\%s Connection lost, exit ha\_energy program\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}));}
+\DoxyCodeLine{309     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s     cause: \%s, \%d\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), cause, id\_num);}
+\DoxyCodeLine{310     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%sDAEMON failure  LOG Version \%s : MQTT Version \%s\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}), \mbox{\hyperlink{energy_8h_aa48b2017856a8a9c33a9935afe604c8d}{LOG\_VERSION}}, \mbox{\hyperlink{energy_8h_a702197a21870dfd505d92530b27754ac}{MQTT\_VERSION}});}
+\DoxyCodeLine{311     fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{312     exit(EXIT\_FAILURE);}
+\DoxyCodeLine{313 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_a2c6c70b9a184aa76393a677b08954c81}\label{energy_8h_a2c6c70b9a184aa76393a677b08954c81}} 
+\index{energy.h@{energy.h}!ha\_ac\_off@{ha\_ac\_off}}
+\index{ha\_ac\_off@{ha\_ac\_off}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{ha\_ac\_off()}{ha\_ac\_off()}}
+{\footnotesize\ttfamily void ha\+\_\+ac\+\_\+off (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{947 \{}
+\DoxyCodeLine{948     \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_ab741d14c77c3f7326b0c05d0be7a4330}{TOPIC\_PACC}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{949     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{950 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_a9a2e9166d49137eb9230625ac072807d}\label{energy_8h_a9a2e9166d49137eb9230625ac072807d}} 
+\index{energy.h@{energy.h}!ha\_ac\_on@{ha\_ac\_on}}
+\index{ha\_ac\_on@{ha\_ac\_on}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{ha\_ac\_on()}{ha\_ac\_on()}}
+{\footnotesize\ttfamily void ha\+\_\+ac\+\_\+on (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{953 \{}
+\DoxyCodeLine{954     \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_ab741d14c77c3f7326b0c05d0be7a4330}{TOPIC\_PACC}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{955     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{956 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_a200b8cfedca58c43dc888d70d83342d2}\label{energy_8h_a200b8cfedca58c43dc888d70d83342d2}} 
+\index{energy.h@{energy.h}!ha\_dc\_off@{ha\_dc\_off}}
+\index{ha\_dc\_off@{ha\_dc\_off}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{ha\_dc\_off()}{ha\_dc\_off()}}
+{\footnotesize\ttfamily void ha\+\_\+dc\+\_\+off (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{962 \{}
+\DoxyCodeLine{963     \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a6bbafe078803d99cb34f62c659e58cbc}{TOPIC\_PDCC}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{964     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{965 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_ada6758833529a18e073775d997a3833b}\label{energy_8h_ada6758833529a18e073775d997a3833b}} 
+\index{energy.h@{energy.h}!ha\_dc\_on@{ha\_dc\_on}}
+\index{ha\_dc\_on@{ha\_dc\_on}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{ha\_dc\_on()}{ha\_dc\_on()}}
+{\footnotesize\ttfamily void ha\+\_\+dc\+\_\+on (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{968 \{}
+\DoxyCodeLine{969     \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a6bbafe078803d99cb34f62c659e58cbc}{TOPIC\_PDCC}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{970     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{971 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_a34d485627939300ea5e51b765f599b9a}\label{energy_8h_a34d485627939300ea5e51b765f599b9a}} 
+\index{energy.h@{energy.h}!iammeter\_read@{iammeter\_read}}
+\index{iammeter\_read@{iammeter\_read}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{iammeter\_read()}{iammeter\_read()}}
+{\footnotesize\ttfamily void iammeter\+\_\+read (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{76 \{}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78     \mbox{\hyperlink{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}{curl}} = curl\_easy\_init();}
+\DoxyCodeLine{79     \textcolor{keywordflow}{if} (\mbox{\hyperlink{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}{curl}}) \{}
+\DoxyCodeLine{80         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_af96503924386a5fa3723e667ef4c57df}{iammeter\_count}}++;}
+\DoxyCodeLine{81         curl\_easy\_setopt(\mbox{\hyperlink{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}{curl}}, CURLOPT\_URL, \textcolor{stringliteral}{"{}http://10.1.1.101/monitorjson"{}});}
+\DoxyCodeLine{82         curl\_easy\_setopt(\mbox{\hyperlink{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}{curl}}, CURLOPT\_WRITEFUNCTION, \mbox{\hyperlink{http__vars_8c_aabb25f42dea94453d721073f265c0063}{iammeter\_write\_callback}});}
+\DoxyCodeLine{83         curl\_easy\_setopt(\mbox{\hyperlink{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}{curl}}, CURLOPT\_WRITEDATA, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_aa7198c879bedfbb1db35874b4ef079dd}{print\_vars}}); \textcolor{comment}{// external data array for iammeter values}}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85         \mbox{\hyperlink{http__vars_8c_acf1ea240303dba3184f1f87a13202862}{res}} = curl\_easy\_perform(\mbox{\hyperlink{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}{curl}});}
+\DoxyCodeLine{86         \textcolor{comment}{/* Check for errors */}}
+\DoxyCodeLine{87         \textcolor{keywordflow}{if} (\mbox{\hyperlink{http__vars_8c_acf1ea240303dba3184f1f87a13202862}{res}} != CURLE\_OK) \{}
+\DoxyCodeLine{88             fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}curl\_easy\_perform() failed in iammeter\_read: \%s\(\backslash\)n"{}},}
+\DoxyCodeLine{89                 curl\_easy\_strerror(\mbox{\hyperlink{http__vars_8c_acf1ea240303dba3184f1f87a13202862}{res}}));}
+\DoxyCodeLine{90             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae9aa060b6fa02493a02a9a2ce5bb7658}{iammeter}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{91             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_ae120ea132c18d0baf98a393c1e06ce20}{iammeter\_error}}++;}
+\DoxyCodeLine{92         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{93             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae9aa060b6fa02493a02a9a2ce5bb7658}{iammeter}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{94         \}}
+\DoxyCodeLine{95         curl\_easy\_cleanup(\mbox{\hyperlink{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}{curl}});}
+\DoxyCodeLine{96     \}}
+\DoxyCodeLine{97 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_a29cd5a6b609c70451dc93083c9244125}\label{energy_8h_a29cd5a6b609c70451dc93083c9244125}} 
+\index{energy.h@{energy.h}!iammeter\_write\_callback@{iammeter\_write\_callback}}
+\index{iammeter\_write\_callback@{iammeter\_write\_callback}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{iammeter\_write\_callback()}{iammeter\_write\_callback()}}
+{\footnotesize\ttfamily size\+\_\+t iammeter\+\_\+write\+\_\+callback (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer,  }\item[{size\+\_\+t}]{size,  }\item[{size\+\_\+t}]{nitems,  }\item[{void $\ast$}]{stream }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{14 \{}
+\DoxyCodeLine{15     cJSON *json = cJSON\_ParseWithLength(buffer, strlen(buffer));}
+\DoxyCodeLine{16     \textcolor{keyword}{struct }\mbox{\hyperlink{structenergy__type}{energy\_type}} * e = stream;}
+\DoxyCodeLine{17     uint32\_t next\_var = 0;}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_af96503924386a5fa3723e667ef4c57df}{iammeter\_count}}++;}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \textcolor{keywordflow}{if} (json == NULL) \{}
+\DoxyCodeLine{22         \textcolor{keyword}{const} \textcolor{keywordtype}{char} *error\_ptr = cJSON\_GetErrorPtr();}
+\DoxyCodeLine{23         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_ae120ea132c18d0baf98a393c1e06ce20}{iammeter\_error}}++;}
+\DoxyCodeLine{24         \textcolor{keywordflow}{if} (error\_ptr != NULL) \{}
+\DoxyCodeLine{25             fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}Error in iammeter\_write\_callback \%u: \%s\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af8b87e76c6fd29fa4ac1fdd6d0e5aeac}{link}}.\mbox{\hyperlink{structlink__type_ae120ea132c18d0baf98a393c1e06ce20}{iammeter\_error}}, error\_ptr);}
+\DoxyCodeLine{26         \}}
+\DoxyCodeLine{27         \textcolor{keywordflow}{goto} iammeter\_exit;}
+\DoxyCodeLine{28     \}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#ifdef IM\_DEBUG}}
+\DoxyCodeLine{30     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)n iammeter\_read\_callback \%s \(\backslash\)n"{}}, buffer);}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     cJSON *data\_result = cJSON\_GetObjectItemCaseSensitive(json, \textcolor{stringliteral}{"{}Datas"{}});}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \textcolor{keywordflow}{if} (!data\_result) \{}
+\DoxyCodeLine{36         size = 0;}
+\DoxyCodeLine{37         nitems = 0;}
+\DoxyCodeLine{38         \textcolor{keywordflow}{goto} iammeter\_exit;}
+\DoxyCodeLine{39     \}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     cJSON *jname;}
+\DoxyCodeLine{42     uint32\_t phase = \mbox{\hyperlink{energy_8h_a43ff9d577152831837f2de48199c0323a8825a1a26ae9bf551b490741d7ae280a}{PHASE\_A}};}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44     cJSON\_ArrayForEach(jname, data\_result)}
+\DoxyCodeLine{45     \{}
+\DoxyCodeLine{46         cJSON *ianame;}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#ifdef IM\_DEBUG}}
+\DoxyCodeLine{48         fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)n iammeter variables "{}});}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51         cJSON\_ArrayForEach(ianame, jname)}
+\DoxyCodeLine{52         \{}
+\DoxyCodeLine{53             uint32\_t phase\_var = \mbox{\hyperlink{energy_8h_a9221f2a245e5eb6eb3034802aa882184a6ee579d3dc53ac798b03bf17c52e7da0}{IA\_VOLTAGE}};}
+\DoxyCodeLine{54             \mbox{\hyperlink{http__vars_8c_adbf9cd5b8ee26136ef6d0b4f954e64be}{iammeter\_get\_data}}(ianame-\/>valuedouble, phase\_var, phase);}
+\DoxyCodeLine{55             e-\/>\mbox{\hyperlink{structenergy__type_aa7198c879bedfbb1db35874b4ef079dd}{print\_vars}}[next\_var++] = ianame-\/>valuedouble;}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#ifdef IM\_DEBUG}}
+\DoxyCodeLine{57             fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%8.2f "{}}, \mbox{\hyperlink{structenergy__type_a61e594f5bba7e386b9bc2dee37eabb56}{im\_vars}}[phase\_var][phase]);}
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{59             phase\_var++;}
+\DoxyCodeLine{60         \}}
+\DoxyCodeLine{61         phase++;}
+\DoxyCodeLine{62     \}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#ifdef IM\_DEBUG}}
+\DoxyCodeLine{64     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 iammeter\_exit:}
+\DoxyCodeLine{68     cJSON\_Delete(json);}
+\DoxyCodeLine{69     \textcolor{keywordflow}{return} size * nitems;}
+\DoxyCodeLine{70 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_aa6c4cd39da4bcd29a41c0aec2fc3596b}\label{energy_8h_aa6c4cd39da4bcd29a41c0aec2fc3596b}} 
+\index{energy.h@{energy.h}!log\_time@{log\_time}}
+\index{log\_time@{log\_time}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{log\_time()}{log\_time()}}
+{\footnotesize\ttfamily char $\ast$ log\+\_\+time (\begin{DoxyParamCaption}\item[{bool}]{log }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1032 \{}
+\DoxyCodeLine{1033     \textcolor{keyword}{static} \textcolor{keywordtype}{char} time\_log[\mbox{\hyperlink{energy_8h_a0c85192a1fc4b17a7c63d0c0f6f61625}{RBUF\_SIZ}}] = \{0\};}
+\DoxyCodeLine{1034     \textcolor{keyword}{static} uint32\_t len = 0, sync\_time = \mbox{\hyperlink{energy_8h_ae1b9e27b004bee7dcaecf4ee4778e0bd}{TIME\_SYNC\_SEC}} -\/ 1;}
+\DoxyCodeLine{1035     time\_t rawtime\_log;}
+\DoxyCodeLine{1036 }
+\DoxyCodeLine{1037     tzset();}
+\DoxyCodeLine{1038     timezone = 0;}
+\DoxyCodeLine{1039     daylight = 0;}
+\DoxyCodeLine{1040     time(\&rawtime\_log);}
+\DoxyCodeLine{1041     \textcolor{keywordflow}{if} (sync\_time++ > \mbox{\hyperlink{energy_8h_ae1b9e27b004bee7dcaecf4ee4778e0bd}{TIME\_SYNC\_SEC}}) \{}
+\DoxyCodeLine{1042         sync\_time = 0;}
+\DoxyCodeLine{1043         snprintf(time\_log, \mbox{\hyperlink{energy_8h_a0c85192a1fc4b17a7c63d0c0f6f61625}{RBUF\_SIZ}} -\/ 1, \textcolor{stringliteral}{"{}VT\%lut"{}}, rawtime\_log); \textcolor{comment}{// format for dumpload controller gti time commands}}
+\DoxyCodeLine{1044         \mbox{\hyperlink{http__vars_8c_addadf78316d3819a2b8fc271ffd97fc9}{mqtt\_gti\_time}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}{TOPIC\_P}}, time\_log);}
+\DoxyCodeLine{1045     \}}
+\DoxyCodeLine{1046 }
+\DoxyCodeLine{1047     sprintf(time\_log, \textcolor{stringliteral}{"{}\%s"{}}, ctime(\&rawtime\_log));}
+\DoxyCodeLine{1048     len = strlen(time\_log);}
+\DoxyCodeLine{1049     time\_log[len -\/ 1] = 0; \textcolor{comment}{// munge out the return character}}
+\DoxyCodeLine{1050     \textcolor{keywordflow}{if} (log) \{}
+\DoxyCodeLine{1051         fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s "{}}, time\_log);}
+\DoxyCodeLine{1052         fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{1053     \}}
+\DoxyCodeLine{1054 }
+\DoxyCodeLine{1055     \textcolor{keywordflow}{return} time\_log;}
+\DoxyCodeLine{1056 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_ae7020228b3ccca216927caec73938554}\label{energy_8h_ae7020228b3ccca216927caec73938554}} 
+\index{energy.h@{energy.h}!log\_timer@{log\_timer}}
+\index{log\_timer@{log\_timer}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{log\_timer()}{log\_timer()}}
+{\footnotesize\ttfamily bool log\+\_\+timer (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1091 \{}
+\DoxyCodeLine{1092     \textcolor{keywordtype}{bool} itstime = \textcolor{keyword}{false};}
+\DoxyCodeLine{1093 }
+\DoxyCodeLine{1094     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ad0ad0d30b04f4fdfed27e78f5fe02151}{log\_spam}} < \mbox{\hyperlink{energy_8h_a764c3b6aadcbcacb53eca948eeb75bdf}{LOW\_LOG\_SPAM}}) \{}
+\DoxyCodeLine{1095         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a03488578b49639581f7fddf8db3076de}{log\_time\_reset}} = 0;}
+\DoxyCodeLine{1096         itstime = \textcolor{keyword}{true};}
+\DoxyCodeLine{1097     \}}
+\DoxyCodeLine{1098     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a03488578b49639581f7fddf8db3076de}{log\_time\_reset}} > \mbox{\hyperlink{energy_8h_a3af0cc0b4b28d3cecd3a7d1daf772804}{RESET\_LOG\_SPAM}}) \{}
+\DoxyCodeLine{1099         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ad0ad0d30b04f4fdfed27e78f5fe02151}{log\_spam}} = 0;}
+\DoxyCodeLine{1100         itstime = \textcolor{keyword}{true};}
+\DoxyCodeLine{1101     \}}
+\DoxyCodeLine{1102     \textcolor{keywordflow}{return} itstime;}
+\DoxyCodeLine{1103 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_a8b0aebb679cfaa2c1c7f70e477e396a5}\label{energy_8h_a8b0aebb679cfaa2c1c7f70e477e396a5}} 
+\index{energy.h@{energy.h}!print\_im\_vars@{print\_im\_vars}}
+\index{print\_im\_vars@{print\_im\_vars}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{print\_im\_vars()}{print\_im\_vars()}}
+{\footnotesize\ttfamily void print\+\_\+im\+\_\+vars (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{111 \{}
+\DoxyCodeLine{112     \textcolor{keyword}{static} \textcolor{keywordtype}{char} time\_log[\mbox{\hyperlink{energy_8h_a0c85192a1fc4b17a7c63d0c0f6f61625}{RBUF\_SIZ}}] = \{0\};}
+\DoxyCodeLine{113     \textcolor{keyword}{static} uint32\_t sync\_time = \mbox{\hyperlink{energy_8h_ae1b9e27b004bee7dcaecf4ee4778e0bd}{TIME\_SYNC\_SEC}} -\/ 1;}
+\DoxyCodeLine{114     time\_t rawtime\_log;}
+\DoxyCodeLine{115     \textcolor{keywordtype}{char} imvars[\mbox{\hyperlink{energy_8h_a52c3aaa9470287b78eee2ca241454fcb}{SYSLOG\_SIZ}}];}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117     fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{118     snprintf(imvars, \mbox{\hyperlink{energy_8h_a52c3aaa9470287b78eee2ca241454fcb}{SYSLOG\_SIZ}}-\/1, \textcolor{stringliteral}{"{}House L1 \%7.2fW, House L2 \%7.2fW, GTI L1 \%7.2fW"{}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_aa7198c879bedfbb1db35874b4ef079dd}{print\_vars}}[\mbox{\hyperlink{energy_8h_afddaf9e33dbc732f31ced2b378f11748}{L1\_P}}], \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_aa7198c879bedfbb1db35874b4ef079dd}{print\_vars}}[\mbox{\hyperlink{energy_8h_a492bcf1cf0c61ce5dfbf5d1825b09946}{L2\_P}}], \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_aa7198c879bedfbb1db35874b4ef079dd}{print\_vars}}[\mbox{\hyperlink{energy_8h_a5a73f316e17083fb4d7cbf348494322a}{L3\_P}}]);}
+\DoxyCodeLine{119     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\%s"{}}, imvars);}
+\DoxyCodeLine{120     fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{121     time(\&rawtime\_log);}
+\DoxyCodeLine{122     \textcolor{keywordflow}{if} (sync\_time++ > \mbox{\hyperlink{energy_8h_ae1b9e27b004bee7dcaecf4ee4778e0bd}{TIME\_SYNC\_SEC}}) \{}
+\DoxyCodeLine{123         sync\_time = 0;}
+\DoxyCodeLine{124         snprintf(time\_log, \mbox{\hyperlink{energy_8h_a0c85192a1fc4b17a7c63d0c0f6f61625}{RBUF\_SIZ}} -\/ 1, \textcolor{stringliteral}{"{}VT\%lut"{}}, rawtime\_log); \textcolor{comment}{// format for dumpload controller gti time commands}}
+\DoxyCodeLine{125         \mbox{\hyperlink{http__vars_8c_addadf78316d3819a2b8fc271ffd97fc9}{mqtt\_gti\_time}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}{TOPIC\_P}}, time\_log);}
+\DoxyCodeLine{126     \}}
+\DoxyCodeLine{127 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_a7ce8be1d4c8d4c9881d482bed4933512}\label{energy_8h_a7ce8be1d4c8d4c9881d482bed4933512}} 
+\index{energy.h@{energy.h}!print\_mvar\_vars@{print\_mvar\_vars}}
+\index{print\_mvar\_vars@{print\_mvar\_vars}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{print\_mvar\_vars()}{print\_mvar\_vars()}}
+{\footnotesize\ttfamily void print\+\_\+mvar\+\_\+vars (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{237 \{}
+\DoxyCodeLine{238     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}, AC Inverter \%7.2fW, BAT Energy \%7.2fWh, Solar E \%7.2fWh, AC E \%7.2fWh, PERR \%7.2fW, PBAL \%7.2fW, ST \%7.2f, GDL \%7.2f, \%d,\%d,\%d \%d,\%d,\%d\(\backslash\)r"{}},}
+\DoxyCodeLine{239         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a1e904f1377abb70e57726e114ff22765}{V\_FLO}}], \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a821ba4dacc502ba41ec0c17aff5c42d3}{V\_FBEKW}}], \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aea8f7852e1fb2fb07ea23c17aaed223e}{V\_FSO}}], \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072af52d8a89895cb70ab99159fcad262585}{V\_FACE}}], \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a430a4ad1dc3ff1be380549424b79d7ca}{error}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a47acb84856d0db6447de2c99171d654d}{V\_BEN}}], \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a48f0bfcac4f5cc565e07896e94221a48}{total\_system}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a42c49feb06f42f31cd1d2dcc68c07bf8}{gti\_dumpload}}, (int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a7391c358a2241e66cdf9f1e953184521}{V\_HDCSW}}], (int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a61c580ff6ce646f13228dc2dcad390c1}{V\_HACSW}}], (int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a972a1c6b6a2288d8dd88d6cde959086c}{V\_HMODE}}],}
+\DoxyCodeLine{240         (int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_aa3b4f7217fce683caf7e64a3211a294a}{dc\_mismatch}}, (int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a077335b41dbccfa620e40cd9d8512bcb}{ac\_mismatch}}, (int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae6f9ecf1f4ff70034b34e614356052a4}{mode\_mismatch}});}
+\DoxyCodeLine{241 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_a46e17290c238de32216da16a2cd5951b}\label{energy_8h_a46e17290c238de32216da16a2cd5951b}} 
+\index{energy.h@{energy.h}!ramp\_down\_ac@{ramp\_down\_ac}}
+\index{ramp\_down\_ac@{ramp\_down\_ac}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{ramp\_down\_ac()}{ramp\_down\_ac()}}
+{\footnotesize\ttfamily void ramp\+\_\+down\+\_\+ac (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p,  }\item[{bool}]{sw\+\_\+off }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{937 \{}
+\DoxyCodeLine{938     \textcolor{keywordflow}{if} (sw\_off) \{}
+\DoxyCodeLine{939         \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(client\_p, \mbox{\hyperlink{energy_8h_ab741d14c77c3f7326b0c05d0be7a4330}{TOPIC\_PACC}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{940         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{941         usleep(500000);}
+\DoxyCodeLine{942     \}}
+\DoxyCodeLine{943     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af480c852a1d03dcbf94c0ed4025888e6}{once\_ac}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{944 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_a921d1b16c4cd888e365414602e256ba8}\label{energy_8h_a921d1b16c4cd888e365414602e256ba8}} 
+\index{energy.h@{energy.h}!ramp\_down\_gti@{ramp\_down\_gti}}
+\index{ramp\_down\_gti@{ramp\_down\_gti}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{ramp\_down\_gti()}{ramp\_down\_gti()}}
+{\footnotesize\ttfamily void ramp\+\_\+down\+\_\+gti (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p,  }\item[{bool}]{sw\+\_\+off }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{904 \{}
+\DoxyCodeLine{905     \textcolor{keywordflow}{if} (sw\_off) \{}
+\DoxyCodeLine{906         \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(client\_p, \mbox{\hyperlink{energy_8h_a6bbafe078803d99cb34f62c659e58cbc}{TOPIC\_PDCC}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{907         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af0f10b5a348da41d79645310f3caa98a}{once\_gti\_zero}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{908         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{909     \}}
+\DoxyCodeLine{910     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a8a63100b110f46b7835687ed198477a0}{once\_gti}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{911 }
+\DoxyCodeLine{912     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af0f10b5a348da41d79645310f3caa98a}{once\_gti\_zero}}) \{}
+\DoxyCodeLine{913         \mbox{\hyperlink{mqtt__vars_8c_a3fc1eb9cd6b570d96277f671de9e979a}{mqtt\_gti\_power}}(client\_p, \mbox{\hyperlink{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}{TOPIC\_P}}, \textcolor{stringliteral}{"{}Z\#"{}}, 7); \textcolor{comment}{// zero power}}
+\DoxyCodeLine{914         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af0f10b5a348da41d79645310f3caa98a}{once\_gti\_zero}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{915     \}}
+\DoxyCodeLine{916 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_a83dff61732d4ce6a5f659dab11d86c0d}\label{energy_8h_a83dff61732d4ce6a5f659dab11d86c0d}} 
+\index{energy.h@{energy.h}!ramp\_up\_ac@{ramp\_up\_ac}}
+\index{ramp\_up\_ac@{ramp\_up\_ac}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{ramp\_up\_ac()}{ramp\_up\_ac()}}
+{\footnotesize\ttfamily void ramp\+\_\+up\+\_\+ac (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p,  }\item[{bool}]{start }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{922 \{}
+\DoxyCodeLine{923 }
+\DoxyCodeLine{924     \textcolor{keywordflow}{if} (start) \{}
+\DoxyCodeLine{925         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af480c852a1d03dcbf94c0ed4025888e6}{once\_ac}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{926     \}}
+\DoxyCodeLine{927 }
+\DoxyCodeLine{928     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af480c852a1d03dcbf94c0ed4025888e6}{once\_ac}}) \{}
+\DoxyCodeLine{929         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af480c852a1d03dcbf94c0ed4025888e6}{once\_ac}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{930         \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(client\_p, \mbox{\hyperlink{energy_8h_ab741d14c77c3f7326b0c05d0be7a4330}{TOPIC\_PACC}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{931         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{932         usleep(500000); \textcolor{comment}{// wait for voltage to ramp}}
+\DoxyCodeLine{933     \}}
+\DoxyCodeLine{934 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_aec7b6ceb0e44a7b4cc2ddcad8af63961}\label{energy_8h_aec7b6ceb0e44a7b4cc2ddcad8af63961}} 
+\index{energy.h@{energy.h}!ramp\_up\_gti@{ramp\_up\_gti}}
+\index{ramp\_up\_gti@{ramp\_up\_gti}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{ramp\_up\_gti()}{ramp\_up\_gti()}}
+{\footnotesize\ttfamily void ramp\+\_\+up\+\_\+gti (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p,  }\item[{bool}]{start,  }\item[{bool}]{excess }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{843 \{}
+\DoxyCodeLine{844     \textcolor{keyword}{static} uint32\_t sequence = 0;}
+\DoxyCodeLine{845 }
+\DoxyCodeLine{846     \textcolor{keywordflow}{if} (start) \{}
+\DoxyCodeLine{847         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a8a63100b110f46b7835687ed198477a0}{once\_gti}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{848     \}}
+\DoxyCodeLine{849 }
+\DoxyCodeLine{850     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a8a63100b110f46b7835687ed198477a0}{once\_gti}}) \{}
+\DoxyCodeLine{851         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a8a63100b110f46b7835687ed198477a0}{once\_gti}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{852         sequence = 0;}
+\DoxyCodeLine{853         \textcolor{keywordflow}{if} (!excess) \{}
+\DoxyCodeLine{854             \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(client\_p, \mbox{\hyperlink{energy_8h_a6bbafe078803d99cb34f62c659e58cbc}{TOPIC\_PDCC}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{855             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{856             usleep(500000); \textcolor{comment}{// wait for voltage to ramp}}
+\DoxyCodeLine{857         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{858             sequence = 1;}
+\DoxyCodeLine{859         \}}
+\DoxyCodeLine{860     \}}
+\DoxyCodeLine{861 }
+\DoxyCodeLine{862     \textcolor{keywordflow}{switch} (sequence) \{}
+\DoxyCodeLine{863     \textcolor{keywordflow}{case} 4:}
+\DoxyCodeLine{864         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af0f10b5a348da41d79645310f3caa98a}{once\_gti\_zero}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{865         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{866     \textcolor{keywordflow}{case} 3:}
+\DoxyCodeLine{867     \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{868     \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{869         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af0f10b5a348da41d79645310f3caa98a}{once\_gti\_zero}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{870         \textcolor{keywordflow}{if} (\mbox{\hyperlink{bsoc_8c_a4ff1d7778a0780a0f1c029a738322513}{bat\_current\_stable}}() || \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}}) \{ \textcolor{comment}{// check battery current std dev, stop 'motorboating'}}
+\DoxyCodeLine{871             sequence++;}
+\DoxyCodeLine{872             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{mqtt__vars_8c_a3fc1eb9cd6b570d96277f671de9e979a}{mqtt\_gti\_power}}(client\_p, \mbox{\hyperlink{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}{TOPIC\_P}}, \textcolor{stringliteral}{"{}+\#"{}}, 3)) \{}
+\DoxyCodeLine{873                 sequence = 0;}
+\DoxyCodeLine{874             \}; \textcolor{comment}{// +100W power}}
+\DoxyCodeLine{875         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{876             usleep(500000); \textcolor{comment}{// wait a bit more for power to be stable}}
+\DoxyCodeLine{877             sequence = 1; \textcolor{comment}{// do power ramps when ready}}
+\DoxyCodeLine{878             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{mqtt__vars_8c_a3fc1eb9cd6b570d96277f671de9e979a}{mqtt\_gti\_power}}(client\_p, \mbox{\hyperlink{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}{TOPIC\_P}}, \textcolor{stringliteral}{"{}-\/\#"{}}, 4)) \{}
+\DoxyCodeLine{879                 sequence = 0;}
+\DoxyCodeLine{880             \}; \textcolor{comment}{// -\/ 100W power}}
+\DoxyCodeLine{881         \}}
+\DoxyCodeLine{882         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{883     \textcolor{keywordflow}{case} 0:}
+\DoxyCodeLine{884         sequence++;}
+\DoxyCodeLine{885         \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af0f10b5a348da41d79645310f3caa98a}{once\_gti\_zero}}) \{}
+\DoxyCodeLine{886             \mbox{\hyperlink{mqtt__vars_8c_a3fc1eb9cd6b570d96277f671de9e979a}{mqtt\_gti\_power}}(client\_p, \mbox{\hyperlink{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}{TOPIC\_P}}, \textcolor{stringliteral}{"{}Z\#"{}}, 5); \textcolor{comment}{// zero power}}
+\DoxyCodeLine{887             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af0f10b5a348da41d79645310f3caa98a}{once\_gti\_zero}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{888         \}}
+\DoxyCodeLine{889         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{890     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{891         \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af0f10b5a348da41d79645310f3caa98a}{once\_gti\_zero}}) \{}
+\DoxyCodeLine{892             \mbox{\hyperlink{mqtt__vars_8c_a3fc1eb9cd6b570d96277f671de9e979a}{mqtt\_gti\_power}}(client\_p, \mbox{\hyperlink{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}{TOPIC\_P}}, \textcolor{stringliteral}{"{}Z\#"{}}, 6); \textcolor{comment}{// zero power}}
+\DoxyCodeLine{893             \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_af0f10b5a348da41d79645310f3caa98a}{once\_gti\_zero}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{894         \}}
+\DoxyCodeLine{895         sequence = 0;}
+\DoxyCodeLine{896         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{897     \}}
+\DoxyCodeLine{898 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_a014b7e7feb1f7f94f1947d2961e58534}\label{energy_8h_a014b7e7feb1f7f94f1947d2961e58534}} 
+\index{energy.h@{energy.h}!sanity\_check@{sanity\_check}}
+\index{sanity\_check@{sanity\_check}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{sanity\_check()}{sanity\_check()}}
+{\footnotesize\ttfamily bool sanity\+\_\+check (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{254 \{}
+\DoxyCodeLine{255     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072ad5c883c864f682ae706402bbcbe385cf}{V\_PWA}}] > \mbox{\hyperlink{energy_8h_a1080c8ca712e9dc1addd48d9ae40b007}{PWA\_SANE}}) \{}
+\DoxyCodeLine{256         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a008fd62f4467127b77deea88813be694}{sane}} = \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7af1d6fa8de1e28a2b6d8539f3b98fce4e}{S\_PWA}};}
+\DoxyCodeLine{257         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{258     \}}
+\DoxyCodeLine{259     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a3c4c2533613529ed910d3b0698e89335}{V\_PAMPS}}] > \mbox{\hyperlink{energy_8h_abdf0a79062ee811bfb1da544d1876e67}{PAMPS\_SANE}}) \{}
+\DoxyCodeLine{260         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a008fd62f4467127b77deea88813be694}{sane}} = \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a25f0992e8e1881acf87ad1beb51150b8}{S\_PAMPS}};}
+\DoxyCodeLine{261         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{262     \}}
+\DoxyCodeLine{263     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aaf767b3b90d0f2566062e8ea9aa77d74}{V\_PVOLTS}}] > \mbox{\hyperlink{energy_8h_aa92d0d3c6e77fb8c158bd4c098ad07ac}{PVOLTS\_SANE}}) \{}
+\DoxyCodeLine{264         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a008fd62f4467127b77deea88813be694}{sane}} = \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a240ee28d7f55ca0e4a3c4b29f06c4e21}{S\_PVOLTS}};}
+\DoxyCodeLine{265         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{266     \}}
+\DoxyCodeLine{267     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a9f8ddad7002f6868f6bf77c46b11e686}{V\_FBAMPS}}] > \mbox{\hyperlink{energy_8h_a36849bf632f6907ce2826cf4f4f7f70a}{BAMPS\_SANE}}) \{}
+\DoxyCodeLine{268         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a008fd62f4467127b77deea88813be694}{sane}} = \mbox{\hyperlink{energy_8h_a5c579d778e1576fd9ae67c1cc7e81ee7a3ba317a28cd9bbd8a72e138b88fe8d7a}{S\_FBAMPS}};}
+\DoxyCodeLine{269         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{270     \}}
+\DoxyCodeLine{271     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{272 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_a2533146394b65b382653eff2cd6f2106}\label{energy_8h_a2533146394b65b382653eff2cd6f2106}} 
+\index{energy.h@{energy.h}!sync\_ha@{sync\_ha}}
+\index{sync\_ha@{sync\_ha}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{sync\_ha()}{sync\_ha()}}
+{\footnotesize\ttfamily bool sync\+\_\+ha (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1062 \{}
+\DoxyCodeLine{1063     \textcolor{keywordtype}{bool} sync = \textcolor{keyword}{false};}
+\DoxyCodeLine{1064     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}} != (\textcolor{keywordtype}{bool}) ((int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a7391c358a2241e66cdf9f1e953184521}{V\_HDCSW}}])) \{}
+\DoxyCodeLine{1065         fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}DC\_MM \%d \%d "{}}, (\textcolor{keywordtype}{bool}) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}}, (\textcolor{keywordtype}{bool}) ((int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a7391c358a2241e66cdf9f1e953184521}{V\_HDCSW}}]));}
+\DoxyCodeLine{1066         \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a6bbafe078803d99cb34f62c659e58cbc}{TOPIC\_PDCC}}, !\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1615a731cb9e2e89052bd6d7105166ec}{gti\_sw\_status}});}
+\DoxyCodeLine{1067         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_aa3b4f7217fce683caf7e64a3211a294a}{dc\_mismatch}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{1068         fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{1069         sync = \textcolor{keyword}{true};}
+\DoxyCodeLine{1070     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{1071         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_aa3b4f7217fce683caf7e64a3211a294a}{dc\_mismatch}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{1072     \}}
+\DoxyCodeLine{1073 }
+\DoxyCodeLine{1074     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}} = (bool) ((int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a61c580ff6ce646f13228dc2dcad390c1}{V\_HACSW}}]); \textcolor{comment}{// TEMP FIX for MISmatch errors}}
+\DoxyCodeLine{1075     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}} != (\textcolor{keywordtype}{bool}) ((int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a61c580ff6ce646f13228dc2dcad390c1}{V\_HACSW}}])) \{}
+\DoxyCodeLine{1076         fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}AC\_MM \%d \%d "{}}, (\textcolor{keywordtype}{bool}) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}}, (\textcolor{keywordtype}{bool}) ((int32\_t) \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a61c580ff6ce646f13228dc2dcad390c1}{V\_HACSW}}]));}
+\DoxyCodeLine{1077         \mbox{\hyperlink{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7}{mqtt\_ha\_switch}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_ab741d14c77c3f7326b0c05d0be7a4330}{TOPIC\_PACC}}, !\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a3100414dc234a91d5cb378f0011b7ab1}{ac\_sw\_status}});}
+\DoxyCodeLine{1078         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a077335b41dbccfa620e40cd9d8512bcb}{ac\_mismatch}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{1079         fflush(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}});}
+\DoxyCodeLine{1080         sync = \textcolor{keyword}{true};}
+\DoxyCodeLine{1081     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{1082         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a077335b41dbccfa620e40cd9d8512bcb}{ac\_mismatch}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{1083     \}}
+\DoxyCodeLine{1084     \textcolor{keywordflow}{return} sync;}
+\DoxyCodeLine{1085 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{energy_8h_a16c43fcb061651421cdf377a01de5802}\label{energy_8h_a16c43fcb061651421cdf377a01de5802}} 
+\index{energy.h@{energy.h}!timer\_callback@{timer\_callback}}
+\index{timer\_callback@{timer\_callback}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{timer\_callback()}{timer\_callback()}}
+{\footnotesize\ttfamily void timer\+\_\+callback (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{signum }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{283 \{}
+\DoxyCodeLine{284     signal(signum, \mbox{\hyperlink{energy_8c_aa39b8400b702a022ed3aaa4940cf4e15}{timer\_callback}});}
+\DoxyCodeLine{285     \mbox{\hyperlink{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}{ha\_flag\_vars\_ss}}.\mbox{\hyperlink{structha__flag__type_a9d886e966396198df5116e8fa9d9265d}{runner}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{286     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a14806e6a839ea53f76d69dd9053b33ee}{ten\_sec\_clock}}++;}
+\DoxyCodeLine{287     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ad0ad0d30b04f4fdfed27e78f5fe02151}{log\_spam}}++;}
+\DoxyCodeLine{288     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a03488578b49639581f7fddf8db3076de}{log\_time\_reset}}++;}
+\DoxyCodeLine{289     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ad0ad0d30b04f4fdfed27e78f5fe02151}{log\_spam}} > \mbox{\hyperlink{energy_8h_ab0b8ba6aa93ebd10e13799409927e3d5}{MAX\_LOG\_SPAM}}) \{}
+\DoxyCodeLine{290         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ad0ad0d30b04f4fdfed27e78f5fe02151}{log\_spam}} = 0;}
+\DoxyCodeLine{291     \}}
+\DoxyCodeLine{292 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{energy_8h_aae3805c63e28abac1e41ffd7b623596e}\label{energy_8h_aae3805c63e28abac1e41ffd7b623596e}} 
+\index{energy.h@{energy.h}!E@{E}}
+\index{E@{E}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{E}{E}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structenergy__type}{energy\+\_\+type}} E\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{energy_8h_acec19516a59050bb447192fe318e6a9c}\label{energy_8h_acec19516a59050bb447192fe318e6a9c}} 
+\index{energy.h@{energy.h}!fout@{fout}}
+\index{fout@{fout}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{fout}{fout}}
+{\footnotesize\ttfamily FILE$\ast$ fout\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{energy_8h_a300fe8f759de831a9cf50f5a86c85e23}\label{energy_8h_a300fe8f759de831a9cf50f5a86c85e23}} 
+\index{energy.h@{energy.h}!ha\_flag\_vars\_ss@{ha\_flag\_vars\_ss}}
+\index{ha\_flag\_vars\_ss@{ha\_flag\_vars\_ss}!energy.h@{energy.h}}
+\doxysubsubsection{\texorpdfstring{ha\_flag\_vars\_ss}{ha\_flag\_vars\_ss}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structha__flag__type}{ha\+\_\+flag\+\_\+type}} ha\+\_\+flag\+\_\+vars\+\_\+ss\hspace{0.3cm}{\ttfamily [extern]}}
+

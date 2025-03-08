@@ -1,0 +1,43 @@
+\hypertarget{mqtt__vars_8h_source}{}\doxysection{mqtt\+\_\+vars.\+h}
+\label{mqtt__vars_8h_source}\index{ha\_energy/mqtt\_vars.h@{ha\_energy/mqtt\_vars.h}}
+\mbox{\hyperlink{mqtt__vars_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* }}
+\DoxyCodeLine{2 \textcolor{comment}{ * File:   mqtt\_vars.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ * Author: root}}
+\DoxyCodeLine{4 \textcolor{comment}{ *}}
+\DoxyCodeLine{5 \textcolor{comment}{ * Created on February 9, 2024, 6:50 AM}}
+\DoxyCodeLine{6 \textcolor{comment}{ */}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#ifndef MQTT\_VARS\_H}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#define MQTT\_VARS\_H}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{12 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15     \textcolor{comment}{//\#define GTI\_NO\_POWER      // do we actually run power commands}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17     \textcolor{comment}{//\#define DEBUG\_HA\_CMD    // show debug text}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define HA\_SW\_DELAY     400000  }\textcolor{comment}{// usecs}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#define TOKEN\_DELAY     250}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#define GTI\_TOKEN\_DELAY 300}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#define QOS             1}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24     \textcolor{keyword}{extern} \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{mqtt__vars_8h_ae6b57480d8cda466cfc65b9bfc47b255}{mqtt\_name}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072ab183b38bd716ecf9405c4546e3bd6870}{V\_DLAST}}];}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26     \textcolor{keywordtype}{void} \mbox{\hyperlink{mqtt__vars_8h_aab5ca8d3e1d7415f7030eb876fad046d}{mqtt\_ha\_switch}}(MQTTClient, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *, \textcolor{keyword}{const} \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{27     \textcolor{keywordtype}{void} \mbox{\hyperlink{mqtt__vars_8h_aca832cbd10235e2e3570c7c7a7809328}{mqtt\_ha\_pid}}(MQTTClient, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *);}
+\DoxyCodeLine{28     \textcolor{keywordtype}{void} \mbox{\hyperlink{mqtt__vars_8h_a256bc3a26b1a547b3f5d94507173d69b}{mqtt\_ha\_shutdown}}(MQTTClient, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *);}
+\DoxyCodeLine{29     \textcolor{keywordtype}{bool} \mbox{\hyperlink{mqtt__vars_8h_a15c4be99c9cfa1cc07ef79746b2411b7}{mqtt\_gti\_power}}(MQTTClient, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *, \textcolor{keywordtype}{char} *, uint32\_t);}
+\DoxyCodeLine{30     \textcolor{keywordtype}{bool} \mbox{\hyperlink{mqtt__vars_8h_addadf78316d3819a2b8fc271ffd97fc9}{mqtt\_gti\_time}}(MQTTClient, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *, \textcolor{keywordtype}{char} *);}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{33 \}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* MQTT\_VARS\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{37 }
+
+\end{DoxyCode}

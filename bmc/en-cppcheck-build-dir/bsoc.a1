@@ -1,78 +1,86 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="16451302874909743591">
-        <error id="normalCheckLevelMaxBranches" severity="information" msg="Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches." verbose="Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches." file0="ha_energy/bsoc.c">
-            <location file="ha_energy/bsoc.c" line="0" column="0"/>
-        </error>
+<analyzerinfo hash="6818017508689016068">
   <FileInfo check="CheckUnusedFunctions">
-    <functiondecl file="ha_energy/bsoc.c" functionName="bsoc_init" lineNumber="60"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="bsoc_set_std_dev" lineNumber="75"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="bsoc_data_collect" lineNumber="85"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="bsoc_ac" lineNumber="135"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="bsoc_gti" lineNumber="145"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="gti_test" lineNumber="170"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="ac_test" lineNumber="190"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="get_batc_dev" lineNumber="195"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="calculateStandardDeviation" lineNumber="204"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="bat_current_stable" lineNumber="239"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="bsoc_set_mode" lineNumber="261"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="error_filter" lineNumber="368"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="ac0_filter" lineNumber="375"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="ac1_filter" lineNumber="383"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="ac2_filter" lineNumber="391"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="dc0_filter" lineNumber="399"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="dc1_filter" lineNumber="407"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="dc2_filter" lineNumber="415"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="drive0_filter" lineNumber="423"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="drive1_filter" lineNumber="431"/>
+    <functiondecl functionName="bsoc_init" lineNumber="60"/>
+    <functiondecl functionName="bsoc_set_std_dev" lineNumber="75"/>
+    <functiondecl functionName="bsoc_data_collect" lineNumber="85"/>
+    <functiondecl functionName="bsoc_ac" lineNumber="135"/>
+    <functiondecl functionName="bsoc_gti" lineNumber="145"/>
+    <functiondecl functionName="gti_test" lineNumber="170"/>
+    <functiondecl functionName="ac_test" lineNumber="190"/>
+    <functiondecl functionName="get_batc_dev" lineNumber="195"/>
+    <functiondecl functionName="calculateStandardDeviation" lineNumber="204"/>
+    <functiondecl functionName="bat_current_stable" lineNumber="239"/>
+    <functiondecl functionName="bsoc_set_mode" lineNumber="261"/>
+    <functiondecl functionName="error_filter" lineNumber="368"/>
+    <functiondecl functionName="ac0_filter" lineNumber="375"/>
+    <functiondecl functionName="ac1_filter" lineNumber="383"/>
+    <functiondecl functionName="ac2_filter" lineNumber="391"/>
+    <functiondecl functionName="dc0_filter" lineNumber="399"/>
+    <functiondecl functionName="dc1_filter" lineNumber="407"/>
+    <functiondecl functionName="dc2_filter" lineNumber="415"/>
+    <functiondecl functionName="drive0_filter" lineNumber="423"/>
+    <functiondecl functionName="drive1_filter" lineNumber="431"/>
+    <functiondecl functionName="bsoc_init" lineNumber="60"/>
+    <functiondecl functionName="bsoc_set_std_dev" lineNumber="75"/>
+    <functiondecl functionName="bsoc_data_collect" lineNumber="85"/>
+    <functiondecl functionName="bsoc_ac" lineNumber="135"/>
+    <functiondecl functionName="bsoc_gti" lineNumber="145"/>
+    <functiondecl functionName="gti_test" lineNumber="170"/>
+    <functiondecl functionName="ac_test" lineNumber="190"/>
+    <functiondecl functionName="get_batc_dev" lineNumber="195"/>
+    <functiondecl functionName="calculateStandardDeviation" lineNumber="204"/>
+    <functiondecl functionName="bat_current_stable" lineNumber="239"/>
+    <functiondecl functionName="bsoc_set_mode" lineNumber="261"/>
+    <functiondecl functionName="error_filter" lineNumber="368"/>
+    <functiondecl functionName="ac0_filter" lineNumber="375"/>
+    <functiondecl functionName="ac1_filter" lineNumber="383"/>
+    <functiondecl functionName="ac2_filter" lineNumber="391"/>
+    <functiondecl functionName="dc0_filter" lineNumber="399"/>
+    <functiondecl functionName="dc1_filter" lineNumber="407"/>
+    <functiondecl functionName="dc2_filter" lineNumber="415"/>
+    <functiondecl functionName="drive0_filter" lineNumber="423"/>
+    <functiondecl functionName="drive1_filter" lineNumber="431"/>
+    <functiondecl functionName="bsoc_init" lineNumber="60"/>
+    <functiondecl functionName="bsoc_set_std_dev" lineNumber="75"/>
+    <functiondecl functionName="bsoc_data_collect" lineNumber="85"/>
+    <functiondecl functionName="bsoc_ac" lineNumber="135"/>
+    <functiondecl functionName="bsoc_gti" lineNumber="145"/>
+    <functiondecl functionName="gti_test" lineNumber="170"/>
+    <functiondecl functionName="ac_test" lineNumber="190"/>
+    <functiondecl functionName="get_batc_dev" lineNumber="195"/>
+    <functiondecl functionName="calculateStandardDeviation" lineNumber="204"/>
+    <functiondecl functionName="bat_current_stable" lineNumber="239"/>
+    <functiondecl functionName="bsoc_set_mode" lineNumber="261"/>
+    <functiondecl functionName="error_filter" lineNumber="368"/>
+    <functiondecl functionName="ac0_filter" lineNumber="375"/>
+    <functiondecl functionName="ac1_filter" lineNumber="383"/>
+    <functiondecl functionName="ac2_filter" lineNumber="391"/>
+    <functiondecl functionName="dc0_filter" lineNumber="399"/>
+    <functiondecl functionName="dc1_filter" lineNumber="407"/>
+    <functiondecl functionName="dc2_filter" lineNumber="415"/>
+    <functiondecl functionName="drive0_filter" lineNumber="423"/>
+    <functiondecl functionName="drive1_filter" lineNumber="431"/>
+    <functioncall functionName="IA_LAST"/>
     <functioncall functionName="MQTTClient"/>
     <functioncall functionName="MQTTClient_deliveryToken"/>
     <functioncall functionName="NULL"/>
+    <functioncall functionName="PHASE_LAST"/>
     <functioncall functionName="ResetPI"/>
     <functioncall functionName="UpdatePI"/>
-    <functioncall functionName="ac0_filter"/>
-    <functioncall functionName="calculateStandardDeviation"/>
-    <functioncall functionName="dc0_filter"/>
-    <functioncall functionName="error_filter"/>
-    <functioncall functionName="false"/>
-    <functioncall functionName="fprintf"/>
-    <functioncall functionName="ha_ac_off"/>
-    <functioncall functionName="ha_ac_on"/>
-    <functioncall functionName="log_time"/>
-    <functioncall functionName="mqtt_gti_power"/>
-    <functioncall functionName="pow"/>
-    <functioncall functionName="pthread_mutex_init"/>
-    <functioncall functionName="pthread_mutex_lock"/>
-    <functioncall functionName="pthread_mutex_unlock"/>
-    <functioncall functionName="round"/>
-    <functioncall functionName="sqrt"/>
-    <functioncall functionName="true"/>
-  </FileInfo>
-  <FileInfo check="CheckUnusedFunctions">
-    <functiondecl file="ha_energy/bsoc.c" functionName="bsoc_init" lineNumber="60"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="bsoc_set_std_dev" lineNumber="75"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="bsoc_data_collect" lineNumber="85"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="bsoc_ac" lineNumber="135"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="bsoc_gti" lineNumber="145"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="gti_test" lineNumber="170"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="ac_test" lineNumber="190"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="get_batc_dev" lineNumber="195"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="calculateStandardDeviation" lineNumber="204"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="bat_current_stable" lineNumber="239"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="bsoc_set_mode" lineNumber="261"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="error_filter" lineNumber="368"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="ac0_filter" lineNumber="375"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="ac1_filter" lineNumber="383"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="ac2_filter" lineNumber="391"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="dc0_filter" lineNumber="399"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="dc1_filter" lineNumber="407"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="dc2_filter" lineNumber="415"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="drive0_filter" lineNumber="423"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="drive1_filter" lineNumber="431"/>
-    <functioncall functionName="MQTTClient"/>
-    <functioncall functionName="MQTTClient_deliveryToken"/>
-    <functioncall functionName="NULL"/>
-    <functioncall functionName="ResetPI"/>
-    <functioncall functionName="UpdatePI"/>
+    <functioncall functionName="V_BEN"/>
+    <functioncall functionName="V_DAHBAT"/>
+    <functioncall functionName="V_DCMPPT"/>
+    <functioncall functionName="V_DLAST"/>
+    <functioncall functionName="V_DPMPPT"/>
+    <functioncall functionName="V_DPPV"/>
+    <functioncall functionName="V_DVBAT"/>
+    <functioncall functionName="V_DVPV"/>
+    <functioncall functionName="V_FACE"/>
+    <functioncall functionName="V_FBEKW"/>
+    <functioncall functionName="V_FLO"/>
+    <functioncall functionName="V_FSO"/>
+    <functioncall functionName="V_PWA"/>
     <functioncall functionName="ac0_filter"/>
     <functioncall functionName="ac_weight"/>
     <functioncall functionName="bat_current"/>
@@ -83,51 +91,6 @@
     <functioncall functionName="false"/>
     <functioncall functionName="fprintf"/>
     <functioncall functionName="gti_weight"/>
-    <functioncall functionName="ha_ac_off"/>
-    <functioncall functionName="ha_ac_on"/>
-    <functioncall functionName="log_time"/>
-    <functioncall functionName="mqtt_gti_power"/>
-    <functioncall functionName="pow"/>
-    <functioncall functionName="pthread_mutex_init"/>
-    <functioncall functionName="pthread_mutex_lock"/>
-    <functioncall functionName="pthread_mutex_unlock"/>
-    <functioncall functionName="pv_voltage"/>
-    <functioncall functionName="round"/>
-    <functioncall functionName="sqrt"/>
-    <functioncall functionName="true"/>
-  </FileInfo>
-  <FileInfo check="CheckUnusedFunctions">
-    <functiondecl file="ha_energy/bsoc.c" functionName="bsoc_init" lineNumber="60"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="bsoc_set_std_dev" lineNumber="75"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="bsoc_data_collect" lineNumber="85"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="bsoc_ac" lineNumber="135"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="bsoc_gti" lineNumber="145"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="gti_test" lineNumber="170"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="ac_test" lineNumber="190"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="get_batc_dev" lineNumber="195"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="calculateStandardDeviation" lineNumber="204"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="bat_current_stable" lineNumber="239"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="bsoc_set_mode" lineNumber="261"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="error_filter" lineNumber="368"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="ac0_filter" lineNumber="375"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="ac1_filter" lineNumber="383"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="ac2_filter" lineNumber="391"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="dc0_filter" lineNumber="399"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="dc1_filter" lineNumber="407"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="dc2_filter" lineNumber="415"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="drive0_filter" lineNumber="423"/>
-    <functiondecl file="ha_energy/bsoc.c" functionName="drive1_filter" lineNumber="431"/>
-    <functioncall functionName="MQTTClient"/>
-    <functioncall functionName="MQTTClient_deliveryToken"/>
-    <functioncall functionName="NULL"/>
-    <functioncall functionName="ResetPI"/>
-    <functioncall functionName="UpdatePI"/>
-    <functioncall functionName="ac0_filter"/>
-    <functioncall functionName="calculateStandardDeviation"/>
-    <functioncall functionName="dc0_filter"/>
-    <functioncall functionName="error_filter"/>
-    <functioncall functionName="false"/>
-    <functioncall functionName="fprintf"/>
     <functioncall functionName="ha_ac_off"/>
     <functioncall functionName="ha_ac_on"/>
     <functioncall functionName="log_time"/>

@@ -36,7 +36,7 @@ extern "C" {
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.71"
+#define LOG_VERSION     "V0.73"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
@@ -92,17 +92,17 @@ extern "C" {
 #define BAT_M_KW            5120.0f
 #define BAT_SOC_TOP         0.98f
 #define BAT_SOC_HIGH        0.95f
-#define BAT_SOC_LOW         0.60f
+#define BAT_SOC_LOW         0.64f
+#define BAT_SOC_LOW_AC      0.70f	
 #define BAT_CRITICAL        200.0f
 #define MIN_BAT_KW_BSOC_SLP 4000.0f
 #define MIN_BAT_KW_BSOC_HI  4550.0f
-#define MIN_BAT_KW_BSOC_LO  3500.0f
 
 #define MIN_BAT_KW_GTI_HI   BAT_M_KW*BAT_SOC_TOP
-#define MIN_BAT_KW_GTI_LO   MIN_BAT_KW_GTI_HI*BAT_SOC_LOW
+#define MIN_BAT_KW_GTI_LO   BAT_M_KW*BAT_SOC_LOW
 
 #define MIN_BAT_KW_AC_HI    BAT_M_KW*BAT_SOC_HIGH
-#define MIN_BAT_KW_AC_LO    MIN_BAT_KW_AC_HI*BAT_SOC_LOW
+#define MIN_BAT_KW_AC_LO    BAT_M_KW*BAT_SOC_LOW_AC
 
 	/*
 	 * PV panel cycle limits parameters
@@ -111,6 +111,7 @@ extern "C" {
 #define PV_IGAIN            0.12f
 #define PV_IMAX             1400.0f
 #define PV_BIAS             288.0f
+#define PV_BIAS_ZERO          0.0f
 #define PV_BIAS_LOW         222.0f
 #define PV_BIAS_FLOAT       399.0f
 #define PV_BIAS_SLEEP       480.0f
@@ -120,8 +121,9 @@ extern "C" {
 #define PV_DL_MPTT_IDLE     57.0f
 #define PV_DL_BIAS_RATE     75.0f
 #define PV_DL_EXCESS       500.0f
-#define PV_DL_B_AH_LOW     425.0f
-#define PV_DL_B_AH_MIN     460.0f 
+#define PV_DL_B_AH_LOW     100.0f
+#define PV_DL_B_AH_MIN     150.0f // DL battery should be at least 175Ah
+#define PV_DL_B_V_LOW       23.8f // Battery low-voltqage cutoff
 #define PWA_SLEEP          200.0f
 #define DL_AC_DC_EFF        1.24f
 
@@ -148,6 +150,8 @@ extern "C" {
 
 	//#define AUTO_CHARGE                   // turn on dumpload charger during restarts
 	//#define B_DLE_DEBUG    // Dump Load debugging
+	//#define BSOC_DEGUB
+	//#define DEBUG_HA_CMD
 
 #define IM_DELAY            1   // tens of second updates
 #define IM_DISPLAY          1
@@ -286,6 +290,9 @@ extern "C" {
 		S_DPBAT,
 		S_DVBAT,
 		S_DCMPPT,
+		S_DPMPPT,
+		S_DAHBAT,
+		S_DCCMODE,
 		S_DGTI,
 		S_DLAST,
 	};

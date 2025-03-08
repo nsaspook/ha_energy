@@ -1,0 +1,606 @@
+\hypertarget{bsoc_8c}{}\doxysection{ha\+\_\+energy/bsoc.c File Reference}
+\label{bsoc_8c}\index{ha\_energy/bsoc.c@{ha\_energy/bsoc.c}}
+{\ttfamily \#include \char`\"{}bsoc.\+h\char`\"{}}\newline
+Include dependency graph for bsoc.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{bsoc_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structlocal__type}{local\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{bsoc_8c_aa9b00e4f08c59d45a2baa05cc44191a2}{error\+\_\+filter}} (const double)
+\item 
+bool \mbox{\hyperlink{bsoc_8c_a571a7c60ba1a2a6c569427c21c829733}{bsoc\+\_\+init}} (void)
+\item 
+void \mbox{\hyperlink{bsoc_8c_adc8522b4d922a9ce45f83ca6a8d2708c}{bsoc\+\_\+set\+\_\+std\+\_\+dev}} (const double value, const uint32\+\_\+t i)
+\item 
+bool \mbox{\hyperlink{bsoc_8c_a4c8b6884b4cae5d49a0d4141ce516372}{bsoc\+\_\+data\+\_\+collect}} (void)
+\item 
+double \mbox{\hyperlink{bsoc_8c_a63f8e1b6516cda51fd09570aaf4e147d}{bsoc\+\_\+ac}} (void)
+\item 
+double \mbox{\hyperlink{bsoc_8c_ab9a97f08a9166d16e45b2025c3887eab}{bsoc\+\_\+gti}} (void)
+\item 
+double \mbox{\hyperlink{bsoc_8c_ade03000a21b56a5527367c81e7219c99}{gti\+\_\+test}} (void)
+\item 
+double \mbox{\hyperlink{bsoc_8c_a413c5066cb43aae0039adba36593129a}{ac\+\_\+test}} (void)
+\item 
+double \mbox{\hyperlink{bsoc_8c_a8f6e0fd4594d467a89005d81038aa602}{get\+\_\+batc\+\_\+dev}} (void)
+\item 
+double \mbox{\hyperlink{bsoc_8c_a822d408a5e379216cd6a003381f94b43}{calculate\+Standard\+Deviation}} (const uint32\+\_\+t N, const double data\mbox{[}$\,$\mbox{]})
+\item 
+bool \mbox{\hyperlink{bsoc_8c_a4ff1d7778a0780a0f1c029a738322513}{bat\+\_\+current\+\_\+stable}} (void)
+\item 
+bool \mbox{\hyperlink{bsoc_8c_a49c1e06b8059a63a9ed7c7d729e59d90}{bsoc\+\_\+set\+\_\+mode}} (const double target, const bool mode, const bool init)
+\item 
+double \mbox{\hyperlink{bsoc_8c_af738b354e21276b35d56a42f217ac1f8}{ac0\+\_\+filter}} (const double raw)
+\item 
+double \mbox{\hyperlink{bsoc_8c_a4ec0fe226796da34c999530046265c3a}{ac1\+\_\+filter}} (const double raw)
+\item 
+double \mbox{\hyperlink{bsoc_8c_aa933af2d3df8ce390f6f95900df4b525}{ac2\+\_\+filter}} (const double raw)
+\item 
+double \mbox{\hyperlink{bsoc_8c_a017e138f3c81b9dd94af5d7e7bd7616c}{dc0\+\_\+filter}} (const double raw)
+\item 
+double \mbox{\hyperlink{bsoc_8c_a623a5ccd411eeeba8acd1132a33a15e8}{dc1\+\_\+filter}} (const double raw)
+\item 
+double \mbox{\hyperlink{bsoc_8c_a4846561257bfbb8d753328d1fe7a1c07}{dc2\+\_\+filter}} (const double raw)
+\item 
+double \mbox{\hyperlink{bsoc_8c_a9ceac393328d0a6c09cccc8c38fa30a1}{drive0\+\_\+filter}} (const double raw)
+\item 
+double \mbox{\hyperlink{bsoc_8c_a9cf492c9b858a53133af1b29b9f68708}{drive1\+\_\+filter}} (const double raw)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \mbox{\hyperlink{bsoc_8c_ae6b57480d8cda466cfc65b9bfc47b255}{mqtt\+\_\+name}} \mbox{[}\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072ab183b38bd716ecf9405c4546e3bd6870}{V\+\_\+\+DLAST}}\mbox{]}
+\item 
+static struct \mbox{\hyperlink{structlocal__type}{local\+\_\+type}} \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{bsoc_8c_af738b354e21276b35d56a42f217ac1f8}\label{bsoc_8c_af738b354e21276b35d56a42f217ac1f8}} 
+\index{bsoc.c@{bsoc.c}!ac0\_filter@{ac0\_filter}}
+\index{ac0\_filter@{ac0\_filter}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{ac0\_filter()}{ac0\_filter()}}
+{\footnotesize\ttfamily double ac0\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{376 \{}
+\DoxyCodeLine{377     \textcolor{keyword}{static} \textcolor{keywordtype}{double} accum = 0.0f;}
+\DoxyCodeLine{378     \textcolor{keyword}{static} \textcolor{keywordtype}{double} coef = \mbox{\hyperlink{bsoc_8h_aeeb125aaf18ebb1dfcd400ac4c9cfb75}{COEFF}};}
+\DoxyCodeLine{379     accum = accum -\/ accum / coef + raw;}
+\DoxyCodeLine{380     \textcolor{keywordflow}{return} accum / coef;}
+\DoxyCodeLine{381 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_a4ec0fe226796da34c999530046265c3a}\label{bsoc_8c_a4ec0fe226796da34c999530046265c3a}} 
+\index{bsoc.c@{bsoc.c}!ac1\_filter@{ac1\_filter}}
+\index{ac1\_filter@{ac1\_filter}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{ac1\_filter()}{ac1\_filter()}}
+{\footnotesize\ttfamily double ac1\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{384 \{}
+\DoxyCodeLine{385     \textcolor{keyword}{static} \textcolor{keywordtype}{double} accum = 0.0f;}
+\DoxyCodeLine{386     \textcolor{keyword}{static} \textcolor{keywordtype}{double} coef = \mbox{\hyperlink{bsoc_8h_aadf817f59fb13a1a5c66ea9f7574b842}{COEF}};}
+\DoxyCodeLine{387     accum = accum -\/ accum / coef + raw;}
+\DoxyCodeLine{388     \textcolor{keywordflow}{return} accum / coef;}
+\DoxyCodeLine{389 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_aa933af2d3df8ce390f6f95900df4b525}\label{bsoc_8c_aa933af2d3df8ce390f6f95900df4b525}} 
+\index{bsoc.c@{bsoc.c}!ac2\_filter@{ac2\_filter}}
+\index{ac2\_filter@{ac2\_filter}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{ac2\_filter()}{ac2\_filter()}}
+{\footnotesize\ttfamily double ac2\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{392 \{}
+\DoxyCodeLine{393     \textcolor{keyword}{static} \textcolor{keywordtype}{double} accum = 0.0f;}
+\DoxyCodeLine{394     \textcolor{keyword}{static} \textcolor{keywordtype}{double} coef = \mbox{\hyperlink{bsoc_8h_aadf817f59fb13a1a5c66ea9f7574b842}{COEF}};}
+\DoxyCodeLine{395     accum = accum -\/ accum / coef + raw;}
+\DoxyCodeLine{396     \textcolor{keywordflow}{return} accum / coef;}
+\DoxyCodeLine{397 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_a413c5066cb43aae0039adba36593129a}\label{bsoc_8c_a413c5066cb43aae0039adba36593129a}} 
+\index{bsoc.c@{bsoc.c}!ac\_test@{ac\_test}}
+\index{ac\_test@{ac\_test}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{ac\_test()}{ac\_test()}}
+{\footnotesize\ttfamily double ac\+\_\+test (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{191 \{}
+\DoxyCodeLine{192     \textcolor{keywordflow}{return} \mbox{\hyperlink{bsoc_8c_af738b354e21276b35d56a42f217ac1f8}{ac0\_filter}}(\mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a49a3bb46e2738b3340577310e4258edb}{ac\_weight}});}
+\DoxyCodeLine{193 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_a4ff1d7778a0780a0f1c029a738322513}\label{bsoc_8c_a4ff1d7778a0780a0f1c029a738322513}} 
+\index{bsoc.c@{bsoc.c}!bat\_current\_stable@{bat\_current\_stable}}
+\index{bat\_current\_stable@{bat\_current\_stable}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{bat\_current\_stable()}{bat\_current\_stable()}}
+{\footnotesize\ttfamily bool bat\+\_\+current\+\_\+stable (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{240 \{}
+\DoxyCodeLine{241     \textcolor{keyword}{static} \textcolor{keywordtype}{double} gap = 0.0f;}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243     \textcolor{keywordflow}{if} (\mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a26f83e801170629be93cdef740ac2a55}{batc\_std\_dev}} <= (\mbox{\hyperlink{bsoc_8h_ada660e6323c9300e8edf92b6406ee039}{MAX\_BATC\_DEV}} + gap)) \{}
+\DoxyCodeLine{244         gap = \mbox{\hyperlink{bsoc_8h_ada660e6323c9300e8edf92b6406ee039}{MAX\_BATC\_DEV}};}
+\DoxyCodeLine{245         \textcolor{keywordflow}{if} (\mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a1cd41126944bc19c3272928f6c6aea81}{bat\_c\_std\_dev}}[0] < \mbox{\hyperlink{bsoc_8h_abb20d4d6de786054de4ac85d7314d51d}{BAT\_C\_DRAW}}) \{}
+\DoxyCodeLine{246             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{247         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{248             gap = 0.0f;}
+\DoxyCodeLine{249             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{250         \}}
+\DoxyCodeLine{251     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{252         gap = 0.0f;}
+\DoxyCodeLine{253         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{254     \}}
+\DoxyCodeLine{255 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_a63f8e1b6516cda51fd09570aaf4e147d}\label{bsoc_8c_a63f8e1b6516cda51fd09570aaf4e147d}} 
+\index{bsoc.c@{bsoc.c}!bsoc\_ac@{bsoc\_ac}}
+\index{bsoc\_ac@{bsoc\_ac}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{bsoc\_ac()}{bsoc\_ac()}}
+{\footnotesize\ttfamily double bsoc\+\_\+ac (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{136 \{}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138     \textcolor{keywordflow}{return} \mbox{\hyperlink{bsoc_8c_af738b354e21276b35d56a42f217ac1f8}{ac0\_filter}}(\mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a49a3bb46e2738b3340577310e4258edb}{ac\_weight}});}
+\DoxyCodeLine{139 \};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_a4c8b6884b4cae5d49a0d4141ce516372}\label{bsoc_8c_a4c8b6884b4cae5d49a0d4141ce516372}} 
+\index{bsoc.c@{bsoc.c}!bsoc\_data\_collect@{bsoc\_data\_collect}}
+\index{bsoc\_data\_collect@{bsoc\_data\_collect}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{bsoc\_data\_collect()}{bsoc\_data\_collect()}}
+{\footnotesize\ttfamily bool bsoc\+\_\+data\+\_\+collect (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{86 \{}
+\DoxyCodeLine{87     \textcolor{keywordtype}{bool} ret = \textcolor{keyword}{false};}
+\DoxyCodeLine{88     \textcolor{keyword}{static} uint32\_t i = 0;}
+\DoxyCodeLine{89     \textcolor{comment}{// lockout threaded updates}}
+\DoxyCodeLine{90     pthread\_mutex\_lock(\&\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a35ae999887cbeb701800e498f4e1721a}{ha\_lock}}); \textcolor{comment}{// lockout MQTT var updates}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92     \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a49a3bb46e2738b3340577310e4258edb}{ac\_weight}} = \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a821ba4dacc502ba41ec0c17aff5c42d3}{V\_FBEKW}}];}
+\DoxyCodeLine{93     \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a4ef0daf79e74cbb007f0b2473a5ea1a4}{gti\_weight}} = \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a821ba4dacc502ba41ec0c17aff5c42d3}{V\_FBEKW}}];}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#ifdef FAKE\_VPV }\textcolor{comment}{// no DUMPLOAD AC charger}}
+\DoxyCodeLine{95     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a72305a9f4d6761d0144244638ef0c98d}{gti\_sw\_on}}) \{}
+\DoxyCodeLine{96         pv\_voltage = \mbox{\hyperlink{bsoc_8h_a2bae68642a6208f91a301a9b479f51b9}{PV\_V\_NOM}};}
+\DoxyCodeLine{97     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{98         pv\_voltage = \mbox{\hyperlink{bsoc_8h_a95c668de635eec6ef69588d3fea0ff87}{PV\_V\_FAKE}};}
+\DoxyCodeLine{99     \}}
+\DoxyCodeLine{100     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aea100527e1fc47fec8e53ea94b738b75}{V\_DVPV}}] = pv\_voltage;}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{102     \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_ad0f49602ecc99db48902a6cfb84e2e45}{pv\_voltage}} = \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aea100527e1fc47fec8e53ea94b738b75}{V\_DVPV}}];}
+\DoxyCodeLine{103 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{104     \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_ad3d39ab7d56e4d1a5433dbe06a03969d}{bat\_voltage}} = \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a313329bdfc449d61aa60f11b31432e1f}{V\_DVBAT}}];}
+\DoxyCodeLine{105     \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a7db94011f82802643648b4964fda79c3}{bat\_current}} = \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a2dd8cb6e7c42be6b299e5d3d6617d7c2}{V\_DCMPPT}}];}
+\DoxyCodeLine{106     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a01cced1053900a4f380da28e1153906f}{ac\_low\_adj}} = \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072aea8f7852e1fb2fb07ea23c17aaed223e}{V\_FSO}}]* -\/0.5f;}
+\DoxyCodeLine{107     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1945c4d2c3ef6600d32ff0d6f6a52df6}{gti\_low\_adj}} = \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072af52d8a89895cb70ab99159fcad262585}{V\_FACE}}] * -\/0.5f;}
+\DoxyCodeLine{108     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_aa813aa79ee962c4dde4572602d60ae69}{dl\_mqtt\_max}} = \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a966e201afd63441eacdb3f18b7dcd592}{V\_DPMPPT}}];}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     pthread\_mutex\_unlock(\&\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a35ae999887cbeb701800e498f4e1721a}{ha\_lock}}); \textcolor{comment}{// resume remote MQTT var updates}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a01cced1053900a4f380da28e1153906f}{ac\_low\_adj}} < -\/2000.0f) \{}
+\DoxyCodeLine{113         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a01cced1053900a4f380da28e1153906f}{ac\_low\_adj}} = -\/2000.0f;}
+\DoxyCodeLine{114     \}}
+\DoxyCodeLine{115     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1945c4d2c3ef6600d32ff0d6f6a52df6}{gti\_low\_adj}} < -\/2000.0f) \{}
+\DoxyCodeLine{116         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a1945c4d2c3ef6600d32ff0d6f6a52df6}{gti\_low\_adj}} = -\/2000.0f;}
+\DoxyCodeLine{117     \}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119     \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a1cd41126944bc19c3272928f6c6aea81}{bat\_c\_std\_dev}}[i++] = \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a7db94011f82802643648b4964fda79c3}{bat\_current}};}
+\DoxyCodeLine{120     \textcolor{keywordflow}{if} (i >= \mbox{\hyperlink{bsoc_8h_a8a3855a66a1f87247cedfa3cc72d20c0}{DEV\_SIZE}}) \{}
+\DoxyCodeLine{121         i = 0;}
+\DoxyCodeLine{122     \}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124     \mbox{\hyperlink{bsoc_8c_a822d408a5e379216cd6a003381f94b43}{calculateStandardDeviation}}(\mbox{\hyperlink{bsoc_8h_a8a3855a66a1f87247cedfa3cc72d20c0}{DEV\_SIZE}}, \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a1cd41126944bc19c3272928f6c6aea81}{bat\_c\_std\_dev}});}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126 \textcolor{preprocessor}{\#ifdef BSOC\_DEBUG}}
+\DoxyCodeLine{127     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)nmqtt var bsoc update\(\backslash\)r\(\backslash\)n"{}});}
+\DoxyCodeLine{128 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{129     \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{130 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_ab9a97f08a9166d16e45b2025c3887eab}\label{bsoc_8c_ab9a97f08a9166d16e45b2025c3887eab}} 
+\index{bsoc.c@{bsoc.c}!bsoc\_gti@{bsoc\_gti}}
+\index{bsoc\_gti@{bsoc\_gti}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{bsoc\_gti()}{bsoc\_gti()}}
+{\footnotesize\ttfamily double bsoc\+\_\+gti (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{146 \{}
+\DoxyCodeLine{147 \textcolor{preprocessor}{\#ifdef BSOC\_DEBUG}}
+\DoxyCodeLine{148     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}pvp \%f, gweight \%f, aweight \%f, batv \%f, batc \%f\(\backslash\)r\(\backslash\)n"{}}, pv\_voltage, gti\_weight, ac\_weight, bat\_voltage, bat\_current);}
+\DoxyCodeLine{149 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{150     \textcolor{comment}{// check for 48VDC AC charger powered from the Solar battery bank AC inverter unless E.dl\_excess is TRUE}}
+\DoxyCodeLine{151     \textcolor{keywordflow}{if} (((\mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_ad0f49602ecc99db48902a6cfb84e2e45}{pv\_voltage}} < \mbox{\hyperlink{bsoc_8h_ac72ac391d051ffd4e1d466d6ede48b34}{MIN\_PV\_VOLTS}}) \&\& (!\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}})) || (\mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_ad3d39ab7d56e4d1a5433dbe06a03969d}{bat\_voltage}} < \mbox{\hyperlink{bsoc_8h_ade1038e9edec3b8646f4288f3b32b713}{MIN\_BAT\_VOLTS}})) \{}
+\DoxyCodeLine{152         \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a4ef0daf79e74cbb007f0b2473a5ea1a4}{gti\_weight}} = 0.0f; \textcolor{comment}{// reduce power to zero}}
+\DoxyCodeLine{153     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{154         \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}}) \{}
+\DoxyCodeLine{155             \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a79eef89bbb62af24bc79c04f29d0ad97}{V\_DAHBAT}}] > \mbox{\hyperlink{energy_8h_a69ba8a83d257f96478010c24eccc1627}{PV\_DL\_B\_AH\_MIN}}) \{}
+\DoxyCodeLine{156                 \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a4ef0daf79e74cbb007f0b2473a5ea1a4}{gti\_weight}} = \mbox{\hyperlink{energy_8h_a821e3aa59b88068f6ee5d1b8a922bd43}{PV\_DL\_EXCESS}} + \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a4324cb84eff8589a0765143e8acbc114}{dl\_excess\_adj}};}
+\DoxyCodeLine{157             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{158                 \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a4ef0daf79e74cbb007f0b2473a5ea1a4}{gti\_weight}} = 0.0f; \textcolor{comment}{// reduce power to zero}}
+\DoxyCodeLine{159             \}}
+\DoxyCodeLine{160         \}}
+\DoxyCodeLine{161     \}}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164     \textcolor{keywordflow}{return} \mbox{\hyperlink{bsoc_8c_a017e138f3c81b9dd94af5d7e7bd7616c}{dc0\_filter}}(\mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a4ef0daf79e74cbb007f0b2473a5ea1a4}{gti\_weight}});}
+\DoxyCodeLine{165 \};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_a571a7c60ba1a2a6c569427c21c829733}\label{bsoc_8c_a571a7c60ba1a2a6c569427c21c829733}} 
+\index{bsoc.c@{bsoc.c}!bsoc\_init@{bsoc\_init}}
+\index{bsoc\_init@{bsoc\_init}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{bsoc\_init()}{bsoc\_init()}}
+{\footnotesize\ttfamily bool bsoc\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{61 \{}
+\DoxyCodeLine{62     \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a49a3bb46e2738b3340577310e4258edb}{ac\_weight}} = 0.0f;}
+\DoxyCodeLine{63     \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a4ef0daf79e74cbb007f0b2473a5ea1a4}{gti\_weight}} = 0.0f;}
+\DoxyCodeLine{64     \textcolor{comment}{// use MUTEX locks for message passing between remote programs}}
+\DoxyCodeLine{65     \textcolor{keywordflow}{if} (pthread\_mutex\_init(\&\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a35ae999887cbeb701800e498f4e1721a}{ha\_lock}}, NULL) != 0) \{}
+\DoxyCodeLine{66         fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}\(\backslash\)n\%s mutex init has failed\(\backslash\)n"{}}, \mbox{\hyperlink{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}{log\_time}}(\textcolor{keyword}{false}));}
+\DoxyCodeLine{67         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{68     \}}
+\DoxyCodeLine{69     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{70 \};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_a49c1e06b8059a63a9ed7c7d729e59d90}\label{bsoc_8c_a49c1e06b8059a63a9ed7c7d729e59d90}} 
+\index{bsoc.c@{bsoc.c}!bsoc\_set\_mode@{bsoc\_set\_mode}}
+\index{bsoc\_set\_mode@{bsoc\_set\_mode}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{bsoc\_set\_mode()}{bsoc\_set\_mode()}}
+{\footnotesize\ttfamily bool bsoc\+\_\+set\+\_\+mode (\begin{DoxyParamCaption}\item[{const double}]{target,  }\item[{const bool}]{mode,  }\item[{const bool}]{init }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{262 \{}
+\DoxyCodeLine{263     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} bsoc\_mode = \textcolor{keyword}{false};}
+\DoxyCodeLine{264     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} bsoc\_high = \textcolor{keyword}{false}, ha\_ac\_mode = \textcolor{keyword}{true};}
+\DoxyCodeLine{265     \textcolor{keyword}{static} \textcolor{keywordtype}{double} accum = 0.0f, vpwa = 0.0f;}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{267     \textcolor{keywordflow}{if} (init) \{}
+\DoxyCodeLine{268         bsoc\_mode = \textcolor{keyword}{false};}
+\DoxyCodeLine{269         bsoc\_high = \textcolor{keyword}{false};}
+\DoxyCodeLine{270         ha\_ac\_mode = \textcolor{keyword}{true};}
+\DoxyCodeLine{271         accum = 0.0f;}
+\DoxyCodeLine{272         vpwa = 0.0f;}
+\DoxyCodeLine{273         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{274     \}}
+\DoxyCodeLine{275     \textcolor{comment}{/*}}
+\DoxyCodeLine{276 \textcolor{comment}{     * running avg filter}}
+\DoxyCodeLine{277 \textcolor{comment}{     */}}
+\DoxyCodeLine{278     accum = accum -\/ accum / \mbox{\hyperlink{bsoc_8h_a7b9e7fc82e04c2af0cd3f9a6185754df}{COEFN}} + \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072ad5c883c864f682ae706402bbcbe385cf}{V\_PWA}}];}
+\DoxyCodeLine{279     vpwa = accum / \mbox{\hyperlink{bsoc_8h_a7b9e7fc82e04c2af0cd3f9a6185754df}{COEFN}};}
+\DoxyCodeLine{280 }
+\DoxyCodeLine{281     \textcolor{keywordflow}{if} ((vpwa >= \mbox{\hyperlink{bsoc_8h_a9e1f90eeafcf3b25dba060a41c7de785}{PV\_FULL\_PWR}}) \&\& (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a821ba4dacc502ba41ec0c17aff5c42d3}{V\_FBEKW}}] >= \mbox{\hyperlink{energy_8h_ad844217bc1ad213a7424c3edc9f3ccbd}{MIN\_BAT\_KW\_BSOC\_HI}})) \{}
+\DoxyCodeLine{282         \textcolor{keywordflow}{if} (!bsoc\_mode) \{}
+\DoxyCodeLine{283             \mbox{\hyperlink{pid_8c_a2845499736d4daabdc6bfcb637203535}{ResetPI}}(\&\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a7d5455aeb7e7424974a31670d0d14c28}{pid}});}
+\DoxyCodeLine{284         \}}
+\DoxyCodeLine{285         bsoc\_mode = \textcolor{keyword}{true};}
+\DoxyCodeLine{286         bsoc\_high = \textcolor{keyword}{true};}
+\DoxyCodeLine{287         \textcolor{keywordflow}{if} (!ha\_ac\_mode) \{}
+\DoxyCodeLine{288             \mbox{\hyperlink{energy_8c_a9a2e9166d49137eb9230625ac072807d}{ha\_ac\_on}}();}
+\DoxyCodeLine{289             ha\_ac\_mode = \textcolor{keyword}{true};}
+\DoxyCodeLine{290         \}}
+\DoxyCodeLine{291 }
+\DoxyCodeLine{292     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{293         \textcolor{keywordflow}{if} (bsoc\_high) \{ \textcolor{comment}{// turn off at min limit power}}
+\DoxyCodeLine{294             \textcolor{keywordflow}{if} ((vpwa >= \mbox{\hyperlink{bsoc_8h_a907125f6d59e3a4b66afc8f3734eaa1d}{PV\_MIN\_PWR}}) \&\& (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a821ba4dacc502ba41ec0c17aff5c42d3}{V\_FBEKW}}] >= \mbox{\hyperlink{energy_8h_ad844217bc1ad213a7424c3edc9f3ccbd}{MIN\_BAT\_KW\_BSOC\_HI}})) \{}
+\DoxyCodeLine{295                 bsoc\_mode = \textcolor{keyword}{true};}
+\DoxyCodeLine{296                 \textcolor{keywordflow}{if} (ha\_ac\_mode) \{}
+\DoxyCodeLine{297                     \mbox{\hyperlink{energy_8c_a2c6c70b9a184aa76393a677b08954c81}{ha\_ac\_off}}();}
+\DoxyCodeLine{298                     ha\_ac\_mode = \textcolor{keyword}{false};}
+\DoxyCodeLine{299                 \}}
+\DoxyCodeLine{300             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{301                 bsoc\_high = \textcolor{keyword}{false};}
+\DoxyCodeLine{302                 ha\_ac\_mode = \textcolor{keyword}{false};}
+\DoxyCodeLine{303             \}}
+\DoxyCodeLine{304         \}}
+\DoxyCodeLine{305     \}}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a42c49feb06f42f31cd1d2dcc68c07bf8}{gti\_dumpload}} = (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_aa7198c879bedfbb1db35874b4ef079dd}{print\_vars}}[\mbox{\hyperlink{energy_8h_a5a73f316e17083fb4d7cbf348494322a}{L3\_P}}]* -\/1.0f) + \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a78658cf8e5d2393c6d0148b279287efc}{V\_DPPV}}]; \textcolor{comment}{// use as a temp variable}}
+\DoxyCodeLine{308     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a48f0bfcac4f5cc565e07896e94221a48}{total\_system}} = (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a1e904f1377abb70e57726e114ff22765}{V\_FLO}}] -\/ \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a42c49feb06f42f31cd1d2dcc68c07bf8}{gti\_dumpload}}) + \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a78658cf8e5d2393c6d0148b279287efc}{V\_DPPV}}] +(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_aa7198c879bedfbb1db35874b4ef079dd}{print\_vars}}[\mbox{\hyperlink{energy_8h_a5a73f316e17083fb4d7cbf348494322a}{L3\_P}}]* -\/1.0f);}
+\DoxyCodeLine{309     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a42c49feb06f42f31cd1d2dcc68c07bf8}{gti\_dumpload}} = (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_aa7198c879bedfbb1db35874b4ef079dd}{print\_vars}}[\mbox{\hyperlink{energy_8h_a5a73f316e17083fb4d7cbf348494322a}{L3\_P}}]* -\/1.0f) -\/ \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a78658cf8e5d2393c6d0148b279287efc}{V\_DPPV}}]; \textcolor{comment}{// use this value}}
+\DoxyCodeLine{310 }
+\DoxyCodeLine{311     \textcolor{comment}{/*}}
+\DoxyCodeLine{312 \textcolor{comment}{     * look at system energy balance for power control drive}}
+\DoxyCodeLine{313 \textcolor{comment}{     */}}
+\DoxyCodeLine{314     if (mode) \{ \textcolor{comment}{// add GTI power from dumpload}}
+\DoxyCodeLine{315         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a430a4ad1dc3ff1be380549424b79d7ca}{error}} = (int32\_t) \mbox{\hyperlink{pid_8c_a87884a0dc8b50e94a38729d4a911e780}{UpdatePI}}(\&\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a7d5455aeb7e7424974a31670d0d14c28}{pid}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a47acb84856d0db6447de2c99171d654d}{V\_BEN}}] + \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a42c49feb06f42f31cd1d2dcc68c07bf8}{gti\_dumpload}} + \mbox{\hyperlink{bsoc_8h_a27e0b9791217cb777e9f790b9b5b7a1d}{PBAL\_OFFSET}});}
+\DoxyCodeLine{316     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{317         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a430a4ad1dc3ff1be380549424b79d7ca}{error}} = (int32\_t) \mbox{\hyperlink{pid_8c_a87884a0dc8b50e94a38729d4a911e780}{UpdatePI}}(\&\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a7d5455aeb7e7424974a31670d0d14c28}{pid}}, \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a47acb84856d0db6447de2c99171d654d}{V\_BEN}}] + \mbox{\hyperlink{bsoc_8h_a27e0b9791217cb777e9f790b9b5b7a1d}{PBAL\_OFFSET}});}
+\DoxyCodeLine{318     \}}
+\DoxyCodeLine{319 }
+\DoxyCodeLine{320     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a430a4ad1dc3ff1be380549424b79d7ca}{error}} > 0.0f) \{}
+\DoxyCodeLine{321         \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a11061b73094f46a2b995a06e14a25875}{coef}} = \mbox{\hyperlink{bsoc_8h_aadf817f59fb13a1a5c66ea9f7574b842}{COEF}};}
+\DoxyCodeLine{322     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{323         \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a11061b73094f46a2b995a06e14a25875}{coef}} = \mbox{\hyperlink{bsoc_8h_a7b9e7fc82e04c2af0cd3f9a6185754df}{COEFN}};}
+\DoxyCodeLine{324     \}}
+\DoxyCodeLine{325     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_adad7f08a8839f1d7fdddcb33d667d2ff}{target}} = target;}
+\DoxyCodeLine{326     \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a430a4ad1dc3ff1be380549424b79d7ca}{error}} = round(\mbox{\hyperlink{bsoc_8c_aa9b00e4f08c59d45a2baa05cc44191a2}{error\_filter}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a430a4ad1dc3ff1be380549424b79d7ca}{error}}));}
+\DoxyCodeLine{327     \textcolor{comment}{/*}}
+\DoxyCodeLine{328 \textcolor{comment}{     * check for idle flag from HA}}
+\DoxyCodeLine{329 \textcolor{comment}{     */}}
+\DoxyCodeLine{330     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a3bc6b3f9a6c3a06dc7875133321aba62}{con6}}) \{}
+\DoxyCodeLine{331         ha\_ac\_mode = \textcolor{keyword}{true};}
+\DoxyCodeLine{332         bsoc\_mode = \textcolor{keyword}{false};}
+\DoxyCodeLine{333     \}}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{335     \textcolor{comment}{/*}}
+\DoxyCodeLine{336 \textcolor{comment}{     * HA start excess button pressed}}
+\DoxyCodeLine{337 \textcolor{comment}{     */}}
+\DoxyCodeLine{338     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a0cc3a15a994a67eb849733193e05fa06}{con4}}) \{}
+\DoxyCodeLine{339         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{340         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a0cc3a15a994a67eb849733193e05fa06}{con4}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{341     \}}
+\DoxyCodeLine{342 }
+\DoxyCodeLine{343     \textcolor{comment}{/*}}
+\DoxyCodeLine{344 \textcolor{comment}{     * HA stop excess button pressed}}
+\DoxyCodeLine{345 \textcolor{comment}{     */}}
+\DoxyCodeLine{346     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a5ca43a1420ba47e4f37857bca5c11938}{con5}}) \{}
+\DoxyCodeLine{347         \mbox{\hyperlink{mqtt__vars_8c_a3fc1eb9cd6b570d96277f671de9e979a}{mqtt\_gti\_power}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}{TOPIC\_P}}, \textcolor{stringliteral}{"{}Z\#"{}}, 9); \textcolor{comment}{// zero power at excess shutdown}}
+\DoxyCodeLine{348         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{349         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a5ca43a1420ba47e4f37857bca5c11938}{con5}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{350     \}}
+\DoxyCodeLine{351 }
+\DoxyCodeLine{352     \textcolor{comment}{/*}}
+\DoxyCodeLine{353 \textcolor{comment}{     * DL buffer battery low set-\/point excess load shutdown}}
+\DoxyCodeLine{354 \textcolor{comment}{     */}}
+\DoxyCodeLine{355     \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a79eef89bbb62af24bc79c04f29d0ad97}{V\_DAHBAT}}] < \mbox{\hyperlink{energy_8h_aa475e97af32e6972baba4dd1a61f48df}{PV\_DL\_B\_AH\_LOW}}) \{}
+\DoxyCodeLine{356         \mbox{\hyperlink{mqtt__vars_8c_a3fc1eb9cd6b570d96277f671de9e979a}{mqtt\_gti\_power}}(\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a7fe10593bbecdc3d6ec73ffa7fe6596c}{client\_p}}, \mbox{\hyperlink{energy_8h_a8170bc07eb3b7f53bb8bfea780ebfdd8}{TOPIC\_P}}, \textcolor{stringliteral}{"{}Z\#"{}}, 10); \textcolor{comment}{// zero power at excess shutdown}}
+\DoxyCodeLine{357         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{358         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a0cc3a15a994a67eb849733193e05fa06}{con4}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{359         \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_ae587cb0d827d54b01b3c04540ab92948}{mode}}.\mbox{\hyperlink{structmode__type_a5ca43a1420ba47e4f37857bca5c11938}{con5}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{360     \}}
+\DoxyCodeLine{361 }
+\DoxyCodeLine{362     \textcolor{keywordflow}{return} bsoc\_mode;}
+\DoxyCodeLine{363 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_adc8522b4d922a9ce45f83ca6a8d2708c}\label{bsoc_8c_adc8522b4d922a9ce45f83ca6a8d2708c}} 
+\index{bsoc.c@{bsoc.c}!bsoc\_set\_std\_dev@{bsoc\_set\_std\_dev}}
+\index{bsoc\_set\_std\_dev@{bsoc\_set\_std\_dev}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{bsoc\_set\_std\_dev()}{bsoc\_set\_std\_dev()}}
+{\footnotesize\ttfamily void bsoc\+\_\+set\+\_\+std\+\_\+dev (\begin{DoxyParamCaption}\item[{const double}]{value,  }\item[{const uint32\+\_\+t}]{i }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{76 \{}
+\DoxyCodeLine{77     \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a1cd41126944bc19c3272928f6c6aea81}{bat\_c\_std\_dev}}[i] = value;}
+\DoxyCodeLine{78 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_a822d408a5e379216cd6a003381f94b43}\label{bsoc_8c_a822d408a5e379216cd6a003381f94b43}} 
+\index{bsoc.c@{bsoc.c}!calculateStandardDeviation@{calculateStandardDeviation}}
+\index{calculateStandardDeviation@{calculateStandardDeviation}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{calculateStandardDeviation()}{calculateStandardDeviation()}}
+{\footnotesize\ttfamily double calculate\+Standard\+Deviation (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{N,  }\item[{const double}]{data\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{205 \{}
+\DoxyCodeLine{206     \textcolor{comment}{// variable to store sum of the given data}}
+\DoxyCodeLine{207     \textcolor{keywordtype}{double} sum = 0;}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < N; i++) \{}
+\DoxyCodeLine{210         sum += data[i];}
+\DoxyCodeLine{211     \}}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213     \textcolor{comment}{// calculating mean}}
+\DoxyCodeLine{214     \textcolor{keywordtype}{double} mean = sum / N;}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216     \textcolor{comment}{// temporary variable to store the summation of square}}
+\DoxyCodeLine{217     \textcolor{comment}{// of difference between individual data items and mean}}
+\DoxyCodeLine{218     \textcolor{keywordtype}{double} values = 0;}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{220     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < N; i++) \{}
+\DoxyCodeLine{221         values += pow(data[i] -\/ mean, 2);}
+\DoxyCodeLine{222     \}}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224     \textcolor{comment}{// variance is the square of standard deviation}}
+\DoxyCodeLine{225     \textcolor{keywordtype}{double} variance = values / N;}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{227     \textcolor{comment}{// calculating standard deviation by finding square root}}
+\DoxyCodeLine{228     \textcolor{comment}{// of variance}}
+\DoxyCodeLine{229     \textcolor{keywordtype}{double} standardDeviation = sqrt(variance);}
+\DoxyCodeLine{230     \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a26f83e801170629be93cdef740ac2a55}{batc\_std\_dev}} = standardDeviation;}
+\DoxyCodeLine{231 }
+\DoxyCodeLine{232 \textcolor{preprocessor}{\#ifdef BSOC\_DEBUG}}
+\DoxyCodeLine{233     \textcolor{comment}{// printing standard deviation}}
+\DoxyCodeLine{234     fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}STD DEV of Current \%.2f\(\backslash\)r\(\backslash\)n"{}}, standardDeviation);}
+\DoxyCodeLine{235 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{236     \textcolor{keywordflow}{return} standardDeviation;}
+\DoxyCodeLine{237 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_a017e138f3c81b9dd94af5d7e7bd7616c}\label{bsoc_8c_a017e138f3c81b9dd94af5d7e7bd7616c}} 
+\index{bsoc.c@{bsoc.c}!dc0\_filter@{dc0\_filter}}
+\index{dc0\_filter@{dc0\_filter}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{dc0\_filter()}{dc0\_filter()}}
+{\footnotesize\ttfamily double dc0\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{400 \{}
+\DoxyCodeLine{401     \textcolor{keyword}{static} \textcolor{keywordtype}{double} accum = 0.0f;}
+\DoxyCodeLine{402     \textcolor{keyword}{static} \textcolor{keywordtype}{double} coef = \mbox{\hyperlink{bsoc_8h_aeeb125aaf18ebb1dfcd400ac4c9cfb75}{COEFF}};}
+\DoxyCodeLine{403     accum = accum -\/ accum / coef + raw;}
+\DoxyCodeLine{404     \textcolor{keywordflow}{return} accum / coef;}
+\DoxyCodeLine{405 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_a623a5ccd411eeeba8acd1132a33a15e8}\label{bsoc_8c_a623a5ccd411eeeba8acd1132a33a15e8}} 
+\index{bsoc.c@{bsoc.c}!dc1\_filter@{dc1\_filter}}
+\index{dc1\_filter@{dc1\_filter}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{dc1\_filter()}{dc1\_filter()}}
+{\footnotesize\ttfamily double dc1\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{408 \{}
+\DoxyCodeLine{409     \textcolor{keyword}{static} \textcolor{keywordtype}{double} accum = 0.0f;}
+\DoxyCodeLine{410     \textcolor{keyword}{static} \textcolor{keywordtype}{double} coef = \mbox{\hyperlink{bsoc_8h_aadf817f59fb13a1a5c66ea9f7574b842}{COEF}};}
+\DoxyCodeLine{411     accum = accum -\/ accum / coef + raw;}
+\DoxyCodeLine{412     \textcolor{keywordflow}{return} accum / coef;}
+\DoxyCodeLine{413 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_a4846561257bfbb8d753328d1fe7a1c07}\label{bsoc_8c_a4846561257bfbb8d753328d1fe7a1c07}} 
+\index{bsoc.c@{bsoc.c}!dc2\_filter@{dc2\_filter}}
+\index{dc2\_filter@{dc2\_filter}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{dc2\_filter()}{dc2\_filter()}}
+{\footnotesize\ttfamily double dc2\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{416 \{}
+\DoxyCodeLine{417     \textcolor{keyword}{static} \textcolor{keywordtype}{double} accum = 0.0f;}
+\DoxyCodeLine{418     \textcolor{keyword}{static} \textcolor{keywordtype}{double} coef = \mbox{\hyperlink{bsoc_8h_aadf817f59fb13a1a5c66ea9f7574b842}{COEF}};}
+\DoxyCodeLine{419     accum = accum -\/ accum / coef + raw;}
+\DoxyCodeLine{420     \textcolor{keywordflow}{return} accum / coef;}
+\DoxyCodeLine{421 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_a9ceac393328d0a6c09cccc8c38fa30a1}\label{bsoc_8c_a9ceac393328d0a6c09cccc8c38fa30a1}} 
+\index{bsoc.c@{bsoc.c}!drive0\_filter@{drive0\_filter}}
+\index{drive0\_filter@{drive0\_filter}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{drive0\_filter()}{drive0\_filter()}}
+{\footnotesize\ttfamily double drive0\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{424 \{}
+\DoxyCodeLine{425     \textcolor{keyword}{static} \textcolor{keywordtype}{double} accum = 0.0f;}
+\DoxyCodeLine{426     \textcolor{keyword}{static} \textcolor{keywordtype}{double} coef = \mbox{\hyperlink{bsoc_8h_aadf817f59fb13a1a5c66ea9f7574b842}{COEF}};}
+\DoxyCodeLine{427     accum = accum -\/ accum / coef + raw;}
+\DoxyCodeLine{428     \textcolor{keywordflow}{return} accum / coef;}
+\DoxyCodeLine{429 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_a9cf492c9b858a53133af1b29b9f68708}\label{bsoc_8c_a9cf492c9b858a53133af1b29b9f68708}} 
+\index{bsoc.c@{bsoc.c}!drive1\_filter@{drive1\_filter}}
+\index{drive1\_filter@{drive1\_filter}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{drive1\_filter()}{drive1\_filter()}}
+{\footnotesize\ttfamily double drive1\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{432 \{}
+\DoxyCodeLine{433     \textcolor{keyword}{static} \textcolor{keywordtype}{double} accum = 0.0f;}
+\DoxyCodeLine{434     \textcolor{keyword}{static} \textcolor{keywordtype}{double} coef = \mbox{\hyperlink{bsoc_8h_aeeb125aaf18ebb1dfcd400ac4c9cfb75}{COEFF}};}
+\DoxyCodeLine{435     accum = accum -\/ accum / coef + raw;}
+\DoxyCodeLine{436     \textcolor{keywordflow}{return} accum / coef;}
+\DoxyCodeLine{437 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_aa9b00e4f08c59d45a2baa05cc44191a2}\label{bsoc_8c_aa9b00e4f08c59d45a2baa05cc44191a2}} 
+\index{bsoc.c@{bsoc.c}!error\_filter@{error\_filter}}
+\index{error\_filter@{error\_filter}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{error\_filter()}{error\_filter()}}
+{\footnotesize\ttfamily static double error\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{369 \{}
+\DoxyCodeLine{370     \textcolor{keyword}{static} \textcolor{keywordtype}{double} accum = 0.0f;}
+\DoxyCodeLine{371     accum = accum -\/ accum / \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a11061b73094f46a2b995a06e14a25875}{coef}} + raw;}
+\DoxyCodeLine{372     \textcolor{keywordflow}{return} accum / \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a11061b73094f46a2b995a06e14a25875}{coef}};}
+\DoxyCodeLine{373 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_a8f6e0fd4594d467a89005d81038aa602}\label{bsoc_8c_a8f6e0fd4594d467a89005d81038aa602}} 
+\index{bsoc.c@{bsoc.c}!get\_batc\_dev@{get\_batc\_dev}}
+\index{get\_batc\_dev@{get\_batc\_dev}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{get\_batc\_dev()}{get\_batc\_dev()}}
+{\footnotesize\ttfamily double get\+\_\+batc\+\_\+dev (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{196 \{}
+\DoxyCodeLine{197     \textcolor{keywordflow}{return} \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a26f83e801170629be93cdef740ac2a55}{batc\_std\_dev}};}
+\DoxyCodeLine{198 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_ade03000a21b56a5527367c81e7219c99}\label{bsoc_8c_ade03000a21b56a5527367c81e7219c99}} 
+\index{bsoc.c@{bsoc.c}!gti\_test@{gti\_test}}
+\index{gti\_test@{gti\_test}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{gti\_test()}{gti\_test()}}
+{\footnotesize\ttfamily double gti\+\_\+test (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{171 \{}
+\DoxyCodeLine{172     \textcolor{comment}{// check for 48VDC AC charger powered from the Solar battery bank AC inverter}}
+\DoxyCodeLine{173     \textcolor{keywordflow}{if} (((\mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_ad0f49602ecc99db48902a6cfb84e2e45}{pv\_voltage}} < \mbox{\hyperlink{bsoc_8h_ac72ac391d051ffd4e1d466d6ede48b34}{MIN\_PV\_VOLTS}}) \&\& (!\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}})) || (\mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_ad3d39ab7d56e4d1a5433dbe06a03969d}{bat\_voltage}} < \mbox{\hyperlink{bsoc_8h_ade1038e9edec3b8646f4288f3b32b713}{MIN\_BAT\_VOLTS}})) \{}
+\DoxyCodeLine{174         \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a4ef0daf79e74cbb007f0b2473a5ea1a4}{gti\_weight}} = 0.0f; \textcolor{comment}{// reduce power to zero}}
+\DoxyCodeLine{175 \textcolor{preprocessor}{\#ifdef BSOC\_DEBUG}}
+\DoxyCodeLine{176         fprintf(\mbox{\hyperlink{energy_8c_acec19516a59050bb447192fe318e6a9c}{fout}}, \textcolor{stringliteral}{"{}pvp \%8.2f, gweight \%8.2f, aweight \%8.2f, batv \%8.2f, batc \%8.2f\(\backslash\)r\(\backslash\)n"{}}, pv\_voltage, gti\_weight, ac\_weight, bat\_voltage, bat\_current);}
+\DoxyCodeLine{177 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{178     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{179         \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_afe36b8bc69e8902c910acf1c210ddf19}{dl\_excess}}) \{}
+\DoxyCodeLine{180             \textcolor{keywordflow}{if} (\mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a0d243a29681d74290efc06922fdfd7b7}{mvar}}[\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072a79eef89bbb62af24bc79c04f29d0ad97}{V\_DAHBAT}}] > \mbox{\hyperlink{energy_8h_a69ba8a83d257f96478010c24eccc1627}{PV\_DL\_B\_AH\_MIN}}) \{}
+\DoxyCodeLine{181                 \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a4ef0daf79e74cbb007f0b2473a5ea1a4}{gti\_weight}} = \mbox{\hyperlink{energy_8h_a821e3aa59b88068f6ee5d1b8a922bd43}{PV\_DL\_EXCESS}} + \mbox{\hyperlink{energy_8c_aae3805c63e28abac1e41ffd7b623596e}{E}}.\mbox{\hyperlink{structenergy__type_a4324cb84eff8589a0765143e8acbc114}{dl\_excess\_adj}};}
+\DoxyCodeLine{182             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{183                 \mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a4ef0daf79e74cbb007f0b2473a5ea1a4}{gti\_weight}} = 0.0f; \textcolor{comment}{// reduce power to zero}}
+\DoxyCodeLine{184             \}}
+\DoxyCodeLine{185         \}}
+\DoxyCodeLine{186     \}}
+\DoxyCodeLine{187     \textcolor{keywordflow}{return} \mbox{\hyperlink{bsoc_8c_a017e138f3c81b9dd94af5d7e7bd7616c}{dc0\_filter}}(\mbox{\hyperlink{bsoc_8c_abde809820d909d15f6f2b063208258ef}{L}}.\mbox{\hyperlink{structlocal__type_a4ef0daf79e74cbb007f0b2473a5ea1a4}{gti\_weight}});}
+\DoxyCodeLine{188 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{bsoc_8c_abde809820d909d15f6f2b063208258ef}\label{bsoc_8c_abde809820d909d15f6f2b063208258ef}} 
+\index{bsoc.c@{bsoc.c}!L@{L}}
+\index{L@{L}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structlocal__type}{local\+\_\+type}} L\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    .ac\_weight = 0.0f,}
+\DoxyCodeLine{    .bat\_current = 0.0f,}
+\DoxyCodeLine{    .bat\_voltage = 0.0f,}
+\DoxyCodeLine{    .batc\_std\_dev = 0.0f,}
+\DoxyCodeLine{    .coef = \mbox{\hyperlink{bsoc_8h_aadf817f59fb13a1a5c66ea9f7574b842}{COEF}},}
+\DoxyCodeLine{    .gti\_weight = 0.0f,}
+\DoxyCodeLine{    .pv\_voltage = 0.0f,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{bsoc_8c_ae6b57480d8cda466cfc65b9bfc47b255}\label{bsoc_8c_ae6b57480d8cda466cfc65b9bfc47b255}} 
+\index{bsoc.c@{bsoc.c}!mqtt\_name@{mqtt\_name}}
+\index{mqtt\_name@{mqtt\_name}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{mqtt\_name}{mqtt\_name}}
+{\footnotesize\ttfamily const char$\ast$ mqtt\+\_\+name\mbox{[}\mbox{\hyperlink{energy_8h_a4798b70da5e09a128bfc682db0b65072ab183b38bd716ecf9405c4546e3bd6870}{V\+\_\+\+DLAST}}\mbox{]}}
+
