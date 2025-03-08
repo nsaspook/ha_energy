@@ -1,8 +1,5 @@
-/*
- * File:   bmc.h
- * Author: root
+/** \file energy.h
  *
- * Created on September 21, 2012, 12:54 PM
  */
 
 #ifndef BMC_H
@@ -36,7 +33,7 @@ extern "C" {
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.73"
+#define LOG_VERSION     "V0.74"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
