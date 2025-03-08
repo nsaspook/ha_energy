@@ -1,0 +1,417 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}Data Structure Index}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Data Structures}{1}{section.1.1}%
+\contentsline {chapter}{\numberline {2}File Index}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}File List}{3}{section.2.1}%
+\contentsline {chapter}{\numberline {3}Data Structure Documentation}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}energy\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}type Struct Reference}{5}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Field Documentation}{6}{subsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.1.1}ac\_low\_adj}{6}{subsubsection.3.1.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.1.2}ac\_mismatch}{6}{subsubsection.3.1.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.1.3}ac\_sw\_on}{6}{subsubsection.3.1.1.3}%
+\contentsline {subsubsection}{\numberline {3.1.1.4}ac\_sw\_status}{7}{subsubsection.3.1.1.4}%
+\contentsline {subsubsection}{\numberline {3.1.1.5}client\_ha}{7}{subsubsection.3.1.1.5}%
+\contentsline {subsubsection}{\numberline {3.1.1.6}client\_p}{7}{subsubsection.3.1.1.6}%
+\contentsline {subsubsection}{\numberline {3.1.1.7}client\_sd}{7}{subsubsection.3.1.1.7}%
+\contentsline {subsubsection}{\numberline {3.1.1.8}dc\_mismatch}{7}{subsubsection.3.1.1.8}%
+\contentsline {subsubsection}{\numberline {3.1.1.9}dl\_excess}{7}{subsubsection.3.1.1.9}%
+\contentsline {subsubsection}{\numberline {3.1.1.10}dl\_excess\_adj}{7}{subsubsection.3.1.1.10}%
+\contentsline {subsubsection}{\numberline {3.1.1.11}dumpload}{7}{subsubsection.3.1.1.11}%
+\contentsline {subsubsection}{\numberline {3.1.1.12}fm80}{7}{subsubsection.3.1.1.12}%
+\contentsline {subsubsection}{\numberline {3.1.1.13}gti\_delay}{7}{subsubsection.3.1.1.13}%
+\contentsline {subsubsection}{\numberline {3.1.1.14}gti\_low\_adj}{8}{subsubsection.3.1.1.14}%
+\contentsline {subsubsection}{\numberline {3.1.1.15}gti\_sw\_on}{8}{subsubsection.3.1.1.15}%
+\contentsline {subsubsection}{\numberline {3.1.1.16}gti\_sw\_status}{8}{subsubsection.3.1.1.16}%
+\contentsline {subsubsection}{\numberline {3.1.1.17}ha\_lock}{8}{subsubsection.3.1.1.17}%
+\contentsline {subsubsection}{\numberline {3.1.1.18}homeassistant}{8}{subsubsection.3.1.1.18}%
+\contentsline {subsubsection}{\numberline {3.1.1.19}iammeter}{8}{subsubsection.3.1.1.19}%
+\contentsline {subsubsection}{\numberline {3.1.1.20}im\_delay}{8}{subsubsection.3.1.1.20}%
+\contentsline {subsubsection}{\numberline {3.1.1.21}im\_display}{8}{subsubsection.3.1.1.21}%
+\contentsline {subsubsection}{\numberline {3.1.1.22}im\_vars}{8}{subsubsection.3.1.1.22}%
+\contentsline {subsubsection}{\numberline {3.1.1.23}link}{8}{subsubsection.3.1.1.23}%
+\contentsline {subsubsection}{\numberline {3.1.1.24}log\_spam}{9}{subsubsection.3.1.1.24}%
+\contentsline {subsubsection}{\numberline {3.1.1.25}log\_time\_reset}{9}{subsubsection.3.1.1.25}%
+\contentsline {subsubsection}{\numberline {3.1.1.26}mode}{9}{subsubsection.3.1.1.26}%
+\contentsline {subsubsection}{\numberline {3.1.1.27}mode\_mismatch}{9}{subsubsection.3.1.1.27}%
+\contentsline {subsubsection}{\numberline {3.1.1.28}mvar}{9}{subsubsection.3.1.1.28}%
+\contentsline {subsubsection}{\numberline {3.1.1.29}once\_ac}{9}{subsubsection.3.1.1.29}%
+\contentsline {subsubsection}{\numberline {3.1.1.30}once\_gti}{9}{subsubsection.3.1.1.30}%
+\contentsline {subsubsection}{\numberline {3.1.1.31}once\_gti\_zero}{9}{subsubsection.3.1.1.31}%
+\contentsline {subsubsection}{\numberline {3.1.1.32}print\_vars}{9}{subsubsection.3.1.1.32}%
+\contentsline {subsubsection}{\numberline {3.1.1.33}rc}{9}{subsubsection.3.1.1.33}%
+\contentsline {subsubsection}{\numberline {3.1.1.34}sane}{10}{subsubsection.3.1.1.34}%
+\contentsline {subsubsection}{\numberline {3.1.1.35}solar\_mode}{10}{subsubsection.3.1.1.35}%
+\contentsline {subsubsection}{\numberline {3.1.1.36}solar\_shutdown}{10}{subsubsection.3.1.1.36}%
+\contentsline {subsubsection}{\numberline {3.1.1.37}speed\_go}{10}{subsubsection.3.1.1.37}%
+\contentsline {subsubsection}{\numberline {3.1.1.38}startup}{10}{subsubsection.3.1.1.38}%
+\contentsline {subsubsection}{\numberline {3.1.1.39}ten\_sec\_clock}{10}{subsubsection.3.1.1.39}%
+\contentsline {section}{\numberline {3.2}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}flag\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}type Struct Reference}{10}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Field Documentation}{11}{subsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.1.1}deliveredtoken}{11}{subsubsection.3.2.1.1}%
+\contentsline {subsubsection}{\numberline {3.2.1.2}energy\_mode}{11}{subsubsection.3.2.1.2}%
+\contentsline {subsubsection}{\numberline {3.2.1.3}ha\_id}{11}{subsubsection.3.2.1.3}%
+\contentsline {subsubsection}{\numberline {3.2.1.4}rec\_ok}{11}{subsubsection.3.2.1.4}%
+\contentsline {subsubsection}{\numberline {3.2.1.5}receivedtoken}{11}{subsubsection.3.2.1.5}%
+\contentsline {subsubsection}{\numberline {3.2.1.6}runner}{11}{subsubsection.3.2.1.6}%
+\contentsline {subsubsection}{\numberline {3.2.1.7}var\_update}{11}{subsubsection.3.2.1.7}%
+\contentsline {section}{\numberline {3.3}link\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}type Struct Reference}{11}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Field Documentation}{12}{subsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.1.1}iammeter\_count}{12}{subsubsection.3.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.3.1.2}iammeter\_error}{12}{subsubsection.3.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.3.1.3}mqtt\_count}{12}{subsubsection.3.3.1.3}%
+\contentsline {subsubsection}{\numberline {3.3.1.4}mqtt\_error}{12}{subsubsection.3.3.1.4}%
+\contentsline {subsubsection}{\numberline {3.3.1.5}shutdown}{12}{subsubsection.3.3.1.5}%
+\contentsline {section}{\numberline {3.4}local\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}type Struct Reference}{12}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Field Documentation}{13}{subsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.1.1}ac\_weight}{13}{subsubsection.3.4.1.1}%
+\contentsline {subsubsection}{\numberline {3.4.1.2}bat\_c\_std\_dev}{13}{subsubsection.3.4.1.2}%
+\contentsline {subsubsection}{\numberline {3.4.1.3}bat\_current}{13}{subsubsection.3.4.1.3}%
+\contentsline {subsubsection}{\numberline {3.4.1.4}bat\_voltage}{13}{subsubsection.3.4.1.4}%
+\contentsline {subsubsection}{\numberline {3.4.1.5}batc\_std\_dev}{13}{subsubsection.3.4.1.5}%
+\contentsline {subsubsection}{\numberline {3.4.1.6}coef}{13}{subsubsection.3.4.1.6}%
+\contentsline {subsubsection}{\numberline {3.4.1.7}gti\_weight}{13}{subsubsection.3.4.1.7}%
+\contentsline {subsubsection}{\numberline {3.4.1.8}pv\_voltage}{13}{subsubsection.3.4.1.8}%
+\contentsline {section}{\numberline {3.5}mode\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}type Struct Reference}{14}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Field Documentation}{14}{subsection.3.5.1}%
+\contentsline {subsubsection}{\numberline {3.5.1.1}bat\_crit}{14}{subsubsection.3.5.1.1}%
+\contentsline {subsubsection}{\numberline {3.5.1.2}con0}{15}{subsubsection.3.5.1.2}%
+\contentsline {subsubsection}{\numberline {3.5.1.3}con1}{15}{subsubsection.3.5.1.3}%
+\contentsline {subsubsection}{\numberline {3.5.1.4}con2}{15}{subsubsection.3.5.1.4}%
+\contentsline {subsubsection}{\numberline {3.5.1.5}con3}{15}{subsubsection.3.5.1.5}%
+\contentsline {subsubsection}{\numberline {3.5.1.6}con4}{15}{subsubsection.3.5.1.6}%
+\contentsline {subsubsection}{\numberline {3.5.1.7}con5}{15}{subsubsection.3.5.1.7}%
+\contentsline {subsubsection}{\numberline {3.5.1.8}con6}{15}{subsubsection.3.5.1.8}%
+\contentsline {subsubsection}{\numberline {3.5.1.9}con7}{15}{subsubsection.3.5.1.9}%
+\contentsline {subsubsection}{\numberline {3.5.1.10}data\_error}{15}{subsubsection.3.5.1.10}%
+\contentsline {subsubsection}{\numberline {3.5.1.11}dl\_mqtt\_max}{15}{subsubsection.3.5.1.11}%
+\contentsline {subsubsection}{\numberline {3.5.1.12}E}{16}{subsubsection.3.5.1.12}%
+\contentsline {subsubsection}{\numberline {3.5.1.13}error}{16}{subsubsection.3.5.1.13}%
+\contentsline {subsubsection}{\numberline {3.5.1.14}gti\_dumpload}{16}{subsubsection.3.5.1.14}%
+\contentsline {subsubsection}{\numberline {3.5.1.15}in\_pid\_control}{16}{subsubsection.3.5.1.15}%
+\contentsline {subsubsection}{\numberline {3.5.1.16}mode}{16}{subsubsection.3.5.1.16}%
+\contentsline {subsubsection}{\numberline {3.5.1.17}mode\_tmr}{16}{subsubsection.3.5.1.17}%
+\contentsline {subsubsection}{\numberline {3.5.1.18}no\_float}{16}{subsubsection.3.5.1.18}%
+\contentsline {subsubsection}{\numberline {3.5.1.19}off\_grid}{16}{subsubsection.3.5.1.19}%
+\contentsline {subsubsection}{\numberline {3.5.1.20}pid}{16}{subsubsection.3.5.1.20}%
+\contentsline {subsubsection}{\numberline {3.5.1.21}pv\_bias}{16}{subsubsection.3.5.1.21}%
+\contentsline {subsubsection}{\numberline {3.5.1.22}R}{17}{subsubsection.3.5.1.22}%
+\contentsline {subsubsection}{\numberline {3.5.1.23}sequence}{17}{subsubsection.3.5.1.23}%
+\contentsline {subsubsection}{\numberline {3.5.1.24}target}{17}{subsubsection.3.5.1.24}%
+\contentsline {subsubsection}{\numberline {3.5.1.25}total\_system}{17}{subsubsection.3.5.1.25}%
+\contentsline {section}{\numberline {3.6}SPid Struct Reference}{17}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Field Documentation}{17}{subsection.3.6.1}%
+\contentsline {subsubsection}{\numberline {3.6.1.1}dGain}{17}{subsubsection.3.6.1.1}%
+\contentsline {subsubsection}{\numberline {3.6.1.2}dState}{17}{subsubsection.3.6.1.2}%
+\contentsline {subsubsection}{\numberline {3.6.1.3}iGain}{18}{subsubsection.3.6.1.3}%
+\contentsline {subsubsection}{\numberline {3.6.1.4}iMax}{18}{subsubsection.3.6.1.4}%
+\contentsline {subsubsection}{\numberline {3.6.1.5}iMin}{18}{subsubsection.3.6.1.5}%
+\contentsline {subsubsection}{\numberline {3.6.1.6}iState}{18}{subsubsection.3.6.1.6}%
+\contentsline {subsubsection}{\numberline {3.6.1.7}pGain}{18}{subsubsection.3.6.1.7}%
+\contentsline {chapter}{\numberline {4}File Documentation}{19}{chapter.4}%
+\contentsline {section}{\numberline {4.1}energy.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}c File Reference}{19}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Macro Definition Documentation}{20}{subsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.1.1}\_DEFAULT\_SOURCE}{20}{subsubsection.4.1.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Function Documentation}{20}{subsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.2.1}connlost()}{20}{subsubsection.4.1.2.1}%
+\contentsline {subsubsection}{\numberline {4.1.2.2}ha\_ac\_off()}{21}{subsubsection.4.1.2.2}%
+\contentsline {subsubsection}{\numberline {4.1.2.3}ha\_ac\_on()}{21}{subsubsection.4.1.2.3}%
+\contentsline {subsubsection}{\numberline {4.1.2.4}ha\_dc\_off()}{22}{subsubsection.4.1.2.4}%
+\contentsline {subsubsection}{\numberline {4.1.2.5}ha\_dc\_on()}{23}{subsubsection.4.1.2.5}%
+\contentsline {subsubsection}{\numberline {4.1.2.6}log\_time()}{23}{subsubsection.4.1.2.6}%
+\contentsline {subsubsection}{\numberline {4.1.2.7}log\_timer()}{24}{subsubsection.4.1.2.7}%
+\contentsline {subsubsection}{\numberline {4.1.2.8}main()}{25}{subsubsection.4.1.2.8}%
+\contentsline {subsubsection}{\numberline {4.1.2.9}ramp\_down\_ac()}{32}{subsubsection.4.1.2.9}%
+\contentsline {subsubsection}{\numberline {4.1.2.10}ramp\_down\_gti()}{33}{subsubsection.4.1.2.10}%
+\contentsline {subsubsection}{\numberline {4.1.2.11}ramp\_up\_ac()}{34}{subsubsection.4.1.2.11}%
+\contentsline {subsubsection}{\numberline {4.1.2.12}ramp\_up\_gti()}{35}{subsubsection.4.1.2.12}%
+\contentsline {subsubsection}{\numberline {4.1.2.13}sanity\_check()}{36}{subsubsection.4.1.2.13}%
+\contentsline {subsubsection}{\numberline {4.1.2.14}showIP()}{36}{subsubsection.4.1.2.14}%
+\contentsline {subsubsection}{\numberline {4.1.2.15}skeleton\_daemon()}{37}{subsubsection.4.1.2.15}%
+\contentsline {subsubsection}{\numberline {4.1.2.16}solar\_shutdown()}{38}{subsubsection.4.1.2.16}%
+\contentsline {subsubsection}{\numberline {4.1.2.17}sync\_ha()}{39}{subsubsection.4.1.2.17}%
+\contentsline {subsubsection}{\numberline {4.1.2.18}timer\_callback()}{40}{subsubsection.4.1.2.18}%
+\contentsline {subsection}{\numberline {4.1.3}Variable Documentation}{41}{subsection.4.1.3}%
+\contentsline {subsubsection}{\numberline {4.1.3.1}board\_name}{41}{subsubsection.4.1.3.1}%
+\contentsline {subsubsection}{\numberline {4.1.3.2}driver\_name}{41}{subsubsection.4.1.3.2}%
+\contentsline {subsubsection}{\numberline {4.1.3.3}E}{41}{subsubsection.4.1.3.3}%
+\contentsline {subsubsection}{\numberline {4.1.3.4}fout}{42}{subsubsection.4.1.3.4}%
+\contentsline {subsubsection}{\numberline {4.1.3.5}ha\_flag\_vars\_ha}{42}{subsubsection.4.1.3.5}%
+\contentsline {subsubsection}{\numberline {4.1.3.6}ha\_flag\_vars\_pc}{42}{subsubsection.4.1.3.6}%
+\contentsline {subsubsection}{\numberline {4.1.3.7}ha\_flag\_vars\_sd}{43}{subsubsection.4.1.3.7}%
+\contentsline {subsubsection}{\numberline {4.1.3.8}ha\_flag\_vars\_ss}{43}{subsubsection.4.1.3.8}%
+\contentsline {section}{\numberline {4.2}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/.dep.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}inc File Reference}{43}{section.4.2}%
+\contentsline {section}{\numberline {4.3}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/bsoc.c File Reference}{43}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Function Documentation}{44}{subsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.1.1}ac0\_filter()}{44}{subsubsection.4.3.1.1}%
+\contentsline {subsubsection}{\numberline {4.3.1.2}ac1\_filter()}{45}{subsubsection.4.3.1.2}%
+\contentsline {subsubsection}{\numberline {4.3.1.3}ac2\_filter()}{45}{subsubsection.4.3.1.3}%
+\contentsline {subsubsection}{\numberline {4.3.1.4}ac\_test()}{45}{subsubsection.4.3.1.4}%
+\contentsline {subsubsection}{\numberline {4.3.1.5}bat\_current\_stable()}{46}{subsubsection.4.3.1.5}%
+\contentsline {subsubsection}{\numberline {4.3.1.6}bsoc\_ac()}{47}{subsubsection.4.3.1.6}%
+\contentsline {subsubsection}{\numberline {4.3.1.7}bsoc\_data\_collect()}{47}{subsubsection.4.3.1.7}%
+\contentsline {subsubsection}{\numberline {4.3.1.8}bsoc\_gti()}{48}{subsubsection.4.3.1.8}%
+\contentsline {subsubsection}{\numberline {4.3.1.9}bsoc\_init()}{49}{subsubsection.4.3.1.9}%
+\contentsline {subsubsection}{\numberline {4.3.1.10}bsoc\_set\_mode()}{50}{subsubsection.4.3.1.10}%
+\contentsline {subsubsection}{\numberline {4.3.1.11}bsoc\_set\_std\_dev()}{51}{subsubsection.4.3.1.11}%
+\contentsline {subsubsection}{\numberline {4.3.1.12}calculateStandardDeviation()}{52}{subsubsection.4.3.1.12}%
+\contentsline {subsubsection}{\numberline {4.3.1.13}dc0\_filter()}{52}{subsubsection.4.3.1.13}%
+\contentsline {subsubsection}{\numberline {4.3.1.14}dc1\_filter()}{53}{subsubsection.4.3.1.14}%
+\contentsline {subsubsection}{\numberline {4.3.1.15}dc2\_filter()}{53}{subsubsection.4.3.1.15}%
+\contentsline {subsubsection}{\numberline {4.3.1.16}drive0\_filter()}{54}{subsubsection.4.3.1.16}%
+\contentsline {subsubsection}{\numberline {4.3.1.17}drive1\_filter()}{54}{subsubsection.4.3.1.17}%
+\contentsline {subsubsection}{\numberline {4.3.1.18}error\_filter()}{54}{subsubsection.4.3.1.18}%
+\contentsline {subsubsection}{\numberline {4.3.1.19}get\_batc\_dev()}{55}{subsubsection.4.3.1.19}%
+\contentsline {subsubsection}{\numberline {4.3.1.20}gti\_test()}{55}{subsubsection.4.3.1.20}%
+\contentsline {subsection}{\numberline {4.3.2}Variable Documentation}{56}{subsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.2.1}L}{56}{subsubsection.4.3.2.1}%
+\contentsline {subsubsection}{\numberline {4.3.2.2}mqtt\_name}{56}{subsubsection.4.3.2.2}%
+\contentsline {section}{\numberline {4.4}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/bsoc.h File Reference}{57}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Macro Definition Documentation}{58}{subsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.1.1}BAT\_C\_DRAW}{58}{subsubsection.4.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.4.1.2}COEF}{58}{subsubsection.4.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.4.1.3}COEFF}{59}{subsubsection.4.4.1.3}%
+\contentsline {subsubsection}{\numberline {4.4.1.4}COEFN}{59}{subsubsection.4.4.1.4}%
+\contentsline {subsubsection}{\numberline {4.4.1.5}DEV\_SIZE}{59}{subsubsection.4.4.1.5}%
+\contentsline {subsubsection}{\numberline {4.4.1.6}MAX\_BATC\_DEV}{59}{subsubsection.4.4.1.6}%
+\contentsline {subsubsection}{\numberline {4.4.1.7}MIN\_BAT\_KW}{59}{subsubsection.4.4.1.7}%
+\contentsline {subsubsection}{\numberline {4.4.1.8}MIN\_BAT\_VOLTS}{59}{subsubsection.4.4.1.8}%
+\contentsline {subsubsection}{\numberline {4.4.1.9}MIN\_PV\_VOLTS}{59}{subsubsection.4.4.1.9}%
+\contentsline {subsubsection}{\numberline {4.4.1.10}PBAL\_OFFSET}{59}{subsubsection.4.4.1.10}%
+\contentsline {subsubsection}{\numberline {4.4.1.11}PV\_FULL\_PWR}{59}{subsubsection.4.4.1.11}%
+\contentsline {subsubsection}{\numberline {4.4.1.12}PV\_MIN\_PWR}{59}{subsubsection.4.4.1.12}%
+\contentsline {subsubsection}{\numberline {4.4.1.13}PV\_V\_FAKE}{60}{subsubsection.4.4.1.13}%
+\contentsline {subsubsection}{\numberline {4.4.1.14}PV\_V\_NOM}{60}{subsubsection.4.4.1.14}%
+\contentsline {subsection}{\numberline {4.4.2}Function Documentation}{60}{subsection.4.4.2}%
+\contentsline {subsubsection}{\numberline {4.4.2.1}ac0\_filter()}{60}{subsubsection.4.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.4.2.2}ac1\_filter()}{60}{subsubsection.4.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.4.2.3}ac2\_filter()}{61}{subsubsection.4.4.2.3}%
+\contentsline {subsubsection}{\numberline {4.4.2.4}ac\_test()}{61}{subsubsection.4.4.2.4}%
+\contentsline {subsubsection}{\numberline {4.4.2.5}bat\_current\_stable()}{62}{subsubsection.4.4.2.5}%
+\contentsline {subsubsection}{\numberline {4.4.2.6}bsoc\_ac()}{62}{subsubsection.4.4.2.6}%
+\contentsline {subsubsection}{\numberline {4.4.2.7}bsoc\_data\_collect()}{63}{subsubsection.4.4.2.7}%
+\contentsline {subsubsection}{\numberline {4.4.2.8}bsoc\_gti()}{64}{subsubsection.4.4.2.8}%
+\contentsline {subsubsection}{\numberline {4.4.2.9}bsoc\_init()}{64}{subsubsection.4.4.2.9}%
+\contentsline {subsubsection}{\numberline {4.4.2.10}bsoc\_set\_mode()}{65}{subsubsection.4.4.2.10}%
+\contentsline {subsubsection}{\numberline {4.4.2.11}bsoc\_set\_std\_dev()}{67}{subsubsection.4.4.2.11}%
+\contentsline {subsubsection}{\numberline {4.4.2.12}calculateStandardDeviation()}{67}{subsubsection.4.4.2.12}%
+\contentsline {subsubsection}{\numberline {4.4.2.13}dc0\_filter()}{68}{subsubsection.4.4.2.13}%
+\contentsline {subsubsection}{\numberline {4.4.2.14}dc1\_filter()}{68}{subsubsection.4.4.2.14}%
+\contentsline {subsubsection}{\numberline {4.4.2.15}dc2\_filter()}{68}{subsubsection.4.4.2.15}%
+\contentsline {subsubsection}{\numberline {4.4.2.16}drive0\_filter()}{69}{subsubsection.4.4.2.16}%
+\contentsline {subsubsection}{\numberline {4.4.2.17}drive1\_filter()}{69}{subsubsection.4.4.2.17}%
+\contentsline {subsubsection}{\numberline {4.4.2.18}get\_batc\_dev()}{70}{subsubsection.4.4.2.18}%
+\contentsline {subsubsection}{\numberline {4.4.2.19}gti\_test()}{70}{subsubsection.4.4.2.19}%
+\contentsline {section}{\numberline {4.5}bsoc.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{71}{section.4.5}%
+\contentsline {section}{\numberline {4.6}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/build/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Debug/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}GNU-\/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}ext/5c0/energy.o.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}d File Reference}{72}{section.4.6}%
+\contentsline {section}{\numberline {4.7}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/build/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Release/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}GNU-\/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}ext/5c0/energy.o.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}d File Reference}{72}{section.4.7}%
+\contentsline {section}{\numberline {4.8}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/build/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Debug/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}GNU-\/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/bsoc.o.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}d File Reference}{72}{section.4.8}%
+\contentsline {section}{\numberline {4.9}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/build/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Release/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}GNU-\/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/bsoc.o.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}d File Reference}{72}{section.4.9}%
+\contentsline {section}{\numberline {4.10}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/build/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Debug/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}GNU-\/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/http\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}vars.o.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}d File Reference}{72}{section.4.10}%
+\contentsline {section}{\numberline {4.11}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/build/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Release/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}GNU-\/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/http\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}vars.o.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}d File Reference}{72}{section.4.11}%
+\contentsline {section}{\numberline {4.12}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/build/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Debug/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}GNU-\/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/mqtt\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}rec.o.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}d File Reference}{72}{section.4.12}%
+\contentsline {section}{\numberline {4.13}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/build/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Release/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}GNU-\/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/mqtt\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}rec.o.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}d File Reference}{72}{section.4.13}%
+\contentsline {section}{\numberline {4.14}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/build/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Debug/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}GNU-\/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/mqtt\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}vars.o.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}d File Reference}{72}{section.4.14}%
+\contentsline {section}{\numberline {4.15}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/build/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Release/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}GNU-\/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/mqtt\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}vars.o.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}d File Reference}{72}{section.4.15}%
+\contentsline {section}{\numberline {4.16}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/build/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Debug/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}GNU-\/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/pid.o.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}d File Reference}{72}{section.4.16}%
+\contentsline {section}{\numberline {4.17}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/build/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Release/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}GNU-\/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/pid.o.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}d File Reference}{72}{section.4.17}%
+\contentsline {section}{\numberline {4.18}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/energy.h File Reference}{72}{section.4.18}%
+\contentsline {subsection}{\numberline {4.18.1}Macro Definition Documentation}{76}{subsection.4.18.1}%
+\contentsline {subsubsection}{\numberline {4.18.1.1}ADDRESS}{76}{subsubsection.4.18.1.1}%
+\contentsline {subsubsection}{\numberline {4.18.1.2}BAL\_MAX\_ENERGY\_AC}{76}{subsubsection.4.18.1.2}%
+\contentsline {subsubsection}{\numberline {4.18.1.3}BAL\_MAX\_ENERGY\_GTI}{76}{subsubsection.4.18.1.3}%
+\contentsline {subsubsection}{\numberline {4.18.1.4}BAL\_MIN\_ENERGY\_AC}{77}{subsubsection.4.18.1.4}%
+\contentsline {subsubsection}{\numberline {4.18.1.5}BAL\_MIN\_ENERGY\_GTI}{77}{subsubsection.4.18.1.5}%
+\contentsline {subsubsection}{\numberline {4.18.1.6}BAMPS\_SANE}{77}{subsubsection.4.18.1.6}%
+\contentsline {subsubsection}{\numberline {4.18.1.7}BAT\_CRITICAL}{77}{subsubsection.4.18.1.7}%
+\contentsline {subsubsection}{\numberline {4.18.1.8}BAT\_M\_KW}{77}{subsubsection.4.18.1.8}%
+\contentsline {subsubsection}{\numberline {4.18.1.9}BAT\_SOC\_HIGH}{77}{subsubsection.4.18.1.9}%
+\contentsline {subsubsection}{\numberline {4.18.1.10}BAT\_SOC\_LOW}{77}{subsubsection.4.18.1.10}%
+\contentsline {subsubsection}{\numberline {4.18.1.11}BAT\_SOC\_LOW\_AC}{77}{subsubsection.4.18.1.11}%
+\contentsline {subsubsection}{\numberline {4.18.1.12}BAT\_SOC\_TOP}{77}{subsubsection.4.18.1.12}%
+\contentsline {subsubsection}{\numberline {4.18.1.13}CLIENTID1}{77}{subsubsection.4.18.1.13}%
+\contentsline {subsubsection}{\numberline {4.18.1.14}CLIENTID2}{78}{subsubsection.4.18.1.14}%
+\contentsline {subsubsection}{\numberline {4.18.1.15}CLIENTID3}{78}{subsubsection.4.18.1.15}%
+\contentsline {subsubsection}{\numberline {4.18.1.16}CMD\_SEC}{78}{subsubsection.4.18.1.16}%
+\contentsline {subsubsection}{\numberline {4.18.1.17}CRITIAL\_SHUTDOWN\_LOG}{78}{subsubsection.4.18.1.17}%
+\contentsline {subsubsection}{\numberline {4.18.1.18}DAQ\_STR}{78}{subsubsection.4.18.1.18}%
+\contentsline {subsubsection}{\numberline {4.18.1.19}DAQ\_STR\_M}{78}{subsubsection.4.18.1.19}%
+\contentsline {subsubsection}{\numberline {4.18.1.20}DL\_AC\_DC\_EFF}{78}{subsubsection.4.18.1.20}%
+\contentsline {subsubsection}{\numberline {4.18.1.21}GTI\_DELAY}{78}{subsubsection.4.18.1.21}%
+\contentsline {subsubsection}{\numberline {4.18.1.22}IAM\_DELAY}{78}{subsubsection.4.18.1.22}%
+\contentsline {subsubsection}{\numberline {4.18.1.23}IM\_DELAY}{78}{subsubsection.4.18.1.23}%
+\contentsline {subsubsection}{\numberline {4.18.1.24}IM\_DISPLAY}{79}{subsubsection.4.18.1.24}%
+\contentsline {subsubsection}{\numberline {4.18.1.25}L1\_P}{79}{subsubsection.4.18.1.25}%
+\contentsline {subsubsection}{\numberline {4.18.1.26}L2\_P}{79}{subsubsection.4.18.1.26}%
+\contentsline {subsubsection}{\numberline {4.18.1.27}L3\_P}{79}{subsubsection.4.18.1.27}%
+\contentsline {subsubsection}{\numberline {4.18.1.28}LADDRESS}{79}{subsubsection.4.18.1.28}%
+\contentsline {subsubsection}{\numberline {4.18.1.29}LOG\_TO\_FILE}{79}{subsubsection.4.18.1.29}%
+\contentsline {subsubsection}{\numberline {4.18.1.30}LOG\_TO\_FILE\_ALT}{79}{subsubsection.4.18.1.30}%
+\contentsline {subsubsection}{\numberline {4.18.1.31}LOG\_VERSION}{79}{subsubsection.4.18.1.31}%
+\contentsline {subsubsection}{\numberline {4.18.1.32}LOW\_LOG\_SPAM}{79}{subsubsection.4.18.1.32}%
+\contentsline {subsubsection}{\numberline {4.18.1.33}MAX\_ERROR}{79}{subsubsection.4.18.1.33}%
+\contentsline {subsubsection}{\numberline {4.18.1.34}MAX\_IM\_VAR}{80}{subsubsection.4.18.1.34}%
+\contentsline {subsubsection}{\numberline {4.18.1.35}MAX\_LOG\_SPAM}{80}{subsubsection.4.18.1.35}%
+\contentsline {subsubsection}{\numberline {4.18.1.36}MIN\_BAT\_KW\_AC\_HI}{80}{subsubsection.4.18.1.36}%
+\contentsline {subsubsection}{\numberline {4.18.1.37}MIN\_BAT\_KW\_AC\_LO}{80}{subsubsection.4.18.1.37}%
+\contentsline {subsubsection}{\numberline {4.18.1.38}MIN\_BAT\_KW\_BSOC\_HI}{80}{subsubsection.4.18.1.38}%
+\contentsline {subsubsection}{\numberline {4.18.1.39}MIN\_BAT\_KW\_BSOC\_SLP}{80}{subsubsection.4.18.1.39}%
+\contentsline {subsubsection}{\numberline {4.18.1.40}MIN\_BAT\_KW\_GTI\_HI}{80}{subsubsection.4.18.1.40}%
+\contentsline {subsubsection}{\numberline {4.18.1.41}MIN\_BAT\_KW\_GTI\_LO}{80}{subsubsection.4.18.1.41}%
+\contentsline {subsubsection}{\numberline {4.18.1.42}MQTT\_TIMEOUT}{80}{subsubsection.4.18.1.42}%
+\contentsline {subsubsection}{\numberline {4.18.1.43}MQTT\_VERSION}{80}{subsubsection.4.18.1.43}%
+\contentsline {subsubsection}{\numberline {4.18.1.44}NO\_CYLON}{81}{subsubsection.4.18.1.44}%
+\contentsline {subsubsection}{\numberline {4.18.1.45}NORM\_MODE}{81}{subsubsection.4.18.1.45}%
+\contentsline {subsubsection}{\numberline {4.18.1.46}PAMPS\_SANE}{81}{subsubsection.4.18.1.46}%
+\contentsline {subsubsection}{\numberline {4.18.1.47}PID\_MODE}{81}{subsubsection.4.18.1.47}%
+\contentsline {subsubsection}{\numberline {4.18.1.48}PV\_BIAS}{81}{subsubsection.4.18.1.48}%
+\contentsline {subsubsection}{\numberline {4.18.1.49}PV\_BIAS\_FLOAT}{81}{subsubsection.4.18.1.49}%
+\contentsline {subsubsection}{\numberline {4.18.1.50}PV\_BIAS\_LOW}{81}{subsubsection.4.18.1.50}%
+\contentsline {subsubsection}{\numberline {4.18.1.51}PV\_BIAS\_RATE}{81}{subsubsection.4.18.1.51}%
+\contentsline {subsubsection}{\numberline {4.18.1.52}PV\_BIAS\_SLEEP}{81}{subsubsection.4.18.1.52}%
+\contentsline {subsubsection}{\numberline {4.18.1.53}PV\_BIAS\_ZERO}{81}{subsubsection.4.18.1.53}%
+\contentsline {subsubsection}{\numberline {4.18.1.54}PV\_DL\_B\_AH\_LOW}{82}{subsubsection.4.18.1.54}%
+\contentsline {subsubsection}{\numberline {4.18.1.55}PV\_DL\_B\_AH\_MIN}{82}{subsubsection.4.18.1.55}%
+\contentsline {subsubsection}{\numberline {4.18.1.56}PV\_DL\_B\_V\_LOW}{82}{subsubsection.4.18.1.56}%
+\contentsline {subsubsection}{\numberline {4.18.1.57}PV\_DL\_BIAS\_RATE}{82}{subsubsection.4.18.1.57}%
+\contentsline {subsubsection}{\numberline {4.18.1.58}PV\_DL\_EXCESS}{82}{subsubsection.4.18.1.58}%
+\contentsline {subsubsection}{\numberline {4.18.1.59}PV\_DL\_MPTT\_EXCESS}{82}{subsubsection.4.18.1.59}%
+\contentsline {subsubsection}{\numberline {4.18.1.60}PV\_DL\_MPTT\_IDLE}{82}{subsubsection.4.18.1.60}%
+\contentsline {subsubsection}{\numberline {4.18.1.61}PV\_DL\_MPTT\_MAX}{82}{subsubsection.4.18.1.61}%
+\contentsline {subsubsection}{\numberline {4.18.1.62}PV\_IGAIN}{82}{subsubsection.4.18.1.62}%
+\contentsline {subsubsection}{\numberline {4.18.1.63}PV\_IMAX}{82}{subsubsection.4.18.1.63}%
+\contentsline {subsubsection}{\numberline {4.18.1.64}PV\_PGAIN}{83}{subsubsection.4.18.1.64}%
+\contentsline {subsubsection}{\numberline {4.18.1.65}PVOLTS\_SANE}{83}{subsubsection.4.18.1.65}%
+\contentsline {subsubsection}{\numberline {4.18.1.66}PWA\_SANE}{83}{subsubsection.4.18.1.66}%
+\contentsline {subsubsection}{\numberline {4.18.1.67}PWA\_SLEEP}{83}{subsubsection.4.18.1.67}%
+\contentsline {subsubsection}{\numberline {4.18.1.68}QOS}{83}{subsubsection.4.18.1.68}%
+\contentsline {subsubsection}{\numberline {4.18.1.69}RBUF\_SIZ}{83}{subsubsection.4.18.1.69}%
+\contentsline {subsubsection}{\numberline {4.18.1.70}RESET\_LOG\_SPAM}{83}{subsubsection.4.18.1.70}%
+\contentsline {subsubsection}{\numberline {4.18.1.71}SBUF\_SIZ}{83}{subsubsection.4.18.1.71}%
+\contentsline {subsubsection}{\numberline {4.18.1.72}SPACING\_USEC}{83}{subsubsection.4.18.1.72}%
+\contentsline {subsubsection}{\numberline {4.18.1.73}SW\_QOS}{83}{subsubsection.4.18.1.73}%
+\contentsline {subsubsection}{\numberline {4.18.1.74}SYSLOG\_SIZ}{84}{subsubsection.4.18.1.74}%
+\contentsline {subsubsection}{\numberline {4.18.1.75}TIME\_SYNC\_SEC}{84}{subsubsection.4.18.1.75}%
+\contentsline {subsubsection}{\numberline {4.18.1.76}TIMEOUT}{84}{subsubsection.4.18.1.76}%
+\contentsline {subsubsection}{\numberline {4.18.1.77}TNAME}{84}{subsubsection.4.18.1.77}%
+\contentsline {subsubsection}{\numberline {4.18.1.78}TOPIC\_HA}{84}{subsubsection.4.18.1.78}%
+\contentsline {subsubsection}{\numberline {4.18.1.79}TOPIC\_P}{84}{subsubsection.4.18.1.79}%
+\contentsline {subsubsection}{\numberline {4.18.1.80}TOPIC\_PACA}{84}{subsubsection.4.18.1.80}%
+\contentsline {subsubsection}{\numberline {4.18.1.81}TOPIC\_PACC}{84}{subsubsection.4.18.1.81}%
+\contentsline {subsubsection}{\numberline {4.18.1.82}TOPIC\_PDCA}{84}{subsubsection.4.18.1.82}%
+\contentsline {subsubsection}{\numberline {4.18.1.83}TOPIC\_PDCC}{84}{subsubsection.4.18.1.83}%
+\contentsline {subsubsection}{\numberline {4.18.1.84}TOPIC\_PPID}{85}{subsubsection.4.18.1.84}%
+\contentsline {subsubsection}{\numberline {4.18.1.85}TOPIC\_SD}{85}{subsubsection.4.18.1.85}%
+\contentsline {subsubsection}{\numberline {4.18.1.86}TOPIC\_SHUTDOWN}{85}{subsubsection.4.18.1.86}%
+\contentsline {subsubsection}{\numberline {4.18.1.87}TOPIC\_SPAM}{85}{subsubsection.4.18.1.87}%
+\contentsline {subsubsection}{\numberline {4.18.1.88}TOPIC\_SS}{85}{subsubsection.4.18.1.88}%
+\contentsline {subsubsection}{\numberline {4.18.1.89}UNIT\_TEST}{85}{subsubsection.4.18.1.89}%
+\contentsline {subsubsection}{\numberline {4.18.1.90}USEC\_SEC}{85}{subsubsection.4.18.1.90}%
+\contentsline {subsection}{\numberline {4.18.2}Enumeration Type Documentation}{85}{subsection.4.18.2}%
+\contentsline {subsubsection}{\numberline {4.18.2.1}energy\_state}{85}{subsubsection.4.18.2.1}%
+\contentsline {subsubsection}{\numberline {4.18.2.2}iammeter\_id}{85}{subsubsection.4.18.2.2}%
+\contentsline {subsubsection}{\numberline {4.18.2.3}iammeter\_phase}{86}{subsubsection.4.18.2.3}%
+\contentsline {subsubsection}{\numberline {4.18.2.4}mqtt\_vars}{86}{subsubsection.4.18.2.4}%
+\contentsline {subsubsection}{\numberline {4.18.2.5}running\_state}{88}{subsubsection.4.18.2.5}%
+\contentsline {subsubsection}{\numberline {4.18.2.6}sane\_vars}{88}{subsubsection.4.18.2.6}%
+\contentsline {subsection}{\numberline {4.18.3}Function Documentation}{89}{subsection.4.18.3}%
+\contentsline {subsubsection}{\numberline {4.18.3.1}connlost()}{89}{subsubsection.4.18.3.1}%
+\contentsline {subsubsection}{\numberline {4.18.3.2}ha\_ac\_off()}{90}{subsubsection.4.18.3.2}%
+\contentsline {subsubsection}{\numberline {4.18.3.3}ha\_ac\_on()}{90}{subsubsection.4.18.3.3}%
+\contentsline {subsubsection}{\numberline {4.18.3.4}ha\_dc\_off()}{91}{subsubsection.4.18.3.4}%
+\contentsline {subsubsection}{\numberline {4.18.3.5}ha\_dc\_on()}{92}{subsubsection.4.18.3.5}%
+\contentsline {subsubsection}{\numberline {4.18.3.6}iammeter\_read()}{92}{subsubsection.4.18.3.6}%
+\contentsline {subsubsection}{\numberline {4.18.3.7}iammeter\_write\_callback()}{93}{subsubsection.4.18.3.7}%
+\contentsline {subsubsection}{\numberline {4.18.3.8}log\_time()}{94}{subsubsection.4.18.3.8}%
+\contentsline {subsubsection}{\numberline {4.18.3.9}log\_timer()}{96}{subsubsection.4.18.3.9}%
+\contentsline {subsubsection}{\numberline {4.18.3.10}print\_im\_vars()}{96}{subsubsection.4.18.3.10}%
+\contentsline {subsubsection}{\numberline {4.18.3.11}print\_mvar\_vars()}{97}{subsubsection.4.18.3.11}%
+\contentsline {subsubsection}{\numberline {4.18.3.12}ramp\_down\_ac()}{97}{subsubsection.4.18.3.12}%
+\contentsline {subsubsection}{\numberline {4.18.3.13}ramp\_down\_gti()}{98}{subsubsection.4.18.3.13}%
+\contentsline {subsubsection}{\numberline {4.18.3.14}ramp\_up\_ac()}{99}{subsubsection.4.18.3.14}%
+\contentsline {subsubsection}{\numberline {4.18.3.15}ramp\_up\_gti()}{99}{subsubsection.4.18.3.15}%
+\contentsline {subsubsection}{\numberline {4.18.3.16}sanity\_check()}{101}{subsubsection.4.18.3.16}%
+\contentsline {subsubsection}{\numberline {4.18.3.17}sync\_ha()}{101}{subsubsection.4.18.3.17}%
+\contentsline {subsubsection}{\numberline {4.18.3.18}timer\_callback()}{102}{subsubsection.4.18.3.18}%
+\contentsline {subsection}{\numberline {4.18.4}Variable Documentation}{103}{subsection.4.18.4}%
+\contentsline {subsubsection}{\numberline {4.18.4.1}E}{103}{subsubsection.4.18.4.1}%
+\contentsline {subsubsection}{\numberline {4.18.4.2}fout}{103}{subsubsection.4.18.4.2}%
+\contentsline {subsubsection}{\numberline {4.18.4.3}ha\_flag\_vars\_ss}{104}{subsubsection.4.18.4.3}%
+\contentsline {section}{\numberline {4.19}energy.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{104}{section.4.19}%
+\contentsline {section}{\numberline {4.20}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/http\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}vars.c File Reference}{108}{section.4.20}%
+\contentsline {subsection}{\numberline {4.20.1}Function Documentation}{109}{subsection.4.20.1}%
+\contentsline {subsubsection}{\numberline {4.20.1.1}iammeter\_get\_data()}{109}{subsubsection.4.20.1.1}%
+\contentsline {subsubsection}{\numberline {4.20.1.2}iammeter\_read()}{109}{subsubsection.4.20.1.2}%
+\contentsline {subsubsection}{\numberline {4.20.1.3}iammeter\_write\_callback()}{110}{subsubsection.4.20.1.3}%
+\contentsline {subsubsection}{\numberline {4.20.1.4}mqtt\_gti\_time()}{111}{subsubsection.4.20.1.4}%
+\contentsline {subsubsection}{\numberline {4.20.1.5}print\_im\_vars()}{112}{subsubsection.4.20.1.5}%
+\contentsline {subsection}{\numberline {4.20.2}Variable Documentation}{113}{subsection.4.20.2}%
+\contentsline {subsubsection}{\numberline {4.20.2.1}curl}{113}{subsubsection.4.20.2.1}%
+\contentsline {subsubsection}{\numberline {4.20.2.2}res}{113}{subsubsection.4.20.2.2}%
+\contentsline {section}{\numberline {4.21}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/http\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}vars.h File Reference}{113}{section.4.21}%
+\contentsline {subsection}{\numberline {4.21.1}Variable Documentation}{114}{subsection.4.21.1}%
+\contentsline {subsubsection}{\numberline {4.21.1.1}fout}{114}{subsubsection.4.21.1.1}%
+\contentsline {section}{\numberline {4.22}http\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}vars.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{114}{section.4.22}%
+\contentsline {section}{\numberline {4.23}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/mqtt\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}rec.c File Reference}{115}{section.4.23}%
+\contentsline {subsection}{\numberline {4.23.1}Function Documentation}{115}{subsection.4.23.1}%
+\contentsline {subsubsection}{\numberline {4.23.1.1}delivered()}{115}{subsubsection.4.23.1.1}%
+\contentsline {subsubsection}{\numberline {4.23.1.2}fm80\_float()}{116}{subsubsection.4.23.1.2}%
+\contentsline {subsubsection}{\numberline {4.23.1.3}fm80\_sleep()}{116}{subsubsection.4.23.1.3}%
+\contentsline {subsubsection}{\numberline {4.23.1.4}json\_get\_data()}{117}{subsubsection.4.23.1.4}%
+\contentsline {subsubsection}{\numberline {4.23.1.5}msgarrvd()}{118}{subsubsection.4.23.1.5}%
+\contentsline {subsubsection}{\numberline {4.23.1.6}print\_mvar\_vars()}{120}{subsubsection.4.23.1.6}%
+\contentsline {section}{\numberline {4.24}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/mqtt\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}rec.h File Reference}{121}{section.4.24}%
+\contentsline {subsection}{\numberline {4.24.1}Macro Definition Documentation}{122}{subsection.4.24.1}%
+\contentsline {subsubsection}{\numberline {4.24.1.1}FLOAT\_CODE}{122}{subsubsection.4.24.1.1}%
+\contentsline {subsubsection}{\numberline {4.24.1.2}MBMQTT}{122}{subsubsection.4.24.1.2}%
+\contentsline {subsubsection}{\numberline {4.24.1.3}RDEV\_SIZE}{122}{subsubsection.4.24.1.3}%
+\contentsline {subsubsection}{\numberline {4.24.1.4}SLEEP\_CODE}{122}{subsubsection.4.24.1.4}%
+\contentsline {subsection}{\numberline {4.24.2}Enumeration Type Documentation}{122}{subsection.4.24.2}%
+\contentsline {subsubsection}{\numberline {4.24.2.1}mqtt\_id}{122}{subsubsection.4.24.2.1}%
+\contentsline {subsection}{\numberline {4.24.3}Function Documentation}{123}{subsection.4.24.3}%
+\contentsline {subsubsection}{\numberline {4.24.3.1}delivered()}{123}{subsubsection.4.24.3.1}%
+\contentsline {subsubsection}{\numberline {4.24.3.2}fm80\_float()}{123}{subsubsection.4.24.3.2}%
+\contentsline {subsubsection}{\numberline {4.24.3.3}fm80\_sleep()}{124}{subsubsection.4.24.3.3}%
+\contentsline {subsubsection}{\numberline {4.24.3.4}json\_get\_data()}{124}{subsubsection.4.24.3.4}%
+\contentsline {subsubsection}{\numberline {4.24.3.5}msgarrvd()}{126}{subsubsection.4.24.3.5}%
+\contentsline {subsection}{\numberline {4.24.4}Variable Documentation}{128}{subsection.4.24.4}%
+\contentsline {subsubsection}{\numberline {4.24.4.1}fout}{128}{subsubsection.4.24.4.1}%
+\contentsline {section}{\numberline {4.25}mqtt\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}rec.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{128}{section.4.25}%
+\contentsline {section}{\numberline {4.26}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/mqtt\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}vars.c File Reference}{129}{section.4.26}%
+\contentsline {subsection}{\numberline {4.26.1}Macro Definition Documentation}{129}{subsection.4.26.1}%
+\contentsline {subsubsection}{\numberline {4.26.1.1}\_DEFAULT\_SOURCE}{129}{subsubsection.4.26.1.1}%
+\contentsline {subsection}{\numberline {4.26.2}Function Documentation}{130}{subsection.4.26.2}%
+\contentsline {subsubsection}{\numberline {4.26.2.1}mqtt\_gti\_power()}{130}{subsubsection.4.26.2.1}%
+\contentsline {subsubsection}{\numberline {4.26.2.2}mqtt\_gti\_time()}{131}{subsubsection.4.26.2.2}%
+\contentsline {subsubsection}{\numberline {4.26.2.3}mqtt\_ha\_pid()}{133}{subsubsection.4.26.2.3}%
+\contentsline {subsubsection}{\numberline {4.26.2.4}mqtt\_ha\_shutdown()}{134}{subsubsection.4.26.2.4}%
+\contentsline {subsubsection}{\numberline {4.26.2.5}mqtt\_ha\_switch()}{135}{subsubsection.4.26.2.5}%
+\contentsline {subsection}{\numberline {4.26.3}Variable Documentation}{137}{subsection.4.26.3}%
+\contentsline {subsubsection}{\numberline {4.26.3.1}FW\_Date}{137}{subsubsection.4.26.3.1}%
+\contentsline {subsubsection}{\numberline {4.26.3.2}FW\_Time}{137}{subsubsection.4.26.3.2}%
+\contentsline {section}{\numberline {4.27}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/mqtt\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}vars.h File Reference}{137}{section.4.27}%
+\contentsline {subsection}{\numberline {4.27.1}Macro Definition Documentation}{138}{subsection.4.27.1}%
+\contentsline {subsubsection}{\numberline {4.27.1.1}GTI\_TOKEN\_DELAY}{138}{subsubsection.4.27.1.1}%
+\contentsline {subsubsection}{\numberline {4.27.1.2}HA\_SW\_DELAY}{138}{subsubsection.4.27.1.2}%
+\contentsline {subsubsection}{\numberline {4.27.1.3}QOS}{138}{subsubsection.4.27.1.3}%
+\contentsline {subsubsection}{\numberline {4.27.1.4}TOKEN\_DELAY}{138}{subsubsection.4.27.1.4}%
+\contentsline {subsection}{\numberline {4.27.2}Function Documentation}{138}{subsection.4.27.2}%
+\contentsline {subsubsection}{\numberline {4.27.2.1}mqtt\_gti\_power()}{138}{subsubsection.4.27.2.1}%
+\contentsline {subsubsection}{\numberline {4.27.2.2}mqtt\_gti\_time()}{140}{subsubsection.4.27.2.2}%
+\contentsline {subsubsection}{\numberline {4.27.2.3}mqtt\_ha\_pid()}{140}{subsubsection.4.27.2.3}%
+\contentsline {subsubsection}{\numberline {4.27.2.4}mqtt\_ha\_shutdown()}{141}{subsubsection.4.27.2.4}%
+\contentsline {subsubsection}{\numberline {4.27.2.5}mqtt\_ha\_switch()}{142}{subsubsection.4.27.2.5}%
+\contentsline {subsection}{\numberline {4.27.3}Variable Documentation}{144}{subsection.4.27.3}%
+\contentsline {subsubsection}{\numberline {4.27.3.1}mqtt\_name}{144}{subsubsection.4.27.3.1}%
+\contentsline {section}{\numberline {4.28}mqtt\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}vars.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{145}{section.4.28}%
+\contentsline {section}{\numberline {4.29}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/nbproject/private/c\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}standard\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}headers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}indexer.c File Reference}{145}{section.4.29}%
+\contentsline {section}{\numberline {4.30}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/nbproject/private/cpp\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}standard\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}headers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}indexer.cpp File Reference}{146}{section.4.30}%
+\contentsline {section}{\numberline {4.31}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/pid.c File Reference}{147}{section.4.31}%
+\contentsline {subsection}{\numberline {4.31.1}Function Documentation}{147}{subsection.4.31.1}%
+\contentsline {subsubsection}{\numberline {4.31.1.1}ResetPI()}{147}{subsubsection.4.31.1.1}%
+\contentsline {subsubsection}{\numberline {4.31.1.2}UpdatePI()}{148}{subsubsection.4.31.1.2}%
+\contentsline {section}{\numberline {4.32}ha\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}energy/pid.h File Reference}{149}{section.4.32}%
+\contentsline {subsection}{\numberline {4.32.1}Function Documentation}{149}{subsection.4.32.1}%
+\contentsline {subsubsection}{\numberline {4.32.1.1}ResetPI()}{149}{subsubsection.4.32.1.1}%
+\contentsline {subsubsection}{\numberline {4.32.1.2}UpdatePI()}{150}{subsubsection.4.32.1.2}%
+\contentsline {section}{\numberline {4.33}pid.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{150}{section.4.33}%
+\contentsline {chapter}{Index}{153}{section*.214}%
