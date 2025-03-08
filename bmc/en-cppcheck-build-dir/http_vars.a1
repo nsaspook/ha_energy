@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="2902731408816755016">
+<analyzerinfo hash="1717888473206308825">
         <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdlib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdlib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
             <location file="ha_energy/energy.h" line="14" column="0"/>
         </error>
@@ -78,12 +78,12 @@
   <path file="ha_energy/http_vars.c" line="53" col="25" info="Assignment &apos;phase_var=IA_VOLTAGE&apos;, assigned value is 0"/>
 </function-call><function-call call-id="ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="3" file="ha_energy/http_vars.c" line="54" col="21" call-argexpr="phase" call-argvaluetype="0" call-argvalue="0">
   <path file="ha_energy/http_vars.c" line="42" col="19" info="Assignment &apos;phase=PHASE_A&apos;, assigned value is 0"/>
-</function-call><function-call call-id="ha_energy/http_vars.c:8:6" call-funcname="mqtt_gti_time" call-argnr="3" file="ha_energy/http_vars.c" line="123" col="16" call-argexpr="time_log" call-argvaluetype="7" call-argvalue="82"/>  </FileInfo>
+</function-call><function-call call-id="ha_energy/http_vars.c:8:6" call-funcname="mqtt_gti_time" call-argnr="3" file="ha_energy/http_vars.c" line="125" col="16" call-argexpr="time_log" call-argvaluetype="7" call-argvalue="82"/>  </FileInfo>
   <FileInfo check="CheckUnusedFunctions">
-    <functiondecl functionName="iammeter_write_callback" lineNumber="13"/>
-    <functiondecl functionName="iammeter_read" lineNumber="75"/>
-    <functiondecl functionName="iammeter_get_data" lineNumber="102"/>
-    <functiondecl functionName="print_im_vars" lineNumber="110"/>
+    <functiondecl file="ha_energy/http_vars.c" functionName="iammeter_write_callback" lineNumber="13"/>
+    <functiondecl file="ha_energy/http_vars.c" functionName="iammeter_read" lineNumber="75"/>
+    <functiondecl file="ha_energy/http_vars.c" functionName="iammeter_get_data" lineNumber="102"/>
+    <functiondecl file="ha_energy/http_vars.c" functionName="print_im_vars" lineNumber="110"/>
     <functioncall functionName="CURLOPT_URL"/>
     <functioncall functionName="CURLOPT_WRITEDATA"/>
     <functioncall functionName="CURLOPT_WRITEFUNCTION"/>
@@ -115,12 +115,12 @@
   <path file="ha_energy/http_vars.c" line="53" col="25" info="Assignment &apos;phase_var=IA_VOLTAGE&apos;, assigned value is 0"/>
 </function-call><function-call call-id="ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="3" file="ha_energy/http_vars.c" line="54" col="21" call-argexpr="phase" call-argvaluetype="0" call-argvalue="0">
   <path file="ha_energy/http_vars.c" line="42" col="19" info="Assignment &apos;phase=PHASE_A&apos;, assigned value is 0"/>
-</function-call><function-call call-id="ha_energy/http_vars.c:8:6" call-funcname="mqtt_gti_time" call-argnr="3" file="ha_energy/http_vars.c" line="123" col="16" call-argexpr="time_log" call-argvaluetype="7" call-argvalue="82"/>  </FileInfo>
+</function-call><function-call call-id="ha_energy/http_vars.c:8:6" call-funcname="mqtt_gti_time" call-argnr="3" file="ha_energy/http_vars.c" line="125" col="16" call-argexpr="time_log" call-argvaluetype="7" call-argvalue="82"/>  </FileInfo>
   <FileInfo check="CheckUnusedFunctions">
-    <functiondecl functionName="iammeter_write_callback" lineNumber="13"/>
-    <functiondecl functionName="iammeter_read" lineNumber="75"/>
-    <functiondecl functionName="iammeter_get_data" lineNumber="102"/>
-    <functiondecl functionName="print_im_vars" lineNumber="110"/>
+    <functiondecl file="ha_energy/http_vars.c" functionName="iammeter_write_callback" lineNumber="13"/>
+    <functiondecl file="ha_energy/http_vars.c" functionName="iammeter_read" lineNumber="75"/>
+    <functiondecl file="ha_energy/http_vars.c" functionName="iammeter_get_data" lineNumber="102"/>
+    <functiondecl file="ha_energy/http_vars.c" functionName="print_im_vars" lineNumber="110"/>
     <functioncall functionName="CURLOPT_URL"/>
     <functioncall functionName="CURLOPT_WRITEDATA"/>
     <functioncall functionName="CURLOPT_WRITEFUNCTION"/>

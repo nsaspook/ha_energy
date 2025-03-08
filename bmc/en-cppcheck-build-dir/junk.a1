@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="6449896925018289634">
+<analyzerinfo hash="4762132935282884367">
         <error id="unusedVariable" severity="style" msg="Unused variable: sleep" verbose="Unused variable: sleep" cwe="563" file0="ha_energy/junk.c">
             <location file="ha_energy/junk.c" line="32" column="9"/>
             <symbol>sleep</symbol>
         </error>
   <FileInfo check="CheckUnusedFunctions">
-    <functiondecl functionName="main" lineNumber="9"/>
+    <functiondecl file="ha_energy/junk.c" functionName="main" lineNumber="9"/>
     <functioncall functionName="delay_ms"/>
     <functioncall functionName="start"/>
   </FileInfo>

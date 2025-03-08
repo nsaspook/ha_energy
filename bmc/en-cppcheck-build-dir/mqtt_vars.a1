@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="12431485291282652210">
+<analyzerinfo hash="684300311313896671">
         <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdlib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdlib.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
             <location file="ha_energy/energy.h" line="14" column="0"/>
         </error>
@@ -109,10 +109,38 @@
             <location file="ha_energy/bsoc.h" line="47" column="0"/>
         </error>
   <FileInfo check="CheckUnusedFunctions">
-    <functiondecl functionName="mqtt_ha_pid" lineNumber="12"/>
-    <functiondecl functionName="mqtt_ha_switch" lineNumber="72"/>
-    <functiondecl functionName="mqtt_gti_power" lineNumber="141"/>
-    <functiondecl functionName="mqtt_gti_time" lineNumber="200"/>
+    <functiondecl file="ha_energy/mqtt_vars.c" functionName="mqtt_ha_shutdown" lineNumber="12"/>
+    <functiondecl file="ha_energy/mqtt_vars.c" functionName="mqtt_ha_pid" lineNumber="45"/>
+    <functiondecl file="ha_energy/mqtt_vars.c" functionName="mqtt_ha_switch" lineNumber="106"/>
+    <functiondecl file="ha_energy/mqtt_vars.c" functionName="mqtt_gti_power" lineNumber="186"/>
+    <functiondecl file="ha_energy/mqtt_vars.c" functionName="mqtt_gti_time" lineNumber="248"/>
+    <functioncall functionName="MQTTClient"/>
+    <functioncall functionName="MQTTClient_deliveryToken"/>
+    <functioncall functionName="MQTTClient_message_initializer"/>
+    <functioncall functionName="MQTTClient_publishMessage"/>
+    <functioncall functionName="bsoc_gti"/>
+    <functioncall functionName="cJSON_AddNumberToObject"/>
+    <functioncall functionName="cJSON_AddStringToObject"/>
+    <functioncall functionName="cJSON_CreateObject"/>
+    <functioncall functionName="cJSON_Delete"/>
+    <functioncall functionName="cJSON_Print"/>
+    <functioncall functionName="cJSON_free"/>
+    <functioncall functionName="drive1_filter"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="fflush"/>
+    <functioncall functionName="fprintf"/>
+    <functioncall functionName="log_time"/>
+    <functioncall functionName="strlen"/>
+    <functioncall functionName="time"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="usleep"/>
+  </FileInfo>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl file="ha_energy/mqtt_vars.c" functionName="mqtt_ha_shutdown" lineNumber="12"/>
+    <functiondecl file="ha_energy/mqtt_vars.c" functionName="mqtt_ha_pid" lineNumber="45"/>
+    <functiondecl file="ha_energy/mqtt_vars.c" functionName="mqtt_ha_switch" lineNumber="106"/>
+    <functiondecl file="ha_energy/mqtt_vars.c" functionName="mqtt_gti_power" lineNumber="186"/>
+    <functiondecl file="ha_energy/mqtt_vars.c" functionName="mqtt_gti_time" lineNumber="248"/>
     <functioncall functionName="MQTTClient"/>
     <functioncall functionName="MQTTClient_deliveryToken"/>
     <functioncall functionName="MQTTClient_message_initializer"/>
@@ -135,15 +163,12 @@
     <functioncall functionName="true"/>
     <functioncall functionName="usleep"/>
   </FileInfo>
-        <error id="unreadVariable" severity="style" msg="Variable &apos;spam&apos; is assigned a value that is never used." verbose="Variable &apos;spam&apos; is assigned a value that is never used." cwe="563" file0="ha_energy/mqtt_vars.c">
-            <location file="ha_energy/mqtt_vars.c" line="147" column="14"/>
-            <symbol>spam</symbol>
-        </error>
   <FileInfo check="CheckUnusedFunctions">
-    <functiondecl functionName="mqtt_ha_pid" lineNumber="12"/>
-    <functiondecl functionName="mqtt_ha_switch" lineNumber="72"/>
-    <functiondecl functionName="mqtt_gti_power" lineNumber="141"/>
-    <functiondecl functionName="mqtt_gti_time" lineNumber="200"/>
+    <functiondecl file="ha_energy/mqtt_vars.c" functionName="mqtt_ha_shutdown" lineNumber="12"/>
+    <functiondecl file="ha_energy/mqtt_vars.c" functionName="mqtt_ha_pid" lineNumber="45"/>
+    <functiondecl file="ha_energy/mqtt_vars.c" functionName="mqtt_ha_switch" lineNumber="106"/>
+    <functiondecl file="ha_energy/mqtt_vars.c" functionName="mqtt_gti_power" lineNumber="186"/>
+    <functiondecl file="ha_energy/mqtt_vars.c" functionName="mqtt_gti_time" lineNumber="248"/>
     <functioncall functionName="MQTTClient"/>
     <functioncall functionName="MQTTClient_deliveryToken"/>
     <functioncall functionName="MQTTClient_message_initializer"/>
@@ -158,33 +183,6 @@
     <functioncall functionName="false"/>
     <functioncall functionName="fflush"/>
     <functioncall functionName="fprintf"/>
-    <functioncall functionName="log_time"/>
-    <functioncall functionName="strlen"/>
-    <functioncall functionName="time"/>
-    <functioncall functionName="true"/>
-    <functioncall functionName="usleep"/>
-  </FileInfo>
-  <FileInfo check="CheckUnusedFunctions">
-    <functiondecl functionName="mqtt_ha_pid" lineNumber="12"/>
-    <functiondecl functionName="mqtt_ha_switch" lineNumber="72"/>
-    <functiondecl functionName="mqtt_gti_power" lineNumber="141"/>
-    <functiondecl functionName="mqtt_gti_time" lineNumber="200"/>
-    <functioncall functionName="MQTTClient"/>
-    <functioncall functionName="MQTTClient_deliveryToken"/>
-    <functioncall functionName="MQTTClient_message_initializer"/>
-    <functioncall functionName="MQTTClient_publishMessage"/>
-    <functioncall functionName="bsoc_gti"/>
-    <functioncall functionName="cJSON_AddNumberToObject"/>
-    <functioncall functionName="cJSON_AddStringToObject"/>
-    <functioncall functionName="cJSON_CreateObject"/>
-    <functioncall functionName="cJSON_Delete"/>
-    <functioncall functionName="cJSON_Print"/>
-    <functioncall functionName="cJSON_free"/>
-    <functioncall functionName="drive1_filter"/>
-    <functioncall functionName="false"/>
-    <functioncall functionName="fflush"/>
-    <functioncall functionName="fprintf"/>
-    <functioncall functionName="get_batc_dev"/>
     <functioncall functionName="log_time"/>
     <functioncall functionName="strlen"/>
     <functioncall functionName="time"/>

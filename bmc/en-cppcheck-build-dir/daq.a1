@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="8931731814054238512">
+<analyzerinfo hash="13887151459209410122">
         <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
             <location file="ha_energy/daq.c" line="1" column="0"/>
         </error>
@@ -76,20 +76,20 @@
   <FileInfo check="ctu">
 <function-call call-id="ha_energy/daq.h:80:9" call-funcname="get_dio_bit" call-argnr="1" file="ha_energy/daq.c" line="311" col="32" call-argexpr="0" call-argvaluetype="0" call-argvalue="0"/><function-call call-id="ha_energy/daq.h:81:9" call-funcname="put_dio_bit" call-argnr="1" file="ha_energy/daq.c" line="315" col="24" call-argexpr="0" call-argvaluetype="0" call-argvalue="0"/>  </FileInfo>
   <FileInfo check="CheckUnusedFunctions">
-    <functiondecl functionName="init_daq" lineNumber="47"/>
-    <functiondecl functionName="init_dac" lineNumber="111"/>
-    <functiondecl functionName="adc_range" lineNumber="149"/>
-    <functiondecl functionName="dac_range" lineNumber="159"/>
-    <functiondecl functionName="set_dac_volts" lineNumber="169"/>
-    <functiondecl functionName="set_dac_raw" lineNumber="183"/>
-    <functiondecl functionName="get_adc_volts" lineNumber="194"/>
-    <functiondecl functionName="set_dio_output" lineNumber="208"/>
-    <functiondecl functionName="set_dio_input" lineNumber="215"/>
-    <functiondecl functionName="get_dio_bit" lineNumber="222"/>
-    <functiondecl functionName="put_dio_bit" lineNumber="235"/>
-    <functiondecl functionName="init_dio" lineNumber="248"/>
-    <functiondecl functionName="get_data_sample" lineNumber="306"/>
-    <functiondecl functionName="lp_filter" lineNumber="332"/>
+    <functiondecl file="ha_energy/daq.c" functionName="init_daq" lineNumber="47"/>
+    <functiondecl file="ha_energy/daq.c" functionName="init_dac" lineNumber="111"/>
+    <functiondecl file="ha_energy/daq.c" functionName="adc_range" lineNumber="149"/>
+    <functiondecl file="ha_energy/daq.c" functionName="dac_range" lineNumber="159"/>
+    <functiondecl file="ha_energy/daq.c" functionName="set_dac_volts" lineNumber="169"/>
+    <functiondecl file="ha_energy/daq.c" functionName="set_dac_raw" lineNumber="183"/>
+    <functiondecl file="ha_energy/daq.c" functionName="get_adc_volts" lineNumber="194"/>
+    <functiondecl file="ha_energy/daq.c" functionName="set_dio_output" lineNumber="208"/>
+    <functiondecl file="ha_energy/daq.c" functionName="set_dio_input" lineNumber="215"/>
+    <functiondecl file="ha_energy/daq.c" functionName="get_dio_bit" lineNumber="222"/>
+    <functiondecl file="ha_energy/daq.c" functionName="put_dio_bit" lineNumber="235"/>
+    <functiondecl file="ha_energy/daq.c" functionName="init_dio" lineNumber="248"/>
+    <functiondecl file="ha_energy/daq.c" functionName="get_data_sample" lineNumber="306"/>
+    <functiondecl file="ha_energy/daq.c" functionName="lp_filter" lineNumber="332"/>
     <functioncall functionName="AREF_GROUND"/>
     <functioncall functionName="COMEDI_INPUT"/>
     <functioncall functionName="COMEDI_OOR_NUMBER"/>

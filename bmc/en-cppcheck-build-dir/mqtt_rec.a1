@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="7780480061149183142">
+<analyzerinfo hash="12908466247593898118">
         <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;math.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;math.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
             <location file="ha_energy/bsoc.h" line="14" column="0"/>
         </error>
@@ -112,44 +112,49 @@
             <location file="ha_energy/mqtt_rec.c" line="0" column="0"/>
         </error>
         <error id="duplicateConditionalAssign" severity="style" msg="The statement &apos;if (E.gti_sw_status!=(bool)((int32_t)E.mvar[i])) E.gti_sw_status=(bool)((int32_t)E.mvar[i])&apos; is logically equivalent to &apos;E.gti_sw_status=(bool)((int32_t)E.mvar[i])&apos;." verbose="The statement &apos;if (E.gti_sw_status!=(bool)((int32_t)E.mvar[i])) E.gti_sw_status=(bool)((int32_t)E.mvar[i])&apos; is logically equivalent to &apos;E.gti_sw_status=(bool)((int32_t)E.mvar[i])&apos;." cwe="398" file0="ha_energy/mqtt_rec.c">
-            <location file="ha_energy/mqtt_rec.c" line="137" column="33" info="Condition &apos;E.gti_sw_status!=(bool)((int32_t)E.mvar[i])&apos; is redundant"/>
-            <location file="ha_energy/mqtt_rec.c" line="138" column="33" info="Assignment &apos;E.gti_sw_status=(bool)((int32_t)E.mvar[i])&apos;"/>
+            <location file="ha_energy/mqtt_rec.c" line="187" column="24" info="Condition &apos;E.gti_sw_status!=(bool)((int32_t)E.mvar[i])&apos; is redundant"/>
+            <location file="ha_energy/mqtt_rec.c" line="188" column="21" info="Assignment &apos;E.gti_sw_status=(bool)((int32_t)E.mvar[i])&apos;"/>
         </error>
         <error id="duplicateConditionalAssign" severity="style" msg="The statement &apos;if (E.ac_sw_status!=(bool)((int32_t)E.mvar[i])) E.ac_sw_status=(bool)((int32_t)E.mvar[i])&apos; is logically equivalent to &apos;E.ac_sw_status=(bool)((int32_t)E.mvar[i])&apos;." verbose="The statement &apos;if (E.ac_sw_status!=(bool)((int32_t)E.mvar[i])) E.ac_sw_status=(bool)((int32_t)E.mvar[i])&apos; is logically equivalent to &apos;E.ac_sw_status=(bool)((int32_t)E.mvar[i])&apos;." cwe="398" file0="ha_energy/mqtt_rec.c">
-            <location file="ha_energy/mqtt_rec.c" line="144" column="32" info="Condition &apos;E.ac_sw_status!=(bool)((int32_t)E.mvar[i])&apos; is redundant"/>
-            <location file="ha_energy/mqtt_rec.c" line="145" column="32" info="Assignment &apos;E.ac_sw_status=(bool)((int32_t)E.mvar[i])&apos;"/>
+            <location file="ha_energy/mqtt_rec.c" line="194" column="23" info="Condition &apos;E.ac_sw_status!=(bool)((int32_t)E.mvar[i])&apos; is redundant"/>
+            <location file="ha_energy/mqtt_rec.c" line="195" column="20" info="Assignment &apos;E.ac_sw_status=(bool)((int32_t)E.mvar[i])&apos;"/>
+        </error>
+        <error id="redundantAssignment" severity="style" msg="Variable &apos;data_result&apos; is assigned an expression that holds the same value." verbose="Variable &apos;data_result&apos; is assigned an expression that holds the same value." cwe="563" file0="ha_energy/mqtt_rec.c">
+            <location file="ha_energy/mqtt_rec.c" line="95" column="3"/>
+            <location file="ha_energy/mqtt_rec.c" line="90" column="22" info="data_result is assigned &apos;json&apos; here."/>
+            <symbol>data_result</symbol>
         </error>
         <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="ha_energy/mqtt_rec.c">
-            <location file="ha_energy/mqtt_rec.c" line="49" column="23" info="Shadow variable"/>
-            <location file="ha_energy/mqtt_rec.c" line="7" column="13" info="Shadowed declaration"/>
+            <location file="ha_energy/mqtt_rec.c" line="58" column="17" info="Shadow variable"/>
+            <location file="ha_energy/mqtt_rec.c" line="9" column="10" info="Shadowed declaration"/>
             <symbol>i</symbol>
         </error>
         <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="ha_energy/mqtt_rec.c">
-            <location file="ha_energy/mqtt_rec.c" line="63" column="23" info="Shadow variable"/>
-            <location file="ha_energy/mqtt_rec.c" line="7" column="13" info="Shadowed declaration"/>
+            <location file="ha_energy/mqtt_rec.c" line="75" column="17" info="Shadow variable"/>
+            <location file="ha_energy/mqtt_rec.c" line="9" column="10" info="Shadowed declaration"/>
             <symbol>i</symbol>
         </error>
         <error id="constVariablePointer" severity="style" msg="Variable &apos;payloadptr&apos; can be declared as pointer to const" verbose="Variable &apos;payloadptr&apos; can be declared as pointer to const" cwe="398" file0="ha_energy/mqtt_rec.c">
-            <location file="ha_energy/mqtt_rec.c" line="8" column="11" info="Variable &apos;payloadptr&apos; can be declared as pointer to const"/>
+            <location file="ha_energy/mqtt_rec.c" line="10" column="8" info="Variable &apos;payloadptr&apos; can be declared as pointer to const"/>
             <symbol>payloadptr</symbol>
         </error>
   <FileInfo check="ctu">
-<function-call call-id="ha_energy/mqtt_rec.h:44:10" call-funcname="json_get_data" call-argnr="4" file="ha_energy/mqtt_rec.c" line="50" col="30" call-argexpr="i" call-argvaluetype="0" call-argvalue="0">
-  <path file="ha_energy/mqtt_rec.c" line="49" col="27" info="Assignment &apos;i=V_FCCM&apos;, assigned value is 0"/>
+<function-call call-id="ha_energy/mqtt_rec.h:47:10" call-funcname="json_get_data" call-argnr="4" file="ha_energy/mqtt_rec.c" line="59" col="21" call-argexpr="i" call-argvaluetype="0" call-argvalue="0">
+  <path file="ha_energy/mqtt_rec.c" line="58" col="21" info="Assignment &apos;i=V_FCCM&apos;, assigned value is 0"/>
 </function-call>  </FileInfo>
   <FileInfo check="Null pointer">
-    <unsafe-usage my-id="ha_energy/mqtt_rec.h:41:13" my-argnr="4" my-argname="message" file="ha_energy/mqtt_rec.c" line="22" col="18" value="0"/>
+    <unsafe-usage my-id="ha_energy/mqtt_rec.h:44:13" my-argnr="4" my-argname="message" file="ha_energy/mqtt_rec.c" line="27" col="15" value="0"/>
   </FileInfo>
   <FileInfo check="Uninitialized variables">
-    <unsafe-usage my-id="ha_energy/mqtt_rec.h:41:13" my-argnr="4" my-argname="message" file="ha_energy/mqtt_rec.c" line="22" col="18" value="0"/>
+    <unsafe-usage my-id="ha_energy/mqtt_rec.h:44:13" my-argnr="4" my-argname="message" file="ha_energy/mqtt_rec.c" line="27" col="15" value="0"/>
   </FileInfo>
   <FileInfo check="CheckUnusedFunctions">
-    <functiondecl functionName="msgarrvd" lineNumber="6"/>
-    <functiondecl functionName="delivered" lineNumber="85"/>
-    <functiondecl functionName="json_get_data" lineNumber="98"/>
-    <functiondecl functionName="print_mvar_vars" lineNumber="188"/>
-    <functiondecl functionName="fm80_float" lineNumber="197"/>
-    <functiondecl functionName="fm80_sleep" lineNumber="217"/>
+    <functiondecl file="ha_energy/mqtt_rec.c" functionName="msgarrvd" lineNumber="7"/>
+    <functiondecl file="ha_energy/mqtt_rec.c" functionName="delivered" lineNumber="122"/>
+    <functiondecl file="ha_energy/mqtt_rec.c" functionName="json_get_data" lineNumber="137"/>
+    <functiondecl file="ha_energy/mqtt_rec.c" functionName="print_mvar_vars" lineNumber="240"/>
+    <functiondecl file="ha_energy/mqtt_rec.c" functionName="fm80_float" lineNumber="250"/>
+    <functiondecl file="ha_energy/mqtt_rec.c" functionName="fm80_sleep" lineNumber="272"/>
     <functioncall functionName="MQTTClient"/>
     <functioncall functionName="MQTTClient_deliveryToken"/>
     <functioncall functionName="MQTTClient_free"/>
@@ -171,22 +176,22 @@
     <functioncall functionName="true"/>
   </FileInfo>
   <FileInfo check="ctu">
-<function-call call-id="ha_energy/mqtt_rec.h:44:10" call-funcname="json_get_data" call-argnr="4" file="ha_energy/mqtt_rec.c" line="50" col="30" call-argexpr="i" call-argvaluetype="0" call-argvalue="0">
-  <path file="ha_energy/mqtt_rec.c" line="49" col="27" info="Assignment &apos;i=V_FCCM&apos;, assigned value is 0"/>
+<function-call call-id="ha_energy/mqtt_rec.h:47:10" call-funcname="json_get_data" call-argnr="4" file="ha_energy/mqtt_rec.c" line="59" col="21" call-argexpr="i" call-argvaluetype="0" call-argvalue="0">
+  <path file="ha_energy/mqtt_rec.c" line="58" col="21" info="Assignment &apos;i=V_FCCM&apos;, assigned value is 0"/>
 </function-call>  </FileInfo>
   <FileInfo check="Null pointer">
-    <unsafe-usage my-id="ha_energy/mqtt_rec.h:41:13" my-argnr="4" my-argname="message" file="ha_energy/mqtt_rec.c" line="22" col="18" value="0"/>
+    <unsafe-usage my-id="ha_energy/mqtt_rec.h:44:13" my-argnr="4" my-argname="message" file="ha_energy/mqtt_rec.c" line="27" col="15" value="0"/>
   </FileInfo>
   <FileInfo check="Uninitialized variables">
-    <unsafe-usage my-id="ha_energy/mqtt_rec.h:41:13" my-argnr="4" my-argname="message" file="ha_energy/mqtt_rec.c" line="22" col="18" value="0"/>
+    <unsafe-usage my-id="ha_energy/mqtt_rec.h:44:13" my-argnr="4" my-argname="message" file="ha_energy/mqtt_rec.c" line="27" col="15" value="0"/>
   </FileInfo>
   <FileInfo check="CheckUnusedFunctions">
-    <functiondecl functionName="msgarrvd" lineNumber="6"/>
-    <functiondecl functionName="delivered" lineNumber="85"/>
-    <functiondecl functionName="json_get_data" lineNumber="98"/>
-    <functiondecl functionName="print_mvar_vars" lineNumber="188"/>
-    <functiondecl functionName="fm80_float" lineNumber="197"/>
-    <functiondecl functionName="fm80_sleep" lineNumber="217"/>
+    <functiondecl file="ha_energy/mqtt_rec.c" functionName="msgarrvd" lineNumber="7"/>
+    <functiondecl file="ha_energy/mqtt_rec.c" functionName="delivered" lineNumber="122"/>
+    <functiondecl file="ha_energy/mqtt_rec.c" functionName="json_get_data" lineNumber="137"/>
+    <functiondecl file="ha_energy/mqtt_rec.c" functionName="print_mvar_vars" lineNumber="240"/>
+    <functiondecl file="ha_energy/mqtt_rec.c" functionName="fm80_float" lineNumber="250"/>
+    <functiondecl file="ha_energy/mqtt_rec.c" functionName="fm80_sleep" lineNumber="272"/>
     <functioncall functionName="MQTTClient"/>
     <functioncall functionName="MQTTClient_deliveryToken"/>
     <functioncall functionName="MQTTClient_free"/>
@@ -208,22 +213,22 @@
     <functioncall functionName="true"/>
   </FileInfo>
   <FileInfo check="ctu">
-<function-call call-id="ha_energy/mqtt_rec.h:44:10" call-funcname="json_get_data" call-argnr="4" file="ha_energy/mqtt_rec.c" line="50" col="30" call-argexpr="i" call-argvaluetype="0" call-argvalue="0">
-  <path file="ha_energy/mqtt_rec.c" line="49" col="27" info="Assignment &apos;i=V_FCCM&apos;, assigned value is 0"/>
+<function-call call-id="ha_energy/mqtt_rec.h:47:10" call-funcname="json_get_data" call-argnr="4" file="ha_energy/mqtt_rec.c" line="59" col="21" call-argexpr="i" call-argvaluetype="0" call-argvalue="0">
+  <path file="ha_energy/mqtt_rec.c" line="58" col="21" info="Assignment &apos;i=V_FCCM&apos;, assigned value is 0"/>
 </function-call>  </FileInfo>
   <FileInfo check="Null pointer">
-    <unsafe-usage my-id="ha_energy/mqtt_rec.h:41:13" my-argnr="4" my-argname="message" file="ha_energy/mqtt_rec.c" line="22" col="18" value="0"/>
+    <unsafe-usage my-id="ha_energy/mqtt_rec.h:44:13" my-argnr="4" my-argname="message" file="ha_energy/mqtt_rec.c" line="27" col="15" value="0"/>
   </FileInfo>
   <FileInfo check="Uninitialized variables">
-    <unsafe-usage my-id="ha_energy/mqtt_rec.h:41:13" my-argnr="4" my-argname="message" file="ha_energy/mqtt_rec.c" line="22" col="18" value="0"/>
+    <unsafe-usage my-id="ha_energy/mqtt_rec.h:44:13" my-argnr="4" my-argname="message" file="ha_energy/mqtt_rec.c" line="27" col="15" value="0"/>
   </FileInfo>
   <FileInfo check="CheckUnusedFunctions">
-    <functiondecl functionName="msgarrvd" lineNumber="6"/>
-    <functiondecl functionName="delivered" lineNumber="85"/>
-    <functiondecl functionName="json_get_data" lineNumber="98"/>
-    <functiondecl functionName="print_mvar_vars" lineNumber="188"/>
-    <functiondecl functionName="fm80_float" lineNumber="197"/>
-    <functiondecl functionName="fm80_sleep" lineNumber="217"/>
+    <functiondecl file="ha_energy/mqtt_rec.c" functionName="msgarrvd" lineNumber="7"/>
+    <functiondecl file="ha_energy/mqtt_rec.c" functionName="delivered" lineNumber="122"/>
+    <functiondecl file="ha_energy/mqtt_rec.c" functionName="json_get_data" lineNumber="137"/>
+    <functiondecl file="ha_energy/mqtt_rec.c" functionName="print_mvar_vars" lineNumber="240"/>
+    <functiondecl file="ha_energy/mqtt_rec.c" functionName="fm80_float" lineNumber="250"/>
+    <functiondecl file="ha_energy/mqtt_rec.c" functionName="fm80_sleep" lineNumber="272"/>
     <functioncall functionName="MQTTClient"/>
     <functioncall functionName="MQTTClient_deliveryToken"/>
     <functioncall functionName="MQTTClient_free"/>
