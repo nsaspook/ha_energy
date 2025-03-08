@@ -92,9 +92,9 @@ extern "C" {
 #define BAT_M_KW            5120.0f
 #define BAT_SOC_TOP         0.98f
 #define BAT_SOC_HIGH        0.95f
-#define BAT_SOC_LOW         0.64f
-#define BAT_SOC_LOW_AC      0.70f	
-#define BAT_CRITICAL        200.0f
+#define BAT_SOC_LOW         0.68f
+#define BAT_SOC_LOW_AC      0.72f	
+#define BAT_CRITICAL        746.0f /// one electrical HP, for one hour
 #define MIN_BAT_KW_BSOC_SLP 4000.0f
 #define MIN_BAT_KW_BSOC_HI  4550.0f
 
