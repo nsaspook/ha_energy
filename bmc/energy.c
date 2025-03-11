@@ -309,7 +309,7 @@ void connlost(void *context, char *cause)
 	}
 	fprintf(fout, "\n%s Connection lost, exit ha_energy program\n", log_time(false));
 	fprintf(fout, "%s     cause: %s, %d\n", log_time(false), cause, id_num);
-	fprintf(fout, "%sDAEMON failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
+	fprintf(fout, "%s DAEMON failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
 	fflush(fout);
 	exit(EXIT_FAILURE);
 }
