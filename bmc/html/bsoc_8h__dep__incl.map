@@ -1,7 +1,0 @@
-<map id="ha_energy/bsoc.h" name="ha_energy/bsoc.h">
-<area shape="rect" id="node1" title=" " alt="" coords="191,5,327,32"/>
-<area shape="rect" id="node2" href="$energy_8c.html" title=" " alt="" coords="5,80,81,107"/>
-<area shape="rect" id="node3" href="$bsoc_8c.html" title=" " alt="" coords="105,80,240,107"/>
-<area shape="rect" id="node4" href="$mqtt__rec_8c.html" title=" " alt="" coords="265,80,427,107"/>
-<area shape="rect" id="node5" href="$mqtt__vars_8c.html" title=" " alt="" coords="451,80,622,107"/>
-</map>

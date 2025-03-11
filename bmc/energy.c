@@ -15,7 +15,7 @@
 #include "ha_energy/mqtt_rec.h"
 #include "ha_energy/bsoc.h"
 
-/*
+/** \file energy.c
  * V0.25 add Home Assistant Matter controlled utility power control switching
  * V0.26 BSOC weights for system condition for power diversion
  * V0.27 -> V0.28 GTI power ramps stability using battery current STD DEV
@@ -48,9 +48,11 @@
  * V.065 DL excess logic tuning and power adjustments
  * V.066 -> V.068 Various timing fixes to reduce spamming commands and logs
  * V.069 send MQTT showdown commands to HA when critical energy conditions are meet
- * V.070 process Home Assistant MQTT commands sent from automations
+ * V.070 process Home Assistant MQTT commands sent from automation's
+ * 
  * V.071 comment additions, logging improvements and code cleanups
  * V.072 -> V.073 fine tune GTI and AC power lower limits
+ * V.074 Doxygen comments added
  */
 
 /*
@@ -307,7 +309,7 @@ void connlost(void *context, char *cause)
 	}
 	fprintf(fout, "\n%s Connection lost, exit ha_energy program\n", log_time(false));
 	fprintf(fout, "%s     cause: %s, %d\n", log_time(false), cause, id_num);
-	fprintf(fout, "%sDAEMON failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
+	fprintf(fout, "%s DAEMON failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
 	fflush(fout);
 	exit(EXIT_FAILURE);
 }
