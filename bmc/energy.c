@@ -201,7 +201,7 @@ static void skeleton_daemon()
 
 	/* An error occurred */
 	if (pid < 0) {
-		printf("\r\n%sDAEMON failure  LOG Version %s : MQTT Version %s\r\n", log_time(false), LOG_VERSION, MQTT_VERSION);
+		printf("\r\n%s DAEMON failure  LOG Version %s : MQTT Version %s\r\n", log_time(false), LOG_VERSION, MQTT_VERSION);
 		exit(EXIT_FAILURE);
 	}
 
@@ -309,7 +309,61 @@ void connlost(void *context, char *cause)
 	}
 	fprintf(fout, "\n%s Connection lost, exit ha_energy program\n", log_time(false));
 	fprintf(fout, "%s     cause: %s, %d\n", log_time(false), cause, id_num);
-	fprintf(fout, "%s DAEMON failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
+	fprintf(fout, "%s MQTT DAEMON failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
+	fflush(fout);
+	exit(EXIT_FAILURE);
+}
+
+void connlost_p(void *context, char *cause)
+{
+	struct ha_flag_type *ha_flag = context;
+	int32_t id_num;
+
+	// bug-out if no context variables passed to callback
+	if (context == NULL) {
+		id_num = -1;
+	} else {
+		id_num = ha_flag->ha_id;
+	}
+	fprintf(fout, "\n%s Connection lost, exit ha_energy program\n", log_time(false));
+	fprintf(fout, "%s     cause: %s, %d\n", log_time(false), cause, id_num);
+	fprintf(fout, "%s MQTT DAEMON failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
+	fflush(fout);
+	exit(EXIT_FAILURE);
+}
+
+void connlost_sd(void *context, char *cause)
+{
+	struct ha_flag_type *ha_flag = context;
+	int32_t id_num;
+
+	// bug-out if no context variables passed to callback
+	if (context == NULL) {
+		id_num = -1;
+	} else {
+		id_num = ha_flag->ha_id;
+	}
+	fprintf(fout, "\n%s Connection lost, exit ha_energy program\n", log_time(false));
+	fprintf(fout, "%s     cause: %s, %d\n", log_time(false), cause, id_num);
+	fprintf(fout, "%s MQTT DAEMON failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
+	fflush(fout);
+	exit(EXIT_FAILURE);
+}
+
+void connlost_ha(void *context, char *cause)
+{
+	struct ha_flag_type *ha_flag = context;
+	int32_t id_num;
+
+	// bug-out if no context variables passed to callback
+	if (context == NULL) {
+		id_num = -1;
+	} else {
+		id_num = ha_flag->ha_id;
+	}
+	fprintf(fout, "\n%s Connection lost, exit ha_energy program\n", log_time(false));
+	fprintf(fout, "%s     cause: %s, %d\n", log_time(false), cause, id_num);
+	fprintf(fout, "%s MQTT DAEMON failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
 	fflush(fout);
 	exit(EXIT_FAILURE);
 }
@@ -391,7 +445,7 @@ int main(int argc, char *argv[])
 
 			fprintf(fout, "%s Connect MQTT server %s, %s\n", log_time(false), hname_ptr, CLIENTID1);
 			fflush(fout);
-			MQTTClient_setCallbacks(E.client_p, &ha_flag_vars_ss, connlost, msgarrvd, delivered);
+			MQTTClient_setCallbacks(E.client_p, &ha_flag_vars_ss, connlost_p, msgarrvd, delivered);
 			if ((E.rc = MQTTClient_connect(E.client_p, &conn_opts_p)) != MQTTCLIENT_SUCCESS) {
 				fprintf(fout, "%s Failed to connect MQTT server, return code %d %s, %s\n", log_time(false), E.rc, hname_ptr, CLIENTID1);
 				fflush(fout);
@@ -415,7 +469,7 @@ int main(int argc, char *argv[])
 
 			fprintf(fout, "%s Connect MQTT server %s, %s\n", log_time(false), hname_ptr, CLIENTID2);
 			fflush(fout);
-			MQTTClient_setCallbacks(E.client_sd, &ha_flag_vars_sd, connlost, msgarrvd, delivered);
+			MQTTClient_setCallbacks(E.client_sd, &ha_flag_vars_sd, connlost_sd, msgarrvd, delivered);
 			if ((E.rc = MQTTClient_connect(E.client_sd, &conn_opts_sd)) != MQTTCLIENT_SUCCESS) {
 				fprintf(fout, "%s Failed to connect MQTT server, return code %d %s, %s\n", log_time(false), E.rc, hname_ptr, CLIENTID2);
 				fflush(fout);
@@ -442,7 +496,7 @@ int main(int argc, char *argv[])
 
 			fprintf(fout, "%s Connect MQTT server %s, %s\n", log_time(false), hname_ptr, CLIENTID3);
 			fflush(fout);
-			MQTTClient_setCallbacks(E.client_ha, &ha_flag_vars_ha, connlost, msgarrvd, delivered);
+			MQTTClient_setCallbacks(E.client_ha, &ha_flag_vars_ha, connlost_ha, msgarrvd, delivered);
 			if ((E.rc = MQTTClient_connect(E.client_ha, &conn_opts_ha)) != MQTTCLIENT_SUCCESS) {
 				fprintf(fout, "%s Failed to connect MQTT server, return code %d %s, %s\n", log_time(false), E.rc, hname_ptr, CLIENTID3);
 				fflush(fout);
