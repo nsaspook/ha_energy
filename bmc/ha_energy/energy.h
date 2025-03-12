@@ -188,6 +188,12 @@ extern "C" {
 	wem3080t_pf_c	kWh	C phase power factor
 	 */
 
+	enum client_id {
+		ID_C1,
+		ID_C2,
+		ID_C3,
+	};
+	
 	enum energy_state {
 		E_INIT,
 		E_RUN,
@@ -337,10 +343,6 @@ extern "C" {
 
 	void timer_callback(int32_t);
 	void connlost(void *, char *);
-	
-	void connlost_p(void *, char *);
-	void connlost_sd(void *, char *);
-	void connlost_ha(void *, char *);
 
 	void ramp_up_gti(MQTTClient, bool, bool);
 	void ramp_up_ac(MQTTClient, bool);
