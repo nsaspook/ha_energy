@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   mqtt_vars.h
  * Author: root
  *

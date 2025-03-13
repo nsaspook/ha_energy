@@ -7,7 +7,7 @@ static void iammeter_get_data(const double, const uint32_t, const uint32_t);
 
 bool mqtt_gti_time(MQTTClient, const char *, char *);
 
-/*
+/** \file http_vars.c
  * read and format data returned from libcurl http WRITEDATA function call
  */
 size_t iammeter_write_callback(char *buffer, size_t size, size_t nitems, void *stream)

@@ -6,7 +6,7 @@
 static const char *const FW_Date = __DATE__;
 static const char *const FW_Time = __TIME__;
 
-/*
+/** \file mqtt_vars.c
  * send energy shutdown command to Home Assistant
  */
 void mqtt_ha_shutdown(MQTTClient client_p, const char * topic_p)
@@ -155,7 +155,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, const bool sw_sta
 			}
 		}
 	}
-#endif    
+#endif
 
 	MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token);
 	// a busy, wait loop for the async delivery thread to complete
@@ -213,8 +213,8 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg, uint3
 		MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token); // run power commands
 	} else {
 		ret = false;
-		pubmsg.payload = "Z#";
-		pubmsg.payloadlen = strlen("Z#");
+		pubmsg.payload = DL_POWER_ZERO;
+		pubmsg.payloadlen = strlen(DL_POWER_ZERO);
 		if (!spam) {
 			MQTTClient_publishMessage(client_p, TOPIC_SPAM, &pubmsg, &token);
 		} else {
