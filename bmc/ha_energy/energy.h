@@ -44,7 +44,7 @@ extern "C" {
 #endif
 #define CLIENTID1       "Energy_Mqtt_HA1"
 #define CLIENTID2       "Energy_Mqtt_HA2"
-#define CLIENTID3       "Energy_Mqtt_HA3" 
+#define CLIENTID3       "Energy_Mqtt_HA3"
 #define TOPIC_P         "mateq84/data/gticmd"
 #define TOPIC_SPAM      "mateq84/data/spam"
 #define TOPIC_PACA      "home-assistant/gtiac/availability"
@@ -93,7 +93,7 @@ extern "C" {
 #define BAT_SOC_TOP         0.98f
 #define BAT_SOC_HIGH        0.95f
 #define BAT_SOC_LOW         0.68f
-#define BAT_SOC_LOW_AC      0.72f 
+#define BAT_SOC_LOW_AC      0.72f
 #define BAT_CRITICAL        746.0f /// one electrical HP, for one hour
 #define MIN_BAT_KW_BSOC_SLP 4000.0f
 #define MIN_BAT_KW_BSOC_HI  4550.0f
@@ -134,6 +134,8 @@ extern "C" {
 #define BAL_MAX_ENERGY_AC   200.0f
 #define BAL_MIN_ENERGY_GTI  -1400.0f
 #define BAL_MAX_ENERGY_GTI  200.0f
+
+#define DL_POWER_ZERO		"V0000X"
 
 #define LOG_TO_FILE         "/store/logs/energy.log"
 #define LOG_TO_FILE_ALT     "/tmp/energy.log"

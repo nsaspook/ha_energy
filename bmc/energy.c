@@ -1,7 +1,7 @@
 /*
  * HA Energy control using MQTT JSON and HTTP format data from various energy monitor sources
  * asynchronous mode using threads in a background process
- * 
+ *
  * long life HA token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI2OTczODQyMGZlMDU0MjVmYjk1OWY0YjM3Mjg4NjRkOSIsImlhdCI6MTcwODg3NzA1OSwiZXhwIjoyMDI0MjM3MDU5fQ.5vfW85qQ2DO3vAyM_lcm1YyNqIX2O8JlTqoYKLdxf6M
  *
  * This file may be freely modified, distributed, and combined with
@@ -49,7 +49,7 @@
  * V.066 -> V.068 Various timing fixes to reduce spamming commands and logs
  * V.069 send MQTT showdown commands to HA when critical energy conditions are meet
  * V.070 process Home Assistant MQTT commands sent from automation's
- * 
+ *
  * V.071 comment additions, logging improvements and code cleanups
  * V.072 -> V.073 fine tune GTI and AC power lower limits
  * V.074 Doxygen comments added
@@ -342,7 +342,7 @@ bugout:
 
 /*
  * HA_ENERGY
- * 
+ *
  * Use MQTT/HTTP to send/receive updates to Solar hardware devices
  * and control energy in an optimized fashion to reduce electrical energy costs
  */
@@ -585,7 +585,7 @@ int main(int argc, char *argv[])
 				fflush(fout);
 				bsoc_set_mode(E.mode.pv_bias, true, true);
 				E.dl_excess = true;
-				mqtt_gti_power(E.client_p, TOPIC_P, "Z#", 1); // zero power at startup
+				mqtt_gti_power(E.client_p, TOPIC_P, DL_POWER_ZERO, 1); // zero power at startup
 				E.dl_excess = false;
 #ifdef AUTO_CHARGE
 				mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
@@ -766,7 +766,7 @@ int main(int argc, char *argv[])
 				 * send excess power into the home power grid taking care not to export energy to the utility grid
 				 */
 				if (((dc1_filter(E.mvar[V_BEN]) > BAL_MAX_ENERGY_GTI) && (gti_test() > MIN_BAT_KW_GTI_HI)) || E.dl_excess) {
-#ifndef  FAKE_VPV                            
+#ifndef  FAKE_VPV
 #ifdef B_DLE_DEBUG
 					if (E.dl_excess) {
 						fprintf(fout, "%s DL excess ramp_up_gti, DC switch %d\r\n", log_time(false), E.gti_sw_on);
@@ -777,7 +777,7 @@ int main(int argc, char *argv[])
 						fprintf(fout, "%s RAMP DOWN DC, MIN_BAT_KW_GTI_HI DC switch %d \r\n", log_time(false), E.gti_sw_on);
 					}
 					E.gti_sw_on = false; // once flag
-#endif                            
+#endif
 				} else {
 					if ((dc2_filter(E.mvar[V_BEN]) < BAL_MIN_ENERGY_GTI) || (gti_test() < (MIN_BAT_KW_GTI_LO + E.gti_low_adj))) {
 						if (!E.dl_excess) {
@@ -884,7 +884,7 @@ void ramp_up_gti(MQTTClient client_p, bool start, bool excess)
 		if (!excess) {
 			mqtt_ha_switch(client_p, TOPIC_PDCC, true);
 			E.gti_sw_status = true;
-			usleep(500000); // wait for voltage to ramp
+			usleep(500000); // wait for PS voltage to ramp
 		} else {
 			sequence = 1;
 		}
@@ -914,13 +914,13 @@ void ramp_up_gti(MQTTClient client_p, bool start, bool excess)
 	case 0:
 		sequence++;
 		if (E.once_gti_zero) {
-			mqtt_gti_power(client_p, TOPIC_P, "Z#", 5); // zero power
+			mqtt_gti_power(client_p, TOPIC_P, DL_POWER_ZERO, 5); // zero power
 			E.once_gti_zero = false;
 		}
 		break;
 	default:
 		if (E.once_gti_zero) {
-			mqtt_gti_power(client_p, TOPIC_P, "Z#", 6); // zero power
+			mqtt_gti_power(client_p, TOPIC_P, DL_POWER_ZERO, 6); // zero power
 			E.once_gti_zero = false;
 		}
 		sequence = 0;
@@ -933,16 +933,20 @@ void ramp_up_gti(MQTTClient client_p, bool start, bool excess)
  */
 void ramp_down_gti(MQTTClient client_p, bool sw_off)
 {
+	static uint32_t times = 0;
 	if (sw_off) {
 		mqtt_ha_switch(client_p, TOPIC_PDCC, false);
 		E.once_gti_zero = true;
+		times = 0;
 		E.gti_sw_status = false;
 	}
 	E.once_gti = true;
 
 	if (E.once_gti_zero) {
-		mqtt_gti_power(client_p, TOPIC_P, "Z#", 7); // zero power
-		E.once_gti_zero = false;
+		mqtt_gti_power(client_p, TOPIC_P, DL_POWER_ZERO, 7); // zero power
+		if (times++ < LOW_LOG_SPAM) {
+			E.once_gti_zero = false;
+		}
 	}
 }
 
@@ -960,7 +964,7 @@ void ramp_up_ac(MQTTClient client_p, bool start)
 		E.once_ac = false;
 		mqtt_ha_switch(client_p, TOPIC_PACC, true);
 		E.ac_sw_status = true;
-		usleep(500000); // wait for voltage to ramp
+		usleep(200000); // wait for voltage to ramp
 	}
 }
 
@@ -969,7 +973,7 @@ void ramp_down_ac(MQTTClient client_p, bool sw_off)
 	if (sw_off) {
 		mqtt_ha_switch(client_p, TOPIC_PACC, false);
 		E.ac_sw_status = false;
-		usleep(500000);
+		usleep(200000);
 	}
 	E.once_ac = true;
 }
@@ -1017,7 +1021,7 @@ static bool solar_shutdown(void)
 
 		/*
 		 * FIXME
-		 * 
+		 *
 		 */
 	}
 
@@ -1031,7 +1035,7 @@ static bool solar_shutdown(void)
 		if (!E.mode.bat_crit) {
 			ret = true;
 #ifdef CRITIAL_SHUTDOWN_LOG
-			fprintf(fout, "%s Solar BATTERY CRITICAL shutdown comms check ret = %d \r\n", log_time(false), ret);
+			fprintf(fout, "%s Solar BATTERY CRITICAL shutdown comms check \r\n", log_time(false));
 			fflush(fout);
 #endif
 			E.mode.bat_crit = true;

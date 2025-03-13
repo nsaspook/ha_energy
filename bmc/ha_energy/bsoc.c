@@ -54,7 +54,7 @@ static struct local_type L = {
 
 static double error_filter(const double);
 
-/*
+/** \file bsoc.c
  * setup basic start state for BSOC functions
  */
 bool bsoc_init(void)
@@ -344,7 +344,7 @@ bool bsoc_set_mode(const double target, const bool mode, const bool init)
 	 * HA stop excess button pressed
 	 */
 	if (E.mode.con5) {
-		mqtt_gti_power(E.client_p, TOPIC_P, "Z#", 9); // zero power at excess shutdown
+		mqtt_gti_power(E.client_p, TOPIC_P, DL_POWER_ZERO, 9); // zero power at excess shutdown
 		E.dl_excess = false;
 		E.mode.con5 = false;
 	}
@@ -353,7 +353,7 @@ bool bsoc_set_mode(const double target, const bool mode, const bool init)
 	 * DL buffer battery low set-point excess load shutdown
 	 */
 	if (E.mvar[V_DAHBAT] < PV_DL_B_AH_LOW) {
-		mqtt_gti_power(E.client_p, TOPIC_P, "Z#", 10); // zero power at excess shutdown
+		mqtt_gti_power(E.client_p, TOPIC_P, DL_POWER_ZERO, 10); // zero power at excess shutdown
 		E.dl_excess = false;
 		E.mode.con4 = false;
 		E.mode.con5 = false;

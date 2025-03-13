@@ -1,6 +1,6 @@
 #include "bsoc.h"
 
-/*
+/** \file mqtt_rec.c
  * data received on topic from the broker, run processing thread
  * max message length set by MBMQTT
  */
@@ -213,7 +213,7 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
 		if (i == V_HCON3) {
 			E.mode.con3 = (bool) ((int32_t) E.mvar[i]);
 		}
-		if (i == V_HCON4) { // set DL GTI excess load MODE 
+		if (i == V_HCON4) { // set DL GTI excess load MODE
 			E.mode.con4 = (bool) ((int32_t) E.mvar[i]);
 		}
 		if (i == V_HCON5) { // clear DL GTI excess load MODE
