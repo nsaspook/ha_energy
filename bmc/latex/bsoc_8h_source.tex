@@ -1,6 +1,6 @@
 \doxysection{bsoc.\+h}
 \hypertarget{bsoc_8h_source}{}\label{bsoc_8h_source}\index{ha\_energy/bsoc.h@{ha\_energy/bsoc.h}}
-\mbox{\hyperlink{bsoc_8h}{Go to the documentation of this file.}}
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{comment}{/*\ }}
 \DoxyCodeLine{00002\ \textcolor{comment}{\ *\ File:\ \ \ bsoc.h}}
@@ -49,31 +49,31 @@
 \DoxyCodeLine{00045\ \textcolor{preprocessor}{\#include\ <sys/time.h>}}
 \DoxyCodeLine{00046\ \textcolor{preprocessor}{\#include\ <errno.h>}}
 \DoxyCodeLine{00047\ \textcolor{preprocessor}{\#include\ <math.h>}}
-\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{pid_8h}{pid.h}}"{}}}
-\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{mqtt__rec_8h}{mqtt\_rec.h}}"{}}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#include\ "{}pid.h"{}}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#include\ "{}mqtt\_rec.h"{}}}
 \DoxyCodeLine{00050\ }
-\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{bsoc_8h_a571a7c60ba1a2a6c569427c21c829733}{bsoc\_init}}(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{bsoc_8h_a4c8b6884b4cae5d49a0d4141ce516372}{bsoc\_data\_collect}}(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{bsoc_8h_a63f8e1b6516cda51fd09570aaf4e147d}{bsoc\_ac}}(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{bsoc_8h_ab9a97f08a9166d16e45b2025c3887eab}{bsoc\_gti}}(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{bsoc_8h_ade03000a21b56a5527367c81e7219c99}{gti\_test}}(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{bsoc_8h_a413c5066cb43aae0039adba36593129a}{ac\_test}}(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{bsoc_8h_a8f6e0fd4594d467a89005d81038aa602}{get\_batc\_dev}}(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{bsoc_8h_a4ff1d7778a0780a0f1c029a738322513}{bat\_current\_stable}}(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{bsoc_8h_a9a2f96755592645c8a777f37538ee22f}{bsoc\_set\_std\_dev}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double},\ \textcolor{keyword}{const}\ uint32\_t);}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ bsoc\_init(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{bool}\ bsoc\_data\_collect(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{double}\ bsoc\_ac(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{double}\ bsoc\_gti(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{double}\ gti\_test(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{double}\ ac\_test(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_batc\_dev(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{bool}\ bat\_current\_stable(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ bsoc\_set\_std\_dev(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double},\ \textcolor{keyword}{const}\ uint32\_t);}
 \DoxyCodeLine{00060\ }
-\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{bsoc_8h_a4d6ba62c19eed6c15bbdff03fdac9aa6}{calculateStandardDeviation}}(\textcolor{keyword}{const}\ uint32\_t,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ *);}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{double}\ calculateStandardDeviation(\textcolor{keyword}{const}\ uint32\_t,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ *);}
 \DoxyCodeLine{00062\ }
-\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{bsoc_8h_af8638ae2beb467ba19743fc5a6314f40}{bsoc\_set\_mode}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{bool}\ bsoc\_set\_mode(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool});}
 \DoxyCodeLine{00064\ }
-\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{bsoc_8h_a635fe0830bf7bf64e997e7c5d8c61811}{ac0\_filter}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double});}
-\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{bsoc_8h_a72c37de23d6a9ecd05279e5b3eeab9aa}{ac1\_filter}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double});}
-\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{bsoc_8h_ab9945eef92d31c9309f0ff4938e80838}{ac2\_filter}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double});}
-\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{bsoc_8h_ae67b753d569056cdb3a43b45eaf3f996}{dc0\_filter}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double});}
-\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{bsoc_8h_a790691555a2f7f3536f8f9a452256f97}{dc1\_filter}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double});}
-\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{bsoc_8h_a709d56c38afc3bf7c2894a6a16707596}{dc2\_filter}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double});}
-\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{bsoc_8h_a4f3016eae41bec1f0bda0ee8a01ce1f8}{drive0\_filter}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double});}
-\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{bsoc_8h_ade5bc65ef4fb147b5cc60ef6444ae2ec}{drive1\_filter}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double});}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{double}\ ac0\_filter(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double});}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{double}\ ac1\_filter(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double});}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{double}\ ac2\_filter(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double});}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{double}\ dc0\_filter(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double});}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{double}\ dc1\_filter(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double});}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{double}\ dc2\_filter(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double});}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{double}\ drive0\_filter(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double});}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{double}\ drive1\_filter(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double});}
 \DoxyCodeLine{00073\ }
 \DoxyCodeLine{00074\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
 \DoxyCodeLine{00075\ \}}
