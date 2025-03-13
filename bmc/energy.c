@@ -304,6 +304,12 @@ void connlost(void *context, char *cause)
 	static uint32_t times = 0;
 	char * where = "Missing Topic";
 
+	// bug-out if no context variables passed to callback
+	if (context == NULL) {
+		id_num = -1;
+		goto bugout; /// trouble in River-city
+	}
+
 	switch (ha_flag->cid) {
 	case ID_C1:
 		where = TOPIC_SS;
@@ -316,24 +322,20 @@ void connlost(void *context, char *cause)
 		break;
 	}
 
-	// bug-out if no context variables passed to callback
-	if (context == NULL) {
-		id_num = -1;
-		goto bugout; /// trouble in River-city
-	} else {
-		if (times++ > MQTT_RECONN) {
-			goto bugout;
-		} else {
 
-			fprintf(fout, "\n%s Connection lost, exit ha_energy program\n", log_time(false));
-			fprintf(fout, "%s     cause: %s, h_id %d c_id %d %s \n", log_time(false), cause, id_num, ha_flag->cid, where);
-			fprintf(fout, "%s MQTT DAEMON failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
-			fflush(fout);
-		}
+	if (times++ > MQTT_RECONN) {
+		goto bugout;
+	} else {
+
+		fprintf(fout, "%s Connection lost, retrying %d \n", log_time(false), times);
+		fprintf(fout, "%s     cause: %s, h_id %d c_id %d %s \n", log_time(false), cause, id_num, ha_flag->cid, where);
+		fprintf(fout, "%s MQTT DAEMON failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
+		fflush(fout);
+		return;
 	}
 
 bugout:
-	fprintf(fout, "\n%s Connection lost, exit ha_energy program\n", log_time(false));
+	fprintf(fout, "%s Connection lost, exit ha_energy program\n", log_time(false));
 	fprintf(fout, "%s     cause: %s, h_id %d c_id %d %s \n", log_time(false), cause, id_num, ha_flag->cid, where);
 	fprintf(fout, "%s MQTT DAEMON failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
 	fflush(fout);
