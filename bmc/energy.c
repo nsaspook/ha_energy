@@ -53,6 +53,7 @@
  * V.071 comment additions, logging improvements and code cleanups
  * V.072 -> V.073 fine tune GTI and AC power lower limits
  * V.074 Doxygen comments added
+ * V.075 connection lost logging and Keep Alive fixes
  */
 
 /*
@@ -299,19 +300,41 @@ void timer_callback(int32_t signum)
 void connlost(void *context, char *cause)
 {
 	struct ha_flag_type *ha_flag = context;
-	int32_t id_num;
+	int32_t id_num = ha_flag->ha_id;
+	static uint32_t times = 0;
+	char * where = "Missing Topic";
+
+	switch (ha_flag->cid) {
+	case ID_C1:
+		where = TOPIC_SS;
+		break;
+	case ID_C2:
+		where = TOPIC_SD;
+		break;
+	case ID_C3:
+		where = TOPIC_HA;
+		break;
+	}
 
 	// bug-out if no context variables passed to callback
 	if (context == NULL) {
 		id_num = -1;
-		goto bugout;
+		goto bugout; /// trouble in River-city
 	} else {
-		id_num = ha_flag->ha_id;
+		if (times++ > MQTT_RECONN) {
+			goto bugout;
+		} else {
+
+			fprintf(fout, "\n%s Connection lost, exit ha_energy program\n", log_time(false));
+			fprintf(fout, "%s     cause: %s, h_id %d c_id %d %s \n", log_time(false), cause, id_num, ha_flag->cid, where);
+			fprintf(fout, "%s MQTT DAEMON failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
+			fflush(fout);
+		}
 	}
 
 bugout:
 	fprintf(fout, "\n%s Connection lost, exit ha_energy program\n", log_time(false));
-	fprintf(fout, "%s     cause: %s, h_id %d c_id %d \n", log_time(false), cause, id_num, ha_flag->cid);
+	fprintf(fout, "%s     cause: %s, h_id %d c_id %d %s \n", log_time(false), cause, id_num, ha_flag->cid, where);
 	fprintf(fout, "%s MQTT DAEMON failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
 	fflush(fout);
 	exit(EXIT_FAILURE);
@@ -381,13 +404,13 @@ int main(int argc, char *argv[])
 			if (strncmp(hname, TNAME, 6) == 0) {
 				MQTTClient_create(&E.client_p, LADDRESS, CLIENTID1,
 					MQTTCLIENT_PERSISTENCE_NONE, NULL);
-				conn_opts_p.keepAliveInterval = 20;
+				conn_opts_p.keepAliveInterval = KAI;
 				conn_opts_p.cleansession = 1;
 				hname_ptr = LADDRESS;
 			} else {
 				MQTTClient_create(&E.client_p, ADDRESS, CLIENTID1,
 					MQTTCLIENT_PERSISTENCE_NONE, NULL);
-				conn_opts_p.keepAliveInterval = 20;
+				conn_opts_p.keepAliveInterval = KAI;
 				conn_opts_p.cleansession = 1;
 				hname_ptr = ADDRESS;
 			}
@@ -406,13 +429,13 @@ int main(int argc, char *argv[])
 			if (strncmp(hname, TNAME, 6) == 0) {
 				MQTTClient_create(&E.client_sd, LADDRESS, CLIENTID2,
 					MQTTCLIENT_PERSISTENCE_NONE, NULL);
-				conn_opts_sd.keepAliveInterval = 20;
+				conn_opts_sd.keepAliveInterval = KAI;
 				conn_opts_sd.cleansession = 1;
 				hname_ptr = LADDRESS;
 			} else {
 				MQTTClient_create(&E.client_sd, ADDRESS, CLIENTID2,
 					MQTTCLIENT_PERSISTENCE_NONE, NULL);
-				conn_opts_sd.keepAliveInterval = 20;
+				conn_opts_sd.keepAliveInterval = KAI;
 				conn_opts_sd.cleansession = 1;
 				hname_ptr = ADDRESS;
 			}
@@ -434,13 +457,13 @@ int main(int argc, char *argv[])
 			if (strncmp(hname, TNAME, 6) == 0) {
 				MQTTClient_create(&E.client_ha, LADDRESS, CLIENTID3,
 					MQTTCLIENT_PERSISTENCE_NONE, NULL);
-				conn_opts_ha.keepAliveInterval = 20;
+				conn_opts_ha.keepAliveInterval = KAI;
 				conn_opts_ha.cleansession = 1;
 				hname_ptr = LADDRESS;
 			} else {
 				MQTTClient_create(&E.client_ha, ADDRESS, CLIENTID3,
 					MQTTCLIENT_PERSISTENCE_NONE, NULL);
-				conn_opts_ha.keepAliveInterval = 20;
+				conn_opts_ha.keepAliveInterval = KAI;
 				conn_opts_ha.cleansession = 1;
 				hname_ptr = ADDRESS;
 			}

@@ -33,7 +33,7 @@ extern "C" {
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.74"
+#define LOG_VERSION     "V0.75"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
@@ -71,6 +71,9 @@ extern "C" {
 #define MQTT_TIMEOUT    900
 #define SW_QOS          1
 
+#define MQTT_RECONN     3
+#define KAI             60
+
 #define NO_CYLON
 #define CRITIAL_SHUTDOWN_LOG
 
@@ -90,7 +93,7 @@ extern "C" {
 #define BAT_SOC_TOP         0.98f
 #define BAT_SOC_HIGH        0.95f
 #define BAT_SOC_LOW         0.68f
-#define BAT_SOC_LOW_AC      0.72f	
+#define BAT_SOC_LOW_AC      0.72f 
 #define BAT_CRITICAL        746.0f /// one electrical HP, for one hour
 #define MIN_BAT_KW_BSOC_SLP 4000.0f
 #define MIN_BAT_KW_BSOC_HI  4550.0f
@@ -193,7 +196,7 @@ extern "C" {
 		ID_C2,
 		ID_C3,
 	};
-	
+
 	enum energy_state {
 		E_INIT,
 		E_RUN,
