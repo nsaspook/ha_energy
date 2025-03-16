@@ -16,8 +16,8 @@ extern "C" {
 
 	//#define DEBUG_HA_CMD    // show debug text
 #define HA_SW_DELAY     400000  // usecs
-#define TOKEN_DELAY     250
-#define GTI_TOKEN_DELAY 300
+#define TOKEN_DELAY     500
+#define GTI_TOKEN_DELAY 600
 
 #define QOS             1
 
