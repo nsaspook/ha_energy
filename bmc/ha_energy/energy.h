@@ -122,7 +122,7 @@ extern "C" {
 #define PV_DL_BIAS_RATE     75.0f
 #define PV_DL_EXCESS       500.0f
 #define PV_DL_B_AH_LOW     100.0f
-#define PV_DL_B_AH_MIN     150.0f // DL battery should be at least 175Ah
+#define PV_DL_B_AH_MIN     120.0f // DL battery should be at least 175Ah
 #define PV_DL_B_V_LOW       23.8f // Battery low-voltqage cutoff
 #define PWA_SLEEP          200.0f
 #define DL_AC_DC_EFF        1.24f

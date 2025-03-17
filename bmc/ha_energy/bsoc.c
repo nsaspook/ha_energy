@@ -144,6 +144,7 @@ double bsoc_ac(void)
  */
 double bsoc_gti(void)
 {
+	static bool once = true;
 #ifdef BSOC_DEBUG
 	fprintf(fout, "pvp %f, gweight %f, aweight %f, batv %f, batc %f\r\n", pv_voltage, gti_weight, ac_weight, bat_voltage, bat_current);
 #endif
@@ -154,8 +155,13 @@ double bsoc_gti(void)
 		if (E.dl_excess) {
 			if (E.mvar[V_DAHBAT] > PV_DL_B_AH_MIN) {
 				L.gti_weight = PV_DL_EXCESS + E.dl_excess_adj;
+				once = true;
 			} else {
 				L.gti_weight = 0.0f; // reduce power to zero
+				if (once) {
+					fprintf(fout, "%s Dump Load Battery Ah below %f \n", log_time(false), PV_DL_B_AH_MIN);
+					once = false;
+				}
 			}
 		}
 	}
@@ -169,6 +175,7 @@ double bsoc_gti(void)
  */
 double gti_test(void)
 {
+	static bool once = true;
 	// check for 48VDC AC charger powered from the Solar battery bank AC inverter
 	if (((L.pv_voltage < MIN_PV_VOLTS) && (!E.dl_excess)) || (L.bat_voltage < MIN_BAT_VOLTS)) {
 		L.gti_weight = 0.0f; // reduce power to zero
@@ -179,8 +186,13 @@ double gti_test(void)
 		if (E.dl_excess) {
 			if (E.mvar[V_DAHBAT] > PV_DL_B_AH_MIN) {
 				L.gti_weight = PV_DL_EXCESS + E.dl_excess_adj;
+				once = true;
 			} else {
 				L.gti_weight = 0.0f; // reduce power to zero
+				if (once) {
+					fprintf(fout, "%s Dump Load Battery Ah below %f \n", log_time(false), PV_DL_B_AH_MIN);
+					once = false;
+				}
 			}
 		}
 	}
@@ -330,6 +342,7 @@ bool bsoc_set_mode(const double target, const bool mode, const bool init)
 	if (E.mode.con6) {
 		ha_ac_mode = true;
 		bsoc_mode = false;
+		fprintf(fout, "%s idle flag from HA\n", log_time(false));
 	}
 
 	/*
@@ -338,6 +351,7 @@ bool bsoc_set_mode(const double target, const bool mode, const bool init)
 	if (E.mode.con4) {
 		E.dl_excess = true;
 		E.mode.con4 = false;
+		fprintf(fout, "%s HA start excess button pressed\n", log_time(false));
 	}
 
 	/*
@@ -347,6 +361,7 @@ bool bsoc_set_mode(const double target, const bool mode, const bool init)
 		mqtt_gti_power(E.client_p, TOPIC_P, DL_POWER_ZERO, 9); // zero power at excess shutdown
 		E.dl_excess = false;
 		E.mode.con5 = false;
+		fprintf(fout, "%s HA stop excess button pressed\n", log_time(false));
 	}
 
 	/*
@@ -359,6 +374,7 @@ bool bsoc_set_mode(const double target, const bool mode, const bool init)
 		E.mode.con5 = false;
 	}
 
+	fflush(fout);
 	return bsoc_mode;
 }
 
