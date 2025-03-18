@@ -33,7 +33,7 @@ extern "C" {
 #include "pid.h"
 
 
-#define LOG_VERSION     "V0.75"
+#define LOG_VERSION     "V0.76"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
@@ -95,6 +95,7 @@ extern "C" {
 #define BAT_SOC_LOW         0.68f
 #define BAT_SOC_LOW_AC      0.72f
 #define BAT_CRITICAL        746.0f /// one electrical HP, for one hour
+#define BAT_RUNTIME_LOW		6.0f
 #define MIN_BAT_KW_BSOC_SLP 4000.0f
 #define MIN_BAT_KW_BSOC_HI  4550.0f
 
@@ -331,7 +332,7 @@ extern "C" {
 		volatile double im_vars[IA_LAST][PHASE_LAST];
 		volatile double mvar[V_DLAST + 1];
 		volatile bool once_gti, once_ac, iammeter, fm80, dumpload, homeassistant, once_gti_zero;
-		volatile double gti_low_adj, ac_low_adj, dl_excess_adj;
+		volatile double gti_low_adj, ac_low_adj, dl_excess_adj, bat_runtime;
 		volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode, startup, ac_mismatch, dc_mismatch, mode_mismatch, dl_excess;
 		volatile uint32_t speed_go, im_delay, im_display, gti_delay;
 		volatile int32_t rc, sane;

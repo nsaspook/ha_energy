@@ -38,7 +38,7 @@ const char* mqtt_name[V_DLAST] = {
 };
 
 struct local_type {
-	volatile double ac_weight, gti_weight, pv_voltage, bat_current, batc_std_dev, bat_voltage;
+	volatile double ac_weight, gti_weight, pv_voltage, bat_current, batc_std_dev, bat_voltage, bat_runtime;
 	double bat_c_std_dev[DEV_SIZE], coef;
 };
 
@@ -50,6 +50,7 @@ static struct local_type L = {
 	.coef = COEF,
 	.gti_weight = 0.0f,
 	.pv_voltage = 0.0f,
+	.bat_runtime = 0.0f,
 };
 
 static double error_filter(const double);
@@ -103,9 +104,11 @@ bool bsoc_data_collect(void)
 #endif
 	L.bat_voltage = E.mvar[V_DVBAT];
 	L.bat_current = E.mvar[V_DCMPPT];
+	L.bat_runtime = E.mvar[V_FRUNT];
 	E.ac_low_adj = E.mvar[V_FSO]* -0.5f;
 	E.gti_low_adj = E.mvar[V_FACE] * -0.5f;
 	E.mode.dl_mqtt_max = E.mvar[V_DPMPPT];
+	E.bat_runtime = E.mvar[V_FRUNT];
 
 	pthread_mutex_unlock(&E.ha_lock); // resume remote MQTT var updates
 
@@ -202,6 +205,11 @@ double gti_test(void)
 double ac_test(void)
 {
 	return ac0_filter(L.ac_weight);
+}
+
+double get_bat_runtime(void)
+{
+	return L.bat_runtime;
 }
 
 double get_batc_dev(void)

@@ -57,6 +57,7 @@ extern "C" {
 	double get_batc_dev(void);
 	bool bat_current_stable(void);
 	void bsoc_set_std_dev(const double, const uint32_t);
+	double get_bat_runtime(void);
 
 	double calculateStandardDeviation(const uint32_t, const double *);
 

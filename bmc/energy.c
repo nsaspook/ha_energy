@@ -54,6 +54,7 @@
  * V.072 -> V.073 fine tune GTI and AC power lower limits
  * V.074 Doxygen comments added
  * V.075 connection lost logging and Keep Alive fixes
+ * V.076 control setpoints tuning for main battery runtime limits
  */
 
 /*
@@ -738,7 +739,7 @@ int main(int argc, char *argv[])
 					/*
 					 * shutdown GTI power at low DL battery Ah or Voltage
 					 */
-					if ((E.mvar[V_DAHBAT] < PV_DL_B_AH_LOW) || (E.mvar[V_DVBAT] < PV_DL_B_V_LOW)) {
+					if ((E.mvar[V_DAHBAT] < PV_DL_B_AH_LOW) || (E.mvar[V_DVBAT] < PV_DL_B_V_LOW) || (get_bat_runtime() < BAT_RUNTIME_LOW)) {
 						error_drive = PV_BIAS_ZERO;
 					}
 
@@ -887,9 +888,11 @@ void ramp_up_gti(MQTTClient client_p, bool start, bool excess)
 		E.once_gti = false;
 		sequence = 0;
 		if (!excess) {
-			mqtt_ha_switch(client_p, TOPIC_PDCC, true);
-			E.gti_sw_status = true;
-			usleep(500000); // wait for PS voltage to ramp
+			if (get_bat_runtime() > BAT_RUNTIME_LOW) {
+				mqtt_ha_switch(client_p, TOPIC_PDCC, true);
+				E.gti_sw_status = true;
+				usleep(500000); // wait for PS voltage to ramp
+			}
 		} else {
 			sequence = 1;
 		}
@@ -905,9 +908,13 @@ void ramp_up_gti(MQTTClient client_p, bool start, bool excess)
 		E.once_gti_zero = true;
 		if (bat_current_stable() || E.dl_excess) { // check battery current std dev, stop 'motorboating'
 			sequence++;
-			if (!mqtt_gti_power(client_p, TOPIC_P, "+#", 3)) {
+			if (get_bat_runtime() > BAT_RUNTIME_LOW) {
+				if (!mqtt_gti_power(client_p, TOPIC_P, "+#", 3)) {
+					sequence = 0;
+				}; // +100W power
+			} else {
 				sequence = 0;
-			}; // +100W power
+			}
 		} else {
 			usleep(500000); // wait a bit more for power to be stable
 			sequence = 1; // do power ramps when ready
@@ -966,10 +973,12 @@ void ramp_up_ac(MQTTClient client_p, bool start)
 	}
 
 	if (E.once_ac) {
-		E.once_ac = false;
-		mqtt_ha_switch(client_p, TOPIC_PACC, true);
-		E.ac_sw_status = true;
-		usleep(200000); // wait for voltage to ramp
+		if (get_bat_runtime() > BAT_RUNTIME_LOW) {
+			E.once_ac = false;
+			mqtt_ha_switch(client_p, TOPIC_PACC, true);
+			E.ac_sw_status = true;
+			usleep(200000); // wait for voltage to ramp
+		}
 	}
 }
 
