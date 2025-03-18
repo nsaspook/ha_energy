@@ -64,7 +64,7 @@ bool bsoc_init(void)
 	L.gti_weight = 0.0f;
 	// use MUTEX locks for message passing between remote programs
 	if (pthread_mutex_init(&E.ha_lock, NULL) != 0) {
-		fprintf(fout, "\n%s mutex init has failed\n", log_time(false));
+		fprintf(fout, "%s mutex init has failed\n", log_time(false));
 		return false;
 	}
 	return true;
