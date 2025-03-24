@@ -747,13 +747,22 @@ int main(int argc, char *argv[])
 					if (get_bat_runtime() < BAT_RUNTIME_LOW) {
 						error_drive = PV_BIAS_ZERO;
 						ha_ac_off();
+						ha_ac_off();
+						ha_ac_off();
+						ha_ac_off();
 						ha_dc_off();
-						fprintf(fout, "%s Main battery Runtime too low, shutting down power drains, %6f Hrs\r\n", log_time(false),get_bat_runtime());
+						ha_dc_off();
+						ha_dc_off();
+						ha_dc_off();
+						fprintf(fout, "%s Main Battery Runtime too low, shutting down power drains, %6f Hrs\r\n", log_time(false), get_bat_runtime());
+						ramp_down_ac(E.client_p, true);
+						ramp_down_gti(E.client_p, true);
+						mqtt_ha_shutdown(E.client_p, TOPIC_SHUTDOWN);
 						fflush(fout);
 					}
 					snprintf(gti_str, SBUF_SIZ - 1, "V%04dX", error_drive); // format for dumpload controller gti power commands
 					mqtt_gti_power(E.client_p, TOPIC_P, gti_str, 2);
-					
+
 				}
 
 #ifndef  FAKE_VPV

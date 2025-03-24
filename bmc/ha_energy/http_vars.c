@@ -137,15 +137,24 @@ void iammeter_read1(const char * meter)
 		curl_easy_setopt(curl, CURLOPT_URL, meter);
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, iammeter_write_callback1);
 		curl_easy_setopt(curl, CURLOPT_WRITEDATA, E.print_vars); // external data array for iammeter values
+		curl_easy_setopt(curl, CURLOPT_TCP_KEEPALIVE, 1L);
+		/* set keep-alive idle time to 120 seconds */
+		curl_easy_setopt(curl, CURLOPT_TCP_KEEPIDLE, 60L);
+		/* interval time between keep-alive probes: 60 seconds */
+		curl_easy_setopt(curl, CURLOPT_TCP_KEEPINTVL, 30L);
 
 		res = curl_easy_perform(curl);
 		/* Check for errors */
 		if (res != CURLE_OK) {
-			fprintf(fout, "%s curl_easy_perform() failed in iammeter_read1: %s %s\n", log_time(false),
-				curl_easy_strerror(res), meter);
-			fflush(fout);
-			E.iammeter = false;
-			E.link.iammeter_error++;
+			if (res == CURLE_GOT_NOTHING) {
+				E.iammeter = false;
+			} else {
+				fprintf(fout, "%s curl_easy_perform() failed in iammeter_read1: %s %s\n", log_time(false),
+					curl_easy_strerror(res), meter);
+				fflush(fout);
+				E.iammeter = false;
+				E.link.iammeter_error++;
+			}
 		} else {
 			E.iammeter = true;
 		}
@@ -162,15 +171,24 @@ void iammeter_read2(const char * meter)
 		curl_easy_setopt(curl, CURLOPT_URL, meter);
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, iammeter_write_callback2);
 		curl_easy_setopt(curl, CURLOPT_WRITEDATA, E.print_vars); // external data array for iammeter values
+		curl_easy_setopt(curl, CURLOPT_TCP_KEEPALIVE, 1L);
+		/* set keep-alive idle time to 120 seconds */
+		curl_easy_setopt(curl, CURLOPT_TCP_KEEPIDLE, 60L);
+		/* interval time between keep-alive probes: 60 seconds */
+		curl_easy_setopt(curl, CURLOPT_TCP_KEEPINTVL, 30L);
 
 		res = curl_easy_perform(curl);
 		/* Check for errors */
 		if (res != CURLE_OK) {
-			fprintf(fout, "%s curl_easy_perform() failed in iammeter_read2: %s %s\n", log_time(false),
-				curl_easy_strerror(res), meter);
-			fflush(fout);
-			E.iammeter = false;
-			E.link.iammeter_error++;
+			if (res == CURLE_GOT_NOTHING) {
+				E.iammeter = false;
+			} else {
+				fprintf(fout, "%s curl_easy_perform() failed in iammeter_read1: %s %s\n", log_time(false),
+					curl_easy_strerror(res), meter);
+				fflush(fout);
+				E.iammeter = false;
+				E.link.iammeter_error++;
+			}
 		} else {
 			E.iammeter = true;
 		}
