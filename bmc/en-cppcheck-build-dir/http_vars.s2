@@ -1,4 +1,4 @@
-iammeter_write_callback global:[fout] call:[cJSON_Delete,cJSON_GetErrorPtr,cJSON_GetObjectItemCaseSensitive,cJSON_ParseWithLength,fprintf,iammeter_get_data,strlen] noreturn:[fprintf]
-iammeter_read global:[E,curl,res] call:[curl_easy_cleanup,curl_easy_init,curl_easy_perform,curl_easy_setopt,curl_easy_strerror,fprintf] noreturn:[curl_easy_cleanup]
+iammeter_write_callback global:[E,fout] call:[cJSON_Delete,cJSON_GetErrorPtr,cJSON_GetObjectItemCaseSensitive,cJSON_ParseWithLength,fprintf,iammeter_get_data,strlen] noreturn:[fprintf]
+iammeter_read global:[E,curl,fout,res] call:[curl_easy_cleanup,curl_easy_init,curl_easy_perform,curl_easy_setopt,curl_easy_strerror,fprintf] noreturn:[curl_easy_cleanup]
 iammeter_get_data global:[E]
 print_im_vars global:[E,fout] call:[fprintf] noreturn:[fprintf]

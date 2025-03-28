@@ -1,12 +1,21 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="10970632555991262142">
+<analyzerinfo hash="5169829781272591209">
   <FileInfo check="CheckUnusedFunctions">
-    <functiondecl functionName="mqtt_ha_pid" lineNumber="9"/>
-    <functiondecl functionName="mqtt_ha_switch" lineNumber="48"/>
-    <functiondecl functionName="mqtt_gti_power" lineNumber="106"/>
-    <functiondecl functionName="mqtt_ha_pid" lineNumber="9"/>
-    <functiondecl functionName="mqtt_ha_switch" lineNumber="48"/>
-    <functiondecl functionName="mqtt_gti_power" lineNumber="106"/>
+    <functiondecl functionName="mqtt_ha_shutdown" lineNumber="12"/>
+    <functiondecl functionName="mqtt_ha_pid" lineNumber="45"/>
+    <functiondecl functionName="mqtt_ha_switch" lineNumber="106"/>
+    <functiondecl functionName="mqtt_gti_power" lineNumber="186"/>
+    <functiondecl functionName="mqtt_gti_time" lineNumber="248"/>
+    <functiondecl functionName="mqtt_ha_shutdown" lineNumber="12"/>
+    <functiondecl functionName="mqtt_ha_pid" lineNumber="45"/>
+    <functiondecl functionName="mqtt_ha_switch" lineNumber="106"/>
+    <functiondecl functionName="mqtt_gti_power" lineNumber="186"/>
+    <functiondecl functionName="mqtt_gti_time" lineNumber="248"/>
+    <functiondecl functionName="mqtt_ha_shutdown" lineNumber="12"/>
+    <functiondecl functionName="mqtt_ha_pid" lineNumber="45"/>
+    <functiondecl functionName="mqtt_ha_switch" lineNumber="106"/>
+    <functiondecl functionName="mqtt_gti_power" lineNumber="186"/>
+    <functiondecl functionName="mqtt_gti_time" lineNumber="248"/>
     <functioncall functionName="IA_LAST"/>
     <functioncall functionName="MQTTClient"/>
     <functioncall functionName="MQTTClient_deliveryToken"/>
@@ -14,6 +23,9 @@
     <functioncall functionName="MQTTClient_publishMessage"/>
     <functioncall functionName="PHASE_LAST"/>
     <functioncall functionName="V_DLAST"/>
+    <functioncall functionName="V_DPPV"/>
+    <functioncall functionName="V_FCCM"/>
+    <functioncall functionName="V_FLO"/>
     <functioncall functionName="bsoc_gti"/>
     <functioncall functionName="cJSON_AddNumberToObject"/>
     <functioncall functionName="cJSON_AddStringToObject"/>
@@ -21,10 +33,14 @@
     <functioncall functionName="cJSON_Delete"/>
     <functioncall functionName="cJSON_Print"/>
     <functioncall functionName="cJSON_free"/>
+    <functioncall functionName="drive1_filter"/>
     <functioncall functionName="false"/>
+    <functioncall functionName="fflush"/>
     <functioncall functionName="fprintf"/>
     <functioncall functionName="get_batc_dev"/>
+    <functioncall functionName="log_time"/>
     <functioncall functionName="strlen"/>
+    <functioncall functionName="time"/>
     <functioncall functionName="true"/>
     <functioncall functionName="usleep"/>
   </FileInfo>

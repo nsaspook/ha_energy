@@ -1,0 +1,39 @@
+\doxysection{pid.\+h}
+\hypertarget{pid_8h_source}{}\label{pid_8h_source}\index{ha\_energy/pid.h@{ha\_energy/pid.h}}
+\mbox{\hyperlink{pid_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ }}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ File:\ \ \ pid.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Author:\ root}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ Created\ on\ March\ 6,\ 2024,\ 7:03\ AM}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ PID\_H}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ PID\_H}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00012\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structSPid}{SPid}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structSPid_a22766300397f1a8142fa6c59f2271afb}{dState}};\ \textcolor{comment}{//\ Last\ position\ input}}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structSPid_ad502ddb8dc5b7ac847997f99ccd74f52}{iState}};\ \textcolor{comment}{//\ Integrator\ state}}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structSPid_a86f9ea8e7eaae2bb49fc2193a5b9f9bc}{iMax}},\ \mbox{\hyperlink{structSPid_afc9b495402e50376fb5e477e3db5da5a}{iMin}};\ \textcolor{comment}{//\ Maximum\ and\ minimum\ allowable\ integrator\ state}}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structSPid_a5030d3c149262e9e2c65481bebebde4a}{iGain}},\ \textcolor{comment}{//\ integral\ gain}}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structSPid_aa96bfc5bff3eddf38c1fcdba7d775105}{pGain}},\ \textcolor{comment}{//\ proportional\ gain}}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structSPid_aa08733dedce47a5062fda5e8adf1ff50}{dGain}};\ \textcolor{comment}{//\ derivative\ gain}}
+\DoxyCodeLine{00022\ \ \ \ \ \};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{pid_8h_a645e907ddaa465c826a196abb2044981}{UpdatePI}}(\textcolor{keyword}{volatile}\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structSPid}{SPid}}\ *\ \textcolor{keyword}{const},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double});}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pid_8h_a4942e19ff67ab179fa2f4e5977290613}{ResetPI}}(\textcolor{keyword}{volatile}\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structSPid}{SPid}}\ *\ \textcolor{keyword}{const});}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00029\ \}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ PID\_H\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00033\ }
+
+\end{DoxyCode}

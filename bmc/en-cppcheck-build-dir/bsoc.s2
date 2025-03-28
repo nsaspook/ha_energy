@@ -1,12 +1,20 @@
 bsoc_init global:[E,ac_weight,gti_weight] call:[printf,pthread_mutex_init]
 bsoc_set_std_dev global:[bat_c_std_dev]
 bsoc_data_collect global:[E,ac_weight,bat_c_std_dev,bat_current,bat_voltage,gti_weight,pv_voltage] call:[calculateStandardDeviation,pthread_mutex_lock,pthread_mutex_unlock]
-bsoc_ac global:[ac_weight]
-bsoc_gti global:[bat_voltage,gti_weight,pv_voltage]
-gti_test global:[bat_voltage,gti_weight,pv_voltage]
-ac_test global:[ac_weight]
+bsoc_ac global:[ac_weight] call:[ac0_filter] noreturn:[ac0_filter]
+bsoc_gti global:[bat_voltage,gti_weight,pv_voltage] call:[dc0_filter] noreturn:[dc0_filter]
+gti_test global:[bat_voltage,gti_weight,pv_voltage] call:[dc0_filter] noreturn:[dc0_filter]
+ac_test global:[ac_weight] call:[ac0_filter] noreturn:[ac0_filter]
 get_batc_dev global:[batc_std_dev]
 calculateStandardDeviation global:[batc_std_dev] call:[pow,sqrt] noreturn:[pow]
 bat_current_stable global:[bat_c_std_dev,batc_std_dev]
 bsoc_set_mode global:[E,coef] call:[ResetPI,UpdatePI,error_filter,ha_ac_off,ha_ac_on,round] noreturn:[ResetPI,UpdatePI]
 error_filter global:[coef]
+ac0_filter
+ac1_filter
+ac2_filter
+dc0_filter
+dc1_filter
+dc2_filter
+drive0_filter
+drive1_filter
