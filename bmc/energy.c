@@ -778,7 +778,9 @@ int main(int argc, char *argv[])
 					if (!fm80_float(true)) {
 						ramp_down_ac(E.client_p, E.ac_sw_on);
 						if (log_timer()) {
+#ifdef RAMP_SW_LOG
 							fprintf(fout, "%s RAMP DOWN AC, MIN_BAT_KW_AC_LO AC switch %d \r\n", log_time(false), E.ac_sw_on);
+#endif
 						}
 					}
 					E.ac_sw_on = true;
@@ -798,7 +800,9 @@ int main(int argc, char *argv[])
 #endif
 					ramp_up_gti(E.client_p, E.gti_sw_on, E.dl_excess);
 					if (log_timer()) {
+#ifdef RAMP_SW_LOG
 						fprintf(fout, "%s RAMP DOWN DC, MIN_BAT_KW_GTI_HI DC switch %d \r\n", log_time(false), E.gti_sw_on);
+#endif
 					}
 					E.gti_sw_on = false; // once flag
 #endif

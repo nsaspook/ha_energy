@@ -157,6 +157,7 @@ extern "C" {
 	//#define B_DLE_DEBUG    // Dump Load debugging
 	//#define BSOC_DEGUB
 	//#define DEBUG_HA_CMD
+	//#define RAMP_SW_LOG
 
 #define IM_DELAY            1   // tens of second updates
 #define IM_DISPLAY          1
