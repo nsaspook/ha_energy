@@ -771,6 +771,15 @@ int main(int argc, char *argv[])
 					} else {
 						E.call_shutdown = true;
 					}
+
+					/*
+					 * Adjust GTI power to zero if the battery power is too high
+					 * No GTI power from the dumpload battery if the charging power is high
+					 */
+					if (E.mvar[V_DPBAT] > DL_BAT_CHARGE_HIGH) {
+						error_drive = 0.0f; // just charge the battery first
+					}
+
 					snprintf(gti_str, SBUF_SIZ - 1, "V%04dX", error_drive); // format for dumpload controller gti power commands
 					mqtt_gti_power(E.client_p, TOPIC_P, gti_str, 2);
 

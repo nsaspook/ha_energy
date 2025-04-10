@@ -38,7 +38,7 @@ const char* mqtt_name[V_DLAST] = {
 };
 
 struct local_type {
-	volatile double ac_weight, gti_weight, pv_voltage, bat_current, batc_std_dev, bat_voltage, bat_runtime;
+	volatile double ac_weight, gti_weight, pv_voltage, bat_current, batc_std_dev, bat_voltage, bat_runtime, bat_power;
 	double bat_c_std_dev[DEV_SIZE], coef;
 };
 
