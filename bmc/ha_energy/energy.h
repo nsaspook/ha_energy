@@ -34,7 +34,7 @@ extern "C" {
 #include "http_vars.h"
 
 
-#define LOG_VERSION     "V0.76"
+#define LOG_VERSION     "V0.77"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
@@ -336,7 +336,7 @@ extern "C" {
 		volatile double print_vars[MAX_IM_VAR];
 		volatile double im_vars[IA_LAST][PHASE_LAST];
 		volatile double mvar[V_DLAST + 1];
-		volatile bool once_gti, once_ac, iammeter, fm80, dumpload, homeassistant, once_gti_zero;
+		volatile bool once_gti, once_ac, iammeter, fm80, dumpload, homeassistant, once_gti_zero, call_shutdown;
 		volatile double gti_low_adj, ac_low_adj, dl_excess_adj, bat_runtime;
 		volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode, startup, ac_mismatch, dc_mismatch, mode_mismatch, dl_excess;
 		volatile uint32_t speed_go, im_delay, im_display, gti_delay;

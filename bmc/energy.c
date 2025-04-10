@@ -55,6 +55,7 @@
  * V.074 Doxygen comments added
  * V.075 connection lost logging and Keep Alive fixes
  * V.076 control setpoints tuning for main battery runtime limits
+ * V.077 limit shutdown calls th HA
  */
 
 /*
@@ -151,6 +152,7 @@ struct energy_type E = {
 	.mode.bat_crit = false,
 	.dl_excess = false,
 	.dl_excess_adj = 0.0f,
+	.call_shutdown = true, // limit shutdown calls to one per data error
 };
 
 static bool solar_shutdown(void);
@@ -572,7 +574,10 @@ int main(int argc, char *argv[])
 
 				uint8_t iam_delay = 0;
 				while (solar_shutdown()) {
-					mqtt_ha_shutdown(E.client_p, TOPIC_SHUTDOWN);
+					if (E.call_shutdown) {
+						mqtt_ha_shutdown(E.client_p, TOPIC_SHUTDOWN);
+						E.call_shutdown = false;
+					}
 					usleep(USEC_SEC); // wait
 					if ((int32_t) E.mvar[V_HACSW]) {
 						ha_ac_off();
@@ -587,6 +592,7 @@ int main(int argc, char *argv[])
 						E.homeassistant = true;
 					}
 				}
+				E.call_shutdown = true;
 				E.link.shutdown = 0;
 				fprintf(fout, "%s RESTART Solar Energy Control\r\n", log_time(false));
 				fflush(fout);
@@ -757,8 +763,13 @@ int main(int argc, char *argv[])
 						fprintf(fout, "%s Main Battery Runtime too low, shutting down power drains, %6f Hrs\r\n", log_time(false), get_bat_runtime());
 						ramp_down_ac(E.client_p, true);
 						ramp_down_gti(E.client_p, true);
-						mqtt_ha_shutdown(E.client_p, TOPIC_SHUTDOWN);
+						if (E.call_shutdown) {
+							mqtt_ha_shutdown(E.client_p, TOPIC_SHUTDOWN);
+							E.call_shutdown = false;
+						}
 						fflush(fout);
+					} else {
+						E.call_shutdown = true;
 					}
 					snprintf(gti_str, SBUF_SIZ - 1, "V%04dX", error_drive); // format for dumpload controller gti power commands
 					mqtt_gti_power(E.client_p, TOPIC_P, gti_str, 2);
@@ -856,11 +867,15 @@ int main(int argc, char *argv[])
 					snprintf(buffer, SYSLOG_SIZ - 1, "\r\n%s !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels M %u,%u I %u,%u\r\n", log_time(false), E.fm80, E.dumpload, E.fm80,
 						E.link.mqtt_count, E.link.mqtt_error, E.link.iammeter_count, E.link.iammeter_error);
 					syslog(LOG_NOTICE, buffer);
-					mqtt_ha_shutdown(E.client_p, TOPIC_SHUTDOWN);
+					if (E.call_shutdown) {
+						mqtt_ha_shutdown(E.client_p, TOPIC_SHUTDOWN);
+						E.call_shutdown = false;
+					}
 					E.mode.data_error = true;
 				} else {
 					E.mode.data_error = false;
 					E.link.shutdown = 0;
+					E.call_shutdown = true;
 				}
 				snprintf(buffer, RBUF_SIZ - 1, "%s", ctime(&rawtime));
 				len = strlen(buffer);
