@@ -41,6 +41,7 @@ extern "C" {
 	};
 
 	extern FILE* fout;
+	extern struct config_type C;
 
 	int32_t msgarrvd(void *, char *, int, MQTTClient_message *);
 	void delivered(void *, MQTTClient_deliveryToken);

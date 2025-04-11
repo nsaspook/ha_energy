@@ -348,7 +348,12 @@ extern "C" {
 		struct link_type link;
 		MQTTClient client_p, client_sd, client_ha;
 	};
-
+	
+	struct config_type {
+		volatile double dl_bat_charge_high;
+		volatile bool dl_bat_charge_zero;
+	};
+	
 	extern struct energy_type E;
 	extern struct ha_flag_type ha_flag_vars_ss;
 	extern FILE* fout;
