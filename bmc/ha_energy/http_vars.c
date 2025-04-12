@@ -100,7 +100,7 @@ size_t iammeter_write_callback2(char *buffer, size_t size, size_t nitems, void *
 	}
 
 	cJSON *jname;
-	uint32_t phase = PHASE_S; // get data from server monitor
+	uint32_t phase = PHASE_S; // get data from shed monitor
 
 #ifdef IM_DEBUG2
 	fprintf(fout, " iammeter variables ");
@@ -196,6 +196,40 @@ void iammeter_read2(const char * meter)
 	}
 }
 
+void iammeter_read3(const char * meter)
+{
+
+	curl = curl_easy_init();
+	if (curl) {
+		E.link.iammeter_count++;
+		curl_easy_setopt(curl, CURLOPT_URL, meter);
+		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, iammeter_write_callback1);
+		curl_easy_setopt(curl, CURLOPT_WRITEDATA, E.print_vars3); // external data array for iammeter values
+		curl_easy_setopt(curl, CURLOPT_TCP_KEEPALIVE, 1L);
+		/* set keep-alive idle time to 120 seconds */
+		curl_easy_setopt(curl, CURLOPT_TCP_KEEPIDLE, 60L);
+		/* interval time between keep-alive probes: 60 seconds */
+		curl_easy_setopt(curl, CURLOPT_TCP_KEEPINTVL, 30L);
+
+		res = curl_easy_perform(curl);
+		/* Check for errors */
+		if (res != CURLE_OK) {
+			if (res == CURLE_GOT_NOTHING) {
+				E.iammeter = false;
+			} else {
+				fprintf(fout, "%s curl_easy_perform() failed in iammeter_read1: %s %s\n", log_time(false),
+					curl_easy_strerror(res), meter);
+				fflush(fout);
+				E.iammeter = false;
+				E.link.iammeter_error++;
+			}
+		} else {
+			E.iammeter = true;
+		}
+		curl_easy_cleanup(curl);
+	}
+}
+
 /*
  * move data into global state structure
  */
@@ -215,8 +249,8 @@ void print_im_vars(void)
 	char imvars[SYSLOG_SIZ];
 
 	fflush(fout);
-	snprintf(imvars, SYSLOG_SIZ - 1, "House L1 %7.2fW, House L2 %7.2fW, GTI L1 %7.2fW, Server %7.2fW",
-		E.print_vars[L1_P], E.print_vars[L2_P], E.print_vars[L3_P], E.print_vars[L4_P]);
+	snprintf(imvars, SYSLOG_SIZ - 1, "Home L1 %6.2fW, Home L2 %6.2fW, GTI L1 %6.2fW, Server %6.2fW, Server GTI %6.2fW, Shed GTI %6.2fW",
+		E.print_vars[L1_P], E.print_vars[L2_P], E.print_vars[L3_P], E.print_vars3[L1_P], E.print_vars[L4_P], E.print_vars3[L2_P]);
 	fprintf(fout, "%s", imvars);
 	fflush(fout);
 	time(&rawtime_log);

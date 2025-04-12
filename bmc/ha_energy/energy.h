@@ -34,7 +34,7 @@ extern "C" {
 #include "http_vars.h"
 
 
-#define LOG_VERSION     "V0.77"
+#define LOG_VERSION     "V0.78"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
@@ -335,6 +335,7 @@ extern "C" {
 
 	struct energy_type {
 		volatile double print_vars[MAX_IM_VAR];
+		volatile double print_vars3[MAX_IM_VAR];
 		volatile double im_vars[IA_LAST][PHASE_LAST];
 		volatile double mvar[V_DLAST + 1];
 		volatile bool once_gti, once_ac, iammeter, fm80, dumpload, homeassistant, once_gti_zero, call_shutdown;
@@ -348,12 +349,12 @@ extern "C" {
 		struct link_type link;
 		MQTTClient client_p, client_sd, client_ha;
 	};
-	
+
 	struct config_type {
-		volatile double dl_bat_charge_high;
+		volatile double dl_bat_charge_high, pv_bias, pv_dl_excess, pv_bias_rate;
 		volatile bool dl_bat_charge_zero;
 	};
-	
+
 	extern struct energy_type E;
 	extern struct ha_flag_type ha_flag_vars_ss;
 	extern FILE* fout;

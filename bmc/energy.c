@@ -56,6 +56,7 @@
  * V.075 connection lost logging and Keep Alive fixes
  * V.076 control setpoints tuning for main battery runtime limits
  * V.077 limit shutdown calls th HA
+ * V.078 3 IMAMETER sensors
  */
 
 /*
@@ -112,6 +113,9 @@ FILE* fout; // logging stream
 // values are boot defaults but change be change during program operation
 struct config_type C = {
 	.dl_bat_charge_high = DL_BAT_CHARGE_HIGH,
+	.pv_bias = PV_BIAS,
+	.pv_dl_excess = PV_DL_EXCESS,
+	.pv_bias_rate = PV_BIAS_RATE,
 	.dl_bat_charge_zero = false,
 };
 
@@ -526,7 +530,7 @@ int main(int argc, char *argv[])
 			 * iammeter connected for split single phase monitoring and one leg GTI power exporting
 			 */
 			iammeter_read1(IAMM1);
-			iammeter_read2(IAMM2);
+			iammeter_read3(IAMM3);
 
 			/*
 			 * start the main energy monitoring loop
@@ -664,7 +668,7 @@ int main(int argc, char *argv[])
 						fprintf(fout, "%s R_FLOAT AC switch true \r\n", log_time(false));
 					}
 				}
-				E.mode.pv_bias = PV_BIAS;
+				E.mode.pv_bias = C.pv_bias;
 				fm80_float(true);
 				break;
 			case R_RUN:
@@ -694,12 +698,12 @@ int main(int argc, char *argv[])
 						usleep(100000); // wait
 						mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
 						E.ac_sw_status = true;
-						E.mode.pv_bias = PV_BIAS;
+						E.mode.pv_bias = C.pv_bias;
 						fprintf(fout, "%s in_pid_mode AC/DC switch true \r\n", log_time(false));
 						fm80_float(true);
 					} else {
 						if (!fm80_float(true)) {
-							E.mode.pv_bias = (int32_t) E.mode.error - PV_BIAS;
+							E.mode.pv_bias = (int32_t) E.mode.error - C.pv_bias;
 						}
 					}
 					/*
@@ -713,13 +717,13 @@ int main(int argc, char *argv[])
 					if (E.mvar[V_DPBAT] > PV_DL_BIAS_RATE) {
 						error_drive = (int32_t) E.mode.error - E.mode.pv_bias; // PI feedback control signal
 					} else {
-						error_drive = (int32_t) E.mode.error - PV_BIAS_RATE;
+						error_drive = (int32_t) E.mode.error - C.pv_bias_rate;
 					}
 					/*
 					 * when main battery is in float, crank-up the power draw from the solar panels
 					 */
 					if (fm80_float(true)) {
-						error_drive = (int32_t) (E.mode.error + PV_BIAS);
+						error_drive = (int32_t) (E.mode.error + C.pv_bias);
 					}
 					/*
 					 * don't drive to zero power
@@ -746,7 +750,7 @@ int main(int argc, char *argv[])
 						}
 					} else {
 						if (E.dl_excess) {
-							error_drive = PV_DL_EXCESS + E.dl_excess_adj;
+							error_drive = C.pv_dl_excess + E.dl_excess_adj;
 						}
 					}
 
@@ -865,7 +869,7 @@ int main(int argc, char *argv[])
 			if (E.im_delay++ >= IM_DELAY) {
 				E.im_delay = 0;
 				iammeter_read1(IAMM1);
-				iammeter_read2(IAMM2);
+				iammeter_read3(IAMM3);
 			}
 			if (E.im_display++ >= IM_DISPLAY) {
 				char buffer[SYSLOG_SIZ];
