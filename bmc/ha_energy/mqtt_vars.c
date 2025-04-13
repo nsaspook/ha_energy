@@ -32,7 +32,7 @@ void mqtt_ha_shutdown(MQTTClient client_p, const char * topic_p)
 		while (ha_flag_vars_ss.deliveredtoken != token) {
 			usleep(TOKEN_DELAY);
 			if (waiting++ > MQTT_TIMEOUT) {
-				fprintf(fout, "%s %s SW Still Waiting, timeout %d\r\n", log_time(false), topic_p, waiting);
+				fprintf(fout, "%s %s SW Still Waiting, timeout %u\r\n", log_time(false), topic_p, waiting);
 				break;
 			}
 		};
@@ -90,7 +90,7 @@ void mqtt_ha_pid(MQTTClient client_p, const char * topic_p)
 		while (ha_flag_vars_ss.deliveredtoken != token) {
 			usleep(TOKEN_DELAY);
 			if (waiting++ > MQTT_TIMEOUT) {
-				fprintf(fout, "%s %s SW Still Waiting, timeout %d\r\n", log_time(false), topic_p, waiting);
+				fprintf(fout, "%s %s SW Still Waiting, timeout %u\r\n", log_time(false), topic_p, waiting);
 				break;
 			}
 		};
@@ -236,7 +236,7 @@ bool mqtt_gti_power(MQTTClient client_p, const char * topic_p, char * msg, uint3
 		while (ha_flag_vars_ss.deliveredtoken != token) {
 			usleep(TOKEN_DELAY);
 			if (waiting++ > MQTT_TIMEOUT) {
-				fprintf(fout, "%s %s GTI Power Still Waiting, timeout %d\r\n", log_time(false), topic_p, waiting);
+				fprintf(fout, "%s %s GTI Power Still Waiting, timeout %u\r\n", log_time(false), topic_p, waiting);
 				break;
 			}
 		};
@@ -266,7 +266,7 @@ bool mqtt_gti_time(MQTTClient client_p, const char * topic_p, char * msg)
 		while (ha_flag_vars_ss.deliveredtoken != token) {
 			usleep(GTI_TOKEN_DELAY);
 			if (waiting++ > MQTT_TIMEOUT) {
-				fprintf(fout, "%s %s GTI Time Still Waiting, timeout %d\r\n", log_time(false), topic_p, waiting);
+				fprintf(fout, "%s %s GTI Time Still Waiting, timeout %u\r\n", log_time(false), topic_p, waiting);
 				break;
 			}
 		};

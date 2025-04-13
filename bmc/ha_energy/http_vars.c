@@ -88,7 +88,7 @@ size_t iammeter_write_callback2(char *buffer, size_t size, size_t nitems, void *
 		goto iammeter_exit;
 	}
 #ifdef IM_DEBUG2
-	fprintf(fout, "\n iammeter_read_callback %s, next_var %d, L4_P %d \n", buffer, next_var, L4_P);
+	fprintf(fout, "\n iammeter_read_callback %s, next_var %u, L4_P %d \n", buffer, next_var, L4_P);
 #endif
 
 	cJSON *data_result = cJSON_GetObjectItemCaseSensitive(json, "Data");
@@ -249,8 +249,8 @@ void print_im_vars(void)
 	char imvars[SYSLOG_SIZ];
 
 	fflush(fout);
-	snprintf(imvars, SYSLOG_SIZ - 1, "Home L1 %6.2fW, Home L2 %6.2fW, GTI L1 %6.2fW, Server %6.2fW, Server GTI %6.2fW, Shed GTI %6.2fW",
-		E.print_vars[L1_P], E.print_vars[L2_P], E.print_vars[L3_P], E.print_vars3[L1_P], E.print_vars[L4_P], E.print_vars3[L2_P]);
+	snprintf(imvars, SYSLOG_SIZ - 1, "Home L1 %6.2fW, H L2 %6.2fW, GTI L1 %6.2fW, Server %6.2fW, S GTI %6.2fW, S UPS %6.2fW, Shed GTI %6.2fW",
+		E.print_vars[L1_P], E.print_vars[L2_P], E.print_vars[L3_P], E.print_vars3[L1_P], E.print_vars3[L2_P], E.print_vars3[L3_P], E.print_vars[L4_P]);
 	fprintf(fout, "%s", imvars);
 	fflush(fout);
 	time(&rawtime_log);

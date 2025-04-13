@@ -1,66 +1,73 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="6818017508689016068">
+<analyzerinfo hash="5173279871139655260">
+        <error id="unusedStructMember" severity="style" msg="struct member &apos;local_type::bat_power&apos; is never used." verbose="struct member &apos;local_type::bat_power&apos; is never used." cwe="563" file0="ha_energy/bsoc.c">
+            <location file="ha_energy/bsoc.c" line="41" column="106"/>
+            <symbol>local_type::bat_power</symbol>
+        </error>
   <FileInfo check="CheckUnusedFunctions">
-    <functiondecl functionName="bsoc_init" lineNumber="60"/>
-    <functiondecl functionName="bsoc_set_std_dev" lineNumber="75"/>
-    <functiondecl functionName="bsoc_data_collect" lineNumber="85"/>
-    <functiondecl functionName="bsoc_ac" lineNumber="135"/>
-    <functiondecl functionName="bsoc_gti" lineNumber="145"/>
-    <functiondecl functionName="gti_test" lineNumber="170"/>
-    <functiondecl functionName="ac_test" lineNumber="190"/>
-    <functiondecl functionName="get_batc_dev" lineNumber="195"/>
-    <functiondecl functionName="calculateStandardDeviation" lineNumber="204"/>
-    <functiondecl functionName="bat_current_stable" lineNumber="239"/>
-    <functiondecl functionName="bsoc_set_mode" lineNumber="261"/>
-    <functiondecl functionName="error_filter" lineNumber="368"/>
-    <functiondecl functionName="ac0_filter" lineNumber="375"/>
-    <functiondecl functionName="ac1_filter" lineNumber="383"/>
-    <functiondecl functionName="ac2_filter" lineNumber="391"/>
-    <functiondecl functionName="dc0_filter" lineNumber="399"/>
-    <functiondecl functionName="dc1_filter" lineNumber="407"/>
-    <functiondecl functionName="dc2_filter" lineNumber="415"/>
-    <functiondecl functionName="drive0_filter" lineNumber="423"/>
-    <functiondecl functionName="drive1_filter" lineNumber="431"/>
-    <functiondecl functionName="bsoc_init" lineNumber="60"/>
-    <functiondecl functionName="bsoc_set_std_dev" lineNumber="75"/>
-    <functiondecl functionName="bsoc_data_collect" lineNumber="85"/>
-    <functiondecl functionName="bsoc_ac" lineNumber="135"/>
-    <functiondecl functionName="bsoc_gti" lineNumber="145"/>
-    <functiondecl functionName="gti_test" lineNumber="170"/>
-    <functiondecl functionName="ac_test" lineNumber="190"/>
-    <functiondecl functionName="get_batc_dev" lineNumber="195"/>
-    <functiondecl functionName="calculateStandardDeviation" lineNumber="204"/>
-    <functiondecl functionName="bat_current_stable" lineNumber="239"/>
-    <functiondecl functionName="bsoc_set_mode" lineNumber="261"/>
-    <functiondecl functionName="error_filter" lineNumber="368"/>
-    <functiondecl functionName="ac0_filter" lineNumber="375"/>
-    <functiondecl functionName="ac1_filter" lineNumber="383"/>
-    <functiondecl functionName="ac2_filter" lineNumber="391"/>
-    <functiondecl functionName="dc0_filter" lineNumber="399"/>
-    <functiondecl functionName="dc1_filter" lineNumber="407"/>
-    <functiondecl functionName="dc2_filter" lineNumber="415"/>
-    <functiondecl functionName="drive0_filter" lineNumber="423"/>
-    <functiondecl functionName="drive1_filter" lineNumber="431"/>
-    <functiondecl functionName="bsoc_init" lineNumber="60"/>
-    <functiondecl functionName="bsoc_set_std_dev" lineNumber="75"/>
-    <functiondecl functionName="bsoc_data_collect" lineNumber="85"/>
-    <functiondecl functionName="bsoc_ac" lineNumber="135"/>
-    <functiondecl functionName="bsoc_gti" lineNumber="145"/>
-    <functiondecl functionName="gti_test" lineNumber="170"/>
-    <functiondecl functionName="ac_test" lineNumber="190"/>
-    <functiondecl functionName="get_batc_dev" lineNumber="195"/>
-    <functiondecl functionName="calculateStandardDeviation" lineNumber="204"/>
-    <functiondecl functionName="bat_current_stable" lineNumber="239"/>
-    <functiondecl functionName="bsoc_set_mode" lineNumber="261"/>
-    <functiondecl functionName="error_filter" lineNumber="368"/>
-    <functiondecl functionName="ac0_filter" lineNumber="375"/>
-    <functiondecl functionName="ac1_filter" lineNumber="383"/>
-    <functiondecl functionName="ac2_filter" lineNumber="391"/>
-    <functiondecl functionName="dc0_filter" lineNumber="399"/>
-    <functiondecl functionName="dc1_filter" lineNumber="407"/>
-    <functiondecl functionName="dc2_filter" lineNumber="415"/>
-    <functiondecl functionName="drive0_filter" lineNumber="423"/>
-    <functiondecl functionName="drive1_filter" lineNumber="431"/>
+    <functiondecl functionName="bsoc_init" lineNumber="61"/>
+    <functiondecl functionName="bsoc_set_std_dev" lineNumber="76"/>
+    <functiondecl functionName="bsoc_data_collect" lineNumber="86"/>
+    <functiondecl functionName="bsoc_ac" lineNumber="138"/>
+    <functiondecl functionName="bsoc_gti" lineNumber="148"/>
+    <functiondecl functionName="gti_test" lineNumber="179"/>
+    <functiondecl functionName="ac_test" lineNumber="205"/>
+    <functiondecl functionName="get_bat_runtime" lineNumber="210"/>
+    <functiondecl functionName="get_batc_dev" lineNumber="215"/>
+    <functiondecl functionName="calculateStandardDeviation" lineNumber="224"/>
+    <functiondecl functionName="bat_current_stable" lineNumber="259"/>
+    <functiondecl functionName="bsoc_set_mode" lineNumber="281"/>
+    <functiondecl functionName="error_filter" lineNumber="392"/>
+    <functiondecl functionName="ac0_filter" lineNumber="399"/>
+    <functiondecl functionName="ac1_filter" lineNumber="407"/>
+    <functiondecl functionName="ac2_filter" lineNumber="415"/>
+    <functiondecl functionName="dc0_filter" lineNumber="423"/>
+    <functiondecl functionName="dc1_filter" lineNumber="431"/>
+    <functiondecl functionName="dc2_filter" lineNumber="439"/>
+    <functiondecl functionName="drive0_filter" lineNumber="447"/>
+    <functiondecl functionName="drive1_filter" lineNumber="455"/>
+    <functiondecl functionName="bsoc_init" lineNumber="61"/>
+    <functiondecl functionName="bsoc_set_std_dev" lineNumber="76"/>
+    <functiondecl functionName="bsoc_data_collect" lineNumber="86"/>
+    <functiondecl functionName="bsoc_ac" lineNumber="138"/>
+    <functiondecl functionName="bsoc_gti" lineNumber="148"/>
+    <functiondecl functionName="gti_test" lineNumber="179"/>
+    <functiondecl functionName="ac_test" lineNumber="205"/>
+    <functiondecl functionName="get_bat_runtime" lineNumber="210"/>
+    <functiondecl functionName="get_batc_dev" lineNumber="215"/>
+    <functiondecl functionName="calculateStandardDeviation" lineNumber="224"/>
+    <functiondecl functionName="bat_current_stable" lineNumber="259"/>
+    <functiondecl functionName="bsoc_set_mode" lineNumber="281"/>
+    <functiondecl functionName="error_filter" lineNumber="392"/>
+    <functiondecl functionName="ac0_filter" lineNumber="399"/>
+    <functiondecl functionName="ac1_filter" lineNumber="407"/>
+    <functiondecl functionName="ac2_filter" lineNumber="415"/>
+    <functiondecl functionName="dc0_filter" lineNumber="423"/>
+    <functiondecl functionName="dc1_filter" lineNumber="431"/>
+    <functiondecl functionName="dc2_filter" lineNumber="439"/>
+    <functiondecl functionName="drive0_filter" lineNumber="447"/>
+    <functiondecl functionName="drive1_filter" lineNumber="455"/>
+    <functiondecl functionName="bsoc_init" lineNumber="61"/>
+    <functiondecl functionName="bsoc_set_std_dev" lineNumber="76"/>
+    <functiondecl functionName="bsoc_data_collect" lineNumber="86"/>
+    <functiondecl functionName="bsoc_ac" lineNumber="138"/>
+    <functiondecl functionName="bsoc_gti" lineNumber="148"/>
+    <functiondecl functionName="gti_test" lineNumber="179"/>
+    <functiondecl functionName="ac_test" lineNumber="205"/>
+    <functiondecl functionName="get_bat_runtime" lineNumber="210"/>
+    <functiondecl functionName="get_batc_dev" lineNumber="215"/>
+    <functiondecl functionName="calculateStandardDeviation" lineNumber="224"/>
+    <functiondecl functionName="bat_current_stable" lineNumber="259"/>
+    <functiondecl functionName="bsoc_set_mode" lineNumber="281"/>
+    <functiondecl functionName="error_filter" lineNumber="392"/>
+    <functiondecl functionName="ac0_filter" lineNumber="399"/>
+    <functiondecl functionName="ac1_filter" lineNumber="407"/>
+    <functiondecl functionName="ac2_filter" lineNumber="415"/>
+    <functiondecl functionName="dc0_filter" lineNumber="423"/>
+    <functiondecl functionName="dc1_filter" lineNumber="431"/>
+    <functiondecl functionName="dc2_filter" lineNumber="439"/>
+    <functiondecl functionName="drive0_filter" lineNumber="447"/>
+    <functiondecl functionName="drive1_filter" lineNumber="455"/>
     <functioncall functionName="IA_LAST"/>
     <functioncall functionName="MQTTClient"/>
     <functioncall functionName="MQTTClient_deliveryToken"/>
@@ -79,6 +86,7 @@
     <functioncall functionName="V_FACE"/>
     <functioncall functionName="V_FBEKW"/>
     <functioncall functionName="V_FLO"/>
+    <functioncall functionName="V_FRUNT"/>
     <functioncall functionName="V_FSO"/>
     <functioncall functionName="V_PWA"/>
     <functioncall functionName="ac0_filter"/>
@@ -89,6 +97,7 @@
     <functioncall functionName="dc0_filter"/>
     <functioncall functionName="error_filter"/>
     <functioncall functionName="false"/>
+    <functioncall functionName="fflush"/>
     <functioncall functionName="fprintf"/>
     <functioncall functionName="gti_weight"/>
     <functioncall functionName="ha_ac_off"/>

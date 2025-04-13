@@ -869,6 +869,7 @@ int main(int argc, char *argv[])
 			if (E.im_delay++ >= IM_DELAY) {
 				E.im_delay = 0;
 				iammeter_read1(IAMM1);
+				iammeter_read2(IAMM2);
 				iammeter_read3(IAMM3);
 			}
 			if (E.im_display++ >= IM_DISPLAY) {

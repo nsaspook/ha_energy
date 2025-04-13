@@ -1,8 +1,5 @@
 bsoc.a1::ha_energy/bsoc.c
-daq.a1::ha_energy/daq.c
 http_vars.a1::ha_energy/http_vars.c
-junk.a1::ha_energy/junk.c
-main.a1::ha_energy/main.cpp
 mqtt_rec.a1::ha_energy/mqtt_rec.c
 mqtt_vars.a1::ha_energy/mqtt_vars.c
 pid.a1::ha_energy/pid.c

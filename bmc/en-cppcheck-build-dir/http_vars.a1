@@ -1,30 +1,58 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="16421973828681172816">
+<analyzerinfo hash="9906057631966248307">
         <error id="variableScope" severity="style" msg="The scope of the variable &apos;time_log&apos; can be reduced." verbose="The scope of the variable &apos;time_log&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="ha_energy/http_vars.c">
-            <location file="ha_energy/http_vars.c" line="112" column="14"/>
+            <location file="ha_energy/http_vars.c" line="246" column="14"/>
             <symbol>time_log</symbol>
         </error>
   <FileInfo check="ctu">
-<function-call call-id="ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="2" file="ha_energy/http_vars.c" line="54" col="21" call-argexpr="phase_var" call-argvaluetype="0" call-argvalue="0">
-  <path file="ha_energy/http_vars.c" line="53" col="25" info="Assignment &apos;phase_var=IA_VOLTAGE&apos;, assigned value is 0"/>
-</function-call><function-call call-id="ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="3" file="ha_energy/http_vars.c" line="54" col="21" call-argexpr="phase" call-argvaluetype="0" call-argvalue="0">
-  <path file="ha_energy/http_vars.c" line="42" col="19" info="Assignment &apos;phase=PHASE_A&apos;, assigned value is 0"/>
-</function-call><function-call call-id="ha_energy/http_vars.c:8:6" call-funcname="mqtt_gti_time" call-argnr="3" file="ha_energy/http_vars.c" line="125" col="16" call-argexpr="time_log" call-argvaluetype="7" call-argvalue="82"/>  </FileInfo>
+<function-call call-id="ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="2" file="ha_energy/http_vars.c" line="55" col="21" call-argexpr="phase_var" call-argvaluetype="0" call-argvalue="0">
+  <path file="ha_energy/http_vars.c" line="54" col="25" info="Assignment &apos;phase_var=IA_VOLTAGE&apos;, assigned value is 0"/>
+</function-call><function-call call-id="ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="3" file="ha_energy/http_vars.c" line="55" col="21" call-argexpr="phase" call-argvaluetype="0" call-argvalue="0">
+  <path file="ha_energy/http_vars.c" line="43" col="19" info="Assignment &apos;phase=PHASE_A&apos;, assigned value is 0"/>
+</function-call><function-call call-id="ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="2" file="ha_energy/http_vars.c" line="112" col="20" call-argexpr="phase_var" call-argvaluetype="0" call-argvalue="0">
+  <path file="ha_energy/http_vars.c" line="111" col="24" info="Assignment &apos;phase_var=IA_VOLTAGE&apos;, assigned value is 0"/>
+</function-call><function-call call-id="ha_energy/http_vars.c:8:6" call-funcname="mqtt_gti_time" call-argnr="3" file="ha_energy/http_vars.c" line="260" col="16" call-argexpr="time_log" call-argvaluetype="7" call-argvalue="82"/>  </FileInfo>
   <FileInfo check="ctu">
-<function-call call-id="ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="2" file="ha_energy/http_vars.c" line="54" col="21" call-argexpr="phase_var" call-argvaluetype="0" call-argvalue="0">
-  <path file="ha_energy/http_vars.c" line="53" col="25" info="Assignment &apos;phase_var=IA_VOLTAGE&apos;, assigned value is 0"/>
-</function-call><function-call call-id="ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="3" file="ha_energy/http_vars.c" line="54" col="21" call-argexpr="phase" call-argvaluetype="0" call-argvalue="0">
-  <path file="ha_energy/http_vars.c" line="42" col="19" info="Assignment &apos;phase=PHASE_A&apos;, assigned value is 0"/>
-</function-call><function-call call-id="ha_energy/http_vars.c:8:6" call-funcname="mqtt_gti_time" call-argnr="3" file="ha_energy/http_vars.c" line="125" col="16" call-argexpr="time_log" call-argvaluetype="7" call-argvalue="82"/>  </FileInfo>
+<function-call call-id="ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="2" file="ha_energy/http_vars.c" line="55" col="21" call-argexpr="phase_var" call-argvaluetype="0" call-argvalue="0">
+  <path file="ha_energy/http_vars.c" line="54" col="25" info="Assignment &apos;phase_var=IA_VOLTAGE&apos;, assigned value is 0"/>
+</function-call><function-call call-id="ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="3" file="ha_energy/http_vars.c" line="55" col="21" call-argexpr="phase" call-argvaluetype="0" call-argvalue="0">
+  <path file="ha_energy/http_vars.c" line="43" col="19" info="Assignment &apos;phase=PHASE_A&apos;, assigned value is 0"/>
+</function-call><function-call call-id="ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="2" file="ha_energy/http_vars.c" line="112" col="20" call-argexpr="phase_var" call-argvaluetype="0" call-argvalue="0">
+  <path file="ha_energy/http_vars.c" line="111" col="24" info="Assignment &apos;phase_var=IA_VOLTAGE&apos;, assigned value is 0"/>
+</function-call><function-call call-id="ha_energy/http_vars.c:8:6" call-funcname="mqtt_gti_time" call-argnr="3" file="ha_energy/http_vars.c" line="260" col="16" call-argexpr="time_log" call-argvaluetype="7" call-argvalue="82"/>  </FileInfo>
+  <FileInfo check="ctu">
+<function-call call-id="ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="2" file="ha_energy/http_vars.c" line="55" col="21" call-argexpr="phase_var" call-argvaluetype="0" call-argvalue="0">
+  <path file="ha_energy/http_vars.c" line="54" col="25" info="Assignment &apos;phase_var=IA_VOLTAGE&apos;, assigned value is 0"/>
+</function-call><function-call call-id="ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="3" file="ha_energy/http_vars.c" line="55" col="21" call-argexpr="phase" call-argvaluetype="0" call-argvalue="0">
+  <path file="ha_energy/http_vars.c" line="43" col="19" info="Assignment &apos;phase=PHASE_A&apos;, assigned value is 0"/>
+</function-call><function-call call-id="ha_energy/http_vars.c:6:13" call-funcname="iammeter_get_data" call-argnr="2" file="ha_energy/http_vars.c" line="112" col="20" call-argexpr="phase_var" call-argvaluetype="0" call-argvalue="0">
+  <path file="ha_energy/http_vars.c" line="111" col="24" info="Assignment &apos;phase_var=IA_VOLTAGE&apos;, assigned value is 0"/>
+</function-call><function-call call-id="ha_energy/http_vars.c:8:6" call-funcname="mqtt_gti_time" call-argnr="3" file="ha_energy/http_vars.c" line="260" col="16" call-argexpr="time_log" call-argvaluetype="7" call-argvalue="82"/>  </FileInfo>
   <FileInfo check="CheckUnusedFunctions">
-    <functiondecl functionName="iammeter_write_callback" lineNumber="13"/>
-    <functiondecl functionName="iammeter_read" lineNumber="75"/>
-    <functiondecl functionName="iammeter_get_data" lineNumber="102"/>
-    <functiondecl functionName="print_im_vars" lineNumber="110"/>
-    <functiondecl functionName="iammeter_write_callback" lineNumber="13"/>
-    <functiondecl functionName="iammeter_read" lineNumber="75"/>
-    <functiondecl functionName="iammeter_get_data" lineNumber="102"/>
-    <functiondecl functionName="print_im_vars" lineNumber="110"/>
+    <functiondecl functionName="iammeter_write_callback1" lineNumber="13"/>
+    <functiondecl functionName="iammeter_write_callback2" lineNumber="73"/>
+    <functiondecl functionName="iammeter_read1" lineNumber="131"/>
+    <functiondecl functionName="iammeter_read2" lineNumber="165"/>
+    <functiondecl functionName="iammeter_read3" lineNumber="199"/>
+    <functiondecl functionName="iammeter_get_data" lineNumber="236"/>
+    <functiondecl functionName="print_im_vars" lineNumber="244"/>
+    <functiondecl functionName="iammeter_write_callback1" lineNumber="13"/>
+    <functiondecl functionName="iammeter_write_callback2" lineNumber="73"/>
+    <functiondecl functionName="iammeter_read1" lineNumber="131"/>
+    <functiondecl functionName="iammeter_read2" lineNumber="165"/>
+    <functiondecl functionName="iammeter_read3" lineNumber="199"/>
+    <functiondecl functionName="iammeter_get_data" lineNumber="236"/>
+    <functiondecl functionName="print_im_vars" lineNumber="244"/>
+    <functiondecl functionName="iammeter_write_callback1" lineNumber="13"/>
+    <functiondecl functionName="iammeter_write_callback2" lineNumber="73"/>
+    <functiondecl functionName="iammeter_read1" lineNumber="131"/>
+    <functiondecl functionName="iammeter_read2" lineNumber="165"/>
+    <functiondecl functionName="iammeter_read3" lineNumber="199"/>
+    <functiondecl functionName="iammeter_get_data" lineNumber="236"/>
+    <functiondecl functionName="print_im_vars" lineNumber="244"/>
+    <functioncall functionName="CURLOPT_TCP_KEEPALIVE"/>
+    <functioncall functionName="CURLOPT_TCP_KEEPIDLE"/>
+    <functioncall functionName="CURLOPT_TCP_KEEPINTVL"/>
     <functioncall functionName="CURLOPT_URL"/>
     <functioncall functionName="CURLOPT_WRITEDATA"/>
     <functioncall functionName="CURLOPT_WRITEFUNCTION"/>
@@ -34,6 +62,7 @@
     <functioncall functionName="MQTTClient"/>
     <functioncall functionName="PHASE_A"/>
     <functioncall functionName="PHASE_LAST"/>
+    <functioncall functionName="PHASE_S"/>
     <functioncall functionName="cJSON_ArrayForEach"/>
     <functioncall functionName="cJSON_Delete"/>
     <functioncall functionName="cJSON_GetErrorPtr"/>
@@ -49,7 +78,9 @@
     <functioncall functionName="fprintf"/>
     <functioncall functionName="iammeter_exit"/>
     <functioncall functionName="iammeter_get_data"/>
-    <functioncall functionName="iammeter_write_callback"/>
+    <functioncall functionName="iammeter_write_callback1"/>
+    <functioncall functionName="iammeter_write_callback2"/>
+    <functioncall functionName="log_time"/>
     <functioncall functionName="mqtt_gti_time"/>
     <functioncall functionName="snprintf"/>
     <functioncall functionName="strlen"/>
