@@ -117,6 +117,8 @@ struct config_type C = {
 	.pv_dl_excess = PV_DL_EXCESS,
 	.pv_bias_rate = PV_BIAS_RATE,
 	.dl_bat_charge_zero = false,
+	.bal_min_energy_ac = BAL_MIN_ENERGY_AC,
+	.min_bat_kw_ac_lo = MIN_BAT_KW_AC_LO,
 };
 
 // energy state structure
@@ -808,7 +810,7 @@ int main(int argc, char *argv[])
 					E.ac_sw_on = false; // once flag
 				}
 #endif
-				if (((ac2_filter(E.mvar[V_BEN]) < BAL_MIN_ENERGY_AC) || ((ac_test() < (MIN_BAT_KW_AC_LO + E.ac_low_adj))))) {
+				if (((ac2_filter(E.mvar[V_BEN]) < C.bal_min_energy_ac) || ((ac_test() < (C.min_bat_kw_ac_lo + E.ac_low_adj))))) {
 					if (!fm80_float(true)) {
 						ramp_down_ac(E.client_p, E.ac_sw_on);
 						if (log_timer()) {

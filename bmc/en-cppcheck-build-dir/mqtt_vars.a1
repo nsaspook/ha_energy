@@ -16,11 +16,6 @@
     <functiondecl functionName="mqtt_ha_switch" lineNumber="106"/>
     <functiondecl functionName="mqtt_gti_power" lineNumber="186"/>
     <functiondecl functionName="mqtt_gti_time" lineNumber="248"/>
-    <functiondecl functionName="mqtt_ha_shutdown" lineNumber="12"/>
-    <functiondecl functionName="mqtt_ha_pid" lineNumber="45"/>
-    <functiondecl functionName="mqtt_ha_switch" lineNumber="106"/>
-    <functiondecl functionName="mqtt_gti_power" lineNumber="186"/>
-    <functiondecl functionName="mqtt_gti_time" lineNumber="248"/>
     <functioncall functionName="IA_LAST"/>
     <functioncall functionName="MQTTClient"/>
     <functioncall functionName="MQTTClient_deliveryToken"/>

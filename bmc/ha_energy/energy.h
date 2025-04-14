@@ -351,7 +351,7 @@ extern "C" {
 	};
 
 	struct config_type {
-		volatile double dl_bat_charge_high, pv_bias, pv_dl_excess, pv_bias_rate;
+		volatile double dl_bat_charge_high, pv_bias, pv_dl_excess, pv_bias_rate ,bal_min_energy_ac, min_bat_kw_ac_lo;
 		volatile bool dl_bat_charge_zero;
 	};
 
