@@ -53,6 +53,9 @@ void mqtt_ha_pid(MQTTClient client_p, const char * topic_p)
 
 	E.link.mqtt_count++;
 	E.mode.sequence++;
+	if (E.mode.sequence > SYSTEM_STABLE) {
+		C.system_stable = true;
+	}
 	json = cJSON_CreateObject();
 	cJSON_AddStringToObject(json, "name", CLIENTID1);
 	cJSON_AddNumberToObject(json, "sequence", E.mode.sequence);
@@ -156,7 +159,9 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, const bool sw_sta
 		}
 	}
 #endif
-
+	if (C.system_stable) {
+		fprintf(fout, "%s mqtt_ha_switch message sent to %s \r\n", log_time(false), topic_p);
+	}
 	MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token);
 	// a busy, wait loop for the async delivery thread to complete
 	{

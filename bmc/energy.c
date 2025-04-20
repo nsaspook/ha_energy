@@ -119,6 +119,7 @@ struct config_type C = {
 	.dl_bat_charge_zero = false,
 	.bal_min_energy_ac = BAL_MIN_ENERGY_AC,
 	.min_bat_kw_ac_lo = MIN_BAT_KW_AC_LO,
+	.system_stable = false,
 };
 
 // energy state structure
@@ -810,7 +811,7 @@ int main(int argc, char *argv[])
 					E.ac_sw_on = false; // once flag
 				}
 #endif
-				if (((ac2_filter(E.mvar[V_BEN]) < C.bal_min_energy_ac) || ((ac_test() < (C.min_bat_kw_ac_lo + E.ac_low_adj))))) {
+				if (((ac2_filter(E.mvar[V_BEN]) < C.bal_min_energy_ac) || ((ac_test() < (C.min_bat_kw_ac_lo))))) {
 					if (!fm80_float(true)) {
 						ramp_down_ac(E.client_p, E.ac_sw_on);
 						if (log_timer()) {

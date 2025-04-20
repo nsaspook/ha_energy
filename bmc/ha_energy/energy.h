@@ -147,6 +147,8 @@ extern "C" {
 #define MAX_LOG_SPAM  60
 #define LOW_LOG_SPAM  2
 #define RESET_LOG_SPAM  120
+	
+#define SYSTEM_STABLE	10.0f
 
 	//#define IM_DEBUG                      // WEM3080T LOGGING
 	//#define B_ADJ_DEBUG                   // debug printing
@@ -352,7 +354,7 @@ extern "C" {
 
 	struct config_type {
 		volatile double dl_bat_charge_high, pv_bias, pv_dl_excess, pv_bias_rate ,bal_min_energy_ac, min_bat_kw_ac_lo;
-		volatile bool dl_bat_charge_zero;
+		volatile bool dl_bat_charge_zero, system_stable;
 	};
 
 	extern struct energy_type E;

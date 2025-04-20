@@ -43,7 +43,7 @@ struct local_type {
 };
 
 static struct local_type L = {
-	.ac_weight = 0.0f,
+	.ac_weight = BAT_M_KW,
 	.bat_current = 0.0f,
 	.bat_voltage = 0.0f,
 	.batc_std_dev = 0.0f,
@@ -60,7 +60,7 @@ static double error_filter(const double);
  */
 bool bsoc_init(void)
 {
-	L.ac_weight = 0.0f;
+	L.ac_weight = BAT_M_KW;
 	L.gti_weight = 0.0f;
 	// use MUTEX locks for message passing between remote programs
 	if (pthread_mutex_init(&E.ha_lock, NULL) != 0) {
@@ -105,7 +105,7 @@ bool bsoc_data_collect(void)
 	L.bat_voltage = E.mvar[V_DVBAT];
 	L.bat_current = E.mvar[V_DCMPPT];
 	L.bat_runtime = E.mvar[V_FRUNT];
-	E.ac_low_adj = E.mvar[V_FSO]* -0.5f;
+	E.ac_low_adj = E.mvar[V_FSO]/0.5f;
 	E.gti_low_adj = E.mvar[V_FACE] * -0.5f;
 	E.mode.dl_mqtt_max = E.mvar[V_DPMPPT];
 	E.bat_runtime = E.mvar[V_FRUNT];
@@ -398,7 +398,8 @@ static double error_filter(const double raw)
 
 double ac0_filter(const double raw)
 {
-	static double accum = 0.0f;
+	static double accum = BAT_CRITICAL;
+;
 	static double coef = COEFF;
 	accum = accum - accum / coef + raw;
 	return accum / coef;
@@ -406,7 +407,7 @@ double ac0_filter(const double raw)
 
 double ac1_filter(const double raw)
 {
-	static double accum = 0.0f;
+	static double accum = BAT_CRITICAL;
 	static double coef = COEF;
 	accum = accum - accum / coef + raw;
 	return accum / coef;
@@ -414,7 +415,7 @@ double ac1_filter(const double raw)
 
 double ac2_filter(const double raw)
 {
-	static double accum = 0.0f;
+	static double accum = BAT_CRITICAL;
 	static double coef = COEF;
 	accum = accum - accum / coef + raw;
 	return accum / coef;
