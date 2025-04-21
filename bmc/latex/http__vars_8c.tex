@@ -2,7 +2,8 @@
 \hypertarget{http__vars_8c}{}\label{http__vars_8c}\index{ha\_energy/http\_vars.c@{ha\_energy/http\_vars.c}}
 {\ttfamily \#include "{}http\+\_\+vars.\+h"{}}\newline
 {\ttfamily \#include $<$time.\+h$>$}\newline
-Include dependency graph for http\+\_\+vars.\+c\+:\nopagebreak
+Include dependency graph for http\+\_\+vars.\+c\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -16,27 +17,29 @@ static void \mbox{\hyperlink{http__vars_8c_adbf9cd5b8ee26136ef6d0b4f954e64be}{ia
 \item 
 bool \mbox{\hyperlink{http__vars_8c_addadf78316d3819a2b8fc271ffd97fc9}{mqtt\+\_\+gti\+\_\+time}} (MQTTClient, const char \texorpdfstring{$\ast$}{*}, char \texorpdfstring{$\ast$}{*})
 \item 
-size\+\_\+t \mbox{\hyperlink{http__vars_8c_aabb25f42dea94453d721073f265c0063}{iammeter\+\_\+write\+\_\+callback}} (char \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t size, size\+\_\+t nitems, void \texorpdfstring{$\ast$}{*}stream)
+size\+\_\+t \mbox{\hyperlink{http__vars_8c_a7a9d9f7269d47a8c352576a09d7c935a}{iammeter\+\_\+write\+\_\+callback1}} (char \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t size, size\+\_\+t nitems, void \texorpdfstring{$\ast$}{*}stream)
 \item 
-void \mbox{\hyperlink{http__vars_8c_a34d485627939300ea5e51b765f599b9a}{iammeter\+\_\+read}} (void)
+size\+\_\+t \mbox{\hyperlink{http__vars_8c_aaa67a5e3705374d43d2fd85987e444ca}{iammeter\+\_\+write\+\_\+callback2}} (char \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t size, size\+\_\+t nitems, void \texorpdfstring{$\ast$}{*}stream)
+\item 
+void \mbox{\hyperlink{http__vars_8c_a7a6a8d67937a80fd10b7463de14dd2eb}{iammeter\+\_\+read1}} (const char \texorpdfstring{$\ast$}{*}meter)
+\item 
+void \mbox{\hyperlink{http__vars_8c_a14f8e6d2fc144dc960ab716da07cfffd}{iammeter\+\_\+read2}} (const char \texorpdfstring{$\ast$}{*}meter)
 \item 
 void \mbox{\hyperlink{http__vars_8c_a8b0aebb679cfaa2c1c7f70e477e396a5}{print\+\_\+im\+\_\+vars}} (void)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-static CURL \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}{curl}}
+\Hypertarget{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}\label{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0} 
+static CURL \texorpdfstring{$\ast$}{*} {\bfseries curl}
 \item 
-static CURLcode \mbox{\hyperlink{http__vars_8c_acf1ea240303dba3184f1f87a13202862}{res}}
+\Hypertarget{http__vars_8c_acf1ea240303dba3184f1f87a13202862}\label{http__vars_8c_acf1ea240303dba3184f1f87a13202862} 
+static CURLcode {\bfseries res}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 read and format data returned from libcurl http WRITEDATA function call 
-
-Definition in file \mbox{\hyperlink{http__vars_8c_source}{http\+\_\+vars.\+c}}.
-
-
 
 \label{doc-func-members}
 \Hypertarget{http__vars_8c_doc-func-members}
@@ -48,61 +51,101 @@ Definition in file \mbox{\hyperlink{http__vars_8c_source}{http\+\_\+vars.\+c}}.
 void iammeter\+\_\+get\+\_\+data (\begin{DoxyParamCaption}\item[{const double}]{valuedouble}{, }\item[{const uint32\+\_\+t}]{i}{, }\item[{const uint32\+\_\+t}]{j}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00203\ \{}
+\DoxyCodeLine{00204\ \ \ \ \ E.im\_vars[i][j]\ =\ valuedouble;}
+\DoxyCodeLine{00205\ \}}
 
-Definition at line \mbox{\hyperlink{http__vars_8c_source_l00102}{102}} of file \mbox{\hyperlink{http__vars_8c_source}{http\+\_\+vars.\+c}}.
+\end{DoxyCode}
+\Hypertarget{http__vars_8c_a7a6a8d67937a80fd10b7463de14dd2eb}\index{http\_vars.c@{http\_vars.c}!iammeter\_read1@{iammeter\_read1}}
+\index{iammeter\_read1@{iammeter\_read1}!http\_vars.c@{http\_vars.c}}
+\doxysubsubsection{\texorpdfstring{iammeter\_read1()}{iammeter\_read1()}}
+{\footnotesize\ttfamily \label{http__vars_8c_a7a6a8d67937a80fd10b7463de14dd2eb} 
+void iammeter\+\_\+read1 (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{meter}{}\end{DoxyParamCaption})}
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00103\ \{}
-\DoxyCodeLine{00104\ \ \ \ \ E.im\_vars[i][j]\ =\ valuedouble;}
-\DoxyCodeLine{00105\ \}}
+\DoxyCodeLine{00132\ \{}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \ \ \ \ curl\ =\ curl\_easy\_init();}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordflow}{if}\ (curl)\ \{}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ E.link.iammeter\_count++;}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ curl\_easy\_setopt(curl,\ CURLOPT\_URL,\ meter);}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ curl\_easy\_setopt(curl,\ CURLOPT\_WRITEFUNCTION,\ iammeter\_write\_callback1);}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ curl\_easy\_setopt(curl,\ CURLOPT\_WRITEDATA,\ E.print\_vars);\ \textcolor{comment}{//\ external\ data\ array\ for\ iammeter\ values}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ curl\_easy\_setopt(curl,\ CURLOPT\_TCP\_KEEPALIVE,\ 1L);}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ set\ keep-\/alive\ idle\ time\ to\ 120\ seconds\ */}}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ curl\_easy\_setopt(curl,\ CURLOPT\_TCP\_KEEPIDLE,\ 60L);}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ interval\ time\ between\ keep-\/alive\ probes:\ 60\ seconds\ */}}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ curl\_easy\_setopt(curl,\ CURLOPT\_TCP\_KEEPINTVL,\ 30L);}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ res\ =\ curl\_easy\_perform(curl);}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Check\ for\ errors\ */}}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ !=\ CURLE\_OK)\ \{}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ ==\ CURLE\_GOT\_NOTHING)\ \{}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.iammeter\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ curl\_easy\_perform()\ failed\ in\ iammeter\_read1:\ \%s\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ curl\_easy\_strerror(res),\ meter);}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.iammeter\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.iammeter\_error++;}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ E.iammeter\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ curl\_easy\_cleanup(curl);}
+\DoxyCodeLine{00162\ \ \ \ \ \}}
+\DoxyCodeLine{00163\ \}}
 
 \end{DoxyCode}
-\Hypertarget{http__vars_8c_a34d485627939300ea5e51b765f599b9a}\index{http\_vars.c@{http\_vars.c}!iammeter\_read@{iammeter\_read}}
-\index{iammeter\_read@{iammeter\_read}!http\_vars.c@{http\_vars.c}}
-\doxysubsubsection{\texorpdfstring{iammeter\_read()}{iammeter\_read()}}
-{\footnotesize\ttfamily \label{http__vars_8c_a34d485627939300ea5e51b765f599b9a} 
-void iammeter\+\_\+read (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{http__vars_8c_source_l00075}{75}} of file \mbox{\hyperlink{http__vars_8c_source}{http\+\_\+vars.\+c}}.
+\Hypertarget{http__vars_8c_a14f8e6d2fc144dc960ab716da07cfffd}\index{http\_vars.c@{http\_vars.c}!iammeter\_read2@{iammeter\_read2}}
+\index{iammeter\_read2@{iammeter\_read2}!http\_vars.c@{http\_vars.c}}
+\doxysubsubsection{\texorpdfstring{iammeter\_read2()}{iammeter\_read2()}}
+{\footnotesize\ttfamily \label{http__vars_8c_a14f8e6d2fc144dc960ab716da07cfffd} 
+void iammeter\+\_\+read2 (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{meter}{}\end{DoxyParamCaption})}
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00076\ \{}
-\DoxyCodeLine{00077\ }
-\DoxyCodeLine{00078\ \ \ \ \ curl\ =\ curl\_easy\_init();}
-\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordflow}{if}\ (curl)\ \{}
-\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ E.link.iammeter\_count++;}
-\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ curl\_easy\_setopt(curl,\ CURLOPT\_URL,\ \textcolor{stringliteral}{"{}http://10.1.1.101/monitorjson"{}});}
-\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ curl\_easy\_setopt(curl,\ CURLOPT\_WRITEFUNCTION,\ iammeter\_write\_callback);}
-\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ curl\_easy\_setopt(curl,\ CURLOPT\_WRITEDATA,\ E.print\_vars);\ \textcolor{comment}{//\ external\ data\ array\ for\ iammeter\ values}}
-\DoxyCodeLine{00084\ }
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ res\ =\ curl\_easy\_perform(curl);}
-\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Check\ for\ errors\ */}}
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ !=\ CURLE\_OK)\ \{}
-\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}curl\_easy\_perform()\ failed\ in\ iammeter\_read:\ \%s\(\backslash\)n"{}},}
-\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ curl\_easy\_strerror(res));}
-\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ E.iammeter\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ E.link.iammeter\_error++;}
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ E.iammeter\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ curl\_easy\_cleanup(curl);}
-\DoxyCodeLine{00096\ \ \ \ \ \}}
-\DoxyCodeLine{00097\ \}}
+\DoxyCodeLine{00166\ \{}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ \ \ curl\ =\ curl\_easy\_init();}
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordflow}{if}\ (curl)\ \{}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ E.link.iammeter\_count++;}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ curl\_easy\_setopt(curl,\ CURLOPT\_URL,\ meter);}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ curl\_easy\_setopt(curl,\ CURLOPT\_WRITEFUNCTION,\ iammeter\_write\_callback2);}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ curl\_easy\_setopt(curl,\ CURLOPT\_WRITEDATA,\ E.print\_vars);\ \textcolor{comment}{//\ external\ data\ array\ for\ iammeter\ values}}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ curl\_easy\_setopt(curl,\ CURLOPT\_TCP\_KEEPALIVE,\ 1L);}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ set\ keep-\/alive\ idle\ time\ to\ 120\ seconds\ */}}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ curl\_easy\_setopt(curl,\ CURLOPT\_TCP\_KEEPIDLE,\ 60L);}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ interval\ time\ between\ keep-\/alive\ probes:\ 60\ seconds\ */}}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ curl\_easy\_setopt(curl,\ CURLOPT\_TCP\_KEEPINTVL,\ 30L);}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ res\ =\ curl\_easy\_perform(curl);}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Check\ for\ errors\ */}}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ !=\ CURLE\_OK)\ \{}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ ==\ CURLE\_GOT\_NOTHING)\ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.iammeter\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ curl\_easy\_perform()\ failed\ in\ iammeter\_read1:\ \%s\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ curl\_easy\_strerror(res),\ meter);}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.iammeter\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.iammeter\_error++;}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ E.iammeter\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ curl\_easy\_cleanup(curl);}
+\DoxyCodeLine{00196\ \ \ \ \ \}}
+\DoxyCodeLine{00197\ \}}
 
 \end{DoxyCode}
-\Hypertarget{http__vars_8c_aabb25f42dea94453d721073f265c0063}\index{http\_vars.c@{http\_vars.c}!iammeter\_write\_callback@{iammeter\_write\_callback}}
-\index{iammeter\_write\_callback@{iammeter\_write\_callback}!http\_vars.c@{http\_vars.c}}
-\doxysubsubsection{\texorpdfstring{iammeter\_write\_callback()}{iammeter\_write\_callback()}}
-{\footnotesize\ttfamily \label{http__vars_8c_aabb25f42dea94453d721073f265c0063} 
-size\+\_\+t iammeter\+\_\+write\+\_\+callback (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{size}{, }\item[{size\+\_\+t}]{nitems}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{stream}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{http__vars_8c_source_l00013}{13}} of file \mbox{\hyperlink{http__vars_8c_source}{http\+\_\+vars.\+c}}.
+\Hypertarget{http__vars_8c_a7a9d9f7269d47a8c352576a09d7c935a}\index{http\_vars.c@{http\_vars.c}!iammeter\_write\_callback1@{iammeter\_write\_callback1}}
+\index{iammeter\_write\_callback1@{iammeter\_write\_callback1}!http\_vars.c@{http\_vars.c}}
+\doxysubsubsection{\texorpdfstring{iammeter\_write\_callback1()}{iammeter\_write\_callback1()}}
+{\footnotesize\ttfamily \label{http__vars_8c_a7a9d9f7269d47a8c352576a09d7c935a} 
+size\+\_\+t iammeter\+\_\+write\+\_\+callback1 (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{size}{, }\item[{size\+\_\+t}]{nitems}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{stream}{}\end{DoxyParamCaption})}
 
 
 \begin{DoxyCode}{0}
@@ -117,52 +160,116 @@ Definition at line \mbox{\hyperlink{http__vars_8c_source_l00013}{13}} of file \m
 \DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *error\_ptr\ =\ cJSON\_GetErrorPtr();}
 \DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ E.link.iammeter\_error++;}
 \DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (error\_ptr\ !=\ NULL)\ \{}
-\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}Error\ in\ iammeter\_write\_callback\ \%u:\ \%s\(\backslash\)n"{}},\ E.link.iammeter\_error,\ error\_ptr);}
-\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ iammeter\_exit;}
-\DoxyCodeLine{00028\ \ \ \ \ \}}
-\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#ifdef\ IM\_DEBUG}}
-\DoxyCodeLine{00030\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)n\ iammeter\_read\_callback\ \%s\ \(\backslash\)n"{}},\ buffer);}
-\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00032\ }
-\DoxyCodeLine{00033\ \ \ \ \ cJSON\ *data\_result\ =\ cJSON\_GetObjectItemCaseSensitive(json,\ \textcolor{stringliteral}{"{}Datas"{}});}
-\DoxyCodeLine{00034\ }
-\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{if}\ (!data\_result)\ \{}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ size\ =\ 0;}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ nitems\ =\ 0;}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ iammeter\_exit;}
-\DoxyCodeLine{00039\ \ \ \ \ \}}
-\DoxyCodeLine{00040\ }
-\DoxyCodeLine{00041\ \ \ \ \ cJSON\ *jname;}
-\DoxyCodeLine{00042\ \ \ \ \ uint32\_t\ phase\ =\ PHASE\_A;}
-\DoxyCodeLine{00043\ }
-\DoxyCodeLine{00044\ \ \ \ \ cJSON\_ArrayForEach(jname,\ data\_result)}
-\DoxyCodeLine{00045\ \ \ \ \ \{}
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ cJSON\ *ianame;}
-\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#ifdef\ IM\_DEBUG}}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)n\ iammeter\ variables\ "{}});}
-\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00050\ }
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ cJSON\_ArrayForEach(ianame,\ jname)}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ phase\_var\ =\ IA\_VOLTAGE;}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ iammeter\_get\_data(ianame-\/>valuedouble,\ phase\_var,\ phase);}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ e-\/>print\_vars[next\_var++]\ =\ ianame-\/>valuedouble;}
-\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#ifdef\ IM\_DEBUG}}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%8.2f\ "{}},\ im\_vars[phase\_var][phase]);}
-\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ phase\_var++;}
-\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ phase++;}
-\DoxyCodeLine{00062\ \ \ \ \ \}}
-\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#ifdef\ IM\_DEBUG}}
-\DoxyCodeLine{00064\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
-\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00066\ }
-\DoxyCodeLine{00067\ iammeter\_exit:}
-\DoxyCodeLine{00068\ \ \ \ \ cJSON\_Delete(json);}
-\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{return}\ size\ *\ nitems;}
-\DoxyCodeLine{00070\ \}}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Error\ in\ iammeter\_write\_callback1\ \%u:\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.link.iammeter\_error,\ error\_ptr);}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ iammeter\_exit;}
+\DoxyCodeLine{00029\ \ \ \ \ \}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#ifdef\ IM\_DEBUG}}
+\DoxyCodeLine{00031\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)n\ iammeter\_read\_callback\ \%s\ \(\backslash\)n"{}},\ buffer);}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ cJSON\ *data\_result\ =\ cJSON\_GetObjectItemCaseSensitive(json,\ \textcolor{stringliteral}{"{}Datas"{}});}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordflow}{if}\ (!data\_result)\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ size\ =\ 0;}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ nitems\ =\ 0;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ iammeter\_exit;}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ cJSON\ *jname;}
+\DoxyCodeLine{00043\ \ \ \ \ uint32\_t\ phase\ =\ PHASE\_A;\ \textcolor{comment}{//\ get\ data\ from\ whole\ house\ monitor}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ cJSON\_ArrayForEach(jname,\ data\_result)}
+\DoxyCodeLine{00046\ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ cJSON\ *ianame;}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#ifdef\ IM\_DEBUG}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)n\ iammeter\ variables\ "{}});}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ cJSON\_ArrayForEach(ianame,\ jname)}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ phase\_var\ =\ IA\_VOLTAGE;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ iammeter\_get\_data(ianame-\/>valuedouble,\ phase\_var,\ phase);}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ e-\/>print\_vars[next\_var++]\ =\ ianame-\/>valuedouble;}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#ifdef\ IM\_DEBUG}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%8.2f\ "{}},\ im\_vars[phase\_var][phase]);}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ phase\_var++;}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ phase++;}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#ifdef\ IM\_DEBUG}}
+\DoxyCodeLine{00065\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ iammeter\_exit:}
+\DoxyCodeLine{00069\ \ \ \ \ cJSON\_Delete(json);}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordflow}{return}\ size\ *\ nitems;}
+\DoxyCodeLine{00071\ \}}
+
+\end{DoxyCode}
+\Hypertarget{http__vars_8c_aaa67a5e3705374d43d2fd85987e444ca}\index{http\_vars.c@{http\_vars.c}!iammeter\_write\_callback2@{iammeter\_write\_callback2}}
+\index{iammeter\_write\_callback2@{iammeter\_write\_callback2}!http\_vars.c@{http\_vars.c}}
+\doxysubsubsection{\texorpdfstring{iammeter\_write\_callback2()}{iammeter\_write\_callback2()}}
+{\footnotesize\ttfamily \label{http__vars_8c_aaa67a5e3705374d43d2fd85987e444ca} 
+size\+\_\+t iammeter\+\_\+write\+\_\+callback2 (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{size}{, }\item[{size\+\_\+t}]{nitems}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{stream}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00074\ \{}
+\DoxyCodeLine{00075\ \ \ \ \ cJSON\ *json\ =\ cJSON\_ParseWithLength(buffer,\ strlen(buffer));}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structenergy__type}{energy\_type}}\ *\ e\ =\ stream;}
+\DoxyCodeLine{00077\ \ \ \ \ uint32\_t\ next\_var\ =\ PHASE\_S*IA\_LAST;}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ E.link.iammeter\_count++;}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordflow}{if}\ (json\ ==\ NULL)\ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *error\_ptr\ =\ cJSON\_GetErrorPtr();}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ E.link.iammeter\_error++;}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (error\_ptr\ !=\ NULL)\ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Error\ in\ iammeter\_write\_callback2\ \%u:\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.link.iammeter\_error,\ error\_ptr);}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ iammeter\_exit;}
+\DoxyCodeLine{00089\ \ \ \ \ \}}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#ifdef\ IM\_DEBUG2}}
+\DoxyCodeLine{00091\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)n\ iammeter\_read\_callback\ \%s,\ next\_var\ \%d,\ L4\_P\ \%d\ \(\backslash\)n"{}},\ buffer,\ next\_var,\ L4\_P);}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ cJSON\ *data\_result\ =\ cJSON\_GetObjectItemCaseSensitive(json,\ \textcolor{stringliteral}{"{}Data"{}});}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordflow}{if}\ (!data\_result)\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ size\ =\ 0;}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ nitems\ =\ 0;}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ iammeter\_exit;}
+\DoxyCodeLine{00100\ \ \ \ \ \}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ cJSON\ *jname;}
+\DoxyCodeLine{00103\ \ \ \ \ uint32\_t\ phase\ =\ PHASE\_S;\ \textcolor{comment}{//\ get\ data\ from\ server\ monitor}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#ifdef\ IM\_DEBUG2}}
+\DoxyCodeLine{00106\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\ iammeter\ variables\ "{}});}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ cJSON\_ArrayForEach(jname,\ data\_result)\ \textcolor{comment}{//\ single\ phase\ of\ data}}
+\DoxyCodeLine{00110\ \ \ \ \ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ uint32\_t\ phase\_var\ =\ IA\_VOLTAGE;}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ iammeter\_get\_data(jname-\/>valuedouble,\ phase\_var,\ phase);}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ e-\/>print\_vars[next\_var++]\ =\ jname-\/>valuedouble;}
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#ifdef\ IM\_DEBUG2}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\ \%8.2f\ "{}},\ jname-\/>valuedouble);}
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ phase\_var++;}
+\DoxyCodeLine{00118\ \ \ \ \ \}}
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#ifdef\ IM\_DEBUG2}}
+\DoxyCodeLine{00120\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ iammeter\_exit:}
+\DoxyCodeLine{00124\ \ \ \ \ cJSON\_Delete(json);}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordflow}{return}\ size\ *\ nitems;}
+\DoxyCodeLine{00126\ \}}
 
 \end{DoxyCode}
 \Hypertarget{http__vars_8c_addadf78316d3819a2b8fc271ffd97fc9}\index{http\_vars.c@{http\_vars.c}!mqtt\_gti\_time@{mqtt\_gti\_time}}
@@ -170,10 +277,6 @@ Definition at line \mbox{\hyperlink{http__vars_8c_source_l00013}{13}} of file \m
 \doxysubsubsection{\texorpdfstring{mqtt\_gti\_time()}{mqtt\_gti\_time()}}
 {\footnotesize\ttfamily \label{http__vars_8c_addadf78316d3819a2b8fc271ffd97fc9} 
 bool mqtt\+\_\+gti\+\_\+time (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{topic\+\_\+p}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{msg}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00248}{248}} of file \mbox{\hyperlink{mqtt__vars_8c_source}{mqtt\+\_\+vars.\+c}}.
 
 
 \begin{DoxyCode}{0}
@@ -197,7 +300,7 @@ Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00248}{248}} of file \
 \DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (ha\_flag\_vars\_ss.deliveredtoken\ !=\ token)\ \{}
 \DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ usleep(GTI\_TOKEN\_DELAY);}
 \DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (waiting++\ >\ MQTT\_TIMEOUT)\ \{}
-\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ GTI\ Time\ Still\ Waiting,\ timeout\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ \%s\ GTI\ Time\ Still\ Waiting,\ timeout\ \%d\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ topic\_p,\ waiting);}
 \DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \};}
@@ -214,52 +317,24 @@ Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00248}{248}} of file \
 void print\+\_\+im\+\_\+vars (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
 
-
-Definition at line \mbox{\hyperlink{http__vars_8c_source_l00110}{110}} of file \mbox{\hyperlink{http__vars_8c_source}{http\+\_\+vars.\+c}}.
-
-
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00111\ \{}
-\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ time\_log[RBUF\_SIZ]\ =\ \{0\};}
-\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ sync\_time\ =\ TIME\_SYNC\_SEC\ -\/\ 1;}
-\DoxyCodeLine{00114\ \ \ \ \ time\_t\ rawtime\_log;}
-\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{char}\ imvars[SYSLOG\_SIZ];}
-\DoxyCodeLine{00116\ }
-\DoxyCodeLine{00117\ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00118\ \ \ \ \ snprintf(imvars,\ SYSLOG\_SIZ-\/1,\ \textcolor{stringliteral}{"{}House\ L1\ \%7.2fW,\ House\ L2\ \%7.2fW,\ GTI\ L1\ \%7.2fW"{}},\ E.print\_vars[L1\_P],\ E.print\_vars[L2\_P],\ E.print\_vars[L3\_P]);}
-\DoxyCodeLine{00119\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s"{}},\ imvars);}
-\DoxyCodeLine{00120\ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00121\ \ \ \ \ time(\&rawtime\_log);}
-\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordflow}{if}\ (sync\_time++\ >\ TIME\_SYNC\_SEC)\ \{}
-\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ sync\_time\ =\ 0;}
-\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ snprintf(time\_log,\ RBUF\_SIZ\ -\/\ 1,\ \textcolor{stringliteral}{"{}VT\%lut"{}},\ rawtime\_log);\ \textcolor{comment}{//\ format\ for\ dumpload\ controller\ gti\ time\ commands}}
-\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ mqtt\_gti\_time(E.client\_p,\ TOPIC\_P,\ time\_log);}
-\DoxyCodeLine{00126\ \ \ \ \ \}}
-\DoxyCodeLine{00127\ \}}
+\DoxyCodeLine{00211\ \{}
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ time\_log[RBUF\_SIZ]\ =\ \{0\};}
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ sync\_time\ =\ TIME\_SYNC\_SEC\ -\/\ 1;}
+\DoxyCodeLine{00214\ \ \ \ \ time\_t\ rawtime\_log;}
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{keywordtype}{char}\ imvars[SYSLOG\_SIZ];}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00217\ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00218\ \ \ \ \ snprintf(imvars,\ SYSLOG\_SIZ\ -\/\ 1,\ \textcolor{stringliteral}{"{}House\ L1\ \%7.2fW,\ House\ L2\ \%7.2fW,\ GTI\ L1\ \%7.2fW,\ Server\ \%7.2fW"{}},}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ E.print\_vars[L1\_P],\ E.print\_vars[L2\_P],\ E.print\_vars[L3\_P],\ E.print\_vars[L4\_P]);}
+\DoxyCodeLine{00220\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s"{}},\ imvars);}
+\DoxyCodeLine{00221\ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00222\ \ \ \ \ time(\&rawtime\_log);}
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{keywordflow}{if}\ (sync\_time++\ >\ TIME\_SYNC\_SEC)\ \{}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ sync\_time\ =\ 0;}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ snprintf(time\_log,\ RBUF\_SIZ\ -\/\ 1,\ \textcolor{stringliteral}{"{}VT\%lut"{}},\ rawtime\_log);\ \textcolor{comment}{//\ format\ for\ dumpload\ controller\ gti\ time\ commands}}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ mqtt\_gti\_time(E.client\_p,\ TOPIC\_P,\ time\_log);}
+\DoxyCodeLine{00227\ \ \ \ \ \}}
+\DoxyCodeLine{00228\ \}}
 
 \end{DoxyCode}
-
-
-\label{doc-var-members}
-\Hypertarget{http__vars_8c_doc-var-members}
-\doxysubsection{Variable Documentation}
-\Hypertarget{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0}\index{http\_vars.c@{http\_vars.c}!curl@{curl}}
-\index{curl@{curl}!http\_vars.c@{http\_vars.c}}
-\doxysubsubsection{\texorpdfstring{curl}{curl}}
-{\footnotesize\ttfamily \label{http__vars_8c_a6a59594ba3469ec6a1d56f6631e275e0} 
-CURL\texorpdfstring{$\ast$}{*} curl\hspace{0.3cm}{\ttfamily [static]}}
-
-
-
-Definition at line \mbox{\hyperlink{http__vars_8c_source_l00004}{4}} of file \mbox{\hyperlink{http__vars_8c_source}{http\+\_\+vars.\+c}}.
-
-\Hypertarget{http__vars_8c_acf1ea240303dba3184f1f87a13202862}\index{http\_vars.c@{http\_vars.c}!res@{res}}
-\index{res@{res}!http\_vars.c@{http\_vars.c}}
-\doxysubsubsection{\texorpdfstring{res}{res}}
-{\footnotesize\ttfamily \label{http__vars_8c_acf1ea240303dba3184f1f87a13202862} 
-CURLcode res\hspace{0.3cm}{\ttfamily [static]}}
-
-
-
-Definition at line \mbox{\hyperlink{http__vars_8c_source_l00005}{5}} of file \mbox{\hyperlink{http__vars_8c_source}{http\+\_\+vars.\+c}}.
-

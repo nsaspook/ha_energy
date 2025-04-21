@@ -33,346 +33,348 @@
 \DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <ifaddrs.h>}}
 \DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ "{}MQTTClient.h"{}}}
 \DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ "{}pid.h"{}}}
-\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ "{}http\_vars.h"{}}}
 \DoxyCodeLine{00035\ }
-\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ LOG\_VERSION\ \ \ \ \ "{}V0.75"{}}}
-\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ MQTT\_VERSION\ \ \ \ "{}V3.11"{}}}
-\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ TNAME\ \ "{}maint9"{}}}
-\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ LADDRESS\ \ \ \ \ \ \ \ "{}tcp://127.0.0.1:1883"{}}}
-\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#ifdef\ \_\_amd64}}
-\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ ADDRESS\ \ \ \ \ \ \ \ \ "{}tcp://10.1.1.172:1883"{}}}
-\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#else}}
-\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ ADDRESS\ \ \ \ \ \ \ \ \ "{}tcp://10.1.1.30:1883"{}}}
-\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ CLIENTID1\ \ \ \ \ \ \ "{}Energy\_Mqtt\_HA1"{}}}
-\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ CLIENTID2\ \ \ \ \ \ \ "{}Energy\_Mqtt\_HA2"{}}}
-\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ CLIENTID3\ \ \ \ \ \ \ "{}Energy\_Mqtt\_HA3"{}\ }}
-\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#define\ TOPIC\_P\ \ \ \ \ \ \ \ \ "{}mateq84/data/gticmd"{}}}
-\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ TOPIC\_SPAM\ \ \ \ \ \ "{}mateq84/data/spam"{}}}
-\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#define\ TOPIC\_PACA\ \ \ \ \ \ "{}home-\/assistant/gtiac/availability"{}}}
-\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ TOPIC\_PDCA\ \ \ \ \ \ "{}home-\/assistant/gtidc/availability"{}}}
-\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ TOPIC\_PACC\ \ \ \ \ \ "{}home-\/assistant/gtiac/contact"{}}}
-\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ TOPIC\_PDCC\ \ \ \ \ \ "{}home-\/assistant/gtidc/contact"{}}}
-\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ TOPIC\_PPID\ \ \ \ \ \ "{}home-\/assistant/solar/pid"{}}}
-\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ TOPIC\_SHUTDOWN\ \ "{}home-\/assistant/solar/shutdown"{}}}
-\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#define\ TOPIC\_SS\ \ \ \ \ \ \ \ "{}mateq84/data/solar"{}}}
-\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#define\ TOPIC\_SD\ \ \ \ \ \ \ \ "{}mateq84/data/dumpload"{}}}
-\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ TOPIC\_HA\ \ \ \ \ \ \ \ "{}home-\/assistant/status/switch"{}}}
-\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ QOS\ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
-\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ TIMEOUT\ \ \ \ \ \ \ \ \ 10000L}}
-\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#define\ SPACING\_USEC\ \ \ \ 500\ *\ 1000}}
-\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#define\ USEC\_SEC\ \ \ \ \ \ \ \ 1000000L}}
-\DoxyCodeLine{00063\ }
-\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#define\ DAQ\_STR\ 32}}
-\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#define\ DAQ\_STR\_M\ DAQ\_STR-\/1}}
-\DoxyCodeLine{00066\ }
-\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#define\ SBUF\_SIZ\ \ \ \ \ \ \ \ 16\ \ }\textcolor{comment}{//\ short\ buffer\ string\ size}}
-\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#define\ RBUF\_SIZ\ \ \ \ \ \ \ \ 82}}
-\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#define\ SYSLOG\_SIZ\ \ \ \ \ \ 512}}
-\DoxyCodeLine{00070\ }
-\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#define\ MQTT\_TIMEOUT\ \ \ \ 900}}
-\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#define\ SW\_QOS\ \ \ \ \ \ \ \ \ \ 1}}
-\DoxyCodeLine{00073\ }
-\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#define\ MQTT\_RECONN\ \ \ \ \ 3}}
-\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#define\ KAI\ \ \ \ \ \ \ \ \ \ \ \ \ 60}}
-\DoxyCodeLine{00076\ }
-\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#define\ NO\_CYLON}}
-\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#define\ CRITIAL\_SHUTDOWN\_LOG}}
-\DoxyCodeLine{00079\ }
-\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#define\ UNIT\_TEST\ \ \ \ \ \ \ 2}}
-\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ NORM\_MODE\ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#define\ PID\_MODE\ \ \ \ \ \ \ \ 1}}
-\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#define\ MAX\_ERROR\ \ \ \ \ \ \ 5}}
-\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#define\ IAM\_DELAY\ \ \ \ \ \ \ 120}}
-\DoxyCodeLine{00085\ }
-\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#define\ CMD\_SEC\ \ \ \ \ \ \ \ \ 10}}
-\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#define\ TIME\_SYNC\_SEC\ \ \ 30}}
-\DoxyCodeLine{00088\ }
-\DoxyCodeLine{00089\ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00090\ \textcolor{comment}{\ \ \ \ \ *\ Battery\ SoC\ cycle\ limits\ parameters}}
-\DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#define\ BAT\_M\_KW\ \ \ \ \ \ \ \ \ \ \ \ 5120.0f}}
-\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#define\ BAT\_SOC\_TOP\ \ \ \ \ \ \ \ \ 0.98f}}
-\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#define\ BAT\_SOC\_HIGH\ \ \ \ \ \ \ \ 0.95f}}
-\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#define\ BAT\_SOC\_LOW\ \ \ \ \ \ \ \ \ 0.68f}}
-\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#define\ BAT\_SOC\_LOW\_AC\ \ \ \ \ \ 0.72f\ }}
-\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#define\ BAT\_CRITICAL\ \ \ \ \ \ \ \ 746.0f\ }}
-\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#define\ MIN\_BAT\_KW\_BSOC\_SLP\ 4000.0f}}
-\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#define\ MIN\_BAT\_KW\_BSOC\_HI\ \ 4550.0f}}
-\DoxyCodeLine{00100\ }
-\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#define\ MIN\_BAT\_KW\_GTI\_HI\ \ \ BAT\_M\_KW*BAT\_SOC\_TOP}}
-\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#define\ MIN\_BAT\_KW\_GTI\_LO\ \ \ BAT\_M\_KW*BAT\_SOC\_LOW}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ LOG\_VERSION\ \ \ \ \ "{}V0.76"{}}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ MQTT\_VERSION\ \ \ \ "{}V3.11"{}}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ TNAME\ \ "{}maint9"{}}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ LADDRESS\ \ \ \ \ \ \ \ "{}tcp://127.0.0.1:1883"{}}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#ifdef\ \_\_amd64}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#define\ ADDRESS\ \ \ \ \ \ \ \ \ "{}tcp://10.1.1.172:1883"{}}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ ADDRESS\ \ \ \ \ \ \ \ \ "{}tcp://10.1.1.30:1883"{}}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ CLIENTID1\ \ \ \ \ \ \ "{}Energy\_Mqtt\_HA1"{}}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ CLIENTID2\ \ \ \ \ \ \ "{}Energy\_Mqtt\_HA2"{}}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#define\ CLIENTID3\ \ \ \ \ \ \ "{}Energy\_Mqtt\_HA3"{}}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ TOPIC\_P\ \ \ \ \ \ \ \ \ "{}mateq84/data/gticmd"{}}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#define\ TOPIC\_SPAM\ \ \ \ \ \ "{}mateq84/data/spam"{}}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ TOPIC\_PACA\ \ \ \ \ \ "{}home-\/assistant/gtiac/availability"{}}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ TOPIC\_PDCA\ \ \ \ \ \ "{}home-\/assistant/gtidc/availability"{}}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ TOPIC\_PACC\ \ \ \ \ \ "{}home-\/assistant/gtiac/contact"{}}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ TOPIC\_PDCC\ \ \ \ \ \ "{}home-\/assistant/gtidc/contact"{}}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ TOPIC\_PPID\ \ \ \ \ \ "{}home-\/assistant/solar/pid"{}}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#define\ TOPIC\_SHUTDOWN\ \ "{}home-\/assistant/solar/shutdown"{}}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#define\ TOPIC\_SS\ \ \ \ \ \ \ \ "{}mateq84/data/solar"{}}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ TOPIC\_SD\ \ \ \ \ \ \ \ "{}mateq84/data/dumpload"{}}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ TOPIC\_HA\ \ \ \ \ \ \ \ "{}home-\/assistant/status/switch"{}}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ QOS\ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#define\ TIMEOUT\ \ \ \ \ \ \ \ \ 10000L}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#define\ SPACING\_USEC\ \ \ \ 500\ *\ 1000}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#define\ USEC\_SEC\ \ \ \ \ \ \ \ 1000000L}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#define\ DAQ\_STR\ 32}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#define\ DAQ\_STR\_M\ DAQ\_STR-\/1}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#define\ SBUF\_SIZ\ \ \ \ \ \ \ \ 16\ \ }\textcolor{comment}{//\ short\ buffer\ string\ size}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#define\ RBUF\_SIZ\ \ \ \ \ \ \ \ 82}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#define\ SYSLOG\_SIZ\ \ \ \ \ \ 512}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#define\ MQTT\_TIMEOUT\ \ \ \ 900}}
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\#define\ SW\_QOS\ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#define\ MQTT\_RECONN\ \ \ \ \ 3}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#define\ KAI\ \ \ \ \ \ \ \ \ \ \ \ \ 60}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#define\ NO\_CYLON}}
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#define\ CRITIAL\_SHUTDOWN\_LOG}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ UNIT\_TEST\ \ \ \ \ \ \ 2}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#define\ NORM\_MODE\ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#define\ PID\_MODE\ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#define\ MAX\_ERROR\ \ \ \ \ \ \ 5}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#define\ IAM\_DELAY\ \ \ \ \ \ \ 120}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#define\ CMD\_SEC\ \ \ \ \ \ \ \ \ 10}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#define\ TIME\_SYNC\_SEC\ \ \ 30}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ \ \ *\ Battery\ SoC\ cycle\ limits\ parameters}}
+\DoxyCodeLine{00092\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#define\ BAT\_M\_KW\ \ \ \ \ \ \ \ \ \ \ \ 5120.0f}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#define\ BAT\_SOC\_TOP\ \ \ \ \ \ \ \ \ 0.98f}}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#define\ BAT\_SOC\_HIGH\ \ \ \ \ \ \ \ 0.95f}}
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#define\ BAT\_SOC\_LOW\ \ \ \ \ \ \ \ \ 0.68f}}
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#define\ BAT\_SOC\_LOW\_AC\ \ \ \ \ \ 0.72f}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#define\ BAT\_CRITICAL\ \ \ \ \ \ \ \ 746.0f\ }}
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#define\ BAT\_RUNTIME\_LOW\ \ \ \ \ 5.0f}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#define\ BAT\_RUNTIME\_GTI\ \ \ \ \ 6.0f}}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#define\ MIN\_BAT\_KW\_BSOC\_SLP\ 4000.0f}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#define\ MIN\_BAT\_KW\_BSOC\_HI\ \ 4550.0f}}
 \DoxyCodeLine{00103\ }
-\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#define\ MIN\_BAT\_KW\_AC\_HI\ \ \ \ BAT\_M\_KW*BAT\_SOC\_HIGH}}
-\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#define\ MIN\_BAT\_KW\_AC\_LO\ \ \ \ BAT\_M\_KW*BAT\_SOC\_LOW\_AC}}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#define\ MIN\_BAT\_KW\_GTI\_HI\ \ \ BAT\_M\_KW*BAT\_SOC\_TOP}}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#define\ MIN\_BAT\_KW\_GTI\_LO\ \ \ BAT\_M\_KW*BAT\_SOC\_LOW}}
 \DoxyCodeLine{00106\ }
-\DoxyCodeLine{00107\ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00108\ \textcolor{comment}{\ \ \ \ \ *\ PV\ panel\ cycle\ limits\ parameters}}
-\DoxyCodeLine{00109\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#define\ PV\_PGAIN\ \ \ \ \ \ \ \ \ \ \ \ 0.85f}}
-\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#define\ PV\_IGAIN\ \ \ \ \ \ \ \ \ \ \ \ 0.12f}}
-\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#define\ PV\_IMAX\ \ \ \ \ \ \ \ \ \ \ \ \ 1400.0f}}
-\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#define\ PV\_BIAS\ \ \ \ \ \ \ \ \ \ \ \ \ 288.0f}}
-\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#define\ PV\_BIAS\_ZERO\ \ \ \ \ \ \ \ \ \ 0.0f}}
-\DoxyCodeLine{00115\ \textcolor{preprocessor}{\#define\ PV\_BIAS\_LOW\ \ \ \ \ \ \ \ \ 222.0f}}
-\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#define\ PV\_BIAS\_FLOAT\ \ \ \ \ \ \ 399.0f}}
-\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#define\ PV\_BIAS\_SLEEP\ \ \ \ \ \ \ 480.0f}}
-\DoxyCodeLine{00118\ \textcolor{preprocessor}{\#define\ PV\_BIAS\_RATE\ \ \ \ \ \ \ \ 320.0f}}
-\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#define\ PV\_DL\_MPTT\_MAX\ \ \ \ \ 1200.0f}}
-\DoxyCodeLine{00120\ \textcolor{preprocessor}{\#define\ PV\_DL\_MPTT\_EXCESS\ \ 1300.0f}}
-\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#define\ PV\_DL\_MPTT\_IDLE\ \ \ \ \ 57.0f}}
-\DoxyCodeLine{00122\ \textcolor{preprocessor}{\#define\ PV\_DL\_BIAS\_RATE\ \ \ \ \ 75.0f}}
-\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#define\ PV\_DL\_EXCESS\ \ \ \ \ \ \ 500.0f}}
-\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#define\ PV\_DL\_B\_AH\_LOW\ \ \ \ \ 100.0f}}
-\DoxyCodeLine{00125\ \textcolor{preprocessor}{\#define\ PV\_DL\_B\_AH\_MIN\ \ \ \ \ 150.0f\ }\textcolor{comment}{//\ DL\ battery\ should\ be\ at\ least\ 175Ah}}
-\DoxyCodeLine{00126\ \textcolor{preprocessor}{\#define\ PV\_DL\_B\_V\_LOW\ \ \ \ \ \ \ 23.8f\ }\textcolor{comment}{//\ Battery\ low-\/voltqage\ cutoff}}
-\DoxyCodeLine{00127\ \textcolor{preprocessor}{\#define\ PWA\_SLEEP\ \ \ \ \ \ \ \ \ \ 200.0f}}
-\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#define\ DL\_AC\_DC\_EFF\ \ \ \ \ \ \ \ 1.24f}}
-\DoxyCodeLine{00129\ }
-\DoxyCodeLine{00130\ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00131\ \textcolor{comment}{\ \ \ \ \ *\ Energy\ control\ loop\ parameters}}
-\DoxyCodeLine{00132\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{00133\ \textcolor{preprocessor}{\#define\ BAL\_MIN\_ENERGY\_AC\ \ \ -\/200.0f}}
-\DoxyCodeLine{00134\ \textcolor{preprocessor}{\#define\ BAL\_MAX\_ENERGY\_AC\ \ \ 200.0f}}
-\DoxyCodeLine{00135\ \textcolor{preprocessor}{\#define\ BAL\_MIN\_ENERGY\_GTI\ \ -\/1400.0f}}
-\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#define\ BAL\_MAX\_ENERGY\_GTI\ \ 200.0f}}
-\DoxyCodeLine{00137\ }
-\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#define\ LOG\_TO\_FILE\ \ \ \ \ \ \ \ \ "{}/store/logs/energy.log"{}}}
-\DoxyCodeLine{00139\ \textcolor{preprocessor}{\#define\ LOG\_TO\_FILE\_ALT\ \ \ \ \ "{}/tmp/energy.log"{}}}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#define\ MIN\_BAT\_KW\_AC\_HI\ \ \ \ BAT\_M\_KW*BAT\_SOC\_HIGH}}
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#define\ MIN\_BAT\_KW\_AC\_LO\ \ \ \ BAT\_M\_KW*BAT\_SOC\_LOW\_AC}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00111\ \textcolor{comment}{\ \ \ \ \ *\ PV\ panel\ cycle\ limits\ parameters}}
+\DoxyCodeLine{00112\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#define\ PV\_PGAIN\ \ \ \ \ \ \ \ \ \ \ \ 0.85f}}
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#define\ PV\_IGAIN\ \ \ \ \ \ \ \ \ \ \ \ 0.12f}}
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\#define\ PV\_IMAX\ \ \ \ \ \ \ \ \ \ \ \ \ 1400.0f}}
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#define\ PV\_BIAS\ \ \ \ \ \ \ \ \ \ \ \ \ 288.0f}}
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#define\ PV\_BIAS\_ZERO\ \ \ \ \ \ \ \ \ \ 0.0f}}
+\DoxyCodeLine{00118\ \textcolor{preprocessor}{\#define\ PV\_BIAS\_LOW\ \ \ \ \ \ \ \ \ 222.0f}}
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#define\ PV\_BIAS\_FLOAT\ \ \ \ \ \ \ 399.0f}}
+\DoxyCodeLine{00120\ \textcolor{preprocessor}{\#define\ PV\_BIAS\_SLEEP\ \ \ \ \ \ \ 480.0f}}
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#define\ PV\_BIAS\_RATE\ \ \ \ \ \ \ \ 320.0f}}
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\#define\ PV\_DL\_MPTT\_MAX\ \ \ \ \ 1200.0f}}
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#define\ PV\_DL\_MPTT\_EXCESS\ \ 1300.0f}}
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#define\ PV\_DL\_MPTT\_IDLE\ \ \ \ \ 57.0f}}
+\DoxyCodeLine{00125\ \textcolor{preprocessor}{\#define\ PV\_DL\_BIAS\_RATE\ \ \ \ \ 75.0f}}
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\#define\ PV\_DL\_EXCESS\ \ \ \ \ \ \ 500.0f}}
+\DoxyCodeLine{00127\ \textcolor{preprocessor}{\#define\ PV\_DL\_B\_AH\_LOW\ \ \ \ \ 100.0f}}
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#define\ PV\_DL\_B\_AH\_MIN\ \ \ \ \ 120.0f\ }\textcolor{comment}{//\ DL\ battery\ should\ be\ at\ least\ 175Ah}}
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\#define\ PV\_DL\_B\_V\_LOW\ \ \ \ \ \ \ 23.8f\ }\textcolor{comment}{//\ Battery\ low-\/voltqage\ cutoff}}
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#define\ PWA\_SLEEP\ \ \ \ \ \ \ \ \ \ 200.0f}}
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\#define\ DL\_AC\_DC\_EFF\ \ \ \ \ \ \ \ 1.24f}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00134\ \textcolor{comment}{\ \ \ \ \ *\ Energy\ control\ loop\ parameters}}
+\DoxyCodeLine{00135\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#define\ BAL\_MIN\_ENERGY\_AC\ \ \ -\/200.0f}}
+\DoxyCodeLine{00137\ \textcolor{preprocessor}{\#define\ BAL\_MAX\_ENERGY\_AC\ \ \ 200.0f}}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#define\ BAL\_MIN\_ENERGY\_GTI\ \ -\/1400.0f}}
+\DoxyCodeLine{00139\ \textcolor{preprocessor}{\#define\ BAL\_MAX\_ENERGY\_GTI\ \ 200.0f}}
 \DoxyCodeLine{00140\ }
-\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#define\ MAX\_LOG\_SPAM\ \ 60}}
-\DoxyCodeLine{00142\ \textcolor{preprocessor}{\#define\ LOW\_LOG\_SPAM\ \ 2}}
-\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#define\ RESET\_LOG\_SPAM\ \ 120}}
-\DoxyCodeLine{00144\ }
-\DoxyCodeLine{00145\ \ \ \ \ \textcolor{comment}{//\#define\ IM\_DEBUG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //\ WEM3080T\ LOGGING}}
-\DoxyCodeLine{00146\ \ \ \ \ \textcolor{comment}{//\#define\ B\_ADJ\_DEBUG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //\ debug\ printing}}
-\DoxyCodeLine{00147\ \ \ \ \ \textcolor{comment}{//\#define\ FAKE\_VPV\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //\ NO\ AC\ CHARGER\ for\ DUMPLOAD,\ batteries\ are\ cross-\/connected\ to\ a\ parallel\ bank}}
-\DoxyCodeLine{00148\ \ \ \ \ \textcolor{comment}{//\#define\ PSW\_DEBUG}}
-\DoxyCodeLine{00149\ \ \ \ \ \textcolor{comment}{//\#define\ DEBUG\_SHUTDOWN}}
-\DoxyCodeLine{00150\ }
-\DoxyCodeLine{00151\ \ \ \ \ \textcolor{comment}{//\#define\ AUTO\_CHARGE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //\ turn\ on\ dumpload\ charger\ during\ restarts}}
-\DoxyCodeLine{00152\ \ \ \ \ \textcolor{comment}{//\#define\ B\_DLE\_DEBUG\ \ \ \ //\ Dump\ Load\ debugging}}
-\DoxyCodeLine{00153\ \ \ \ \ \textcolor{comment}{//\#define\ BSOC\_DEGUB}}
-\DoxyCodeLine{00154\ \ \ \ \ \textcolor{comment}{//\#define\ DEBUG\_HA\_CMD}}
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#define\ DL\_POWER\_ZERO\ \ "{}V0000X"{}}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#define\ LOG\_TO\_FILE\ \ \ \ \ \ \ \ \ "{}/store/logs/energy.log"{}}}
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\#define\ LOG\_TO\_FILE\_ALT\ \ \ \ \ "{}/tmp/energy.log"{}}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \textcolor{preprocessor}{\#define\ MAX\_LOG\_SPAM\ \ 60}}
+\DoxyCodeLine{00147\ \textcolor{preprocessor}{\#define\ LOW\_LOG\_SPAM\ \ 2}}
+\DoxyCodeLine{00148\ \textcolor{preprocessor}{\#define\ RESET\_LOG\_SPAM\ \ 120}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{comment}{//\#define\ IM\_DEBUG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //\ WEM3080T\ LOGGING}}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{comment}{//\#define\ B\_ADJ\_DEBUG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //\ debug\ printing}}
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{comment}{//\#define\ FAKE\_VPV\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //\ NO\ AC\ CHARGER\ for\ DUMPLOAD,\ batteries\ are\ cross-\/connected\ to\ a\ parallel\ bank}}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{comment}{//\#define\ PSW\_DEBUG}}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{comment}{//\#define\ DEBUG\_SHUTDOWN}}
 \DoxyCodeLine{00155\ }
-\DoxyCodeLine{00156\ \textcolor{preprocessor}{\#define\ IM\_DELAY\ \ \ \ \ \ \ \ \ \ \ \ 1\ \ \ }\textcolor{comment}{//\ tens\ of\ second\ updates}}
-\DoxyCodeLine{00157\ \textcolor{preprocessor}{\#define\ IM\_DISPLAY\ \ \ \ \ \ \ \ \ \ 1}}
-\DoxyCodeLine{00158\ \textcolor{preprocessor}{\#define\ GTI\_DELAY\ \ \ \ \ \ \ \ \ \ \ 1}}
-\DoxyCodeLine{00159\ }
-\DoxyCodeLine{00160\ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00161\ \textcolor{comment}{\ \ \ \ \ *\ sane\ limits\ for\ system\ data\ elements}}
-\DoxyCodeLine{00162\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{00163\ \textcolor{preprocessor}{\#define\ PWA\_SANE\ \ \ \ \ \ \ \ \ \ \ \ 1700.0f}}
-\DoxyCodeLine{00164\ \textcolor{preprocessor}{\#define\ PAMPS\_SANE\ \ \ \ \ \ \ \ \ \ 16.0f}}
-\DoxyCodeLine{00165\ \textcolor{preprocessor}{\#define\ PVOLTS\_SANE\ \ \ \ \ \ \ \ \ 150.0f}}
-\DoxyCodeLine{00166\ \textcolor{preprocessor}{\#define\ BAMPS\_SANE\ \ \ \ \ \ \ \ \ \ 70.0f}}
-\DoxyCodeLine{00167\ }
-\DoxyCodeLine{00168\ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00169\ \textcolor{comment}{\ \ \ \ \ \ \ \ Three\ Phase\ WiFi\ Energy\ Meter\ (WEM3080T)}}
-\DoxyCodeLine{00170\ \textcolor{comment}{\ \ \ \ name\ \ \ \ Unit\ \ \ \ Description}}
-\DoxyCodeLine{00171\ \textcolor{comment}{\ \ \ \ wem3080t\_voltage\_a\ \ V\ \ \ A\ phase\ voltage}}
-\DoxyCodeLine{00172\ \textcolor{comment}{\ \ \ \ wem3080t\_current\_a\ \ A\ \ \ A\ phase\ current}}
-\DoxyCodeLine{00173\ \textcolor{comment}{\ \ \ \ wem3080t\_power\_a\ \ \ \ W\ \ \ A\ phase\ active\ power}}
-\DoxyCodeLine{00174\ \textcolor{comment}{\ \ \ \ wem3080t\_importenergy\_a\ kWh\ A\ phase\ import\ energy}}
-\DoxyCodeLine{00175\ \textcolor{comment}{\ \ \ \ wem3080t\_exportgrid\_a\ \ \ kWh\ A\ phase\ export\ energy}}
-\DoxyCodeLine{00176\ \textcolor{comment}{\ \ \ \ wem3080t\_frequency\_a\ \ \ \ kWh\ A\ phase\ frequency}}
-\DoxyCodeLine{00177\ \textcolor{comment}{\ \ \ \ wem3080t\_pf\_a\ \ \ kWh\ A\ phase\ power\ factor}}
-\DoxyCodeLine{00178\ \textcolor{comment}{\ \ \ \ wem3080t\_voltage\_b\ \ V\ \ \ B\ phase\ voltage}}
-\DoxyCodeLine{00179\ \textcolor{comment}{\ \ \ \ wem3080t\_current\_b\ \ A\ \ \ B\ phase\ current}}
-\DoxyCodeLine{00180\ \textcolor{comment}{\ \ \ \ wem3080t\_power\_b\ \ \ \ W\ \ \ B\ phase\ active\ power}}
-\DoxyCodeLine{00181\ \textcolor{comment}{\ \ \ \ wem3080t\_importenergy\_b\ kWh\ B\ phase\ import\ energy}}
-\DoxyCodeLine{00182\ \textcolor{comment}{\ \ \ \ wem3080t\_exportgrid\_b\ \ \ kWh\ B\ phase\ export\ energy}}
-\DoxyCodeLine{00183\ \textcolor{comment}{\ \ \ \ wem3080t\_frequency\_b\ \ \ \ kWh\ B\ phase\ frequency}}
-\DoxyCodeLine{00184\ \textcolor{comment}{\ \ \ \ wem3080t\_pf\_b\ \ \ kWh\ B\ phase\ power\ factor}}
-\DoxyCodeLine{00185\ \textcolor{comment}{\ \ \ \ wem3080t\_voltage\_c\ \ V\ \ \ C\ phase\ voltage}}
-\DoxyCodeLine{00186\ \textcolor{comment}{\ \ \ \ wem3080t\_current\_c\ \ A\ \ \ C\ phase\ current}}
-\DoxyCodeLine{00187\ \textcolor{comment}{\ \ \ \ wem3080t\_power\_c\ \ \ \ W\ \ \ C\ phase\ active\ power}}
-\DoxyCodeLine{00188\ \textcolor{comment}{\ \ \ \ wem3080t\_importenergy\_c\ kWh\ C\ phase\ import\ energy}}
-\DoxyCodeLine{00189\ \textcolor{comment}{\ \ \ \ wem3080t\_exportgrid\_c\ \ \ kWh\ C\ phase\ export\ energy}}
-\DoxyCodeLine{00190\ \textcolor{comment}{\ \ \ \ wem3080t\_frequency\_c\ \ \ \ kWh\ C\ phase\ frequency}}
-\DoxyCodeLine{00191\ \textcolor{comment}{\ \ \ \ wem3080t\_pf\_c\ \ \ kWh\ C\ phase\ power\ factor}}
-\DoxyCodeLine{00192\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{00193\ }
-\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keyword}{enum}\ client\_id\ \{}
-\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ ID\_C1,}
-\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ ID\_C2,}
-\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ ID\_C3,}
-\DoxyCodeLine{00198\ \ \ \ \ \};}
-\DoxyCodeLine{00199\ }
-\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keyword}{enum}\ energy\_state\ \{}
-\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ E\_INIT,}
-\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ E\_RUN,}
-\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ E\_WAIT,}
-\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ E\_IDLE,}
-\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ E\_STOP,}
-\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ E\_LAST,}
-\DoxyCodeLine{00207\ \ \ \ \ \};}
-\DoxyCodeLine{00208\ }
-\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keyword}{enum}\ running\_state\ \{}
-\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ R\_INIT,}
-\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ R\_FLOAT,}
-\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ R\_SLEEP,}
-\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ R\_RUN,}
-\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ R\_IDLE,}
-\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ R\_LAST,}
-\DoxyCodeLine{00216\ \ \ \ \ \};}
-\DoxyCodeLine{00217\ }
-\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keyword}{enum}\ iammeter\_phase\ \{}
-\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ PHASE\_A,}
-\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ PHASE\_B,}
-\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ PHASE\_C,}
-\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ PHASE\_LAST,}
-\DoxyCodeLine{00223\ \ \ \ \ \};}
-\DoxyCodeLine{00224\ }
-\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keyword}{enum}\ iammeter\_id\ \{}
-\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ IA\_VOLTAGE,}
-\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ IA\_CURRENT,}
-\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ IA\_POWER,}
-\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ IA\_IMPORT,}
-\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ IA\_EXPORT,}
-\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ IA\_FREQ,}
-\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ IA\_PF,}
-\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ IA\_LAST,}
-\DoxyCodeLine{00234\ \ \ \ \ \};}
-\DoxyCodeLine{00235\ }
-\DoxyCodeLine{00236\ \ \ \ \ \textcolor{keyword}{enum}\ mqtt\_vars\ \{}
-\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ V\_FCCM,}
-\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ V\_FBEKW,}
-\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ V\_FRUNT,}
-\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ V\_FBAMPS,}
-\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ V\_FBV,}
-\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ V\_FLO,}
-\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ V\_FSO,}
-\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ V\_FACE,}
-\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ V\_BEN,}
-\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ V\_PWA,}
-\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ V\_PAMPS,}
-\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ V\_PVOLTS,}
-\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ V\_FLAST,}
-\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ V\_HDCSW,}
-\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ V\_HACSW,}
-\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ V\_HSHUT,}
-\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ V\_HMODE,}
-\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ V\_HCON0,}
-\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ V\_HCON1,}
-\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ V\_HCON2,}
-\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ V\_HCON3,}
-\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ V\_HCON4,}
-\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ V\_HCON5,}
-\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ V\_HCON6,}
-\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ V\_HCON7,}
-\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ add\ other\ data\ ranges\ here}}
-\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ V\_DVPV,}
-\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ V\_DPPV,}
-\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ V\_DPBAT,}
-\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ V\_DVBAT,}
-\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ V\_DCMPPT,}
-\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ V\_DPMPPT,}
-\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ V\_DAHBAT,}
-\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ V\_DCCMODE,}
-\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ V\_DGTI,}
-\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ V\_DLAST,}
-\DoxyCodeLine{00273\ \ \ \ \ \};}
-\DoxyCodeLine{00274\ }
-\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keyword}{enum}\ sane\_vars\ \{}
-\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ S\_FCCM,}
-\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ S\_FBEKW,}
-\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ S\_FRUNT,}
-\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ S\_FBAMPS,}
-\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ S\_FBV,}
-\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ S\_FLO,}
-\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ S\_FSO,}
-\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ S\_FACE,}
-\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ S\_BEN,}
-\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ S\_PWA,}
-\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ S\_PAMPS,}
-\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ S\_PVOLTS,}
-\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ S\_FLAST,}
-\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ S\_HDCSW,}
-\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ S\_HACSW,}
-\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ S\_HSHUT,}
-\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ S\_HMODE,}
-\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ add\ other\ data\ ranges\ here}}
-\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ S\_DVPV,}
-\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ S\_DPPV,}
-\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ S\_DPBAT,}
-\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ S\_DVBAT,}
-\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ S\_DCMPPT,}
-\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ S\_DPMPPT,}
-\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ S\_DAHBAT,}
-\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ S\_DCCMODE,}
-\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ S\_DGTI,}
-\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ S\_DLAST,}
-\DoxyCodeLine{00304\ \ \ \ \ \};}
-\DoxyCodeLine{00305\ }
-\DoxyCodeLine{00306\ \textcolor{preprocessor}{\#define\ MAX\_IM\_VAR\ \ IA\_LAST*PHASE\_LAST}}
-\DoxyCodeLine{00307\ }
-\DoxyCodeLine{00308\ \textcolor{preprocessor}{\#define\ L1\_P\ \ \ \ IA\_POWER}}
-\DoxyCodeLine{00309\ \textcolor{preprocessor}{\#define\ L2\_P\ \ \ \ L1\_P+IA\_LAST}}
-\DoxyCodeLine{00310\ \textcolor{preprocessor}{\#define\ L3\_P\ \ \ \ L2\_P+IA\_LAST}}
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{comment}{//\#define\ AUTO\_CHARGE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //\ turn\ on\ dumpload\ charger\ during\ restarts}}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{comment}{//\#define\ B\_DLE\_DEBUG\ \ \ \ //\ Dump\ Load\ debugging}}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{comment}{//\#define\ BSOC\_DEGUB}}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{comment}{//\#define\ DEBUG\_HA\_CMD}}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{\#define\ IM\_DELAY\ \ \ \ \ \ \ \ \ \ \ \ 1\ \ \ }\textcolor{comment}{//\ tens\ of\ second\ updates}}
+\DoxyCodeLine{00162\ \textcolor{preprocessor}{\#define\ IM\_DISPLAY\ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{00163\ \textcolor{preprocessor}{\#define\ GTI\_DELAY\ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00166\ \textcolor{comment}{\ \ \ \ \ *\ sane\ limits\ for\ system\ data\ elements}}
+\DoxyCodeLine{00167\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00168\ \textcolor{preprocessor}{\#define\ PWA\_SANE\ \ \ \ \ \ \ \ \ \ \ \ 1700.0f}}
+\DoxyCodeLine{00169\ \textcolor{preprocessor}{\#define\ PAMPS\_SANE\ \ \ \ \ \ \ \ \ \ 16.0f}}
+\DoxyCodeLine{00170\ \textcolor{preprocessor}{\#define\ PVOLTS\_SANE\ \ \ \ \ \ \ \ \ 150.0f}}
+\DoxyCodeLine{00171\ \textcolor{preprocessor}{\#define\ BAMPS\_SANE\ \ \ \ \ \ \ \ \ \ 70.0f}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00174\ \textcolor{comment}{\ \ \ \ \ \ \ \ Three\ Phase\ WiFi\ Energy\ Meter\ (WEM3080T)}}
+\DoxyCodeLine{00175\ \textcolor{comment}{\ \ \ \ name\ \ \ \ Unit\ \ \ \ Description}}
+\DoxyCodeLine{00176\ \textcolor{comment}{\ \ \ \ wem3080t\_voltage\_a\ \ V\ \ \ A\ phase\ voltage}}
+\DoxyCodeLine{00177\ \textcolor{comment}{\ \ \ \ wem3080t\_current\_a\ \ A\ \ \ A\ phase\ current}}
+\DoxyCodeLine{00178\ \textcolor{comment}{\ \ \ \ wem3080t\_power\_a\ \ \ \ W\ \ \ A\ phase\ active\ power}}
+\DoxyCodeLine{00179\ \textcolor{comment}{\ \ \ \ wem3080t\_importenergy\_a\ kWh\ A\ phase\ import\ energy}}
+\DoxyCodeLine{00180\ \textcolor{comment}{\ \ \ \ wem3080t\_exportgrid\_a\ \ \ kWh\ A\ phase\ export\ energy}}
+\DoxyCodeLine{00181\ \textcolor{comment}{\ \ \ \ wem3080t\_frequency\_a\ \ \ \ kWh\ A\ phase\ frequency}}
+\DoxyCodeLine{00182\ \textcolor{comment}{\ \ \ \ wem3080t\_pf\_a\ \ \ kWh\ A\ phase\ power\ factor}}
+\DoxyCodeLine{00183\ \textcolor{comment}{\ \ \ \ wem3080t\_voltage\_b\ \ V\ \ \ B\ phase\ voltage}}
+\DoxyCodeLine{00184\ \textcolor{comment}{\ \ \ \ wem3080t\_current\_b\ \ A\ \ \ B\ phase\ current}}
+\DoxyCodeLine{00185\ \textcolor{comment}{\ \ \ \ wem3080t\_power\_b\ \ \ \ W\ \ \ B\ phase\ active\ power}}
+\DoxyCodeLine{00186\ \textcolor{comment}{\ \ \ \ wem3080t\_importenergy\_b\ kWh\ B\ phase\ import\ energy}}
+\DoxyCodeLine{00187\ \textcolor{comment}{\ \ \ \ wem3080t\_exportgrid\_b\ \ \ kWh\ B\ phase\ export\ energy}}
+\DoxyCodeLine{00188\ \textcolor{comment}{\ \ \ \ wem3080t\_frequency\_b\ \ \ \ kWh\ B\ phase\ frequency}}
+\DoxyCodeLine{00189\ \textcolor{comment}{\ \ \ \ wem3080t\_pf\_b\ \ \ kWh\ B\ phase\ power\ factor}}
+\DoxyCodeLine{00190\ \textcolor{comment}{\ \ \ \ wem3080t\_voltage\_c\ \ V\ \ \ C\ phase\ voltage}}
+\DoxyCodeLine{00191\ \textcolor{comment}{\ \ \ \ wem3080t\_current\_c\ \ A\ \ \ C\ phase\ current}}
+\DoxyCodeLine{00192\ \textcolor{comment}{\ \ \ \ wem3080t\_power\_c\ \ \ \ W\ \ \ C\ phase\ active\ power}}
+\DoxyCodeLine{00193\ \textcolor{comment}{\ \ \ \ wem3080t\_importenergy\_c\ kWh\ C\ phase\ import\ energy}}
+\DoxyCodeLine{00194\ \textcolor{comment}{\ \ \ \ wem3080t\_exportgrid\_c\ \ \ kWh\ C\ phase\ export\ energy}}
+\DoxyCodeLine{00195\ \textcolor{comment}{\ \ \ \ wem3080t\_frequency\_c\ \ \ \ kWh\ C\ phase\ frequency}}
+\DoxyCodeLine{00196\ \textcolor{comment}{\ \ \ \ wem3080t\_pf\_c\ \ \ kWh\ C\ phase\ power\ factor}}
+\DoxyCodeLine{00197\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{keyword}{enum}\ client\_id\ \{}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ ID\_C1,}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ ID\_C2,}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ ID\_C3,}
+\DoxyCodeLine{00203\ \ \ \ \ \};}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \ \ \ \ \textcolor{keyword}{enum}\ energy\_state\ \{}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ E\_INIT,}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ E\_RUN,}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ E\_WAIT,}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ E\_IDLE,}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ E\_STOP,}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ E\_LAST,}
+\DoxyCodeLine{00212\ \ \ \ \ \};}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keyword}{enum}\ running\_state\ \{}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ R\_INIT,}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ R\_FLOAT,}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ R\_SLEEP,}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ R\_RUN,}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ R\_IDLE,}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ R\_LAST,}
+\DoxyCodeLine{00221\ \ \ \ \ \};}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{keyword}{enum}\ iammeter\_phase\ \{}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ PHASE\_A,}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ PHASE\_B,}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ PHASE\_C,}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ PHASE\_S,}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ PHASE\_LAST,}
+\DoxyCodeLine{00229\ \ \ \ \ \};}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \ \ \ \ \textcolor{keyword}{enum}\ iammeter\_id\ \{}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ IA\_VOLTAGE,}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ IA\_CURRENT,}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ IA\_POWER,}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ IA\_IMPORT,}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ IA\_EXPORT,}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ IA\_FREQ,}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ IA\_PF,}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ IA\_LAST,}
+\DoxyCodeLine{00240\ \ \ \ \ \};}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{keyword}{enum}\ mqtt\_vars\ \{}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ V\_FCCM,}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ V\_FBEKW,}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ V\_FRUNT,}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ V\_FBAMPS,}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ V\_FBV,}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ V\_FLO,}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ V\_FSO,}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ V\_FACE,}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ V\_BEN,}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ V\_PWA,}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ V\_PAMPS,}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ V\_PVOLTS,}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ V\_FLAST,}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ V\_HDCSW,}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ V\_HACSW,}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ V\_HSHUT,}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ V\_HMODE,}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ V\_HCON0,}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ V\_HCON1,}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ V\_HCON2,}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ V\_HCON3,}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ V\_HCON4,}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ V\_HCON5,}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ V\_HCON6,}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ V\_HCON7,}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ add\ other\ data\ ranges\ here}}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ V\_DVPV,}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ V\_DPPV,}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ V\_DPBAT,}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ V\_DVBAT,}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ V\_DCMPPT,}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ V\_DPMPPT,}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ V\_DAHBAT,}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ V\_DCCMODE,}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ V\_DGTI,}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ V\_DLAST,}
+\DoxyCodeLine{00279\ \ \ \ \ \};}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \ \ \ \ \textcolor{keyword}{enum}\ sane\_vars\ \{}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ S\_FCCM,}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ S\_FBEKW,}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ S\_FRUNT,}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ S\_FBAMPS,}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ S\_FBV,}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ S\_FLO,}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ S\_FSO,}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ S\_FACE,}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ S\_BEN,}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ S\_PWA,}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ S\_PAMPS,}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ S\_PVOLTS,}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ S\_FLAST,}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ S\_HDCSW,}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ S\_HACSW,}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ S\_HSHUT,}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ S\_HMODE,}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ add\ other\ data\ ranges\ here}}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ S\_DVPV,}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ S\_DPPV,}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ S\_DPBAT,}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ S\_DVBAT,}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ S\_DCMPPT,}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ S\_DPMPPT,}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ S\_DAHBAT,}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ S\_DCCMODE,}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ S\_DGTI,}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ S\_DLAST,}
+\DoxyCodeLine{00310\ \ \ \ \ \};}
 \DoxyCodeLine{00311\ }
-\DoxyCodeLine{00312\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlink__type}{link\_type}}\ \{}
-\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ uint32\_t\ iammeter\_error,\ iammeter\_count;}
-\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ uint32\_t\ mqtt\_error,\ mqtt\_count;}
-\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ uint32\_t\ shutdown;}
-\DoxyCodeLine{00316\ \ \ \ \ \};}
-\DoxyCodeLine{00317\ }
-\DoxyCodeLine{00318\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmode__type}{mode\_type}}\ \{}
-\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{double}\ error,\ target,\ total\_system,\ gti\_dumpload,\ pv\_bias,\ dl\_mqtt\_max,\ off\_grid,\ sequence;}
-\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{bool}\ mode,\ in\_pid\_control,\ con0,\ con1,\ con2,\ con3,\ con4,\ con5,\ con6,\ con7,\ no\_float,\ data\_error,\ bat\_crit;}
-\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ uint32\_t\ mode\_tmr;}
-\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structSPid}{SPid}}\ pid;}
-\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keyword}{enum}\ energy\_state\ E;}
-\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keyword}{enum}\ running\_state\ R;}
-\DoxyCodeLine{00325\ \ \ \ \ \};}
-\DoxyCodeLine{00326\ }
-\DoxyCodeLine{00327\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structenergy__type}{energy\_type}}\ \{}
-\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{double}\ print\_vars[MAX\_IM\_VAR];}
-\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{double}\ im\_vars[IA\_LAST][PHASE\_LAST];}
-\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{double}\ mvar[V\_DLAST\ +\ 1];}
-\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{bool}\ once\_gti,\ once\_ac,\ iammeter,\ fm80,\ dumpload,\ homeassistant,\ once\_gti\_zero;}
-\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{double}\ gti\_low\_adj,\ ac\_low\_adj,\ dl\_excess\_adj;}
-\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{bool}\ ac\_sw\_on,\ gti\_sw\_on,\ ac\_sw\_status,\ gti\_sw\_status,\ solar\_shutdown,\ solar\_mode,\ startup,\ ac\_mismatch,\ dc\_mismatch,\ mode\_mismatch,\ dl\_excess;}
-\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ uint32\_t\ speed\_go,\ im\_delay,\ im\_display,\ gti\_delay;}
-\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ int32\_t\ rc,\ sane;}
-\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ uint32\_t\ ten\_sec\_clock,\ log\_spam,\ log\_time\_reset;}
-\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ pthread\_mutex\_t\ ha\_lock;}
-\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmode__type}{mode\_type}}\ mode;}
-\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlink__type}{link\_type}}\ link;}
-\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ MQTTClient\ client\_p,\ client\_sd,\ client\_ha;}
-\DoxyCodeLine{00341\ \ \ \ \ \};}
-\DoxyCodeLine{00342\ }
-\DoxyCodeLine{00343\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structenergy__type}{energy\_type}}\ E;}
-\DoxyCodeLine{00344\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structha__flag__type}{ha\_flag\_type}}\ ha\_flag\_vars\_ss;}
-\DoxyCodeLine{00345\ \ \ \ \ \textcolor{keyword}{extern}\ FILE*\ fout;}
-\DoxyCodeLine{00346\ }
-\DoxyCodeLine{00347\ \ \ \ \ \textcolor{keywordtype}{void}\ timer\_callback(int32\_t);}
-\DoxyCodeLine{00348\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{energy_8h_acac721db1f1fabfc32db2d76683f6584}{connlost}}(\textcolor{keywordtype}{void}\ *,\ \textcolor{keywordtype}{char}\ *);}
+\DoxyCodeLine{00312\ \textcolor{preprocessor}{\#define\ MAX\_IM\_VAR\ \ IA\_LAST*PHASE\_LAST}}
+\DoxyCodeLine{00313\ }
+\DoxyCodeLine{00314\ \textcolor{preprocessor}{\#define\ L1\_P\ \ \ \ IA\_POWER}}
+\DoxyCodeLine{00315\ \textcolor{preprocessor}{\#define\ L2\_P\ \ \ \ L1\_P+IA\_LAST}}
+\DoxyCodeLine{00316\ \textcolor{preprocessor}{\#define\ L3\_P\ \ \ \ L2\_P+IA\_LAST}}
+\DoxyCodeLine{00317\ \textcolor{preprocessor}{\#define\ L4\_P\ \ \ \ L3\_P+IA\_LAST}}
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00319\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlink__type}{link\_type}}\ \{}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ uint32\_t\ iammeter\_error,\ iammeter\_count;}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ uint32\_t\ mqtt\_error,\ mqtt\_count;}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ uint32\_t\ shutdown;}
+\DoxyCodeLine{00323\ \ \ \ \ \};}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00325\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmode__type}{mode\_type}}\ \{}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{double}\ error,\ target,\ total\_system,\ gti\_dumpload,\ pv\_bias,\ dl\_mqtt\_max,\ off\_grid,\ sequence;}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{bool}\ mode,\ in\_pid\_control,\ con0,\ con1,\ con2,\ con3,\ con4,\ con5,\ con6,\ con7,\ no\_float,\ data\_error,\ bat\_crit;}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ uint32\_t\ mode\_tmr;}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structSPid}{SPid}}\ pid;}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keyword}{enum}\ energy\_state\ E;}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keyword}{enum}\ running\_state\ R;}
+\DoxyCodeLine{00332\ \ \ \ \ \};}
+\DoxyCodeLine{00333\ }
+\DoxyCodeLine{00334\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structenergy__type}{energy\_type}}\ \{}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{double}\ print\_vars[MAX\_IM\_VAR];}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{double}\ im\_vars[IA\_LAST][PHASE\_LAST];}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{double}\ mvar[V\_DLAST\ +\ 1];}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{bool}\ once\_gti,\ once\_ac,\ iammeter,\ fm80,\ dumpload,\ homeassistant,\ once\_gti\_zero;}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{double}\ gti\_low\_adj,\ ac\_low\_adj,\ dl\_excess\_adj,\ bat\_runtime;}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{bool}\ ac\_sw\_on,\ gti\_sw\_on,\ ac\_sw\_status,\ gti\_sw\_status,\ solar\_shutdown,\ solar\_mode,\ startup,\ ac\_mismatch,\ dc\_mismatch,\ mode\_mismatch,\ dl\_excess;}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ uint32\_t\ speed\_go,\ im\_delay,\ im\_display,\ gti\_delay;}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ int32\_t\ rc,\ sane;}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ uint32\_t\ ten\_sec\_clock,\ log\_spam,\ log\_time\_reset;}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ pthread\_mutex\_t\ ha\_lock;}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmode__type}{mode\_type}}\ mode;}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlink__type}{link\_type}}\ link;}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ MQTTClient\ client\_p,\ client\_sd,\ client\_ha;}
+\DoxyCodeLine{00348\ \ \ \ \ \};}
 \DoxyCodeLine{00349\ }
-\DoxyCodeLine{00350\ \ \ \ \ \textcolor{keywordtype}{void}\ ramp\_up\_gti(MQTTClient,\ \textcolor{keywordtype}{bool},\ \textcolor{keywordtype}{bool});}
-\DoxyCodeLine{00351\ \ \ \ \ \textcolor{keywordtype}{void}\ ramp\_up\_ac(MQTTClient,\ \textcolor{keywordtype}{bool});}
-\DoxyCodeLine{00352\ \ \ \ \ \textcolor{keywordtype}{void}\ ramp\_down\_gti(MQTTClient,\ \textcolor{keywordtype}{bool});}
-\DoxyCodeLine{00353\ \ \ \ \ \textcolor{keywordtype}{void}\ ramp\_down\_ac(MQTTClient,\ \textcolor{keywordtype}{bool});}
-\DoxyCodeLine{00354\ \ \ \ \ \textcolor{keywordtype}{void}\ ha\_ac\_off(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00355\ \ \ \ \ \textcolor{keywordtype}{void}\ ha\_ac\_on(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00356\ \ \ \ \ \textcolor{keywordtype}{void}\ ha\_dc\_off(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00357\ \ \ \ \ \textcolor{keywordtype}{void}\ ha\_dc\_on(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00358\ }
-\DoxyCodeLine{00359\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ iammeter\_write\_callback(\textcolor{keywordtype}{char}\ *,\ \textcolor{keywordtype}{size\_t},\ \textcolor{keywordtype}{size\_t},\ \textcolor{keywordtype}{void}\ *);}
-\DoxyCodeLine{00360\ \ \ \ \ \textcolor{keywordtype}{void}\ iammeter\_read(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00361\ \ \ \ \ \textcolor{keywordtype}{void}\ print\_im\_vars(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00362\ \ \ \ \ \textcolor{keywordtype}{void}\ print\_mvar\_vars(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00363\ }
-\DoxyCodeLine{00364\ \ \ \ \ \textcolor{keywordtype}{bool}\ sanity\_check(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00365\ \ \ \ \ \textcolor{keywordtype}{char}\ *\ log\_time(\textcolor{keywordtype}{bool});}
-\DoxyCodeLine{00366\ \ \ \ \ \textcolor{keywordtype}{bool}\ sync\_ha(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00367\ \ \ \ \ \textcolor{keywordtype}{bool}\ log\_timer(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00368\ }
-\DoxyCodeLine{00369\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
-\DoxyCodeLine{00370\ \}}
-\DoxyCodeLine{00371\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00372\ }
-\DoxyCodeLine{00373\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ BMC\_H\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00350\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structenergy__type}{energy\_type}}\ E;}
+\DoxyCodeLine{00351\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structha__flag__type}{ha\_flag\_type}}\ ha\_flag\_vars\_ss;}
+\DoxyCodeLine{00352\ \ \ \ \ \textcolor{keyword}{extern}\ FILE*\ fout;}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00354\ \ \ \ \ \textcolor{keywordtype}{void}\ timer\_callback(int32\_t);}
+\DoxyCodeLine{00355\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{energy_8h_acac721db1f1fabfc32db2d76683f6584}{connlost}}(\textcolor{keywordtype}{void}\ *,\ \textcolor{keywordtype}{char}\ *);}
+\DoxyCodeLine{00356\ }
+\DoxyCodeLine{00357\ \ \ \ \ \textcolor{keywordtype}{void}\ ramp\_up\_gti(MQTTClient,\ \textcolor{keywordtype}{bool},\ \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{00358\ \ \ \ \ \textcolor{keywordtype}{void}\ ramp\_up\_ac(MQTTClient,\ \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{00359\ \ \ \ \ \textcolor{keywordtype}{void}\ ramp\_down\_gti(MQTTClient,\ \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{00360\ \ \ \ \ \textcolor{keywordtype}{void}\ ramp\_down\_ac(MQTTClient,\ \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{00361\ \ \ \ \ \textcolor{keywordtype}{void}\ ha\_ac\_off(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00362\ \ \ \ \ \textcolor{keywordtype}{void}\ ha\_ac\_on(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00363\ \ \ \ \ \textcolor{keywordtype}{void}\ ha\_dc\_off(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00364\ \ \ \ \ \textcolor{keywordtype}{void}\ ha\_dc\_on(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00365\ }
+\DoxyCodeLine{00366\ \ \ \ \ \textcolor{keywordtype}{bool}\ sanity\_check(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00367\ \ \ \ \ \textcolor{keywordtype}{char}\ *\ log\_time(\textcolor{keywordtype}{bool});}
+\DoxyCodeLine{00368\ \ \ \ \ \textcolor{keywordtype}{bool}\ sync\_ha(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00369\ \ \ \ \ \textcolor{keywordtype}{bool}\ log\_timer(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00370\ }
+\DoxyCodeLine{00371\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00372\ \}}
+\DoxyCodeLine{00373\ \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{00374\ }
+\DoxyCodeLine{00375\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ BMC\_H\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00376\ }
 
 \end{DoxyCode}

@@ -1,7 +1,8 @@
 \doxysection{ha\+\_\+energy/mqtt\+\_\+rec.c File Reference}
 \hypertarget{mqtt__rec_8c}{}\label{mqtt__rec_8c}\index{ha\_energy/mqtt\_rec.c@{ha\_energy/mqtt\_rec.c}}
 {\ttfamily \#include "{}bsoc.\+h"{}}\newline
-Include dependency graph for mqtt\+\_\+rec.\+c\+:\nopagebreak
+Include dependency graph for mqtt\+\_\+rec.\+c\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -28,10 +29,6 @@ bool \mbox{\hyperlink{mqtt__rec_8c_a218d78ec87cc0f9067283f98bace529f}{fm80\+\_\+
 \doxysubsection{Detailed Description}
 data received on topic from the broker, run processing thread max message length set by MBMQTT 
 
-Definition in file \mbox{\hyperlink{mqtt__rec_8c_source}{mqtt\+\_\+rec.\+c}}.
-
-
-
 \label{doc-func-members}
 \Hypertarget{mqtt__rec_8c_doc-func-members}
 \doxysubsection{Function Documentation}
@@ -40,10 +37,6 @@ Definition in file \mbox{\hyperlink{mqtt__rec_8c_source}{mqtt\+\_\+rec.\+c}}.
 \doxysubsubsection{\texorpdfstring{delivered()}{delivered()}}
 {\footnotesize\ttfamily \label{mqtt__rec_8c_a4a79780b9057489f0740020d6bae250f} 
 void delivered (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{context}{, }\item[{MQTTClient\+\_\+delivery\+Token}]{dt}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{mqtt__rec_8c_source_l00122}{122}} of file \mbox{\hyperlink{mqtt__rec_8c_source}{mqtt\+\_\+rec.\+c}}.
 
 
 \begin{DoxyCode}{0}
@@ -63,10 +56,6 @@ Definition at line \mbox{\hyperlink{mqtt__rec_8c_source_l00122}{122}} of file \m
 \doxysubsubsection{\texorpdfstring{fm80\_float()}{fm80\_float()}}
 {\footnotesize\ttfamily \label{mqtt__rec_8c_ab3219c1d482ea970a00a713bc9631eb6} 
 bool fm80\+\_\+float (\begin{DoxyParamCaption}\item[{const bool}]{set\+\_\+bias}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{mqtt__rec_8c_source_l00246}{246}} of file \mbox{\hyperlink{mqtt__rec_8c_source}{mqtt\+\_\+rec.\+c}}.
 
 
 \begin{DoxyCode}{0}
@@ -95,10 +84,6 @@ Definition at line \mbox{\hyperlink{mqtt__rec_8c_source_l00246}{246}} of file \m
 bool fm80\+\_\+sleep (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
 
-
-Definition at line \mbox{\hyperlink{mqtt__rec_8c_source_l00268}{268}} of file \mbox{\hyperlink{mqtt__rec_8c_source}{mqtt\+\_\+rec.\+c}}.
-
-
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00269\ \{}
 \DoxyCodeLine{00270\ \ \ \ \ \textcolor{keywordflow}{if}\ ((uint32\_t)\ E.mvar[V\_FCCM]\ ==\ SLEEP\_CODE)\ \{}
@@ -113,10 +98,6 @@ Definition at line \mbox{\hyperlink{mqtt__rec_8c_source_l00268}{268}} of file \m
 \doxysubsubsection{\texorpdfstring{json\_get\_data()}{json\_get\_data()}}
 {\footnotesize\ttfamily \label{mqtt__rec_8c_acaa1a0e82c0b21e28a7b6fd6c1d6ac43} 
 bool json\+\_\+get\+\_\+data (\begin{DoxyParamCaption}\item[{c\+JSON \texorpdfstring{$\ast$}{*}}]{json\+\_\+src}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{data\+\_\+id}{, }\item[{c\+JSON \texorpdfstring{$\ast$}{*}}]{name}{, }\item[{uint32\+\_\+t}]{i}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{mqtt__rec_8c_source_l00137}{137}} of file \mbox{\hyperlink{mqtt__rec_8c_source}{mqtt\+\_\+rec.\+c}}.
 
 
 \begin{DoxyCode}{0}
@@ -221,10 +202,6 @@ Definition at line \mbox{\hyperlink{mqtt__rec_8c_source_l00137}{137}} of file \m
 \doxysubsubsection{\texorpdfstring{msgarrvd()}{msgarrvd()}}
 {\footnotesize\ttfamily \label{mqtt__rec_8c_aeb7f1edb73f2b51c6df601678ca4df22} 
 int32\+\_\+t msgarrvd (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{context}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{topic\+Name}{, }\item[{int}]{topic\+Len}{, }\item[{MQTTClient\+\_\+message \texorpdfstring{$\ast$}{*}}]{message}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{mqtt__rec_8c_source_l00007}{7}} of file \mbox{\hyperlink{mqtt__rec_8c_source}{mqtt\+\_\+rec.\+c}}.
 
 
 \begin{DoxyCode}{0}
@@ -345,10 +322,6 @@ Definition at line \mbox{\hyperlink{mqtt__rec_8c_source_l00007}{7}} of file \mbo
 \doxysubsubsection{\texorpdfstring{print\_mvar\_vars()}{print\_mvar\_vars()}}
 {\footnotesize\ttfamily \label{mqtt__rec_8c_a7ce8be1d4c8d4c9881d482bed4933512} 
 void print\+\_\+mvar\+\_\+vars (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{mqtt__rec_8c_source_l00236}{236}} of file \mbox{\hyperlink{mqtt__rec_8c_source}{mqtt\+\_\+rec.\+c}}.
 
 
 \begin{DoxyCode}{0}

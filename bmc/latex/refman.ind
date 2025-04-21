@@ -1,164 +1,300 @@
 \begin{theindex}
 
+  \item {ac0\_filter}
+    \subitem {bsoc.c}, \hyperpage{27}
+  \item {ac1\_filter}
+    \subitem {bsoc.c}, \hyperpage{27}
+  \item {ac2\_filter}
+    \subitem {bsoc.c}, \hyperpage{27}
+  \item {ac\_test}
+    \subitem {bsoc.c}, \hyperpage{27}
+
+  \indexspace
+
+  \item {bat\_current\_stable}
+    \subitem {bsoc.c}, \hyperpage{27}
+  \item {bsoc.c}
+    \subitem {ac0\_filter}, \hyperpage{27}
+    \subitem {ac1\_filter}, \hyperpage{27}
+    \subitem {ac2\_filter}, \hyperpage{27}
+    \subitem {ac\_test}, \hyperpage{27}
+    \subitem {bat\_current\_stable}, \hyperpage{27}
+    \subitem {bsoc\_ac}, \hyperpage{27}
+    \subitem {bsoc\_data\_collect}, \hyperpage{28}
+    \subitem {bsoc\_gti}, \hyperpage{28}
+    \subitem {bsoc\_init}, \hyperpage{29}
+    \subitem {bsoc\_set\_mode}, \hyperpage{29}
+    \subitem {bsoc\_set\_std\_dev}, \hyperpage{30}
+    \subitem {calculateStandardDeviation}, \hyperpage{31}
+    \subitem {dc0\_filter}, \hyperpage{31}
+    \subitem {dc1\_filter}, \hyperpage{31}
+    \subitem {dc2\_filter}, \hyperpage{31}
+    \subitem {drive0\_filter}, \hyperpage{32}
+    \subitem {drive1\_filter}, \hyperpage{32}
+    \subitem {error\_filter}, \hyperpage{32}
+    \subitem {get\_bat\_runtime}, \hyperpage{32}
+    \subitem {get\_batc\_dev}, \hyperpage{32}
+    \subitem {gti\_test}, \hyperpage{32}
+    \subitem {L}, \hyperpage{33}
+    \subitem {mqtt\_name}, \hyperpage{33}
+  \item {bsoc\_ac}
+    \subitem {bsoc.c}, \hyperpage{27}
+  \item {bsoc\_data\_collect}
+    \subitem {bsoc.c}, \hyperpage{28}
+  \item {bsoc\_gti}
+    \subitem {bsoc.c}, \hyperpage{28}
+  \item {bsoc\_init}
+    \subitem {bsoc.c}, \hyperpage{29}
+  \item {bsoc\_set\_mode}
+    \subitem {bsoc.c}, \hyperpage{29}
+  \item {bsoc\_set\_std\_dev}
+    \subitem {bsoc.c}, \hyperpage{30}
+
+  \indexspace
+
+  \item {calculateStandardDeviation}
+    \subitem {bsoc.c}, \hyperpage{31}
   \item {client\_id}
-    \subitem {energy.h}, \hyperpage{30}
+    \subitem {energy.h}, \hyperpage{39}
   \item {connlost}
     \subitem {energy.c}, \hyperpage{10}
-    \subitem {energy.h}, \hyperpage{32}
+    \subitem {energy.h}, \hyperpage{41}
+
+  \indexspace
+
+  \item {dc0\_filter}
+    \subitem {bsoc.c}, \hyperpage{31}
+  \item {dc1\_filter}
+    \subitem {bsoc.c}, \hyperpage{31}
+  \item {dc2\_filter}
+    \subitem {bsoc.c}, \hyperpage{31}
+  \item {delivered}
+    \subitem {mqtt\_rec.c}, \hyperpage{57}
+  \item {drive0\_filter}
+    \subitem {bsoc.c}, \hyperpage{32}
+  \item {drive1\_filter}
+    \subitem {bsoc.c}, \hyperpage{32}
 
   \indexspace
 
   \item {E}
-    \subitem {energy.c}, \hyperpage{23}
-    \subitem {energy.h}, \hyperpage{39}
+    \subitem {energy.c}, \hyperpage{24}
+    \subitem {energy.h}, \hyperpage{46}
   \item {energy.c}, \hyperpage{9}
     \subitem {connlost}, \hyperpage{10}
-    \subitem {E}, \hyperpage{23}
+    \subitem {E}, \hyperpage{24}
     \subitem {ha\_ac\_off}, \hyperpage{11}
     \subitem {ha\_ac\_on}, \hyperpage{11}
     \subitem {ha\_dc\_off}, \hyperpage{11}
     \subitem {ha\_dc\_on}, \hyperpage{11}
     \subitem {ha\_flag\_vars\_ha}, \hyperpage{24}
     \subitem {ha\_flag\_vars\_pc}, \hyperpage{24}
-    \subitem {ha\_flag\_vars\_sd}, \hyperpage{24}
+    \subitem {ha\_flag\_vars\_sd}, \hyperpage{25}
     \subitem {ha\_flag\_vars\_ss}, \hyperpage{25}
-    \subitem {log\_time}, \hyperpage{11}
+    \subitem {log\_time}, \hyperpage{12}
     \subitem {log\_timer}, \hyperpage{12}
     \subitem {main}, \hyperpage{12}
     \subitem {ramp\_down\_ac}, \hyperpage{19}
     \subitem {ramp\_down\_gti}, \hyperpage{19}
-    \subitem {ramp\_up\_ac}, \hyperpage{19}
-    \subitem {ramp\_up\_gti}, \hyperpage{19}
-    \subitem {sanity\_check}, \hyperpage{20}
+    \subitem {ramp\_up\_ac}, \hyperpage{20}
+    \subitem {ramp\_up\_gti}, \hyperpage{20}
+    \subitem {sanity\_check}, \hyperpage{21}
     \subitem {showIP}, \hyperpage{21}
     \subitem {skeleton\_daemon}, \hyperpage{21}
     \subitem {solar\_shutdown}, \hyperpage{22}
-    \subitem {sync\_ha}, \hyperpage{22}
+    \subitem {sync\_ha}, \hyperpage{23}
     \subitem {timer\_callback}, \hyperpage{23}
   \item {energy.h}
-    \subitem {client\_id}, \hyperpage{30}
-    \subitem {connlost}, \hyperpage{32}
-    \subitem {E}, \hyperpage{39}
-    \subitem {energy\_state}, \hyperpage{30}
-    \subitem {ha\_ac\_off}, \hyperpage{33}
-    \subitem {ha\_ac\_on}, \hyperpage{33}
-    \subitem {ha\_dc\_off}, \hyperpage{33}
-    \subitem {ha\_dc\_on}, \hyperpage{33}
-    \subitem {ha\_flag\_vars\_ss}, \hyperpage{39}
-    \subitem {iammeter\_id}, \hyperpage{30}
-    \subitem {iammeter\_phase}, \hyperpage{31}
-    \subitem {iammeter\_read}, \hyperpage{33}
-    \subitem {iammeter\_write\_callback}, \hyperpage{34}
-    \subitem {log\_time}, \hyperpage{35}
-    \subitem {log\_timer}, \hyperpage{35}
-    \subitem {mqtt\_vars}, \hyperpage{31}
-    \subitem {print\_im\_vars}, \hyperpage{35}
-    \subitem {print\_mvar\_vars}, \hyperpage{36}
-    \subitem {ramp\_down\_ac}, \hyperpage{36}
-    \subitem {ramp\_down\_gti}, \hyperpage{36}
-    \subitem {ramp\_up\_ac}, \hyperpage{36}
-    \subitem {ramp\_up\_gti}, \hyperpage{37}
-    \subitem {running\_state}, \hyperpage{31}
-    \subitem {sane\_vars}, \hyperpage{32}
-    \subitem {sanity\_check}, \hyperpage{38}
-    \subitem {sync\_ha}, \hyperpage{38}
-    \subitem {timer\_callback}, \hyperpage{38}
+    \subitem {client\_id}, \hyperpage{39}
+    \subitem {connlost}, \hyperpage{41}
+    \subitem {E}, \hyperpage{46}
+    \subitem {energy\_state}, \hyperpage{39}
+    \subitem {ha\_ac\_off}, \hyperpage{42}
+    \subitem {ha\_ac\_on}, \hyperpage{42}
+    \subitem {ha\_dc\_off}, \hyperpage{42}
+    \subitem {ha\_dc\_on}, \hyperpage{42}
+    \subitem {ha\_flag\_vars\_ss}, \hyperpage{46}
+    \subitem {iammeter\_id}, \hyperpage{39}
+    \subitem {iammeter\_phase}, \hyperpage{39}
+    \subitem {log\_time}, \hyperpage{42}
+    \subitem {log\_timer}, \hyperpage{43}
+    \subitem {mqtt\_vars}, \hyperpage{40}
+    \subitem {ramp\_down\_ac}, \hyperpage{43}
+    \subitem {ramp\_down\_gti}, \hyperpage{43}
+    \subitem {ramp\_up\_ac}, \hyperpage{44}
+    \subitem {ramp\_up\_gti}, \hyperpage{44}
+    \subitem {running\_state}, \hyperpage{40}
+    \subitem {sane\_vars}, \hyperpage{40}
+    \subitem {sanity\_check}, \hyperpage{45}
+    \subitem {sync\_ha}, \hyperpage{45}
+    \subitem {timer\_callback}, \hyperpage{46}
   \item {energy\_state}
-    \subitem {energy.h}, \hyperpage{30}
+    \subitem {energy.h}, \hyperpage{39}
   \item {energy\_type}, \hyperpage{5}
+  \item {error\_filter}
+    \subitem {bsoc.c}, \hyperpage{32}
+
+  \indexspace
+
+  \item {fm80\_float}
+    \subitem {mqtt\_rec.c}, \hyperpage{57}
+  \item {fm80\_sleep}
+    \subitem {mqtt\_rec.c}, \hyperpage{57}
+
+  \indexspace
+
+  \item {get\_bat\_runtime}
+    \subitem {bsoc.c}, \hyperpage{32}
+  \item {get\_batc\_dev}
+    \subitem {bsoc.c}, \hyperpage{32}
+  \item {gti\_test}
+    \subitem {bsoc.c}, \hyperpage{32}
 
   \indexspace
 
   \item {ha\_ac\_off}
     \subitem {energy.c}, \hyperpage{11}
-    \subitem {energy.h}, \hyperpage{33}
+    \subitem {energy.h}, \hyperpage{42}
   \item {ha\_ac\_on}
     \subitem {energy.c}, \hyperpage{11}
-    \subitem {energy.h}, \hyperpage{33}
+    \subitem {energy.h}, \hyperpage{42}
   \item {ha\_dc\_off}
     \subitem {energy.c}, \hyperpage{11}
-    \subitem {energy.h}, \hyperpage{33}
+    \subitem {energy.h}, \hyperpage{42}
   \item {ha\_dc\_on}
     \subitem {energy.c}, \hyperpage{11}
-    \subitem {energy.h}, \hyperpage{33}
-  \item {ha\_energy/bsoc.h}, \hyperpage{25}
-  \item {ha\_energy/energy.h}, \hyperpage{26}, \hyperpage{39}
-  \item {ha\_energy/http\_vars.h}, \hyperpage{44}
-  \item {ha\_energy/mqtt\_rec.h}, \hyperpage{44}
-  \item {ha\_energy/mqtt\_vars.h}, \hyperpage{45}
-  \item {ha\_energy/pid.h}, \hyperpage{45}
+    \subitem {energy.h}, \hyperpage{42}
+  \item {ha\_energy/bsoc.c}, \hyperpage{26}
+  \item {ha\_energy/bsoc.h}, \hyperpage{34}
+  \item {ha\_energy/energy.h}, \hyperpage{35}, \hyperpage{47}
+  \item {ha\_energy/http\_vars.c}, \hyperpage{51}
+  \item {ha\_energy/http\_vars.h}, \hyperpage{56}
+  \item {ha\_energy/mqtt\_rec.c}, \hyperpage{56}
+  \item {ha\_energy/mqtt\_rec.h}, \hyperpage{60}
+  \item {ha\_energy/mqtt\_vars.c}, \hyperpage{61}
+  \item {ha\_energy/mqtt\_vars.h}, \hyperpage{65}
+  \item {ha\_energy/pid.h}, \hyperpage{66}
   \item {ha\_flag\_type}, \hyperpage{6}
   \item {ha\_flag\_vars\_ha}
     \subitem {energy.c}, \hyperpage{24}
   \item {ha\_flag\_vars\_pc}
     \subitem {energy.c}, \hyperpage{24}
   \item {ha\_flag\_vars\_sd}
-    \subitem {energy.c}, \hyperpage{24}
+    \subitem {energy.c}, \hyperpage{25}
   \item {ha\_flag\_vars\_ss}
     \subitem {energy.c}, \hyperpage{25}
-    \subitem {energy.h}, \hyperpage{39}
+    \subitem {energy.h}, \hyperpage{46}
+  \item {http\_vars.c}
+    \subitem {iammeter\_get\_data}, \hyperpage{52}
+    \subitem {iammeter\_read1}, \hyperpage{52}
+    \subitem {iammeter\_read2}, \hyperpage{52}
+    \subitem {iammeter\_write\_callback1}, \hyperpage{53}
+    \subitem {iammeter\_write\_callback2}, \hyperpage{54}
+    \subitem {mqtt\_gti\_time}, \hyperpage{55}
+    \subitem {print\_im\_vars}, \hyperpage{55}
 
   \indexspace
 
+  \item {iammeter\_get\_data}
+    \subitem {http\_vars.c}, \hyperpage{52}
   \item {iammeter\_id}
-    \subitem {energy.h}, \hyperpage{30}
+    \subitem {energy.h}, \hyperpage{39}
   \item {iammeter\_phase}
-    \subitem {energy.h}, \hyperpage{31}
-  \item {iammeter\_read}
-    \subitem {energy.h}, \hyperpage{33}
-  \item {iammeter\_write\_callback}
-    \subitem {energy.h}, \hyperpage{34}
+    \subitem {energy.h}, \hyperpage{39}
+  \item {iammeter\_read1}
+    \subitem {http\_vars.c}, \hyperpage{52}
+  \item {iammeter\_read2}
+    \subitem {http\_vars.c}, \hyperpage{52}
+  \item {iammeter\_write\_callback1}
+    \subitem {http\_vars.c}, \hyperpage{53}
+  \item {iammeter\_write\_callback2}
+    \subitem {http\_vars.c}, \hyperpage{54}
 
   \indexspace
 
+  \item {json\_get\_data}
+    \subitem {mqtt\_rec.c}, \hyperpage{57}
+
+  \indexspace
+
+  \item {L}
+    \subitem {bsoc.c}, \hyperpage{33}
   \item {link\_type}, \hyperpage{7}
   \item {local\_type}, \hyperpage{7}
   \item {log\_time}
-    \subitem {energy.c}, \hyperpage{11}
-    \subitem {energy.h}, \hyperpage{35}
+    \subitem {energy.c}, \hyperpage{12}
+    \subitem {energy.h}, \hyperpage{42}
   \item {log\_timer}
     \subitem {energy.c}, \hyperpage{12}
-    \subitem {energy.h}, \hyperpage{35}
+    \subitem {energy.h}, \hyperpage{43}
 
   \indexspace
 
   \item {main}
     \subitem {energy.c}, \hyperpage{12}
   \item {mode\_type}, \hyperpage{7}
+  \item {mqtt\_gti\_power}
+    \subitem {mqtt\_vars.c}, \hyperpage{62}
+  \item {mqtt\_gti\_time}
+    \subitem {http\_vars.c}, \hyperpage{55}
+    \subitem {mqtt\_vars.c}, \hyperpage{62}
+  \item {mqtt\_ha\_pid}
+    \subitem {mqtt\_vars.c}, \hyperpage{63}
+  \item {mqtt\_ha\_shutdown}
+    \subitem {mqtt\_vars.c}, \hyperpage{64}
+  \item {mqtt\_ha\_switch}
+    \subitem {mqtt\_vars.c}, \hyperpage{64}
+  \item {mqtt\_name}
+    \subitem {bsoc.c}, \hyperpage{33}
+  \item {mqtt\_rec.c}
+    \subitem {delivered}, \hyperpage{57}
+    \subitem {fm80\_float}, \hyperpage{57}
+    \subitem {fm80\_sleep}, \hyperpage{57}
+    \subitem {json\_get\_data}, \hyperpage{57}
+    \subitem {msgarrvd}, \hyperpage{58}
+    \subitem {print\_mvar\_vars}, \hyperpage{60}
   \item {mqtt\_vars}
-    \subitem {energy.h}, \hyperpage{31}
+    \subitem {energy.h}, \hyperpage{40}
+  \item {mqtt\_vars.c}
+    \subitem {mqtt\_gti\_power}, \hyperpage{62}
+    \subitem {mqtt\_gti\_time}, \hyperpage{62}
+    \subitem {mqtt\_ha\_pid}, \hyperpage{63}
+    \subitem {mqtt\_ha\_shutdown}, \hyperpage{64}
+    \subitem {mqtt\_ha\_switch}, \hyperpage{64}
+  \item {msgarrvd}
+    \subitem {mqtt\_rec.c}, \hyperpage{58}
 
   \indexspace
 
   \item {print\_im\_vars}
-    \subitem {energy.h}, \hyperpage{35}
+    \subitem {http\_vars.c}, \hyperpage{55}
   \item {print\_mvar\_vars}
-    \subitem {energy.h}, \hyperpage{36}
+    \subitem {mqtt\_rec.c}, \hyperpage{60}
 
   \indexspace
 
   \item {ramp\_down\_ac}
     \subitem {energy.c}, \hyperpage{19}
-    \subitem {energy.h}, \hyperpage{36}
+    \subitem {energy.h}, \hyperpage{43}
   \item {ramp\_down\_gti}
     \subitem {energy.c}, \hyperpage{19}
-    \subitem {energy.h}, \hyperpage{36}
+    \subitem {energy.h}, \hyperpage{43}
   \item {ramp\_up\_ac}
-    \subitem {energy.c}, \hyperpage{19}
-    \subitem {energy.h}, \hyperpage{36}
+    \subitem {energy.c}, \hyperpage{20}
+    \subitem {energy.h}, \hyperpage{44}
   \item {ramp\_up\_gti}
-    \subitem {energy.c}, \hyperpage{19}
-    \subitem {energy.h}, \hyperpage{37}
+    \subitem {energy.c}, \hyperpage{20}
+    \subitem {energy.h}, \hyperpage{44}
   \item {running\_state}
-    \subitem {energy.h}, \hyperpage{31}
+    \subitem {energy.h}, \hyperpage{40}
 
   \indexspace
 
   \item {sane\_vars}
-    \subitem {energy.h}, \hyperpage{32}
+    \subitem {energy.h}, \hyperpage{40}
   \item {sanity\_check}
-    \subitem {energy.c}, \hyperpage{20}
-    \subitem {energy.h}, \hyperpage{38}
+    \subitem {energy.c}, \hyperpage{21}
+    \subitem {energy.h}, \hyperpage{45}
   \item {showIP}
     \subitem {energy.c}, \hyperpage{21}
   \item {skeleton\_daemon}
@@ -167,13 +303,13 @@
     \subitem {energy.c}, \hyperpage{22}
   \item {SPid}, \hyperpage{8}
   \item {sync\_ha}
-    \subitem {energy.c}, \hyperpage{22}
-    \subitem {energy.h}, \hyperpage{38}
+    \subitem {energy.c}, \hyperpage{23}
+    \subitem {energy.h}, \hyperpage{45}
 
   \indexspace
 
   \item {timer\_callback}
     \subitem {energy.c}, \hyperpage{23}
-    \subitem {energy.h}, \hyperpage{38}
+    \subitem {energy.h}, \hyperpage{46}
 
 \end{theindex}

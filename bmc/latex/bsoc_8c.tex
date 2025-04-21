@@ -1,7 +1,8 @@
 \doxysection{ha\+\_\+energy/bsoc.c File Reference}
 \hypertarget{bsoc_8c}{}\label{bsoc_8c}\index{ha\_energy/bsoc.c@{ha\_energy/bsoc.c}}
 {\ttfamily \#include "{}bsoc.\+h"{}}\newline
-Include dependency graph for bsoc.\+c\+:\nopagebreak
+Include dependency graph for bsoc.\+c\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -31,6 +32,8 @@ double \mbox{\hyperlink{bsoc_8c_ab9a97f08a9166d16e45b2025c3887eab}{bsoc\+\_\+gti
 double \mbox{\hyperlink{bsoc_8c_ade03000a21b56a5527367c81e7219c99}{gti\+\_\+test}} (void)
 \item 
 double \mbox{\hyperlink{bsoc_8c_a413c5066cb43aae0039adba36593129a}{ac\+\_\+test}} (void)
+\item 
+double \mbox{\hyperlink{bsoc_8c_a2dc9fddd6ca4c180193b8b183571d265}{get\+\_\+bat\+\_\+runtime}} (void)
 \item 
 double \mbox{\hyperlink{bsoc_8c_a8f6e0fd4594d467a89005d81038aa602}{get\+\_\+batc\+\_\+dev}} (void)
 \item 
@@ -68,10 +71,6 @@ static struct \mbox{\hyperlink{structlocal__type}{local\+\_\+type}} \mbox{\hyper
 \doxysubsection{Detailed Description}
 setup basic start state for BSOC functions 
 
-Definition in file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
-
-
-
 \label{doc-func-members}
 \Hypertarget{bsoc_8c_doc-func-members}
 \doxysubsection{Function Documentation}
@@ -80,432 +79,6 @@ Definition in file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
 \doxysubsubsection{\texorpdfstring{ac0\_filter()}{ac0\_filter()}}
 {\footnotesize\ttfamily \label{bsoc_8c_af738b354e21276b35d56a42f217ac1f8} 
 double ac0\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00375}{375}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{00376\ \{}
-\DoxyCodeLine{00377\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ accum\ =\ 0.0f;}
-\DoxyCodeLine{00378\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ coef\ =\ COEFF;}
-\DoxyCodeLine{00379\ \ \ \ \ accum\ =\ accum\ -\/\ accum\ /\ coef\ +\ raw;}
-\DoxyCodeLine{00380\ \ \ \ \ \textcolor{keywordflow}{return}\ accum\ /\ coef;}
-\DoxyCodeLine{00381\ \}}
-
-\end{DoxyCode}
-\Hypertarget{bsoc_8c_a4ec0fe226796da34c999530046265c3a}\index{bsoc.c@{bsoc.c}!ac1\_filter@{ac1\_filter}}
-\index{ac1\_filter@{ac1\_filter}!bsoc.c@{bsoc.c}}
-\doxysubsubsection{\texorpdfstring{ac1\_filter()}{ac1\_filter()}}
-{\footnotesize\ttfamily \label{bsoc_8c_a4ec0fe226796da34c999530046265c3a} 
-double ac1\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00383}{383}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{00384\ \{}
-\DoxyCodeLine{00385\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ accum\ =\ 0.0f;}
-\DoxyCodeLine{00386\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ coef\ =\ COEF;}
-\DoxyCodeLine{00387\ \ \ \ \ accum\ =\ accum\ -\/\ accum\ /\ coef\ +\ raw;}
-\DoxyCodeLine{00388\ \ \ \ \ \textcolor{keywordflow}{return}\ accum\ /\ coef;}
-\DoxyCodeLine{00389\ \}}
-
-\end{DoxyCode}
-\Hypertarget{bsoc_8c_aa933af2d3df8ce390f6f95900df4b525}\index{bsoc.c@{bsoc.c}!ac2\_filter@{ac2\_filter}}
-\index{ac2\_filter@{ac2\_filter}!bsoc.c@{bsoc.c}}
-\doxysubsubsection{\texorpdfstring{ac2\_filter()}{ac2\_filter()}}
-{\footnotesize\ttfamily \label{bsoc_8c_aa933af2d3df8ce390f6f95900df4b525} 
-double ac2\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00391}{391}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{00392\ \{}
-\DoxyCodeLine{00393\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ accum\ =\ 0.0f;}
-\DoxyCodeLine{00394\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ coef\ =\ COEF;}
-\DoxyCodeLine{00395\ \ \ \ \ accum\ =\ accum\ -\/\ accum\ /\ coef\ +\ raw;}
-\DoxyCodeLine{00396\ \ \ \ \ \textcolor{keywordflow}{return}\ accum\ /\ coef;}
-\DoxyCodeLine{00397\ \}}
-
-\end{DoxyCode}
-\Hypertarget{bsoc_8c_a413c5066cb43aae0039adba36593129a}\index{bsoc.c@{bsoc.c}!ac\_test@{ac\_test}}
-\index{ac\_test@{ac\_test}!bsoc.c@{bsoc.c}}
-\doxysubsubsection{\texorpdfstring{ac\_test()}{ac\_test()}}
-{\footnotesize\ttfamily \label{bsoc_8c_a413c5066cb43aae0039adba36593129a} 
-double ac\+\_\+test (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00190}{190}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{00191\ \{}
-\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keywordflow}{return}\ ac0\_filter(L.ac\_weight);}
-\DoxyCodeLine{00193\ \}}
-
-\end{DoxyCode}
-\Hypertarget{bsoc_8c_a4ff1d7778a0780a0f1c029a738322513}\index{bsoc.c@{bsoc.c}!bat\_current\_stable@{bat\_current\_stable}}
-\index{bat\_current\_stable@{bat\_current\_stable}!bsoc.c@{bsoc.c}}
-\doxysubsubsection{\texorpdfstring{bat\_current\_stable()}{bat\_current\_stable()}}
-{\footnotesize\ttfamily \label{bsoc_8c_a4ff1d7778a0780a0f1c029a738322513} 
-bool bat\+\_\+current\+\_\+stable (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00239}{239}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{00240\ \{}
-\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ gap\ =\ 0.0f;}
-\DoxyCodeLine{00242\ }
-\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keywordflow}{if}\ (L.batc\_std\_dev\ <=\ (MAX\_BATC\_DEV\ +\ gap))\ \{}
-\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ gap\ =\ MAX\_BATC\_DEV;}
-\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (L.bat\_c\_std\_dev[0]\ <\ BAT\_C\_DRAW)\ \{}
-\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ gap\ =\ 0.0f;}
-\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00251\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ gap\ =\ 0.0f;}
-\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00254\ \ \ \ \ \}}
-\DoxyCodeLine{00255\ \}}
-
-\end{DoxyCode}
-\Hypertarget{bsoc_8c_a63f8e1b6516cda51fd09570aaf4e147d}\index{bsoc.c@{bsoc.c}!bsoc\_ac@{bsoc\_ac}}
-\index{bsoc\_ac@{bsoc\_ac}!bsoc.c@{bsoc.c}}
-\doxysubsubsection{\texorpdfstring{bsoc\_ac()}{bsoc\_ac()}}
-{\footnotesize\ttfamily \label{bsoc_8c_a63f8e1b6516cda51fd09570aaf4e147d} 
-double bsoc\+\_\+ac (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00135}{135}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{00136\ \{}
-\DoxyCodeLine{00137\ }
-\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordflow}{return}\ ac0\_filter(L.ac\_weight);}
-\DoxyCodeLine{00139\ \};}
-
-\end{DoxyCode}
-\Hypertarget{bsoc_8c_a4c8b6884b4cae5d49a0d4141ce516372}\index{bsoc.c@{bsoc.c}!bsoc\_data\_collect@{bsoc\_data\_collect}}
-\index{bsoc\_data\_collect@{bsoc\_data\_collect}!bsoc.c@{bsoc.c}}
-\doxysubsubsection{\texorpdfstring{bsoc\_data\_collect()}{bsoc\_data\_collect()}}
-{\footnotesize\ttfamily \label{bsoc_8c_a4c8b6884b4cae5d49a0d4141ce516372} 
-bool bsoc\+\_\+data\+\_\+collect (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00085}{85}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{00086\ \{}
-\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{bool}\ ret\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ i\ =\ 0;}
-\DoxyCodeLine{00089\ \ \ \ \ \textcolor{comment}{//\ lockout\ threaded\ updates}}
-\DoxyCodeLine{00090\ \ \ \ \ pthread\_mutex\_lock(\&E.ha\_lock);\ \textcolor{comment}{//\ lockout\ MQTT\ var\ updates}}
-\DoxyCodeLine{00091\ }
-\DoxyCodeLine{00092\ \ \ \ \ L.ac\_weight\ =\ E.mvar[V\_FBEKW];}
-\DoxyCodeLine{00093\ \ \ \ \ L.gti\_weight\ =\ E.mvar[V\_FBEKW];}
-\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#ifdef\ FAKE\_VPV\ }\textcolor{comment}{//\ no\ DUMPLOAD\ AC\ charger}}
-\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.gti\_sw\_on)\ \{}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ pv\_voltage\ =\ PV\_V\_NOM;}
-\DoxyCodeLine{00097\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ pv\_voltage\ =\ PV\_V\_FAKE;}
-\DoxyCodeLine{00099\ \ \ \ \ \}}
-\DoxyCodeLine{00100\ \ \ \ \ E.mvar[V\_DVPV]\ =\ pv\_voltage;}
-\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#else}}
-\DoxyCodeLine{00102\ \ \ \ \ L.pv\_voltage\ =\ E.mvar[V\_DVPV];}
-\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00104\ \ \ \ \ L.bat\_voltage\ =\ E.mvar[V\_DVBAT];}
-\DoxyCodeLine{00105\ \ \ \ \ L.bat\_current\ =\ E.mvar[V\_DCMPPT];}
-\DoxyCodeLine{00106\ \ \ \ \ E.ac\_low\_adj\ =\ E.mvar[V\_FSO]*\ -\/0.5f;}
-\DoxyCodeLine{00107\ \ \ \ \ E.gti\_low\_adj\ =\ E.mvar[V\_FACE]\ *\ -\/0.5f;}
-\DoxyCodeLine{00108\ \ \ \ \ E.mode.dl\_mqtt\_max\ =\ E.mvar[V\_DPMPPT];}
-\DoxyCodeLine{00109\ }
-\DoxyCodeLine{00110\ \ \ \ \ pthread\_mutex\_unlock(\&E.ha\_lock);\ \textcolor{comment}{//\ resume\ remote\ MQTT\ var\ updates}}
-\DoxyCodeLine{00111\ }
-\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.ac\_low\_adj\ <\ -\/2000.0f)\ \{}
-\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ E.ac\_low\_adj\ =\ -\/2000.0f;}
-\DoxyCodeLine{00114\ \ \ \ \ \}}
-\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.gti\_low\_adj\ <\ -\/2000.0f)\ \{}
-\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ E.gti\_low\_adj\ =\ -\/2000.0f;}
-\DoxyCodeLine{00117\ \ \ \ \ \}}
-\DoxyCodeLine{00118\ }
-\DoxyCodeLine{00119\ \ \ \ \ L.bat\_c\_std\_dev[i++]\ =\ L.bat\_current;}
-\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ >=\ DEV\_SIZE)\ \{}
-\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ i\ =\ 0;}
-\DoxyCodeLine{00122\ \ \ \ \ \}}
-\DoxyCodeLine{00123\ }
-\DoxyCodeLine{00124\ \ \ \ \ calculateStandardDeviation(DEV\_SIZE,\ L.bat\_c\_std\_dev);}
-\DoxyCodeLine{00125\ }
-\DoxyCodeLine{00126\ \textcolor{preprocessor}{\#ifdef\ BSOC\_DEBUG}}
-\DoxyCodeLine{00127\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)nmqtt\ var\ bsoc\ update\(\backslash\)r\(\backslash\)n"{}});}
-\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
-\DoxyCodeLine{00130\ \}}
-
-\end{DoxyCode}
-\Hypertarget{bsoc_8c_ab9a97f08a9166d16e45b2025c3887eab}\index{bsoc.c@{bsoc.c}!bsoc\_gti@{bsoc\_gti}}
-\index{bsoc\_gti@{bsoc\_gti}!bsoc.c@{bsoc.c}}
-\doxysubsubsection{\texorpdfstring{bsoc\_gti()}{bsoc\_gti()}}
-{\footnotesize\ttfamily \label{bsoc_8c_ab9a97f08a9166d16e45b2025c3887eab} 
-double bsoc\+\_\+gti (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00145}{145}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{00146\ \{}
-\DoxyCodeLine{00147\ \textcolor{preprocessor}{\#ifdef\ BSOC\_DEBUG}}
-\DoxyCodeLine{00148\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}pvp\ \%f,\ gweight\ \%f,\ aweight\ \%f,\ batv\ \%f,\ batc\ \%f\(\backslash\)r\(\backslash\)n"{}},\ pv\_voltage,\ gti\_weight,\ ac\_weight,\ bat\_voltage,\ bat\_current);}
-\DoxyCodeLine{00149\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00150\ \ \ \ \ \textcolor{comment}{//\ check\ for\ 48VDC\ AC\ charger\ powered\ from\ the\ Solar\ battery\ bank\ AC\ inverter\ unless\ E.dl\_excess\ is\ TRUE}}
-\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordflow}{if}\ (((L.pv\_voltage\ <\ MIN\_PV\_VOLTS)\ \&\&\ (!E.dl\_excess))\ ||\ (L.bat\_voltage\ <\ MIN\_BAT\_VOLTS))\ \{}
-\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ L.gti\_weight\ =\ 0.0f;\ \textcolor{comment}{//\ reduce\ power\ to\ zero}}
-\DoxyCodeLine{00153\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.dl\_excess)\ \{}
-\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_DAHBAT]\ >\ PV\_DL\_B\_AH\_MIN)\ \{}
-\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ L.gti\_weight\ =\ PV\_DL\_EXCESS\ +\ E.dl\_excess\_adj;}
-\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ L.gti\_weight\ =\ 0.0f;\ \textcolor{comment}{//\ reduce\ power\ to\ zero}}
-\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00161\ \ \ \ \ \}}
-\DoxyCodeLine{00162\ }
-\DoxyCodeLine{00163\ }
-\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordflow}{return}\ dc0\_filter(L.gti\_weight);}
-\DoxyCodeLine{00165\ \};}
-
-\end{DoxyCode}
-\Hypertarget{bsoc_8c_a571a7c60ba1a2a6c569427c21c829733}\index{bsoc.c@{bsoc.c}!bsoc\_init@{bsoc\_init}}
-\index{bsoc\_init@{bsoc\_init}!bsoc.c@{bsoc.c}}
-\doxysubsubsection{\texorpdfstring{bsoc\_init()}{bsoc\_init()}}
-{\footnotesize\ttfamily \label{bsoc_8c_a571a7c60ba1a2a6c569427c21c829733} 
-bool bsoc\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00060}{60}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{00061\ \{}
-\DoxyCodeLine{00062\ \ \ \ \ L.ac\_weight\ =\ 0.0f;}
-\DoxyCodeLine{00063\ \ \ \ \ L.gti\_weight\ =\ 0.0f;}
-\DoxyCodeLine{00064\ \ \ \ \ \textcolor{comment}{//\ use\ MUTEX\ locks\ for\ message\ passing\ between\ remote\ programs}}
-\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordflow}{if}\ (pthread\_mutex\_init(\&E.ha\_lock,\ NULL)\ !=\ 0)\ \{}
-\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)n\%s\ mutex\ init\ has\ failed\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00068\ \ \ \ \ \}}
-\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00070\ \};}
-
-\end{DoxyCode}
-\Hypertarget{bsoc_8c_a49c1e06b8059a63a9ed7c7d729e59d90}\index{bsoc.c@{bsoc.c}!bsoc\_set\_mode@{bsoc\_set\_mode}}
-\index{bsoc\_set\_mode@{bsoc\_set\_mode}!bsoc.c@{bsoc.c}}
-\doxysubsubsection{\texorpdfstring{bsoc\_set\_mode()}{bsoc\_set\_mode()}}
-{\footnotesize\ttfamily \label{bsoc_8c_a49c1e06b8059a63a9ed7c7d729e59d90} 
-bool bsoc\+\_\+set\+\_\+mode (\begin{DoxyParamCaption}\item[{const double}]{target}{, }\item[{const bool}]{mode}{, }\item[{const bool}]{init}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00261}{261}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{00262\ \{}
-\DoxyCodeLine{00263\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ bsoc\_mode\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00264\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ bsoc\_high\ =\ \textcolor{keyword}{false},\ ha\_ac\_mode\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00265\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ accum\ =\ 0.0f,\ vpwa\ =\ 0.0f;}
-\DoxyCodeLine{00266\ }
-\DoxyCodeLine{00267\ \ \ \ \ \textcolor{keywordflow}{if}\ (init)\ \{}
-\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ bsoc\_mode\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ bsoc\_high\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ ha\_ac\_mode\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ accum\ =\ 0.0f;}
-\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ vpwa\ =\ 0.0f;}
-\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00274\ \ \ \ \ \}}
-\DoxyCodeLine{00275\ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00276\ \textcolor{comment}{\ \ \ \ \ *\ running\ avg\ filter}}
-\DoxyCodeLine{00277\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{00278\ \ \ \ \ accum\ =\ accum\ -\/\ accum\ /\ COEFN\ +\ E.mvar[V\_PWA];}
-\DoxyCodeLine{00279\ \ \ \ \ vpwa\ =\ accum\ /\ COEFN;}
-\DoxyCodeLine{00280\ }
-\DoxyCodeLine{00281\ \ \ \ \ \textcolor{keywordflow}{if}\ ((vpwa\ >=\ PV\_FULL\_PWR)\ \&\&\ (E.mvar[V\_FBEKW]\ >=\ MIN\_BAT\_KW\_BSOC\_HI))\ \{}
-\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!bsoc\_mode)\ \{}
-\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ ResetPI(\&E.mode.pid);}
-\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ bsoc\_mode\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ bsoc\_high\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!ha\_ac\_mode)\ \{}
-\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_ac\_on();}
-\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_ac\_mode\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00291\ }
-\DoxyCodeLine{00292\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bsoc\_high)\ \{\ \textcolor{comment}{//\ turn\ off\ at\ min\ limit\ power}}
-\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((vpwa\ >=\ PV\_MIN\_PWR)\ \&\&\ (E.mvar[V\_FBEKW]\ >=\ MIN\_BAT\_KW\_BSOC\_HI))\ \{}
-\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bsoc\_mode\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ha\_ac\_mode)\ \{}
-\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_ac\_off();}
-\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_ac\_mode\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bsoc\_high\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_ac\_mode\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00305\ \ \ \ \ \}}
-\DoxyCodeLine{00306\ }
-\DoxyCodeLine{00307\ \ \ \ \ E.mode.gti\_dumpload\ =\ (E.print\_vars[L3\_P]*\ -\/1.0f)\ +\ E.mvar[V\_DPPV];\ \textcolor{comment}{//\ use\ as\ a\ temp\ variable}}
-\DoxyCodeLine{00308\ \ \ \ \ E.mode.total\_system\ =\ (E.mvar[V\_FLO]\ -\/\ E.mode.gti\_dumpload)\ +\ E.mvar[V\_DPPV]\ +(E.print\_vars[L3\_P]*\ -\/1.0f);}
-\DoxyCodeLine{00309\ \ \ \ \ E.mode.gti\_dumpload\ =\ (E.print\_vars[L3\_P]*\ -\/1.0f)\ -\/\ E.mvar[V\_DPPV];\ \textcolor{comment}{//\ use\ this\ value}}
-\DoxyCodeLine{00310\ }
-\DoxyCodeLine{00311\ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00312\ \textcolor{comment}{\ \ \ \ \ *\ look\ at\ system\ energy\ balance\ for\ power\ control\ drive}}
-\DoxyCodeLine{00313\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{00314\ \ \ \ \ \textcolor{keywordflow}{if}\ (mode)\ \{\ \textcolor{comment}{//\ add\ GTI\ power\ from\ dumpload}}
-\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ E.mode.error\ =\ (int32\_t)\ UpdatePI(\&E.mode.pid,\ E.mvar[V\_BEN]\ +\ E.mode.gti\_dumpload\ +\ PBAL\_OFFSET);}
-\DoxyCodeLine{00316\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ E.mode.error\ =\ (int32\_t)\ UpdatePI(\&E.mode.pid,\ E.mvar[V\_BEN]\ +\ PBAL\_OFFSET);}
-\DoxyCodeLine{00318\ \ \ \ \ \}}
-\DoxyCodeLine{00319\ }
-\DoxyCodeLine{00320\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.error\ >\ 0.0f)\ \{}
-\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ L.coef\ =\ COEF;}
-\DoxyCodeLine{00322\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ L.coef\ =\ COEFN;}
-\DoxyCodeLine{00324\ \ \ \ \ \}}
-\DoxyCodeLine{00325\ \ \ \ \ E.mode.target\ =\ target;}
-\DoxyCodeLine{00326\ \ \ \ \ E.mode.error\ =\ round(error\_filter(E.mode.error));}
-\DoxyCodeLine{00327\ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00328\ \textcolor{comment}{\ \ \ \ \ *\ check\ for\ idle\ flag\ from\ HA}}
-\DoxyCodeLine{00329\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{00330\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.con6)\ \{}
-\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ ha\_ac\_mode\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ bsoc\_mode\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00333\ \ \ \ \ \}}
-\DoxyCodeLine{00334\ }
-\DoxyCodeLine{00335\ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00336\ \textcolor{comment}{\ \ \ \ \ *\ HA\ start\ excess\ button\ pressed}}
-\DoxyCodeLine{00337\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{00338\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.con4)\ \{}
-\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ E.dl\_excess\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ E.mode.con4\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00341\ \ \ \ \ \}}
-\DoxyCodeLine{00342\ }
-\DoxyCodeLine{00343\ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00344\ \textcolor{comment}{\ \ \ \ \ *\ HA\ stop\ excess\ button\ pressed}}
-\DoxyCodeLine{00345\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{00346\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.con5)\ \{}
-\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ mqtt\_gti\_power(E.client\_p,\ TOPIC\_P,\ DL\_POWER\_ZERO,\ 9);\ \textcolor{comment}{//\ zero\ power\ at\ excess\ shutdown}}
-\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ E.dl\_excess\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ E.mode.con5\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00350\ \ \ \ \ \}}
-\DoxyCodeLine{00351\ }
-\DoxyCodeLine{00352\ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00353\ \textcolor{comment}{\ \ \ \ \ *\ DL\ buffer\ battery\ low\ set-\/point\ excess\ load\ shutdown}}
-\DoxyCodeLine{00354\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{00355\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_DAHBAT]\ <\ PV\_DL\_B\_AH\_LOW)\ \{}
-\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ mqtt\_gti\_power(E.client\_p,\ TOPIC\_P,\ DL\_POWER\_ZERO,\ 10);\ \textcolor{comment}{//\ zero\ power\ at\ excess\ shutdown}}
-\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ E.dl\_excess\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ E.mode.con4\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ E.mode.con5\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00360\ \ \ \ \ \}}
-\DoxyCodeLine{00361\ }
-\DoxyCodeLine{00362\ \ \ \ \ \textcolor{keywordflow}{return}\ bsoc\_mode;}
-\DoxyCodeLine{00363\ \}}
-
-\end{DoxyCode}
-\Hypertarget{bsoc_8c_adc8522b4d922a9ce45f83ca6a8d2708c}\index{bsoc.c@{bsoc.c}!bsoc\_set\_std\_dev@{bsoc\_set\_std\_dev}}
-\index{bsoc\_set\_std\_dev@{bsoc\_set\_std\_dev}!bsoc.c@{bsoc.c}}
-\doxysubsubsection{\texorpdfstring{bsoc\_set\_std\_dev()}{bsoc\_set\_std\_dev()}}
-{\footnotesize\ttfamily \label{bsoc_8c_adc8522b4d922a9ce45f83ca6a8d2708c} 
-void bsoc\+\_\+set\+\_\+std\+\_\+dev (\begin{DoxyParamCaption}\item[{const double}]{value}{, }\item[{const uint32\+\_\+t}]{i}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00075}{75}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{00076\ \{}
-\DoxyCodeLine{00077\ \ \ \ \ L.bat\_c\_std\_dev[i]\ =\ value;}
-\DoxyCodeLine{00078\ \}}
-
-\end{DoxyCode}
-\Hypertarget{bsoc_8c_a822d408a5e379216cd6a003381f94b43}\index{bsoc.c@{bsoc.c}!calculateStandardDeviation@{calculateStandardDeviation}}
-\index{calculateStandardDeviation@{calculateStandardDeviation}!bsoc.c@{bsoc.c}}
-\doxysubsubsection{\texorpdfstring{calculateStandardDeviation()}{calculateStandardDeviation()}}
-{\footnotesize\ttfamily \label{bsoc_8c_a822d408a5e379216cd6a003381f94b43} 
-double calculate\+Standard\+Deviation (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{N}{, }\item[{const double}]{data}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00204}{204}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{00205\ \{}
-\DoxyCodeLine{00206\ \ \ \ \ \textcolor{comment}{//\ variable\ to\ store\ sum\ of\ the\ given\ data}}
-\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordtype}{double}\ sum\ =\ 0;}
-\DoxyCodeLine{00208\ }
-\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ i++)\ \{}
-\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ sum\ +=\ data[i];}
-\DoxyCodeLine{00211\ \ \ \ \ \}}
-\DoxyCodeLine{00212\ }
-\DoxyCodeLine{00213\ \ \ \ \ \textcolor{comment}{//\ calculating\ mean}}
-\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keywordtype}{double}\ mean\ =\ sum\ /\ N;}
-\DoxyCodeLine{00215\ }
-\DoxyCodeLine{00216\ \ \ \ \ \textcolor{comment}{//\ temporary\ variable\ to\ store\ the\ summation\ of\ square}}
-\DoxyCodeLine{00217\ \ \ \ \ \textcolor{comment}{//\ of\ difference\ between\ individual\ data\ items\ and\ mean}}
-\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordtype}{double}\ values\ =\ 0;}
-\DoxyCodeLine{00219\ }
-\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ i++)\ \{}
-\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ values\ +=\ pow(data[i]\ -\/\ mean,\ 2);}
-\DoxyCodeLine{00222\ \ \ \ \ \}}
-\DoxyCodeLine{00223\ }
-\DoxyCodeLine{00224\ \ \ \ \ \textcolor{comment}{//\ variance\ is\ the\ square\ of\ standard\ deviation}}
-\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keywordtype}{double}\ variance\ =\ values\ /\ N;}
-\DoxyCodeLine{00226\ }
-\DoxyCodeLine{00227\ \ \ \ \ \textcolor{comment}{//\ calculating\ standard\ deviation\ by\ finding\ square\ root}}
-\DoxyCodeLine{00228\ \ \ \ \ \textcolor{comment}{//\ of\ variance}}
-\DoxyCodeLine{00229\ \ \ \ \ \textcolor{keywordtype}{double}\ standardDeviation\ =\ sqrt(variance);}
-\DoxyCodeLine{00230\ \ \ \ \ L.batc\_std\_dev\ =\ standardDeviation;}
-\DoxyCodeLine{00231\ }
-\DoxyCodeLine{00232\ \textcolor{preprocessor}{\#ifdef\ BSOC\_DEBUG}}
-\DoxyCodeLine{00233\ \ \ \ \ \textcolor{comment}{//\ printing\ standard\ deviation}}
-\DoxyCodeLine{00234\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}STD\ DEV\ of\ Current\ \%.2f\(\backslash\)r\(\backslash\)n"{}},\ standardDeviation);}
-\DoxyCodeLine{00235\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00236\ \ \ \ \ \textcolor{keywordflow}{return}\ standardDeviation;}
-\DoxyCodeLine{00237\ \}}
-
-\end{DoxyCode}
-\Hypertarget{bsoc_8c_a017e138f3c81b9dd94af5d7e7bd7616c}\index{bsoc.c@{bsoc.c}!dc0\_filter@{dc0\_filter}}
-\index{dc0\_filter@{dc0\_filter}!bsoc.c@{bsoc.c}}
-\doxysubsubsection{\texorpdfstring{dc0\_filter()}{dc0\_filter()}}
-{\footnotesize\ttfamily \label{bsoc_8c_a017e138f3c81b9dd94af5d7e7bd7616c} 
-double dc0\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00399}{399}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
 
 
 \begin{DoxyCode}{0}
@@ -517,15 +90,11 @@ Definition at line \mbox{\hyperlink{bsoc_8c_source_l00399}{399}} of file \mbox{\
 \DoxyCodeLine{00405\ \}}
 
 \end{DoxyCode}
-\Hypertarget{bsoc_8c_a623a5ccd411eeeba8acd1132a33a15e8}\index{bsoc.c@{bsoc.c}!dc1\_filter@{dc1\_filter}}
-\index{dc1\_filter@{dc1\_filter}!bsoc.c@{bsoc.c}}
-\doxysubsubsection{\texorpdfstring{dc1\_filter()}{dc1\_filter()}}
-{\footnotesize\ttfamily \label{bsoc_8c_a623a5ccd411eeeba8acd1132a33a15e8} 
-double dc1\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00407}{407}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
+\Hypertarget{bsoc_8c_a4ec0fe226796da34c999530046265c3a}\index{bsoc.c@{bsoc.c}!ac1\_filter@{ac1\_filter}}
+\index{ac1\_filter@{ac1\_filter}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{ac1\_filter()}{ac1\_filter()}}
+{\footnotesize\ttfamily \label{bsoc_8c_a4ec0fe226796da34c999530046265c3a} 
+double ac1\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw}{}\end{DoxyParamCaption})}
 
 
 \begin{DoxyCode}{0}
@@ -537,15 +106,11 @@ Definition at line \mbox{\hyperlink{bsoc_8c_source_l00407}{407}} of file \mbox{\
 \DoxyCodeLine{00413\ \}}
 
 \end{DoxyCode}
-\Hypertarget{bsoc_8c_a4846561257bfbb8d753328d1fe7a1c07}\index{bsoc.c@{bsoc.c}!dc2\_filter@{dc2\_filter}}
-\index{dc2\_filter@{dc2\_filter}!bsoc.c@{bsoc.c}}
-\doxysubsubsection{\texorpdfstring{dc2\_filter()}{dc2\_filter()}}
-{\footnotesize\ttfamily \label{bsoc_8c_a4846561257bfbb8d753328d1fe7a1c07} 
-double dc2\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00415}{415}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
+\Hypertarget{bsoc_8c_aa933af2d3df8ce390f6f95900df4b525}\index{bsoc.c@{bsoc.c}!ac2\_filter@{ac2\_filter}}
+\index{ac2\_filter@{ac2\_filter}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{ac2\_filter()}{ac2\_filter()}}
+{\footnotesize\ttfamily \label{bsoc_8c_aa933af2d3df8ce390f6f95900df4b525} 
+double ac2\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw}{}\end{DoxyParamCaption})}
 
 
 \begin{DoxyCode}{0}
@@ -557,6 +122,392 @@ Definition at line \mbox{\hyperlink{bsoc_8c_source_l00415}{415}} of file \mbox{\
 \DoxyCodeLine{00421\ \}}
 
 \end{DoxyCode}
+\Hypertarget{bsoc_8c_a413c5066cb43aae0039adba36593129a}\index{bsoc.c@{bsoc.c}!ac\_test@{ac\_test}}
+\index{ac\_test@{ac\_test}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{ac\_test()}{ac\_test()}}
+{\footnotesize\ttfamily \label{bsoc_8c_a413c5066cb43aae0039adba36593129a} 
+double ac\+\_\+test (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00206\ \{}
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordflow}{return}\ ac0\_filter(L.ac\_weight);}
+\DoxyCodeLine{00208\ \}}
+
+\end{DoxyCode}
+\Hypertarget{bsoc_8c_a4ff1d7778a0780a0f1c029a738322513}\index{bsoc.c@{bsoc.c}!bat\_current\_stable@{bat\_current\_stable}}
+\index{bat\_current\_stable@{bat\_current\_stable}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{bat\_current\_stable()}{bat\_current\_stable()}}
+{\footnotesize\ttfamily \label{bsoc_8c_a4ff1d7778a0780a0f1c029a738322513} 
+bool bat\+\_\+current\+\_\+stable (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00260\ \{}
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ gap\ =\ 0.0f;}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00263\ \ \ \ \ \textcolor{keywordflow}{if}\ (L.batc\_std\_dev\ <=\ (MAX\_BATC\_DEV\ +\ gap))\ \{}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ gap\ =\ MAX\_BATC\_DEV;}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (L.bat\_c\_std\_dev[0]\ <\ BAT\_C\_DRAW)\ \{}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ gap\ =\ 0.0f;}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00271\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ gap\ =\ 0.0f;}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00274\ \ \ \ \ \}}
+\DoxyCodeLine{00275\ \}}
+
+\end{DoxyCode}
+\Hypertarget{bsoc_8c_a63f8e1b6516cda51fd09570aaf4e147d}\index{bsoc.c@{bsoc.c}!bsoc\_ac@{bsoc\_ac}}
+\index{bsoc\_ac@{bsoc\_ac}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{bsoc\_ac()}{bsoc\_ac()}}
+{\footnotesize\ttfamily \label{bsoc_8c_a63f8e1b6516cda51fd09570aaf4e147d} 
+double bsoc\+\_\+ac (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00139\ \{}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordflow}{return}\ ac0\_filter(L.ac\_weight);}
+\DoxyCodeLine{00142\ \};}
+
+\end{DoxyCode}
+\Hypertarget{bsoc_8c_a4c8b6884b4cae5d49a0d4141ce516372}\index{bsoc.c@{bsoc.c}!bsoc\_data\_collect@{bsoc\_data\_collect}}
+\index{bsoc\_data\_collect@{bsoc\_data\_collect}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{bsoc\_data\_collect()}{bsoc\_data\_collect()}}
+{\footnotesize\ttfamily \label{bsoc_8c_a4c8b6884b4cae5d49a0d4141ce516372} 
+bool bsoc\+\_\+data\+\_\+collect (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00087\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{bool}\ ret\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ i\ =\ 0;}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{comment}{//\ lockout\ threaded\ updates}}
+\DoxyCodeLine{00091\ \ \ \ \ pthread\_mutex\_lock(\&E.ha\_lock);\ \textcolor{comment}{//\ lockout\ MQTT\ var\ updates}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ L.ac\_weight\ =\ E.mvar[V\_FBEKW];}
+\DoxyCodeLine{00094\ \ \ \ \ L.gti\_weight\ =\ E.mvar[V\_FBEKW];}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#ifdef\ FAKE\_VPV\ }\textcolor{comment}{//\ no\ DUMPLOAD\ AC\ charger}}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.gti\_sw\_on)\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ pv\_voltage\ =\ PV\_V\_NOM;}
+\DoxyCodeLine{00098\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ pv\_voltage\ =\ PV\_V\_FAKE;}
+\DoxyCodeLine{00100\ \ \ \ \ \}}
+\DoxyCodeLine{00101\ \ \ \ \ E.mvar[V\_DVPV]\ =\ pv\_voltage;}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00103\ \ \ \ \ L.pv\_voltage\ =\ E.mvar[V\_DVPV];}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00105\ \ \ \ \ L.bat\_voltage\ =\ E.mvar[V\_DVBAT];}
+\DoxyCodeLine{00106\ \ \ \ \ L.bat\_current\ =\ E.mvar[V\_DCMPPT];}
+\DoxyCodeLine{00107\ \ \ \ \ L.bat\_runtime\ =\ E.mvar[V\_FRUNT];}
+\DoxyCodeLine{00108\ \ \ \ \ E.ac\_low\_adj\ =\ E.mvar[V\_FSO]*\ -\/0.5f;}
+\DoxyCodeLine{00109\ \ \ \ \ E.gti\_low\_adj\ =\ E.mvar[V\_FACE]\ *\ -\/0.5f;}
+\DoxyCodeLine{00110\ \ \ \ \ E.mode.dl\_mqtt\_max\ =\ E.mvar[V\_DPMPPT];}
+\DoxyCodeLine{00111\ \ \ \ \ E.bat\_runtime\ =\ E.mvar[V\_FRUNT];}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ pthread\_mutex\_unlock(\&E.ha\_lock);\ \textcolor{comment}{//\ resume\ remote\ MQTT\ var\ updates}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.ac\_low\_adj\ <\ -\/2000.0f)\ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ E.ac\_low\_adj\ =\ -\/2000.0f;}
+\DoxyCodeLine{00117\ \ \ \ \ \}}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.gti\_low\_adj\ <\ -\/2000.0f)\ \{}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ E.gti\_low\_adj\ =\ -\/2000.0f;}
+\DoxyCodeLine{00120\ \ \ \ \ \}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ L.bat\_c\_std\_dev[i++]\ =\ L.bat\_current;}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ >=\ DEV\_SIZE)\ \{}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ i\ =\ 0;}
+\DoxyCodeLine{00125\ \ \ \ \ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ calculateStandardDeviation(DEV\_SIZE,\ L.bat\_c\_std\_dev);}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\#ifdef\ BSOC\_DEBUG}}
+\DoxyCodeLine{00130\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)nmqtt\ var\ bsoc\ update\(\backslash\)r\(\backslash\)n"{}});}
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
+\DoxyCodeLine{00133\ \}}
+
+\end{DoxyCode}
+\Hypertarget{bsoc_8c_ab9a97f08a9166d16e45b2025c3887eab}\index{bsoc.c@{bsoc.c}!bsoc\_gti@{bsoc\_gti}}
+\index{bsoc\_gti@{bsoc\_gti}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{bsoc\_gti()}{bsoc\_gti()}}
+{\footnotesize\ttfamily \label{bsoc_8c_ab9a97f08a9166d16e45b2025c3887eab} 
+double bsoc\+\_\+gti (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00149\ \{}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ once\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00151\ \textcolor{preprocessor}{\#ifdef\ BSOC\_DEBUG}}
+\DoxyCodeLine{00152\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}pvp\ \%f,\ gweight\ \%f,\ aweight\ \%f,\ batv\ \%f,\ batc\ \%f\(\backslash\)r\(\backslash\)n"{}},\ pv\_voltage,\ gti\_weight,\ ac\_weight,\ bat\_voltage,\ bat\_current);}
+\DoxyCodeLine{00153\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{comment}{//\ check\ for\ 48VDC\ AC\ charger\ powered\ from\ the\ Solar\ battery\ bank\ AC\ inverter\ unless\ E.dl\_excess\ is\ TRUE}}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordflow}{if}\ (((L.pv\_voltage\ <\ MIN\_PV\_VOLTS)\ \&\&\ (!E.dl\_excess))\ ||\ (L.bat\_voltage\ <\ MIN\_BAT\_VOLTS))\ \{}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ L.gti\_weight\ =\ 0.0f;\ \textcolor{comment}{//\ reduce\ power\ to\ zero}}
+\DoxyCodeLine{00157\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.dl\_excess)\ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_DAHBAT]\ >\ PV\_DL\_B\_AH\_MIN)\ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ L.gti\_weight\ =\ PV\_DL\_EXCESS\ +\ E.dl\_excess\_adj;}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ once\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ L.gti\_weight\ =\ 0.0f;\ \textcolor{comment}{//\ reduce\ power\ to\ zero}}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (once)\ \{}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Dump\ Load\ Battery\ Ah\ below\ \%f\ \(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ PV\_DL\_B\_AH\_MIN);}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ once\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00170\ \ \ \ \ \}}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordflow}{return}\ dc0\_filter(L.gti\_weight);}
+\DoxyCodeLine{00174\ \};}
+
+\end{DoxyCode}
+\Hypertarget{bsoc_8c_a571a7c60ba1a2a6c569427c21c829733}\index{bsoc.c@{bsoc.c}!bsoc\_init@{bsoc\_init}}
+\index{bsoc\_init@{bsoc\_init}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{bsoc\_init()}{bsoc\_init()}}
+{\footnotesize\ttfamily \label{bsoc_8c_a571a7c60ba1a2a6c569427c21c829733} 
+bool bsoc\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00062\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ L.ac\_weight\ =\ 0.0f;}
+\DoxyCodeLine{00064\ \ \ \ \ L.gti\_weight\ =\ 0.0f;}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{comment}{//\ use\ MUTEX\ locks\ for\ message\ passing\ between\ remote\ programs}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{if}\ (pthread\_mutex\_init(\&E.ha\_lock,\ NULL)\ !=\ 0)\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ mutex\ init\ has\ failed\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00069\ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00071\ \};}
+
+\end{DoxyCode}
+\Hypertarget{bsoc_8c_a49c1e06b8059a63a9ed7c7d729e59d90}\index{bsoc.c@{bsoc.c}!bsoc\_set\_mode@{bsoc\_set\_mode}}
+\index{bsoc\_set\_mode@{bsoc\_set\_mode}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{bsoc\_set\_mode()}{bsoc\_set\_mode()}}
+{\footnotesize\ttfamily \label{bsoc_8c_a49c1e06b8059a63a9ed7c7d729e59d90} 
+bool bsoc\+\_\+set\+\_\+mode (\begin{DoxyParamCaption}\item[{const double}]{target}{, }\item[{const bool}]{mode}{, }\item[{const bool}]{init}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00282\ \{}
+\DoxyCodeLine{00283\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ bsoc\_mode\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00284\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ bsoc\_high\ =\ \textcolor{keyword}{false},\ ha\_ac\_mode\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00285\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ accum\ =\ 0.0f,\ vpwa\ =\ 0.0f;}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00287\ \ \ \ \ \textcolor{keywordflow}{if}\ (init)\ \{}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ bsoc\_mode\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ bsoc\_high\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ ha\_ac\_mode\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ accum\ =\ 0.0f;}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ vpwa\ =\ 0.0f;}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00294\ \ \ \ \ \}}
+\DoxyCodeLine{00295\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00296\ \textcolor{comment}{\ \ \ \ \ *\ running\ avg\ filter}}
+\DoxyCodeLine{00297\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00298\ \ \ \ \ accum\ =\ accum\ -\/\ accum\ /\ COEFN\ +\ E.mvar[V\_PWA];}
+\DoxyCodeLine{00299\ \ \ \ \ vpwa\ =\ accum\ /\ COEFN;}
+\DoxyCodeLine{00300\ }
+\DoxyCodeLine{00301\ \ \ \ \ \textcolor{keywordflow}{if}\ ((vpwa\ >=\ PV\_FULL\_PWR)\ \&\&\ (E.mvar[V\_FBEKW]\ >=\ MIN\_BAT\_KW\_BSOC\_HI))\ \{}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!bsoc\_mode)\ \{}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ ResetPI(\&E.mode.pid);}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ bsoc\_mode\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ bsoc\_high\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!ha\_ac\_mode)\ \{}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_ac\_on();}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_ac\_mode\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00311\ }
+\DoxyCodeLine{00312\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bsoc\_high)\ \{\ \textcolor{comment}{//\ turn\ off\ at\ min\ limit\ power}}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((vpwa\ >=\ PV\_MIN\_PWR)\ \&\&\ (E.mvar[V\_FBEKW]\ >=\ MIN\_BAT\_KW\_BSOC\_HI))\ \{}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bsoc\_mode\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ha\_ac\_mode)\ \{}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_ac\_off();}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_ac\_mode\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bsoc\_high\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_ac\_mode\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00325\ \ \ \ \ \}}
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00327\ \ \ \ \ E.mode.gti\_dumpload\ =\ (E.print\_vars[L3\_P]*\ -\/1.0f)\ +\ E.mvar[V\_DPPV];\ \textcolor{comment}{//\ use\ as\ a\ temp\ variable}}
+\DoxyCodeLine{00328\ \ \ \ \ E.mode.total\_system\ =\ (E.mvar[V\_FLO]\ -\/\ E.mode.gti\_dumpload)\ +\ E.mvar[V\_DPPV]\ +(E.print\_vars[L3\_P]*\ -\/1.0f);}
+\DoxyCodeLine{00329\ \ \ \ \ E.mode.gti\_dumpload\ =\ (E.print\_vars[L3\_P]*\ -\/1.0f)\ -\/\ E.mvar[V\_DPPV];\ \textcolor{comment}{//\ use\ this\ value}}
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00331\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00332\ \textcolor{comment}{\ \ \ \ \ *\ look\ at\ system\ energy\ balance\ for\ power\ control\ drive}}
+\DoxyCodeLine{00333\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00334\ \ \ \ \ \textcolor{keywordflow}{if}\ (mode)\ \{\ \textcolor{comment}{//\ add\ GTI\ power\ from\ dumpload}}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ E.mode.error\ =\ (int32\_t)\ UpdatePI(\&E.mode.pid,\ E.mvar[V\_BEN]\ +\ E.mode.gti\_dumpload\ +\ PBAL\_OFFSET);}
+\DoxyCodeLine{00336\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ E.mode.error\ =\ (int32\_t)\ UpdatePI(\&E.mode.pid,\ E.mvar[V\_BEN]\ +\ PBAL\_OFFSET);}
+\DoxyCodeLine{00338\ \ \ \ \ \}}
+\DoxyCodeLine{00339\ }
+\DoxyCodeLine{00340\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.error\ >\ 0.0f)\ \{}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ L.coef\ =\ COEF;}
+\DoxyCodeLine{00342\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ L.coef\ =\ COEFN;}
+\DoxyCodeLine{00344\ \ \ \ \ \}}
+\DoxyCodeLine{00345\ \ \ \ \ E.mode.target\ =\ target;}
+\DoxyCodeLine{00346\ \ \ \ \ E.mode.error\ =\ round(error\_filter(E.mode.error));}
+\DoxyCodeLine{00347\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00348\ \textcolor{comment}{\ \ \ \ \ *\ check\ for\ idle\ flag\ from\ HA}}
+\DoxyCodeLine{00349\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00350\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.con6)\ \{}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ ha\_ac\_mode\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ bsoc\_mode\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ idle\ flag\ from\ HA\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00354\ \ \ \ \ \}}
+\DoxyCodeLine{00355\ }
+\DoxyCodeLine{00356\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00357\ \textcolor{comment}{\ \ \ \ \ *\ HA\ start\ excess\ button\ pressed}}
+\DoxyCodeLine{00358\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00359\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.con4)\ \{}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ E.dl\_excess\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ E.mode.con4\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ HA\ start\ excess\ button\ pressed\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00363\ \ \ \ \ \}}
+\DoxyCodeLine{00364\ }
+\DoxyCodeLine{00365\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00366\ \textcolor{comment}{\ \ \ \ \ *\ HA\ stop\ excess\ button\ pressed}}
+\DoxyCodeLine{00367\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00368\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.con5)\ \{}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ mqtt\_gti\_power(E.client\_p,\ TOPIC\_P,\ DL\_POWER\_ZERO,\ 9);\ \textcolor{comment}{//\ zero\ power\ at\ excess\ shutdown}}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ E.dl\_excess\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ E.mode.con5\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ HA\ stop\ excess\ button\ pressed\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00373\ \ \ \ \ \}}
+\DoxyCodeLine{00374\ }
+\DoxyCodeLine{00375\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00376\ \textcolor{comment}{\ \ \ \ \ *\ DL\ buffer\ battery\ low\ set-\/point\ excess\ load\ shutdown}}
+\DoxyCodeLine{00377\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00378\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_DAHBAT]\ <\ PV\_DL\_B\_AH\_LOW)\ \{}
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ mqtt\_gti\_power(E.client\_p,\ TOPIC\_P,\ DL\_POWER\_ZERO,\ 10);\ \textcolor{comment}{//\ zero\ power\ at\ excess\ shutdown}}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ E.dl\_excess\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ E.mode.con4\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ E.mode.con5\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00383\ \ \ \ \ \}}
+\DoxyCodeLine{00384\ }
+\DoxyCodeLine{00385\ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00386\ \ \ \ \ \textcolor{keywordflow}{return}\ bsoc\_mode;}
+\DoxyCodeLine{00387\ \}}
+
+\end{DoxyCode}
+\Hypertarget{bsoc_8c_adc8522b4d922a9ce45f83ca6a8d2708c}\index{bsoc.c@{bsoc.c}!bsoc\_set\_std\_dev@{bsoc\_set\_std\_dev}}
+\index{bsoc\_set\_std\_dev@{bsoc\_set\_std\_dev}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{bsoc\_set\_std\_dev()}{bsoc\_set\_std\_dev()}}
+{\footnotesize\ttfamily \label{bsoc_8c_adc8522b4d922a9ce45f83ca6a8d2708c} 
+void bsoc\+\_\+set\+\_\+std\+\_\+dev (\begin{DoxyParamCaption}\item[{const double}]{value}{, }\item[{const uint32\+\_\+t}]{i}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00077\ \{}
+\DoxyCodeLine{00078\ \ \ \ \ L.bat\_c\_std\_dev[i]\ =\ value;}
+\DoxyCodeLine{00079\ \}}
+
+\end{DoxyCode}
+\Hypertarget{bsoc_8c_a822d408a5e379216cd6a003381f94b43}\index{bsoc.c@{bsoc.c}!calculateStandardDeviation@{calculateStandardDeviation}}
+\index{calculateStandardDeviation@{calculateStandardDeviation}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{calculateStandardDeviation()}{calculateStandardDeviation()}}
+{\footnotesize\ttfamily \label{bsoc_8c_a822d408a5e379216cd6a003381f94b43} 
+double calculate\+Standard\+Deviation (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{N}{, }\item[{const double}]{data}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00225\ \{}
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{comment}{//\ variable\ to\ store\ sum\ of\ the\ given\ data}}
+\DoxyCodeLine{00227\ \ \ \ \ \textcolor{keywordtype}{double}\ sum\ =\ 0;}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ i++)\ \{}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ sum\ +=\ data[i];}
+\DoxyCodeLine{00231\ \ \ \ \ \}}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{comment}{//\ calculating\ mean}}
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{keywordtype}{double}\ mean\ =\ sum\ /\ N;}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{comment}{//\ temporary\ variable\ to\ store\ the\ summation\ of\ square}}
+\DoxyCodeLine{00237\ \ \ \ \ \textcolor{comment}{//\ of\ difference\ between\ individual\ data\ items\ and\ mean}}
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keywordtype}{double}\ values\ =\ 0;}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ i++)\ \{}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ values\ +=\ pow(data[i]\ -\/\ mean,\ 2);}
+\DoxyCodeLine{00242\ \ \ \ \ \}}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{comment}{//\ variance\ is\ the\ square\ of\ standard\ deviation}}
+\DoxyCodeLine{00245\ \ \ \ \ \textcolor{keywordtype}{double}\ variance\ =\ values\ /\ N;}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{comment}{//\ calculating\ standard\ deviation\ by\ finding\ square\ root}}
+\DoxyCodeLine{00248\ \ \ \ \ \textcolor{comment}{//\ of\ variance}}
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keywordtype}{double}\ standardDeviation\ =\ sqrt(variance);}
+\DoxyCodeLine{00250\ \ \ \ \ L.batc\_std\_dev\ =\ standardDeviation;}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00252\ \textcolor{preprocessor}{\#ifdef\ BSOC\_DEBUG}}
+\DoxyCodeLine{00253\ \ \ \ \ \textcolor{comment}{//\ printing\ standard\ deviation}}
+\DoxyCodeLine{00254\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}STD\ DEV\ of\ Current\ \%.2f\(\backslash\)r\(\backslash\)n"{}},\ standardDeviation);}
+\DoxyCodeLine{00255\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{keywordflow}{return}\ standardDeviation;}
+\DoxyCodeLine{00257\ \}}
+
+\end{DoxyCode}
+\Hypertarget{bsoc_8c_a017e138f3c81b9dd94af5d7e7bd7616c}\index{bsoc.c@{bsoc.c}!dc0\_filter@{dc0\_filter}}
+\index{dc0\_filter@{dc0\_filter}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{dc0\_filter()}{dc0\_filter()}}
+{\footnotesize\ttfamily \label{bsoc_8c_a017e138f3c81b9dd94af5d7e7bd7616c} 
+double dc0\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00424\ \{}
+\DoxyCodeLine{00425\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ accum\ =\ 0.0f;}
+\DoxyCodeLine{00426\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ coef\ =\ COEFF;}
+\DoxyCodeLine{00427\ \ \ \ \ accum\ =\ accum\ -\/\ accum\ /\ coef\ +\ raw;}
+\DoxyCodeLine{00428\ \ \ \ \ \textcolor{keywordflow}{return}\ accum\ /\ coef;}
+\DoxyCodeLine{00429\ \}}
+
+\end{DoxyCode}
+\Hypertarget{bsoc_8c_a623a5ccd411eeeba8acd1132a33a15e8}\index{bsoc.c@{bsoc.c}!dc1\_filter@{dc1\_filter}}
+\index{dc1\_filter@{dc1\_filter}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{dc1\_filter()}{dc1\_filter()}}
+{\footnotesize\ttfamily \label{bsoc_8c_a623a5ccd411eeeba8acd1132a33a15e8} 
+double dc1\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00432\ \{}
+\DoxyCodeLine{00433\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ accum\ =\ 0.0f;}
+\DoxyCodeLine{00434\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ coef\ =\ COEF;}
+\DoxyCodeLine{00435\ \ \ \ \ accum\ =\ accum\ -\/\ accum\ /\ coef\ +\ raw;}
+\DoxyCodeLine{00436\ \ \ \ \ \textcolor{keywordflow}{return}\ accum\ /\ coef;}
+\DoxyCodeLine{00437\ \}}
+
+\end{DoxyCode}
+\Hypertarget{bsoc_8c_a4846561257bfbb8d753328d1fe7a1c07}\index{bsoc.c@{bsoc.c}!dc2\_filter@{dc2\_filter}}
+\index{dc2\_filter@{dc2\_filter}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{dc2\_filter()}{dc2\_filter()}}
+{\footnotesize\ttfamily \label{bsoc_8c_a4846561257bfbb8d753328d1fe7a1c07} 
+double dc2\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00440\ \{}
+\DoxyCodeLine{00441\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ accum\ =\ 0.0f;}
+\DoxyCodeLine{00442\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ coef\ =\ COEF;}
+\DoxyCodeLine{00443\ \ \ \ \ accum\ =\ accum\ -\/\ accum\ /\ coef\ +\ raw;}
+\DoxyCodeLine{00444\ \ \ \ \ \textcolor{keywordflow}{return}\ accum\ /\ coef;}
+\DoxyCodeLine{00445\ \}}
+
+\end{DoxyCode}
 \Hypertarget{bsoc_8c_a9ceac393328d0a6c09cccc8c38fa30a1}\index{bsoc.c@{bsoc.c}!drive0\_filter@{drive0\_filter}}
 \index{drive0\_filter@{drive0\_filter}!bsoc.c@{bsoc.c}}
 \doxysubsubsection{\texorpdfstring{drive0\_filter()}{drive0\_filter()}}
@@ -564,17 +515,13 @@ Definition at line \mbox{\hyperlink{bsoc_8c_source_l00415}{415}} of file \mbox{\
 double drive0\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw}{}\end{DoxyParamCaption})}
 
 
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00423}{423}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
-
-
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00424\ \{}
-\DoxyCodeLine{00425\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ accum\ =\ 0.0f;}
-\DoxyCodeLine{00426\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ coef\ =\ COEF;}
-\DoxyCodeLine{00427\ \ \ \ \ accum\ =\ accum\ -\/\ accum\ /\ coef\ +\ raw;}
-\DoxyCodeLine{00428\ \ \ \ \ \textcolor{keywordflow}{return}\ accum\ /\ coef;}
-\DoxyCodeLine{00429\ \}}
+\DoxyCodeLine{00448\ \{}
+\DoxyCodeLine{00449\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ accum\ =\ 0.0f;}
+\DoxyCodeLine{00450\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ coef\ =\ COEF;}
+\DoxyCodeLine{00451\ \ \ \ \ accum\ =\ accum\ -\/\ accum\ /\ coef\ +\ raw;}
+\DoxyCodeLine{00452\ \ \ \ \ \textcolor{keywordflow}{return}\ accum\ /\ coef;}
+\DoxyCodeLine{00453\ \}}
 
 \end{DoxyCode}
 \Hypertarget{bsoc_8c_a9cf492c9b858a53133af1b29b9f68708}\index{bsoc.c@{bsoc.c}!drive1\_filter@{drive1\_filter}}
@@ -584,17 +531,13 @@ Definition at line \mbox{\hyperlink{bsoc_8c_source_l00423}{423}} of file \mbox{\
 double drive1\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw}{}\end{DoxyParamCaption})}
 
 
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00431}{431}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
-
-
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00432\ \{}
-\DoxyCodeLine{00433\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ accum\ =\ 0.0f;}
-\DoxyCodeLine{00434\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ coef\ =\ COEFF;}
-\DoxyCodeLine{00435\ \ \ \ \ accum\ =\ accum\ -\/\ accum\ /\ coef\ +\ raw;}
-\DoxyCodeLine{00436\ \ \ \ \ \textcolor{keywordflow}{return}\ accum\ /\ coef;}
-\DoxyCodeLine{00437\ \}}
+\DoxyCodeLine{00456\ \{}
+\DoxyCodeLine{00457\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ accum\ =\ 0.0f;}
+\DoxyCodeLine{00458\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ coef\ =\ COEFF;}
+\DoxyCodeLine{00459\ \ \ \ \ accum\ =\ accum\ -\/\ accum\ /\ coef\ +\ raw;}
+\DoxyCodeLine{00460\ \ \ \ \ \textcolor{keywordflow}{return}\ accum\ /\ coef;}
+\DoxyCodeLine{00461\ \}}
 
 \end{DoxyCode}
 \Hypertarget{bsoc_8c_aa9b00e4f08c59d45a2baa05cc44191a2}\index{bsoc.c@{bsoc.c}!error\_filter@{error\_filter}}
@@ -604,16 +547,25 @@ Definition at line \mbox{\hyperlink{bsoc_8c_source_l00431}{431}} of file \mbox{\
 double error\+\_\+filter (\begin{DoxyParamCaption}\item[{const double}]{raw}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00393\ \{}
+\DoxyCodeLine{00394\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ accum\ =\ 0.0f;}
+\DoxyCodeLine{00395\ \ \ \ \ accum\ =\ accum\ -\/\ accum\ /\ L.coef\ +\ raw;}
+\DoxyCodeLine{00396\ \ \ \ \ \textcolor{keywordflow}{return}\ accum\ /\ L.coef;}
+\DoxyCodeLine{00397\ \}}
 
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00368}{368}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
+\end{DoxyCode}
+\Hypertarget{bsoc_8c_a2dc9fddd6ca4c180193b8b183571d265}\index{bsoc.c@{bsoc.c}!get\_bat\_runtime@{get\_bat\_runtime}}
+\index{get\_bat\_runtime@{get\_bat\_runtime}!bsoc.c@{bsoc.c}}
+\doxysubsubsection{\texorpdfstring{get\_bat\_runtime()}{get\_bat\_runtime()}}
+{\footnotesize\ttfamily \label{bsoc_8c_a2dc9fddd6ca4c180193b8b183571d265} 
+double get\+\_\+bat\+\_\+runtime (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00369\ \{}
-\DoxyCodeLine{00370\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ accum\ =\ 0.0f;}
-\DoxyCodeLine{00371\ \ \ \ \ accum\ =\ accum\ -\/\ accum\ /\ L.coef\ +\ raw;}
-\DoxyCodeLine{00372\ \ \ \ \ \textcolor{keywordflow}{return}\ accum\ /\ L.coef;}
-\DoxyCodeLine{00373\ \}}
+\DoxyCodeLine{00211\ \{}
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keywordflow}{return}\ L.bat\_runtime;}
+\DoxyCodeLine{00213\ \}}
 
 \end{DoxyCode}
 \Hypertarget{bsoc_8c_a8f6e0fd4594d467a89005d81038aa602}\index{bsoc.c@{bsoc.c}!get\_batc\_dev@{get\_batc\_dev}}
@@ -623,14 +575,10 @@ Definition at line \mbox{\hyperlink{bsoc_8c_source_l00368}{368}} of file \mbox{\
 double get\+\_\+batc\+\_\+dev (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
 
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00195}{195}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
-
-
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00196\ \{}
-\DoxyCodeLine{00197\ \ \ \ \ \textcolor{keywordflow}{return}\ L.batc\_std\_dev;}
-\DoxyCodeLine{00198\ \}}
+\DoxyCodeLine{00216\ \{}
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keywordflow}{return}\ L.batc\_std\_dev;}
+\DoxyCodeLine{00218\ \}}
 
 \end{DoxyCode}
 \Hypertarget{bsoc_8c_ade03000a21b56a5527367c81e7219c99}\index{bsoc.c@{bsoc.c}!gti\_test@{gti\_test}}
@@ -640,29 +588,31 @@ Definition at line \mbox{\hyperlink{bsoc_8c_source_l00195}{195}} of file \mbox{\
 double gti\+\_\+test (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
 
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00170}{170}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
-
-
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00171\ \{}
-\DoxyCodeLine{00172\ \ \ \ \ \textcolor{comment}{//\ check\ for\ 48VDC\ AC\ charger\ powered\ from\ the\ Solar\ battery\ bank\ AC\ inverter}}
-\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordflow}{if}\ (((L.pv\_voltage\ <\ MIN\_PV\_VOLTS)\ \&\&\ (!E.dl\_excess))\ ||\ (L.bat\_voltage\ <\ MIN\_BAT\_VOLTS))\ \{}
-\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ L.gti\_weight\ =\ 0.0f;\ \textcolor{comment}{//\ reduce\ power\ to\ zero}}
-\DoxyCodeLine{00175\ \textcolor{preprocessor}{\#ifdef\ BSOC\_DEBUG}}
-\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}pvp\ \%8.2f,\ gweight\ \%8.2f,\ aweight\ \%8.2f,\ batv\ \%8.2f,\ batc\ \%8.2f\(\backslash\)r\(\backslash\)n"{}},\ pv\_voltage,\ gti\_weight,\ ac\_weight,\ bat\_voltage,\ bat\_current);}
-\DoxyCodeLine{00177\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00178\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.dl\_excess)\ \{}
-\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_DAHBAT]\ >\ PV\_DL\_B\_AH\_MIN)\ \{}
-\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ L.gti\_weight\ =\ PV\_DL\_EXCESS\ +\ E.dl\_excess\_adj;}
-\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ L.gti\_weight\ =\ 0.0f;\ \textcolor{comment}{//\ reduce\ power\ to\ zero}}
-\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00186\ \ \ \ \ \}}
-\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keywordflow}{return}\ dc0\_filter(L.gti\_weight);}
-\DoxyCodeLine{00188\ \}}
+\DoxyCodeLine{00180\ \{}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ once\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{comment}{//\ check\ for\ 48VDC\ AC\ charger\ powered\ from\ the\ Solar\ battery\ bank\ AC\ inverter}}
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keywordflow}{if}\ (((L.pv\_voltage\ <\ MIN\_PV\_VOLTS)\ \&\&\ (!E.dl\_excess))\ ||\ (L.bat\_voltage\ <\ MIN\_BAT\_VOLTS))\ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ L.gti\_weight\ =\ 0.0f;\ \textcolor{comment}{//\ reduce\ power\ to\ zero}}
+\DoxyCodeLine{00185\ \textcolor{preprocessor}{\#ifdef\ BSOC\_DEBUG}}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}pvp\ \%8.2f,\ gweight\ \%8.2f,\ aweight\ \%8.2f,\ batv\ \%8.2f,\ batc\ \%8.2f\(\backslash\)r\(\backslash\)n"{}},\ pv\_voltage,\ gti\_weight,\ ac\_weight,\ bat\_voltage,\ bat\_current);}
+\DoxyCodeLine{00187\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00188\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.dl\_excess)\ \{}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_DAHBAT]\ >\ PV\_DL\_B\_AH\_MIN)\ \{}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ L.gti\_weight\ =\ PV\_DL\_EXCESS\ +\ E.dl\_excess\_adj;}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ once\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ L.gti\_weight\ =\ 0.0f;\ \textcolor{comment}{//\ reduce\ power\ to\ zero}}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (once)\ \{}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Dump\ Load\ Battery\ Ah\ below\ \%f\ \(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ PV\_DL\_B\_AH\_MIN);}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ once\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00201\ \ \ \ \ \}}
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keywordflow}{return}\ dc0\_filter(L.gti\_weight);}
+\DoxyCodeLine{00203\ \}}
 
 \end{DoxyCode}
 
@@ -686,13 +636,10 @@ struct \mbox{\hyperlink{structlocal__type}{local\+\_\+type}} L\hspace{0.3cm}{\tt
 \DoxyCodeLine{\ \ \ \ .coef\ =\ COEF,}
 \DoxyCodeLine{\ \ \ \ .gti\_weight\ =\ 0.0f,}
 \DoxyCodeLine{\ \ \ \ .pv\_voltage\ =\ 0.0f,}
+\DoxyCodeLine{\ \ \ \ .bat\_runtime\ =\ 0.0f,}
 \DoxyCodeLine{\}}
 
 \end{DoxyCode}
-
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00045}{45}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
-
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
@@ -703,7 +650,8 @@ Definition at line \mbox{\hyperlink{bsoc_8c_source_l00045}{45}} of file \mbox{\h
 \DoxyCodeLine{00050\ \ \ \ \ .coef\ =\ COEF,}
 \DoxyCodeLine{00051\ \ \ \ \ .gti\_weight\ =\ 0.0f,}
 \DoxyCodeLine{00052\ \ \ \ \ .pv\_voltage\ =\ 0.0f,}
-\DoxyCodeLine{00053\ \};}
+\DoxyCodeLine{00053\ \ \ \ \ .bat\_runtime\ =\ 0.0f,}
+\DoxyCodeLine{00054\ \};}
 
 \end{DoxyCode}
 \Hypertarget{bsoc_8c_ae6b57480d8cda466cfc65b9bfc47b255}\index{bsoc.c@{bsoc.c}!mqtt\_name@{mqtt\_name}}
@@ -711,10 +659,6 @@ Definition at line \mbox{\hyperlink{bsoc_8c_source_l00045}{45}} of file \mbox{\h
 \doxysubsubsection{\texorpdfstring{mqtt\_name}{mqtt\_name}}
 {\footnotesize\ttfamily \label{bsoc_8c_ae6b57480d8cda466cfc65b9bfc47b255} 
 const char\texorpdfstring{$\ast$}{*} mqtt\+\_\+name\mbox{[}V\+\_\+\+DLAST\mbox{]}}
-
-
-
-Definition at line \mbox{\hyperlink{bsoc_8c_source_l00003}{3}} of file \mbox{\hyperlink{bsoc_8c_source}{bsoc.\+c}}.
 
 
 \begin{DoxyCode}{0}

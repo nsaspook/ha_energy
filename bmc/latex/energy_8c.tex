@@ -3,7 +3,8 @@
 {\ttfamily \#include "{}ha\+\_\+energy/energy.\+h"{}}\newline
 {\ttfamily \#include "{}ha\+\_\+energy/mqtt\+\_\+rec.\+h"{}}\newline
 {\ttfamily \#include "{}ha\+\_\+energy/bsoc.\+h"{}}\newline
-Include dependency graph for energy.\+c\+:\nopagebreak
+Include dependency graph for energy.\+c\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -76,8 +77,10 @@ struct \mbox{\hyperlink{structenergy__type}{energy\+\_\+type}} \mbox{\hyperlink{
 \doxysubsection{Detailed Description}
 V0.\+25 add Home Assistant Matter controlled utility power control switching V0.\+26 BSOC weights for system condition for power diversion V0.\+27 -\/\texorpdfstring{$>$}{>} V0.\+28 GTI power ramps stability using battery current STD DEV V0.\+29 log date-\/time and spam control V0.\+30 add iammeter http data reading and processing V0.\+31 refactor http code and a few vars V0.\+32 AC and GTI power triggers reworked V0.\+33 refactor system parms into energy structure \doxylink{structenergy__type}{energy\+\_\+type} E V0.\+34 GTI and AC Inverter battery energy run down limits adjustments per energy usage and solar production V0.\+35 more refactors and global variable consolidation V0.\+36 more command repeat fixes for ramp up/down dumpload commands V0.\+37 Power feedback to use PV power to GTI and AC loads V0.\+38 signal filters to smooth large power swings in control optimization V0.\+39 fix optimizer bugs and add AC load switching set-\/points in BSOC control V0.\+40 shutdown and restart fixes V0.\+41 fix errors and warning per cppcheck V0.\+42 fake ac charger for dumpload using FAKE\+\_\+\+VPV define V0.\+43 adjust PV\+\_\+\+BIAS per float or charging status V0.\+44 tune for spring/summer solar conditions V0.\+50 convert main loop code to FSM V0.\+51 logging time additions V0.\+52 tune GTI inverter levels for better conversion efficiency V0.\+53 sync to HA back-\/end switch status V0.\+54 data source shutdown functions V0.\+55 off-\/grid inverter power tracking for HA V0.\+56 run as Daemon in background V0.\+62 adjust battery critical to keep making energy calculations V0.\+63 add IP address logging V0.\+64 Dump Load excess load mode programming V.\+065 DL excess logic tuning and power adjustments V.\+066 -\/\texorpdfstring{$>$}{>} V.\+068 Various timing fixes to reduce spamming commands and logs V.\+069 send MQTT showdown commands to HA when critical energy conditions are meet V.\+070 process Home Assistant MQTT commands sent from automation\textquotesingle{}s
 
-V.\+071 comment additions, logging improvements and code cleanups V.\+072 -\/\texorpdfstring{$>$}{>} V.\+073 fine tune GTI and AC power lower limits V.\+074 Doxygen comments added V.\+075 connection lost logging and Keep Alive fixes 
+V.\+071 comment additions, logging improvements and code cleanups V.\+072 -\/\texorpdfstring{$>$}{>} V.\+073 fine tune GTI and AC power lower limits V.\+074 Doxygen comments added V.\+075 connection lost logging and Keep Alive fixes V.\+076 control setpoints tuning for main battery runtime limits 
 
+\label{doc-func-members}
+\Hypertarget{energy_8c_doc-func-members}
 \doxysubsection{Function Documentation}
 \Hypertarget{energy_8c_a2a87ef47168dc639b307a285b8cb4462}\index{energy.c@{energy.c}!connlost@{connlost}}
 \index{connlost@{connlost}!energy.c@{energy.c}}
@@ -87,47 +90,52 @@ void connlost (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{
 
 trouble in River-\/city
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00301\ \{}
-\DoxyCodeLine{00302\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structha__flag__type}{ha\_flag\_type}}\ *ha\_flag\ =\ context;}
-\DoxyCodeLine{00303\ \ \ \ \ int32\_t\ id\_num\ =\ ha\_flag-\/>ha\_id;}
-\DoxyCodeLine{00304\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ times\ =\ 0;}
-\DoxyCodeLine{00305\ \ \ \ \ \textcolor{keywordtype}{char}\ *\ where\ =\ \textcolor{stringliteral}{"{}Missing\ Topic"{}};}
-\DoxyCodeLine{00306\ }
-\DoxyCodeLine{00307\ \ \ \ \ \textcolor{keywordflow}{switch}\ (ha\_flag-\/>cid)\ \{}
-\DoxyCodeLine{00308\ \ \ \ \ \textcolor{keywordflow}{case}\ ID\_C1:}
-\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ where\ =\ TOPIC\_SS;}
-\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00311\ \ \ \ \ \textcolor{keywordflow}{case}\ ID\_C2:}
-\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ where\ =\ TOPIC\_SD;}
-\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00314\ \ \ \ \ \textcolor{keywordflow}{case}\ ID\_C3:}
-\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ where\ =\ TOPIC\_HA;}
-\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00317\ \ \ \ \ \}}
-\DoxyCodeLine{00318\ }
-\DoxyCodeLine{00319\ \ \ \ \ \textcolor{comment}{//\ bug-\/out\ if\ no\ context\ variables\ passed\ to\ callback}}
-\DoxyCodeLine{00320\ \ \ \ \ \textcolor{keywordflow}{if}\ (context\ ==\ NULL)\ \{}
-\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ id\_num\ =\ -\/1;}
-\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ bugout;\ }
-\DoxyCodeLine{00323\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (times++\ >\ MQTT\_RECONN)\ \{}
-\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ bugout;}
-\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00302\ \{}
+\DoxyCodeLine{00303\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structha__flag__type}{ha\_flag\_type}}\ *ha\_flag\ =\ context;}
+\DoxyCodeLine{00304\ \ \ \ \ int32\_t\ id\_num\ =\ ha\_flag-\/>ha\_id;}
+\DoxyCodeLine{00305\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ times\ =\ 0;}
+\DoxyCodeLine{00306\ \ \ \ \ \textcolor{keywordtype}{char}\ *\ where\ =\ \textcolor{stringliteral}{"{}Context\ is\ NULL"{}};}
+\DoxyCodeLine{00307\ \ \ \ \ \textcolor{keywordtype}{char}\ *\ what\ =\ \textcolor{stringliteral}{"{}Reconnection\ Retry"{}};}
+\DoxyCodeLine{00308\ }
+\DoxyCodeLine{00309\ \ \ \ \ \textcolor{comment}{//\ bug-\/out\ if\ no\ context\ variables\ passed\ to\ callback}}
+\DoxyCodeLine{00310\ \ \ \ \ \textcolor{keywordflow}{if}\ (context\ ==\ NULL)\ \{}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ id\_num\ =\ -\/1;}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ bugout;\ }
+\DoxyCodeLine{00313\ \ \ \ \ \}}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00315\ \ \ \ \ \textcolor{keywordflow}{switch}\ (ha\_flag-\/>cid)\ \{}
+\DoxyCodeLine{00316\ \ \ \ \ \textcolor{keywordflow}{case}\ ID\_C1:}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ where\ =\ TOPIC\_SS;}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00319\ \ \ \ \ \textcolor{keywordflow}{case}\ ID\_C2:}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ where\ =\ TOPIC\_SD;}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00322\ \ \ \ \ \textcolor{keywordflow}{case}\ ID\_C3:}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ where\ =\ TOPIC\_HA;}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00325\ \ \ \ \ \}}
+\DoxyCodeLine{00326\ }
 \DoxyCodeLine{00327\ }
-\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)n\%s\ Connection\ lost,\ exit\ ha\_energy\ program\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
-\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ \ \ \ \ cause:\ \%s,\ h\_id\ \%d\ c\_id\ \%d\ \%s\ \(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ cause,\ id\_num,\ ha\_flag-\/>cid,\ where);}
-\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ MQTT\ DAEMON\ failure\ \ LOG\ Version\ \%s\ :\ MQTT\ Version\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ LOG\_VERSION,\ MQTT\_VERSION);}
-\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00333\ \ \ \ \ \}}
-\DoxyCodeLine{00334\ }
-\DoxyCodeLine{00335\ bugout:}
-\DoxyCodeLine{00336\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)n\%s\ Connection\ lost,\ exit\ ha\_energy\ program\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
-\DoxyCodeLine{00337\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ \ \ \ \ cause:\ \%s,\ h\_id\ \%d\ c\_id\ \%d\ \%s\ \(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ cause,\ id\_num,\ ha\_flag-\/>cid,\ where);}
-\DoxyCodeLine{00338\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ MQTT\ DAEMON\ failure\ \ LOG\ Version\ \%s\ :\ MQTT\ Version\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ LOG\_VERSION,\ MQTT\_VERSION);}
-\DoxyCodeLine{00339\ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00340\ \ \ \ \ exit(EXIT\_FAILURE);}
-\DoxyCodeLine{00341\ \}}
+\DoxyCodeLine{00328\ \ \ \ \ \textcolor{keywordflow}{if}\ (times++\ >\ MQTT\_RECONN)\ \{}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ bugout;}
+\DoxyCodeLine{00330\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (times\ >\ 1)\ \{}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Connection\ lost,\ retrying\ \%d\ \(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ times);}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Cause:\ \%s,\ h\_id\ \%d,\ c\_id\ \%d,\ \%s\ \(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ cause,\ id\_num,\ ha\_flag-\/>cid,\ what);}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ MQTT\ DAEMON\ reconnection\ failure\ \ LOG\ Version\ \%s\ :\ MQTT\ Version\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ LOG\_VERSION,\ MQTT\_VERSION);}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ times\ =\ 0;}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00339\ \ \ \ \ \}}
+\DoxyCodeLine{00340\ }
+\DoxyCodeLine{00341\ bugout:}
+\DoxyCodeLine{00342\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Connection\ lost,\ exit\ ha\_energy\ program\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00343\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Cause:\ \%s,\ h\_id\ \%d,\ c\_id\ \%d,\ \%s\ \(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ cause,\ id\_num,\ ha\_flag-\/>cid,\ where);}
+\DoxyCodeLine{00344\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ MQTT\ DAEMON\ context\ is\ null\ failure\ \ LOG\ Version\ \%s\ :\ MQTT\ Version\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ LOG\_VERSION,\ MQTT\_VERSION);}
+\DoxyCodeLine{00345\ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00346\ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{00347\ \}}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_a2c6c70b9a184aa76393a677b08954c81}\index{energy.c@{energy.c}!ha\_ac\_off@{ha\_ac\_off}}
@@ -138,10 +146,10 @@ void ha\+\_\+ac\+\_\+off (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyPara
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00978\ \{}
-\DoxyCodeLine{00979\ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00980\ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00981\ \}}
+\DoxyCodeLine{01015\ \{}
+\DoxyCodeLine{01016\ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{01017\ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{01018\ \}}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_a9a2e9166d49137eb9230625ac072807d}\index{energy.c@{energy.c}!ha\_ac\_on@{ha\_ac\_on}}
@@ -152,10 +160,10 @@ void ha\+\_\+ac\+\_\+on (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParam
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00984\ \{}
-\DoxyCodeLine{00985\ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00986\ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00987\ \}}
+\DoxyCodeLine{01021\ \{}
+\DoxyCodeLine{01022\ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{01023\ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{01024\ \}}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_a200b8cfedca58c43dc888d70d83342d2}\index{energy.c@{energy.c}!ha\_dc\_off@{ha\_dc\_off}}
@@ -166,10 +174,10 @@ void ha\+\_\+dc\+\_\+off (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyPara
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00993\ \{}
-\DoxyCodeLine{00994\ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00995\ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00996\ \}}
+\DoxyCodeLine{01030\ \{}
+\DoxyCodeLine{01031\ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{01032\ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{01033\ \}}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_ada6758833529a18e073775d997a3833b}\index{energy.c@{energy.c}!ha\_dc\_on@{ha\_dc\_on}}
@@ -180,10 +188,10 @@ void ha\+\_\+dc\+\_\+on (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParam
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00999\ \{}
-\DoxyCodeLine{01000\ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{true});}
-\DoxyCodeLine{01001\ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{01002\ \}}
+\DoxyCodeLine{01036\ \{}
+\DoxyCodeLine{01037\ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{01038\ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{01039\ \}}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_a18b19ee666a9edc39d904a474ddee1d9}\index{energy.c@{energy.c}!log\_time@{log\_time}}
@@ -194,31 +202,31 @@ char \texorpdfstring{$\ast$}{*} log\+\_\+time (\begin{DoxyParamCaption}\item[{bo
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{01063\ \{}
-\DoxyCodeLine{01064\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ time\_log[RBUF\_SIZ]\ =\ \{0\};}
-\DoxyCodeLine{01065\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ len\ =\ 0,\ sync\_time\ =\ TIME\_SYNC\_SEC\ -\/\ 1;}
-\DoxyCodeLine{01066\ \ \ \ \ time\_t\ rawtime\_log;}
-\DoxyCodeLine{01067\ }
-\DoxyCodeLine{01068\ \ \ \ \ tzset();}
-\DoxyCodeLine{01069\ \ \ \ \ timezone\ =\ 0;}
-\DoxyCodeLine{01070\ \ \ \ \ daylight\ =\ 0;}
-\DoxyCodeLine{01071\ \ \ \ \ time(\&rawtime\_log);}
-\DoxyCodeLine{01072\ \ \ \ \ \textcolor{keywordflow}{if}\ (sync\_time++\ >\ TIME\_SYNC\_SEC)\ \{}
-\DoxyCodeLine{01073\ \ \ \ \ \ \ \ \ sync\_time\ =\ 0;}
-\DoxyCodeLine{01074\ \ \ \ \ \ \ \ \ snprintf(time\_log,\ RBUF\_SIZ\ -\/\ 1,\ \textcolor{stringliteral}{"{}VT\%lut"{}},\ rawtime\_log);\ \textcolor{comment}{//\ format\ for\ dumpload\ controller\ gti\ time\ commands}}
-\DoxyCodeLine{01075\ \ \ \ \ \ \ \ \ mqtt\_gti\_time(E.client\_p,\ TOPIC\_P,\ time\_log);}
-\DoxyCodeLine{01076\ \ \ \ \ \}}
-\DoxyCodeLine{01077\ }
-\DoxyCodeLine{01078\ \ \ \ \ sprintf(time\_log,\ \textcolor{stringliteral}{"{}\%s"{}},\ ctime(\&rawtime\_log));}
-\DoxyCodeLine{01079\ \ \ \ \ len\ =\ strlen(time\_log);}
-\DoxyCodeLine{01080\ \ \ \ \ time\_log[len\ -\/\ 1]\ =\ 0;\ \textcolor{comment}{//\ munge\ out\ the\ return\ character}}
-\DoxyCodeLine{01081\ \ \ \ \ \textcolor{keywordflow}{if}\ (log)\ \{}
-\DoxyCodeLine{01082\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ "{}},\ time\_log);}
-\DoxyCodeLine{01083\ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{01084\ \ \ \ \ \}}
-\DoxyCodeLine{01085\ }
-\DoxyCodeLine{01086\ \ \ \ \ \textcolor{keywordflow}{return}\ time\_log;}
-\DoxyCodeLine{01087\ \}}
+\DoxyCodeLine{01100\ \{}
+\DoxyCodeLine{01101\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ time\_log[RBUF\_SIZ]\ =\ \{0\};}
+\DoxyCodeLine{01102\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ len\ =\ 0,\ sync\_time\ =\ TIME\_SYNC\_SEC\ -\/\ 1;}
+\DoxyCodeLine{01103\ \ \ \ \ time\_t\ rawtime\_log;}
+\DoxyCodeLine{01104\ }
+\DoxyCodeLine{01105\ \ \ \ \ tzset();}
+\DoxyCodeLine{01106\ \ \ \ \ timezone\ =\ 0;}
+\DoxyCodeLine{01107\ \ \ \ \ daylight\ =\ 0;}
+\DoxyCodeLine{01108\ \ \ \ \ time(\&rawtime\_log);}
+\DoxyCodeLine{01109\ \ \ \ \ \textcolor{keywordflow}{if}\ (sync\_time++\ >\ TIME\_SYNC\_SEC)\ \{}
+\DoxyCodeLine{01110\ \ \ \ \ \ \ \ \ sync\_time\ =\ 0;}
+\DoxyCodeLine{01111\ \ \ \ \ \ \ \ \ snprintf(time\_log,\ RBUF\_SIZ\ -\/\ 1,\ \textcolor{stringliteral}{"{}VT\%lut"{}},\ rawtime\_log);\ \textcolor{comment}{//\ format\ for\ dumpload\ controller\ gti\ time\ commands}}
+\DoxyCodeLine{01112\ \ \ \ \ \ \ \ \ mqtt\_gti\_time(E.client\_p,\ TOPIC\_P,\ time\_log);}
+\DoxyCodeLine{01113\ \ \ \ \ \}}
+\DoxyCodeLine{01114\ }
+\DoxyCodeLine{01115\ \ \ \ \ sprintf(time\_log,\ \textcolor{stringliteral}{"{}\%s"{}},\ ctime(\&rawtime\_log));}
+\DoxyCodeLine{01116\ \ \ \ \ len\ =\ strlen(time\_log);}
+\DoxyCodeLine{01117\ \ \ \ \ time\_log[len\ -\/\ 1]\ =\ 0;\ \textcolor{comment}{//\ munge\ out\ the\ return\ character}}
+\DoxyCodeLine{01118\ \ \ \ \ \textcolor{keywordflow}{if}\ (log)\ \{}
+\DoxyCodeLine{01119\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ "{}},\ time\_log);}
+\DoxyCodeLine{01120\ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{01121\ \ \ \ \ \}}
+\DoxyCodeLine{01122\ }
+\DoxyCodeLine{01123\ \ \ \ \ \textcolor{keywordflow}{return}\ time\_log;}
+\DoxyCodeLine{01124\ \}}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_ae7020228b3ccca216927caec73938554}\index{energy.c@{energy.c}!log\_timer@{log\_timer}}
@@ -229,19 +237,19 @@ bool log\+\_\+timer (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCapt
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{01122\ \{}
-\DoxyCodeLine{01123\ \ \ \ \ \textcolor{keywordtype}{bool}\ itstime\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{01124\ }
-\DoxyCodeLine{01125\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.log\_spam\ <\ LOW\_LOG\_SPAM)\ \{}
-\DoxyCodeLine{01126\ \ \ \ \ \ \ \ \ E.log\_time\_reset\ =\ 0;}
-\DoxyCodeLine{01127\ \ \ \ \ \ \ \ \ itstime\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{01128\ \ \ \ \ \}}
-\DoxyCodeLine{01129\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.log\_time\_reset\ >\ RESET\_LOG\_SPAM)\ \{}
-\DoxyCodeLine{01130\ \ \ \ \ \ \ \ \ E.log\_spam\ =\ 0;}
-\DoxyCodeLine{01131\ \ \ \ \ \ \ \ \ itstime\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{01132\ \ \ \ \ \}}
-\DoxyCodeLine{01133\ \ \ \ \ \textcolor{keywordflow}{return}\ itstime;}
-\DoxyCodeLine{01134\ \}}
+\DoxyCodeLine{01159\ \{}
+\DoxyCodeLine{01160\ \ \ \ \ \textcolor{keywordtype}{bool}\ itstime\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{01161\ }
+\DoxyCodeLine{01162\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.log\_spam\ <\ LOW\_LOG\_SPAM)\ \{}
+\DoxyCodeLine{01163\ \ \ \ \ \ \ \ \ E.log\_time\_reset\ =\ 0;}
+\DoxyCodeLine{01164\ \ \ \ \ \ \ \ \ itstime\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{01165\ \ \ \ \ \}}
+\DoxyCodeLine{01166\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.log\_time\_reset\ >\ RESET\_LOG\_SPAM)\ \{}
+\DoxyCodeLine{01167\ \ \ \ \ \ \ \ \ E.log\_spam\ =\ 0;}
+\DoxyCodeLine{01168\ \ \ \ \ \ \ \ \ itstime\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{01169\ \ \ \ \ \}}
+\DoxyCodeLine{01170\ \ \ \ \ \textcolor{keywordflow}{return}\ itstime;}
+\DoxyCodeLine{01171\ \}}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_a0ddf1224851353fc92bfbff6f499fa97}\index{energy.c@{energy.c}!main@{main}}
@@ -252,525 +260,544 @@ int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstr
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00350\ \{}
-\DoxyCodeLine{00351\ \ \ \ \ \textcolor{keyword}{struct\ }itimerval\ new\_timer\ =\ \{}
-\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ .it\_value.tv\_sec\ =\ CMD\_SEC,}
-\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ .it\_value.tv\_usec\ =\ 0,}
-\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ .it\_interval.tv\_sec\ =\ CMD\_SEC,}
-\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ .it\_interval.tv\_usec\ =\ 0,}
-\DoxyCodeLine{00356\ \ \ \ \ \};}
-\DoxyCodeLine{00357\ \ \ \ \ \textcolor{keyword}{struct\ }itimerval\ old\_timer;}
-\DoxyCodeLine{00358\ \ \ \ \ time\_t\ rawtime;}
-\DoxyCodeLine{00359\ \ \ \ \ MQTTClient\_connectOptions\ conn\_opts\_p\ =\ MQTTClient\_connectOptions\_initializer,}
-\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ conn\_opts\_sd\ =\ MQTTClient\_connectOptions\_initializer,}
-\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ conn\_opts\_ha\ =\ MQTTClient\_connectOptions\_initializer;}
-\DoxyCodeLine{00362\ \ \ \ \ MQTTClient\_message\ pubmsg\ =\ MQTTClient\_message\_initializer;}
-\DoxyCodeLine{00363\ \ \ \ \ MQTTClient\_deliveryToken\ token;}
-\DoxyCodeLine{00364\ \ \ \ \ \textcolor{keywordtype}{char}\ hname[256],\ *hname\_ptr\ =\ hname;}
-\DoxyCodeLine{00365\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ hname\_len\ =\ 12;}
-\DoxyCodeLine{00366\ }
-\DoxyCodeLine{00367\ \ \ \ \ gethostname(hname,\ hname\_len);}
-\DoxyCodeLine{00368\ \ \ \ \ hname[12]\ =\ 0;}
-\DoxyCodeLine{00369\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\ \ LOG\ Version\ \%s\ :\ MQTT\ Version\ \%s\ :\ Host\ Name\ \%s\(\backslash\)r\(\backslash\)n"{}},\ LOG\_VERSION,\ MQTT\_VERSION,\ hname);}
-\DoxyCodeLine{00370\ \ \ \ \ showIP();}
-\DoxyCodeLine{00371\ \ \ \ \ skeleton\_daemon();}
+\DoxyCodeLine{00356\ \{}
+\DoxyCodeLine{00357\ \ \ \ \ \textcolor{keyword}{struct\ }itimerval\ new\_timer\ =\ \{}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ .it\_value.tv\_sec\ =\ CMD\_SEC,}
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ .it\_value.tv\_usec\ =\ 0,}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ .it\_interval.tv\_sec\ =\ CMD\_SEC,}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ .it\_interval.tv\_usec\ =\ 0,}
+\DoxyCodeLine{00362\ \ \ \ \ \};}
+\DoxyCodeLine{00363\ \ \ \ \ \textcolor{keyword}{struct\ }itimerval\ old\_timer;}
+\DoxyCodeLine{00364\ \ \ \ \ time\_t\ rawtime;}
+\DoxyCodeLine{00365\ \ \ \ \ MQTTClient\_connectOptions\ conn\_opts\_p\ =\ MQTTClient\_connectOptions\_initializer,}
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ conn\_opts\_sd\ =\ MQTTClient\_connectOptions\_initializer,}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ conn\_opts\_ha\ =\ MQTTClient\_connectOptions\_initializer;}
+\DoxyCodeLine{00368\ \ \ \ \ MQTTClient\_message\ pubmsg\ =\ MQTTClient\_message\_initializer;}
+\DoxyCodeLine{00369\ \ \ \ \ MQTTClient\_deliveryToken\ token;}
+\DoxyCodeLine{00370\ \ \ \ \ \textcolor{keywordtype}{char}\ hname[256],\ *hname\_ptr\ =\ hname;}
+\DoxyCodeLine{00371\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ hname\_len\ =\ 12;}
 \DoxyCodeLine{00372\ }
-\DoxyCodeLine{00373\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
-\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (E.mode.E)\ \{}
-\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ E\_INIT:}
-\DoxyCodeLine{00376\ }
-\DoxyCodeLine{00377\ \textcolor{preprocessor}{\#ifdef\ LOG\_TO\_FILE}}
-\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \ \ \ \ fout\ =\ fopen(LOG\_TO\_FILE,\ \textcolor{stringliteral}{"{}a"{}});}
-\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fout\ ==\ NULL)\ \{}
-\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fout\ =\ fopen(LOG\_TO\_FILE\_ALT,\ \textcolor{stringliteral}{"{}a"{}});}
-\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fout\ ==\ NULL)\ \{}
-\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fout\ =\ stdout;}
-\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ Unable\ to\ open\ LOG\ file\ \%s\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ LOG\_TO\_FILE\_ALT);}
-\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00386\ \textcolor{preprocessor}{\#else}}
-\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \ \ \ \ fout\ =\ stdout;}
-\DoxyCodeLine{00388\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ LOG\ Version\ \%s\ :\ MQTT\ Version\ \%s\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ LOG\_VERSION,\ MQTT\_VERSION);}
-\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00391\ }
-\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!bsoc\_init())\ \{}
-\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ bsoc\_init\ failure\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
-\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
-\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00398\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ set\ the\ timer\ for\ MQTT\ publishing\ sample\ speed}}
-\DoxyCodeLine{00399\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ CMD\_SEC\ \ \ \ \ \ \ \ \ 10}}
-\DoxyCodeLine{00400\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ setitimer(ITIMER\_REAL,\ \&new\_timer,\ \&old\_timer);}
-\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \ \ \ \ signal(SIGALRM,\ timer\_callback);}
-\DoxyCodeLine{00403\ }
-\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strncmp(hname,\ TNAME,\ 6)\ ==\ 0)\ \{}
-\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_create(\&E.client\_p,\ LADDRESS,\ CLIENTID1,}
-\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTCLIENT\_PERSISTENCE\_NONE,\ NULL);}
-\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_p.keepAliveInterval\ =\ KAI;}
-\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_p.cleansession\ =\ 1;}
-\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hname\_ptr\ =\ LADDRESS;}
-\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_create(\&E.client\_p,\ ADDRESS,\ CLIENTID1,}
+\DoxyCodeLine{00373\ \ \ \ \ gethostname(hname,\ hname\_len);}
+\DoxyCodeLine{00374\ \ \ \ \ hname[12]\ =\ 0;}
+\DoxyCodeLine{00375\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\ \ LOG\ Version\ \%s\ :\ MQTT\ Version\ \%s\ :\ Host\ Name\ \%s\(\backslash\)r\(\backslash\)n"{}},\ LOG\_VERSION,\ MQTT\_VERSION,\ hname);}
+\DoxyCodeLine{00376\ \ \ \ \ showIP();}
+\DoxyCodeLine{00377\ \ \ \ \ skeleton\_daemon();}
+\DoxyCodeLine{00378\ }
+\DoxyCodeLine{00379\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (E.mode.E)\ \{}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ E\_INIT:}
+\DoxyCodeLine{00382\ }
+\DoxyCodeLine{00383\ \textcolor{preprocessor}{\#ifdef\ LOG\_TO\_FILE}}
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \ \ \ \ fout\ =\ fopen(LOG\_TO\_FILE,\ \textcolor{stringliteral}{"{}a"{}});}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fout\ ==\ NULL)\ \{}
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fout\ =\ fopen(LOG\_TO\_FILE\_ALT,\ \textcolor{stringliteral}{"{}a"{}});}
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fout\ ==\ NULL)\ \{}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fout\ =\ stdout;}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ Unable\ to\ open\ LOG\ file\ \%s\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ LOG\_TO\_FILE\_ALT);}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00392\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \ \ \ \ fout\ =\ stdout;}
+\DoxyCodeLine{00394\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ LOG\ Version\ \%s\ :\ MQTT\ Version\ \%s\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ LOG\_VERSION,\ MQTT\_VERSION);}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00397\ }
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!bsoc\_init())\ \{}
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ bsoc\_init\ failure\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00404\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ set\ the\ timer\ for\ MQTT\ publishing\ sample\ speed}}
+\DoxyCodeLine{00405\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ CMD\_SEC\ \ \ \ \ \ \ \ \ 10}}
+\DoxyCodeLine{00406\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \ \ \ \ setitimer(ITIMER\_REAL,\ \&new\_timer,\ \&old\_timer);}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \ \ \ \ signal(SIGALRM,\ timer\_callback);}
+\DoxyCodeLine{00409\ }
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strncmp(hname,\ TNAME,\ 6)\ ==\ 0)\ \{}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_create(\&E.client\_p,\ LADDRESS,\ CLIENTID1,}
 \DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTCLIENT\_PERSISTENCE\_NONE,\ NULL);}
 \DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_p.keepAliveInterval\ =\ KAI;}
 \DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_p.cleansession\ =\ 1;}
-\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hname\_ptr\ =\ ADDRESS;}
-\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00417\ }
-\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Connect\ MQTT\ server\ \%s,\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ hname\_ptr,\ CLIENTID1);}
-\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ss.cid\ =\ ID\_C1;}
-\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_setCallbacks(E.client\_p,\ \&ha\_flag\_vars\_ss,\ \mbox{\hyperlink{energy_8c_a2a87ef47168dc639b307a285b8cb4462}{connlost}},\ msgarrvd,\ delivered);}
-\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((E.rc\ =\ MQTTClient\_connect(E.client\_p,\ \&conn\_opts\_p))\ !=\ MQTTCLIENT\_SUCCESS)\ \{}
-\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Failed\ to\ connect\ MQTT\ server,\ return\ code\ \%d\ \%s,\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.rc,\ hname\_ptr,\ CLIENTID1);}
-\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pthread\_mutex\_destroy(\&E.ha\_lock);}
-\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
-\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00428\ }
-\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strncmp(hname,\ TNAME,\ 6)\ ==\ 0)\ \{}
-\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_create(\&E.client\_sd,\ LADDRESS,\ CLIENTID2,}
-\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTCLIENT\_PERSISTENCE\_NONE,\ NULL);}
-\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_sd.keepAliveInterval\ =\ KAI;}
-\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_sd.cleansession\ =\ 1;}
-\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hname\_ptr\ =\ LADDRESS;}
-\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_create(\&E.client\_sd,\ ADDRESS,\ CLIENTID2,}
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hname\_ptr\ =\ LADDRESS;}
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_create(\&E.client\_p,\ ADDRESS,\ CLIENTID1,}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTCLIENT\_PERSISTENCE\_NONE,\ NULL);}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_p.keepAliveInterval\ =\ KAI;}
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_p.cleansession\ =\ 1;}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hname\_ptr\ =\ ADDRESS;}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00423\ }
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Connect\ MQTT\ server\ \%s,\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ hname\_ptr,\ CLIENTID1);}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ss.cid\ =\ ID\_C1;}
+\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_setCallbacks(E.client\_p,\ \&ha\_flag\_vars\_ss,\ \mbox{\hyperlink{energy_8c_a2a87ef47168dc639b307a285b8cb4462}{connlost}},\ msgarrvd,\ delivered);}
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((E.rc\ =\ MQTTClient\_connect(E.client\_p,\ \&conn\_opts\_p))\ !=\ MQTTCLIENT\_SUCCESS)\ \{}
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Failed\ to\ connect\ MQTT\ server,\ return\ code\ \%d\ \%s,\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.rc,\ hname\_ptr,\ CLIENTID1);}
+\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pthread\_mutex\_destroy(\&E.ha\_lock);}
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00434\ }
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strncmp(hname,\ TNAME,\ 6)\ ==\ 0)\ \{}
+\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_create(\&E.client\_sd,\ LADDRESS,\ CLIENTID2,}
 \DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTCLIENT\_PERSISTENCE\_NONE,\ NULL);}
 \DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_sd.keepAliveInterval\ =\ KAI;}
 \DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_sd.cleansession\ =\ 1;}
-\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hname\_ptr\ =\ ADDRESS;}
-\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00442\ }
-\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Connect\ MQTT\ server\ \%s,\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ hname\_ptr,\ CLIENTID2);}
-\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_sd.cid\ =\ ID\_C2;}
-\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_setCallbacks(E.client\_sd,\ \&ha\_flag\_vars\_sd,\ \mbox{\hyperlink{energy_8c_a2a87ef47168dc639b307a285b8cb4462}{connlost}},\ msgarrvd,\ delivered);}
-\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((E.rc\ =\ MQTTClient\_connect(E.client\_sd,\ \&conn\_opts\_sd))\ !=\ MQTTCLIENT\_SUCCESS)\ \{}
-\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Failed\ to\ connect\ MQTT\ server,\ return\ code\ \%d\ \%s,\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.rc,\ hname\_ptr,\ CLIENTID2);}
-\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pthread\_mutex\_destroy(\&E.ha\_lock);}
-\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
-\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00453\ }
-\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00455\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ Home\ Assistant\ MQTT\ receive\ messages}}
-\DoxyCodeLine{00456\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strncmp(hname,\ TNAME,\ 6)\ ==\ 0)\ \{}
-\DoxyCodeLine{00458\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_create(\&E.client\_ha,\ LADDRESS,\ CLIENTID3,}
-\DoxyCodeLine{00459\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTCLIENT\_PERSISTENCE\_NONE,\ NULL);}
-\DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_ha.keepAliveInterval\ =\ KAI;}
-\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_ha.cleansession\ =\ 1;}
-\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hname\_ptr\ =\ LADDRESS;}
-\DoxyCodeLine{00463\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00464\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_create(\&E.client\_ha,\ ADDRESS,\ CLIENTID3,}
+\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hname\_ptr\ =\ LADDRESS;}
+\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_create(\&E.client\_sd,\ ADDRESS,\ CLIENTID2,}
+\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTCLIENT\_PERSISTENCE\_NONE,\ NULL);}
+\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_sd.keepAliveInterval\ =\ KAI;}
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_sd.cleansession\ =\ 1;}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hname\_ptr\ =\ ADDRESS;}
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00448\ }
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Connect\ MQTT\ server\ \%s,\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ hname\_ptr,\ CLIENTID2);}
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_sd.cid\ =\ ID\_C2;}
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_setCallbacks(E.client\_sd,\ \&ha\_flag\_vars\_sd,\ \mbox{\hyperlink{energy_8c_a2a87ef47168dc639b307a285b8cb4462}{connlost}},\ msgarrvd,\ delivered);}
+\DoxyCodeLine{00453\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((E.rc\ =\ MQTTClient\_connect(E.client\_sd,\ \&conn\_opts\_sd))\ !=\ MQTTCLIENT\_SUCCESS)\ \{}
+\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Failed\ to\ connect\ MQTT\ server,\ return\ code\ \%d\ \%s,\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.rc,\ hname\_ptr,\ CLIENTID2);}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pthread\_mutex\_destroy(\&E.ha\_lock);}
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{00458\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00459\ }
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00461\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ Home\ Assistant\ MQTT\ receive\ messages}}
+\DoxyCodeLine{00462\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00463\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strncmp(hname,\ TNAME,\ 6)\ ==\ 0)\ \{}
+\DoxyCodeLine{00464\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_create(\&E.client\_ha,\ LADDRESS,\ CLIENTID3,}
 \DoxyCodeLine{00465\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTCLIENT\_PERSISTENCE\_NONE,\ NULL);}
 \DoxyCodeLine{00466\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_ha.keepAliveInterval\ =\ KAI;}
 \DoxyCodeLine{00467\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_ha.cleansession\ =\ 1;}
-\DoxyCodeLine{00468\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hname\_ptr\ =\ ADDRESS;}
-\DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00470\ }
-\DoxyCodeLine{00471\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Connect\ MQTT\ server\ \%s,\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ hname\_ptr,\ CLIENTID3);}
-\DoxyCodeLine{00472\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00473\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ha.cid\ =\ ID\_C3;}
-\DoxyCodeLine{00474\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_setCallbacks(E.client\_ha,\ \&ha\_flag\_vars\_ha,\ \mbox{\hyperlink{energy_8c_a2a87ef47168dc639b307a285b8cb4462}{connlost}},\ msgarrvd,\ delivered);}
-\DoxyCodeLine{00475\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((E.rc\ =\ MQTTClient\_connect(E.client\_ha,\ \&conn\_opts\_ha))\ !=\ MQTTCLIENT\_SUCCESS)\ \{}
-\DoxyCodeLine{00476\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Failed\ to\ connect\ MQTT\ server,\ return\ code\ \%d\ \%s,\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.rc,\ hname\_ptr,\ CLIENTID3);}
-\DoxyCodeLine{00477\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00478\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pthread\_mutex\_destroy(\&E.ha\_lock);}
-\DoxyCodeLine{00479\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
-\DoxyCodeLine{00480\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00481\ }
-\DoxyCodeLine{00482\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00483\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ on\ topic\ received\ data\ will\ trigger\ the\ msgarrvd\ function}}
-\DoxyCodeLine{00484\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00485\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_subscribe(E.client\_p,\ TOPIC\_SS,\ QOS);\ \textcolor{comment}{//\ FM80\ Q84}}
-\DoxyCodeLine{00486\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_subscribe(E.client\_sd,\ TOPIC\_SD,\ QOS);\ \textcolor{comment}{//\ DUMPLOAD\ K42}}
-\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_subscribe(E.client\_ha,\ TOPIC\_HA,\ QOS);\ \textcolor{comment}{//\ Home\ Assistant\ Linux\ AMD64\ \ and\ ARM64}}
-\DoxyCodeLine{00488\ }
-\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ \ \ \ \ pubmsg.payload\ =\ \textcolor{stringliteral}{"{}online"{}};}
-\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ \ \ \ \ pubmsg.payloadlen\ =\ strlen(\textcolor{stringliteral}{"{}online"{}});}
-\DoxyCodeLine{00491\ \ \ \ \ \ \ \ \ \ \ \ \ pubmsg.qos\ =\ QOS;}
-\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ \ \ \ \ pubmsg.retained\ =\ 0;}
-\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ss.deliveredtoken\ =\ 0;}
-\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ notify\ HA\ we\ are\ running\ and\ controlling\ AC\ power\ plugs}}
-\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_publishMessage(E.client\_p,\ TOPIC\_PACA,\ \&pubmsg,\ \&token);}
-\DoxyCodeLine{00496\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_publishMessage(E.client\_p,\ TOPIC\_PDCA,\ \&pubmsg,\ \&token);}
-\DoxyCodeLine{00497\ }
-\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ sync\ HA\ power\ switches}}
-\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00500\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00501\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00502\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00503\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00504\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00505\ }
-\DoxyCodeLine{00506\ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_on\ =\ \textcolor{keyword}{true};\ \textcolor{comment}{//\ can\ be\ switched\ on\ once}}
-\DoxyCodeLine{00507\ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_on\ =\ \textcolor{keyword}{true};\ \textcolor{comment}{//\ can\ be\ switched\ on\ once}}
-\DoxyCodeLine{00508\ }
-\DoxyCodeLine{00509\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00510\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ use\ libcurl\ to\ read\ AC\ power\ meter\ HTTP\ data}}
-\DoxyCodeLine{00511\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ iammeter\ connected\ for\ split\ single\ phase\ monitoring\ and\ one\ leg\ GTI\ power\ exporting}}
-\DoxyCodeLine{00512\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00513\ \ \ \ \ \ \ \ \ \ \ \ \ iammeter\_read();}
+\DoxyCodeLine{00468\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hname\_ptr\ =\ LADDRESS;}
+\DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00470\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_create(\&E.client\_ha,\ ADDRESS,\ CLIENTID3,}
+\DoxyCodeLine{00471\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTCLIENT\_PERSISTENCE\_NONE,\ NULL);}
+\DoxyCodeLine{00472\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_ha.keepAliveInterval\ =\ KAI;}
+\DoxyCodeLine{00473\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_ha.cleansession\ =\ 1;}
+\DoxyCodeLine{00474\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hname\_ptr\ =\ ADDRESS;}
+\DoxyCodeLine{00475\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00476\ }
+\DoxyCodeLine{00477\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Connect\ MQTT\ server\ \%s,\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ hname\_ptr,\ CLIENTID3);}
+\DoxyCodeLine{00478\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00479\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ha.cid\ =\ ID\_C3;}
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_setCallbacks(E.client\_ha,\ \&ha\_flag\_vars\_ha,\ \mbox{\hyperlink{energy_8c_a2a87ef47168dc639b307a285b8cb4462}{connlost}},\ msgarrvd,\ delivered);}
+\DoxyCodeLine{00481\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((E.rc\ =\ MQTTClient\_connect(E.client\_ha,\ \&conn\_opts\_ha))\ !=\ MQTTCLIENT\_SUCCESS)\ \{}
+\DoxyCodeLine{00482\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Failed\ to\ connect\ MQTT\ server,\ return\ code\ \%d\ \%s,\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.rc,\ hname\_ptr,\ CLIENTID3);}
+\DoxyCodeLine{00483\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00484\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pthread\_mutex\_destroy(\&E.ha\_lock);}
+\DoxyCodeLine{00485\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{00486\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00487\ }
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00489\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ on\ topic\ received\ data\ will\ trigger\ the\ msgarrvd\ function}}
+\DoxyCodeLine{00490\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00491\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_subscribe(E.client\_p,\ TOPIC\_SS,\ QOS);\ \textcolor{comment}{//\ FM80\ Q84}}
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_subscribe(E.client\_sd,\ TOPIC\_SD,\ QOS);\ \textcolor{comment}{//\ DUMPLOAD\ K42}}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_subscribe(E.client\_ha,\ TOPIC\_HA,\ QOS);\ \textcolor{comment}{//\ Home\ Assistant\ Linux\ AMD64\ \ and\ ARM64}}
+\DoxyCodeLine{00494\ }
+\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ \ \ \ \ pubmsg.payload\ =\ \textcolor{stringliteral}{"{}online"{}};}
+\DoxyCodeLine{00496\ \ \ \ \ \ \ \ \ \ \ \ \ pubmsg.payloadlen\ =\ strlen(\textcolor{stringliteral}{"{}online"{}});}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ \ \ \ \ pubmsg.qos\ =\ QOS;}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ \ \ \ \ pubmsg.retained\ =\ 0;}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ss.deliveredtoken\ =\ 0;}
+\DoxyCodeLine{00500\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ notify\ HA\ we\ are\ running\ and\ controlling\ AC\ power\ plugs}}
+\DoxyCodeLine{00501\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_publishMessage(E.client\_p,\ TOPIC\_PACA,\ \&pubmsg,\ \&token);}
+\DoxyCodeLine{00502\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_publishMessage(E.client\_p,\ TOPIC\_PDCA,\ \&pubmsg,\ \&token);}
+\DoxyCodeLine{00503\ }
+\DoxyCodeLine{00504\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ sync\ HA\ power\ switches}}
+\DoxyCodeLine{00505\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00506\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00507\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00508\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00509\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00510\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00511\ }
+\DoxyCodeLine{00512\ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_on\ =\ \textcolor{keyword}{true};\ \textcolor{comment}{//\ can\ be\ switched\ on\ once}}
+\DoxyCodeLine{00513\ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_on\ =\ \textcolor{keyword}{true};\ \textcolor{comment}{//\ can\ be\ switched\ on\ once}}
 \DoxyCodeLine{00514\ }
 \DoxyCodeLine{00515\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00516\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ start\ the\ main\ energy\ monitoring\ loop}}
-\DoxyCodeLine{00517\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00518\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ Solar\ Energy\ AC\ power\ controller\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
-\DoxyCodeLine{00519\ }
-\DoxyCodeLine{00520\ \textcolor{preprocessor}{\#ifdef\ FAKE\_VPV}}
-\DoxyCodeLine{00521\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\ Faking\ dumpload\ PV\ voltage\(\backslash\)r\(\backslash\)n"{}});}
-\DoxyCodeLine{00522\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00523\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ss.energy\_mode\ =\ NORM\_MODE;}
-\DoxyCodeLine{00524\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.E\ =\ E\_WAIT;}
-\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00526\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ E\_WAIT:}
-\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ha\_flag\_vars\_ss.runner\ ||\ E.speed\_go++\ >\ 1500000)\ \{}
-\DoxyCodeLine{00528\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.speed\_go\ =\ 0;}
-\DoxyCodeLine{00529\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ss.runner\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00530\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.E\ =\ E\_RUN;}
-\DoxyCodeLine{00531\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00532\ }
-\DoxyCodeLine{00533\ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100);}
-\DoxyCodeLine{00534\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00535\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ main\ state-\/machine\ update\ sequence}}
-\DoxyCodeLine{00536\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00537\ \ \ \ \ \ \ \ \ \ \ \ \ bsoc\_data\_collect();}
-\DoxyCodeLine{00538\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!sanity\_check())\ \{}
-\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ Sanity\ Check\ error\ \%d\ \%s\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.sane,\ mqtt\_name[E.sane]);}
-\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00542\ }
-\DoxyCodeLine{00543\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00544\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ stop\ and\ restart\ the\ energy\ control\ processing}}
-\DoxyCodeLine{00545\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ from\ inside\ the\ program\ or\ from\ a\ remote\ Home\ Assistant\ command}}
-\DoxyCodeLine{00546\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00547\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (solar\_shutdown())\ \{}
-\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.startup)\ \{}
-\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ SHUTDOWN\ Solar\ Energy\ Control\ -\/-\/-\/>\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
-\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00551\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00552\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_gti(E.client\_p,\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
-\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_ac(E.client\_p,\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
-\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_gti(E.client\_p,\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00557\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
-\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_ac(E.client\_p,\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
-\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.startup)\ \{}
-\DoxyCodeLine{00561\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Completed\ SHUTDOWN,\ Press\ again\ to\ RESTART.\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
-\DoxyCodeLine{00562\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00564\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00565\ }
-\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ iam\_delay\ =\ 0;}
-\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (solar\_shutdown())\ \{}
-\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_shutdown(E.client\_p,\ TOPIC\_SHUTDOWN);}
-\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(USEC\_SEC);\ \textcolor{comment}{//\ wait}}
-\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((int32\_t)\ E.mvar[V\_HACSW])\ \{}
-\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_ac\_off();}
-\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((int32\_t)\ E.mvar[V\_HDCSW])\ \{}
-\DoxyCodeLine{00574\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_dc\_off();}
-\DoxyCodeLine{00575\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((iam\_delay++\ >\ IAM\_DELAY)\ \&\&\ E.link.shutdown)\ \{}
-\DoxyCodeLine{00577\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.fm80\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00578\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.dumpload\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.iammeter\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.homeassistant\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.shutdown\ =\ 0;}
-\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ RESTART\ Solar\ Energy\ Control\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
-\DoxyCodeLine{00585\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00586\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bsoc\_set\_mode(E.mode.pv\_bias,\ \textcolor{keyword}{true},\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00587\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.dl\_excess\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00588\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_gti\_power(E.client\_p,\ TOPIC\_P,\ \textcolor{stringliteral}{"{}Z\#"{}},\ 1);\ \textcolor{comment}{//\ zero\ power\ at\ startup}}
-\DoxyCodeLine{00589\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.dl\_excess\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00590\ \textcolor{preprocessor}{\#ifdef\ AUTO\_CHARGE}}
-\DoxyCodeLine{00591\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00592\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00593\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
-\DoxyCodeLine{00594\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00595\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ResetPI(\&E.mode.pid);}
-\DoxyCodeLine{00596\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ss.runner\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00597\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.fm80\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00598\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.dumpload\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00599\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.iammeter\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00600\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.homeassistant\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00601\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.in\_pid\_control\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ shutdown\ auto\ energy\ control}}
-\DoxyCodeLine{00602\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.R\ =\ R\_INIT;}
-\DoxyCodeLine{00603\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00604\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ha\_flag\_vars\_ss.receivedtoken)\ \{}
-\DoxyCodeLine{00605\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ss.receivedtoken\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00606\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00607\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ha\_flag\_vars\_sd.receivedtoken)\ \{}
-\DoxyCodeLine{00608\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_sd.receivedtoken\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00609\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00610\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00611\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ E\_RUN:}
-\DoxyCodeLine{00612\ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100);}
-\DoxyCodeLine{00613\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (E.mode.R)\ \{}
-\DoxyCodeLine{00614\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ R\_INIT:}
-\DoxyCodeLine{00615\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_ac\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00616\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_gti\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00617\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_on\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00618\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_on\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00619\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.R\ =\ R\_RUN;}
-\DoxyCodeLine{00620\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.no\_float\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00621\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00622\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ R\_FLOAT:}
-\DoxyCodeLine{00623\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.no\_float)\ \{}
-\DoxyCodeLine{00624\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_ac\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00625\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_gti\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00626\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_on\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00627\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_on\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00628\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00629\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00630\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.no\_float\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00631\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00632\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.gti\_sw\_status)\ \{}
-\DoxyCodeLine{00633\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (gti\_test()\ >\ MIN\_BAT\_KW\_GTI\_HI)\ \{}
-\DoxyCodeLine{00634\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00635\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00636\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ R\_FLOAT\ DC\ switch\ true\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
-\DoxyCodeLine{00637\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00516\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ use\ libcurl\ to\ read\ AC\ power\ meter\ HTTP\ data}}
+\DoxyCodeLine{00517\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ iammeter\ connected\ for\ split\ single\ phase\ monitoring\ and\ one\ leg\ GTI\ power\ exporting}}
+\DoxyCodeLine{00518\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00519\ \ \ \ \ \ \ \ \ \ \ \ \ iammeter\_read1(IAMM1);}
+\DoxyCodeLine{00520\ \ \ \ \ \ \ \ \ \ \ \ \ iammeter\_read2(IAMM2);}
+\DoxyCodeLine{00521\ }
+\DoxyCodeLine{00522\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00523\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ start\ the\ main\ energy\ monitoring\ loop}}
+\DoxyCodeLine{00524\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ Solar\ Energy\ AC\ power\ controller\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00526\ }
+\DoxyCodeLine{00527\ \textcolor{preprocessor}{\#ifdef\ FAKE\_VPV}}
+\DoxyCodeLine{00528\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\ Faking\ dumpload\ PV\ voltage\(\backslash\)r\(\backslash\)n"{}});}
+\DoxyCodeLine{00529\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00530\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ss.energy\_mode\ =\ NORM\_MODE;}
+\DoxyCodeLine{00531\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.E\ =\ E\_WAIT;}
+\DoxyCodeLine{00532\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00533\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ E\_WAIT:}
+\DoxyCodeLine{00534\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ha\_flag\_vars\_ss.runner\ ||\ E.speed\_go++\ >\ 1500000)\ \{}
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.speed\_go\ =\ 0;}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ss.runner\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00537\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.E\ =\ E\_RUN;}
+\DoxyCodeLine{00538\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00539\ }
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100);}
+\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00542\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ main\ state-\/machine\ update\ sequence}}
+\DoxyCodeLine{00543\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ \ \ \ \ bsoc\_data\_collect();}
+\DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!sanity\_check())\ \{}
+\DoxyCodeLine{00546\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ Sanity\ Check\ error\ \%d\ \%s\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.sane,\ mqtt\_name[E.sane]);}
+\DoxyCodeLine{00547\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00549\ }
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00551\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ stop\ and\ restart\ the\ energy\ control\ processing}}
+\DoxyCodeLine{00552\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ from\ inside\ the\ program\ or\ from\ a\ remote\ Home\ Assistant\ command}}
+\DoxyCodeLine{00553\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (solar\_shutdown())\ \{}
+\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.startup)\ \{}
+\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ SHUTDOWN\ Solar\ Energy\ Control\ -\/-\/-\/>\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00557\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_gti(E.client\_p,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
+\DoxyCodeLine{00561\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_ac(E.client\_p,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00562\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_gti(E.client\_p,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00564\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
+\DoxyCodeLine{00565\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_ac(E.client\_p,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.startup)\ \{}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Completed\ SHUTDOWN,\ Press\ again\ to\ RESTART.\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00572\ }
+\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ iam\_delay\ =\ 0;}
+\DoxyCodeLine{00574\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (solar\_shutdown())\ \{}
+\DoxyCodeLine{00575\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_shutdown(E.client\_p,\ TOPIC\_SHUTDOWN);}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(USEC\_SEC);\ \textcolor{comment}{//\ wait}}
+\DoxyCodeLine{00577\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((int32\_t)\ E.mvar[V\_HACSW])\ \{}
+\DoxyCodeLine{00578\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_ac\_off();}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((int32\_t)\ E.mvar[V\_HDCSW])\ \{}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_dc\_off();}
+\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((iam\_delay++\ >\ IAM\_DELAY)\ \&\&\ E.link.shutdown)\ \{}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.fm80\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00585\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.dumpload\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00586\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.iammeter\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00587\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.homeassistant\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00588\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00589\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00590\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.shutdown\ =\ 0;}
+\DoxyCodeLine{00591\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ RESTART\ Solar\ Energy\ Control\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00592\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00593\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bsoc\_set\_mode(E.mode.pv\_bias,\ \textcolor{keyword}{true},\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00594\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.dl\_excess\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00595\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_gti\_power(E.client\_p,\ TOPIC\_P,\ DL\_POWER\_ZERO,\ 1);\ \textcolor{comment}{//\ zero\ power\ at\ startup}}
+\DoxyCodeLine{00596\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.dl\_excess\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00597\ \textcolor{preprocessor}{\#ifdef\ AUTO\_CHARGE}}
+\DoxyCodeLine{00598\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00599\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00600\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
+\DoxyCodeLine{00601\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00602\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ResetPI(\&E.mode.pid);}
+\DoxyCodeLine{00603\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ss.runner\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00604\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.fm80\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00605\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.dumpload\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00606\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.iammeter\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00607\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.homeassistant\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00608\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.in\_pid\_control\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ shutdown\ auto\ energy\ control}}
+\DoxyCodeLine{00609\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.R\ =\ R\_INIT;}
+\DoxyCodeLine{00610\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00611\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ha\_flag\_vars\_ss.receivedtoken)\ \{}
+\DoxyCodeLine{00612\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ss.receivedtoken\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00613\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00614\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ha\_flag\_vars\_sd.receivedtoken)\ \{}
+\DoxyCodeLine{00615\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_sd.receivedtoken\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00616\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00617\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00618\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ E\_RUN:}
+\DoxyCodeLine{00619\ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100);}
+\DoxyCodeLine{00620\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (E.mode.R)\ \{}
+\DoxyCodeLine{00621\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ R\_INIT:}
+\DoxyCodeLine{00622\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_ac\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00623\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_gti\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00624\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_on\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00625\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_on\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00626\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.R\ =\ R\_RUN;}
+\DoxyCodeLine{00627\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.no\_float\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00628\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00629\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ R\_FLOAT:}
+\DoxyCodeLine{00630\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.no\_float)\ \{}
+\DoxyCodeLine{00631\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_ac\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00632\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_gti\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00633\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_on\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00634\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_on\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00635\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00636\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00637\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.no\_float\ =\ \textcolor{keyword}{false};}
 \DoxyCodeLine{00638\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00639\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
-\DoxyCodeLine{00640\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.ac\_sw\_status)\ \{}
-\DoxyCodeLine{00641\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ac\_test()\ >\ MIN\_BAT\_KW\_AC\_HI)\ \{}
-\DoxyCodeLine{00642\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00643\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00644\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ R\_FLOAT\ AC\ switch\ true\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
-\DoxyCodeLine{00645\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00646\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00647\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.pv\_bias\ =\ PV\_BIAS;}
-\DoxyCodeLine{00648\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fm80\_float(\textcolor{keyword}{true});}
-\DoxyCodeLine{00649\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00650\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ R\_RUN:}
-\DoxyCodeLine{00651\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
-\DoxyCodeLine{00652\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.R\ =\ R\_RUN;}
-\DoxyCodeLine{00653\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.no\_float\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00654\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00655\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00656\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00657\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ main\ state-\/machine\ update\ sequence\ and\ control\ logic}}
-\DoxyCodeLine{00658\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00659\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00660\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ check\ for\ idle/data\ errors\ flags\ from\ sensors\ and\ HA}}
-\DoxyCodeLine{00661\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00662\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.mode.data\_error)\ \{}
-\DoxyCodeLine{00663\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bsoc\_set\_mode(E.mode.pv\_bias,\ \textcolor{keyword}{true},\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00664\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.gti\_delay++\ >=\ GTI\_DELAY)\ \{}
-\DoxyCodeLine{00665\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ gti\_str[SBUF\_SIZ];}
-\DoxyCodeLine{00666\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int32\_t\ error\_drive;}
-\DoxyCodeLine{00667\ }
-\DoxyCodeLine{00668\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00669\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ reset\ the\ control\ mode\ from\ simple\ switched\ power\ to\ PID\ control}}
-\DoxyCodeLine{00670\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00671\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.mode.in\_pid\_control)\ \{}
-\DoxyCodeLine{00672\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00673\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00674\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
-\DoxyCodeLine{00675\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00676\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00677\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.pv\_bias\ =\ PV\_BIAS;}
-\DoxyCodeLine{00678\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ in\_pid\_mode\ AC/DC\ switch\ true\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
-\DoxyCodeLine{00679\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fm80\_float(\textcolor{keyword}{true});}
-\DoxyCodeLine{00680\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00681\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!fm80\_float(\textcolor{keyword}{true}))\ \{}
-\DoxyCodeLine{00682\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.pv\_bias\ =\ (int32\_t)\ E.mode.error\ -\/\ PV\_BIAS;}
-\DoxyCodeLine{00683\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00684\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00685\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00686\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ use\ PID\ style\ set-\/point\ error\ correction}}
-\DoxyCodeLine{00687\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00688\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.in\_pid\_control\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00689\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_delay\ =\ 0;}
-\DoxyCodeLine{00690\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00691\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ adjust\ power\ balance\ if\ battery\ charging\ energy\ is\ low}}
-\DoxyCodeLine{00692\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00693\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_DPBAT]\ >\ PV\_DL\_BIAS\_RATE)\ \{}
-\DoxyCodeLine{00694\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ (int32\_t)\ E.mode.error\ -\/\ E.mode.pv\_bias;\ \textcolor{comment}{//\ PI\ feedback\ control\ signal}}
-\DoxyCodeLine{00695\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00696\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ (int32\_t)\ E.mode.error\ -\/\ PV\_BIAS\_RATE;}
-\DoxyCodeLine{00697\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00698\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00699\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ when\ main\ battery\ is\ in\ float,\ crank-\/up\ the\ power\ draw\ from\ the\ solar\ panels}}
-\DoxyCodeLine{00700\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00701\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fm80\_float(\textcolor{keyword}{true}))\ \{}
-\DoxyCodeLine{00702\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ (int32\_t)\ (E.mode.error\ +\ PV\_BIAS);}
-\DoxyCodeLine{00703\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00704\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00705\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ don't\ drive\ to\ zero\ power}}
-\DoxyCodeLine{00706\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00707\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (error\_drive\ <\ 0)\ \{}
-\DoxyCodeLine{00708\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ PV\_BIAS\_LOW;\ \textcolor{comment}{//\ control\ wide\ power\ swings}}
-\DoxyCodeLine{00709\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!fm80\_sleep())\ \{\ \textcolor{comment}{//\ check\ for\ using\ sleep\ bias}}
-\DoxyCodeLine{00710\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((E.mvar[V\_FBEKW]\ >\ MIN\_BAT\_KW\_BSOC\_SLP)\ \&\&\ (E.mvar[V\_PWA]\ >\ PWA\_SLEEP))\ \{}
-\DoxyCodeLine{00711\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ PV\_BIAS\_SLEEP;\ \textcolor{comment}{//\ use\ higher\ power\ when\ we\ still\ have\ sun\ for\ better\ inverter\ efficiency}}
-\DoxyCodeLine{00712\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00713\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00714\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00715\ }
-\DoxyCodeLine{00716\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00717\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ reduce\ charging/diversion\ power\ to\ safe\ PS\ limits}}
-\DoxyCodeLine{00718\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00719\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.dl\_mqtt\_max\ >\ PV\_DL\_MPTT\_MAX)\ \{}
-\DoxyCodeLine{00720\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.dl\_excess)\ \{}
-\DoxyCodeLine{00721\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ PV\_DL\_MPTT\_IDLE;}
-\DoxyCodeLine{00722\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00723\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.dl\_mqtt\_max\ >\ PV\_DL\_MPTT\_EXCESS)\ \{}
-\DoxyCodeLine{00724\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ PV\_DL\_MPTT\_IDLE;}
-\DoxyCodeLine{00725\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00726\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00727\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00728\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.dl\_excess)\ \{}
-\DoxyCodeLine{00729\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ PV\_DL\_EXCESS\ +\ E.dl\_excess\_adj;}
-\DoxyCodeLine{00730\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00731\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00732\ }
-\DoxyCodeLine{00733\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00734\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ shutdown\ GTI\ power\ at\ low\ DL\ battery\ Ah\ or\ Voltage}}
-\DoxyCodeLine{00735\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00736\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((E.mvar[V\_DAHBAT]\ <\ PV\_DL\_B\_AH\_LOW)\ ||\ (E.mvar[V\_DVBAT]\ <\ PV\_DL\_B\_V\_LOW))\ \{}
-\DoxyCodeLine{00737\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ PV\_BIAS\_ZERO;}
+\DoxyCodeLine{00639\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.gti\_sw\_status)\ \{}
+\DoxyCodeLine{00640\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (gti\_test()\ >\ MIN\_BAT\_KW\_GTI\_HI)\ \{}
+\DoxyCodeLine{00641\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00642\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00643\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ R\_FLOAT\ DC\ switch\ true\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00644\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00645\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00646\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
+\DoxyCodeLine{00647\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.ac\_sw\_status)\ \{}
+\DoxyCodeLine{00648\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ac\_test()\ >\ MIN\_BAT\_KW\_AC\_HI)\ \{}
+\DoxyCodeLine{00649\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00650\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00651\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ R\_FLOAT\ AC\ switch\ true\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00652\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00653\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00654\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.pv\_bias\ =\ PV\_BIAS;}
+\DoxyCodeLine{00655\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fm80\_float(\textcolor{keyword}{true});}
+\DoxyCodeLine{00656\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00657\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ R\_RUN:}
+\DoxyCodeLine{00658\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00659\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.R\ =\ R\_RUN;}
+\DoxyCodeLine{00660\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.no\_float\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00661\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00662\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00663\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00664\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ main\ state-\/machine\ update\ sequence\ and\ control\ logic}}
+\DoxyCodeLine{00665\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00666\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00667\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ check\ for\ idle/data\ errors\ flags\ from\ sensors\ and\ HA}}
+\DoxyCodeLine{00668\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00669\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.mode.data\_error)\ \{}
+\DoxyCodeLine{00670\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bsoc\_set\_mode(E.mode.pv\_bias,\ \textcolor{keyword}{true},\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00671\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.gti\_delay++\ >=\ GTI\_DELAY)\ \{}
+\DoxyCodeLine{00672\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ gti\_str[SBUF\_SIZ];}
+\DoxyCodeLine{00673\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int32\_t\ error\_drive;}
+\DoxyCodeLine{00674\ }
+\DoxyCodeLine{00675\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00676\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ reset\ the\ control\ mode\ from\ simple\ switched\ power\ to\ PID\ control}}
+\DoxyCodeLine{00677\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00678\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.mode.in\_pid\_control)\ \{}
+\DoxyCodeLine{00679\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00680\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00681\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
+\DoxyCodeLine{00682\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00683\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00684\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.pv\_bias\ =\ PV\_BIAS;}
+\DoxyCodeLine{00685\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ in\_pid\_mode\ AC/DC\ switch\ true\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00686\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fm80\_float(\textcolor{keyword}{true});}
+\DoxyCodeLine{00687\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00688\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!fm80\_float(\textcolor{keyword}{true}))\ \{}
+\DoxyCodeLine{00689\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.pv\_bias\ =\ (int32\_t)\ E.mode.error\ -\/\ PV\_BIAS;}
+\DoxyCodeLine{00690\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00691\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00692\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00693\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ use\ PID\ style\ set-\/point\ error\ correction}}
+\DoxyCodeLine{00694\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00695\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.in\_pid\_control\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00696\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_delay\ =\ 0;}
+\DoxyCodeLine{00697\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00698\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ adjust\ power\ balance\ if\ battery\ charging\ energy\ is\ low}}
+\DoxyCodeLine{00699\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00700\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_DPBAT]\ >\ PV\_DL\_BIAS\_RATE)\ \{}
+\DoxyCodeLine{00701\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ (int32\_t)\ E.mode.error\ -\/\ E.mode.pv\_bias;\ \textcolor{comment}{//\ PI\ feedback\ control\ signal}}
+\DoxyCodeLine{00702\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00703\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ (int32\_t)\ E.mode.error\ -\/\ PV\_BIAS\_RATE;}
+\DoxyCodeLine{00704\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00705\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00706\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ when\ main\ battery\ is\ in\ float,\ crank-\/up\ the\ power\ draw\ from\ the\ solar\ panels}}
+\DoxyCodeLine{00707\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00708\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fm80\_float(\textcolor{keyword}{true}))\ \{}
+\DoxyCodeLine{00709\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ (int32\_t)\ (E.mode.error\ +\ PV\_BIAS);}
+\DoxyCodeLine{00710\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00711\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00712\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ don't\ drive\ to\ zero\ power}}
+\DoxyCodeLine{00713\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00714\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (error\_drive\ <\ 0)\ \{}
+\DoxyCodeLine{00715\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ PV\_BIAS\_LOW;\ \textcolor{comment}{//\ control\ wide\ power\ swings}}
+\DoxyCodeLine{00716\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!fm80\_sleep())\ \{\ \textcolor{comment}{//\ check\ for\ using\ sleep\ bias}}
+\DoxyCodeLine{00717\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((E.mvar[V\_FBEKW]\ >\ MIN\_BAT\_KW\_BSOC\_SLP)\ \&\&\ (E.mvar[V\_PWA]\ >\ PWA\_SLEEP))\ \{}
+\DoxyCodeLine{00718\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ PV\_BIAS\_SLEEP;\ \textcolor{comment}{//\ use\ higher\ power\ when\ we\ still\ have\ sun\ for\ better\ inverter\ efficiency}}
+\DoxyCodeLine{00719\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00720\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00721\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00722\ }
+\DoxyCodeLine{00723\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00724\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ reduce\ charging/diversion\ power\ to\ safe\ PS\ limits}}
+\DoxyCodeLine{00725\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00726\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.dl\_mqtt\_max\ >\ PV\_DL\_MPTT\_MAX)\ \{}
+\DoxyCodeLine{00727\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.dl\_excess)\ \{}
+\DoxyCodeLine{00728\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ PV\_DL\_MPTT\_IDLE;}
+\DoxyCodeLine{00729\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00730\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.dl\_mqtt\_max\ >\ PV\_DL\_MPTT\_EXCESS)\ \{}
+\DoxyCodeLine{00731\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ PV\_DL\_MPTT\_IDLE;}
+\DoxyCodeLine{00732\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00733\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00734\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00735\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.dl\_excess)\ \{}
+\DoxyCodeLine{00736\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ PV\_DL\_EXCESS\ +\ E.dl\_excess\_adj;}
+\DoxyCodeLine{00737\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00738\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00739\ }
-\DoxyCodeLine{00740\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ snprintf(gti\_str,\ SBUF\_SIZ\ -\/\ 1,\ \textcolor{stringliteral}{"{}V\%04dX"{}},\ error\_drive);\ \textcolor{comment}{//\ format\ for\ dumpload\ controller\ gti\ power\ commands}}
-\DoxyCodeLine{00741\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_gti\_power(E.client\_p,\ TOPIC\_P,\ gti\_str,\ 2);}
-\DoxyCodeLine{00742\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00743\ }
-\DoxyCodeLine{00744\ \textcolor{preprocessor}{\#ifndef\ \ FAKE\_VPV}}
-\DoxyCodeLine{00745\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fm80\_float(\textcolor{keyword}{true})\ ||\ ((ac1\_filter(E.mvar[V\_BEN])\ >\ BAL\_MAX\_ENERGY\_AC)\ \&\&\ (ac\_test()\ >\ MIN\_BAT\_KW\_AC\_HI)))\ \{}
-\DoxyCodeLine{00746\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_up\_ac(E.client\_p,\ E.ac\_sw\_on);\ \textcolor{comment}{//\ use\ once\ control}}
-\DoxyCodeLine{00747\ \textcolor{preprocessor}{\#ifdef\ PSW\_DEBUG}}
-\DoxyCodeLine{00748\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ MIN\_BAT\_KW\_AC\_HI\ AC\ switch\ \%d\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.ac\_sw\_on);}
-\DoxyCodeLine{00749\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00750\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_on\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ once\ flag}}
-\DoxyCodeLine{00751\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00752\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00753\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (((ac2\_filter(E.mvar[V\_BEN])\ <\ BAL\_MIN\_ENERGY\_AC)\ ||\ ((ac\_test()\ <\ (MIN\_BAT\_KW\_AC\_LO\ +\ E.ac\_low\_adj)))))\ \{}
-\DoxyCodeLine{00754\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!fm80\_float(\textcolor{keyword}{true}))\ \{}
-\DoxyCodeLine{00755\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_ac(E.client\_p,\ E.ac\_sw\_on);}
-\DoxyCodeLine{00756\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (log\_timer())\ \{}
-\DoxyCodeLine{00757\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ RAMP\ DOWN\ AC,\ MIN\_BAT\_KW\_AC\_LO\ AC\ switch\ \%d\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.ac\_sw\_on);}
-\DoxyCodeLine{00758\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00759\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00760\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_on\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00761\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00762\ }
-\DoxyCodeLine{00763\ }
-\DoxyCodeLine{00764\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00765\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ Dump\ Load\ Excess\ testing}}
-\DoxyCodeLine{00766\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ send\ excess\ power\ into\ the\ home\ power\ grid\ taking\ care\ not\ to\ export\ energy\ to\ the\ utility\ grid}}
-\DoxyCodeLine{00767\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00768\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (((dc1\_filter(E.mvar[V\_BEN])\ >\ BAL\_MAX\_ENERGY\_GTI)\ \&\&\ (gti\_test()\ >\ MIN\_BAT\_KW\_GTI\_HI))\ ||\ E.dl\_excess)\ \{}
-\DoxyCodeLine{00769\ \textcolor{preprocessor}{\#ifndef\ \ FAKE\_VPV\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{00770\ \textcolor{preprocessor}{\#ifdef\ B\_DLE\_DEBUG}}
-\DoxyCodeLine{00771\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.dl\_excess)\ \{}
-\DoxyCodeLine{00772\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ DL\ excess\ ramp\_up\_gti,\ DC\ switch\ \%d\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.gti\_sw\_on);}
-\DoxyCodeLine{00773\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00774\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00775\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_up\_gti(E.client\_p,\ E.gti\_sw\_on,\ E.dl\_excess);}
-\DoxyCodeLine{00776\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (log\_timer())\ \{}
-\DoxyCodeLine{00777\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ RAMP\ DOWN\ DC,\ MIN\_BAT\_KW\_GTI\_HI\ DC\ switch\ \%d\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.gti\_sw\_on);}
-\DoxyCodeLine{00778\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00779\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_on\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ once\ flag}}
-\DoxyCodeLine{00780\ \textcolor{preprocessor}{\#endif\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{00781\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00782\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((dc2\_filter(E.mvar[V\_BEN])\ <\ BAL\_MIN\_ENERGY\_GTI)\ ||\ (gti\_test()\ <\ (MIN\_BAT\_KW\_GTI\_LO\ +\ E.gti\_low\_adj)))\ \{}
-\DoxyCodeLine{00783\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.dl\_excess)\ \{}
-\DoxyCodeLine{00784\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (log\_timer())\ \{}
-\DoxyCodeLine{00785\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_gti(E.client\_p,\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00786\ \textcolor{preprocessor}{\#ifdef\ PSW\_DEBUG}}
-\DoxyCodeLine{00787\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ MIN\_BAT\_KW\_GTI\_LO\ DC\ switch\ \%d\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.gti\_sw\_on);}
-\DoxyCodeLine{00788\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00789\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00790\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_on\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00791\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00792\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00793\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00794\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
-\DoxyCodeLine{00795\ }
-\DoxyCodeLine{00796\ \textcolor{preprocessor}{\#ifdef\ B\_ADJ\_DEBUG}}
-\DoxyCodeLine{00797\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\ LO\ ADJ:\ AC\ \%8.2fWh,\ GTI\ \%8.2fWh\(\backslash\)r\(\backslash\)n"{}},\ MIN\_BAT\_KW\_AC\_LO\ +\ E.ac\_low\_adj,\ MIN\_BAT\_KW\_GTI\_LO\ +\ E.gti\_low\_adj);}
+\DoxyCodeLine{00740\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00741\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ shutdown\ GTI\ power\ at\ low\ DL\ battery\ Ah\ or\ Voltage}}
+\DoxyCodeLine{00742\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00743\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((E.mvar[V\_DAHBAT]\ <\ PV\_DL\_B\_AH\_LOW)\ ||\ (E.mvar[V\_DVBAT]\ <\ PV\_DL\_B\_V\_LOW)\ ||\ (get\_bat\_runtime()\ <\ BAT\_RUNTIME\_GTI))\ \{}
+\DoxyCodeLine{00744\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ PV\_BIAS\_ZERO;}
+\DoxyCodeLine{00745\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00746\ }
+\DoxyCodeLine{00747\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (get\_bat\_runtime()\ <\ BAT\_RUNTIME\_LOW)\ \{}
+\DoxyCodeLine{00748\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ PV\_BIAS\_ZERO;}
+\DoxyCodeLine{00749\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_ac\_off();}
+\DoxyCodeLine{00750\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_ac\_off();}
+\DoxyCodeLine{00751\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_ac\_off();}
+\DoxyCodeLine{00752\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_ac\_off();}
+\DoxyCodeLine{00753\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_dc\_off();}
+\DoxyCodeLine{00754\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_dc\_off();}
+\DoxyCodeLine{00755\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_dc\_off();}
+\DoxyCodeLine{00756\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_dc\_off();}
+\DoxyCodeLine{00757\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Main\ Battery\ Runtime\ too\ low,\ shutting\ down\ power\ drains,\ \%6f\ Hrs\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ get\_bat\_runtime());}
+\DoxyCodeLine{00758\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_ac(E.client\_p,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00759\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_gti(E.client\_p,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00760\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_shutdown(E.client\_p,\ TOPIC\_SHUTDOWN);}
+\DoxyCodeLine{00761\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00762\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00763\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ snprintf(gti\_str,\ SBUF\_SIZ\ -\/\ 1,\ \textcolor{stringliteral}{"{}V\%04dX"{}},\ error\_drive);\ \textcolor{comment}{//\ format\ for\ dumpload\ controller\ gti\ power\ commands}}
+\DoxyCodeLine{00764\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_gti\_power(E.client\_p,\ TOPIC\_P,\ gti\_str,\ 2);}
+\DoxyCodeLine{00765\ }
+\DoxyCodeLine{00766\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00767\ }
+\DoxyCodeLine{00768\ \textcolor{preprocessor}{\#ifndef\ \ FAKE\_VPV}}
+\DoxyCodeLine{00769\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fm80\_float(\textcolor{keyword}{true})\ ||\ ((ac1\_filter(E.mvar[V\_BEN])\ >\ BAL\_MAX\_ENERGY\_AC)\ \&\&\ (ac\_test()\ >\ MIN\_BAT\_KW\_AC\_HI)))\ \{}
+\DoxyCodeLine{00770\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_up\_ac(E.client\_p,\ E.ac\_sw\_on);\ \textcolor{comment}{//\ use\ once\ control}}
+\DoxyCodeLine{00771\ \textcolor{preprocessor}{\#ifdef\ PSW\_DEBUG}}
+\DoxyCodeLine{00772\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ MIN\_BAT\_KW\_AC\_HI\ AC\ switch\ \%d\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.ac\_sw\_on);}
+\DoxyCodeLine{00773\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00774\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_on\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ once\ flag}}
+\DoxyCodeLine{00775\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00776\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00777\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (((ac2\_filter(E.mvar[V\_BEN])\ <\ BAL\_MIN\_ENERGY\_AC)\ ||\ ((ac\_test()\ <\ (MIN\_BAT\_KW\_AC\_LO\ +\ E.ac\_low\_adj)))))\ \{}
+\DoxyCodeLine{00778\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!fm80\_float(\textcolor{keyword}{true}))\ \{}
+\DoxyCodeLine{00779\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_ac(E.client\_p,\ E.ac\_sw\_on);}
+\DoxyCodeLine{00780\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (log\_timer())\ \{}
+\DoxyCodeLine{00781\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ RAMP\ DOWN\ AC,\ MIN\_BAT\_KW\_AC\_LO\ AC\ switch\ \%d\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.ac\_sw\_on);}
+\DoxyCodeLine{00782\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00783\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00784\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_on\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00785\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00786\ }
+\DoxyCodeLine{00787\ }
+\DoxyCodeLine{00788\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00789\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ Dump\ Load\ Excess\ testing}}
+\DoxyCodeLine{00790\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ send\ excess\ power\ into\ the\ home\ power\ grid\ taking\ care\ not\ to\ export\ energy\ to\ the\ utility\ grid}}
+\DoxyCodeLine{00791\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00792\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (((dc1\_filter(E.mvar[V\_BEN])\ >\ BAL\_MAX\_ENERGY\_GTI)\ \&\&\ (gti\_test()\ >\ MIN\_BAT\_KW\_GTI\_HI))\ ||\ E.dl\_excess)\ \{}
+\DoxyCodeLine{00793\ \textcolor{preprocessor}{\#ifndef\ \ FAKE\_VPV}}
+\DoxyCodeLine{00794\ \textcolor{preprocessor}{\#ifdef\ B\_DLE\_DEBUG}}
+\DoxyCodeLine{00795\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.dl\_excess)\ \{}
+\DoxyCodeLine{00796\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ DL\ excess\ ramp\_up\_gti,\ DC\ switch\ \%d\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.gti\_sw\_on);}
+\DoxyCodeLine{00797\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00798\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00799\ \textcolor{preprocessor}{\#ifdef\ B\_DLE\_DEBUG}}
-\DoxyCodeLine{00800\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.dl\_excess)\ \{}
-\DoxyCodeLine{00801\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ DL\ excess\ vars\ from\ ha\_energy\ \%d\ \%d\ :\ Flag\ \%d\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.mode.con4,\ E.mode.con5,\ E.dl\_excess);}
-\DoxyCodeLine{00802\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00803\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00804\ }
-\DoxyCodeLine{00805\ \ \ \ \ \ \ \ \ \ \ \ \ time(\&rawtime);}
-\DoxyCodeLine{00806\ }
-\DoxyCodeLine{00807\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.im\_delay++\ >=\ IM\_DELAY)\ \{}
-\DoxyCodeLine{00808\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.im\_delay\ =\ 0;}
-\DoxyCodeLine{00809\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ iammeter\_read();}
-\DoxyCodeLine{00810\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00811\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.im\_display++\ >=\ IM\_DISPLAY)\ \{}
-\DoxyCodeLine{00812\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ buffer[SYSLOG\_SIZ];}
-\DoxyCodeLine{00813\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ len;}
-\DoxyCodeLine{00814\ }
-\DoxyCodeLine{00815\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.im\_display\ =\ 0;}
-\DoxyCodeLine{00816\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_pid(E.client\_p,\ TOPIC\_PPID);}
-\DoxyCodeLine{00817\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!(E.fm80\ \&\&\ E.dumpload\ \&\&\ E.iammeter))\ \{}
-\DoxyCodeLine{00818\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.iammeter)\ \{}
-\DoxyCodeLine{00819\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.iammeter\_error++;}
-\DoxyCodeLine{00820\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00821\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.mqtt\_error++;}
-\DoxyCodeLine{00822\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00823\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.shutdown++;}
-\DoxyCodeLine{00824\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ !!!!\ Source\ data\ update\ error\ !!!!\ ,\ check\ FM80\ \%i,\ DUMPLOAD\ \%i,\ IAMMETER\ \%i\ channels\ M\ \%u,\%u\ I\ \%u,\%u\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.fm80,\ E.dumpload,\ E.fm80,}
-\DoxyCodeLine{00825\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.mqtt\_count,\ E.link.mqtt\_error,\ E.link.iammeter\_count,\ E.link.iammeter\_error);}
-\DoxyCodeLine{00826\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00827\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ snprintf(buffer,\ SYSLOG\_SIZ\ -\/\ 1,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ !!!!\ Source\ data\ update\ error\ !!!!\ ,\ check\ FM80\ \%i,\ DUMPLOAD\ \%i,\ IAMMETER\ \%i\ channels\ M\ \%u,\%u\ I\ \%u,\%u\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.fm80,\ E.dumpload,\ E.fm80,}
-\DoxyCodeLine{00828\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.mqtt\_count,\ E.link.mqtt\_error,\ E.link.iammeter\_count,\ E.link.iammeter\_error);}
-\DoxyCodeLine{00829\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ syslog(LOG\_NOTICE,\ buffer);}
-\DoxyCodeLine{00830\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_shutdown(E.client\_p,\ TOPIC\_SHUTDOWN);}
-\DoxyCodeLine{00831\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.data\_error\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00832\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00833\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.data\_error\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00834\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.shutdown\ =\ 0;}
-\DoxyCodeLine{00835\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00836\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ snprintf(buffer,\ RBUF\_SIZ\ -\/\ 1,\ \textcolor{stringliteral}{"{}\%s"{}},\ ctime(\&rawtime));}
-\DoxyCodeLine{00837\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ len\ =\ strlen(buffer);}
-\DoxyCodeLine{00838\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ buffer[len\ -\/\ 1]\ =\ 0;\ \textcolor{comment}{//\ munge\ out\ the\ return\ character}}
-\DoxyCodeLine{00839\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ "{}},\ buffer);}
-\DoxyCodeLine{00840\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00841\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.fm80\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00842\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.dumpload\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00843\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.homeassistant\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00844\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.iammeter\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00845\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sync\_ha();}
-\DoxyCodeLine{00846\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print\_im\_vars();}
-\DoxyCodeLine{00847\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print\_mvar\_vars();}
-\DoxyCodeLine{00848\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\(\backslash\)r"{}},\ ctime(\&rawtime));}
-\DoxyCodeLine{00849\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00850\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.E\ =\ E\_WAIT;}
-\DoxyCodeLine{00851\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00852\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.con6)\ \{}
-\DoxyCodeLine{00853\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.R\ =\ R\_IDLE;}
-\DoxyCodeLine{00854\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00855\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.con7)\ \{}
-\DoxyCodeLine{00856\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.E\ =\ E\_STOP;}
-\DoxyCodeLine{00857\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00858\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00859\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ E\_STOP:}
-\DoxyCodeLine{00860\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
-\DoxyCodeLine{00861\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00862\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ HA\ Energy\ stopped\ and\ exited.\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
-\DoxyCodeLine{00863\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{00864\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
-\DoxyCodeLine{00865\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00866\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00867\ \ \ \ \ \}}
-\DoxyCodeLine{00868\ \}}
+\DoxyCodeLine{00799\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_up\_gti(E.client\_p,\ E.gti\_sw\_on,\ E.dl\_excess);}
+\DoxyCodeLine{00800\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (log\_timer())\ \{}
+\DoxyCodeLine{00801\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ RAMP\ DOWN\ DC,\ MIN\_BAT\_KW\_GTI\_HI\ DC\ switch\ \%d\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.gti\_sw\_on);}
+\DoxyCodeLine{00802\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00803\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_on\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ once\ flag}}
+\DoxyCodeLine{00804\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00805\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00806\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((dc2\_filter(E.mvar[V\_BEN])\ <\ BAL\_MIN\_ENERGY\_GTI)\ ||\ (gti\_test()\ <\ (MIN\_BAT\_KW\_GTI\_LO\ +\ E.gti\_low\_adj)))\ \{}
+\DoxyCodeLine{00807\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.dl\_excess)\ \{}
+\DoxyCodeLine{00808\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (log\_timer())\ \{}
+\DoxyCodeLine{00809\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_gti(E.client\_p,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00810\ \textcolor{preprocessor}{\#ifdef\ PSW\_DEBUG}}
+\DoxyCodeLine{00811\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ MIN\_BAT\_KW\_GTI\_LO\ DC\ switch\ \%d\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.gti\_sw\_on);}
+\DoxyCodeLine{00812\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00813\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00814\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_on\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00815\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00816\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00817\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00818\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00819\ }
+\DoxyCodeLine{00820\ \textcolor{preprocessor}{\#ifdef\ B\_ADJ\_DEBUG}}
+\DoxyCodeLine{00821\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\ LO\ ADJ:\ AC\ \%8.2fWh,\ GTI\ \%8.2fWh\(\backslash\)r\(\backslash\)n"{}},\ MIN\_BAT\_KW\_AC\_LO\ +\ E.ac\_low\_adj,\ MIN\_BAT\_KW\_GTI\_LO\ +\ E.gti\_low\_adj);}
+\DoxyCodeLine{00822\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00823\ \textcolor{preprocessor}{\#ifdef\ B\_DLE\_DEBUG}}
+\DoxyCodeLine{00824\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.dl\_excess)\ \{}
+\DoxyCodeLine{00825\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ DL\ excess\ vars\ from\ ha\_energy\ \%d\ \%d\ :\ Flag\ \%d\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.mode.con4,\ E.mode.con5,\ E.dl\_excess);}
+\DoxyCodeLine{00826\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00827\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00828\ }
+\DoxyCodeLine{00829\ \ \ \ \ \ \ \ \ \ \ \ \ time(\&rawtime);}
+\DoxyCodeLine{00830\ }
+\DoxyCodeLine{00831\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.im\_delay++\ >=\ IM\_DELAY)\ \{}
+\DoxyCodeLine{00832\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.im\_delay\ =\ 0;}
+\DoxyCodeLine{00833\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ iammeter\_read1(IAMM1);}
+\DoxyCodeLine{00834\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ iammeter\_read2(IAMM2);}
+\DoxyCodeLine{00835\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00836\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.im\_display++\ >=\ IM\_DISPLAY)\ \{}
+\DoxyCodeLine{00837\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ buffer[SYSLOG\_SIZ];}
+\DoxyCodeLine{00838\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ len;}
+\DoxyCodeLine{00839\ }
+\DoxyCodeLine{00840\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.im\_display\ =\ 0;}
+\DoxyCodeLine{00841\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_pid(E.client\_p,\ TOPIC\_PPID);}
+\DoxyCodeLine{00842\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!(E.fm80\ \&\&\ E.dumpload\ \&\&\ E.iammeter))\ \{}
+\DoxyCodeLine{00843\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.iammeter)\ \{}
+\DoxyCodeLine{00844\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.iammeter\_error++;}
+\DoxyCodeLine{00845\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00846\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.mqtt\_error++;}
+\DoxyCodeLine{00847\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00848\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.shutdown++;}
+\DoxyCodeLine{00849\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ !!!!\ Source\ data\ update\ error\ !!!!\ ,\ check\ FM80\ \%i,\ DUMPLOAD\ \%i,\ IAMMETER\ \%i\ channels\ M\ \%u,\%u\ I\ \%u,\%u\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.fm80,\ E.dumpload,\ E.fm80,}
+\DoxyCodeLine{00850\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.mqtt\_count,\ E.link.mqtt\_error,\ E.link.iammeter\_count,\ E.link.iammeter\_error);}
+\DoxyCodeLine{00851\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00852\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ snprintf(buffer,\ SYSLOG\_SIZ\ -\/\ 1,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ !!!!\ Source\ data\ update\ error\ !!!!\ ,\ check\ FM80\ \%i,\ DUMPLOAD\ \%i,\ IAMMETER\ \%i\ channels\ M\ \%u,\%u\ I\ \%u,\%u\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.fm80,\ E.dumpload,\ E.fm80,}
+\DoxyCodeLine{00853\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.mqtt\_count,\ E.link.mqtt\_error,\ E.link.iammeter\_count,\ E.link.iammeter\_error);}
+\DoxyCodeLine{00854\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ syslog(LOG\_NOTICE,\ buffer);}
+\DoxyCodeLine{00855\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_shutdown(E.client\_p,\ TOPIC\_SHUTDOWN);}
+\DoxyCodeLine{00856\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.data\_error\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00857\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00858\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.data\_error\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00859\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.shutdown\ =\ 0;}
+\DoxyCodeLine{00860\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00861\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ snprintf(buffer,\ RBUF\_SIZ\ -\/\ 1,\ \textcolor{stringliteral}{"{}\%s"{}},\ ctime(\&rawtime));}
+\DoxyCodeLine{00862\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ len\ =\ strlen(buffer);}
+\DoxyCodeLine{00863\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ buffer[len\ -\/\ 1]\ =\ 0;\ \textcolor{comment}{//\ munge\ out\ the\ return\ character}}
+\DoxyCodeLine{00864\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ "{}},\ buffer);}
+\DoxyCodeLine{00865\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00866\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.fm80\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00867\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.dumpload\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00868\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.homeassistant\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00869\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.iammeter\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00870\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sync\_ha();}
+\DoxyCodeLine{00871\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print\_im\_vars();}
+\DoxyCodeLine{00872\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print\_mvar\_vars();}
+\DoxyCodeLine{00873\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\(\backslash\)r"{}},\ ctime(\&rawtime));}
+\DoxyCodeLine{00874\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00875\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.E\ =\ E\_WAIT;}
+\DoxyCodeLine{00876\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00877\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.con6)\ \{}
+\DoxyCodeLine{00878\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.R\ =\ R\_IDLE;}
+\DoxyCodeLine{00879\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00880\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.con7)\ \{}
+\DoxyCodeLine{00881\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.E\ =\ E\_STOP;}
+\DoxyCodeLine{00882\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00883\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00884\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ E\_STOP:}
+\DoxyCodeLine{00885\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00886\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00887\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ HA\ Energy\ stopped\ and\ exited.\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00888\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{00889\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00890\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00891\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00892\ \ \ \ \ \}}
+\DoxyCodeLine{00893\ \}}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_a92077e5f551e509dad279a8d2be4b21d}\index{energy.c@{energy.c}!ramp\_down\_ac@{ramp\_down\_ac}}
@@ -781,14 +808,14 @@ void ramp\+\_\+down\+\_\+ac (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00968\ \{}
-\DoxyCodeLine{00969\ \ \ \ \ \textcolor{keywordflow}{if}\ (sw\_off)\ \{}
-\DoxyCodeLine{00970\ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00971\ \ \ \ \ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00972\ \ \ \ \ \ \ \ \ usleep(500000);}
-\DoxyCodeLine{00973\ \ \ \ \ \}}
-\DoxyCodeLine{00974\ \ \ \ \ E.once\_ac\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00975\ \}}
+\DoxyCodeLine{01005\ \{}
+\DoxyCodeLine{01006\ \ \ \ \ \textcolor{keywordflow}{if}\ (sw\_off)\ \{}
+\DoxyCodeLine{01007\ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{01008\ \ \ \ \ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{01009\ \ \ \ \ \ \ \ \ usleep(200000);}
+\DoxyCodeLine{01010\ \ \ \ \ \}}
+\DoxyCodeLine{01011\ \ \ \ \ E.once\_ac\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{01012\ \}}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_aa02b759a5ba02eb2d0083c02dcbe4834}\index{energy.c@{energy.c}!ramp\_down\_gti@{ramp\_down\_gti}}
@@ -799,19 +826,23 @@ void ramp\+\_\+down\+\_\+gti (\begin{DoxyParamCaption}\item[{MQTTClient}]{client
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00935\ \{}
-\DoxyCodeLine{00936\ \ \ \ \ \textcolor{keywordflow}{if}\ (sw\_off)\ \{}
-\DoxyCodeLine{00937\ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00938\ \ \ \ \ \ \ \ \ E.once\_gti\_zero\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00939\ \ \ \ \ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00940\ \ \ \ \ \}}
-\DoxyCodeLine{00941\ \ \ \ \ E.once\_gti\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00942\ }
-\DoxyCodeLine{00943\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.once\_gti\_zero)\ \{}
-\DoxyCodeLine{00944\ \ \ \ \ \ \ \ \ mqtt\_gti\_power(client\_p,\ TOPIC\_P,\ \textcolor{stringliteral}{"{}Z\#"{}},\ 7);\ \textcolor{comment}{//\ zero\ power}}
-\DoxyCodeLine{00945\ \ \ \ \ \ \ \ \ E.once\_gti\_zero\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00946\ \ \ \ \ \}}
-\DoxyCodeLine{00947\ \}}
+\DoxyCodeLine{00966\ \{}
+\DoxyCodeLine{00967\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ times\ =\ 0;}
+\DoxyCodeLine{00968\ \ \ \ \ \textcolor{keywordflow}{if}\ (sw\_off)\ \{}
+\DoxyCodeLine{00969\ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00970\ \ \ \ \ \ \ \ \ E.once\_gti\_zero\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00971\ \ \ \ \ \ \ \ \ times\ =\ 0;}
+\DoxyCodeLine{00972\ \ \ \ \ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00973\ \ \ \ \ \}}
+\DoxyCodeLine{00974\ \ \ \ \ E.once\_gti\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00975\ }
+\DoxyCodeLine{00976\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.once\_gti\_zero)\ \{}
+\DoxyCodeLine{00977\ \ \ \ \ \ \ \ \ mqtt\_gti\_power(client\_p,\ TOPIC\_P,\ DL\_POWER\_ZERO,\ 7);\ \textcolor{comment}{//\ zero\ power}}
+\DoxyCodeLine{00978\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (times++\ <\ LOW\_LOG\_SPAM)\ \{}
+\DoxyCodeLine{00979\ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_gti\_zero\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00980\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00981\ \ \ \ \ \}}
+\DoxyCodeLine{00982\ \}}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_a28b7bbb5fe37666136a84c7cded51e2e}\index{energy.c@{energy.c}!ramp\_up\_ac@{ramp\_up\_ac}}
@@ -822,19 +853,21 @@ void ramp\+\_\+up\+\_\+ac (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00953\ \{}
-\DoxyCodeLine{00954\ }
-\DoxyCodeLine{00955\ \ \ \ \ \textcolor{keywordflow}{if}\ (start)\ \{}
-\DoxyCodeLine{00956\ \ \ \ \ \ \ \ \ E.once\_ac\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00957\ \ \ \ \ \}}
-\DoxyCodeLine{00958\ }
-\DoxyCodeLine{00959\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.once\_ac)\ \{}
-\DoxyCodeLine{00960\ \ \ \ \ \ \ \ \ E.once\_ac\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00961\ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00962\ \ \ \ \ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00963\ \ \ \ \ \ \ \ \ usleep(500000);\ \textcolor{comment}{//\ wait\ for\ voltage\ to\ ramp}}
-\DoxyCodeLine{00964\ \ \ \ \ \}}
-\DoxyCodeLine{00965\ \}}
+\DoxyCodeLine{00988\ \{}
+\DoxyCodeLine{00989\ }
+\DoxyCodeLine{00990\ \ \ \ \ \textcolor{keywordflow}{if}\ (start)\ \{}
+\DoxyCodeLine{00991\ \ \ \ \ \ \ \ \ E.once\_ac\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00992\ \ \ \ \ \}}
+\DoxyCodeLine{00993\ }
+\DoxyCodeLine{00994\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.once\_ac)\ \{}
+\DoxyCodeLine{00995\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (get\_bat\_runtime()\ >\ BAT\_RUNTIME\_GTI)\ \{}
+\DoxyCodeLine{00996\ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_ac\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00997\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00998\ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00999\ \ \ \ \ \ \ \ \ \ \ \ \ usleep(200000);\ \textcolor{comment}{//\ wait\ for\ voltage\ to\ ramp}}
+\DoxyCodeLine{01000\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01001\ \ \ \ \ \}}
+\DoxyCodeLine{01002\ \}}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_aaa8441f14022457063db591bed50fe62}\index{energy.c@{energy.c}!ramp\_up\_gti@{ramp\_up\_gti}}
@@ -845,62 +878,68 @@ void ramp\+\_\+up\+\_\+gti (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00874\ \{}
-\DoxyCodeLine{00875\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ sequence\ =\ 0;}
-\DoxyCodeLine{00876\ }
-\DoxyCodeLine{00877\ \ \ \ \ \textcolor{keywordflow}{if}\ (start)\ \{}
-\DoxyCodeLine{00878\ \ \ \ \ \ \ \ \ E.once\_gti\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00879\ \ \ \ \ \}}
-\DoxyCodeLine{00880\ }
-\DoxyCodeLine{00881\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.once\_gti)\ \{}
-\DoxyCodeLine{00882\ \ \ \ \ \ \ \ \ E.once\_gti\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00883\ \ \ \ \ \ \ \ \ sequence\ =\ 0;}
-\DoxyCodeLine{00884\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!excess)\ \{}
-\DoxyCodeLine{00885\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00886\ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00887\ \ \ \ \ \ \ \ \ \ \ \ \ usleep(500000);\ \textcolor{comment}{//\ wait\ for\ voltage\ to\ ramp}}
-\DoxyCodeLine{00888\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00889\ \ \ \ \ \ \ \ \ \ \ \ \ sequence\ =\ 1;}
-\DoxyCodeLine{00890\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00891\ \ \ \ \ \}}
-\DoxyCodeLine{00892\ }
-\DoxyCodeLine{00893\ \ \ \ \ \textcolor{keywordflow}{switch}\ (sequence)\ \{}
-\DoxyCodeLine{00894\ \ \ \ \ \textcolor{keywordflow}{case}\ 4:}
-\DoxyCodeLine{00895\ \ \ \ \ \ \ \ \ E.once\_gti\_zero\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00896\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00897\ \ \ \ \ \textcolor{keywordflow}{case}\ 3:}
-\DoxyCodeLine{00898\ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
-\DoxyCodeLine{00899\ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
-\DoxyCodeLine{00900\ \ \ \ \ \ \ \ \ E.once\_gti\_zero\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00901\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bat\_current\_stable()\ ||\ E.dl\_excess)\ \{\ \textcolor{comment}{//\ check\ battery\ current\ std\ dev,\ stop\ 'motorboating'}}
-\DoxyCodeLine{00902\ \ \ \ \ \ \ \ \ \ \ \ \ sequence++;}
-\DoxyCodeLine{00903\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!mqtt\_gti\_power(client\_p,\ TOPIC\_P,\ \textcolor{stringliteral}{"{}+\#"{}},\ 3))\ \{}
-\DoxyCodeLine{00904\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sequence\ =\ 0;}
-\DoxyCodeLine{00905\ \ \ \ \ \ \ \ \ \ \ \ \ \};\ \textcolor{comment}{//\ +100W\ power}}
-\DoxyCodeLine{00906\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00907\ \ \ \ \ \ \ \ \ \ \ \ \ usleep(500000);\ \textcolor{comment}{//\ wait\ a\ bit\ more\ for\ power\ to\ be\ stable}}
-\DoxyCodeLine{00908\ \ \ \ \ \ \ \ \ \ \ \ \ sequence\ =\ 1;\ \textcolor{comment}{//\ do\ power\ ramps\ when\ ready}}
-\DoxyCodeLine{00909\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!mqtt\_gti\_power(client\_p,\ TOPIC\_P,\ \textcolor{stringliteral}{"{}-\/\#"{}},\ 4))\ \{}
-\DoxyCodeLine{00910\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sequence\ =\ 0;}
-\DoxyCodeLine{00911\ \ \ \ \ \ \ \ \ \ \ \ \ \};\ \textcolor{comment}{//\ -\/\ 100W\ power}}
-\DoxyCodeLine{00912\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00913\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00914\ \ \ \ \ \textcolor{keywordflow}{case}\ 0:}
-\DoxyCodeLine{00915\ \ \ \ \ \ \ \ \ sequence++;}
-\DoxyCodeLine{00916\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.once\_gti\_zero)\ \{}
-\DoxyCodeLine{00917\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_gti\_power(client\_p,\ TOPIC\_P,\ \textcolor{stringliteral}{"{}Z\#"{}},\ 5);\ \textcolor{comment}{//\ zero\ power}}
-\DoxyCodeLine{00918\ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_gti\_zero\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00919\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00920\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00921\ \ \ \ \ \textcolor{keywordflow}{default}:}
-\DoxyCodeLine{00922\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.once\_gti\_zero)\ \{}
-\DoxyCodeLine{00923\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_gti\_power(client\_p,\ TOPIC\_P,\ \textcolor{stringliteral}{"{}Z\#"{}},\ 6);\ \textcolor{comment}{//\ zero\ power}}
-\DoxyCodeLine{00924\ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_gti\_zero\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00925\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00926\ \ \ \ \ \ \ \ \ sequence\ =\ 0;}
-\DoxyCodeLine{00927\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00928\ \ \ \ \ \}}
-\DoxyCodeLine{00929\ \}}
+\DoxyCodeLine{00899\ \{}
+\DoxyCodeLine{00900\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ sequence\ =\ 0;}
+\DoxyCodeLine{00901\ }
+\DoxyCodeLine{00902\ \ \ \ \ \textcolor{keywordflow}{if}\ (start)\ \{}
+\DoxyCodeLine{00903\ \ \ \ \ \ \ \ \ E.once\_gti\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00904\ \ \ \ \ \}}
+\DoxyCodeLine{00905\ }
+\DoxyCodeLine{00906\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.once\_gti)\ \{}
+\DoxyCodeLine{00907\ \ \ \ \ \ \ \ \ E.once\_gti\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00908\ \ \ \ \ \ \ \ \ sequence\ =\ 0;}
+\DoxyCodeLine{00909\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!excess)\ \{}
+\DoxyCodeLine{00910\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (get\_bat\_runtime()\ >\ BAT\_RUNTIME\_GTI)\ \{}
+\DoxyCodeLine{00911\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00912\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00913\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(500000);\ \textcolor{comment}{//\ wait\ for\ PS\ voltage\ to\ ramp}}
+\DoxyCodeLine{00914\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00915\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00916\ \ \ \ \ \ \ \ \ \ \ \ \ sequence\ =\ 1;}
+\DoxyCodeLine{00917\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00918\ \ \ \ \ \}}
+\DoxyCodeLine{00919\ }
+\DoxyCodeLine{00920\ \ \ \ \ \textcolor{keywordflow}{switch}\ (sequence)\ \{}
+\DoxyCodeLine{00921\ \ \ \ \ \textcolor{keywordflow}{case}\ 4:}
+\DoxyCodeLine{00922\ \ \ \ \ \ \ \ \ E.once\_gti\_zero\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00923\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00924\ \ \ \ \ \textcolor{keywordflow}{case}\ 3:}
+\DoxyCodeLine{00925\ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{00926\ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{00927\ \ \ \ \ \ \ \ \ E.once\_gti\_zero\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00928\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bat\_current\_stable()\ ||\ E.dl\_excess)\ \{\ \textcolor{comment}{//\ check\ battery\ current\ std\ dev,\ stop\ 'motorboating'}}
+\DoxyCodeLine{00929\ \ \ \ \ \ \ \ \ \ \ \ \ sequence++;}
+\DoxyCodeLine{00930\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (get\_bat\_runtime()\ >\ BAT\_RUNTIME\_GTI)\ \{}
+\DoxyCodeLine{00931\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!mqtt\_gti\_power(client\_p,\ TOPIC\_P,\ \textcolor{stringliteral}{"{}+\#"{}},\ 3))\ \{}
+\DoxyCodeLine{00932\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sequence\ =\ 0;}
+\DoxyCodeLine{00933\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};\ \textcolor{comment}{//\ +100W\ power}}
+\DoxyCodeLine{00934\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00935\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sequence\ =\ 0;}
+\DoxyCodeLine{00936\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00937\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00938\ \ \ \ \ \ \ \ \ \ \ \ \ usleep(500000);\ \textcolor{comment}{//\ wait\ a\ bit\ more\ for\ power\ to\ be\ stable}}
+\DoxyCodeLine{00939\ \ \ \ \ \ \ \ \ \ \ \ \ sequence\ =\ 1;\ \textcolor{comment}{//\ do\ power\ ramps\ when\ ready}}
+\DoxyCodeLine{00940\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!mqtt\_gti\_power(client\_p,\ TOPIC\_P,\ \textcolor{stringliteral}{"{}-\/\#"{}},\ 4))\ \{}
+\DoxyCodeLine{00941\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sequence\ =\ 0;}
+\DoxyCodeLine{00942\ \ \ \ \ \ \ \ \ \ \ \ \ \};\ \textcolor{comment}{//\ -\/\ 100W\ power}}
+\DoxyCodeLine{00943\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00944\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00945\ \ \ \ \ \textcolor{keywordflow}{case}\ 0:}
+\DoxyCodeLine{00946\ \ \ \ \ \ \ \ \ sequence++;}
+\DoxyCodeLine{00947\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.once\_gti\_zero)\ \{}
+\DoxyCodeLine{00948\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_gti\_power(client\_p,\ TOPIC\_P,\ DL\_POWER\_ZERO,\ 5);\ \textcolor{comment}{//\ zero\ power}}
+\DoxyCodeLine{00949\ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_gti\_zero\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00950\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00951\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00952\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00953\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.once\_gti\_zero)\ \{}
+\DoxyCodeLine{00954\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_gti\_power(client\_p,\ TOPIC\_P,\ DL\_POWER\_ZERO,\ 6);\ \textcolor{comment}{//\ zero\ power}}
+\DoxyCodeLine{00955\ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_gti\_zero\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00956\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00957\ \ \ \ \ \ \ \ \ sequence\ =\ 0;}
+\DoxyCodeLine{00958\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00959\ \ \ \ \ \}}
+\DoxyCodeLine{00960\ \}}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_a014b7e7feb1f7f94f1947d2961e58534}\index{energy.c@{energy.c}!sanity\_check@{sanity\_check}}
@@ -911,25 +950,25 @@ bool sanity\+\_\+check (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamC
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00257\ \{}
-\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_PWA]\ >\ PWA\_SANE)\ \{}
-\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ E.sane\ =\ S\_PWA;}
-\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00261\ \ \ \ \ \}}
-\DoxyCodeLine{00262\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_PAMPS]\ >\ PAMPS\_SANE)\ \{}
-\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ E.sane\ =\ S\_PAMPS;}
-\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00265\ \ \ \ \ \}}
-\DoxyCodeLine{00266\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_PVOLTS]\ >\ PVOLTS\_SANE)\ \{}
-\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ E.sane\ =\ S\_PVOLTS;}
-\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00269\ \ \ \ \ \}}
-\DoxyCodeLine{00270\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_FBAMPS]\ >\ BAMPS\_SANE)\ \{}
-\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ E.sane\ =\ S\_FBAMPS;}
-\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00273\ \ \ \ \ \}}
-\DoxyCodeLine{00274\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00275\ \}}
+\DoxyCodeLine{00258\ \{}
+\DoxyCodeLine{00259\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_PWA]\ >\ PWA\_SANE)\ \{}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ E.sane\ =\ S\_PWA;}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00262\ \ \ \ \ \}}
+\DoxyCodeLine{00263\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_PAMPS]\ >\ PAMPS\_SANE)\ \{}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ E.sane\ =\ S\_PAMPS;}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00266\ \ \ \ \ \}}
+\DoxyCodeLine{00267\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_PVOLTS]\ >\ PVOLTS\_SANE)\ \{}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ E.sane\ =\ S\_PVOLTS;}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00270\ \ \ \ \ \}}
+\DoxyCodeLine{00271\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_FBAMPS]\ >\ BAMPS\_SANE)\ \{}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ E.sane\ =\ S\_FBAMPS;}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00274\ \ \ \ \ \}}
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00276\ \}}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_a0e3152830cd54954f6745ba7ae42ff42}\index{energy.c@{energy.c}!showIP@{showIP}}
@@ -940,34 +979,34 @@ void show\+IP (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00163\ \{}
-\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keyword}{struct\ }ifaddrs\ *ifaddr,\ *ifa;}
-\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordtype}{int}\ s;}
-\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordtype}{char}\ host[NI\_MAXHOST];}
-\DoxyCodeLine{00167\ }
-\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordflow}{if}\ (getifaddrs(\&ifaddr)\ ==\ -\/1)\ \{}
-\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ perror(\textcolor{stringliteral}{"{}getifaddrs"{}});}
-\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
-\DoxyCodeLine{00171\ \ \ \ \ \}}
-\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00164\ \{}
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keyword}{struct\ }ifaddrs\ *ifaddr,\ *ifa;}
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordtype}{int}\ s;}
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordtype}{char}\ host[NI\_MAXHOST];}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordflow}{if}\ (getifaddrs(\&ifaddr)\ ==\ -\/1)\ \{}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ perror(\textcolor{stringliteral}{"{}getifaddrs"{}});}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{00172\ \ \ \ \ \}}
 \DoxyCodeLine{00173\ }
-\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordflow}{for}\ (ifa\ =\ ifaddr;\ ifa\ !=\ NULL;\ ifa\ =\ ifa-\/>ifa\_next)\ \{}
-\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ifa-\/>ifa\_addr\ ==\ NULL)}
-\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{00177\ }
-\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ s\ =\ getnameinfo(ifa-\/>ifa\_addr,\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct}\ sockaddr\_in),\ host,\ NI\_MAXHOST,\ NULL,\ 0,\ NI\_NUMERICHOST);}
-\DoxyCodeLine{00179\ }
-\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ifa-\/>ifa\_addr-\/>sa\_family\ ==\ AF\_INET)\ \{}
-\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (s\ !=\ 0)\ \{}
-\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
-\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)tInterface\ :\ <\%s>\(\backslash\)n"{}},\ ifa-\/>ifa\_name);}
-\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\ \ Address\ :\ <\%s>\(\backslash\)n"{}},\ host);}
-\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00187\ \ \ \ \ \}}
-\DoxyCodeLine{00188\ }
-\DoxyCodeLine{00189\ \ \ \ \ freeifaddrs(ifaddr);}
-\DoxyCodeLine{00190\ \}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keywordflow}{for}\ (ifa\ =\ ifaddr;\ ifa\ !=\ NULL;\ ifa\ =\ ifa-\/>ifa\_next)\ \{}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ifa-\/>ifa\_addr\ ==\ NULL)}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ s\ =\ getnameinfo(ifa-\/>ifa\_addr,\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct}\ sockaddr\_in),\ host,\ NI\_MAXHOST,\ NULL,\ 0,\ NI\_NUMERICHOST);}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ifa-\/>ifa\_addr-\/>sa\_family\ ==\ AF\_INET)\ \{}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (s\ !=\ 0)\ \{}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)tInterface\ :\ <\%s>\(\backslash\)n"{}},\ ifa-\/>ifa\_name);}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\ \ Address\ :\ <\%s>\(\backslash\)n"{}},\ host);}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00188\ \ \ \ \ \}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ \ \ freeifaddrs(ifaddr);}
+\DoxyCodeLine{00191\ \}}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_ac6b8bef7c0921e591a31d844e13d24e8}\index{energy.c@{energy.c}!skeleton\_daemon@{skeleton\_daemon}}
@@ -978,60 +1017,60 @@ void skeleton\+\_\+daemon (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\h
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00197\ \{}
-\DoxyCodeLine{00198\ \ \ \ \ pid\_t\ pid;}
-\DoxyCodeLine{00199\ }
-\DoxyCodeLine{00200\ \ \ \ \ \textcolor{comment}{/*\ Fork\ off\ the\ parent\ process\ */}}
-\DoxyCodeLine{00201\ \ \ \ \ pid\ =\ fork();}
-\DoxyCodeLine{00202\ }
-\DoxyCodeLine{00203\ \ \ \ \ \textcolor{comment}{/*\ An\ error\ occurred\ */}}
-\DoxyCodeLine{00204\ \ \ \ \ \textcolor{keywordflow}{if}\ (pid\ <\ 0)\ \{}
-\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ DAEMON\ failure\ \ LOG\ Version\ \%s\ :\ MQTT\ Version\ \%s\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ LOG\_VERSION,\ MQTT\_VERSION);}
-\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
-\DoxyCodeLine{00207\ \ \ \ \ \}}
-\DoxyCodeLine{00208\ }
-\DoxyCodeLine{00209\ \ \ \ \ \textcolor{comment}{/*\ Success:\ Let\ the\ parent\ terminate\ */}}
-\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keywordflow}{if}\ (pid\ >\ 0)\ \{}
-\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ exit(EXIT\_SUCCESS);}
-\DoxyCodeLine{00212\ \ \ \ \ \}}
-\DoxyCodeLine{00213\ }
-\DoxyCodeLine{00214\ \ \ \ \ \textcolor{comment}{/*\ On\ success:\ The\ child\ process\ becomes\ session\ leader\ */}}
-\DoxyCodeLine{00215\ \ \ \ \ \textcolor{keywordflow}{if}\ (setsid()\ <\ 0)\ \{}
-\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
-\DoxyCodeLine{00217\ \ \ \ \ \}}
-\DoxyCodeLine{00218\ }
-\DoxyCodeLine{00219\ \ \ \ \ \textcolor{comment}{/*\ Catch,\ ignore\ and\ handle\ signals\ */}}
-\DoxyCodeLine{00220\ \ \ \ \ \textcolor{comment}{/*TODO:\ Implement\ a\ working\ signal\ handler\ */}}
-\DoxyCodeLine{00221\ \ \ \ \ \textcolor{comment}{//\ \ \ \ signal(SIGCHLD,\ SIG\_IGN);}}
-\DoxyCodeLine{00222\ \ \ \ \ \textcolor{comment}{//\ \ \ \ signal(SIGHUP,\ SIG\_IGN);}}
-\DoxyCodeLine{00223\ }
-\DoxyCodeLine{00224\ \ \ \ \ \textcolor{comment}{/*\ Fork\ off\ for\ the\ second\ time*/}}
-\DoxyCodeLine{00225\ \ \ \ \ pid\ =\ fork();}
-\DoxyCodeLine{00226\ }
-\DoxyCodeLine{00227\ \ \ \ \ \textcolor{comment}{/*\ An\ error\ occurred\ */}}
-\DoxyCodeLine{00228\ \ \ \ \ \textcolor{keywordflow}{if}\ (pid\ <\ 0)\ \{}
-\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
-\DoxyCodeLine{00230\ \ \ \ \ \}}
-\DoxyCodeLine{00231\ }
-\DoxyCodeLine{00232\ \ \ \ \ \textcolor{comment}{/*\ Success:\ Let\ the\ parent\ terminate\ */}}
-\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keywordflow}{if}\ (pid\ >\ 0)\ \{}
-\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ exit(EXIT\_SUCCESS);}
-\DoxyCodeLine{00235\ \ \ \ \ \}}
-\DoxyCodeLine{00236\ }
-\DoxyCodeLine{00237\ \ \ \ \ \textcolor{comment}{/*\ Set\ new\ file\ permissions\ */}}
-\DoxyCodeLine{00238\ \ \ \ \ umask(0);}
-\DoxyCodeLine{00239\ }
-\DoxyCodeLine{00240\ \ \ \ \ \textcolor{comment}{/*\ Change\ the\ working\ directory\ to\ the\ root\ directory\ */}}
-\DoxyCodeLine{00241\ \ \ \ \ \textcolor{comment}{/*\ or\ another\ appropriated\ directory\ */}}
-\DoxyCodeLine{00242\ \ \ \ \ chdir(\textcolor{stringliteral}{"{}/"{}});}
-\DoxyCodeLine{00243\ }
-\DoxyCodeLine{00244\ \ \ \ \ \textcolor{comment}{/*\ Close\ all\ open\ file\ descriptors\ */}}
-\DoxyCodeLine{00245\ \ \ \ \ \textcolor{keywordtype}{int}\ x;}
-\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keywordflow}{for}\ (x\ =\ sysconf(\_SC\_OPEN\_MAX);\ x\ >=\ 0;\ x-\/-\/)\ \{}
-\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ close(x);}
-\DoxyCodeLine{00248\ \ \ \ \ \}}
-\DoxyCodeLine{00249\ }
-\DoxyCodeLine{00250\ \}}
+\DoxyCodeLine{00198\ \{}
+\DoxyCodeLine{00199\ \ \ \ \ pid\_t\ pid;}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{comment}{/*\ Fork\ off\ the\ parent\ process\ */}}
+\DoxyCodeLine{00202\ \ \ \ \ pid\ =\ fork();}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \ \ \ \ \textcolor{comment}{/*\ An\ error\ occurred\ */}}
+\DoxyCodeLine{00205\ \ \ \ \ \textcolor{keywordflow}{if}\ (pid\ <\ 0)\ \{}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ DAEMON\ failure\ \ LOG\ Version\ \%s\ :\ MQTT\ Version\ \%s\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ LOG\_VERSION,\ MQTT\_VERSION);}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{00208\ \ \ \ \ \}}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{comment}{/*\ Success:\ Let\ the\ parent\ terminate\ */}}
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{keywordflow}{if}\ (pid\ >\ 0)\ \{}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ exit(EXIT\_SUCCESS);}
+\DoxyCodeLine{00213\ \ \ \ \ \}}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{comment}{/*\ On\ success:\ The\ child\ process\ becomes\ session\ leader\ */}}
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keywordflow}{if}\ (setsid()\ <\ 0)\ \{}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{00218\ \ \ \ \ \}}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{comment}{/*\ Catch,\ ignore\ and\ handle\ signals\ */}}
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{comment}{/*TODO:\ Implement\ a\ working\ signal\ handler\ */}}
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{comment}{//\ \ \ \ signal(SIGCHLD,\ SIG\_IGN);}}
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{comment}{//\ \ \ \ signal(SIGHUP,\ SIG\_IGN);}}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{comment}{/*\ Fork\ off\ for\ the\ second\ time*/}}
+\DoxyCodeLine{00226\ \ \ \ \ pid\ =\ fork();}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00228\ \ \ \ \ \textcolor{comment}{/*\ An\ error\ occurred\ */}}
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{keywordflow}{if}\ (pid\ <\ 0)\ \{}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{00231\ \ \ \ \ \}}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{comment}{/*\ Success:\ Let\ the\ parent\ terminate\ */}}
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{keywordflow}{if}\ (pid\ >\ 0)\ \{}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ exit(EXIT\_SUCCESS);}
+\DoxyCodeLine{00236\ \ \ \ \ \}}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{comment}{/*\ Set\ new\ file\ permissions\ */}}
+\DoxyCodeLine{00239\ \ \ \ \ umask(0);}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{comment}{/*\ Change\ the\ working\ directory\ to\ the\ root\ directory\ */}}
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{comment}{/*\ or\ another\ appropriated\ directory\ */}}
+\DoxyCodeLine{00243\ \ \ \ \ chdir(\textcolor{stringliteral}{"{}/"{}});}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \ \ \ \ \textcolor{comment}{/*\ Close\ all\ open\ file\ descriptors\ */}}
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keywordtype}{int}\ x;}
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keywordflow}{for}\ (x\ =\ sysconf(\_SC\_OPEN\_MAX);\ x\ >=\ 0;\ x-\/-\/)\ \{}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ close(x);}
+\DoxyCodeLine{00249\ \ \ \ \ \}}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \}}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_a5db80d060a0e5e2905e748f97ce54f80}\index{energy.c@{energy.c}!solar\_shutdown@{solar\_shutdown}}
@@ -1042,56 +1081,56 @@ bool solar\+\_\+shutdown (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyPara
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{01008\ \{}
-\DoxyCodeLine{01009\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ ret\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{01010\ }
-\DoxyCodeLine{01011\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.startup)\ \{}
-\DoxyCodeLine{01012\ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{01013\ \ \ \ \ \ \ \ \ E.startup\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{01014\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
-\DoxyCodeLine{01015\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{01016\ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{01017\ }
-\DoxyCodeLine{01018\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{01019\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ FIXME}}
-\DoxyCodeLine{01020\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ }}
-\DoxyCodeLine{01021\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{01022\ \ \ \ \ \}}
-\DoxyCodeLine{01023\ }
-\DoxyCodeLine{01024\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.solar\_shutdown)\ \{}
-\DoxyCodeLine{01025\ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{01026\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{01027\ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{01028\ \ \ \ \ \}}
-\DoxyCodeLine{01029\ }
-\DoxyCodeLine{01030\ \ \ \ \ \textcolor{keywordflow}{if}\ ((E.mvar[V\_FBEKW]\ <\ BAT\_CRITICAL)\ \&\&\ !E.startup)\ \{\ \textcolor{comment}{//\ special\ case\ for\ low\ battery}}
-\DoxyCodeLine{01031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.mode.bat\_crit)\ \{}
-\DoxyCodeLine{01032\ \ \ \ \ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{01033\ \textcolor{preprocessor}{\#ifdef\ CRITIAL\_SHUTDOWN\_LOG}}
-\DoxyCodeLine{01034\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Solar\ BATTERY\ CRITICAL\ shutdown\ comms\ check\ ret\ =\ \%d\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ ret);}
-\DoxyCodeLine{01035\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{01036\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{01037\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.bat\_crit\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{01038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
-\DoxyCodeLine{01039\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{01040\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{01041\ \ \ \ \ \ \ \ \ E.mode.bat\_crit\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{01042\ \ \ \ \ \}}
-\DoxyCodeLine{01043\ }
-\DoxyCodeLine{01044\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.link.shutdown\ >=\ MAX\_ERROR)\ \{}
-\DoxyCodeLine{01045\ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{01046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.fm80\ \&\&\ E.dumpload\ \&\&\ E.iammeter)\ \{}
-\DoxyCodeLine{01047\ \ \ \ \ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{01048\ \ \ \ \ \ \ \ \ \ \ \ \ E.link.shutdown\ =\ 0;}
-\DoxyCodeLine{01049\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{01050\ }
-\DoxyCodeLine{01051\ \textcolor{preprocessor}{\#ifdef\ DEBUG\_SHUTDOWN}}
-\DoxyCodeLine{01052\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Solar\ shutdown\ comms\ check\ ret\ =\ \%d\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ ret);}
-\DoxyCodeLine{01053\ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{01054\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{01055\ \ \ \ \ \}}
-\DoxyCodeLine{01056\ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
-\DoxyCodeLine{01057\ \}}
+\DoxyCodeLine{01045\ \{}
+\DoxyCodeLine{01046\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ ret\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{01047\ }
+\DoxyCodeLine{01048\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.startup)\ \{}
+\DoxyCodeLine{01049\ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{01050\ \ \ \ \ \ \ \ \ E.startup\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{01051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
+\DoxyCodeLine{01052\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{01053\ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{01054\ }
+\DoxyCodeLine{01055\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{01056\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ FIXME}}
+\DoxyCodeLine{01057\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{01058\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01059\ \ \ \ \ \}}
+\DoxyCodeLine{01060\ }
+\DoxyCodeLine{01061\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.solar\_shutdown)\ \{}
+\DoxyCodeLine{01062\ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{01063\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{01064\ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{01065\ \ \ \ \ \}}
+\DoxyCodeLine{01066\ }
+\DoxyCodeLine{01067\ \ \ \ \ \textcolor{keywordflow}{if}\ ((E.mvar[V\_FBEKW]\ <\ BAT\_CRITICAL)\ \&\&\ !E.startup)\ \{\ \textcolor{comment}{//\ special\ case\ for\ low\ battery}}
+\DoxyCodeLine{01068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.mode.bat\_crit)\ \{}
+\DoxyCodeLine{01069\ \ \ \ \ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{01070\ \textcolor{preprocessor}{\#ifdef\ CRITIAL\_SHUTDOWN\_LOG}}
+\DoxyCodeLine{01071\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Solar\ BATTERY\ CRITICAL\ shutdown\ comms\ check\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{01072\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{01073\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01074\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.bat\_crit\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{01075\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
+\DoxyCodeLine{01076\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01077\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{01078\ \ \ \ \ \ \ \ \ E.mode.bat\_crit\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{01079\ \ \ \ \ \}}
+\DoxyCodeLine{01080\ }
+\DoxyCodeLine{01081\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.link.shutdown\ >=\ MAX\_ERROR)\ \{}
+\DoxyCodeLine{01082\ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{01083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.fm80\ \&\&\ E.dumpload\ \&\&\ E.iammeter)\ \{}
+\DoxyCodeLine{01084\ \ \ \ \ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{01085\ \ \ \ \ \ \ \ \ \ \ \ \ E.link.shutdown\ =\ 0;}
+\DoxyCodeLine{01086\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01087\ }
+\DoxyCodeLine{01088\ \textcolor{preprocessor}{\#ifdef\ DEBUG\_SHUTDOWN}}
+\DoxyCodeLine{01089\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Solar\ shutdown\ comms\ check\ ret\ =\ \%d\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ ret);}
+\DoxyCodeLine{01090\ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{01091\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01092\ \ \ \ \ \}}
+\DoxyCodeLine{01093\ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
+\DoxyCodeLine{01094\ \}}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_a2533146394b65b382653eff2cd6f2106}\index{energy.c@{energy.c}!sync\_ha@{sync\_ha}}
@@ -1102,30 +1141,30 @@ bool sync\+\_\+ha (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaptio
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{01093\ \{}
-\DoxyCodeLine{01094\ \ \ \ \ \textcolor{keywordtype}{bool}\ sync\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{01095\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.gti\_sw\_status\ !=\ (\textcolor{keywordtype}{bool})\ ((int32\_t)\ E.mvar[V\_HDCSW]))\ \{}
-\DoxyCodeLine{01096\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}DC\_MM\ \%d\ \%d\ "{}},\ (\textcolor{keywordtype}{bool})\ E.gti\_sw\_status,\ (\textcolor{keywordtype}{bool})\ ((int32\_t)\ E.mvar[V\_HDCSW]));}
-\DoxyCodeLine{01097\ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ !E.gti\_sw\_status);}
-\DoxyCodeLine{01098\ \ \ \ \ \ \ \ \ E.dc\_mismatch\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{01099\ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{01100\ \ \ \ \ \ \ \ \ sync\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{01101\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{01102\ \ \ \ \ \ \ \ \ E.dc\_mismatch\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{01103\ \ \ \ \ \}}
-\DoxyCodeLine{01104\ }
-\DoxyCodeLine{01105\ \ \ \ \ E.ac\_sw\_status\ =\ (bool)\ ((int32\_t)\ E.mvar[V\_HACSW]);\ \textcolor{comment}{//\ TEMP\ FIX\ for\ MISmatch\ errors}}
-\DoxyCodeLine{01106\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.ac\_sw\_status\ !=\ (\textcolor{keywordtype}{bool})\ ((int32\_t)\ E.mvar[V\_HACSW]))\ \{}
-\DoxyCodeLine{01107\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}AC\_MM\ \%d\ \%d\ "{}},\ (\textcolor{keywordtype}{bool})\ E.ac\_sw\_status,\ (\textcolor{keywordtype}{bool})\ ((int32\_t)\ E.mvar[V\_HACSW]));}
-\DoxyCodeLine{01108\ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ !E.ac\_sw\_status);}
-\DoxyCodeLine{01109\ \ \ \ \ \ \ \ \ E.ac\_mismatch\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{01110\ \ \ \ \ \ \ \ \ fflush(fout);}
-\DoxyCodeLine{01111\ \ \ \ \ \ \ \ \ sync\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{01112\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{01113\ \ \ \ \ \ \ \ \ E.ac\_mismatch\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{01114\ \ \ \ \ \}}
-\DoxyCodeLine{01115\ \ \ \ \ \textcolor{keywordflow}{return}\ sync;}
-\DoxyCodeLine{01116\ \}}
+\DoxyCodeLine{01130\ \{}
+\DoxyCodeLine{01131\ \ \ \ \ \textcolor{keywordtype}{bool}\ sync\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{01132\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.gti\_sw\_status\ !=\ (\textcolor{keywordtype}{bool})\ ((int32\_t)\ E.mvar[V\_HDCSW]))\ \{}
+\DoxyCodeLine{01133\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}DC\_MM\ \%d\ \%d\ "{}},\ (\textcolor{keywordtype}{bool})\ E.gti\_sw\_status,\ (\textcolor{keywordtype}{bool})\ ((int32\_t)\ E.mvar[V\_HDCSW]));}
+\DoxyCodeLine{01134\ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ !E.gti\_sw\_status);}
+\DoxyCodeLine{01135\ \ \ \ \ \ \ \ \ E.dc\_mismatch\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{01136\ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{01137\ \ \ \ \ \ \ \ \ sync\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{01138\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{01139\ \ \ \ \ \ \ \ \ E.dc\_mismatch\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{01140\ \ \ \ \ \}}
+\DoxyCodeLine{01141\ }
+\DoxyCodeLine{01142\ \ \ \ \ E.ac\_sw\_status\ =\ (bool)\ ((int32\_t)\ E.mvar[V\_HACSW]);\ \textcolor{comment}{//\ TEMP\ FIX\ for\ MISmatch\ errors}}
+\DoxyCodeLine{01143\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.ac\_sw\_status\ !=\ (\textcolor{keywordtype}{bool})\ ((int32\_t)\ E.mvar[V\_HACSW]))\ \{}
+\DoxyCodeLine{01144\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}AC\_MM\ \%d\ \%d\ "{}},\ (\textcolor{keywordtype}{bool})\ E.ac\_sw\_status,\ (\textcolor{keywordtype}{bool})\ ((int32\_t)\ E.mvar[V\_HACSW]));}
+\DoxyCodeLine{01145\ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ !E.ac\_sw\_status);}
+\DoxyCodeLine{01146\ \ \ \ \ \ \ \ \ E.ac\_mismatch\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{01147\ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{01148\ \ \ \ \ \ \ \ \ sync\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{01149\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{01150\ \ \ \ \ \ \ \ \ E.ac\_mismatch\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{01151\ \ \ \ \ \}}
+\DoxyCodeLine{01152\ \ \ \ \ \textcolor{keywordflow}{return}\ sync;}
+\DoxyCodeLine{01153\ \}}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_aa39b8400b702a022ed3aaa4940cf4e15}\index{energy.c@{energy.c}!timer\_callback@{timer\_callback}}
@@ -1136,20 +1175,22 @@ void timer\+\_\+callback (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{signum}{
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00286\ \{}
-\DoxyCodeLine{00287\ \ \ \ \ signal(signum,\ timer\_callback);}
-\DoxyCodeLine{00288\ \ \ \ \ ha\_flag\_vars\_ss.runner\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00289\ \ \ \ \ E.ten\_sec\_clock++;}
-\DoxyCodeLine{00290\ \ \ \ \ E.log\_spam++;}
-\DoxyCodeLine{00291\ \ \ \ \ E.log\_time\_reset++;}
-\DoxyCodeLine{00292\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.log\_spam\ >\ MAX\_LOG\_SPAM)\ \{}
-\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ E.log\_spam\ =\ 0;}
-\DoxyCodeLine{00294\ \ \ \ \ \}}
-\DoxyCodeLine{00295\ \}}
+\DoxyCodeLine{00287\ \{}
+\DoxyCodeLine{00288\ \ \ \ \ signal(signum,\ timer\_callback);}
+\DoxyCodeLine{00289\ \ \ \ \ ha\_flag\_vars\_ss.runner\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00290\ \ \ \ \ E.ten\_sec\_clock++;}
+\DoxyCodeLine{00291\ \ \ \ \ E.log\_spam++;}
+\DoxyCodeLine{00292\ \ \ \ \ E.log\_time\_reset++;}
+\DoxyCodeLine{00293\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.log\_spam\ >\ MAX\_LOG\_SPAM)\ \{}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ E.log\_spam\ =\ 0;}
+\DoxyCodeLine{00295\ \ \ \ \ \}}
+\DoxyCodeLine{00296\ \}}
 
 \end{DoxyCode}
 
 
+\label{doc-var-members}
+\Hypertarget{energy_8c_doc-var-members}
 \doxysubsection{Variable Documentation}
 \Hypertarget{energy_8c_aae3805c63e28abac1e41ffd7b623596e}\index{energy.c@{energy.c}!E@{E}}
 \index{E@{E}!energy.c@{energy.c}}
@@ -1159,50 +1200,50 @@ struct \mbox{\hyperlink{structenergy__type}{energy\+\_\+type}} E}
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00111\ \ \ \ \ .once\_gti\ =\ \textcolor{keyword}{true},}
-\DoxyCodeLine{00112\ \ \ \ \ .once\_ac\ =\ \textcolor{keyword}{true},}
-\DoxyCodeLine{00113\ \ \ \ \ .once\_gti\_zero\ =\ \textcolor{keyword}{true},}
-\DoxyCodeLine{00114\ \ \ \ \ .iammeter\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00115\ \ \ \ \ .fm80\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00116\ \ \ \ \ .dumpload\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00117\ \ \ \ \ .homeassistant\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00118\ \ \ \ \ .ac\_low\_adj\ =\ 0.0f,}
-\DoxyCodeLine{00119\ \ \ \ \ .gti\_low\_adj\ =\ 0.0f,}
-\DoxyCodeLine{00120\ \ \ \ \ .ac\_sw\_on\ =\ \textcolor{keyword}{true},}
-\DoxyCodeLine{00121\ \ \ \ \ .gti\_sw\_on\ =\ \textcolor{keyword}{true},}
-\DoxyCodeLine{00122\ \ \ \ \ .im\_delay\ =\ 0,}
-\DoxyCodeLine{00123\ \ \ \ \ .gti\_delay\ =\ 0,}
-\DoxyCodeLine{00124\ \ \ \ \ .im\_display\ =\ 0,}
-\DoxyCodeLine{00125\ \ \ \ \ .rc\ =\ 0,}
-\DoxyCodeLine{00126\ \ \ \ \ .speed\_go\ =\ 0,}
-\DoxyCodeLine{00127\ \ \ \ \ .mode.pid.iMax\ =\ PV\_IMAX,}
-\DoxyCodeLine{00128\ \ \ \ \ .mode.pid.iMin\ =\ 0.0f,}
-\DoxyCodeLine{00129\ \ \ \ \ .mode.pid.pGain\ =\ PV\_PGAIN,}
-\DoxyCodeLine{00130\ \ \ \ \ .mode.pid.iGain\ =\ PV\_IGAIN,}
-\DoxyCodeLine{00131\ \ \ \ \ .mode.mode\_tmr\ =\ 0,}
-\DoxyCodeLine{00132\ \ \ \ \ .mode.mode\ =\ \textcolor{keyword}{true},}
-\DoxyCodeLine{00133\ \ \ \ \ .mode.in\_pid\_control\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00134\ \ \ \ \ .mode.dl\_mqtt\_max\ =\ PV\_DL\_MPTT\_MAX,}
-\DoxyCodeLine{00135\ \ \ \ \ .mode.E\ =\ E\_INIT,}
-\DoxyCodeLine{00136\ \ \ \ \ .mode.R\ =\ R\_INIT,}
-\DoxyCodeLine{00137\ \ \ \ \ .mode.no\_float\ =\ \textcolor{keyword}{true},}
-\DoxyCodeLine{00138\ \ \ \ \ .mode.data\_error\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00139\ \ \ \ \ .ac\_sw\_status\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00140\ \ \ \ \ .gti\_sw\_status\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00141\ \ \ \ \ .solar\_mode\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00142\ \ \ \ \ .solar\_shutdown\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00143\ \ \ \ \ .mode.pv\_bias\ =\ PV\_BIAS\_LOW,}
-\DoxyCodeLine{00144\ \ \ \ \ .sane\ =\ S\_DLAST,}
-\DoxyCodeLine{00145\ \ \ \ \ .startup\ =\ \textcolor{keyword}{true},}
-\DoxyCodeLine{00146\ \ \ \ \ .ac\_mismatch\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00147\ \ \ \ \ .dc\_mismatch\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00148\ \ \ \ \ .mode\_mismatch\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00149\ \ \ \ \ .link.shutdown\ =\ 0,}
-\DoxyCodeLine{00150\ \ \ \ \ .mode.bat\_crit\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00151\ \ \ \ \ .dl\_excess\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00152\ \ \ \ \ .dl\_excess\_adj\ =\ 0.0f,}
-\DoxyCodeLine{00153\ \};}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00112\ \ \ \ \ .once\_gti\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{00113\ \ \ \ \ .once\_ac\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{00114\ \ \ \ \ .once\_gti\_zero\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{00115\ \ \ \ \ .iammeter\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00116\ \ \ \ \ .fm80\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00117\ \ \ \ \ .dumpload\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00118\ \ \ \ \ .homeassistant\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00119\ \ \ \ \ .ac\_low\_adj\ =\ 0.0f,}
+\DoxyCodeLine{00120\ \ \ \ \ .gti\_low\_adj\ =\ 0.0f,}
+\DoxyCodeLine{00121\ \ \ \ \ .ac\_sw\_on\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{00122\ \ \ \ \ .gti\_sw\_on\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{00123\ \ \ \ \ .im\_delay\ =\ 0,}
+\DoxyCodeLine{00124\ \ \ \ \ .gti\_delay\ =\ 0,}
+\DoxyCodeLine{00125\ \ \ \ \ .im\_display\ =\ 0,}
+\DoxyCodeLine{00126\ \ \ \ \ .rc\ =\ 0,}
+\DoxyCodeLine{00127\ \ \ \ \ .speed\_go\ =\ 0,}
+\DoxyCodeLine{00128\ \ \ \ \ .mode.pid.iMax\ =\ PV\_IMAX,}
+\DoxyCodeLine{00129\ \ \ \ \ .mode.pid.iMin\ =\ 0.0f,}
+\DoxyCodeLine{00130\ \ \ \ \ .mode.pid.pGain\ =\ PV\_PGAIN,}
+\DoxyCodeLine{00131\ \ \ \ \ .mode.pid.iGain\ =\ PV\_IGAIN,}
+\DoxyCodeLine{00132\ \ \ \ \ .mode.mode\_tmr\ =\ 0,}
+\DoxyCodeLine{00133\ \ \ \ \ .mode.mode\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{00134\ \ \ \ \ .mode.in\_pid\_control\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00135\ \ \ \ \ .mode.dl\_mqtt\_max\ =\ PV\_DL\_MPTT\_MAX,}
+\DoxyCodeLine{00136\ \ \ \ \ .mode.E\ =\ E\_INIT,}
+\DoxyCodeLine{00137\ \ \ \ \ .mode.R\ =\ R\_INIT,}
+\DoxyCodeLine{00138\ \ \ \ \ .mode.no\_float\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{00139\ \ \ \ \ .mode.data\_error\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00140\ \ \ \ \ .ac\_sw\_status\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00141\ \ \ \ \ .gti\_sw\_status\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00142\ \ \ \ \ .solar\_mode\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00143\ \ \ \ \ .solar\_shutdown\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00144\ \ \ \ \ .mode.pv\_bias\ =\ PV\_BIAS\_LOW,}
+\DoxyCodeLine{00145\ \ \ \ \ .sane\ =\ S\_DLAST,}
+\DoxyCodeLine{00146\ \ \ \ \ .startup\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{00147\ \ \ \ \ .ac\_mismatch\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00148\ \ \ \ \ .dc\_mismatch\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00149\ \ \ \ \ .mode\_mismatch\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00150\ \ \ \ \ .link.shutdown\ =\ 0,}
+\DoxyCodeLine{00151\ \ \ \ \ .mode.bat\_crit\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00152\ \ \ \ \ .dl\_excess\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00153\ \ \ \ \ .dl\_excess\_adj\ =\ 0.0f,}
+\DoxyCodeLine{00154\ \};}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_ab9a22fb7b17a1ebe54668d617b8d7226}\index{energy.c@{energy.c}!ha\_flag\_vars\_ha@{ha\_flag\_vars\_ha}}
@@ -1225,14 +1266,14 @@ struct \mbox{\hyperlink{structha__flag__type}{ha\+\_\+flag\+\_\+type}} ha\+\_\+f
 \end{DoxyCode}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00096\ \ \ \ \ .runner\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00097\ \ \ \ \ .receivedtoken\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00098\ \ \ \ \ .deliveredtoken\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00099\ \ \ \ \ .rec\_ok\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00100\ \ \ \ \ .ha\_id\ =\ HA\_ID,}
-\DoxyCodeLine{00101\ \ \ \ \ .var\_update\ =\ 0,}
-\DoxyCodeLine{00102\ \};}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00097\ \ \ \ \ .runner\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00098\ \ \ \ \ .receivedtoken\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00099\ \ \ \ \ .deliveredtoken\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00100\ \ \ \ \ .rec\_ok\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00101\ \ \ \ \ .ha\_id\ =\ HA\_ID,}
+\DoxyCodeLine{00102\ \ \ \ \ .var\_update\ =\ 0,}
+\DoxyCodeLine{00103\ \};}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_ae0a8ca490b1331a13666dbedf7175bd9}\index{energy.c@{energy.c}!ha\_flag\_vars\_pc@{ha\_flag\_vars\_pc}}
@@ -1255,14 +1296,14 @@ struct \mbox{\hyperlink{structha__flag__type}{ha\+\_\+flag\+\_\+type}} ha\+\_\+f
 \end{DoxyCode}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00065\ \ \ \ \ .runner\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00066\ \ \ \ \ .receivedtoken\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00067\ \ \ \ \ .deliveredtoken\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00068\ \ \ \ \ .rec\_ok\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00069\ \ \ \ \ .ha\_id\ =\ P8055\_ID,}
-\DoxyCodeLine{00070\ \ \ \ \ .var\_update\ =\ 0,}
-\DoxyCodeLine{00071\ \};}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00066\ \ \ \ \ .runner\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00067\ \ \ \ \ .receivedtoken\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00068\ \ \ \ \ .deliveredtoken\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00069\ \ \ \ \ .rec\_ok\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00070\ \ \ \ \ .ha\_id\ =\ P8055\_ID,}
+\DoxyCodeLine{00071\ \ \ \ \ .var\_update\ =\ 0,}
+\DoxyCodeLine{00072\ \};}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_a04a99d06cea1265d7193a122288d83a0}\index{energy.c@{energy.c}!ha\_flag\_vars\_sd@{ha\_flag\_vars\_sd}}
@@ -1285,14 +1326,14 @@ struct \mbox{\hyperlink{structha__flag__type}{ha\+\_\+flag\+\_\+type}} ha\+\_\+f
 \end{DoxyCode}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00086\ \ \ \ \ .runner\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00087\ \ \ \ \ .receivedtoken\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00088\ \ \ \ \ .deliveredtoken\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00089\ \ \ \ \ .rec\_ok\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00090\ \ \ \ \ .ha\_id\ =\ DUMPLOAD\_ID,}
-\DoxyCodeLine{00091\ \ \ \ \ .var\_update\ =\ 0,}
-\DoxyCodeLine{00092\ \};}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00087\ \ \ \ \ .runner\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00088\ \ \ \ \ .receivedtoken\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00089\ \ \ \ \ .deliveredtoken\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00090\ \ \ \ \ .rec\_ok\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00091\ \ \ \ \ .ha\_id\ =\ DUMPLOAD\_ID,}
+\DoxyCodeLine{00092\ \ \ \ \ .var\_update\ =\ 0,}
+\DoxyCodeLine{00093\ \};}
 
 \end{DoxyCode}
 \Hypertarget{energy_8c_a300fe8f759de831a9cf50f5a86c85e23}\index{energy.c@{energy.c}!ha\_flag\_vars\_ss@{ha\_flag\_vars\_ss}}
@@ -1316,14 +1357,14 @@ struct \mbox{\hyperlink{structha__flag__type}{ha\+\_\+flag\+\_\+type}} ha\+\_\+f
 \end{DoxyCode}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00075\ \ \ \ \ .runner\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00076\ \ \ \ \ .receivedtoken\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00077\ \ \ \ \ .deliveredtoken\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00078\ \ \ \ \ .rec\_ok\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00079\ \ \ \ \ .ha\_id\ =\ FM80\_ID,}
-\DoxyCodeLine{00080\ \ \ \ \ .var\_update\ =\ 0,}
-\DoxyCodeLine{00081\ \ \ \ \ .energy\_mode\ =\ NORM\_MODE,}
-\DoxyCodeLine{00082\ \};}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00076\ \ \ \ \ .runner\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00077\ \ \ \ \ .receivedtoken\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00078\ \ \ \ \ .deliveredtoken\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00079\ \ \ \ \ .rec\_ok\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00080\ \ \ \ \ .ha\_id\ =\ FM80\_ID,}
+\DoxyCodeLine{00081\ \ \ \ \ .var\_update\ =\ 0,}
+\DoxyCodeLine{00082\ \ \ \ \ .energy\_mode\ =\ NORM\_MODE,}
+\DoxyCodeLine{00083\ \};}
 
 \end{DoxyCode}

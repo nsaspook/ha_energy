@@ -3,7 +3,8 @@
 {\ttfamily \#include "{}mqtt\+\_\+rec.\+h"{}}\newline
 {\ttfamily \#include "{}energy.\+h"{}}\newline
 {\ttfamily \#include "{}bsoc.\+h"{}}\newline
-Include dependency graph for mqtt\+\_\+vars.\+c\+:\nopagebreak
+Include dependency graph for mqtt\+\_\+vars.\+c\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -26,33 +27,16 @@ bool \mbox{\hyperlink{mqtt__vars_8c_ae0037d55a541c02ce938a19fd48905c9}{mqtt\+\_\
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-static const char \texorpdfstring{$\ast$}{*}const \mbox{\hyperlink{mqtt__vars_8c_ab4828b8efa6bac71f6aef967fb50e42b}{FW\+\_\+\+Date}} = \+\_\+\+\_\+\+DATE\+\_\+\+\_\+
+\Hypertarget{mqtt__vars_8c_ab4828b8efa6bac71f6aef967fb50e42b}\label{mqtt__vars_8c_ab4828b8efa6bac71f6aef967fb50e42b} 
+static const char \texorpdfstring{$\ast$}{*}const {\bfseries FW\+\_\+\+Date} = \+\_\+\+\_\+\+DATE\+\_\+\+\_\+
 \item 
-static const char \texorpdfstring{$\ast$}{*}const \mbox{\hyperlink{mqtt__vars_8c_aacd97d62982976b38276c48612efabd5}{FW\+\_\+\+Time}} = \+\_\+\+\_\+\+TIME\+\_\+\+\_\+
+\Hypertarget{mqtt__vars_8c_aacd97d62982976b38276c48612efabd5}\label{mqtt__vars_8c_aacd97d62982976b38276c48612efabd5} 
+static const char \texorpdfstring{$\ast$}{*}const {\bfseries FW\+\_\+\+Time} = \+\_\+\+\_\+\+TIME\+\_\+\+\_\+
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 send energy shutdown command to Home Assistant 
-
-Definition in file \mbox{\hyperlink{mqtt__vars_8c_source}{mqtt\+\_\+vars.\+c}}.
-
-
-
-\label{doc-define-members}
-\Hypertarget{mqtt__vars_8c_doc-define-members}
-\doxysubsection{Macro Definition Documentation}
-\Hypertarget{mqtt__vars_8c_a8fb447618db946a9e2a596d9ea18763f}\index{mqtt\_vars.c@{mqtt\_vars.c}!\_DEFAULT\_SOURCE@{\_DEFAULT\_SOURCE}}
-\index{\_DEFAULT\_SOURCE@{\_DEFAULT\_SOURCE}!mqtt\_vars.c@{mqtt\_vars.c}}
-\doxysubsubsection{\texorpdfstring{\_DEFAULT\_SOURCE}{\_DEFAULT\_SOURCE}}
-{\footnotesize\ttfamily \label{mqtt__vars_8c_a8fb447618db946a9e2a596d9ea18763f} 
-\#define \+\_\+\+DEFAULT\+\_\+\+SOURCE}
-
-
-
-Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00001}{1}} of file \mbox{\hyperlink{mqtt__vars_8c_source}{mqtt\+\_\+vars.\+c}}.
-
-
 
 \label{doc-func-members}
 \Hypertarget{mqtt__vars_8c_doc-func-members}
@@ -62,10 +46,6 @@ Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00001}{1}} of file \mb
 \doxysubsubsection{\texorpdfstring{mqtt\_gti\_power()}{mqtt\_gti\_power()}}
 {\footnotesize\ttfamily \label{mqtt__vars_8c_a3fc1eb9cd6b570d96277f671de9e979a} 
 bool mqtt\+\_\+gti\+\_\+power (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{topic\+\_\+p}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{msg}{, }\item[{uint32\+\_\+t}]{trace}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00186}{186}} of file \mbox{\hyperlink{mqtt__vars_8c_source}{mqtt\+\_\+vars.\+c}}.
 
 
 \begin{DoxyCode}{0}
@@ -121,7 +101,7 @@ Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00186}{186}} of file \
 \DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (ha\_flag\_vars\_ss.deliveredtoken\ !=\ token)\ \{}
 \DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ usleep(TOKEN\_DELAY);}
 \DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (waiting++\ >\ MQTT\_TIMEOUT)\ \{}
-\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ GTI\ Power\ Still\ Waiting,\ timeout\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ \%s\ GTI\ Power\ Still\ Waiting,\ timeout\ \%d\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ topic\_p,\ waiting);}
 \DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \};}
@@ -136,10 +116,6 @@ Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00186}{186}} of file \
 \doxysubsubsection{\texorpdfstring{mqtt\_gti\_time()}{mqtt\_gti\_time()}}
 {\footnotesize\ttfamily \label{mqtt__vars_8c_ae0037d55a541c02ce938a19fd48905c9} 
 bool mqtt\+\_\+gti\+\_\+time (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{topic\+\_\+p}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{msg}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00248}{248}} of file \mbox{\hyperlink{mqtt__vars_8c_source}{mqtt\+\_\+vars.\+c}}.
 
 
 \begin{DoxyCode}{0}
@@ -163,7 +139,7 @@ Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00248}{248}} of file \
 \DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (ha\_flag\_vars\_ss.deliveredtoken\ !=\ token)\ \{}
 \DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ usleep(GTI\_TOKEN\_DELAY);}
 \DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (waiting++\ >\ MQTT\_TIMEOUT)\ \{}
-\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ GTI\ Time\ Still\ Waiting,\ timeout\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ \%s\ GTI\ Time\ Still\ Waiting,\ timeout\ \%d\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ topic\_p,\ waiting);}
 \DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \};}
@@ -178,10 +154,6 @@ Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00248}{248}} of file \
 \doxysubsubsection{\texorpdfstring{mqtt\_ha\_pid()}{mqtt\_ha\_pid()}}
 {\footnotesize\ttfamily \label{mqtt__vars_8c_aca0d9fca85baa3d4690a22e16e1b53ce} 
 void mqtt\+\_\+ha\+\_\+pid (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{topic\+\_\+p}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00045}{45}} of file \mbox{\hyperlink{mqtt__vars_8c_source}{mqtt\+\_\+vars.\+c}}.
 
 
 \begin{DoxyCode}{0}
@@ -232,7 +204,7 @@ Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00045}{45}} of file \m
 \DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (ha\_flag\_vars\_ss.deliveredtoken\ !=\ token)\ \{}
 \DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ usleep(TOKEN\_DELAY);}
 \DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (waiting++\ >\ MQTT\_TIMEOUT)\ \{}
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ SW\ Still\ Waiting,\ timeout\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ \%s\ SW\ Still\ Waiting,\ timeout\ \%d\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ topic\_p,\ waiting);}
 \DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \};}
@@ -248,10 +220,6 @@ Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00045}{45}} of file \m
 \doxysubsubsection{\texorpdfstring{mqtt\_ha\_shutdown()}{mqtt\_ha\_shutdown()}}
 {\footnotesize\ttfamily \label{mqtt__vars_8c_a8cae358dc3a23f274454a9dc9d10443e} 
 void mqtt\+\_\+ha\+\_\+shutdown (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{topic\+\_\+p}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00012}{12}} of file \mbox{\hyperlink{mqtt__vars_8c_source}{mqtt\+\_\+vars.\+c}}.
 
 
 \begin{DoxyCode}{0}
@@ -277,7 +245,7 @@ Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00012}{12}} of file \m
 \DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (ha\_flag\_vars\_ss.deliveredtoken\ !=\ token)\ \{}
 \DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ usleep(TOKEN\_DELAY);}
 \DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (waiting++\ >\ MQTT\_TIMEOUT)\ \{}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ SW\ Still\ Waiting,\ timeout\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ \%s\ SW\ Still\ Waiting,\ timeout\ \%d\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ topic\_p,\ waiting);}
 \DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \};}
@@ -290,10 +258,6 @@ Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00012}{12}} of file \m
 \doxysubsubsection{\texorpdfstring{mqtt\_ha\_switch()}{mqtt\_ha\_switch()}}
 {\footnotesize\ttfamily \label{mqtt__vars_8c_ae47064c42a63c93c8a775ba79a16f5d7} 
 void mqtt\+\_\+ha\+\_\+switch (\begin{DoxyParamCaption}\item[{MQTTClient}]{client\+\_\+p}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{topic\+\_\+p}{, }\item[{const bool}]{sw\+\_\+state}{}\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00106}{106}} of file \mbox{\hyperlink{mqtt__vars_8c_source}{mqtt\+\_\+vars.\+c}}.
 
 
 \begin{DoxyCode}{0}
@@ -374,28 +338,3 @@ Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00106}{106}} of file \
 \DoxyCodeLine{00181\ \}}
 
 \end{DoxyCode}
-
-
-\label{doc-var-members}
-\Hypertarget{mqtt__vars_8c_doc-var-members}
-\doxysubsection{Variable Documentation}
-\Hypertarget{mqtt__vars_8c_ab4828b8efa6bac71f6aef967fb50e42b}\index{mqtt\_vars.c@{mqtt\_vars.c}!FW\_Date@{FW\_Date}}
-\index{FW\_Date@{FW\_Date}!mqtt\_vars.c@{mqtt\_vars.c}}
-\doxysubsubsection{\texorpdfstring{FW\_Date}{FW\_Date}}
-{\footnotesize\ttfamily \label{mqtt__vars_8c_ab4828b8efa6bac71f6aef967fb50e42b} 
-const char\texorpdfstring{$\ast$}{*} const FW\+\_\+\+Date = \+\_\+\+\_\+\+DATE\+\_\+\+\_\+\hspace{0.3cm}{\ttfamily [static]}}
-
-
-
-Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00006}{6}} of file \mbox{\hyperlink{mqtt__vars_8c_source}{mqtt\+\_\+vars.\+c}}.
-
-\Hypertarget{mqtt__vars_8c_aacd97d62982976b38276c48612efabd5}\index{mqtt\_vars.c@{mqtt\_vars.c}!FW\_Time@{FW\_Time}}
-\index{FW\_Time@{FW\_Time}!mqtt\_vars.c@{mqtt\_vars.c}}
-\doxysubsubsection{\texorpdfstring{FW\_Time}{FW\_Time}}
-{\footnotesize\ttfamily \label{mqtt__vars_8c_aacd97d62982976b38276c48612efabd5} 
-const char\texorpdfstring{$\ast$}{*} const FW\+\_\+\+Time = \+\_\+\+\_\+\+TIME\+\_\+\+\_\+\hspace{0.3cm}{\ttfamily [static]}}
-
-
-
-Definition at line \mbox{\hyperlink{mqtt__vars_8c_source_l00007}{7}} of file \mbox{\hyperlink{mqtt__vars_8c_source}{mqtt\+\_\+vars.\+c}}.
-

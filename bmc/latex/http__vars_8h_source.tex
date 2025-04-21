@@ -18,13 +18,24 @@
 \DoxyCodeLine{00014\ }
 \DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{energy_8h}{energy.h}}"{}}}
 \DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{extern}\ FILE*\ fout;}
-\DoxyCodeLine{00018\ }
-\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
-\DoxyCodeLine{00020\ \}}
-\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ IAMM1\ "{}http://10.1.1.101/monitorjson"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ IAMM2\ "{}http://10.1.1.102/monitorjson"{}}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{comment}{//\#define\ IM\_DEBUG2}}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{extern}\ FILE*\ fout;}
 \DoxyCodeLine{00022\ }
-\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ HTTP\_VARS\_H\ */}\textcolor{preprocessor}{}}
-\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ iammeter\_write\_callback1(\textcolor{keywordtype}{char}\ *,\ \textcolor{keywordtype}{size\_t},\ \textcolor{keywordtype}{size\_t},\ \textcolor{keywordtype}{void}\ *);}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ iammeter\_write\_callback2(\textcolor{keywordtype}{char}\ *,\ \textcolor{keywordtype}{size\_t},\ \textcolor{keywordtype}{size\_t},\ \textcolor{keywordtype}{void}\ *);}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ iammeter\_read1(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *);}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ iammeter\_read2(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *);}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ print\_im\_vars(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ print\_mvar\_vars(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00031\ \}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ HTTP\_VARS\_H\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00035\ }
 
 \end{DoxyCode}
