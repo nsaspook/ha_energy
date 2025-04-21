@@ -1,0 +1,1105 @@
+\doxysection{energy.\+c}
+\hypertarget{energy_8c_source}{}\label{energy_8c_source}\mbox{\hyperlink{energy_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00002}00002\ \textcolor{comment}{\ *\ HA\ Energy\ control\ using\ MQTT\ JSON\ and\ HTTP\ format\ data\ from\ various\ energy\ monitor\ sources}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00003}00003\ \textcolor{comment}{\ *\ asynchronous\ mode\ using\ threads\ in\ a\ background\ process}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00005}00005\ \textcolor{comment}{\ *\ long\ life\ HA\ token:\ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI2OTczODQyMGZlMDU0MjVmYjk1OWY0YjM3Mjg4NjRkOSIsImlhdCI6MTcwODg3NzA1OSwiZXhwIjoyMDI0MjM3MDU5fQ.5vfW85qQ2DO3vAyM\_lcm1YyNqIX2O8JlTqoYKLdxf6M}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00007}00007\ \textcolor{comment}{\ *\ This\ file\ may\ be\ freely\ modified,\ distributed,\ and\ combined\ with}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00008}00008\ \textcolor{comment}{\ *\ other\ software,\ as\ long\ as\ proper\ attribution\ is\ given\ in\ the}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00009}00009\ \textcolor{comment}{\ *\ source\ code.}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00010}00010\ \textcolor{comment}{\ *\ Daemon\ example\ code:}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00011}00011\ \textcolor{comment}{\ *\ https://github.com/pasce/daemon-\/skeleton-\/linux-\/c}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00012}00012\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00013}00013\ \textcolor{preprocessor}{\#define\ \_DEFAULT\_SOURCE}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{energy_8h}{ha\_energy/energy.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}ha\_energy/mqtt\_rec.h"{}}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}ha\_energy/bsoc.h"{}}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00059}00059\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00060}00060\ \textcolor{comment}{\ *\ for\ the\ publish\ and\ subscribe\ topic\ pair}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00061}00061\ \textcolor{comment}{\ *\ passed\ as\ a\ context\ variable}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00062}00062\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00063}00063\ \textcolor{comment}{//\ for\ local\ device\ Comedi\ hardware\ I/O\ device\ control}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00064}00064\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structha__flag__type}{ha\_flag\_type}}\ ha\_flag\_vars\_pc\ =\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00065}00065\ \ \ \ \ .runner\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00066}00066\ \ \ \ \ .receivedtoken\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00067}00067\ \ \ \ \ .deliveredtoken\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00068}00068\ \ \ \ \ .rec\_ok\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00069}00069\ \ \ \ \ .ha\_id\ =\ P8055\_ID,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00070}00070\ \ \ \ \ .var\_update\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00071}00071\ \};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00073}00073\ \textcolor{comment}{//\ solar\ data\ from\ mateq84}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00074}00074\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structha__flag__type}{ha\_flag\_type}}\ ha\_flag\_vars\_ss\ =\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00075}00075\ \ \ \ \ .runner\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00076}00076\ \ \ \ \ .receivedtoken\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00077}00077\ \ \ \ \ .deliveredtoken\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00078}00078\ \ \ \ \ .rec\_ok\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00079}00079\ \ \ \ \ .ha\_id\ =\ FM80\_ID,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00080}00080\ \ \ \ \ .var\_update\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00081}00081\ \ \ \ \ .energy\_mode\ =\ NORM\_MODE,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00082}00082\ \};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00084}00084\ \textcolor{comment}{//\ dumpload\ data\ from\ mbmc\_k42}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00085}00085\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structha__flag__type}{ha\_flag\_type}}\ ha\_flag\_vars\_sd\ =\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00086}00086\ \ \ \ \ .runner\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00087}00087\ \ \ \ \ .receivedtoken\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00088}00088\ \ \ \ \ .deliveredtoken\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00089}00089\ \ \ \ \ .rec\_ok\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00090}00090\ \ \ \ \ .ha\_id\ =\ DUMPLOAD\_ID,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00091}00091\ \ \ \ \ .var\_update\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00092}00092\ \};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00094}00094\ \textcolor{comment}{//\ data\ from\ HA}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00095}00095\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structha__flag__type}{ha\_flag\_type}}\ ha\_flag\_vars\_ha\ =\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00096}00096\ \ \ \ \ .runner\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00097}00097\ \ \ \ \ .receivedtoken\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00098}00098\ \ \ \ \ .deliveredtoken\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00099}00099\ \ \ \ \ .rec\_ok\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00100}00100\ \ \ \ \ .ha\_id\ =\ HA\_ID,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00101}00101\ \ \ \ \ .var\_update\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00102}00102\ \};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00104}00104\ \textcolor{comment}{//\ Comedi\ I/O\ device\ type}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00105}00105\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *board\_name\ =\ \textcolor{stringliteral}{"{}NO\_BOARD"{}},\ *driver\_name\ =\ \textcolor{stringliteral}{"{}NO\_DRIVER"{}};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00107}00107\ FILE*\ fout;\ \textcolor{comment}{//\ logging\ stream}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00109}00109\ \textcolor{comment}{//\ energy\ state\ structure}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00110}00110\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structenergy__type}{energy\_type}}\ E\ =\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00111}00111\ \ \ \ \ .once\_gti\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00112}00112\ \ \ \ \ .once\_ac\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00113}00113\ \ \ \ \ .once\_gti\_zero\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00114}00114\ \ \ \ \ .iammeter\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00115}00115\ \ \ \ \ .fm80\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00116}00116\ \ \ \ \ .dumpload\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00117}00117\ \ \ \ \ .homeassistant\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00118}00118\ \ \ \ \ .ac\_low\_adj\ =\ 0.0f,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00119}00119\ \ \ \ \ .gti\_low\_adj\ =\ 0.0f,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00120}00120\ \ \ \ \ .ac\_sw\_on\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00121}00121\ \ \ \ \ .gti\_sw\_on\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00122}00122\ \ \ \ \ .im\_delay\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00123}00123\ \ \ \ \ .gti\_delay\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00124}00124\ \ \ \ \ .im\_display\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00125}00125\ \ \ \ \ .rc\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00126}00126\ \ \ \ \ .speed\_go\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00127}00127\ \ \ \ \ .mode.pid.iMax\ =\ PV\_IMAX,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00128}00128\ \ \ \ \ .mode.pid.iMin\ =\ 0.0f,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00129}00129\ \ \ \ \ .mode.pid.pGain\ =\ PV\_PGAIN,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00130}00130\ \ \ \ \ .mode.pid.iGain\ =\ PV\_IGAIN,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00131}00131\ \ \ \ \ .mode.mode\_tmr\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00132}00132\ \ \ \ \ .mode.mode\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00133}00133\ \ \ \ \ .mode.in\_pid\_control\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00134}00134\ \ \ \ \ .mode.dl\_mqtt\_max\ =\ PV\_DL\_MPTT\_MAX,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00135}00135\ \ \ \ \ .mode.E\ =\ E\_INIT,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00136}00136\ \ \ \ \ .mode.R\ =\ R\_INIT,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00137}00137\ \ \ \ \ .mode.no\_float\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00138}00138\ \ \ \ \ .mode.data\_error\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00139}00139\ \ \ \ \ .ac\_sw\_status\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00140}00140\ \ \ \ \ .gti\_sw\_status\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00141}00141\ \ \ \ \ .solar\_mode\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00142}00142\ \ \ \ \ .solar\_shutdown\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00143}00143\ \ \ \ \ .mode.pv\_bias\ =\ PV\_BIAS\_LOW,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00144}00144\ \ \ \ \ .sane\ =\ S\_DLAST,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00145}00145\ \ \ \ \ .startup\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00146}00146\ \ \ \ \ .ac\_mismatch\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00147}00147\ \ \ \ \ .dc\_mismatch\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00148}00148\ \ \ \ \ .mode\_mismatch\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00149}00149\ \ \ \ \ .link.shutdown\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00150}00150\ \ \ \ \ .mode.bat\_crit\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00151}00151\ \ \ \ \ .dl\_excess\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00152}00152\ \ \ \ \ .dl\_excess\_adj\ =\ 0.0f,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00153}00153\ \};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00155}00155\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ solar\_shutdown(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00156}00156\ \textcolor{keywordtype}{void}\ showIP(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00158}00158\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00159}00159\ \textcolor{comment}{\ *\ show\ all\ assigned\ networking\ addresses\ and\ types}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00160}00160\ \textcolor{comment}{\ *\ on\ the\ current\ machine}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00161}00161\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00162}00162\ \textcolor{keywordtype}{void}\ showIP(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00163}00163\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00164}00164\ \ \ \ \ \textcolor{keyword}{struct\ }ifaddrs\ *ifaddr,\ *ifa;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00165}00165\ \ \ \ \ \textcolor{keywordtype}{int}\ s;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00166}00166\ \ \ \ \ \textcolor{keywordtype}{char}\ host[NI\_MAXHOST];}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00168}00168\ \ \ \ \ \textcolor{keywordflow}{if}\ (getifaddrs(\&ifaddr)\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00169}00169\ \ \ \ \ \ \ \ \ perror(\textcolor{stringliteral}{"{}getifaddrs"{}});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00170}00170\ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00171}00171\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00174}00174\ \ \ \ \ \textcolor{keywordflow}{for}\ (ifa\ =\ ifaddr;\ ifa\ !=\ NULL;\ ifa\ =\ ifa-\/>ifa\_next)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00175}00175\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ifa-\/>ifa\_addr\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00178}00178\ \ \ \ \ \ \ \ \ s\ =\ getnameinfo(ifa-\/>ifa\_addr,\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct}\ sockaddr\_in),\ host,\ NI\_MAXHOST,\ NULL,\ 0,\ NI\_NUMERICHOST);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00180}00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ifa-\/>ifa\_addr-\/>sa\_family\ ==\ AF\_INET)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (s\ !=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)tInterface\ :\ <\%s>\(\backslash\)n"{}},\ ifa-\/>ifa\_name);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\ \ Address\ :\ <\%s>\(\backslash\)n"{}},\ host);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00186}00186\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00187}00187\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00189}00189\ \ \ \ \ freeifaddrs(ifaddr);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00190}00190\ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00192}00192\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00193}00193\ \textcolor{comment}{\ *\ setup\ ha\_energy\ program\ to\ run\ as\ a\ background\ deamon}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00194}00194\ \textcolor{comment}{\ *\ disconnect\ and\ exit\ foreground\ startup\ process}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00195}00195\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00196}00196\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ skeleton\_daemon()}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00197}00197\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00198}00198\ \ \ \ \ pid\_t\ pid;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00200}00200\ \ \ \ \ \textcolor{comment}{/*\ Fork\ off\ the\ parent\ process\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00201}00201\ \ \ \ \ pid\ =\ fork();}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00203}00203\ \ \ \ \ \textcolor{comment}{/*\ An\ error\ occurred\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00204}00204\ \ \ \ \ \textcolor{keywordflow}{if}\ (pid\ <\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00205}00205\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ DAEMON\ failure\ \ LOG\ Version\ \%s\ :\ MQTT\ Version\ \%s\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ LOG\_VERSION,\ MQTT\_VERSION);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00206}00206\ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00207}00207\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00208}00208\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00209}00209\ \ \ \ \ \textcolor{comment}{/*\ Success:\ Let\ the\ parent\ terminate\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00210}00210\ \ \ \ \ \textcolor{keywordflow}{if}\ (pid\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00211}00211\ \ \ \ \ \ \ \ \ exit(EXIT\_SUCCESS);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00212}00212\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00214}00214\ \ \ \ \ \textcolor{comment}{/*\ On\ success:\ The\ child\ process\ becomes\ session\ leader\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00215}00215\ \ \ \ \ \textcolor{keywordflow}{if}\ (setsid()\ <\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00216}00216\ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00217}00217\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00219}00219\ \ \ \ \ \textcolor{comment}{/*\ Catch,\ ignore\ and\ handle\ signals\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00220}00220\ \ \ \ \ \textcolor{comment}{/*TODO:\ Implement\ a\ working\ signal\ handler\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00221}00221\ \ \ \ \ \textcolor{comment}{//\ \ \ \ signal(SIGCHLD,\ SIG\_IGN);}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00222}00222\ \ \ \ \ \textcolor{comment}{//\ \ \ \ signal(SIGHUP,\ SIG\_IGN);}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00223}00223\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00224}00224\ \ \ \ \ \textcolor{comment}{/*\ Fork\ off\ for\ the\ second\ time*/}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00225}00225\ \ \ \ \ pid\ =\ fork();}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00227}00227\ \ \ \ \ \textcolor{comment}{/*\ An\ error\ occurred\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00228}00228\ \ \ \ \ \textcolor{keywordflow}{if}\ (pid\ <\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00229}00229\ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00230}00230\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00231}00231\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00232}00232\ \ \ \ \ \textcolor{comment}{/*\ Success:\ Let\ the\ parent\ terminate\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00233}00233\ \ \ \ \ \textcolor{keywordflow}{if}\ (pid\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00234}00234\ \ \ \ \ \ \ \ \ exit(EXIT\_SUCCESS);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00235}00235\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00237}00237\ \ \ \ \ \textcolor{comment}{/*\ Set\ new\ file\ permissions\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00238}00238\ \ \ \ \ umask(0);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00240}00240\ \ \ \ \ \textcolor{comment}{/*\ Change\ the\ working\ directory\ to\ the\ root\ directory\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00241}00241\ \ \ \ \ \textcolor{comment}{/*\ or\ another\ appropriated\ directory\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00242}00242\ \ \ \ \ chdir(\textcolor{stringliteral}{"{}/"{}});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00244}00244\ \ \ \ \ \textcolor{comment}{/*\ Close\ all\ open\ file\ descriptors\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00245}00245\ \ \ \ \ \textcolor{keywordtype}{int}\ x;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00246}00246\ \ \ \ \ \textcolor{keywordflow}{for}\ (x\ =\ sysconf(\_SC\_OPEN\_MAX);\ x\ >=\ 0;\ x-\/-\/)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00247}00247\ \ \ \ \ \ \ \ \ close(x);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00248}00248\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00249}00249\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00250}00250\ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00252}00252\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00253}00253\ \textcolor{comment}{\ *\ check\ for\ sensor\ range\ errors\ for\ some\ critical\ data\ points}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00254}00254\ \textcolor{comment}{\ *\ look\ for\ bad\ data\ on\ the\ high\ side}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00255}00255\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00256}00256\ \textcolor{keywordtype}{bool}\ sanity\_check(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00257}00257\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00258}00258\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_PWA]\ >\ PWA\_SANE)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00259}00259\ \ \ \ \ \ \ \ \ E.sane\ =\ S\_PWA;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00260}00260\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00261}00261\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00262}00262\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_PAMPS]\ >\ PAMPS\_SANE)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00263}00263\ \ \ \ \ \ \ \ \ E.sane\ =\ S\_PAMPS;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00264}00264\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00265}00265\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00266}00266\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_PVOLTS]\ >\ PVOLTS\_SANE)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00267}00267\ \ \ \ \ \ \ \ \ E.sane\ =\ S\_PVOLTS;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00268}00268\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00269}00269\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00270}00270\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_FBAMPS]\ >\ BAMPS\_SANE)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00271}00271\ \ \ \ \ \ \ \ \ E.sane\ =\ S\_FBAMPS;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00272}00272\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00273}00273\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00274}00274\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00275}00275\ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00276}00276\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00277}00277\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00278}00278\ \textcolor{comment}{\ *\ Async\ processing\ threads}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00279}00279\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00281}00281\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00282}00282\ \textcolor{comment}{\ *\ data\ update\ timer\ flag}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00283}00283\ \textcolor{comment}{\ *\ and\ 10\ second\ software\ time\ clock}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00284}00284\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00285}00285\ \textcolor{keywordtype}{void}\ timer\_callback(int32\_t\ signum)}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00286}00286\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00287}00287\ \ \ \ \ signal(signum,\ timer\_callback);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00288}00288\ \ \ \ \ ha\_flag\_vars\_ss.runner\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00289}00289\ \ \ \ \ E.ten\_sec\_clock++;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00290}00290\ \ \ \ \ E.log\_spam++;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00291}00291\ \ \ \ \ E.log\_time\_reset++;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00292}00292\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.log\_spam\ >\ MAX\_LOG\_SPAM)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00293}00293\ \ \ \ \ \ \ \ \ E.log\_spam\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00294}00294\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00295}00295\ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00297}00297\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00298}00298\ \textcolor{comment}{\ *\ MQTT\ Broker\ errors\ are\ fatal}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00299}00299\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00300}\mbox{\hyperlink{energy_8c_a2a87ef47168dc639b307a285b8cb4462}{00300}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{energy_8c_a2a87ef47168dc639b307a285b8cb4462}{connlost}}(\textcolor{keywordtype}{void}\ *context,\ \textcolor{keywordtype}{char}\ *cause)}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00301}00301\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00302}00302\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structha__flag__type}{ha\_flag\_type}}\ *ha\_flag\ =\ context;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00303}00303\ \ \ \ \ int32\_t\ id\_num\ =\ ha\_flag-\/>ha\_id;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00304}00304\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ times\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00305}00305\ \ \ \ \ \textcolor{keywordtype}{char}\ *\ where\ =\ \textcolor{stringliteral}{"{}Missing\ Topic"{}};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00306}00306\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00307}00307\ \ \ \ \ \textcolor{comment}{//\ bug-\/out\ if\ no\ context\ variables\ passed\ to\ callback}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00308}00308\ \ \ \ \ \textcolor{keywordflow}{if}\ (context\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00309}00309\ \ \ \ \ \ \ \ \ id\_num\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00310}00310\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ bugout;\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00311}00311\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00312}00312\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00313}00313\ \ \ \ \ \textcolor{keywordflow}{switch}\ (ha\_flag-\/>cid)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00314}00314\ \ \ \ \ \textcolor{keywordflow}{case}\ ID\_C1:}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00315}00315\ \ \ \ \ \ \ \ \ where\ =\ TOPIC\_SS;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00316}00316\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00317}00317\ \ \ \ \ \textcolor{keywordflow}{case}\ ID\_C2:}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00318}00318\ \ \ \ \ \ \ \ \ where\ =\ TOPIC\_SD;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00319}00319\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00320}00320\ \ \ \ \ \textcolor{keywordflow}{case}\ ID\_C3:}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00321}00321\ \ \ \ \ \ \ \ \ where\ =\ TOPIC\_HA;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00322}00322\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00323}00323\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00324}00324\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00325}00325\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00326}00326\ \ \ \ \ \textcolor{keywordflow}{if}\ (times++\ >\ MQTT\_RECONN)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00327}00327\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ bugout;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00328}00328\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00329}00329\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00330}00330\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Connection\ lost,\ retrying\ \%d\ \(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ times);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00331}00331\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ \ \ \ \ cause:\ \%s,\ h\_id\ \%d\ c\_id\ \%d\ \%s\ \(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ cause,\ id\_num,\ ha\_flag-\/>cid,\ where);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00332}00332\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ MQTT\ DAEMON\ failure\ \ LOG\ Version\ \%s\ :\ MQTT\ Version\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ LOG\_VERSION,\ MQTT\_VERSION);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00333}00333\ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00334}00334\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00335}00335\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00336}00336\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00337}00337\ bugout:}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00338}00338\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Connection\ lost,\ exit\ ha\_energy\ program\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00339}00339\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ \ \ \ \ cause:\ \%s,\ h\_id\ \%d\ c\_id\ \%d\ \%s\ \(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ cause,\ id\_num,\ ha\_flag-\/>cid,\ where);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00340}00340\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ MQTT\ DAEMON\ failure\ \ LOG\ Version\ \%s\ :\ MQTT\ Version\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ LOG\_VERSION,\ MQTT\_VERSION);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00341}00341\ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00342}00342\ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00343}00343\ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00344}00344\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00345}00345\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00346}00346\ \textcolor{comment}{\ *\ HA\_ENERGY}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00347}00347\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00348}00348\ \textcolor{comment}{\ *\ Use\ MQTT/HTTP\ to\ send/receive\ updates\ to\ Solar\ hardware\ devices}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00349}00349\ \textcolor{comment}{\ *\ and\ control\ energy\ in\ an\ optimized\ fashion\ to\ reduce\ electrical\ energy\ costs}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00350}00350\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00351}00351\ \textcolor{keywordtype}{int}\ main(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ *argv[])}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00352}00352\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00353}00353\ \ \ \ \ \textcolor{keyword}{struct\ }itimerval\ new\_timer\ =\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00354}00354\ \ \ \ \ \ \ \ \ .it\_value.tv\_sec\ =\ CMD\_SEC,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00355}00355\ \ \ \ \ \ \ \ \ .it\_value.tv\_usec\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00356}00356\ \ \ \ \ \ \ \ \ .it\_interval.tv\_sec\ =\ CMD\_SEC,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00357}00357\ \ \ \ \ \ \ \ \ .it\_interval.tv\_usec\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00358}00358\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00359}00359\ \ \ \ \ \textcolor{keyword}{struct\ }itimerval\ old\_timer;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00360}00360\ \ \ \ \ time\_t\ rawtime;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00361}00361\ \ \ \ \ MQTTClient\_connectOptions\ conn\_opts\_p\ =\ MQTTClient\_connectOptions\_initializer,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00362}00362\ \ \ \ \ \ \ \ \ conn\_opts\_sd\ =\ MQTTClient\_connectOptions\_initializer,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00363}00363\ \ \ \ \ \ \ \ \ conn\_opts\_ha\ =\ MQTTClient\_connectOptions\_initializer;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00364}00364\ \ \ \ \ MQTTClient\_message\ pubmsg\ =\ MQTTClient\_message\_initializer;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00365}00365\ \ \ \ \ MQTTClient\_deliveryToken\ token;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00366}00366\ \ \ \ \ \textcolor{keywordtype}{char}\ hname[256],\ *hname\_ptr\ =\ hname;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00367}00367\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ hname\_len\ =\ 12;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00368}00368\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00369}00369\ \ \ \ \ gethostname(hname,\ hname\_len);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00370}00370\ \ \ \ \ hname[12]\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00371}00371\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\ \ LOG\ Version\ \%s\ :\ MQTT\ Version\ \%s\ :\ Host\ Name\ \%s\(\backslash\)r\(\backslash\)n"{}},\ LOG\_VERSION,\ MQTT\_VERSION,\ hname);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00372}00372\ \ \ \ \ showIP();}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00373}00373\ \ \ \ \ skeleton\_daemon();}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00374}00374\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00375}00375\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00376}00376\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (E.mode.E)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00377}00377\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ E\_INIT:}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00378}00378\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00379}00379\ \textcolor{preprocessor}{\#ifdef\ LOG\_TO\_FILE}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00380}00380\ \ \ \ \ \ \ \ \ \ \ \ \ fout\ =\ fopen(LOG\_TO\_FILE,\ \textcolor{stringliteral}{"{}a"{}});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00381}00381\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fout\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00382}00382\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fout\ =\ fopen(LOG\_TO\_FILE\_ALT,\ \textcolor{stringliteral}{"{}a"{}});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00383}00383\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fout\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00384}00384\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fout\ =\ stdout;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00385}00385\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ Unable\ to\ open\ LOG\ file\ \%s\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ LOG\_TO\_FILE\_ALT);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00386}00386\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00387}00387\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00388}00388\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00389}00389\ \ \ \ \ \ \ \ \ \ \ \ \ fout\ =\ stdout;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00390}00390\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00391}00391\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ LOG\ Version\ \%s\ :\ MQTT\ Version\ \%s\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ LOG\_VERSION,\ MQTT\_VERSION);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00392}00392\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00393}00393\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00394}00394\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!bsoc\_init())\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00395}00395\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ bsoc\_init\ failure\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00396}00396\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00397}00397\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00398}00398\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00399}00399\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00400}00400\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ set\ the\ timer\ for\ MQTT\ publishing\ sample\ speed}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00401}00401\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ CMD\_SEC\ \ \ \ \ \ \ \ \ 10}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00402}00402\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00403}00403\ \ \ \ \ \ \ \ \ \ \ \ \ setitimer(ITIMER\_REAL,\ \&new\_timer,\ \&old\_timer);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00404}00404\ \ \ \ \ \ \ \ \ \ \ \ \ signal(SIGALRM,\ timer\_callback);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00405}00405\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00406}00406\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strncmp(hname,\ TNAME,\ 6)\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00407}00407\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_create(\&E.client\_p,\ LADDRESS,\ CLIENTID1,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00408}00408\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTCLIENT\_PERSISTENCE\_NONE,\ NULL);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00409}00409\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_p.keepAliveInterval\ =\ KAI;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00410}00410\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_p.cleansession\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00411}00411\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hname\_ptr\ =\ LADDRESS;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00412}00412\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00413}00413\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_create(\&E.client\_p,\ ADDRESS,\ CLIENTID1,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00414}00414\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTCLIENT\_PERSISTENCE\_NONE,\ NULL);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00415}00415\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_p.keepAliveInterval\ =\ KAI;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00416}00416\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_p.cleansession\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00417}00417\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hname\_ptr\ =\ ADDRESS;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00418}00418\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00419}00419\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00420}00420\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Connect\ MQTT\ server\ \%s,\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ hname\_ptr,\ CLIENTID1);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00421}00421\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00422}00422\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ss.cid\ =\ ID\_C1;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00423}00423\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_setCallbacks(E.client\_p,\ \&ha\_flag\_vars\_ss,\ \mbox{\hyperlink{energy_8c_a2a87ef47168dc639b307a285b8cb4462}{connlost}},\ msgarrvd,\ delivered);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00424}00424\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((E.rc\ =\ MQTTClient\_connect(E.client\_p,\ \&conn\_opts\_p))\ !=\ MQTTCLIENT\_SUCCESS)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00425}00425\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Failed\ to\ connect\ MQTT\ server,\ return\ code\ \%d\ \%s,\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.rc,\ hname\_ptr,\ CLIENTID1);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00426}00426\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00427}00427\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pthread\_mutex\_destroy(\&E.ha\_lock);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00428}00428\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00429}00429\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00430}00430\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00431}00431\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strncmp(hname,\ TNAME,\ 6)\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00432}00432\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_create(\&E.client\_sd,\ LADDRESS,\ CLIENTID2,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00433}00433\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTCLIENT\_PERSISTENCE\_NONE,\ NULL);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00434}00434\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_sd.keepAliveInterval\ =\ KAI;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00435}00435\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_sd.cleansession\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00436}00436\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hname\_ptr\ =\ LADDRESS;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00437}00437\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00438}00438\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_create(\&E.client\_sd,\ ADDRESS,\ CLIENTID2,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00439}00439\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTCLIENT\_PERSISTENCE\_NONE,\ NULL);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00440}00440\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_sd.keepAliveInterval\ =\ KAI;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00441}00441\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_sd.cleansession\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00442}00442\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hname\_ptr\ =\ ADDRESS;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00443}00443\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00444}00444\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00445}00445\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Connect\ MQTT\ server\ \%s,\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ hname\_ptr,\ CLIENTID2);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00446}00446\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00447}00447\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_sd.cid\ =\ ID\_C2;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00448}00448\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_setCallbacks(E.client\_sd,\ \&ha\_flag\_vars\_sd,\ \mbox{\hyperlink{energy_8c_a2a87ef47168dc639b307a285b8cb4462}{connlost}},\ msgarrvd,\ delivered);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00449}00449\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((E.rc\ =\ MQTTClient\_connect(E.client\_sd,\ \&conn\_opts\_sd))\ !=\ MQTTCLIENT\_SUCCESS)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00450}00450\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Failed\ to\ connect\ MQTT\ server,\ return\ code\ \%d\ \%s,\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.rc,\ hname\_ptr,\ CLIENTID2);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00451}00451\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00452}00452\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pthread\_mutex\_destroy(\&E.ha\_lock);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00453}00453\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00454}00454\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00455}00455\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00456}00456\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00457}00457\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ Home\ Assistant\ MQTT\ receive\ messages}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00458}00458\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00459}00459\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strncmp(hname,\ TNAME,\ 6)\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00460}00460\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_create(\&E.client\_ha,\ LADDRESS,\ CLIENTID3,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00461}00461\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTCLIENT\_PERSISTENCE\_NONE,\ NULL);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00462}00462\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_ha.keepAliveInterval\ =\ KAI;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00463}00463\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_ha.cleansession\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00464}00464\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hname\_ptr\ =\ LADDRESS;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00465}00465\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00466}00466\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_create(\&E.client\_ha,\ ADDRESS,\ CLIENTID3,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00467}00467\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MQTTCLIENT\_PERSISTENCE\_NONE,\ NULL);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00468}00468\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_ha.keepAliveInterval\ =\ KAI;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00469}00469\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conn\_opts\_ha.cleansession\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00470}00470\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hname\_ptr\ =\ ADDRESS;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00471}00471\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00472}00472\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00473}00473\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Connect\ MQTT\ server\ \%s,\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ hname\_ptr,\ CLIENTID3);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00474}00474\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00475}00475\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ha.cid\ =\ ID\_C3;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00476}00476\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_setCallbacks(E.client\_ha,\ \&ha\_flag\_vars\_ha,\ \mbox{\hyperlink{energy_8c_a2a87ef47168dc639b307a285b8cb4462}{connlost}},\ msgarrvd,\ delivered);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00477}00477\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((E.rc\ =\ MQTTClient\_connect(E.client\_ha,\ \&conn\_opts\_ha))\ !=\ MQTTCLIENT\_SUCCESS)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00478}00478\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Failed\ to\ connect\ MQTT\ server,\ return\ code\ \%d\ \%s,\ \%s\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.rc,\ hname\_ptr,\ CLIENTID3);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00479}00479\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00480}00480\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pthread\_mutex\_destroy(\&E.ha\_lock);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00481}00481\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00482}00482\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00483}00483\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00484}00484\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00485}00485\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ on\ topic\ received\ data\ will\ trigger\ the\ msgarrvd\ function}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00486}00486\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00487}00487\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_subscribe(E.client\_p,\ TOPIC\_SS,\ QOS);\ \textcolor{comment}{//\ FM80\ Q84}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00488}00488\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_subscribe(E.client\_sd,\ TOPIC\_SD,\ QOS);\ \textcolor{comment}{//\ DUMPLOAD\ K42}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00489}00489\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_subscribe(E.client\_ha,\ TOPIC\_HA,\ QOS);\ \textcolor{comment}{//\ Home\ Assistant\ Linux\ AMD64\ \ and\ ARM64}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00490}00490\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00491}00491\ \ \ \ \ \ \ \ \ \ \ \ \ pubmsg.payload\ =\ \textcolor{stringliteral}{"{}online"{}};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00492}00492\ \ \ \ \ \ \ \ \ \ \ \ \ pubmsg.payloadlen\ =\ strlen(\textcolor{stringliteral}{"{}online"{}});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00493}00493\ \ \ \ \ \ \ \ \ \ \ \ \ pubmsg.qos\ =\ QOS;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00494}00494\ \ \ \ \ \ \ \ \ \ \ \ \ pubmsg.retained\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00495}00495\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ss.deliveredtoken\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00496}00496\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ notify\ HA\ we\ are\ running\ and\ controlling\ AC\ power\ plugs}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00497}00497\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_publishMessage(E.client\_p,\ TOPIC\_PACA,\ \&pubmsg,\ \&token);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00498}00498\ \ \ \ \ \ \ \ \ \ \ \ \ MQTTClient\_publishMessage(E.client\_p,\ TOPIC\_PDCA,\ \&pubmsg,\ \&token);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00499}00499\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00500}00500\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ sync\ HA\ power\ switches}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00501}00501\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00502}00502\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00503}00503\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00504}00504\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00505}00505\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00506}00506\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00507}00507\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00508}00508\ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_on\ =\ \textcolor{keyword}{true};\ \textcolor{comment}{//\ can\ be\ switched\ on\ once}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00509}00509\ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_on\ =\ \textcolor{keyword}{true};\ \textcolor{comment}{//\ can\ be\ switched\ on\ once}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00510}00510\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00511}00511\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00512}00512\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ use\ libcurl\ to\ read\ AC\ power\ meter\ HTTP\ data}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00513}00513\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ iammeter\ connected\ for\ split\ single\ phase\ monitoring\ and\ one\ leg\ GTI\ power\ exporting}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00514}00514\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00515}00515\ \ \ \ \ \ \ \ \ \ \ \ \ iammeter\_read();}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00516}00516\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00517}00517\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00518}00518\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ start\ the\ main\ energy\ monitoring\ loop}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00519}00519\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00520}00520\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ Solar\ Energy\ AC\ power\ controller\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00521}00521\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00522}00522\ \textcolor{preprocessor}{\#ifdef\ FAKE\_VPV}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00523}00523\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\ Faking\ dumpload\ PV\ voltage\(\backslash\)r\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00524}00524\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00525}00525\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ss.energy\_mode\ =\ NORM\_MODE;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00526}00526\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.E\ =\ E\_WAIT;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00527}00527\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00528}00528\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ E\_WAIT:}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00529}00529\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ha\_flag\_vars\_ss.runner\ ||\ E.speed\_go++\ >\ 1500000)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00530}00530\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.speed\_go\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00531}00531\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ss.runner\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00532}00532\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.E\ =\ E\_RUN;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00533}00533\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00534}00534\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00535}00535\ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00536}00536\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00537}00537\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ main\ state-\/machine\ update\ sequence}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00538}00538\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00539}00539\ \ \ \ \ \ \ \ \ \ \ \ \ bsoc\_data\_collect();}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00540}00540\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!sanity\_check())\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00541}00541\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ Sanity\ Check\ error\ \%d\ \%s\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.sane,\ mqtt\_name[E.sane]);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00542}00542\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00543}00543\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00544}00544\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00545}00545\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00546}00546\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ stop\ and\ restart\ the\ energy\ control\ processing}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00547}00547\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ from\ inside\ the\ program\ or\ from\ a\ remote\ Home\ Assistant\ command}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00548}00548\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00549}00549\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (solar\_shutdown())\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00550}00550\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.startup)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00551}00551\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ SHUTDOWN\ Solar\ Energy\ Control\ -\/-\/-\/>\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00552}00552\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00553}00553\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00554}00554\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_gti(E.client\_p,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00555}00555\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00556}00556\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_ac(E.client\_p,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00557}00557\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00558}00558\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_gti(E.client\_p,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00559}00559\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00560}00560\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_ac(E.client\_p,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00561}00561\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00562}00562\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.startup)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00563}00563\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Completed\ SHUTDOWN,\ Press\ again\ to\ RESTART.\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00564}00564\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00565}00565\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00566}00566\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00567}00567\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00568}00568\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ iam\_delay\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00569}00569\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (solar\_shutdown())\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00570}00570\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_shutdown(E.client\_p,\ TOPIC\_SHUTDOWN);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00571}00571\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(USEC\_SEC);\ \textcolor{comment}{//\ wait}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00572}00572\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((int32\_t)\ E.mvar[V\_HACSW])\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00573}00573\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_ac\_off();}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00574}00574\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00575}00575\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((int32\_t)\ E.mvar[V\_HDCSW])\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00576}00576\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_dc\_off();}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00577}00577\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00578}00578\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((iam\_delay++\ >\ IAM\_DELAY)\ \&\&\ E.link.shutdown)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00579}00579\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.fm80\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00580}00580\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.dumpload\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00581}00581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.iammeter\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00582}00582\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.homeassistant\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00583}00583\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00584}00584\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00585}00585\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.shutdown\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00586}00586\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ RESTART\ Solar\ Energy\ Control\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00587}00587\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00588}00588\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bsoc\_set\_mode(E.mode.pv\_bias,\ \textcolor{keyword}{true},\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00589}00589\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.dl\_excess\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00590}00590\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_gti\_power(E.client\_p,\ TOPIC\_P,\ DL\_POWER\_ZERO,\ 1);\ \textcolor{comment}{//\ zero\ power\ at\ startup}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00591}00591\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.dl\_excess\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00592}00592\ \textcolor{preprocessor}{\#ifdef\ AUTO\_CHARGE}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00593}00593\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00594}00594\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00595}00595\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00596}00596\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00597}00597\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ResetPI(\&E.mode.pid);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00598}00598\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ss.runner\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00599}00599\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.fm80\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00600}00600\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.dumpload\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00601}00601\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.iammeter\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00602}00602\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.homeassistant\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00603}00603\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.in\_pid\_control\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ shutdown\ auto\ energy\ control}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00604}00604\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.R\ =\ R\_INIT;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00605}00605\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00606}00606\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ha\_flag\_vars\_ss.receivedtoken)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00607}00607\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ss.receivedtoken\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00608}00608\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00609}00609\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ha\_flag\_vars\_sd.receivedtoken)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00610}00610\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_sd.receivedtoken\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00611}00611\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00612}00612\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00613}00613\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ E\_RUN:}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00614}00614\ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00615}00615\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (E.mode.R)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00616}00616\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ R\_INIT:}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00617}00617\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_ac\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00618}00618\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_gti\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00619}00619\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_on\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00620}00620\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_on\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00621}00621\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.R\ =\ R\_RUN;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00622}00622\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.no\_float\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00623}00623\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00624}00624\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ R\_FLOAT:}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00625}00625\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.no\_float)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00626}00626\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_ac\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00627}00627\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_gti\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00628}00628\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_on\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00629}00629\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_on\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00630}00630\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00631}00631\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00632}00632\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.no\_float\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00633}00633\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00634}00634\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.gti\_sw\_status)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00635}00635\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (gti\_test()\ >\ MIN\_BAT\_KW\_GTI\_HI)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00636}00636\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00637}00637\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00638}00638\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ R\_FLOAT\ DC\ switch\ true\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00639}00639\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00640}00640\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00641}00641\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00642}00642\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.ac\_sw\_status)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00643}00643\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ac\_test()\ >\ MIN\_BAT\_KW\_AC\_HI)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00644}00644\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00645}00645\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00646}00646\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ R\_FLOAT\ AC\ switch\ true\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00647}00647\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00648}00648\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00649}00649\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.pv\_bias\ =\ PV\_BIAS;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00650}00650\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fm80\_float(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00651}00651\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00652}00652\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ R\_RUN:}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00653}00653\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00654}00654\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.R\ =\ R\_RUN;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00655}00655\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.no\_float\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00656}00656\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00657}00657\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00658}00658\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00659}00659\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ main\ state-\/machine\ update\ sequence\ and\ control\ logic}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00660}00660\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00661}00661\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00662}00662\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ check\ for\ idle/data\ errors\ flags\ from\ sensors\ and\ HA}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00663}00663\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00664}00664\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.mode.data\_error)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00665}00665\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bsoc\_set\_mode(E.mode.pv\_bias,\ \textcolor{keyword}{true},\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00666}00666\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.gti\_delay++\ >=\ GTI\_DELAY)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00667}00667\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ gti\_str[SBUF\_SIZ];}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00668}00668\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int32\_t\ error\_drive;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00669}00669\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00670}00670\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00671}00671\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ reset\ the\ control\ mode\ from\ simple\ switched\ power\ to\ PID\ control}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00672}00672\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00673}00673\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.mode.in\_pid\_control)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00674}00674\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00675}00675\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00676}00676\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ usleep(100000);\ \textcolor{comment}{//\ wait}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00677}00677\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00678}00678\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00679}00679\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.pv\_bias\ =\ PV\_BIAS;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00680}00680\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ in\_pid\_mode\ AC/DC\ switch\ true\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00681}00681\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fm80\_float(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00682}00682\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00683}00683\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!fm80\_float(\textcolor{keyword}{true}))\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00684}00684\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.pv\_bias\ =\ (int32\_t)\ E.mode.error\ -\/\ PV\_BIAS;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00685}00685\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00686}00686\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00687}00687\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00688}00688\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ use\ PID\ style\ set-\/point\ error\ correction}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00689}00689\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00690}00690\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.in\_pid\_control\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00691}00691\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_delay\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00692}00692\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00693}00693\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ adjust\ power\ balance\ if\ battery\ charging\ energy\ is\ low}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00694}00694\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00695}00695\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mvar[V\_DPBAT]\ >\ PV\_DL\_BIAS\_RATE)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00696}00696\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ (int32\_t)\ E.mode.error\ -\/\ E.mode.pv\_bias;\ \textcolor{comment}{//\ PI\ feedback\ control\ signal}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00697}00697\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00698}00698\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ (int32\_t)\ E.mode.error\ -\/\ PV\_BIAS\_RATE;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00699}00699\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00700}00700\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00701}00701\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ when\ main\ battery\ is\ in\ float,\ crank-\/up\ the\ power\ draw\ from\ the\ solar\ panels}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00702}00702\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00703}00703\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fm80\_float(\textcolor{keyword}{true}))\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00704}00704\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ (int32\_t)\ (E.mode.error\ +\ PV\_BIAS);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00705}00705\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00706}00706\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00707}00707\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ don't\ drive\ to\ zero\ power}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00708}00708\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00709}00709\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (error\_drive\ <\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00710}00710\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ PV\_BIAS\_LOW;\ \textcolor{comment}{//\ control\ wide\ power\ swings}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00711}00711\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!fm80\_sleep())\ \{\ \textcolor{comment}{//\ check\ for\ using\ sleep\ bias}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00712}00712\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((E.mvar[V\_FBEKW]\ >\ MIN\_BAT\_KW\_BSOC\_SLP)\ \&\&\ (E.mvar[V\_PWA]\ >\ PWA\_SLEEP))\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00713}00713\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ PV\_BIAS\_SLEEP;\ \textcolor{comment}{//\ use\ higher\ power\ when\ we\ still\ have\ sun\ for\ better\ inverter\ efficiency}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00714}00714\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00715}00715\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00716}00716\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00717}00717\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00718}00718\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00719}00719\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ reduce\ charging/diversion\ power\ to\ safe\ PS\ limits}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00720}00720\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00721}00721\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.dl\_mqtt\_max\ >\ PV\_DL\_MPTT\_MAX)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00722}00722\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.dl\_excess)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00723}00723\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ PV\_DL\_MPTT\_IDLE;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00724}00724\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00725}00725\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.dl\_mqtt\_max\ >\ PV\_DL\_MPTT\_EXCESS)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00726}00726\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ PV\_DL\_MPTT\_IDLE;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00727}00727\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00728}00728\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00729}00729\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00730}00730\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.dl\_excess)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00731}00731\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ PV\_DL\_EXCESS\ +\ E.dl\_excess\_adj;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00732}00732\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00733}00733\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00734}00734\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00735}00735\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00736}00736\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ shutdown\ GTI\ power\ at\ low\ DL\ battery\ Ah\ or\ Voltage}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00737}00737\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00738}00738\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((E.mvar[V\_DAHBAT]\ <\ PV\_DL\_B\_AH\_LOW)\ ||\ (E.mvar[V\_DVBAT]\ <\ PV\_DL\_B\_V\_LOW))\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00739}00739\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_drive\ =\ PV\_BIAS\_ZERO;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00740}00740\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00741}00741\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00742}00742\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ snprintf(gti\_str,\ SBUF\_SIZ\ -\/\ 1,\ \textcolor{stringliteral}{"{}V\%04dX"{}},\ error\_drive);\ \textcolor{comment}{//\ format\ for\ dumpload\ controller\ gti\ power\ commands}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00743}00743\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_gti\_power(E.client\_p,\ TOPIC\_P,\ gti\_str,\ 2);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00744}00744\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00745}00745\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00746}00746\ \textcolor{preprocessor}{\#ifndef\ \ FAKE\_VPV}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00747}00747\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fm80\_float(\textcolor{keyword}{true})\ ||\ ((ac1\_filter(E.mvar[V\_BEN])\ >\ BAL\_MAX\_ENERGY\_AC)\ \&\&\ (ac\_test()\ >\ MIN\_BAT\_KW\_AC\_HI)))\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00748}00748\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_up\_ac(E.client\_p,\ E.ac\_sw\_on);\ \textcolor{comment}{//\ use\ once\ control}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00749}00749\ \textcolor{preprocessor}{\#ifdef\ PSW\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00750}00750\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ MIN\_BAT\_KW\_AC\_HI\ AC\ switch\ \%d\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.ac\_sw\_on);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00751}00751\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00752}00752\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_on\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ once\ flag}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00753}00753\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00754}00754\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00755}00755\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (((ac2\_filter(E.mvar[V\_BEN])\ <\ BAL\_MIN\_ENERGY\_AC)\ ||\ ((ac\_test()\ <\ (MIN\_BAT\_KW\_AC\_LO\ +\ E.ac\_low\_adj)))))\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00756}00756\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!fm80\_float(\textcolor{keyword}{true}))\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00757}00757\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_ac(E.client\_p,\ E.ac\_sw\_on);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00758}00758\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (log\_timer())\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00759}00759\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ RAMP\ DOWN\ AC,\ MIN\_BAT\_KW\_AC\_LO\ AC\ switch\ \%d\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.ac\_sw\_on);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00760}00760\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00761}00761\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00762}00762\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_on\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00763}00763\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00764}00764\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00765}00765\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00766}00766\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00767}00767\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ Dump\ Load\ Excess\ testing}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00768}00768\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ send\ excess\ power\ into\ the\ home\ power\ grid\ taking\ care\ not\ to\ export\ energy\ to\ the\ utility\ grid}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00769}00769\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00770}00770\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (((dc1\_filter(E.mvar[V\_BEN])\ >\ BAL\_MAX\_ENERGY\_GTI)\ \&\&\ (gti\_test()\ >\ MIN\_BAT\_KW\_GTI\_HI))\ ||\ E.dl\_excess)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00771}00771\ \textcolor{preprocessor}{\#ifndef\ \ FAKE\_VPV}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00772}00772\ \textcolor{preprocessor}{\#ifdef\ B\_DLE\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00773}00773\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.dl\_excess)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00774}00774\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ DL\ excess\ ramp\_up\_gti,\ DC\ switch\ \%d\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.gti\_sw\_on);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00775}00775\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00776}00776\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00777}00777\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_up\_gti(E.client\_p,\ E.gti\_sw\_on,\ E.dl\_excess);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00778}00778\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (log\_timer())\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00779}00779\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ RAMP\ DOWN\ DC,\ MIN\_BAT\_KW\_GTI\_HI\ DC\ switch\ \%d\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.gti\_sw\_on);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00780}00780\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00781}00781\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_on\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ once\ flag}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00782}00782\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00783}00783\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00784}00784\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((dc2\_filter(E.mvar[V\_BEN])\ <\ BAL\_MIN\_ENERGY\_GTI)\ ||\ (gti\_test()\ <\ (MIN\_BAT\_KW\_GTI\_LO\ +\ E.gti\_low\_adj)))\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00785}00785\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.dl\_excess)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00786}00786\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (log\_timer())\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00787}00787\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ramp\_down\_gti(E.client\_p,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00788}00788\ \textcolor{preprocessor}{\#ifdef\ PSW\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00789}00789\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ MIN\_BAT\_KW\_GTI\_LO\ DC\ switch\ \%d\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.gti\_sw\_on);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00790}00790\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00791}00791\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00792}00792\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_on\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00793}00793\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00794}00794\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00795}00795\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00796}00796\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00797}00797\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00798}00798\ \textcolor{preprocessor}{\#ifdef\ B\_ADJ\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00799}00799\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\ LO\ ADJ:\ AC\ \%8.2fWh,\ GTI\ \%8.2fWh\(\backslash\)r\(\backslash\)n"{}},\ MIN\_BAT\_KW\_AC\_LO\ +\ E.ac\_low\_adj,\ MIN\_BAT\_KW\_GTI\_LO\ +\ E.gti\_low\_adj);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00800}00800\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00801}00801\ \textcolor{preprocessor}{\#ifdef\ B\_DLE\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00802}00802\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.dl\_excess)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00803}00803\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ DL\ excess\ vars\ from\ ha\_energy\ \%d\ \%d\ :\ Flag\ \%d\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.mode.con4,\ E.mode.con5,\ E.dl\_excess);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00804}00804\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00805}00805\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00806}00806\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00807}00807\ \ \ \ \ \ \ \ \ \ \ \ \ time(\&rawtime);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00808}00808\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00809}00809\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.im\_delay++\ >=\ IM\_DELAY)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00810}00810\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.im\_delay\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00811}00811\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ iammeter\_read();}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00812}00812\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00813}00813\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.im\_display++\ >=\ IM\_DISPLAY)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00814}00814\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ buffer[SYSLOG\_SIZ];}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00815}00815\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ len;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00816}00816\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00817}00817\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.im\_display\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00818}00818\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_pid(E.client\_p,\ TOPIC\_PPID);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00819}00819\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!(E.fm80\ \&\&\ E.dumpload\ \&\&\ E.iammeter))\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00820}00820\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.iammeter)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00821}00821\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.iammeter\_error++;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00822}00822\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00823}00823\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.mqtt\_error++;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00824}00824\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00825}00825\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.shutdown++;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00826}00826\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ !!!!\ Source\ data\ update\ error\ !!!!\ ,\ check\ FM80\ \%i,\ DUMPLOAD\ \%i,\ IAMMETER\ \%i\ channels\ M\ \%u,\%u\ I\ \%u,\%u\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.fm80,\ E.dumpload,\ E.fm80,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00827}00827\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.mqtt\_count,\ E.link.mqtt\_error,\ E.link.iammeter\_count,\ E.link.iammeter\_error);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00828}00828\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00829}00829\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ snprintf(buffer,\ SYSLOG\_SIZ\ -\/\ 1,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ !!!!\ Source\ data\ update\ error\ !!!!\ ,\ check\ FM80\ \%i,\ DUMPLOAD\ \%i,\ IAMMETER\ \%i\ channels\ M\ \%u,\%u\ I\ \%u,\%u\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ E.fm80,\ E.dumpload,\ E.fm80,}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00830}00830\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.mqtt\_count,\ E.link.mqtt\_error,\ E.link.iammeter\_count,\ E.link.iammeter\_error);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00831}00831\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ syslog(LOG\_NOTICE,\ buffer);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00832}00832\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_shutdown(E.client\_p,\ TOPIC\_SHUTDOWN);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00833}00833\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.data\_error\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00834}00834\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00835}00835\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.data\_error\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00836}00836\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.link.shutdown\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00837}00837\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00838}00838\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ snprintf(buffer,\ RBUF\_SIZ\ -\/\ 1,\ \textcolor{stringliteral}{"{}\%s"{}},\ ctime(\&rawtime));}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00839}00839\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ len\ =\ strlen(buffer);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00840}00840\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ buffer[len\ -\/\ 1]\ =\ 0;\ \textcolor{comment}{//\ munge\ out\ the\ return\ character}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00841}00841\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ "{}},\ buffer);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00842}00842\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00843}00843\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.fm80\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00844}00844\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.dumpload\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00845}00845\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.homeassistant\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00846}00846\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.iammeter\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00847}00847\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sync\_ha();}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00848}00848\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print\_im\_vars();}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00849}00849\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print\_mvar\_vars();}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00850}00850\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\(\backslash\)r"{}},\ ctime(\&rawtime));}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00851}00851\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00852}00852\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.E\ =\ E\_WAIT;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00853}00853\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00854}00854\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.con6)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00855}00855\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.R\ =\ R\_IDLE;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00856}00856\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00857}00857\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.con7)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00858}00858\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.E\ =\ E\_STOP;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00859}00859\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00860}00860\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00861}00861\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ E\_STOP:}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00862}00862\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00863}00863\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00864}00864\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n\%s\ HA\ Energy\ stopped\ and\ exited.\(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00865}00865\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00866}00866\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00867}00867\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00868}00868\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00869}00869\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00870}00870\ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00871}00871\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00872}00872\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00873}00873\ \textcolor{comment}{\ *\ send\ energy\ to\ the\ house\ grid}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00874}00874\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00875}00875\ \textcolor{keywordtype}{void}\ ramp\_up\_gti(MQTTClient\ client\_p,\ \textcolor{keywordtype}{bool}\ start,\ \textcolor{keywordtype}{bool}\ excess)}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00876}00876\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00877}00877\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ sequence\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00878}00878\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00879}00879\ \ \ \ \ \textcolor{keywordflow}{if}\ (start)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00880}00880\ \ \ \ \ \ \ \ \ E.once\_gti\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00881}00881\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00882}00882\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00883}00883\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.once\_gti)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00884}00884\ \ \ \ \ \ \ \ \ E.once\_gti\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00885}00885\ \ \ \ \ \ \ \ \ sequence\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00886}00886\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!excess)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00887}00887\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00888}00888\ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00889}00889\ \ \ \ \ \ \ \ \ \ \ \ \ usleep(500000);\ \textcolor{comment}{//\ wait\ for\ PS\ voltage\ to\ ramp}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00890}00890\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00891}00891\ \ \ \ \ \ \ \ \ \ \ \ \ sequence\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00892}00892\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00893}00893\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00894}00894\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00895}00895\ \ \ \ \ \textcolor{keywordflow}{switch}\ (sequence)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00896}00896\ \ \ \ \ \textcolor{keywordflow}{case}\ 4:}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00897}00897\ \ \ \ \ \ \ \ \ E.once\_gti\_zero\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00898}00898\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00899}00899\ \ \ \ \ \textcolor{keywordflow}{case}\ 3:}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00900}00900\ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00901}00901\ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00902}00902\ \ \ \ \ \ \ \ \ E.once\_gti\_zero\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00903}00903\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bat\_current\_stable()\ ||\ E.dl\_excess)\ \{\ \textcolor{comment}{//\ check\ battery\ current\ std\ dev,\ stop\ 'motorboating'}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00904}00904\ \ \ \ \ \ \ \ \ \ \ \ \ sequence++;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00905}00905\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!mqtt\_gti\_power(client\_p,\ TOPIC\_P,\ \textcolor{stringliteral}{"{}+\#"{}},\ 3))\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00906}00906\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sequence\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00907}00907\ \ \ \ \ \ \ \ \ \ \ \ \ \};\ \textcolor{comment}{//\ +100W\ power}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00908}00908\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00909}00909\ \ \ \ \ \ \ \ \ \ \ \ \ usleep(500000);\ \textcolor{comment}{//\ wait\ a\ bit\ more\ for\ power\ to\ be\ stable}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00910}00910\ \ \ \ \ \ \ \ \ \ \ \ \ sequence\ =\ 1;\ \textcolor{comment}{//\ do\ power\ ramps\ when\ ready}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00911}00911\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!mqtt\_gti\_power(client\_p,\ TOPIC\_P,\ \textcolor{stringliteral}{"{}-\/\#"{}},\ 4))\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00912}00912\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sequence\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00913}00913\ \ \ \ \ \ \ \ \ \ \ \ \ \};\ \textcolor{comment}{//\ -\/\ 100W\ power}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00914}00914\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00915}00915\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00916}00916\ \ \ \ \ \textcolor{keywordflow}{case}\ 0:}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00917}00917\ \ \ \ \ \ \ \ \ sequence++;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00918}00918\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.once\_gti\_zero)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00919}00919\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_gti\_power(client\_p,\ TOPIC\_P,\ DL\_POWER\_ZERO,\ 5);\ \textcolor{comment}{//\ zero\ power}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00920}00920\ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_gti\_zero\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00921}00921\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00922}00922\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00923}00923\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00924}00924\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.once\_gti\_zero)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00925}00925\ \ \ \ \ \ \ \ \ \ \ \ \ mqtt\_gti\_power(client\_p,\ TOPIC\_P,\ DL\_POWER\_ZERO,\ 6);\ \textcolor{comment}{//\ zero\ power}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00926}00926\ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_gti\_zero\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00927}00927\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00928}00928\ \ \ \ \ \ \ \ \ sequence\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00929}00929\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00930}00930\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00931}00931\ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00932}00932\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00933}00933\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00934}00934\ \textcolor{comment}{\ *\ showdown\ energy\ to\ the\ house\ grid}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00935}00935\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00936}00936\ \textcolor{keywordtype}{void}\ ramp\_down\_gti(MQTTClient\ client\_p,\ \textcolor{keywordtype}{bool}\ sw\_off)}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00937}00937\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00938}00938\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ times\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00939}00939\ \ \ \ \ \textcolor{keywordflow}{if}\ (sw\_off)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00940}00940\ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00941}00941\ \ \ \ \ \ \ \ \ E.once\_gti\_zero\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00942}00942\ \ \ \ \ \ \ \ \ times\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00943}00943\ \ \ \ \ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00944}00944\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00945}00945\ \ \ \ \ E.once\_gti\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00946}00946\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00947}00947\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.once\_gti\_zero)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00948}00948\ \ \ \ \ \ \ \ \ mqtt\_gti\_power(client\_p,\ TOPIC\_P,\ DL\_POWER\_ZERO,\ 7);\ \textcolor{comment}{//\ zero\ power}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00949}00949\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (times++\ <\ LOW\_LOG\_SPAM)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00950}00950\ \ \ \ \ \ \ \ \ \ \ \ \ E.once\_gti\_zero\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00951}00951\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00952}00952\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00953}00953\ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00954}00954\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00955}00955\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00956}00956\ \textcolor{comment}{\ *\ control\ power\ from\ the\ off-\/grid\ AC\ inverter}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00957}00957\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00958}00958\ \textcolor{keywordtype}{void}\ ramp\_up\_ac(MQTTClient\ client\_p,\ \textcolor{keywordtype}{bool}\ start)}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00959}00959\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00960}00960\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00961}00961\ \ \ \ \ \textcolor{keywordflow}{if}\ (start)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00962}00962\ \ \ \ \ \ \ \ \ E.once\_ac\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00963}00963\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00964}00964\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00965}00965\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.once\_ac)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00966}00966\ \ \ \ \ \ \ \ \ E.once\_ac\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00967}00967\ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00968}00968\ \ \ \ \ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00969}00969\ \ \ \ \ \ \ \ \ usleep(200000);\ \textcolor{comment}{//\ wait\ for\ voltage\ to\ ramp}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00970}00970\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00971}00971\ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00972}00972\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00973}00973\ \textcolor{keywordtype}{void}\ ramp\_down\_ac(MQTTClient\ client\_p,\ \textcolor{keywordtype}{bool}\ sw\_off)}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00974}00974\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00975}00975\ \ \ \ \ \textcolor{keywordflow}{if}\ (sw\_off)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00976}00976\ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00977}00977\ \ \ \ \ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00978}00978\ \ \ \ \ \ \ \ \ usleep(200000);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00979}00979\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00980}00980\ \ \ \ \ E.once\_ac\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00981}00981\ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00982}00982\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00983}00983\ \textcolor{keywordtype}{void}\ ha\_ac\_off(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00984}00984\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00985}00985\ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00986}00986\ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00987}00987\ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00988}00988\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00989}00989\ \textcolor{keywordtype}{void}\ ha\_ac\_on(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00990}00990\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00991}00991\ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00992}00992\ \ \ \ \ E.ac\_sw\_status\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00993}00993\ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00994}00994\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00995}00995\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00996}00996\ \textcolor{comment}{\ *\ control\ power\ from\ the\ GTI\ inverters\ to\ the\ house\ grid}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00997}00997\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00998}00998\ \textcolor{keywordtype}{void}\ ha\_dc\_off(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l00999}00999\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01000}01000\ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01001}01001\ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01002}01002\ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01003}01003\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01004}01004\ \textcolor{keywordtype}{void}\ ha\_dc\_on(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01005}01005\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01006}01006\ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01007}01007\ \ \ \ \ E.gti\_sw\_status\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01008}01008\ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01009}01009\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01010}01010\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01011}01011\ \textcolor{comment}{\ *\ Battery\ and\ system\ protection}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01012}01012\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01013}01013\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ solar\_shutdown(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01014}01014\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01015}01015\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ ret\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01016}01016\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01017}01017\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.startup)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01018}01018\ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01019}01019\ \ \ \ \ \ \ \ \ E.startup\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01020}01020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01021}01021\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01022}01022\ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01023}01023\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01024}01024\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01025}01025\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ FIXME}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01026}01026\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01027}01027\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01028}01028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01029}01029\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01030}01030\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.solar\_shutdown)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01031}01031\ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01032}01032\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01033}01033\ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01034}01034\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01035}01035\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01036}01036\ \ \ \ \ \textcolor{keywordflow}{if}\ ((E.mvar[V\_FBEKW]\ <\ BAT\_CRITICAL)\ \&\&\ !E.startup)\ \{\ \textcolor{comment}{//\ special\ case\ for\ low\ battery}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01037}01037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!E.mode.bat\_crit)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01038}01038\ \ \ \ \ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01039}01039\ \textcolor{preprocessor}{\#ifdef\ CRITIAL\_SHUTDOWN\_LOG}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01040}01040\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Solar\ BATTERY\ CRITICAL\ shutdown\ comms\ check\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}));}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01041}01041\ \ \ \ \ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01042}01042\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01043}01043\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.bat\_crit\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01044}01044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01045}01045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01046}01046\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01047}01047\ \ \ \ \ \ \ \ \ E.mode.bat\_crit\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01048}01048\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01049}01049\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01050}01050\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.link.shutdown\ >=\ MAX\_ERROR)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01051}01051\ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01052}01052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.fm80\ \&\&\ E.dumpload\ \&\&\ E.iammeter)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01053}01053\ \ \ \ \ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01054}01054\ \ \ \ \ \ \ \ \ \ \ \ \ E.link.shutdown\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01055}01055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01056}01056\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01057}01057\ \textcolor{preprocessor}{\#ifdef\ DEBUG\_SHUTDOWN}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01058}01058\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Solar\ shutdown\ comms\ check\ ret\ =\ \%d\ \(\backslash\)r\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ ret);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01059}01059\ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01060}01060\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01061}01061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01062}01062\ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01063}01063\ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01064}01064\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01065}01065\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01066}01066\ \textcolor{comment}{\ *\ sent\ the\ current\ UTC\ to\ the\ Dump\ Load\ controller}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01067}01067\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01068}01068\ \textcolor{keywordtype}{char}\ *\ log\_time(\textcolor{keywordtype}{bool}\ log)}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01069}01069\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01070}01070\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ time\_log[RBUF\_SIZ]\ =\ \{0\};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01071}01071\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ len\ =\ 0,\ sync\_time\ =\ TIME\_SYNC\_SEC\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01072}01072\ \ \ \ \ time\_t\ rawtime\_log;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01073}01073\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01074}01074\ \ \ \ \ tzset();}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01075}01075\ \ \ \ \ timezone\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01076}01076\ \ \ \ \ daylight\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01077}01077\ \ \ \ \ time(\&rawtime\_log);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01078}01078\ \ \ \ \ \textcolor{keywordflow}{if}\ (sync\_time++\ >\ TIME\_SYNC\_SEC)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01079}01079\ \ \ \ \ \ \ \ \ sync\_time\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01080}01080\ \ \ \ \ \ \ \ \ snprintf(time\_log,\ RBUF\_SIZ\ -\/\ 1,\ \textcolor{stringliteral}{"{}VT\%lut"{}},\ rawtime\_log);\ \textcolor{comment}{//\ format\ for\ dumpload\ controller\ gti\ time\ commands}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01081}01081\ \ \ \ \ \ \ \ \ mqtt\_gti\_time(E.client\_p,\ TOPIC\_P,\ time\_log);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01082}01082\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01083}01083\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01084}01084\ \ \ \ \ sprintf(time\_log,\ \textcolor{stringliteral}{"{}\%s"{}},\ ctime(\&rawtime\_log));}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01085}01085\ \ \ \ \ len\ =\ strlen(time\_log);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01086}01086\ \ \ \ \ time\_log[len\ -\/\ 1]\ =\ 0;\ \textcolor{comment}{//\ munge\ out\ the\ return\ character}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01087}01087\ \ \ \ \ \textcolor{keywordflow}{if}\ (log)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01088}01088\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ "{}},\ time\_log);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01089}01089\ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01090}01090\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01091}01091\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01092}01092\ \ \ \ \ \textcolor{keywordflow}{return}\ time\_log;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01093}01093\ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01094}01094\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01095}01095\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01096}01096\ \textcolor{comment}{\ *\ try\ to\ keep\ this\ programs\ switch\ status\ and\ HA\ in\ sync}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01097}01097\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01098}01098\ \textcolor{keywordtype}{bool}\ sync\_ha(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01099}01099\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01100}01100\ \ \ \ \ \textcolor{keywordtype}{bool}\ sync\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01101}01101\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.gti\_sw\_status\ !=\ (\textcolor{keywordtype}{bool})\ ((int32\_t)\ E.mvar[V\_HDCSW]))\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01102}01102\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}DC\_MM\ \%d\ \%d\ "{}},\ (\textcolor{keywordtype}{bool})\ E.gti\_sw\_status,\ (\textcolor{keywordtype}{bool})\ ((int32\_t)\ E.mvar[V\_HDCSW]));}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01103}01103\ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PDCC,\ !E.gti\_sw\_status);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01104}01104\ \ \ \ \ \ \ \ \ E.dc\_mismatch\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01105}01105\ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01106}01106\ \ \ \ \ \ \ \ \ sync\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01107}01107\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01108}01108\ \ \ \ \ \ \ \ \ E.dc\_mismatch\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01109}01109\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01110}01110\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01111}01111\ \ \ \ \ E.ac\_sw\_status\ =\ (bool)\ ((int32\_t)\ E.mvar[V\_HACSW]);\ \textcolor{comment}{//\ TEMP\ FIX\ for\ MISmatch\ errors}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01112}01112\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.ac\_sw\_status\ !=\ (\textcolor{keywordtype}{bool})\ ((int32\_t)\ E.mvar[V\_HACSW]))\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01113}01113\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}AC\_MM\ \%d\ \%d\ "{}},\ (\textcolor{keywordtype}{bool})\ E.ac\_sw\_status,\ (\textcolor{keywordtype}{bool})\ ((int32\_t)\ E.mvar[V\_HACSW]));}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01114}01114\ \ \ \ \ \ \ \ \ mqtt\_ha\_switch(E.client\_p,\ TOPIC\_PACC,\ !E.ac\_sw\_status);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01115}01115\ \ \ \ \ \ \ \ \ E.ac\_mismatch\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01116}01116\ \ \ \ \ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01117}01117\ \ \ \ \ \ \ \ \ sync\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01118}01118\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01119}01119\ \ \ \ \ \ \ \ \ E.ac\_mismatch\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01120}01120\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01121}01121\ \ \ \ \ \textcolor{keywordflow}{return}\ sync;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01122}01122\ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01123}01123\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01124}01124\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01125}01125\ \textcolor{comment}{\ *\ limits\ commands\ and\ log\ messages,\ check\ for\ proper\ functionality\ for\ each\ usage}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01126}01126\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01127}01127\ \textcolor{keywordtype}{bool}\ log\_timer(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01128}01128\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01129}01129\ \ \ \ \ \textcolor{keywordtype}{bool}\ itstime\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01130}01130\ }
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01131}01131\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.log\_spam\ <\ LOW\_LOG\_SPAM)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01132}01132\ \ \ \ \ \ \ \ \ E.log\_time\_reset\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01133}01133\ \ \ \ \ \ \ \ \ itstime\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01134}01134\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01135}01135\ \ \ \ \ \textcolor{keywordflow}{if}\ (E.log\_time\_reset\ >\ RESET\_LOG\_SPAM)\ \{}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01136}01136\ \ \ \ \ \ \ \ \ E.log\_spam\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01137}01137\ \ \ \ \ \ \ \ \ itstime\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01138}01138\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01139}01139\ \ \ \ \ \textcolor{keywordflow}{return}\ itstime;}
+\DoxyCodeLine{\Hypertarget{energy_8c_source_l01140}01140\ \}}
+
+\end{DoxyCode}

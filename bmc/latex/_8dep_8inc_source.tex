@@ -1,0 +1,11 @@
+\doxysection{.dep.\+inc}
+\hypertarget{_8dep_8inc_source}{}\label{_8dep_8inc_source}\index{ha\_energy/.dep.inc@{ha\_energy/.dep.inc}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_8dep_8inc_source_l00001}00001\ \textcolor{preprocessor}{\#\ This\ code\ depends\ on\ make\ tool\ being\ used}}
+\DoxyCodeLine{\Hypertarget{_8dep_8inc_source_l00002}00002\ DEPFILES=\$(wildcard\ \$(addsuffix\ .d,\ \$\{OBJECTFILES\}\ \$\{TESTOBJECTFILES\}))}
+\DoxyCodeLine{\Hypertarget{_8dep_8inc_source_l00003}00003\ ifneq\ (\$\{DEPFILES\},)}
+\DoxyCodeLine{\Hypertarget{_8dep_8inc_source_l00004}00004\ include\ \$\{DEPFILES\}}
+\DoxyCodeLine{\Hypertarget{_8dep_8inc_source_l00005}00005\ endif}
+
+\end{DoxyCode}

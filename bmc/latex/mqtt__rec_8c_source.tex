@@ -1,0 +1,276 @@
+\doxysection{mqtt\+\_\+rec.\+c}
+\hypertarget{mqtt__rec_8c_source}{}\label{mqtt__rec_8c_source}\index{ha\_energy/mqtt\_rec.c@{ha\_energy/mqtt\_rec.c}}
+\mbox{\hyperlink{mqtt__rec_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}bsoc.h"{}}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00007}00007\ int32\_t\ msgarrvd(\textcolor{keywordtype}{void}\ *context,\ \textcolor{keywordtype}{char}\ *topicName,\ \textcolor{keywordtype}{int}\ topicLen,\ MQTTClient\_message\ *message)}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00009}00009\ \ \ \ \ int32\_t\ i,\ ret\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00010}00010\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ payloadptr;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00011}00011\ \ \ \ \ \textcolor{keywordtype}{char}\ buffer[MBMQTT];}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00012}00012\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structha__flag__type}{ha\_flag\_type}}\ *ha\_flag\ =\ context;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00014}00014\ \ \ \ \ E.link.mqtt\_count++;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00015}00015\ \ \ \ \ \textcolor{comment}{//\ bug-\/out\ if\ no\ context\ variables\ passed\ to\ callback}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00016}00016\ \ \ \ \ \textcolor{keywordflow}{if}\ (context\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00017}00017\ \ \ \ \ \ \ \ \ ret\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00018}00018\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ null\_exit;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00019}00019\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00021}00021\ \textcolor{preprocessor}{\#ifdef\ DEBUG\_REC}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00022}00022\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}Message\ arrived\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00023}00023\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00024}00024\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00025}00025\ \textcolor{comment}{\ \ \ \ \ *\ move\ the\ received\ message\ into\ a\ processing\ holding\ buffer}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00026}00026\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00027}00027\ \ \ \ \ payloadptr\ =\ message-\/>payload;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00028}00028\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ message-\/>payloadlen;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00029}00029\ \ \ \ \ \ \ \ \ buffer[i]\ =\ *payloadptr++;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00030}00030\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00031}00031\ \ \ \ \ buffer[i]\ =\ 0;\ \textcolor{comment}{//\ make\ a\ null\ terminated\ C\ string}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00033}00033\ \ \ \ \ \textcolor{comment}{//\ parse\ the\ JSON\ data\ in\ the\ holding\ buffer}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00034}00034\ \ \ \ \ cJSON\ *json\ =\ cJSON\_ParseWithLength(buffer,\ message-\/>payloadlen);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00035}00035\ \ \ \ \ \textcolor{keywordflow}{if}\ (json\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *error\_ptr\ =\ cJSON\_GetErrorPtr();}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (error\_ptr\ !=\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Error:\ \%s\ NULL\ cJSON\ pointer\(\backslash\)n"{}},\ log\_time(\textcolor{keyword}{false}),\ error\_ptr);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00039}00039\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00040}00040\ \ \ \ \ \ \ \ \ ret\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00041}00041\ \ \ \ \ \ \ \ \ ha\_flag-\/>rec\_ok\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00042}00042\ \ \ \ \ \ \ \ \ E.fm80\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00043}00043\ \ \ \ \ \ \ \ \ E.dumpload\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00044}00044\ \ \ \ \ \ \ \ \ E.homeassistant\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00045}00045\ \ \ \ \ \ \ \ \ E.link.mqtt\_error++;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ error\_exit;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00049}00049\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00050}00050\ \textcolor{comment}{\ \ \ \ \ *\ MQTT\ messages\ from\ the\ FM80\ Q84\ interface}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00051}00051\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00052}00052\ \ \ \ \ \textcolor{keywordflow}{if}\ (ha\_flag-\/>ha\_id\ ==\ FM80\_ID)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00053}00053\ \textcolor{preprocessor}{\#ifdef\ DEBUG\_REC}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00054}00054\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}FM80\ MQTT\ data\(\backslash\)r\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00055}00055\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00056}00056\ \ \ \ \ \ \ \ \ cJSON\ *data\_result\ =\ json;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint32\_t\ ii\ =\ V\_FCCM;\ ii\ <\ V\_FLAST;\ ii++)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (json\_get\_data(json,\ mqtt\_name[ii],\ data\_result,\ ii))\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag-\/>var\_update++;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00062}00062\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00063}00063\ \ \ \ \ \ \ \ \ E.fm80\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00064}00064\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00066}00066\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00067}00067\ \textcolor{comment}{\ \ \ \ \ *\ MQTT\ messages\ from\ the\ K42\ dumpload/gti\ interface}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00068}00068\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{if}\ (ha\_flag-\/>ha\_id\ ==\ DUMPLOAD\_ID)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00070}00070\ \textcolor{preprocessor}{\#ifdef\ DEBUG\_REC}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00071}00071\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}DUMPLOAD\ MQTT\ data\(\backslash\)r\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00072}00072\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00073}00073\ \ \ \ \ \ \ \ \ cJSON\ *data\_result\ =\ json;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint32\_t\ ii\ =\ V\_HDCSW;\ ii\ <\ V\_DLAST;\ ii++)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (json\_get\_data(json,\ mqtt\_name[ii],\ data\_result,\ ii))\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag-\/>var\_update++;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00079}00079\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00080}00080\ \ \ \ \ \ \ \ \ E.dumpload\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00081}00081\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00083}00083\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00084}00084\ \textcolor{comment}{\ \ \ \ \ *\ MQTT\ messages\ from\ the\ Linux\ HA\_ENERGY\ interface}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00085}00085\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00086}00086\ \ \ \ \ \textcolor{keywordflow}{if}\ (ha\_flag-\/>ha\_id\ ==\ HA\_ID)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00087}00087\ \textcolor{preprocessor}{\#ifdef\ DEBUG\_REC}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00088}00088\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}Home\ Assistant\ MQTT\ data\(\backslash\)r\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00089}00089\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00090}00090\ \ \ \ \ \ \ \ \ cJSON\ *data\_result\ =\ json;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (json\_get\_data(json,\ mqtt\_name[V\_HACSW],\ data\_result,\ V\_HACSW))\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag-\/>var\_update++;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00094}00094\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00095}00095\ \ \ \ \ \ \ \ \ data\_result\ =\ json;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (json\_get\_data(json,\ mqtt\_name[V\_HDCSW],\ data\_result,\ V\_HDCSW))\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag-\/>var\_update++;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00098}00098\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ E.homeassistant\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00101}00101\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00103}00103\ \ \ \ \ \textcolor{comment}{//\ done\ with\ processing\ MQTT\ async\ message,\ set\ state\ flags}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00104}00104\ \ \ \ \ ha\_flag-\/>receivedtoken\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00105}00105\ \ \ \ \ ha\_flag-\/>rec\_ok\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00106}00106\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00107}00107\ \textcolor{comment}{\ \ \ \ \ *\ exit\ and\ delete/free\ resources.\ In\ steps\ depending\ of\ possible\ error\ conditions}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00108}00108\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00109}00109\ error\_exit:}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00110}00110\ \ \ \ \ \textcolor{comment}{//\ delete\ the\ JSON\ object}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00111}00111\ \ \ \ \ cJSON\_Delete(json);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00112}00112\ null\_exit:}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00113}00113\ \ \ \ \ \textcolor{comment}{//\ free\ the\ MQTT\ objects}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00114}00114\ \ \ \ \ MQTTClient\_freeMessage(\&message);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00115}00115\ \ \ \ \ MQTTClient\_free(topicName);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00116}00116\ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00117}00117\ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00119}00119\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00120}00120\ \textcolor{comment}{\ *\ set\ the\ broker\ has\ message\ token}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00121}00121\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00122}00122\ \textcolor{keywordtype}{void}\ delivered(\textcolor{keywordtype}{void}\ *context,\ MQTTClient\_deliveryToken\ dt)}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00123}00123\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00124}00124\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structha__flag__type}{ha\_flag\_type}}\ *ha\_flag\ =\ context;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00126}00126\ \ \ \ \ \textcolor{comment}{//\ bug-\/out\ if\ no\ context\ variables\ passed\ to\ callback}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00127}00127\ \ \ \ \ \textcolor{keywordflow}{if}\ (context\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00128}00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00129}00129\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00130}00130\ \ \ \ \ ha\_flag-\/>deliveredtoken\ =\ dt;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00131}00131\ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00133}00133\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00134}00134\ \textcolor{comment}{\ *\ lock\ and\ load\ MQTT\ thread\ received\ data\ into\ buffered\ program\ data\ array}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00135}00135\ \textcolor{comment}{\ *\ for\ main\ program\ thread\ processing\ using\ a\ mutex\_lock}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00136}00136\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00137}00137\ \textcolor{keywordtype}{bool}\ json\_get\_data(cJSON\ *json\_src,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ data\_id,\ cJSON\ *name,\ uint32\_t\ i)}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00138}00138\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00139}00139\ \ \ \ \ \textcolor{keywordtype}{bool}\ ret\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00140}00140\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ j\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00142}00142\ \ \ \ \ \textcolor{comment}{//\ access\ the\ JSON\ data\ using\ the\ lookup\ string\ passed\ in\ data\_id}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00143}00143\ \ \ \ \ name\ =\ cJSON\_GetObjectItemCaseSensitive(json\_src,\ data\_id);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00145}00145\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00146}00146\ \textcolor{comment}{\ \ \ \ \ *\ process\ string\ values}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00147}00147\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00148}00148\ \ \ \ \ \textcolor{keywordflow}{if}\ (cJSON\_IsString(name)\ \&\&\ (name-\/>valuestring\ !=\ NULL))\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00149}00149\ \textcolor{preprocessor}{\#ifdef\ GET\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00150}00150\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Name:\ \%s\(\backslash\)n"{}},\ data\_id,\ name-\/>valuestring);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00151}00151\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00152}00152\ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00153}00153\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00155}00155\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00156}00156\ \textcolor{comment}{\ \ \ \ \ *\ process\ numeric\ values}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00157}00157\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00158}00158\ \ \ \ \ \textcolor{keywordflow}{if}\ (cJSON\_IsNumber(name))\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00159}00159\ \textcolor{preprocessor}{\#ifdef\ GET\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00160}00160\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s\ Value:\ \%f\(\backslash\)n"{}},\ data\_id,\ name-\/>valuedouble);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00161}00161\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00162}00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ >\ V\_DLAST)\ \{\ \textcolor{comment}{//\ check\ for\ out-\/of-\/range\ index}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ V\_DLAST;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00164}00164\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00166}00166\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ lock\ the\ main\ value\ array\ during\ updates}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00167}00167\ \ \ \ \ \ \ \ \ pthread\_mutex\_lock(\&E.ha\_lock);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00168}00168\ \ \ \ \ \ \ \ \ E.mvar[i]\ =\ name-\/>valuedouble;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00169}00169\ \ \ \ \ \ \ \ \ pthread\_mutex\_unlock(\&E.ha\_lock);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00171}00171\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00172}00172\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ special\ processing\ for\ variable\ data\ received}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00173}00173\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00174}00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ V\_DCMPPT)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00176}00176\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ load\ battery\ current\ standard\ deviation\ array\ bat\_c\_std\_dev\ with\ data}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00177}00177\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ bsoc\_set\_std\_dev(E.mvar[i],\ j++);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (j\ >=\ RDEV\_SIZE)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ j\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00182}00182\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00183}00183\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00184}00184\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ update\ local\ MATTER\ switch\ status\ from\ HA}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00185}00185\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00186}00186\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ V\_HDCSW)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ E.gti\_sw\_status\ =\ (bool)\ ((int32\_t)\ E.mvar[i]);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ E.dc\_mismatch\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00189}00189\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00191}00191\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ V\_HACSW)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_sw\_status\ =\ (bool)\ ((int32\_t)\ E.mvar[i]);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ E.ac\_mismatch\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00194}00194\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00196}00196\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ command\ HA\_ENERGY\ to\ shutdown\ mode}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00197}00197\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ V\_HSHUT)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ E.solar\_shutdown\ =\ (bool)\ ((int32\_t)\ E.mvar[i]);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00199}00199\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00200}00200\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ set\ HA\_ENERGY\ energy\ processing\ mode}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00201}00201\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ V\_HMODE)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ ha\_flag\_vars\_ss.energy\_mode\ =\ (bool)\ ((int32\_t)\ E.mvar[i]);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00203}00203\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00204}00204\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ V\_HCON0)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.con0\ =\ (bool)\ ((int32\_t)\ E.mvar[i]);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00206}00206\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00207}00207\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ V\_HCON1)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.con1\ =\ (bool)\ ((int32\_t)\ E.mvar[i]);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00209}00209\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00210}00210\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ V\_HCON2)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.con2\ =\ (bool)\ ((int32\_t)\ E.mvar[i]);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00212}00212\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00213}00213\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ V\_HCON3)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.con3\ =\ (bool)\ ((int32\_t)\ E.mvar[i]);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00215}00215\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00216}00216\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ V\_HCON4)\ \{\ \textcolor{comment}{//\ set\ DL\ GTI\ excess\ load\ MODE}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.con4\ =\ (bool)\ ((int32\_t)\ E.mvar[i]);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00218}00218\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00219}00219\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ V\_HCON5)\ \{\ \textcolor{comment}{//\ clear\ DL\ GTI\ excess\ load\ MODE}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.con5\ =\ (bool)\ ((int32\_t)\ E.mvar[i]);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00221}00221\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00222}00222\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ V\_HCON6)\ \{\ \textcolor{comment}{//\ HA\ Energy\ program\ idle}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.con6\ =\ (bool)\ ((int32\_t)\ E.mvar[i]);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00224}00224\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00225}00225\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ V\_HCON7)\ \{\ \textcolor{comment}{//\ HA\ Energy\ program\ exit}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.con7\ =\ (bool)\ ((int32\_t)\ E.mvar[i]);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00227}00227\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00228}00228\ \ \ \ \ \ \ \ \ ret\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00229}00229\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00230}00230\ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00231}00231\ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00233}00233\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00234}00234\ \textcolor{comment}{\ *\ logging\ to\ system\ log\ file}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00235}00235\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00236}00236\ \textcolor{keywordtype}{void}\ print\_mvar\_vars(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00237}00237\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00238}00238\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{},\ AC\ Inverter\ \%7.2fW,\ BAT\ Energy\ \%7.2fWh,\ Solar\ E\ \%7.2fWh,\ AC\ E\ \%7.2fWh,\ PERR\ \%7.2fW,\ PBAL\ \%7.2fW,\ ST\ \%7.2f,\ GDL\ \%7.2f,\ \%d,\%d,\%d\ \%d,\%d,\%d\(\backslash\)r"{}},}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00239}00239\ \ \ \ \ \ \ \ \ E.mvar[V\_FLO],\ E.mvar[V\_FBEKW],\ E.mvar[V\_FSO],\ E.mvar[V\_FACE],\ E.mode.error,\ E.mvar[V\_BEN],\ E.mode.total\_system,\ E.mode.gti\_dumpload,\ (int32\_t)\ E.mvar[V\_HDCSW],\ (int32\_t)\ E.mvar[V\_HACSW],\ (int32\_t)\ E.mvar[V\_HMODE],}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00240}00240\ \ \ \ \ \ \ \ \ (int32\_t)\ E.dc\_mismatch,\ (int32\_t)\ E.ac\_mismatch,\ (int32\_t)\ E.mode\_mismatch);}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00241}00241\ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00242}00242\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00243}00243\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00244}00244\ \textcolor{comment}{\ *\ return\ float\ status\ of\ FM80\ to\ trigger\ excess\ energy\ modes}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00245}00245\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00246}00246\ \textcolor{keywordtype}{bool}\ fm80\_float(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ set\_bias)}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00247}00247\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00248}00248\ \ \ \ \ \textcolor{keywordflow}{if}\ ((uint32\_t)\ E.mvar[V\_FCCM]\ ==\ FLOAT\_CODE)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00249}00249\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (set\_bias)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.pv\_bias\ =\ PV\_BIAS\_FLOAT;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00251}00251\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00252}00252\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.R\ !=\ R\_IDLE)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.R\ =\ R\_FLOAT;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00254}00254\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00255}00255\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00256}00256\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00257}00257\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (E.mode.R\ ==\ R\_FLOAT)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ E.mode.R\ =\ R\_RUN;}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00259}00259\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00260}00260\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00261}00261\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00262}00262\ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00263}00263\ }
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00264}00264\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00265}00265\ \textcolor{comment}{\ *\ return\ sleep\ status\ of\ FM80\ to\ select\ solar\ production\ or\ 'night'\ modes}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00266}00266\ \textcolor{comment}{\ *\ by\ adjusting\ load\ drive\ bias}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00267}00267\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00268}00268\ \textcolor{keywordtype}{bool}\ fm80\_sleep(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00269}00269\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00270}00270\ \ \ \ \ \textcolor{keywordflow}{if}\ ((uint32\_t)\ E.mvar[V\_FCCM]\ ==\ SLEEP\_CODE)\ \{}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00271}00271\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00272}00272\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00273}00273\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{mqtt__rec_8c_source_l00274}00274\ \}}
+
+\end{DoxyCode}

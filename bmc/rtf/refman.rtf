@@ -1,0 +1,4427 @@
+{\rtf1\ansi\ansicpg1252\uc1 \deff0\deflang1033\deflangfe1033
+{\fonttbl {\f0\froman\fcharset0\fprq2{\*\panose 02020603050405020304}Times New Roman;}
+{\f1\fswiss\fcharset0\fprq2{\*\panose 020b0604020202020204}Arial;}
+{\f2\fmodern\fcharset0\fprq1{\*\panose 02070309020205020404}Courier New;}
+{\f3\froman\fcharset2\fprq2{\*\panose 05050102010706020507}Symbol;}
+}
+{\colortbl;\red0\green0\blue0;\red0\green0\blue255;\red0\green255\blue255;\red0\green255\blue0;\red255\green0\blue255;\red255\green0\blue0;\red255\green255\blue0;\red255\green255\blue255;\red0\green0\blue128;\red0\green128\blue128;\red0\green128\blue0;\red128\green0\blue128;\red128\green0\blue0;\red128\green128\blue0;\red128\green128\blue128;\red192\green192\blue192;\red0\green128\blue0;\red96\green64\blue32;\rede0\green128\blue0;\red128\green0\blue0;\red128\green96\blue32;\red0\green32\blue128;\red0\green128\blue128;\red255\green0\blue255;\red0\green0\blue0;\red112\green0\blue112;\red255\green0\blue0;}
+{\stylesheet
+{\widctlpar\adjustright \fs20\cgrid \snext0 Normal;}
+{\paperw11900\paperh16840\margl1800\margr1800\margt1440\margb1440\gutter0\ltrsect}
+{\s1\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs36\kerning36\cgrid \sbasedon0 \snext0 heading 1;}
+{\s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid \sbasedon0 \snext0 heading 2;}
+{\s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid \sbasedon0 \snext0 heading 3;}
+{\s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid \sbasedon0 \snext0 heading 4;}{\*\cs10 \additive Default Paragraph Font;}
+{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs16\cgrid \sbasedon0 \snext0 heading 5;}{\*\cs10 \additive Default Paragraph Font;}
+{\s6\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs12\cgrid \sbasedon0 \snext0 heading 6;}{\*\cs10 \additive Default Paragraph Font;}
+{\s15\qc\sb240\sa60\widctlpar\outlinelevel0\adjustright \b\f1\fs32\kerning28\cgrid \sbasedon0 \snext15 Title;}
+{\s16\qc\sa60\widctlpar\outlinelevel1\adjustright \f1\cgrid \sbasedon0 \snext16 Subtitle;}
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid \sbasedon0 \snext17 BodyText;}
+{\s18\widctlpar\fs22\cgrid \sbasedon0 \snext18 DenseText;}
+{\s28\widctlpar\tqc\tx4320\tqr\tx8640\adjustright \fs20\cgrid \sbasedon0 \snext28 header;}
+{\s29\widctlpar\tqc\tx4320\tqr\tx8640\qr\adjustright \fs20\cgrid \sbasedon0 \snext29 footer;}
+{\s30\li360\sa60\sb120\keepn\widctlpar\adjustright \b\f1\fs20\cgrid \sbasedon0 \snext30 GroupHeader;}
+{\s40\li0\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid \sbasedon0 \snext41 Code Example 0;}
+{\s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid \sbasedon0 \snext42 Code Example 1;}
+{\s42\li720\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid \sbasedon0 \snext43 Code Example 2;}
+{\s43\li1080\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid \sbasedon0 \snext44 Code Example 3;}
+{\s44\li1440\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid \sbasedon0 \snext45 Code Example 4;}
+{\s45\li1800\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid \sbasedon0 \snext46 Code Example 5;}
+{\s46\li2160\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid \sbasedon0 \snext47 Code Example 6;}
+{\s47\li2520\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid \sbasedon0 \snext48 Code Example 7;}
+{\s48\li2880\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid \sbasedon0 \snext49 Code Example 8;}
+{\s49\li3240\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid \sbasedon0 \snext50 Code Example 9;}
+{\s50\li3600\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid \sbasedon0 \snext51 Code Example 10;}
+{\s51\li3960\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid \sbasedon0 \snext52 Code Example 11;}
+{\s52\li4320\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid \sbasedon0 \snext53 Code Example 12;}
+{\s53\li4680\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid \sbasedon0 \snext53 Code Example 13;}
+{\s60\li0\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid \sbasedon0 \snext61 List Continue 0;}
+{\s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid \sbasedon0 \snext62 List Continue 1;}
+{\s62\li720\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid \sbasedon0 \snext63 List Continue 2;}
+{\s63\li1080\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid \sbasedon0 \snext64 List Continue 3;}
+{\s64\li1440\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid \sbasedon0 \snext65 List Continue 4;}
+{\s65\li1800\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid \sbasedon0 \snext66 List Continue 5;}
+{\s66\li2160\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid \sbasedon0 \snext67 List Continue 6;}
+{\s67\li2520\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid \sbasedon0 \snext68 List Continue 7;}
+{\s68\li2880\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid \sbasedon0 \snext69 List Continue 8;}
+{\s69\li3240\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid \sbasedon0 \snext70 List Continue 9;}
+{\s70\li3600\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid \sbasedon0 \snext71 List Continue 10;}
+{\s71\li3960\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid \sbasedon0 \snext72 List Continue 11;}
+{\s72\li4320\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid \sbasedon0 \snext73 List Continue 12;}
+{\s73\li4680\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid \sbasedon0 \snext73 List Continue 13;}
+{\s80\li0\widctlpar\ql\adjustright \fs20\cgrid \sbasedon0 \snext81 DescContinue 0;}
+{\s81\li360\widctlpar\ql\adjustright \fs20\cgrid \sbasedon0 \snext82 DescContinue 1;}
+{\s82\li720\widctlpar\ql\adjustright \fs20\cgrid \sbasedon0 \snext83 DescContinue 2;}
+{\s83\li1080\widctlpar\ql\adjustright \fs20\cgrid \sbasedon0 \snext84 DescContinue 3;}
+{\s84\li1440\widctlpar\ql\adjustright \fs20\cgrid \sbasedon0 \snext85 DescContinue 4;}
+{\s85\li1800\widctlpar\ql\adjustright \fs20\cgrid \sbasedon0 \snext86 DescContinue 5;}
+{\s86\li2160\widctlpar\ql\adjustright \fs20\cgrid \sbasedon0 \snext87 DescContinue 6;}
+{\s87\li2520\widctlpar\ql\adjustright \fs20\cgrid \sbasedon0 \snext88 DescContinue 7;}
+{\s88\li2880\widctlpar\ql\adjustright \fs20\cgrid \sbasedon0 \snext89 DescContinue 8;}
+{\s89\li3240\widctlpar\ql\adjustright \fs20\cgrid \sbasedon0 \snext90 DescContinue 9;}
+{\s90\li3600\widctlpar\ql\adjustright \fs20\cgrid \sbasedon0 \snext91 DescContinue 10;}
+{\s91\li3960\widctlpar\ql\adjustright \fs20\cgrid \sbasedon0 \snext92 DescContinue 11;}
+{\s92\li4320\widctlpar\ql\adjustright \fs20\cgrid \sbasedon0 \snext93 DescContinue 12;}
+{\s93\li4680\widctlpar\ql\adjustright \fs20\cgrid \sbasedon0 \snext93 DescContinue 13;}
+{\s100\li0\sa30\sb30\widctlpar\tqr\tldot\tx8640\adjustright \fs20\cgrid \sbasedon0 \snext101 LatexTOC 0;}
+{\s101\li360\sa27\sb27\widctlpar\tqr\tldot\tx8640\adjustright \fs20\cgrid \sbasedon0 \snext102 LatexTOC 1;}
+{\s102\li720\sa24\sb24\widctlpar\tqr\tldot\tx8640\adjustright \fs20\cgrid \sbasedon0 \snext103 LatexTOC 2;}
+{\s103\li1080\sa21\sb21\widctlpar\tqr\tldot\tx8640\adjustright \fs20\cgrid \sbasedon0 \snext104 LatexTOC 3;}
+{\s104\li1440\sa18\sb18\widctlpar\tqr\tldot\tx8640\adjustright \fs20\cgrid \sbasedon0 \snext105 LatexTOC 4;}
+{\s105\li1800\sa15\sb15\widctlpar\tqr\tldot\tx8640\adjustright \fs20\cgrid \sbasedon0 \snext106 LatexTOC 5;}
+{\s106\li2160\sa12\sb12\widctlpar\tqr\tldot\tx8640\adjustright \fs20\cgrid \sbasedon0 \snext107 LatexTOC 6;}
+{\s107\li2520\sa9\sb9\widctlpar\tqr\tldot\tx8640\adjustright \fs20\cgrid \sbasedon0 \snext108 LatexTOC 7;}
+{\s108\li2880\sa6\sb6\widctlpar\tqr\tldot\tx8640\adjustright \fs20\cgrid \sbasedon0 \snext109 LatexTOC 8;}
+{\s109\li3240\sa3\sb3\widctlpar\tqr\tldot\tx8640\adjustright \fs20\cgrid \sbasedon0 \snext110 LatexTOC 9;}
+{\s110\li3600\sa3\sb3\widctlpar\tqr\tldot\tx8640\adjustright \fs20\cgrid \sbasedon0 \snext111 LatexTOC 10;}
+{\s111\li3960\sa3\sb3\widctlpar\tqr\tldot\tx8640\adjustright \fs20\cgrid \sbasedon0 \snext112 LatexTOC 11;}
+{\s112\li4320\sa3\sb3\widctlpar\tqr\tldot\tx8640\adjustright \fs20\cgrid \sbasedon0 \snext113 LatexTOC 12;}
+{\s113\li4680\sa3\sb3\widctlpar\tqr\tldot\tx8640\adjustright \fs20\cgrid \sbasedon0 \snext113 LatexTOC 13;}
+{\s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid \sbasedon0 \snext121 \sautoupd List Bullet 0;}
+{\s121\fi-360\li720\widctlpar\jclisttab\tx720{\*\pn \pnlvlbody\ilvl0\ls2\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid \sbasedon0 \snext122 \sautoupd List Bullet 1;}
+{\s122\fi-360\li1080\widctlpar\jclisttab\tx1080{\*\pn \pnlvlbody\ilvl0\ls3\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid \sbasedon0 \snext123 \sautoupd List Bullet 2;}
+{\s123\fi-360\li1440\widctlpar\jclisttab\tx1440{\*\pn \pnlvlbody\ilvl0\ls4\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid \sbasedon0 \snext124 \sautoupd List Bullet 3;}
+{\s124\fi-360\li1800\widctlpar\jclisttab\tx1800{\*\pn \pnlvlbody\ilvl0\ls5\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid \sbasedon0 \snext125 \sautoupd List Bullet 4;}
+{\s125\fi-360\li2160\widctlpar\jclisttab\tx2160{\*\pn \pnlvlbody\ilvl0\ls6\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid \sbasedon0 \snext126 \sautoupd List Bullet 5;}
+{\s126\fi-360\li2520\widctlpar\jclisttab\tx2520{\*\pn \pnlvlbody\ilvl0\ls7\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid \sbasedon0 \snext127 \sautoupd List Bullet 6;}
+{\s127\fi-360\li2880\widctlpar\jclisttab\tx2880{\*\pn \pnlvlbody\ilvl0\ls8\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid \sbasedon0 \snext128 \sautoupd List Bullet 7;}
+{\s128\fi-360\li3240\widctlpar\jclisttab\tx3240{\*\pn \pnlvlbody\ilvl0\ls9\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid \sbasedon0 \snext129 \sautoupd List Bullet 8;}
+{\s129\fi-360\li3600\widctlpar\jclisttab\tx3600{\*\pn \pnlvlbody\ilvl0\ls10\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid \sbasedon0 \snext130 \sautoupd List Bullet 9;}
+{\s130\fi-360\li3960\widctlpar\jclisttab\tx3960{\*\pn \pnlvlbody\ilvl0\ls11\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid \sbasedon0 \snext131 \sautoupd List Bullet 10;}
+{\s131\fi-360\li4320\widctlpar\jclisttab\tx4320{\*\pn \pnlvlbody\ilvl0\ls12\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid \sbasedon0 \snext132 \sautoupd List Bullet 11;}
+{\s132\fi-360\li4680\widctlpar\jclisttab\tx4680{\*\pn \pnlvlbody\ilvl0\ls13\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid \sbasedon0 \snext133 \sautoupd List Bullet 12;}
+{\s133\fi-360\li5040\widctlpar\jclisttab\tx5040{\*\pn \pnlvlbody\ilvl0\ls14\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid \sbasedon0 \snext133 \sautoupd List Bullet 13;}
+{\s140\fi-360\li360\widctlpar\fs20\cgrid \sbasedon0 \snext141 \sautoupd List Enum 0;}
+{\s141\fi-360\li720\widctlpar\fs20\cgrid \sbasedon0 \snext142 \sautoupd List Enum 1;}
+{\s142\fi-360\li1080\widctlpar\fs20\cgrid \sbasedon0 \snext143 \sautoupd List Enum 2;}
+{\s143\fi-360\li1440\widctlpar\fs20\cgrid \sbasedon0 \snext144 \sautoupd List Enum 3;}
+{\s144\fi-360\li1800\widctlpar\fs20\cgrid \sbasedon0 \snext145 \sautoupd List Enum 4;}
+{\s145\fi-360\li2160\widctlpar\fs20\cgrid \sbasedon0 \snext146 \sautoupd List Enum 5;}
+{\s146\fi-360\li2520\widctlpar\fs20\cgrid \sbasedon0 \snext147 \sautoupd List Enum 6;}
+{\s147\fi-360\li2880\widctlpar\fs20\cgrid \sbasedon0 \snext148 \sautoupd List Enum 7;}
+{\s148\fi-360\li3240\widctlpar\fs20\cgrid \sbasedon0 \snext149 \sautoupd List Enum 8;}
+{\s149\fi-360\li3600\widctlpar\fs20\cgrid \sbasedon0 \snext150 \sautoupd List Enum 9;}
+{\s150\fi-360\li3960\widctlpar\fs20\cgrid \sbasedon0 \snext151 \sautoupd List Enum 10;}
+{\s151\fi-360\li4320\widctlpar\fs20\cgrid \sbasedon0 \snext152 \sautoupd List Enum 11;}
+{\s152\fi-360\li4680\widctlpar\fs20\cgrid \sbasedon0 \snext153 \sautoupd List Enum 12;}
+{\s153\fi-360\li5040\widctlpar\fs20\cgrid \sbasedon0 \snext153 \sautoupd List Enum 13;}
+}
+{\*\listtable
+{\list\listtemplateid1
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u8226 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li360 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9702 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li720 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9642 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li1080 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u8226 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li1440 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9702 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li1800 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9642 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li2160 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u8662 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li2520 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9702 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li2880 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9642 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li3600 }
+\listid1}
+{\list\listtemplateid2
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9744 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li360 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9744 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li720 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9744 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li1080 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9744 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li1440 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9744 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li1800 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9744 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li2160 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9744 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li2520 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9744 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li2880 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9744 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li3600 }
+\listid2}
+{\list\listtemplateid3
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9746 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li360 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9746 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li720 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9746 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li1080 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9746 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li1440 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9746 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li1800 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9746 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li2160 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9746 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li2520 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9746 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li2880 }
+{ \listlevel\levelnfc23\leveljc0\levelstartat1\levelfollow0{\leveltext \'01\u9746 ?;}{\levelnumbers;}\f8\dbch\af3\fi-360\li3600 }
+\listid3}
+}
+{\listoverridetable
+{\listoverride\listid1\listoverridecount0\ls1}
+{\listoverride\listid2\listoverridecount0\ls2}
+{\listoverride\listid3\listoverridecount0\ls3}
+}
+{\info 
+{\title {\comment HA Energy  {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+1 \par
+}}HA Energy}
+{\comment Generated by doxygen 1.14.0.}
+}\pard\plain 
+\sectd\pgnlcrm
+{\footer \s29\widctlpar\tqc\tx4320\tqr\tx8640\qr\adjustright \fs20\cgrid {\chpgn}}
+\pard\plain \s16\qc\sa60\widctlpar\outlinelevel1\adjustright \f1\cgrid 
+\vertalc\qc\par\par\par\par\par\par\par
+\pard\plain \s15\qc\sb240\sa60\widctlpar\outlinelevel0\adjustright \b\f1\fs32\kerning28\cgrid 
+{\field\fldedit {\*\fldinst TITLE \\*MERGEFORMAT}{\fldrslt HA Energy}}\par
+\pard\plain \s16\qc\sa60\widctlpar\outlinelevel1\adjustright \f1\cgrid 
+\par
+\par\par\par\par\par\par\par\par\par\par\par\par
+\pard\plain \s16\qc\sa60\widctlpar\outlinelevel1\adjustright \f1\cgrid 
+{\field\fldedit {\*\fldinst AUTHOR \\*MERGEFORMAT}{\fldrslt AUTHOR}}\par
+Version 1\par\page\page\vertalt
+\pard\plain 
+\s1\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs36\kerning36\cgrid Table of Contents\par
+\pard\plain \par
+{\field\fldedit {\*\fldinst TOC \\f \\*MERGEFORMAT}{\fldrslt Table of contents}}\par
+\pard\plain 
+\sect \sbkpage \pgndec \pgnrestart
+\sect \sectd \sbknone
+{\footer \s29\widctlpar\tqc\tx4320\tqr\tx8640\qr\adjustright \fs20\cgrid {\chpgn}}
+
+\pard\plain \sect\sbkpage
+\s1\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs36\kerning36\cgrid 
+Data Structure Index\par \pard\plain 
+{\tc \v Data Structure Index}
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+Data Structures\par \pard\plain 
+{
+\pard\plain \s17\sa60\sb30\widctlpar\qj \fs22\cgrid Here are the data structures with brief descriptions:}
+{
+\par
+\pard\plain \s101\li360\sa27\sb27\widctlpar\tqr\tldot\tx8640\adjustright \fs20\cgrid 
+{\b {\b energy_type} } \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAFV \\*MERGEFORMAT}{\fldrslt pagenum}}
+\par
+{\b {\b ha_flag_type} } \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAFW \\*MERGEFORMAT}{\fldrslt pagenum}}
+\par
+{\b {\b link_type} } \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAGF \\*MERGEFORMAT}{\fldrslt pagenum}}
+\par
+{\b {\b local_type} } \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAGL \\*MERGEFORMAT}{\fldrslt pagenum}}
+\par
+{\b {\b mode_type} } \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAGE \\*MERGEFORMAT}{\fldrslt pagenum}}
+\par
+{\b {\b SPid} } \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAGU \\*MERGEFORMAT}{\fldrslt pagenum}}
+\par
+\par}
+\pard\plain \sect\sbkpage
+\s1\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs36\kerning36\cgrid 
+File Index\par \pard\plain 
+{\tc \v File Index}
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+File List\par \pard\plain 
+{
+\pard\plain \s17\sa60\sb30\widctlpar\qj \fs22\cgrid Here is a list of all documented files with brief descriptions:}
+{
+\par
+\pard\plain \s101\li360\sa27\sb27\widctlpar\tqr\tldot\tx8640\adjustright \fs20\cgrid 
+{\b {\b energy.c} } \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAAG \\*MERGEFORMAT}{\fldrslt pagenum}}
+\par
+{\b ha_energy/{\b bsoc.h} } \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAAA \\*MERGEFORMAT}{\fldrslt pagenum}}
+\par
+{\b ha_energy/{\b energy.h} } \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAAH \\*MERGEFORMAT}{\fldrslt pagenum}}
+\par
+{\b ha_energy/{\b http_vars.h} } \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAAB \\*MERGEFORMAT}{\fldrslt pagenum}}
+\par
+{\b ha_energy/{\b mqtt_rec.h} } \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAAC \\*MERGEFORMAT}{\fldrslt pagenum}}
+\par
+{\b ha_energy/{\b mqtt_vars.h} } \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAAE \\*MERGEFORMAT}{\fldrslt pagenum}}
+\par
+{\b ha_energy/{\b pid.h} } \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAAF \\*MERGEFORMAT}{\fldrslt pagenum}}
+\par
+\par}
+\pard\plain \sect\sbkpage
+\s1\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs36\kerning36\cgrid 
+Data Structure Documentation{\tc \v Data Structure Documentation}
+\par \pard\plain 
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+energy_type Struct Reference\par \pard\plain 
+{\tc\tcl2 \v energy_type}
+{\xe \v energy_type}
+{\bkmkstart AAAAAAAAFV}
+{\bkmkend AAAAAAAAFV}
+Collaboration diagram for energy_type:{
+\pard\plain 
+\par\pard \qc {\field\flddirty {\*\fldinst INCLUDEPICTURE "structenergy__type__coll__graph.png" \\d \\*MERGEFORMAT}{\fldrslt IMAGE}}\par
+}
+\par
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Data Fields\par
+\pard\plain 
+
+{
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b print_vars} [MAX_IM_VAR]{\bkmkstart AAAAAAAAHY}
+{\bkmkend AAAAAAAAHY}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b im_vars} [IA_LAST][PHASE_LAST]{\bkmkstart AAAAAAAAIC}
+{\bkmkend AAAAAAAAIC}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b mvar} [V_DLAST+1]{\bkmkstart AAAAAAAAID}
+{\bkmkend AAAAAAAAID}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b once_gti}{\bkmkstart AAAAAAAAIE}
+{\bkmkend AAAAAAAAIE}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b once_ac}{\bkmkstart AAAAAAAAIF}
+{\bkmkend AAAAAAAAIF}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b iammeter}{\bkmkstart AAAAAAAAIG}
+{\bkmkend AAAAAAAAIG}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b fm80}{\bkmkstart AAAAAAAAIH}
+{\bkmkend AAAAAAAAIH}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b dumpload}{\bkmkstart AAAAAAAAII}
+{\bkmkend AAAAAAAAII}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b homeassistant}{\bkmkstart AAAAAAAAIJ}
+{\bkmkend AAAAAAAAIJ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b once_gti_zero}{\bkmkstart AAAAAAAAIK}
+{\bkmkend AAAAAAAAIK}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b gti_low_adj}{\bkmkstart AAAAAAAAIL}
+{\bkmkend AAAAAAAAIL}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b ac_low_adj}{\bkmkstart AAAAAAAAIM}
+{\bkmkend AAAAAAAAIM}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b dl_excess_adj}{\bkmkstart AAAAAAAAIN}
+{\bkmkend AAAAAAAAIN}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b ac_sw_on}{\bkmkstart AAAAAAAAIO}
+{\bkmkend AAAAAAAAIO}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b gti_sw_on}{\bkmkstart AAAAAAAAIP}
+{\bkmkend AAAAAAAAIP}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b ac_sw_status}{\bkmkstart AAAAAAAAIQ}
+{\bkmkend AAAAAAAAIQ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b gti_sw_status}{\bkmkstart AAAAAAAAIR}
+{\bkmkend AAAAAAAAIR}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b solar_shutdown}{\bkmkstart AAAAAAAAIS}
+{\bkmkend AAAAAAAAIS}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b solar_mode}{\bkmkstart AAAAAAAAIT}
+{\bkmkend AAAAAAAAIT}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b startup}{\bkmkstart AAAAAAAAIU}
+{\bkmkend AAAAAAAAIU}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b ac_mismatch}{\bkmkstart AAAAAAAAIV}
+{\bkmkend AAAAAAAAIV}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b dc_mismatch}{\bkmkstart AAAAAAAAIW}
+{\bkmkend AAAAAAAAIW}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b mode_mismatch}{\bkmkstart AAAAAAAAIX}
+{\bkmkend AAAAAAAAIX}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b dl_excess}{\bkmkstart AAAAAAAAIY}
+{\bkmkend AAAAAAAAIY}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile uint32_t {\b speed_go}{\bkmkstart AAAAAAAAIZ}
+{\bkmkend AAAAAAAAIZ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile uint32_t {\b im_delay}{\bkmkstart AAAAAAAAJA}
+{\bkmkend AAAAAAAAJA}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile uint32_t {\b im_display}{\bkmkstart AAAAAAAAJB}
+{\bkmkend AAAAAAAAJB}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile uint32_t {\b gti_delay}{\bkmkstart AAAAAAAAJC}
+{\bkmkend AAAAAAAAJC}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile int32_t {\b rc}{\bkmkstart AAAAAAAAJD}
+{\bkmkend AAAAAAAAJD}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile int32_t {\b sane}{\bkmkstart AAAAAAAAJE}
+{\bkmkend AAAAAAAAJE}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile uint32_t {\b ten_sec_clock}{\bkmkstart AAAAAAAAJF}
+{\bkmkend AAAAAAAAJF}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile uint32_t {\b log_spam}{\bkmkstart AAAAAAAAJG}
+{\bkmkend AAAAAAAAJG}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile uint32_t {\b log_time_reset}{\bkmkstart AAAAAAAAJH}
+{\bkmkend AAAAAAAAJH}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+pthread_mutex_t {\b ha_lock}{\bkmkstart AAAAAAAAJI}
+{\bkmkend AAAAAAAAJI}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+struct {\b mode_type} {\b mode}{\bkmkstart AAAAAAAAJJ}
+{\bkmkend AAAAAAAAJJ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+struct {\b link_type} {\b link}{\bkmkstart AAAAAAAAJK}
+{\bkmkend AAAAAAAAJK}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+MQTTClient {\b client_p}{\bkmkstart AAAAAAAAJL}
+{\bkmkend AAAAAAAAJL}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+MQTTClient {\b client_sd}{\bkmkstart AAAAAAAAJM}
+{\bkmkend AAAAAAAAJM}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+MQTTClient {\b client_ha}{\bkmkstart AAAAAAAAJN}
+{\bkmkend AAAAAAAAJN}
+\par
+}
+{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
+The documentation for this struct was generated from the following file:{\par
+\pard\plain \s121\fi-360\li720\widctlpar\jclisttab\tx720{\*\pn \pnlvlbody\ilvl0\ls2\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+ha_energy/{\b energy.h}\par
+}\par \pard\plain 
+
+\pard\plain \sect\sbkpage
+\s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+ha_flag_type Struct Reference\par \pard\plain 
+{\tc\tcl2 \v ha_flag_type}
+{\xe \v ha_flag_type}
+{\bkmkstart AAAAAAAAFW}
+{\bkmkend AAAAAAAAFW}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Data Fields\par
+\pard\plain 
+
+{
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile MQTTClient_deliveryToken {\b deliveredtoken}{\bkmkstart AAAAAAAAFX}
+{\bkmkend AAAAAAAAFX}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile MQTTClient_deliveryToken {\b receivedtoken}{\bkmkstart AAAAAAAAFY}
+{\bkmkend AAAAAAAAFY}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b runner}{\bkmkstart AAAAAAAAFZ}
+{\bkmkend AAAAAAAAFZ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b rec_ok}{\bkmkstart AAAAAAAAGA}
+{\bkmkend AAAAAAAAGA}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+int32_t {\b ha_id}{\bkmkstart AAAAAAAAGB}
+{\bkmkend AAAAAAAAGB}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile int32_t {\b var_update}{\bkmkstart AAAAAAAAGC}
+{\bkmkend AAAAAAAAGC}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile int32_t {\b energy_mode}{\bkmkstart AAAAAAAAGD}
+{\bkmkend AAAAAAAAGD}
+\par
+}
+{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
+The documentation for this struct was generated from the following file:{\par
+\pard\plain \s121\fi-360\li720\widctlpar\jclisttab\tx720{\*\pn \pnlvlbody\ilvl0\ls2\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+ha_energy/mqtt_rec.h\par
+}\par \pard\plain 
+
+\pard\plain \sect\sbkpage
+\s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+link_type Struct Reference\par \pard\plain 
+{\tc\tcl2 \v link_type}
+{\xe \v link_type}
+{\bkmkstart AAAAAAAAGF}
+{\bkmkend AAAAAAAAGF}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Data Fields\par
+\pard\plain 
+
+{
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile uint32_t {\b iammeter_error}{\bkmkstart AAAAAAAAGG}
+{\bkmkend AAAAAAAAGG}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile uint32_t {\b iammeter_count}{\bkmkstart AAAAAAAAGH}
+{\bkmkend AAAAAAAAGH}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile uint32_t {\b mqtt_error}{\bkmkstart AAAAAAAAGI}
+{\bkmkend AAAAAAAAGI}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile uint32_t {\b mqtt_count}{\bkmkstart AAAAAAAAGJ}
+{\bkmkend AAAAAAAAGJ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile uint32_t {\b shutdown}{\bkmkstart AAAAAAAAGK}
+{\bkmkend AAAAAAAAGK}
+\par
+}
+{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
+The documentation for this struct was generated from the following file:{\par
+\pard\plain \s121\fi-360\li720\widctlpar\jclisttab\tx720{\*\pn \pnlvlbody\ilvl0\ls2\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+ha_energy/{\b energy.h}\par
+}\par \pard\plain 
+
+\pard\plain \sect\sbkpage
+\s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+local_type Struct Reference\par \pard\plain 
+{\tc\tcl2 \v local_type}
+{\xe \v local_type}
+{\bkmkstart AAAAAAAAGL}
+{\bkmkend AAAAAAAAGL}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Data Fields\par
+\pard\plain 
+
+{
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b ac_weight}{\bkmkstart AAAAAAAAGM}
+{\bkmkend AAAAAAAAGM}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b gti_weight}{\bkmkstart AAAAAAAAGN}
+{\bkmkend AAAAAAAAGN}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b pv_voltage}{\bkmkstart AAAAAAAAGO}
+{\bkmkend AAAAAAAAGO}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b bat_current}{\bkmkstart AAAAAAAAGP}
+{\bkmkend AAAAAAAAGP}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b batc_std_dev}{\bkmkstart AAAAAAAAGQ}
+{\bkmkend AAAAAAAAGQ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b bat_voltage}{\bkmkstart AAAAAAAAGR}
+{\bkmkend AAAAAAAAGR}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+double {\b bat_c_std_dev} [DEV_SIZE]{\bkmkstart AAAAAAAAGS}
+{\bkmkend AAAAAAAAGS}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+double {\b coef}{\bkmkstart AAAAAAAAGT}
+{\bkmkend AAAAAAAAGT}
+\par
+}
+{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
+The documentation for this struct was generated from the following file:{\par
+\pard\plain \s121\fi-360\li720\widctlpar\jclisttab\tx720{\*\pn \pnlvlbody\ilvl0\ls2\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+ha_energy/bsoc.c\par
+}\par \pard\plain 
+
+\pard\plain \sect\sbkpage
+\s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+mode_type Struct Reference\par \pard\plain 
+{\tc\tcl2 \v mode_type}
+{\xe \v mode_type}
+{\bkmkstart AAAAAAAAGE}
+{\bkmkend AAAAAAAAGE}
+Collaboration diagram for mode_type:{
+\pard\plain 
+\par\pard \qc {\field\flddirty {\*\fldinst INCLUDEPICTURE "structmode__type__coll__graph.png" \\d \\*MERGEFORMAT}{\fldrslt IMAGE}}\par
+}
+\par
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Data Fields\par
+\pard\plain 
+
+{
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b error}{\bkmkstart AAAAAAAAHC}
+{\bkmkend AAAAAAAAHC}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b target}{\bkmkstart AAAAAAAAHD}
+{\bkmkend AAAAAAAAHD}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b total_system}{\bkmkstart AAAAAAAAHE}
+{\bkmkend AAAAAAAAHE}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b gti_dumpload}{\bkmkstart AAAAAAAAHF}
+{\bkmkend AAAAAAAAHF}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b pv_bias}{\bkmkstart AAAAAAAAHG}
+{\bkmkend AAAAAAAAHG}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b dl_mqtt_max}{\bkmkstart AAAAAAAAHH}
+{\bkmkend AAAAAAAAHH}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b off_grid}{\bkmkstart AAAAAAAAHI}
+{\bkmkend AAAAAAAAHI}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile double {\b sequence}{\bkmkstart AAAAAAAAHJ}
+{\bkmkend AAAAAAAAHJ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b mode}{\bkmkstart AAAAAAAAHK}
+{\bkmkend AAAAAAAAHK}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b in_pid_control}{\bkmkstart AAAAAAAAHL}
+{\bkmkend AAAAAAAAHL}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b con0}{\bkmkstart AAAAAAAAHM}
+{\bkmkend AAAAAAAAHM}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b con1}{\bkmkstart AAAAAAAAHN}
+{\bkmkend AAAAAAAAHN}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b con2}{\bkmkstart AAAAAAAAHO}
+{\bkmkend AAAAAAAAHO}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b con3}{\bkmkstart AAAAAAAAHP}
+{\bkmkend AAAAAAAAHP}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b con4}{\bkmkstart AAAAAAAAHQ}
+{\bkmkend AAAAAAAAHQ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b con5}{\bkmkstart AAAAAAAAHR}
+{\bkmkend AAAAAAAAHR}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b con6}{\bkmkstart AAAAAAAAHS}
+{\bkmkend AAAAAAAAHS}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b con7}{\bkmkstart AAAAAAAAHT}
+{\bkmkend AAAAAAAAHT}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b no_float}{\bkmkstart AAAAAAAAHU}
+{\bkmkend AAAAAAAAHU}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b data_error}{\bkmkstart AAAAAAAAHV}
+{\bkmkend AAAAAAAAHV}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile bool {\b bat_crit}{\bkmkstart AAAAAAAAHW}
+{\bkmkend AAAAAAAAHW}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile uint32_t {\b mode_tmr}{\bkmkstart AAAAAAAAHX}
+{\bkmkend AAAAAAAAHX}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+volatile struct {\b SPid} {\b pid}{\bkmkstart AAAAAAAAHZ}
+{\bkmkend AAAAAAAAHZ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+enum energy_state {\b E}{\bkmkstart AAAAAAAAIA}
+{\bkmkend AAAAAAAAIA}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+enum running_state {\b R}{\bkmkstart AAAAAAAAIB}
+{\bkmkend AAAAAAAAIB}
+\par
+}
+{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
+The documentation for this struct was generated from the following file:{\par
+\pard\plain \s121\fi-360\li720\widctlpar\jclisttab\tx720{\*\pn \pnlvlbody\ilvl0\ls2\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+ha_energy/{\b energy.h}\par
+}\par \pard\plain 
+
+\pard\plain \sect\sbkpage
+\s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+SPid Struct Reference\par \pard\plain 
+{\tc\tcl2 \v SPid}
+{\xe \v SPid}
+{\bkmkstart AAAAAAAAGU}
+{\bkmkend AAAAAAAAGU}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Data Fields\par
+\pard\plain 
+
+{
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+double {\b dState}{\bkmkstart AAAAAAAAGV}
+{\bkmkend AAAAAAAAGV}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+double {\b iState}{\bkmkstart AAAAAAAAGW}
+{\bkmkend AAAAAAAAGW}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+double {\b iMax}{\bkmkstart AAAAAAAAGX}
+{\bkmkend AAAAAAAAGX}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+double {\b iMin}{\bkmkstart AAAAAAAAGY}
+{\bkmkend AAAAAAAAGY}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+double {\b iGain}{\bkmkstart AAAAAAAAGZ}
+{\bkmkend AAAAAAAAGZ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+double {\b pGain}{\bkmkstart AAAAAAAAHA}
+{\bkmkend AAAAAAAAHA}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+double {\b dGain}{\bkmkstart AAAAAAAAHB}
+{\bkmkend AAAAAAAAHB}
+\par
+}
+{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
+The documentation for this struct was generated from the following file:{\par
+\pard\plain \s121\fi-360\li720\widctlpar\jclisttab\tx720{\*\pn \pnlvlbody\ilvl0\ls2\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+ha_energy/pid.h\par
+}
+\pard\plain \sect\sbkpage
+\s1\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs36\kerning36\cgrid 
+File Documentation{\tc \v File Documentation}
+\par \pard\plain 
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+energy.c File Reference\par \pard\plain 
+{\tc\tcl2 \v energy.c}
+{\xe \v energy.c}
+{\bkmkstart AAAAAAAAAG}
+{\bkmkend AAAAAAAAAG}
+{
+\pard\plain \s18\widctlpar\fs22\cgrid {\f2 #include "ha_energy/energy.h"}\par
+{\f2 #include "ha_energy/mqtt_rec.h"}\par
+{\f2 #include "ha_energy/bsoc.h"}\par
+}
+{
+\pard\plain \s17\sa60\sb30\widctlpar\qj \fs22\cgrid Include dependency graph for energy.c:{
+\pard\plain 
+\par\pard \qc {\field\flddirty {\*\fldinst INCLUDEPICTURE "energy_8c__incl.png" \\d \\*MERGEFORMAT}{\fldrslt IMAGE}}\par
+}
+\par
+}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Functions\par
+\pard\plain 
+
+{
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+static bool {\b solar_shutdown} (void)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b showIP} (void)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+static void {\b skeleton_daemon} ()\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+bool {\b sanity_check} (void)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b timer_callback} (int32_t signum)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b connlost} (void *context, char *cause)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+int {\b main} (int argc, char *argv[])\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b ramp_up_gti} (MQTTClient client_p, bool start, bool excess)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b ramp_down_gti} (MQTTClient client_p, bool sw_off)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b ramp_up_ac} (MQTTClient client_p, bool start)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b ramp_down_ac} (MQTTClient client_p, bool sw_off)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b ha_ac_off} (void)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b ha_ac_on} (void)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b ha_dc_off} (void)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b ha_dc_on} (void)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+char * {\b log_time} (bool log)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+bool {\b sync_ha} (void)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+bool {\b log_timer} (void)\par
+}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Variables\par
+\pard\plain 
+
+{
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+struct {\b ha_flag_type} {\b ha_flag_vars_pc}\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+struct {\b ha_flag_type} {\b ha_flag_vars_ss}\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+struct {\b ha_flag_type} {\b ha_flag_vars_sd}\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+struct {\b ha_flag_type} {\b ha_flag_vars_ha}\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+const char * {\b board_name} = "NO_BOARD"{\bkmkstart AAAAAAAAAI}
+{\bkmkend AAAAAAAAAI}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+const char * {\b driver_name} = "NO_DRIVER"{\bkmkstart AAAAAAAAAJ}
+{\bkmkend AAAAAAAAAJ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+FILE * {\b fout}{\bkmkstart AAAAAAAAAK}
+{\bkmkend AAAAAAAAAK}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+struct {\b energy_type} {\b E}\par
+}
+{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Detailed Description\par
+\pard\plain 
+{
+\pard\plain \s17\sa60\sb30\widctlpar\qj \fs22\cgrid {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+V0.25 add Home Assistant Matter controlled utility power control switching V0.26 BSOC weights for system condition for power diversion V0.27 -> V0.28 GTI power ramps stability using battery current STD DEV V0.29 log date-time and spam control V0.30 add iammeter http data reading and processing V0.31 refactor http code and a few vars V0.32 AC and GTI power triggers reworked V0.33 refactor system parms into energy structure {\b energy_type} E V0.34 GTI and AC Inverter battery energy run down limits adjustments per energy usage and solar production V0.35 more refactors and global variable consolidation V0.36 more command repeat fixes for ramp up/down dumpload commands V0.37 Power feedback to use PV power to GTI and AC loads V0.38 signal filters to smooth large power swings in control optimization V0.39 fix optimizer bugs and add AC load switching set-points in BSOC control V0.40 shutdown and restart fixes V0.41 fix errors and warning per cppcheck V0.42 fake ac charger for dumpload using FAKE_VPV define V0.43 adjust PV_BIAS per float or charging status V0.44 tune for spring/summer solar conditions V0.50 convert main loop code to FSM V0.51 logging time additions V0.52 tune GTI inverter levels for better conversion efficiency V0.53 sync to HA back-end switch status V0.54 data source shutdown functions V0.55 off-grid inverter power tracking for HA V0.56 run as Daemon in background V0.62 adjust battery critical to keep making energy calculations V0.63 add IP address logging V0.64 Dump Load excess load mode programming V.065 DL excess logic tuning and power adjustments V.066 -> V.068 Various timing fixes to reduce spamming commands and logs V.069 send MQTT showdown commands to HA when critical energy conditions are meet V.070 process Home Assistant MQTT commands sent from automation's\par
+V.071 comment additions, logging improvements and code cleanups V.072 -> V.073 fine tune GTI and AC power lower limits V.074 Doxygen comments added \par
+}}
+{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Function Documentation\par
+\pard\plain 
+{\xe \v connlost\:energy.c}
+{\xe \v energy.c\:connlost}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void connlost (void * context, char * cause)}}
+\par
+{\bkmkstart AAAAAAAAAL}
+{\bkmkend AAAAAAAAAL}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 300 \{\par
+301     {\cf17 struct }ha_flag_type *ha_flag = context;\par
+302     int32_t id_num;\par
+303 \par
+304     {\cf20 // bug-out if no context variables passed to callback}\par
+305     {\cf19 if} (context == NULL) \{\par
+306         id_num = -1;\par
+307     \} {\cf19 else} \{\par
+308         id_num = ha_flag->ha_id;\par
+309     \}\par
+310     fprintf(fout, {\cf22 "\\n%s Connection lost, exit ha_energy program\\n"}, log_time({\cf17 false}));\par
+311     fprintf(fout, {\cf22 "%s     cause: %s, %d\\n"}, log_time({\cf17 false}), cause, id_num);\par
+312     fprintf(fout, {\cf22 "%sDAEMON failure  LOG Version %s : MQTT Version %s\\n"}, log_time({\cf17 false}), LOG_VERSION, MQTT_VERSION);\par
+313     fflush(fout);\par
+314     exit(EXIT_FAILURE);\par
+315 \}\par
+}
+}
+{\xe \v ha_ac_off\:energy.c}
+{\xe \v energy.c\:ha_ac_off}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void ha_ac_off (void )}}
+\par
+{\bkmkstart AAAAAAAAAM}
+{\bkmkend AAAAAAAAAM}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 949 \{\par
+950     mqtt_ha_switch(E.client_p, TOPIC_PACC, {\cf17 false});\par
+951     E.ac_sw_status = {\cf17 false};\par
+952 \}\par
+}
+}
+{\xe \v ha_ac_on\:energy.c}
+{\xe \v energy.c\:ha_ac_on}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void ha_ac_on (void )}}
+\par
+{\bkmkstart AAAAAAAAAN}
+{\bkmkend AAAAAAAAAN}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 955 \{\par
+956     mqtt_ha_switch(E.client_p, TOPIC_PACC, {\cf17 true});\par
+957     E.ac_sw_status = {\cf17 true};\par
+958 \}\par
+}
+}
+{\xe \v ha_dc_off\:energy.c}
+{\xe \v energy.c\:ha_dc_off}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void ha_dc_off (void )}}
+\par
+{\bkmkstart AAAAAAAAAO}
+{\bkmkend AAAAAAAAAO}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 964 \{\par
+965     mqtt_ha_switch(E.client_p, TOPIC_PDCC, {\cf17 false});\par
+966     E.gti_sw_status = {\cf17 false};\par
+967 \}\par
+}
+}
+{\xe \v ha_dc_on\:energy.c}
+{\xe \v energy.c\:ha_dc_on}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void ha_dc_on (void )}}
+\par
+{\bkmkstart AAAAAAAAAP}
+{\bkmkend AAAAAAAAAP}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 970 \{\par
+971     mqtt_ha_switch(E.client_p, TOPIC_PDCC, {\cf17 true});\par
+972     E.gti_sw_status = {\cf17 true};\par
+973 \}\par
+}
+}
+{\xe \v log_time\:energy.c}
+{\xe \v energy.c\:log_time}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+char * log_time (bool log)}}
+\par
+{\bkmkstart AAAAAAAAAT}
+{\bkmkend AAAAAAAAAT}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 1034 \{\par
+1035     {\cf17 static} {\cf18 char} time_log[RBUF_SIZ] = \{0\};\par
+1036     {\cf17 static} uint32_t len = 0, sync_time = TIME_SYNC_SEC - 1;\par
+1037     time_t rawtime_log;\par
+1038 \par
+1039     tzset();\par
+1040     timezone = 0;\par
+1041     daylight = 0;\par
+1042     time(&rawtime_log);\par
+1043     {\cf19 if} (sync_time++ > TIME_SYNC_SEC) \{\par
+1044         sync_time = 0;\par
+1045         snprintf(time_log, RBUF_SIZ - 1, {\cf22 "VT%lut"}, rawtime_log); {\cf20 // format for dumpload controller gti time commands}\par
+1046         mqtt_gti_time(E.client_p, TOPIC_P, time_log);\par
+1047     \}\par
+1048 \par
+1049     sprintf(time_log, {\cf22 "%s"}, ctime(&rawtime_log));\par
+1050     len = strlen(time_log);\par
+1051     time_log[len - 1] = 0; {\cf20 // munge out the return character}\par
+1052     {\cf19 if} (log) \{\par
+1053         fprintf(fout, {\cf22 "%s "}, time_log);\par
+1054         fflush(fout);\par
+1055     \}\par
+1056 \par
+1057     {\cf19 return} time_log;\par
+1058 \}\par
+}
+}
+{\xe \v log_timer\:energy.c}
+{\xe \v energy.c\:log_timer}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+bool log_timer (void )}}
+\par
+{\bkmkstart AAAAAAAABW}
+{\bkmkend AAAAAAAABW}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 1093 \{\par
+1094     {\cf18 bool} itstime = {\cf17 false};\par
+1095 \par
+1096     {\cf19 if} (E.log_spam < LOW_LOG_SPAM) \{\par
+1097         E.log_time_reset = 0;\par
+1098         itstime = {\cf17 true};\par
+1099     \}\par
+1100     {\cf19 if} (E.log_time_reset > RESET_LOG_SPAM) \{\par
+1101         E.log_spam = 0;\par
+1102         itstime = {\cf17 true};\par
+1103     \}\par
+1104     {\cf19 return} itstime;\par
+1105 \}\par
+}
+}
+{\xe \v main\:energy.c}
+{\xe \v energy.c\:main}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+int main (int argc, char * argv[])}}
+\par
+{\bkmkstart AAAAAAAACP}
+{\bkmkend AAAAAAAACP}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 324 \{\par
+325     {\cf17 struct }itimerval new_timer = \{\par
+326         .it_value.tv_sec = CMD_SEC,\par
+327         .it_value.tv_usec = 0,\par
+328         .it_interval.tv_sec = CMD_SEC,\par
+329         .it_interval.tv_usec = 0,\par
+330     \};\par
+331     {\cf17 struct }itimerval old_timer;\par
+332     time_t rawtime;\par
+333     MQTTClient_connectOptions conn_opts_p = MQTTClient_connectOptions_initializer,\par
+334         conn_opts_sd = MQTTClient_connectOptions_initializer,\par
+335         conn_opts_ha = MQTTClient_connectOptions_initializer;\par
+336     MQTTClient_message pubmsg = MQTTClient_message_initializer;\par
+337     MQTTClient_deliveryToken token;\par
+338     {\cf18 char} hname[256], *hname_ptr = hname;\par
+339     {\cf18 size_t} hname_len = 12;\par
+340 \par
+341     gethostname(hname, hname_len);\par
+342     hname[12] = 0;\par
+343     printf({\cf22 "\\r\\n  LOG Version %s : MQTT Version %s : Host Name %s\\r\\n"}, LOG_VERSION, MQTT_VERSION, hname);\par
+344     showIP();\par
+345     skeleton_daemon();\par
+346 \par
+347     {\cf19 while} ({\cf17 true}) \{\par
+348         {\cf19 switch} (E.mode.E) \{\par
+349         {\cf19 case} E_INIT:\par
+350 \par
+351 {\cf21 #ifdef LOG_TO_FILE}\par
+352             fout = fopen(LOG_TO_FILE, {\cf22 "a"});\par
+353             {\cf19 if} (fout == NULL) \{\par
+354                 fout = fopen(LOG_TO_FILE_ALT, {\cf22 "a"});\par
+355                 {\cf19 if} (fout == NULL) \{\par
+356                     fout = stdout;\par
+357                     printf({\cf22 "\\r\\n%s Unable to open LOG file %s \\r\\n"}, log_time({\cf17 false}), LOG_TO_FILE_ALT);\par
+358                 \}\par
+359             \}\par
+360 {\cf21 #else}\par
+361             fout = stdout;\par
+362 {\cf21 #endif}\par
+363             fprintf(fout, {\cf22 "\\r\\n%s LOG Version %s : MQTT Version %s\\r\\n"}, log_time({\cf17 false}), LOG_VERSION, MQTT_VERSION);\par
+364             fflush(fout);\par
+365 \par
+366             {\cf19 if} (!bsoc_init()) \{\par
+367                 fprintf(fout, {\cf22 "\\r\\n%s bsoc_init failure \\r\\n"}, log_time({\cf17 false}));\par
+368                 fflush(fout);\par
+369                 exit(EXIT_FAILURE);\par
+370             \}\par
+371             {\cf20 /*}\par
+372 {\cf20              * set the timer for MQTT publishing sample speed}\par
+373 {\cf20              * CMD_SEC         10}\par
+374 {\cf20              */}\par
+375             setitimer(ITIMER_REAL, &new_timer, &old_timer);\par
+376             signal(SIGALRM, timer_callback);\par
+377 \par
+378             {\cf19 if} (strncmp(hname, TNAME, 6) == 0) \{\par
+379                 MQTTClient_create(&E.client_p, LADDRESS, CLIENTID1,\par
+380                     MQTTCLIENT_PERSISTENCE_NONE, NULL);\par
+381                 conn_opts_p.keepAliveInterval = 20;\par
+382                 conn_opts_p.cleansession = 1;\par
+383                 hname_ptr = LADDRESS;\par
+384             \} {\cf19 else} \{\par
+385                 MQTTClient_create(&E.client_p, ADDRESS, CLIENTID1,\par
+386                     MQTTCLIENT_PERSISTENCE_NONE, NULL);\par
+387                 conn_opts_p.keepAliveInterval = 20;\par
+388                 conn_opts_p.cleansession = 1;\par
+389                 hname_ptr = ADDRESS;\par
+390             \}\par
+391 \par
+392             fprintf(fout, {\cf22 "%s Connect MQTT server %s, %s\\n"}, log_time({\cf17 false}), hname_ptr, CLIENTID1);\par
+393             fflush(fout);\par
+394             MQTTClient_setCallbacks(E.client_p, &ha_flag_vars_ss, connlost, msgarrvd, delivered);\par
+395             {\cf19 if} ((E.rc = MQTTClient_connect(E.client_p, &conn_opts_p)) != MQTTCLIENT_SUCCESS) \{\par
+396                 fprintf(fout, {\cf22 "%s Failed to connect MQTT server, return code %d %s, %s\\n"}, log_time({\cf17 false}), E.rc, hname_ptr, CLIENTID1);\par
+397                 fflush(fout);\par
+398                 pthread_mutex_destroy(&E.ha_lock);\par
+399                 exit(EXIT_FAILURE);\par
+400             \}\par
+401 \par
+402             {\cf19 if} (strncmp(hname, TNAME, 6) == 0) \{\par
+403                 MQTTClient_create(&E.client_sd, LADDRESS, CLIENTID2,\par
+404                     MQTTCLIENT_PERSISTENCE_NONE, NULL);\par
+405                 conn_opts_sd.keepAliveInterval = 20;\par
+406                 conn_opts_sd.cleansession = 1;\par
+407                 hname_ptr = LADDRESS;\par
+408             \} {\cf19 else} \{\par
+409                 MQTTClient_create(&E.client_sd, ADDRESS, CLIENTID2,\par
+410                     MQTTCLIENT_PERSISTENCE_NONE, NULL);\par
+411                 conn_opts_sd.keepAliveInterval = 20;\par
+412                 conn_opts_sd.cleansession = 1;\par
+413                 hname_ptr = ADDRESS;\par
+414             \}\par
+415 \par
+416             fprintf(fout, {\cf22 "%s Connect MQTT server %s, %s\\n"}, log_time({\cf17 false}), hname_ptr, CLIENTID2);\par
+417             fflush(fout);\par
+418             MQTTClient_setCallbacks(E.client_sd, &ha_flag_vars_sd, connlost, msgarrvd, delivered);\par
+419             {\cf19 if} ((E.rc = MQTTClient_connect(E.client_sd, &conn_opts_sd)) != MQTTCLIENT_SUCCESS) \{\par
+420                 fprintf(fout, {\cf22 "%s Failed to connect MQTT server, return code %d %s, %s\\n"}, log_time({\cf17 false}), E.rc, hname_ptr, CLIENTID2);\par
+421                 fflush(fout);\par
+422                 pthread_mutex_destroy(&E.ha_lock);\par
+423                 exit(EXIT_FAILURE);\par
+424             \}\par
+425 \par
+426             {\cf20 /*}\par
+427 {\cf20              * Home Assistant MQTT receive messages}\par
+428 {\cf20              */}\par
+429             {\cf19 if} (strncmp(hname, TNAME, 6) == 0) \{\par
+430                 MQTTClient_create(&E.client_ha, LADDRESS, CLIENTID3,\par
+431                     MQTTCLIENT_PERSISTENCE_NONE, NULL);\par
+432                 conn_opts_ha.keepAliveInterval = 20;\par
+433                 conn_opts_ha.cleansession = 1;\par
+434                 hname_ptr = LADDRESS;\par
+435             \} {\cf19 else} \{\par
+436                 MQTTClient_create(&E.client_ha, ADDRESS, CLIENTID3,\par
+437                     MQTTCLIENT_PERSISTENCE_NONE, NULL);\par
+438                 conn_opts_ha.keepAliveInterval = 20;\par
+439                 conn_opts_ha.cleansession = 1;\par
+440                 hname_ptr = ADDRESS;\par
+441             \}\par
+442 \par
+443             fprintf(fout, {\cf22 "%s Connect MQTT server %s, %s\\n"}, log_time({\cf17 false}), hname_ptr, CLIENTID3);\par
+444             fflush(fout);\par
+445             MQTTClient_setCallbacks(E.client_ha, &ha_flag_vars_ha, connlost, msgarrvd, delivered);\par
+446             {\cf19 if} ((E.rc = MQTTClient_connect(E.client_ha, &conn_opts_ha)) != MQTTCLIENT_SUCCESS) \{\par
+447                 fprintf(fout, {\cf22 "%s Failed to connect MQTT server, return code %d %s, %s\\n"}, log_time({\cf17 false}), E.rc, hname_ptr, CLIENTID3);\par
+448                 fflush(fout);\par
+449                 pthread_mutex_destroy(&E.ha_lock);\par
+450                 exit(EXIT_FAILURE);\par
+451             \}\par
+452 \par
+453             {\cf20 /*}\par
+454 {\cf20              * on topic received data will trigger the msgarrvd function}\par
+455 {\cf20              */}\par
+456             MQTTClient_subscribe(E.client_p, TOPIC_SS, QOS); {\cf20 // FM80 Q84}\par
+457             MQTTClient_subscribe(E.client_sd, TOPIC_SD, QOS); {\cf20 // DUMPLOAD K42}\par
+458             MQTTClient_subscribe(E.client_ha, TOPIC_HA, QOS); {\cf20 // Home Assistant Linux AMD64  and ARM64}\par
+459 \par
+460             pubmsg.payload = {\cf22 "online"};\par
+461             pubmsg.payloadlen = strlen({\cf22 "online"});\par
+462             pubmsg.qos = QOS;\par
+463             pubmsg.retained = 0;\par
+464             ha_flag_vars_ss.deliveredtoken = 0;\par
+465             {\cf20 // notify HA we are running and controlling AC power plugs}\par
+466             MQTTClient_publishMessage(E.client_p, TOPIC_PACA, &pubmsg, &token);\par
+467             MQTTClient_publishMessage(E.client_p, TOPIC_PDCA, &pubmsg, &token);\par
+468 \par
+469             {\cf20 // sync HA power switches}\par
+470             mqtt_ha_switch(E.client_p, TOPIC_PDCC, {\cf17 false});\par
+471             mqtt_ha_switch(E.client_p, TOPIC_PACC, {\cf17 false});\par
+472             mqtt_ha_switch(E.client_p, TOPIC_PDCC, {\cf17 true});\par
+473             mqtt_ha_switch(E.client_p, TOPIC_PACC, {\cf17 true});\par
+474             mqtt_ha_switch(E.client_p, TOPIC_PDCC, {\cf17 false});\par
+475             mqtt_ha_switch(E.client_p, TOPIC_PACC, {\cf17 false});\par
+476 \par
+477             E.ac_sw_on = {\cf17 true}; {\cf20 // can be switched on once}\par
+478             E.gti_sw_on = {\cf17 true}; {\cf20 // can be switched on once}\par
+479 \par
+480             {\cf20 /*}\par
+481 {\cf20              * use libcurl to read AC power meter HTTP data}\par
+482 {\cf20              * iammeter connected for split single phase monitoring and one leg GTI power exporting}\par
+483 {\cf20              */}\par
+484             iammeter_read();\par
+485 \par
+486             {\cf20 /*}\par
+487 {\cf20              * start the main energy monitoring loop}\par
+488 {\cf20              */}\par
+489             fprintf(fout, {\cf22 "\\r\\n%s Solar Energy AC power controller\\r\\n"}, log_time({\cf17 false}));\par
+490 \par
+491 {\cf21 #ifdef FAKE_VPV}\par
+492             fprintf(fout, {\cf22 "\\r\\n Faking dumpload PV voltage\\r\\n"});\par
+493 {\cf21 #endif}\par
+494             ha_flag_vars_ss.energy_mode = NORM_MODE;\par
+495             E.mode.E = E_WAIT;\par
+496             {\cf19 break};\par
+497         {\cf19 case} E_WAIT:\par
+498             {\cf19 if} (ha_flag_vars_ss.runner || E.speed_go++ > 1500000) \{\par
+499                 E.speed_go = 0;\par
+500                 ha_flag_vars_ss.runner = {\cf17 false};\par
+501                 E.mode.E = E_RUN;\par
+502             \}\par
+503 \par
+504             usleep(100);\par
+505             {\cf20 /*}\par
+506 {\cf20              * main state-machine update sequence}\par
+507 {\cf20              */}\par
+508             bsoc_data_collect();\par
+509             {\cf19 if} (!sanity_check()) \{\par
+510                 fprintf(fout, {\cf22 "\\r\\n%s Sanity Check error %d %s \\r\\n"}, log_time({\cf17 false}), E.sane, mqtt_name[E.sane]);\par
+511                 fflush(fout);\par
+512             \}\par
+513 \par
+514             {\cf20 /*}\par
+515 {\cf20              * stop and restart the energy control processing}\par
+516 {\cf20              * from inside the program or from a remote Home Assistant command}\par
+517 {\cf20              */}\par
+518             {\cf19 if} (solar_shutdown()) \{\par
+519                 {\cf19 if} (!E.startup) \{\par
+520                     fprintf(fout, {\cf22 "%s SHUTDOWN Solar Energy Control ---> \\r\\n"}, log_time({\cf17 false}));\par
+521                 \}\par
+522                 fflush(fout);\par
+523                 ramp_down_gti(E.client_p, {\cf17 true});\par
+524                 usleep(100000); {\cf20 // wait}\par
+525                 ramp_down_ac(E.client_p, {\cf17 true});\par
+526                 usleep(100000); {\cf20 // wait}\par
+527                 ramp_down_gti(E.client_p, {\cf17 true});\par
+528                 usleep(100000); {\cf20 // wait}\par
+529                 ramp_down_ac(E.client_p, {\cf17 true});\par
+530                 usleep(100000); {\cf20 // wait}\par
+531                 {\cf19 if} (!E.startup) \{\par
+532                     fprintf(fout, {\cf22 "%s Completed SHUTDOWN, Press again to RESTART.\\r\\n"}, log_time({\cf17 false}));\par
+533                     fflush(fout);\par
+534                 \}\par
+535                 fflush(fout);\par
+536 \par
+537                 uint8_t iam_delay = 0;\par
+538                 {\cf19 while} (solar_shutdown()) \{\par
+539                     mqtt_ha_shutdown(E.client_p, TOPIC_SHUTDOWN);\par
+540                     usleep(USEC_SEC); {\cf20 // wait}\par
+541                     {\cf19 if} ((int32_t) E.mvar[V_HACSW]) \{\par
+542                         ha_ac_off();\par
+543                     \}\par
+544                     {\cf19 if} ((int32_t) E.mvar[V_HDCSW]) \{\par
+545                         ha_dc_off();\par
+546                     \}\par
+547                     {\cf19 if} ((iam_delay++ > IAM_DELAY) && E.link.shutdown) \{\par
+548                         E.fm80 = {\cf17 true};\par
+549                         E.dumpload = {\cf17 true};\par
+550                         E.iammeter = {\cf17 true};\par
+551                         E.homeassistant = {\cf17 true};\par
+552                     \}\par
+553                 \}\par
+554                 E.link.shutdown = 0;\par
+555                 fprintf(fout, {\cf22 "%s RESTART Solar Energy Control\\r\\n"}, log_time({\cf17 false}));\par
+556                 fflush(fout);\par
+557                 bsoc_set_mode(E.mode.pv_bias, {\cf17 true}, {\cf17 true});\par
+558                 E.dl_excess = {\cf17 true};\par
+559                 mqtt_gti_power(E.client_p, TOPIC_P, {\cf22 "Z#"}, 1); {\cf20 // zero power at startup}\par
+560                 E.dl_excess = {\cf17 false};\par
+561 {\cf21 #ifdef AUTO_CHARGE}\par
+562                 mqtt_ha_switch(E.client_p, TOPIC_PDCC, {\cf17 true});\par
+563 {\cf21 #endif}\par
+564                 usleep(100000); {\cf20 // wait}\par
+565                 E.gti_sw_status = {\cf17 true};\par
+566                 ResetPI(&E.mode.pid);\par
+567                 ha_flag_vars_ss.runner = {\cf17 true};\par
+568                 E.fm80 = {\cf17 true};\par
+569                 E.dumpload = {\cf17 true};\par
+570                 E.iammeter = {\cf17 true};\par
+571                 E.homeassistant = {\cf17 true};\par
+572                 E.mode.in_pid_control = {\cf17 false}; {\cf20 // shutdown auto energy control}\par
+573                 E.mode.R = R_INIT;\par
+574             \}\par
+575             {\cf19 if} (ha_flag_vars_ss.receivedtoken) \{\par
+576                 ha_flag_vars_ss.receivedtoken = {\cf17 false};\par
+577             \}\par
+578             {\cf19 if} (ha_flag_vars_sd.receivedtoken) \{\par
+579                 ha_flag_vars_sd.receivedtoken = {\cf17 false};\par
+580             \}\par
+581             {\cf19 break};\par
+582         {\cf19 case} E_RUN:\par
+583             usleep(100);\par
+584             {\cf19 switch} (E.mode.R) \{\par
+585             {\cf19 case} R_INIT:\par
+586                 E.once_ac = {\cf17 true};\par
+587                 E.once_gti = {\cf17 true};\par
+588                 E.ac_sw_on = {\cf17 true};\par
+589                 E.gti_sw_on = {\cf17 true};\par
+590                 E.mode.R = R_RUN;\par
+591                 E.mode.no_float = {\cf17 true};\par
+592                 {\cf19 break};\par
+593             {\cf19 case} R_FLOAT:\par
+594                 {\cf19 if} (E.mode.no_float) \{\par
+595                     E.once_ac = {\cf17 true};\par
+596                     E.once_gti = {\cf17 true};\par
+597                     E.ac_sw_on = {\cf17 true};\par
+598                     E.gti_sw_on = {\cf17 true};\par
+599                     E.gti_sw_status = {\cf17 false};\par
+600                     E.ac_sw_status = {\cf17 false};\par
+601                     E.mode.no_float = {\cf17 false};\par
+602                 \}\par
+603                 {\cf19 if} (!E.gti_sw_status) \{\par
+604                     {\cf19 if} (gti_test() > MIN_BAT_KW_GTI_HI) \{\par
+605                         mqtt_ha_switch(E.client_p, TOPIC_PDCC, {\cf17 true});\par
+606                         E.gti_sw_status = {\cf17 true};\par
+607                         fprintf(fout, {\cf22 "%s R_FLOAT DC switch true \\r\\n"}, log_time({\cf17 false}));\par
+608                     \}\par
+609                 \}\par
+610                 usleep(100000); {\cf20 // wait}\par
+611                 {\cf19 if} (!E.ac_sw_status) \{\par
+612                     {\cf19 if} (ac_test() > MIN_BAT_KW_AC_HI) \{\par
+613                         mqtt_ha_switch(E.client_p, TOPIC_PACC, {\cf17 true});\par
+614                         E.ac_sw_status = {\cf17 true};\par
+615                         fprintf(fout, {\cf22 "%s R_FLOAT AC switch true \\r\\n"}, log_time({\cf17 false}));\par
+616                     \}\par
+617                 \}\par
+618                 E.mode.pv_bias = PV_BIAS;\par
+619                 fm80_float({\cf17 true});\par
+620                 {\cf19 break};\par
+621             {\cf19 case} R_RUN:\par
+622             {\cf19 default}:\par
+623                 E.mode.R = R_RUN;\par
+624                 E.mode.no_float = {\cf17 true};\par
+625                 {\cf19 break};\par
+626             \}\par
+627             {\cf20 /*}\par
+628 {\cf20              * main state-machine update sequence and control logic}\par
+629 {\cf20              */}\par
+630             {\cf20 /*}\par
+631 {\cf20              * check for idle/data errors flags from sensors and HA}\par
+632 {\cf20              */}\par
+633             {\cf19 if} (!E.mode.data_error) \{\par
+634                 bsoc_set_mode(E.mode.pv_bias, {\cf17 true}, {\cf17 false});\par
+635                 {\cf19 if} (E.gti_delay++ >= GTI_DELAY) \{\par
+636                     {\cf18 char} gti_str[SBUF_SIZ];\par
+637                     int32_t error_drive;\par
+638 \par
+639                     {\cf20 /*}\par
+640 {\cf20                      * reset the control mode from simple switched power to PID control}\par
+641 {\cf20                      */}\par
+642                     {\cf19 if} (!E.mode.in_pid_control) \{\par
+643                         mqtt_ha_switch(E.client_p, TOPIC_PDCC, {\cf17 true});\par
+644                         E.gti_sw_status = {\cf17 true};\par
+645                         usleep(100000); {\cf20 // wait}\par
+646                         mqtt_ha_switch(E.client_p, TOPIC_PACC, {\cf17 true});\par
+647                         E.ac_sw_status = {\cf17 true};\par
+648                         E.mode.pv_bias = PV_BIAS;\par
+649                         fprintf(fout, {\cf22 "%s in_pid_mode AC/DC switch true \\r\\n"}, log_time({\cf17 false}));\par
+650                         fm80_float({\cf17 true});\par
+651                     \} {\cf19 else} \{\par
+652                         {\cf19 if} (!fm80_float({\cf17 true})) \{\par
+653                             E.mode.pv_bias = (int32_t) E.mode.error - PV_BIAS;\par
+654                         \}\par
+655                     \}\par
+656                     {\cf20 /*}\par
+657 {\cf20                      * use PID style set-point error correction}\par
+658 {\cf20                      */}\par
+659                     E.mode.in_pid_control = {\cf17 true};\par
+660                     E.gti_delay = 0;\par
+661                     {\cf20 /*}\par
+662 {\cf20                      * adjust power balance if battery charging energy is low}\par
+663 {\cf20                      */}\par
+664                     {\cf19 if} (E.mvar[V_DPBAT] > PV_DL_BIAS_RATE) \{\par
+665                         error_drive = (int32_t) E.mode.error - E.mode.pv_bias; {\cf20 // PI feedback control signal}\par
+666                     \} {\cf19 else} \{\par
+667                         error_drive = (int32_t) E.mode.error - PV_BIAS_RATE;\par
+668                     \}\par
+669                     {\cf20 /*}\par
+670 {\cf20                      * when main battery is in float, crank-up the power draw from the solar panels}\par
+671 {\cf20                      */}\par
+672                     {\cf19 if} (fm80_float({\cf17 true})) \{\par
+673                         error_drive = (int32_t) (E.mode.error + PV_BIAS);\par
+674                     \}\par
+675                     {\cf20 /*}\par
+676 {\cf20                      * don't drive to zero power}\par
+677 {\cf20                      */}\par
+678                     {\cf19 if} (error_drive < 0) \{\par
+679                         error_drive = PV_BIAS_LOW; {\cf20 // control wide power swings}\par
+680                         {\cf19 if} (!fm80_sleep()) \{ {\cf20 // check for using sleep bias}\par
+681                             {\cf19 if} ((E.mvar[V_FBEKW] > MIN_BAT_KW_BSOC_SLP) && (E.mvar[V_PWA] > PWA_SLEEP)) \{\par
+682                                 error_drive = PV_BIAS_SLEEP; {\cf20 // use higher power when we still have sun for better inverter efficiency}\par
+683                             \}\par
+684                         \}\par
+685                     \}\par
+686 \par
+687                     {\cf20 /*}\par
+688 {\cf20                      * reduce charging/diversion power to safe PS limits}\par
+689 {\cf20                      */}\par
+690                     {\cf19 if} (E.mode.dl_mqtt_max > PV_DL_MPTT_MAX) \{\par
+691                         {\cf19 if} (!E.dl_excess) \{\par
+692                             error_drive = PV_DL_MPTT_IDLE;\par
+693                         \} {\cf19 else} \{\par
+694                             {\cf19 if} (E.mode.dl_mqtt_max > PV_DL_MPTT_EXCESS) \{\par
+695                                 error_drive = PV_DL_MPTT_IDLE;\par
+696                             \}\par
+697                         \}\par
+698                     \} {\cf19 else} \{\par
+699                         {\cf19 if} (E.dl_excess) \{\par
+700                             error_drive = PV_DL_EXCESS + E.dl_excess_adj;\par
+701                         \}\par
+702                     \}\par
+703 \par
+704                     {\cf20 /*}\par
+705 {\cf20                      * shutdown GTI power at low DL battery Ah or Voltage}\par
+706 {\cf20                      */}\par
+707                     {\cf19 if} ((E.mvar[V_DAHBAT] < PV_DL_B_AH_LOW) || (E.mvar[V_DVBAT] < PV_DL_B_V_LOW)) \{\par
+708                         error_drive = PV_BIAS_ZERO;\par
+709                     \}\par
+710 \par
+711                     snprintf(gti_str, SBUF_SIZ - 1, {\cf22 "V%04dX"}, error_drive); {\cf20 // format for dumpload controller gti power commands}\par
+712                     mqtt_gti_power(E.client_p, TOPIC_P, gti_str, 2);\par
+713                 \}\par
+714 \par
+715 {\cf21 #ifndef  FAKE_VPV}\par
+716                 {\cf19 if} (fm80_float({\cf17 true}) || ((ac1_filter(E.mvar[V_BEN]) > BAL_MAX_ENERGY_AC) && (ac_test() > MIN_BAT_KW_AC_HI))) \{\par
+717                     ramp_up_ac(E.client_p, E.ac_sw_on); {\cf20 // use once control}\par
+718 {\cf21 #ifdef PSW_DEBUG}\par
+719                     fprintf(fout, {\cf22 "%s MIN_BAT_KW_AC_HI AC switch %d \\r\\n"}, log_time({\cf17 false}), E.ac_sw_on);\par
+720 {\cf21 #endif}\par
+721                     E.ac_sw_on = {\cf17 false}; {\cf20 // once flag}\par
+722                 \}\par
+723 {\cf21 #endif}\par
+724                 {\cf19 if} (((ac2_filter(E.mvar[V_BEN]) < BAL_MIN_ENERGY_AC) || ((ac_test() < (MIN_BAT_KW_AC_LO + E.ac_low_adj))))) \{\par
+725                     {\cf19 if} (!fm80_float({\cf17 true})) \{\par
+726                         ramp_down_ac(E.client_p, E.ac_sw_on);\par
+727                         {\cf19 if} (log_timer()) \{\par
+728                             fprintf(fout, {\cf22 "%s RAMP DOWN AC, MIN_BAT_KW_AC_LO AC switch %d \\r\\n"}, log_time({\cf17 false}), E.ac_sw_on);\par
+729                         \}\par
+730                     \}\par
+731                     E.ac_sw_on = {\cf17 true};\par
+732                 \}\par
+733 \par
+734 \par
+735                 {\cf20 /*}\par
+736 {\cf20                  * Dump Load Excess testing}\par
+737 {\cf20                  * send excess power into the home power grid taking care not to export energy to the utility grid}\par
+738 {\cf20                  */}\par
+739                 {\cf19 if} (((dc1_filter(E.mvar[V_BEN]) > BAL_MAX_ENERGY_GTI) && (gti_test() > MIN_BAT_KW_GTI_HI)) || E.dl_excess) \{\par
+740 {\cf21 #ifndef  FAKE_VPV                            }\par
+741 {\cf21 #ifdef B_DLE_DEBUG}\par
+742                     {\cf19 if} (E.dl_excess) \{\par
+743                         fprintf(fout, {\cf22 "%s DL excess ramp_up_gti, DC switch %d\\r\\n"}, log_time({\cf17 false}), E.gti_sw_on);\par
+744                     \}\par
+745 {\cf21 #endif}\par
+746                     ramp_up_gti(E.client_p, E.gti_sw_on, E.dl_excess);\par
+747                     {\cf19 if} (log_timer()) \{\par
+748                         fprintf(fout, {\cf22 "%s RAMP DOWN DC, MIN_BAT_KW_GTI_HI DC switch %d \\r\\n"}, log_time({\cf17 false}), E.gti_sw_on);\par
+749                     \}\par
+750                     E.gti_sw_on = {\cf17 false}; {\cf20 // once flag}\par
+751 {\cf21 #endif                            }\par
+752                 \} {\cf19 else} \{\par
+753                     {\cf19 if} ((dc2_filter(E.mvar[V_BEN]) < BAL_MIN_ENERGY_GTI) || (gti_test() < (MIN_BAT_KW_GTI_LO + E.gti_low_adj))) \{\par
+754                         {\cf19 if} (!E.dl_excess) \{\par
+755                             {\cf19 if} (log_timer()) \{\par
+756                                 ramp_down_gti(E.client_p, {\cf17 true});\par
+757 {\cf21 #ifdef PSW_DEBUG}\par
+758                                 fprintf(fout, {\cf22 "%s MIN_BAT_KW_GTI_LO DC switch %d \\r\\n"}, log_time({\cf17 false}), E.gti_sw_on);\par
+759 {\cf21 #endif}\par
+760                             \}\par
+761                             E.gti_sw_on = {\cf17 true};\par
+762                         \}\par
+763                     \}\par
+764                 \}\par
+765             \};\par
+766 \par
+767 {\cf21 #ifdef B_ADJ_DEBUG}\par
+768             fprintf(fout, {\cf22 "\\r\\n LO ADJ: AC %8.2fWh, GTI %8.2fWh\\r\\n"}, MIN_BAT_KW_AC_LO + E.ac_low_adj, MIN_BAT_KW_GTI_LO + E.gti_low_adj);\par
+769 {\cf21 #endif}\par
+770 {\cf21 #ifdef B_DLE_DEBUG}\par
+771             {\cf19 if} (E.dl_excess) \{\par
+772                 fprintf(fout, {\cf22 "%s DL excess vars from ha_energy %d %d : Flag %d\\r\\n"}, log_time({\cf17 false}), E.mode.con4, E.mode.con5, E.dl_excess);\par
+773             \}\par
+774 {\cf21 #endif}\par
+775 \par
+776             time(&rawtime);\par
+777 \par
+778             {\cf19 if} (E.im_delay++ >= IM_DELAY) \{\par
+779                 E.im_delay = 0;\par
+780                 iammeter_read();\par
+781             \}\par
+782             {\cf19 if} (E.im_display++ >= IM_DISPLAY) \{\par
+783                 {\cf18 char} buffer[SYSLOG_SIZ];\par
+784                 uint32_t len;\par
+785 \par
+786                 E.im_display = 0;\par
+787                 mqtt_ha_pid(E.client_p, TOPIC_PPID);\par
+788                 {\cf19 if} (!(E.fm80 && E.dumpload && E.iammeter)) \{\par
+789                     {\cf19 if} (!E.iammeter) \{\par
+790                         E.link.iammeter_error++;\par
+791                     \} {\cf19 else} \{\par
+792                         E.link.mqtt_error++;\par
+793                     \}\par
+794                     E.link.shutdown++;\par
+795                     fprintf(fout, {\cf22 "\\r\\n%s !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels M %u,%u I %u,%u\\r\\n"}, log_time({\cf17 false}), E.fm80, E.dumpload, E.fm80,\par
+796                         E.link.mqtt_count, E.link.mqtt_error, E.link.iammeter_count, E.link.iammeter_error);\par
+797                     fflush(fout);\par
+798                     snprintf(buffer, SYSLOG_SIZ - 1, {\cf22 "\\r\\n%s !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels M %u,%u I %u,%u\\r\\n"}, log_time({\cf17 false}), E.fm80, E.dumpload, E.fm80,\par
+799                         E.link.mqtt_count, E.link.mqtt_error, E.link.iammeter_count, E.link.iammeter_error);\par
+800                     syslog(LOG_NOTICE, buffer);\par
+801                     mqtt_ha_shutdown(E.client_p, TOPIC_SHUTDOWN);\par
+802                     E.mode.data_error = {\cf17 true};\par
+803                 \} {\cf19 else} \{\par
+804                     E.mode.data_error = {\cf17 false};\par
+805                     E.link.shutdown = 0;\par
+806                 \}\par
+807                 snprintf(buffer, RBUF_SIZ - 1, {\cf22 "%s"}, ctime(&rawtime));\par
+808                 len = strlen(buffer);\par
+809                 buffer[len - 1] = 0; {\cf20 // munge out the return character}\par
+810                 fprintf(fout, {\cf22 "%s "}, buffer);\par
+811                 fflush(fout);\par
+812                 E.fm80 = {\cf17 false};\par
+813                 E.dumpload = {\cf17 false};\par
+814                 E.homeassistant = {\cf17 false};\par
+815                 E.iammeter = {\cf17 false};\par
+816                 sync_ha();\par
+817                 print_im_vars();\par
+818                 print_mvar_vars();\par
+819                 fprintf(fout, {\cf22 "%s\\r"}, ctime(&rawtime));\par
+820             \}\par
+821             E.mode.E = E_WAIT;\par
+822             fflush(fout);\par
+823             {\cf19 if} (E.mode.con6) \{\par
+824                 E.mode.R = R_IDLE;\par
+825             \}\par
+826             {\cf19 if} (E.mode.con7) \{\par
+827                 E.mode.E = E_STOP;\par
+828             \}\par
+829             {\cf19 break};\par
+830         {\cf19 case} E_STOP:\par
+831         {\cf19 default}:\par
+832             fflush(fout);\par
+833             fprintf(fout, {\cf22 "\\r\\n%s HA Energy stopped and exited.\\r\\n"}, log_time({\cf17 false}));\par
+834             fflush(fout);\par
+835             {\cf19 return} 0;\par
+836             {\cf19 break};\par
+837         \}\par
+838     \}\par
+839 \}\par
+}
+}
+{\xe \v ramp_down_ac\:energy.c}
+{\xe \v energy.c\:ramp_down_ac}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void ramp_down_ac (MQTTClient client_p, bool sw_off)}}
+\par
+{\bkmkstart AAAAAAAAEX}
+{\bkmkend AAAAAAAAEX}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 939 \{\par
+940     {\cf19 if} (sw_off) \{\par
+941         mqtt_ha_switch(client_p, TOPIC_PACC, {\cf17 false});\par
+942         E.ac_sw_status = {\cf17 false};\par
+943         usleep(500000);\par
+944     \}\par
+945     E.once_ac = {\cf17 true};\par
+946 \}\par
+}
+}
+{\xe \v ramp_down_gti\:energy.c}
+{\xe \v energy.c\:ramp_down_gti}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void ramp_down_gti (MQTTClient client_p, bool sw_off)}}
+\par
+{\bkmkstart AAAAAAAAFA}
+{\bkmkend AAAAAAAAFA}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 906 \{\par
+907     {\cf19 if} (sw_off) \{\par
+908         mqtt_ha_switch(client_p, TOPIC_PDCC, {\cf17 false});\par
+909         E.once_gti_zero = {\cf17 true};\par
+910         E.gti_sw_status = {\cf17 false};\par
+911     \}\par
+912     E.once_gti = {\cf17 true};\par
+913 \par
+914     {\cf19 if} (E.once_gti_zero) \{\par
+915         mqtt_gti_power(client_p, TOPIC_P, {\cf22 "Z#"}, 7); {\cf20 // zero power}\par
+916         E.once_gti_zero = {\cf17 false};\par
+917     \}\par
+918 \}\par
+}
+}
+{\xe \v ramp_up_ac\:energy.c}
+{\xe \v energy.c\:ramp_up_ac}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void ramp_up_ac (MQTTClient client_p, bool start)}}
+\par
+{\bkmkstart AAAAAAAAFC}
+{\bkmkend AAAAAAAAFC}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 924 \{\par
+925 \par
+926     {\cf19 if} (start) \{\par
+927         E.once_ac = {\cf17 true};\par
+928     \}\par
+929 \par
+930     {\cf19 if} (E.once_ac) \{\par
+931         E.once_ac = {\cf17 false};\par
+932         mqtt_ha_switch(client_p, TOPIC_PACC, {\cf17 true});\par
+933         E.ac_sw_status = {\cf17 true};\par
+934         usleep(500000); {\cf20 // wait for voltage to ramp}\par
+935     \}\par
+936 \}\par
+}
+}
+{\xe \v ramp_up_gti\:energy.c}
+{\xe \v energy.c\:ramp_up_gti}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void ramp_up_gti (MQTTClient client_p, bool start, bool excess)}}
+\par
+{\bkmkstart AAAAAAAAFE}
+{\bkmkend AAAAAAAAFE}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 845 \{\par
+846     {\cf17 static} uint32_t sequence = 0;\par
+847 \par
+848     {\cf19 if} (start) \{\par
+849         E.once_gti = {\cf17 true};\par
+850     \}\par
+851 \par
+852     {\cf19 if} (E.once_gti) \{\par
+853         E.once_gti = {\cf17 false};\par
+854         sequence = 0;\par
+855         {\cf19 if} (!excess) \{\par
+856             mqtt_ha_switch(client_p, TOPIC_PDCC, {\cf17 true});\par
+857             E.gti_sw_status = {\cf17 true};\par
+858             usleep(500000); {\cf20 // wait for voltage to ramp}\par
+859         \} {\cf19 else} \{\par
+860             sequence = 1;\par
+861         \}\par
+862     \}\par
+863 \par
+864     {\cf19 switch} (sequence) \{\par
+865     {\cf19 case} 4:\par
+866         E.once_gti_zero = {\cf17 true};\par
+867         {\cf19 break};\par
+868     {\cf19 case} 3:\par
+869     {\cf19 case} 2:\par
+870     {\cf19 case} 1:\par
+871         E.once_gti_zero = {\cf17 true};\par
+872         {\cf19 if} (bat_current_stable() || E.dl_excess) \{ {\cf20 // check battery current std dev, stop 'motorboating'}\par
+873             sequence++;\par
+874             {\cf19 if} (!mqtt_gti_power(client_p, TOPIC_P, {\cf22 "+#"}, 3)) \{\par
+875                 sequence = 0;\par
+876             \}; {\cf20 // +100W power}\par
+877         \} {\cf19 else} \{\par
+878             usleep(500000); {\cf20 // wait a bit more for power to be stable}\par
+879             sequence = 1; {\cf20 // do power ramps when ready}\par
+880             {\cf19 if} (!mqtt_gti_power(client_p, TOPIC_P, {\cf22 "-#"}, 4)) \{\par
+881                 sequence = 0;\par
+882             \}; {\cf20 // - 100W power}\par
+883         \}\par
+884         {\cf19 break};\par
+885     {\cf19 case} 0:\par
+886         sequence++;\par
+887         {\cf19 if} (E.once_gti_zero) \{\par
+888             mqtt_gti_power(client_p, TOPIC_P, {\cf22 "Z#"}, 5); {\cf20 // zero power}\par
+889             E.once_gti_zero = {\cf17 false};\par
+890         \}\par
+891         {\cf19 break};\par
+892     {\cf19 default}:\par
+893         {\cf19 if} (E.once_gti_zero) \{\par
+894             mqtt_gti_power(client_p, TOPIC_P, {\cf22 "Z#"}, 6); {\cf20 // zero power}\par
+895             E.once_gti_zero = {\cf17 false};\par
+896         \}\par
+897         sequence = 0;\par
+898         {\cf19 break};\par
+899     \}\par
+900 \}\par
+}
+}
+{\xe \v sanity_check\:energy.c}
+{\xe \v energy.c\:sanity_check}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+bool sanity_check (void )}}
+\par
+{\bkmkstart AAAAAAAAFG}
+{\bkmkend AAAAAAAAFG}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 256 \{\par
+257     {\cf19 if} (E.mvar[V_PWA] > PWA_SANE) \{\par
+258         E.sane = S_PWA;\par
+259         {\cf19 return} {\cf17 false};\par
+260     \}\par
+261     {\cf19 if} (E.mvar[V_PAMPS] > PAMPS_SANE) \{\par
+262         E.sane = S_PAMPS;\par
+263         {\cf19 return} {\cf17 false};\par
+264     \}\par
+265     {\cf19 if} (E.mvar[V_PVOLTS] > PVOLTS_SANE) \{\par
+266         E.sane = S_PVOLTS;\par
+267         {\cf19 return} {\cf17 false};\par
+268     \}\par
+269     {\cf19 if} (E.mvar[V_FBAMPS] > BAMPS_SANE) \{\par
+270         E.sane = S_FBAMPS;\par
+271         {\cf19 return} {\cf17 false};\par
+272     \}\par
+273     {\cf19 return} {\cf17 true};\par
+274 \}\par
+}
+}
+{\xe \v showIP\:energy.c}
+{\xe \v energy.c\:showIP}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void showIP (void )}}
+\par
+{\bkmkstart AAAAAAAAFI}
+{\bkmkend AAAAAAAAFI}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 162 \{\par
+163     {\cf17 struct }ifaddrs *ifaddr, *ifa;\par
+164     {\cf18 int} s;\par
+165     {\cf18 char} host[NI_MAXHOST];\par
+166 \par
+167     {\cf19 if} (getifaddrs(&ifaddr) == -1) \{\par
+168         perror({\cf22 "getifaddrs"});\par
+169         exit(EXIT_FAILURE);\par
+170     \}\par
+171 \par
+172 \par
+173     {\cf19 for} (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) \{\par
+174         {\cf19 if} (ifa->ifa_addr == NULL)\par
+175             {\cf19 continue};\par
+176 \par
+177         s = getnameinfo(ifa->ifa_addr, {\cf17 sizeof}({\cf17 struct} sockaddr_in), host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);\par
+178 \par
+179         {\cf19 if} (ifa->ifa_addr->sa_family == AF_INET) \{\par
+180             {\cf19 if} (s != 0) \{\par
+181                 exit(EXIT_FAILURE);\par
+182             \}\par
+183             printf({\cf22 "\\tInterface : <%s>\\n"}, ifa->ifa_name);\par
+184             printf({\cf22 "\\t  Address : <%s>\\n"}, host);\par
+185         \}\par
+186     \}\par
+187 \par
+188     freeifaddrs(ifaddr);\par
+189 \}\par
+}
+}
+{\xe \v skeleton_daemon\:energy.c}
+{\xe \v energy.c\:skeleton_daemon}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void skeleton_daemon (){\f2 [static]}}}
+\par
+{\bkmkstart AAAAAAAAFL}
+{\bkmkend AAAAAAAAFL}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 196 \{\par
+197     pid_t pid;\par
+198 \par
+199     {\cf20 /* Fork off the parent process */}\par
+200     pid = fork();\par
+201 \par
+202     {\cf20 /* An error occurred */}\par
+203     {\cf19 if} (pid < 0) \{\par
+204         printf({\cf22 "\\r\\n%sDAEMON failure  LOG Version %s : MQTT Version %s\\r\\n"}, log_time({\cf17 false}), LOG_VERSION, MQTT_VERSION);\par
+205         exit(EXIT_FAILURE);\par
+206     \}\par
+207 \par
+208     {\cf20 /* Success: Let the parent terminate */}\par
+209     {\cf19 if} (pid > 0) \{\par
+210         exit(EXIT_SUCCESS);\par
+211     \}\par
+212 \par
+213     {\cf20 /* On success: The child process becomes session leader */}\par
+214     {\cf19 if} (setsid() < 0) \{\par
+215         exit(EXIT_FAILURE);\par
+216     \}\par
+217 \par
+218     {\cf20 /* Catch, ignore and handle signals */}\par
+219     {\cf20 /*TODO: Implement a working signal handler */}\par
+220     {\cf20 //    signal(SIGCHLD, SIG_IGN);}\par
+221     {\cf20 //    signal(SIGHUP, SIG_IGN);}\par
+222 \par
+223     {\cf20 /* Fork off for the second time*/}\par
+224     pid = fork();\par
+225 \par
+226     {\cf20 /* An error occurred */}\par
+227     {\cf19 if} (pid < 0) \{\par
+228         exit(EXIT_FAILURE);\par
+229     \}\par
+230 \par
+231     {\cf20 /* Success: Let the parent terminate */}\par
+232     {\cf19 if} (pid > 0) \{\par
+233         exit(EXIT_SUCCESS);\par
+234     \}\par
+235 \par
+236     {\cf20 /* Set new file permissions */}\par
+237     umask(0);\par
+238 \par
+239     {\cf20 /* Change the working directory to the root directory */}\par
+240     {\cf20 /* or another appropriated directory */}\par
+241     chdir({\cf22 "/"});\par
+242 \par
+243     {\cf20 /* Close all open file descriptors */}\par
+244     {\cf18 int} x;\par
+245     {\cf19 for} (x = sysconf(_SC_OPEN_MAX); x >= 0; x--) \{\par
+246         close(x);\par
+247     \}\par
+248 \par
+249 \}\par
+}
+}
+{\xe \v solar_shutdown\:energy.c}
+{\xe \v energy.c\:solar_shutdown}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+bool solar_shutdown (void ){\f2 [static]}}}
+\par
+{\bkmkstart AAAAAAAAFN}
+{\bkmkend AAAAAAAAFN}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 979 \{\par
+980     {\cf17 static} {\cf18 bool} ret = {\cf17 false};\par
+981 \par
+982     {\cf19 if} (E.startup) \{\par
+983         ret = {\cf17 true};\par
+984         E.startup = {\cf17 false};\par
+985         {\cf19 return} ret;\par
+986     \} {\cf19 else} \{\par
+987         ret = {\cf17 false};\par
+988 \par
+989         {\cf20 /*}\par
+990 {\cf20          * FIXME}\par
+991 {\cf20          * }\par
+992 {\cf20          */}\par
+993     \}\par
+994 \par
+995     {\cf19 if} (E.solar_shutdown) \{\par
+996         ret = {\cf17 true};\par
+997     \} {\cf19 else} \{\par
+998         ret = {\cf17 false};\par
+999     \}\par
+1000 \par
+1001     {\cf19 if} ((E.mvar[V_FBEKW] < BAT_CRITICAL) && !E.startup) \{ {\cf20 // special case for low battery}\par
+1002         {\cf19 if} (!E.mode.bat_crit) \{\par
+1003             ret = {\cf17 true};\par
+1004 {\cf21 #ifdef CRITIAL_SHUTDOWN_LOG}\par
+1005             fprintf(fout, {\cf22 "%s Solar BATTERY CRITICAL shutdown comms check ret = %d \\r\\n"}, log_time({\cf17 false}), ret);\par
+1006             fflush(fout);\par
+1007 {\cf21 #endif}\par
+1008             E.mode.bat_crit = {\cf17 true};\par
+1009             {\cf19 return} ret;\par
+1010         \}\par
+1011     \} {\cf19 else} \{\par
+1012         E.mode.bat_crit = {\cf17 false};\par
+1013     \}\par
+1014 \par
+1015     {\cf19 if} (E.link.shutdown >= MAX_ERROR) \{\par
+1016         ret = {\cf17 true};\par
+1017         {\cf19 if} (E.fm80 && E.dumpload && E.iammeter) \{\par
+1018             ret = {\cf17 false};\par
+1019             E.link.shutdown = 0;\par
+1020         \}\par
+1021 \par
+1022 {\cf21 #ifdef DEBUG_SHUTDOWN}\par
+1023         fprintf(fout, {\cf22 "%s Solar shutdown comms check ret = %d \\r\\n"}, log_time({\cf17 false}), ret);\par
+1024         fflush(fout);\par
+1025 {\cf21 #endif}\par
+1026     \}\par
+1027     {\cf19 return} ret;\par
+1028 \}\par
+}
+}
+{\xe \v sync_ha\:energy.c}
+{\xe \v energy.c\:sync_ha}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+bool sync_ha (void )}}
+\par
+{\bkmkstart AAAAAAAAFO}
+{\bkmkend AAAAAAAAFO}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 1064 \{\par
+1065     {\cf18 bool} sync = {\cf17 false};\par
+1066     {\cf19 if} (E.gti_sw_status != ({\cf18 bool}) ((int32_t) E.mvar[V_HDCSW])) \{\par
+1067         fprintf(fout, {\cf22 "DC_MM %d %d "}, ({\cf18 bool}) E.gti_sw_status, ({\cf18 bool}) ((int32_t) E.mvar[V_HDCSW]));\par
+1068         mqtt_ha_switch(E.client_p, TOPIC_PDCC, !E.gti_sw_status);\par
+1069         E.dc_mismatch = {\cf17 true};\par
+1070         fflush(fout);\par
+1071         sync = {\cf17 true};\par
+1072     \} {\cf19 else} \{\par
+1073         E.dc_mismatch = {\cf17 false};\par
+1074     \}\par
+1075 \par
+1076     E.ac_sw_status = (bool) ((int32_t) E.mvar[V_HACSW]); {\cf20 // TEMP FIX for MISmatch errors}\par
+1077     {\cf19 if} (E.ac_sw_status != ({\cf18 bool}) ((int32_t) E.mvar[V_HACSW])) \{\par
+1078         fprintf(fout, {\cf22 "AC_MM %d %d "}, ({\cf18 bool}) E.ac_sw_status, ({\cf18 bool}) ((int32_t) E.mvar[V_HACSW]));\par
+1079         mqtt_ha_switch(E.client_p, TOPIC_PACC, !E.ac_sw_status);\par
+1080         E.ac_mismatch = {\cf17 true};\par
+1081         fflush(fout);\par
+1082         sync = {\cf17 true};\par
+1083     \} {\cf19 else} \{\par
+1084         E.ac_mismatch = {\cf17 false};\par
+1085     \}\par
+1086     {\cf19 return} sync;\par
+1087 \}\par
+}
+}
+{\xe \v timer_callback\:energy.c}
+{\xe \v energy.c\:timer_callback}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void timer_callback (int32_t signum)}}
+\par
+{\bkmkstart AAAAAAAAFP}
+{\bkmkend AAAAAAAAFP}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 285 \{\par
+286     signal(signum, timer_callback);\par
+287     ha_flag_vars_ss.runner = {\cf17 true};\par
+288     E.ten_sec_clock++;\par
+289     E.log_spam++;\par
+290     E.log_time_reset++;\par
+291     {\cf19 if} (E.log_spam > MAX_LOG_SPAM) \{\par
+292         E.log_spam = 0;\par
+293     \}\par
+294 \}\par
+}
+}
+{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Variable Documentation\par
+\pard\plain 
+{\xe \v E\:energy.c}
+{\xe \v energy.c\:E}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+struct {\b energy_type} E}}
+\par
+{\bkmkstart AAAAAAAAFQ}
+{\bkmkend AAAAAAAAFQ}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 109                        \{\par
+110     .once_gti = {\cf17 true},\par
+111     .once_ac = {\cf17 true},\par
+112     .once_gti_zero = {\cf17 true},\par
+113     .iammeter = {\cf17 false},\par
+114     .fm80 = {\cf17 false},\par
+115     .dumpload = {\cf17 false},\par
+116     .homeassistant = {\cf17 false},\par
+117     .ac_low_adj = 0.0f,\par
+118     .gti_low_adj = 0.0f,\par
+119     .ac_sw_on = {\cf17 true},\par
+120     .gti_sw_on = {\cf17 true},\par
+121     .im_delay = 0,\par
+122     .gti_delay = 0,\par
+123     .im_display = 0,\par
+124     .rc = 0,\par
+125     .speed_go = 0,\par
+126     .mode.pid.iMax = PV_IMAX,\par
+127     .mode.pid.iMin = 0.0f,\par
+128     .mode.pid.pGain = PV_PGAIN,\par
+129     .mode.pid.iGain = PV_IGAIN,\par
+130     .mode.mode_tmr = 0,\par
+131     .mode.mode = {\cf17 true},\par
+132     .mode.in_pid_control = {\cf17 false},\par
+133     .mode.dl_mqtt_max = PV_DL_MPTT_MAX,\par
+134     .mode.E = E_INIT,\par
+135     .mode.R = R_INIT,\par
+136     .mode.no_float = {\cf17 true},\par
+137     .mode.data_error = {\cf17 false},\par
+138     .ac_sw_status = {\cf17 false},\par
+139     .gti_sw_status = {\cf17 false},\par
+140     .solar_mode = {\cf17 false},\par
+141     .solar_shutdown = {\cf17 false},\par
+142     .mode.pv_bias = PV_BIAS_LOW,\par
+143     .sane = S_DLAST,\par
+144     .startup = {\cf17 true},\par
+145     .ac_mismatch = {\cf17 false},\par
+146     .dc_mismatch = {\cf17 false},\par
+147     .mode_mismatch = {\cf17 false},\par
+148     .link.shutdown = 0,\par
+149     .mode.bat_crit = {\cf17 false},\par
+150     .dl_excess = {\cf17 false},\par
+151     .dl_excess_adj = 0.0f,\par
+152 \};\par
+}
+}
+{\xe \v ha_flag_vars_ha\:energy.c}
+{\xe \v energy.c\:ha_flag_vars_ha}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+struct {\b ha_flag_type} ha_flag_vars_ha}}
+\par
+{\bkmkstart AAAAAAAAFR}
+{\bkmkend AAAAAAAAFR}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{\b Initial value:}{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid = \{\par
+    .runner = {\cf17 false},\par
+    .receivedtoken = {\cf17 false},\par
+    .deliveredtoken = {\cf17 false},\par
+    .rec_ok = {\cf17 false},\par
+    .ha_id = HA_ID,\par
+    .var_update = 0,\par
+\}\par
+}
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 94                                       \{\par
+95     .runner = {\cf17 false},\par
+96     .receivedtoken = {\cf17 false},\par
+97     .deliveredtoken = {\cf17 false},\par
+98     .rec_ok = {\cf17 false},\par
+99     .ha_id = HA_ID,\par
+100     .var_update = 0,\par
+101 \};\par
+}
+}
+{\xe \v ha_flag_vars_pc\:energy.c}
+{\xe \v energy.c\:ha_flag_vars_pc}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+struct {\b ha_flag_type} ha_flag_vars_pc}}
+\par
+{\bkmkstart AAAAAAAAFS}
+{\bkmkend AAAAAAAAFS}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{\b Initial value:}{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid = \{\par
+    .runner = {\cf17 false},\par
+    .receivedtoken = {\cf17 false},\par
+    .deliveredtoken = {\cf17 false},\par
+    .rec_ok = {\cf17 false},\par
+    .ha_id = P8055_ID,\par
+    .var_update = 0,\par
+\}\par
+}
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 63                                       \{\par
+64     .runner = {\cf17 false},\par
+65     .receivedtoken = {\cf17 false},\par
+66     .deliveredtoken = {\cf17 false},\par
+67     .rec_ok = {\cf17 false},\par
+68     .ha_id = P8055_ID,\par
+69     .var_update = 0,\par
+70 \};\par
+}
+}
+{\xe \v ha_flag_vars_sd\:energy.c}
+{\xe \v energy.c\:ha_flag_vars_sd}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+struct {\b ha_flag_type} ha_flag_vars_sd}}
+\par
+{\bkmkstart AAAAAAAAFT}
+{\bkmkend AAAAAAAAFT}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{\b Initial value:}{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid = \{\par
+    .runner = {\cf17 false},\par
+    .receivedtoken = {\cf17 false},\par
+    .deliveredtoken = {\cf17 false},\par
+    .rec_ok = {\cf17 false},\par
+    .ha_id = DUMPLOAD_ID,\par
+    .var_update = 0,\par
+\}\par
+}
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 84                                       \{\par
+85     .runner = {\cf17 false},\par
+86     .receivedtoken = {\cf17 false},\par
+87     .deliveredtoken = {\cf17 false},\par
+88     .rec_ok = {\cf17 false},\par
+89     .ha_id = DUMPLOAD_ID,\par
+90     .var_update = 0,\par
+91 \};\par
+}
+}
+{\xe \v ha_flag_vars_ss\:energy.c}
+{\xe \v energy.c\:ha_flag_vars_ss}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+struct {\b ha_flag_type} ha_flag_vars_ss}}
+\par
+{\bkmkstart AAAAAAAAFU}
+{\bkmkend AAAAAAAAFU}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{\b Initial value:}{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid = \{\par
+    .runner = {\cf17 false},\par
+    .receivedtoken = {\cf17 false},\par
+    .deliveredtoken = {\cf17 false},\par
+    .rec_ok = {\cf17 false},\par
+    .ha_id = FM80_ID,\par
+    .var_update = 0,\par
+    .energy_mode = NORM_MODE,\par
+\}\par
+}
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 73                                       \{\par
+74     .runner = {\cf17 false},\par
+75     .receivedtoken = {\cf17 false},\par
+76     .deliveredtoken = {\cf17 false},\par
+77     .rec_ok = {\cf17 false},\par
+78     .ha_id = FM80_ID,\par
+79     .var_update = 0,\par
+80     .energy_mode = NORM_MODE,\par
+81 \};\par
+}
+}
+\par \pard\plain 
+
+\pard\plain \sect\sbkpage
+\s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+bsoc.h\par \pard\plain 
+{\tc\tcl2 \v ha_energy/bsoc.h}
+{\xe \v ha_energy/bsoc.h}
+{\bkmkstart AAAAAAAAAA}
+{\bkmkend AAAAAAAAAA}
+{
+\par
+\pard\plain \s40\li0\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 1 {\cf20 /* }\par
+2 {\cf20  * File:   bsoc.h}\par
+3 {\cf20  * Author: root}\par
+4 {\cf20  *}\par
+5 {\cf20  * Created on February 10, 2024, 6:24 PM}\par
+6 {\cf20  */}\par
+7 \par
+8 {\cf21 #ifndef BSOC_H}\par
+9 {\cf21 #define BSOC_H}\par
+10 \par
+11 {\cf21 #ifdef __cplusplus}\par
+12 {\cf17 extern} {\cf22 "C"} \{\par
+13 {\cf21 #endif}\par
+14 {\cf21 #include <math.h>}\par
+15     {\cf20 //#define BSOC_DEBUG}\par
+16 \par
+17 {\cf21 #define MIN_PV_VOLTS    5.0f}\par
+18 {\cf21 #define MIN_BAT_VOLTS   23.0f}\par
+19 {\cf21 #define MIN_BAT_KW      4100.0f}\par
+20 \par
+21 {\cf21 #define DEV_SIZE        10}\par
+22 {\cf21 #define MAX_BATC_DEV    1.5f}\par
+23 {\cf21 #define BAT_C_DRAW      3.0f}\par
+24 \par
+25 {\cf21 #define PBAL_OFFSET     -50.0f }{\cf20 // postive bias for control point}\par
+26 {\cf21 #define PV_FULL_PWR     300.0f}\par
+27 {\cf21 #define PV_MIN_PWR      160.0f}\par
+28 {\cf21 #define PV_V_NOM        60.0f}\par
+29 {\cf21 #define PV_V_FAKE       0.336699f}\par
+30 \par
+31 {\cf21 #define COEF            8.0f}\par
+32 {\cf21 #define COEFN           4.0f}\par
+33 {\cf21 #define COEFF           2.0f}\par
+34 \par
+35 {\cf21 #include <stdlib.h>}\par
+36 {\cf21 #include <stdio.h>} {\cf20 /* for printf() */}\par
+37 {\cf21 #include <unistd.h>}\par
+38 {\cf21 #include <stdint.h>}\par
+39 {\cf21 #include <string.h>}\par
+40 {\cf21 #include <stdbool.h>}\par
+41 {\cf21 #include <signal.h>}\par
+42 {\cf21 #include <time.h>}\par
+43 {\cf21 #include <sys/wait.h>}\par
+44 {\cf21 #include <sys/types.h>}\par
+45 {\cf21 #include <sys/time.h>}\par
+46 {\cf21 #include <errno.h>}\par
+47 {\cf21 #include <math.h>}\par
+48 {\cf21 #include "pid.h"}\par
+49 {\cf21 #include "mqtt_rec.h"}\par
+50 \par
+51     {\cf18 bool} bsoc_init({\cf18 void});\par
+52     {\cf18 bool} bsoc_data_collect({\cf18 void});\par
+53     {\cf18 double} bsoc_ac({\cf18 void});\par
+54     {\cf18 double} bsoc_gti({\cf18 void});\par
+55     {\cf18 double} gti_test({\cf18 void});\par
+56     {\cf18 double} ac_test({\cf18 void});\par
+57     {\cf18 double} get_batc_dev({\cf18 void});\par
+58     {\cf18 bool} bat_current_stable({\cf18 void});\par
+59     {\cf18 void} bsoc_set_std_dev({\cf17 const} {\cf18 double}, {\cf17 const} uint32_t);\par
+60 \par
+61     {\cf18 double} calculateStandardDeviation({\cf17 const} uint32_t, {\cf17 const} {\cf18 double} *);\par
+62 \par
+63     {\cf18 bool} bsoc_set_mode({\cf17 const} {\cf18 double}, {\cf17 const} {\cf18 bool}, {\cf17 const} {\cf18 bool});\par
+64 \par
+65     {\cf18 double} ac0_filter({\cf17 const} {\cf18 double});\par
+66     {\cf18 double} ac1_filter({\cf17 const} {\cf18 double});\par
+67     {\cf18 double} ac2_filter({\cf17 const} {\cf18 double});\par
+68     {\cf18 double} dc0_filter({\cf17 const} {\cf18 double});\par
+69     {\cf18 double} dc1_filter({\cf17 const} {\cf18 double});\par
+70     {\cf18 double} dc2_filter({\cf17 const} {\cf18 double});\par
+71     {\cf18 double} drive0_filter({\cf17 const} {\cf18 double});\par
+72     {\cf18 double} drive1_filter({\cf17 const} {\cf18 double});\par
+73 \par
+74 {\cf21 #ifdef __cplusplus}\par
+75 \}\par
+76 {\cf21 #endif}\par
+77 \par
+78 {\cf21 #endif }{\cf20 /* BSOC_H */}{\cf21 }\par
+79 \par
+}
+\par \pard\plain 
+
+\pard\plain \sect\sbkpage
+\s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+ha_energy/energy.h File Reference\par \pard\plain 
+{\tc\tcl2 \v ha_energy/energy.h}
+{\xe \v ha_energy/energy.h}
+{\bkmkstart AAAAAAAAAH}
+{\bkmkend AAAAAAAAAH}
+{
+\pard\plain \s18\widctlpar\fs22\cgrid {\f2 #include <stdlib.h>}\par
+{\f2 #include <stdio.h>}\par
+{\f2 #include <unistd.h>}\par
+{\f2 #include <stdint.h>}\par
+{\f2 #include <string.h>}\par
+{\f2 #include <stdbool.h>}\par
+{\f2 #include <signal.h>}\par
+{\f2 #include <time.h>}\par
+{\f2 #include <sys/wait.h>}\par
+{\f2 #include <sys/types.h>}\par
+{\f2 #include <sys/time.h>}\par
+{\f2 #include <errno.h>}\par
+{\f2 #include <cjson/cJSON.h>}\par
+{\f2 #include <curl/curl.h>}\par
+{\f2 #include <pthread.h>}\par
+{\f2 #include <sys/stat.h>}\par
+{\f2 #include <syslog.h>}\par
+{\f2 #include <arpa/inet.h>}\par
+{\f2 #include <sys/socket.h>}\par
+{\f2 #include <netdb.h>}\par
+{\f2 #include <ifaddrs.h>}\par
+{\f2 #include "MQTTClient.h"}\par
+{\f2 #include "pid.h"}\par
+}
+{
+\pard\plain \s17\sa60\sb30\widctlpar\qj \fs22\cgrid Include dependency graph for energy.h:{
+\pard\plain 
+\par\pard \qc {\field\flddirty {\*\fldinst INCLUDEPICTURE "energy_8h__incl.png" \\d \\*MERGEFORMAT}{\fldrslt IMAGE}}\par
+}
+\par
+}
+{
+\pard\plain \s17\sa60\sb30\widctlpar\qj \fs22\cgrid This graph shows which files directly or indirectly include this file:{
+\pard\plain 
+\par\pard \qc {\field\flddirty {\*\fldinst INCLUDEPICTURE "energy_8h__dep__incl.png" \\d \\*MERGEFORMAT}{\fldrslt IMAGE}}\par
+}
+\par
+}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Data Structures\par
+\pard\plain 
+
+{
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+struct {\b link_type}\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+struct {\b mode_type}\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+struct {\b energy_type}\par
+}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Macros\par
+\pard\plain 
+
+{
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b LOG_VERSION}\~ "V0.74"{\bkmkstart AAAAAAAAAQ}
+{\bkmkend AAAAAAAAAQ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b MQTT_VERSION}\~ "V3.11"{\bkmkstart AAAAAAAAAR}
+{\bkmkend AAAAAAAAAR}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b TNAME}\~ "maint9"{\bkmkstart AAAAAAAAAS}
+{\bkmkend AAAAAAAAAS}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b LADDRESS}\~ "tcp://127.0.0.1:1883"{\bkmkstart AAAAAAAAAU}
+{\bkmkend AAAAAAAAAU}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b ADDRESS}\~ "tcp://10.1.1.30:1883"{\bkmkstart AAAAAAAAAV}
+{\bkmkend AAAAAAAAAV}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b CLIENTID1}\~ "Energy_Mqtt_HA1"{\bkmkstart AAAAAAAAAW}
+{\bkmkend AAAAAAAAAW}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b CLIENTID2}\~ "Energy_Mqtt_HA2"{\bkmkstart AAAAAAAAAX}
+{\bkmkend AAAAAAAAAX}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b CLIENTID3}\~ "Energy_Mqtt_HA3"{\bkmkstart AAAAAAAAAY}
+{\bkmkend AAAAAAAAAY}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b TOPIC_P}\~ "mateq84/data/gticmd"{\bkmkstart AAAAAAAAAZ}
+{\bkmkend AAAAAAAAAZ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b TOPIC_SPAM}\~ "mateq84/data/spam"{\bkmkstart AAAAAAAABA}
+{\bkmkend AAAAAAAABA}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b TOPIC_PACA}\~ "home-assistant/gtiac/availability"{\bkmkstart AAAAAAAABB}
+{\bkmkend AAAAAAAABB}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b TOPIC_PDCA}\~ "home-assistant/gtidc/availability"{\bkmkstart AAAAAAAABC}
+{\bkmkend AAAAAAAABC}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b TOPIC_PACC}\~ "home-assistant/gtiac/contact"{\bkmkstart AAAAAAAABD}
+{\bkmkend AAAAAAAABD}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b TOPIC_PDCC}\~ "home-assistant/gtidc/contact"{\bkmkstart AAAAAAAABE}
+{\bkmkend AAAAAAAABE}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b TOPIC_PPID}\~ "home-assistant/solar/pid"{\bkmkstart AAAAAAAABF}
+{\bkmkend AAAAAAAABF}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b TOPIC_SHUTDOWN}\~ "home-assistant/solar/shutdown"{\bkmkstart AAAAAAAABG}
+{\bkmkend AAAAAAAABG}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b TOPIC_SS}\~ "mateq84/data/solar"{\bkmkstart AAAAAAAABH}
+{\bkmkend AAAAAAAABH}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b TOPIC_SD}\~ "mateq84/data/dumpload"{\bkmkstart AAAAAAAABI}
+{\bkmkend AAAAAAAABI}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b TOPIC_HA}\~ "home-assistant/status/switch"{\bkmkstart AAAAAAAABJ}
+{\bkmkend AAAAAAAABJ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b QOS}\~ 1{\bkmkstart AAAAAAAABK}
+{\bkmkend AAAAAAAABK}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b TIMEOUT}\~ 10000L{\bkmkstart AAAAAAAABL}
+{\bkmkend AAAAAAAABL}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b SPACING_USEC}\~ 500 * 1000{\bkmkstart AAAAAAAABM}
+{\bkmkend AAAAAAAABM}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b USEC_SEC}\~ 1000000L{\bkmkstart AAAAAAAABN}
+{\bkmkend AAAAAAAABN}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b DAQ_STR}\~ 32{\bkmkstart AAAAAAAABO}
+{\bkmkend AAAAAAAABO}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b DAQ_STR_M}\~ DAQ_STR-1{\bkmkstart AAAAAAAABP}
+{\bkmkend AAAAAAAABP}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b SBUF_SIZ}\~ 16{\bkmkstart AAAAAAAABQ}
+{\bkmkend AAAAAAAABQ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b RBUF_SIZ}\~ 82{\bkmkstart AAAAAAAABR}
+{\bkmkend AAAAAAAABR}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b SYSLOG_SIZ}\~ 512{\bkmkstart AAAAAAAABS}
+{\bkmkend AAAAAAAABS}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b MQTT_TIMEOUT}\~ 900{\bkmkstart AAAAAAAABT}
+{\bkmkend AAAAAAAABT}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b SW_QOS}\~ 1{\bkmkstart AAAAAAAABU}
+{\bkmkend AAAAAAAABU}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b NO_CYLON}{\bkmkstart AAAAAAAABV}
+{\bkmkend AAAAAAAABV}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b CRITIAL_SHUTDOWN_LOG}{\bkmkstart AAAAAAAABX}
+{\bkmkend AAAAAAAABX}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b UNIT_TEST}\~ 2{\bkmkstart AAAAAAAABY}
+{\bkmkend AAAAAAAABY}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b NORM_MODE}\~ 0{\bkmkstart AAAAAAAABZ}
+{\bkmkend AAAAAAAABZ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PID_MODE}\~ 1{\bkmkstart AAAAAAAACA}
+{\bkmkend AAAAAAAACA}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b MAX_ERROR}\~ 5{\bkmkstart AAAAAAAACB}
+{\bkmkend AAAAAAAACB}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b IAM_DELAY}\~ 120{\bkmkstart AAAAAAAACC}
+{\bkmkend AAAAAAAACC}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b CMD_SEC}\~ 10{\bkmkstart AAAAAAAACD}
+{\bkmkend AAAAAAAACD}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b TIME_SYNC_SEC}\~ 30{\bkmkstart AAAAAAAACE}
+{\bkmkend AAAAAAAACE}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b BAT_M_KW}\~ 5120.0f{\bkmkstart AAAAAAAACF}
+{\bkmkend AAAAAAAACF}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b BAT_SOC_TOP}\~ 0.98f{\bkmkstart AAAAAAAACG}
+{\bkmkend AAAAAAAACG}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b BAT_SOC_HIGH}\~ 0.95f{\bkmkstart AAAAAAAACH}
+{\bkmkend AAAAAAAACH}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b BAT_SOC_LOW}\~ 0.68f{\bkmkstart AAAAAAAACI}
+{\bkmkend AAAAAAAACI}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b BAT_SOC_LOW_AC}\~ 0.72f{\bkmkstart AAAAAAAACJ}
+{\bkmkend AAAAAAAACJ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b BAT_CRITICAL}\~ 746.0f{\bkmkstart AAAAAAAACK}
+{\bkmkend AAAAAAAACK}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b MIN_BAT_KW_BSOC_SLP}\~ 4000.0f{\bkmkstart AAAAAAAACL}
+{\bkmkend AAAAAAAACL}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b MIN_BAT_KW_BSOC_HI}\~ 4550.0f{\bkmkstart AAAAAAAACM}
+{\bkmkend AAAAAAAACM}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b MIN_BAT_KW_GTI_HI}\~ BAT_M_KW*BAT_SOC_TOP{\bkmkstart AAAAAAAACN}
+{\bkmkend AAAAAAAACN}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b MIN_BAT_KW_GTI_LO}\~ BAT_M_KW*BAT_SOC_LOW{\bkmkstart AAAAAAAACO}
+{\bkmkend AAAAAAAACO}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b MIN_BAT_KW_AC_HI}\~ BAT_M_KW*BAT_SOC_HIGH{\bkmkstart AAAAAAAACQ}
+{\bkmkend AAAAAAAACQ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b MIN_BAT_KW_AC_LO}\~ BAT_M_KW*BAT_SOC_LOW_AC{\bkmkstart AAAAAAAACR}
+{\bkmkend AAAAAAAACR}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PV_PGAIN}\~ 0.85f{\bkmkstart AAAAAAAACS}
+{\bkmkend AAAAAAAACS}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PV_IGAIN}\~ 0.12f{\bkmkstart AAAAAAAACT}
+{\bkmkend AAAAAAAACT}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PV_IMAX}\~ 1400.0f{\bkmkstart AAAAAAAACU}
+{\bkmkend AAAAAAAACU}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PV_BIAS}\~ 288.0f{\bkmkstart AAAAAAAACV}
+{\bkmkend AAAAAAAACV}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PV_BIAS_ZERO}\~ 0.0f{\bkmkstart AAAAAAAACW}
+{\bkmkend AAAAAAAACW}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PV_BIAS_LOW}\~ 222.0f{\bkmkstart AAAAAAAACX}
+{\bkmkend AAAAAAAACX}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PV_BIAS_FLOAT}\~ 399.0f{\bkmkstart AAAAAAAACY}
+{\bkmkend AAAAAAAACY}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PV_BIAS_SLEEP}\~ 480.0f{\bkmkstart AAAAAAAACZ}
+{\bkmkend AAAAAAAACZ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PV_BIAS_RATE}\~ 320.0f{\bkmkstart AAAAAAAADA}
+{\bkmkend AAAAAAAADA}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PV_DL_MPTT_MAX}\~ 1200.0f{\bkmkstart AAAAAAAADB}
+{\bkmkend AAAAAAAADB}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PV_DL_MPTT_EXCESS}\~ 1300.0f{\bkmkstart AAAAAAAADC}
+{\bkmkend AAAAAAAADC}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PV_DL_MPTT_IDLE}\~ 57.0f{\bkmkstart AAAAAAAADD}
+{\bkmkend AAAAAAAADD}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PV_DL_BIAS_RATE}\~ 75.0f{\bkmkstart AAAAAAAADE}
+{\bkmkend AAAAAAAADE}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PV_DL_EXCESS}\~ 500.0f{\bkmkstart AAAAAAAADF}
+{\bkmkend AAAAAAAADF}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PV_DL_B_AH_LOW}\~ 100.0f{\bkmkstart AAAAAAAADG}
+{\bkmkend AAAAAAAADG}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PV_DL_B_AH_MIN}\~ 150.0f{\bkmkstart AAAAAAAADH}
+{\bkmkend AAAAAAAADH}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PV_DL_B_V_LOW}\~ 23.8f{\bkmkstart AAAAAAAADI}
+{\bkmkend AAAAAAAADI}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PWA_SLEEP}\~ 200.0f{\bkmkstart AAAAAAAADJ}
+{\bkmkend AAAAAAAADJ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b DL_AC_DC_EFF}\~ 1.24f{\bkmkstart AAAAAAAADK}
+{\bkmkend AAAAAAAADK}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b BAL_MIN_ENERGY_AC}\~ -200.0f{\bkmkstart AAAAAAAADL}
+{\bkmkend AAAAAAAADL}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b BAL_MAX_ENERGY_AC}\~ 200.0f{\bkmkstart AAAAAAAADM}
+{\bkmkend AAAAAAAADM}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b BAL_MIN_ENERGY_GTI}\~ -1400.0f{\bkmkstart AAAAAAAADN}
+{\bkmkend AAAAAAAADN}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b BAL_MAX_ENERGY_GTI}\~ 200.0f{\bkmkstart AAAAAAAADO}
+{\bkmkend AAAAAAAADO}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b LOG_TO_FILE}\~ "/store/logs/energy.log"{\bkmkstart AAAAAAAADP}
+{\bkmkend AAAAAAAADP}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b LOG_TO_FILE_ALT}\~ "/tmp/energy.log"{\bkmkstart AAAAAAAADQ}
+{\bkmkend AAAAAAAADQ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b MAX_LOG_SPAM}\~ 60{\bkmkstart AAAAAAAADR}
+{\bkmkend AAAAAAAADR}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b LOW_LOG_SPAM}\~ 2{\bkmkstart AAAAAAAADS}
+{\bkmkend AAAAAAAADS}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b RESET_LOG_SPAM}\~ 120{\bkmkstart AAAAAAAADT}
+{\bkmkend AAAAAAAADT}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b IM_DELAY}\~ 1{\bkmkstart AAAAAAAADU}
+{\bkmkend AAAAAAAADU}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b IM_DISPLAY}\~ 1{\bkmkstart AAAAAAAADV}
+{\bkmkend AAAAAAAADV}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b GTI_DELAY}\~ 1{\bkmkstart AAAAAAAADW}
+{\bkmkend AAAAAAAADW}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PWA_SANE}\~ 1700.0f{\bkmkstart AAAAAAAADX}
+{\bkmkend AAAAAAAADX}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PAMPS_SANE}\~ 16.0f{\bkmkstart AAAAAAAADY}
+{\bkmkend AAAAAAAADY}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b PVOLTS_SANE}\~ 150.0f{\bkmkstart AAAAAAAADZ}
+{\bkmkend AAAAAAAADZ}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b BAMPS_SANE}\~ 70.0f{\bkmkstart AAAAAAAAEA}
+{\bkmkend AAAAAAAAEA}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b MAX_IM_VAR}\~ IA_LAST*PHASE_LAST{\bkmkstart AAAAAAAAEB}
+{\bkmkend AAAAAAAAEB}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b L1_P}\~ IA_POWER{\bkmkstart AAAAAAAAEC}
+{\bkmkend AAAAAAAAEC}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b L2_P}\~ L1_P+IA_LAST{\bkmkstart AAAAAAAAED}
+{\bkmkend AAAAAAAAED}
+\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+#define {\b L3_P}\~ L2_P+IA_LAST{\bkmkstart AAAAAAAAEE}
+{\bkmkend AAAAAAAAEE}
+\par
+}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Enumerations\par
+\pard\plain 
+
+{
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+enum {\b energy_state} \{ {\b E_INIT}
+, {\b E_RUN}
+, {\b E_WAIT}
+, {\b E_IDLE}
+, {\b E_STOP}
+, {\b E_LAST}
+ \}\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+enum {\b running_state} \{ {\b R_INIT}
+, {\b R_FLOAT}
+, {\b R_SLEEP}
+, {\b R_RUN}
+, {\b R_IDLE}
+, {\b R_LAST}
+ \}\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+enum {\b iammeter_phase} \{ {\b PHASE_A}
+, {\b PHASE_B}
+, {\b PHASE_C}
+, {\b PHASE_LAST}
+ \}\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+enum {\b iammeter_id} \{ {\b IA_VOLTAGE}
+, {\b IA_CURRENT}
+, {\b IA_POWER}
+, {\b IA_IMPORT}
+, {\b IA_EXPORT}
+, {\b IA_FREQ}
+, {\b IA_PF}
+, {\b IA_LAST}
+ \}\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+enum {\b mqtt_vars} \{ {\b V_FCCM}
+, {\b V_FBEKW}
+, {\b V_FRUNT}
+, {\b V_FBAMPS}
+, {\b V_FBV}
+, {\b V_FLO}
+, {\b V_FSO}
+, {\b V_FACE}
+, {\b V_BEN}
+, {\b V_PWA}
+, {\b V_PAMPS}
+, {\b V_PVOLTS}
+, {\b V_FLAST}
+, {\b V_HDCSW}
+, {\b V_HACSW}
+, {\b V_HSHUT}
+, {\b V_HMODE}
+, {\b V_HCON0}
+, {\b V_HCON1}
+, {\b V_HCON2}
+, {\b V_HCON3}
+, {\b V_HCON4}
+, {\b V_HCON5}
+, {\b V_HCON6}
+, {\b V_HCON7}
+, {\b V_DVPV}
+, {\b V_DPPV}
+, {\b V_DPBAT}
+, {\b V_DVBAT}
+, {\b V_DCMPPT}
+, {\b V_DPMPPT}
+, {\b V_DAHBAT}
+, {\b V_DCCMODE}
+, {\b V_DGTI}
+, {\b V_DLAST}
+ \}\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+enum {\b sane_vars} \{ {\b S_FCCM}
+, {\b S_FBEKW}
+, {\b S_FRUNT}
+, {\b S_FBAMPS}
+, {\b S_FBV}
+, {\b S_FLO}
+, {\b S_FSO}
+, {\b S_FACE}
+, {\b S_BEN}
+, {\b S_PWA}
+, {\b S_PAMPS}
+, {\b S_PVOLTS}
+, {\b S_FLAST}
+, {\b S_HDCSW}
+, {\b S_HACSW}
+, {\b S_HSHUT}
+, {\b S_HMODE}
+, {\b S_DVPV}
+, {\b S_DPPV}
+, {\b S_DPBAT}
+, {\b S_DVBAT}
+, {\b S_DCMPPT}
+, {\b S_DPMPPT}
+, {\b S_DAHBAT}
+, {\b S_DCCMODE}
+, {\b S_DGTI}
+, {\b S_DLAST}
+ \}\par
+}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Functions\par
+\pard\plain 
+
+{
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b timer_callback} (int32_t)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b connlost} (void *, char *)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b ramp_up_gti} (MQTTClient, bool, bool)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b ramp_up_ac} (MQTTClient, bool)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b ramp_down_gti} (MQTTClient, bool)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b ramp_down_ac} (MQTTClient, bool)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b ha_ac_off} (void)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b ha_ac_on} (void)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b ha_dc_off} (void)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b ha_dc_on} (void)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+size_t {\b iammeter_write_callback} (char *, size_t, size_t, void *)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b iammeter_read} (void)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b print_im_vars} (void)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b print_mvar_vars} (void)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+bool {\b sanity_check} (void)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+char * {\b log_time} (bool)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+bool {\b sync_ha} (void)\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+bool {\b log_timer} (void)\par
+}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Variables\par
+\pard\plain 
+
+{
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+struct {\b energy_type} {\b E}\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+struct {\b ha_flag_type} {\b ha_flag_vars_ss}\par
+\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+
+FILE * {\b fout}{\bkmkstart AAAAAAAAEF}
+{\bkmkend AAAAAAAAEF}
+\par
+}
+{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Enumeration Type Documentation\par
+\pard\plain 
+{\xe \v energy_state\:energy.h}
+{\xe \v energy.h\:energy_state}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+enum energy_state}}
+\par
+{\bkmkstart AAAAAAAAEG}
+{\bkmkend AAAAAAAAEG}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 191                       \{\par
+192         E_INIT,\par
+193         E_RUN,\par
+194         E_WAIT,\par
+195         E_IDLE,\par
+196         E_STOP,\par
+197         E_LAST,\par
+198     \};\par
+}
+}
+{\xe \v iammeter_id\:energy.h}
+{\xe \v energy.h\:iammeter_id}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+enum iammeter_id}}
+\par
+{\bkmkstart AAAAAAAAEH}
+{\bkmkend AAAAAAAAEH}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 216                      \{\par
+217         IA_VOLTAGE,\par
+218         IA_CURRENT,\par
+219         IA_POWER,\par
+220         IA_IMPORT,\par
+221         IA_EXPORT,\par
+222         IA_FREQ,\par
+223         IA_PF,\par
+224         IA_LAST,\par
+225     \};\par
+}
+}
+{\xe \v iammeter_phase\:energy.h}
+{\xe \v energy.h\:iammeter_phase}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+enum iammeter_phase}}
+\par
+{\bkmkstart AAAAAAAAEI}
+{\bkmkend AAAAAAAAEI}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 209                         \{\par
+210         PHASE_A,\par
+211         PHASE_B,\par
+212         PHASE_C,\par
+213         PHASE_LAST,\par
+214     \};\par
+}
+}
+{\xe \v mqtt_vars\:energy.h}
+{\xe \v energy.h\:mqtt_vars}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+enum mqtt_vars}}
+\par
+{\bkmkstart AAAAAAAAEJ}
+{\bkmkend AAAAAAAAEJ}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 227                    \{\par
+228         V_FCCM,\par
+229         V_FBEKW,\par
+230         V_FRUNT,\par
+231         V_FBAMPS,\par
+232         V_FBV,\par
+233         V_FLO,\par
+234         V_FSO,\par
+235         V_FACE,\par
+236         V_BEN,\par
+237         V_PWA,\par
+238         V_PAMPS,\par
+239         V_PVOLTS,\par
+240         V_FLAST,\par
+241         V_HDCSW,\par
+242         V_HACSW,\par
+243         V_HSHUT,\par
+244         V_HMODE,\par
+245         V_HCON0,\par
+246         V_HCON1,\par
+247         V_HCON2,\par
+248         V_HCON3,\par
+249         V_HCON4,\par
+250         V_HCON5,\par
+251         V_HCON6,\par
+252         V_HCON7,\par
+253         {\cf20 // add other data ranges here}\par
+254         V_DVPV,\par
+255         V_DPPV,\par
+256         V_DPBAT,\par
+257         V_DVBAT,\par
+258         V_DCMPPT,\par
+259         V_DPMPPT,\par
+260         V_DAHBAT,\par
+261         V_DCCMODE,\par
+262         V_DGTI,\par
+263         V_DLAST,\par
+264     \};\par
+}
+}
+{\xe \v running_state\:energy.h}
+{\xe \v energy.h\:running_state}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+enum running_state}}
+\par
+{\bkmkstart AAAAAAAAEK}
+{\bkmkend AAAAAAAAEK}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 200                        \{\par
+201         R_INIT,\par
+202         R_FLOAT,\par
+203         R_SLEEP,\par
+204         R_RUN,\par
+205         R_IDLE,\par
+206         R_LAST,\par
+207     \};\par
+}
+}
+{\xe \v sane_vars\:energy.h}
+{\xe \v energy.h\:sane_vars}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+enum sane_vars}}
+\par
+{\bkmkstart AAAAAAAAEL}
+{\bkmkend AAAAAAAAEL}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 266                    \{\par
+267         S_FCCM,\par
+268         S_FBEKW,\par
+269         S_FRUNT,\par
+270         S_FBAMPS,\par
+271         S_FBV,\par
+272         S_FLO,\par
+273         S_FSO,\par
+274         S_FACE,\par
+275         S_BEN,\par
+276         S_PWA,\par
+277         S_PAMPS,\par
+278         S_PVOLTS,\par
+279         S_FLAST,\par
+280         S_HDCSW,\par
+281         S_HACSW,\par
+282         S_HSHUT,\par
+283         S_HMODE,\par
+284         {\cf20 // add other data ranges here}\par
+285         S_DVPV,\par
+286         S_DPPV,\par
+287         S_DPBAT,\par
+288         S_DVBAT,\par
+289         S_DCMPPT,\par
+290         S_DPMPPT,\par
+291         S_DAHBAT,\par
+292         S_DCCMODE,\par
+293         S_DGTI,\par
+294         S_DLAST,\par
+295     \};\par
+}
+}
+{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Function Documentation\par
+\pard\plain 
+{\xe \v connlost\:energy.h}
+{\xe \v energy.h\:connlost}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void connlost (void * context, char * cause)}}
+\par
+{\bkmkstart AAAAAAAAEM}
+{\bkmkend AAAAAAAAEM}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 300 \{\par
+301     {\cf17 struct }ha_flag_type *ha_flag = context;\par
+302     int32_t id_num;\par
+303 \par
+304     {\cf20 // bug-out if no context variables passed to callback}\par
+305     {\cf19 if} (context == NULL) \{\par
+306         id_num = -1;\par
+307     \} {\cf19 else} \{\par
+308         id_num = ha_flag->ha_id;\par
+309     \}\par
+310     fprintf(fout, {\cf22 "\\n%s Connection lost, exit ha_energy program\\n"}, log_time({\cf17 false}));\par
+311     fprintf(fout, {\cf22 "%s     cause: %s, %d\\n"}, log_time({\cf17 false}), cause, id_num);\par
+312     fprintf(fout, {\cf22 "%sDAEMON failure  LOG Version %s : MQTT Version %s\\n"}, log_time({\cf17 false}), LOG_VERSION, MQTT_VERSION);\par
+313     fflush(fout);\par
+314     exit(EXIT_FAILURE);\par
+315 \}\par
+}
+}
+{\xe \v ha_ac_off\:energy.h}
+{\xe \v energy.h\:ha_ac_off}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void ha_ac_off (void )}}
+\par
+{\bkmkstart AAAAAAAAEN}
+{\bkmkend AAAAAAAAEN}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 949 \{\par
+950     mqtt_ha_switch(E.client_p, TOPIC_PACC, {\cf17 false});\par
+951     E.ac_sw_status = {\cf17 false};\par
+952 \}\par
+}
+}
+{\xe \v ha_ac_on\:energy.h}
+{\xe \v energy.h\:ha_ac_on}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void ha_ac_on (void )}}
+\par
+{\bkmkstart AAAAAAAAEO}
+{\bkmkend AAAAAAAAEO}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 955 \{\par
+956     mqtt_ha_switch(E.client_p, TOPIC_PACC, {\cf17 true});\par
+957     E.ac_sw_status = {\cf17 true};\par
+958 \}\par
+}
+}
+{\xe \v ha_dc_off\:energy.h}
+{\xe \v energy.h\:ha_dc_off}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void ha_dc_off (void )}}
+\par
+{\bkmkstart AAAAAAAAEP}
+{\bkmkend AAAAAAAAEP}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 964 \{\par
+965     mqtt_ha_switch(E.client_p, TOPIC_PDCC, {\cf17 false});\par
+966     E.gti_sw_status = {\cf17 false};\par
+967 \}\par
+}
+}
+{\xe \v ha_dc_on\:energy.h}
+{\xe \v energy.h\:ha_dc_on}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void ha_dc_on (void )}}
+\par
+{\bkmkstart AAAAAAAAEQ}
+{\bkmkend AAAAAAAAEQ}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 970 \{\par
+971     mqtt_ha_switch(E.client_p, TOPIC_PDCC, {\cf17 true});\par
+972     E.gti_sw_status = {\cf17 true};\par
+973 \}\par
+}
+}
+{\xe \v iammeter_read\:energy.h}
+{\xe \v energy.h\:iammeter_read}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void iammeter_read (void )}}
+\par
+{\bkmkstart AAAAAAAAER}
+{\bkmkend AAAAAAAAER}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 76 \{\par
+77 \par
+78     curl = curl_easy_init();\par
+79     {\cf19 if} (curl) \{\par
+80         E.link.iammeter_count++;\par
+81         curl_easy_setopt(curl, CURLOPT_URL, {\cf22 "http://10.1.1.101/monitorjson"});\par
+82         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, iammeter_write_callback);\par
+83         curl_easy_setopt(curl, CURLOPT_WRITEDATA, E.print_vars); {\cf20 // external data array for iammeter values}\par
+84 \par
+85         res = curl_easy_perform(curl);\par
+86         {\cf20 /* Check for errors */}\par
+87         {\cf19 if} (res != CURLE_OK) \{\par
+88             fprintf(fout, {\cf22 "curl_easy_perform() failed in iammeter_read: %s\\n"},\par
+89                 curl_easy_strerror(res));\par
+90             E.iammeter = {\cf17 false};\par
+91             E.link.iammeter_error++;\par
+92         \} {\cf19 else} \{\par
+93             E.iammeter = {\cf17 true};\par
+94         \}\par
+95         curl_easy_cleanup(curl);\par
+96     \}\par
+97 \}\par
+}
+}
+{\xe \v iammeter_write_callback\:energy.h}
+{\xe \v energy.h\:iammeter_write_callback}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+size_t iammeter_write_callback (char * buffer, size_t size, size_t nitems, void * stream)}}
+\par
+{\bkmkstart AAAAAAAAES}
+{\bkmkend AAAAAAAAES}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 14 \{\par
+15     cJSON *json = cJSON_ParseWithLength(buffer, strlen(buffer));\par
+16     {\cf17 struct }energy_type * e = stream;\par
+17     uint32_t next_var = 0;\par
+18 \par
+19     E.link.iammeter_count++;\par
+20 \par
+21     {\cf19 if} (json == NULL) \{\par
+22         {\cf17 const} {\cf18 char} *error_ptr = cJSON_GetErrorPtr();\par
+23         E.link.iammeter_error++;\par
+24         {\cf19 if} (error_ptr != NULL) \{\par
+25             fprintf(fout, {\cf22 "Error in iammeter_write_callback %u: %s\\n"}, E.link.iammeter_error, error_ptr);\par
+26         \}\par
+27         {\cf19 goto} iammeter_exit;\par
+28     \}\par
+29 {\cf21 #ifdef IM_DEBUG}\par
+30     fprintf(fout, {\cf22 "\\n iammeter_read_callback %s \\n"}, buffer);\par
+31 {\cf21 #endif}\par
+32 \par
+33     cJSON *data_result = cJSON_GetObjectItemCaseSensitive(json, {\cf22 "Datas"});\par
+34 \par
+35     {\cf19 if} (!data_result) \{\par
+36         size = 0;\par
+37         nitems = 0;\par
+38         {\cf19 goto} iammeter_exit;\par
+39     \}\par
+40 \par
+41     cJSON *jname;\par
+42     uint32_t phase = PHASE_A;\par
+43 \par
+44     cJSON_ArrayForEach(jname, data_result)\par
+45     \{\par
+46         cJSON *ianame;\par
+47 {\cf21 #ifdef IM_DEBUG}\par
+48         fprintf(fout, {\cf22 "\\n iammeter variables "});\par
+49 {\cf21 #endif}\par
+50 \par
+51         cJSON_ArrayForEach(ianame, jname)\par
+52         \{\par
+53             uint32_t phase_var = IA_VOLTAGE;\par
+54             iammeter_get_data(ianame->valuedouble, phase_var, phase);\par
+55             e->print_vars[next_var++] = ianame->valuedouble;\par
+56 {\cf21 #ifdef IM_DEBUG}\par
+57             fprintf(fout, {\cf22 "%8.2f "}, im_vars[phase_var][phase]);\par
+58 {\cf21 #endif}\par
+59             phase_var++;\par
+60         \}\par
+61         phase++;\par
+62     \}\par
+63 {\cf21 #ifdef IM_DEBUG}\par
+64     fprintf(fout, {\cf22 "\\n"});\par
+65 {\cf21 #endif}\par
+66 \par
+67 iammeter_exit:\par
+68     cJSON_Delete(json);\par
+69     {\cf19 return} size * nitems;\par
+70 \}\par
+}
+}
+{\xe \v log_time\:energy.h}
+{\xe \v energy.h\:log_time}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+char * log_time (bool log)}}
+\par
+{\bkmkstart AAAAAAAAET}
+{\bkmkend AAAAAAAAET}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 1034 \{\par
+1035     {\cf17 static} {\cf18 char} time_log[RBUF_SIZ] = \{0\};\par
+1036     {\cf17 static} uint32_t len = 0, sync_time = TIME_SYNC_SEC - 1;\par
+1037     time_t rawtime_log;\par
+1038 \par
+1039     tzset();\par
+1040     timezone = 0;\par
+1041     daylight = 0;\par
+1042     time(&rawtime_log);\par
+1043     {\cf19 if} (sync_time++ > TIME_SYNC_SEC) \{\par
+1044         sync_time = 0;\par
+1045         snprintf(time_log, RBUF_SIZ - 1, {\cf22 "VT%lut"}, rawtime_log); {\cf20 // format for dumpload controller gti time commands}\par
+1046         mqtt_gti_time(E.client_p, TOPIC_P, time_log);\par
+1047     \}\par
+1048 \par
+1049     sprintf(time_log, {\cf22 "%s"}, ctime(&rawtime_log));\par
+1050     len = strlen(time_log);\par
+1051     time_log[len - 1] = 0; {\cf20 // munge out the return character}\par
+1052     {\cf19 if} (log) \{\par
+1053         fprintf(fout, {\cf22 "%s "}, time_log);\par
+1054         fflush(fout);\par
+1055     \}\par
+1056 \par
+1057     {\cf19 return} time_log;\par
+1058 \}\par
+}
+}
+{\xe \v log_timer\:energy.h}
+{\xe \v energy.h\:log_timer}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+bool log_timer (void )}}
+\par
+{\bkmkstart AAAAAAAAEU}
+{\bkmkend AAAAAAAAEU}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 1093 \{\par
+1094     {\cf18 bool} itstime = {\cf17 false};\par
+1095 \par
+1096     {\cf19 if} (E.log_spam < LOW_LOG_SPAM) \{\par
+1097         E.log_time_reset = 0;\par
+1098         itstime = {\cf17 true};\par
+1099     \}\par
+1100     {\cf19 if} (E.log_time_reset > RESET_LOG_SPAM) \{\par
+1101         E.log_spam = 0;\par
+1102         itstime = {\cf17 true};\par
+1103     \}\par
+1104     {\cf19 return} itstime;\par
+1105 \}\par
+}
+}
+{\xe \v print_im_vars\:energy.h}
+{\xe \v energy.h\:print_im_vars}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void print_im_vars (void )}}
+\par
+{\bkmkstart AAAAAAAAEV}
+{\bkmkend AAAAAAAAEV}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 111 \{\par
+112     {\cf17 static} {\cf18 char} time_log[RBUF_SIZ] = \{0\};\par
+113     {\cf17 static} uint32_t sync_time = TIME_SYNC_SEC - 1;\par
+114     time_t rawtime_log;\par
+115     {\cf18 char} imvars[SYSLOG_SIZ];\par
+116 \par
+117     fflush(fout);\par
+118     snprintf(imvars, SYSLOG_SIZ-1, {\cf22 "House L1 %7.2fW, House L2 %7.2fW, GTI L1 %7.2fW"}, E.print_vars[L1_P], E.print_vars[L2_P], E.print_vars[L3_P]);\par
+119     fprintf(fout, {\cf22 "%s"}, imvars);\par
+120     fflush(fout);\par
+121     time(&rawtime_log);\par
+122     {\cf19 if} (sync_time++ > TIME_SYNC_SEC) \{\par
+123         sync_time = 0;\par
+124         snprintf(time_log, RBUF_SIZ - 1, {\cf22 "VT%lut"}, rawtime_log); {\cf20 // format for dumpload controller gti time commands}\par
+125         mqtt_gti_time(E.client_p, TOPIC_P, time_log);\par
+126     \}\par
+127 \}\par
+}
+}
+{\xe \v print_mvar_vars\:energy.h}
+{\xe \v energy.h\:print_mvar_vars}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void print_mvar_vars (void )}}
+\par
+{\bkmkstart AAAAAAAAEW}
+{\bkmkend AAAAAAAAEW}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 237 \{\par
+238     fprintf(fout, {\cf22 ", AC Inverter %7.2fW, BAT Energy %7.2fWh, Solar E %7.2fWh, AC E %7.2fWh, PERR %7.2fW, PBAL %7.2fW, ST %7.2f, GDL %7.2f, %d,%d,%d %d,%d,%d\\r"},\par
+239         E.mvar[V_FLO], E.mvar[V_FBEKW], E.mvar[V_FSO], E.mvar[V_FACE], E.mode.error, E.mvar[V_BEN], E.mode.total_system, E.mode.gti_dumpload, (int32_t) E.mvar[V_HDCSW], (int32_t) E.mvar[V_HACSW], (int32_t) E.mvar[V_HMODE],\par
+240         (int32_t) E.dc_mismatch, (int32_t) E.ac_mismatch, (int32_t) E.mode_mismatch);\par
+241 \}\par
+}
+}
+{\xe \v ramp_down_ac\:energy.h}
+{\xe \v energy.h\:ramp_down_ac}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void ramp_down_ac (MQTTClient client_p, bool sw_off)}}
+\par
+{\bkmkstart AAAAAAAAEY}
+{\bkmkend AAAAAAAAEY}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 939 \{\par
+940     {\cf19 if} (sw_off) \{\par
+941         mqtt_ha_switch(client_p, TOPIC_PACC, {\cf17 false});\par
+942         E.ac_sw_status = {\cf17 false};\par
+943         usleep(500000);\par
+944     \}\par
+945     E.once_ac = {\cf17 true};\par
+946 \}\par
+}
+}
+{\xe \v ramp_down_gti\:energy.h}
+{\xe \v energy.h\:ramp_down_gti}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void ramp_down_gti (MQTTClient client_p, bool sw_off)}}
+\par
+{\bkmkstart AAAAAAAAEZ}
+{\bkmkend AAAAAAAAEZ}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 906 \{\par
+907     {\cf19 if} (sw_off) \{\par
+908         mqtt_ha_switch(client_p, TOPIC_PDCC, {\cf17 false});\par
+909         E.once_gti_zero = {\cf17 true};\par
+910         E.gti_sw_status = {\cf17 false};\par
+911     \}\par
+912     E.once_gti = {\cf17 true};\par
+913 \par
+914     {\cf19 if} (E.once_gti_zero) \{\par
+915         mqtt_gti_power(client_p, TOPIC_P, {\cf22 "Z#"}, 7); {\cf20 // zero power}\par
+916         E.once_gti_zero = {\cf17 false};\par
+917     \}\par
+918 \}\par
+}
+}
+{\xe \v ramp_up_ac\:energy.h}
+{\xe \v energy.h\:ramp_up_ac}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void ramp_up_ac (MQTTClient client_p, bool start)}}
+\par
+{\bkmkstart AAAAAAAAFB}
+{\bkmkend AAAAAAAAFB}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 924 \{\par
+925 \par
+926     {\cf19 if} (start) \{\par
+927         E.once_ac = {\cf17 true};\par
+928     \}\par
+929 \par
+930     {\cf19 if} (E.once_ac) \{\par
+931         E.once_ac = {\cf17 false};\par
+932         mqtt_ha_switch(client_p, TOPIC_PACC, {\cf17 true});\par
+933         E.ac_sw_status = {\cf17 true};\par
+934         usleep(500000); {\cf20 // wait for voltage to ramp}\par
+935     \}\par
+936 \}\par
+}
+}
+{\xe \v ramp_up_gti\:energy.h}
+{\xe \v energy.h\:ramp_up_gti}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void ramp_up_gti (MQTTClient client_p, bool start, bool excess)}}
+\par
+{\bkmkstart AAAAAAAAFD}
+{\bkmkend AAAAAAAAFD}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 845 \{\par
+846     {\cf17 static} uint32_t sequence = 0;\par
+847 \par
+848     {\cf19 if} (start) \{\par
+849         E.once_gti = {\cf17 true};\par
+850     \}\par
+851 \par
+852     {\cf19 if} (E.once_gti) \{\par
+853         E.once_gti = {\cf17 false};\par
+854         sequence = 0;\par
+855         {\cf19 if} (!excess) \{\par
+856             mqtt_ha_switch(client_p, TOPIC_PDCC, {\cf17 true});\par
+857             E.gti_sw_status = {\cf17 true};\par
+858             usleep(500000); {\cf20 // wait for voltage to ramp}\par
+859         \} {\cf19 else} \{\par
+860             sequence = 1;\par
+861         \}\par
+862     \}\par
+863 \par
+864     {\cf19 switch} (sequence) \{\par
+865     {\cf19 case} 4:\par
+866         E.once_gti_zero = {\cf17 true};\par
+867         {\cf19 break};\par
+868     {\cf19 case} 3:\par
+869     {\cf19 case} 2:\par
+870     {\cf19 case} 1:\par
+871         E.once_gti_zero = {\cf17 true};\par
+872         {\cf19 if} (bat_current_stable() || E.dl_excess) \{ {\cf20 // check battery current std dev, stop 'motorboating'}\par
+873             sequence++;\par
+874             {\cf19 if} (!mqtt_gti_power(client_p, TOPIC_P, {\cf22 "+#"}, 3)) \{\par
+875                 sequence = 0;\par
+876             \}; {\cf20 // +100W power}\par
+877         \} {\cf19 else} \{\par
+878             usleep(500000); {\cf20 // wait a bit more for power to be stable}\par
+879             sequence = 1; {\cf20 // do power ramps when ready}\par
+880             {\cf19 if} (!mqtt_gti_power(client_p, TOPIC_P, {\cf22 "-#"}, 4)) \{\par
+881                 sequence = 0;\par
+882             \}; {\cf20 // - 100W power}\par
+883         \}\par
+884         {\cf19 break};\par
+885     {\cf19 case} 0:\par
+886         sequence++;\par
+887         {\cf19 if} (E.once_gti_zero) \{\par
+888             mqtt_gti_power(client_p, TOPIC_P, {\cf22 "Z#"}, 5); {\cf20 // zero power}\par
+889             E.once_gti_zero = {\cf17 false};\par
+890         \}\par
+891         {\cf19 break};\par
+892     {\cf19 default}:\par
+893         {\cf19 if} (E.once_gti_zero) \{\par
+894             mqtt_gti_power(client_p, TOPIC_P, {\cf22 "Z#"}, 6); {\cf20 // zero power}\par
+895             E.once_gti_zero = {\cf17 false};\par
+896         \}\par
+897         sequence = 0;\par
+898         {\cf19 break};\par
+899     \}\par
+900 \}\par
+}
+}
+{\xe \v sanity_check\:energy.h}
+{\xe \v energy.h\:sanity_check}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+bool sanity_check (void )}}
+\par
+{\bkmkstart AAAAAAAAFF}
+{\bkmkend AAAAAAAAFF}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 256 \{\par
+257     {\cf19 if} (E.mvar[V_PWA] > PWA_SANE) \{\par
+258         E.sane = S_PWA;\par
+259         {\cf19 return} {\cf17 false};\par
+260     \}\par
+261     {\cf19 if} (E.mvar[V_PAMPS] > PAMPS_SANE) \{\par
+262         E.sane = S_PAMPS;\par
+263         {\cf19 return} {\cf17 false};\par
+264     \}\par
+265     {\cf19 if} (E.mvar[V_PVOLTS] > PVOLTS_SANE) \{\par
+266         E.sane = S_PVOLTS;\par
+267         {\cf19 return} {\cf17 false};\par
+268     \}\par
+269     {\cf19 if} (E.mvar[V_FBAMPS] > BAMPS_SANE) \{\par
+270         E.sane = S_FBAMPS;\par
+271         {\cf19 return} {\cf17 false};\par
+272     \}\par
+273     {\cf19 return} {\cf17 true};\par
+274 \}\par
+}
+}
+{\xe \v sync_ha\:energy.h}
+{\xe \v energy.h\:sync_ha}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+bool sync_ha (void )}}
+\par
+{\bkmkstart AAAAAAAAFH}
+{\bkmkend AAAAAAAAFH}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 1064 \{\par
+1065     {\cf18 bool} sync = {\cf17 false};\par
+1066     {\cf19 if} (E.gti_sw_status != ({\cf18 bool}) ((int32_t) E.mvar[V_HDCSW])) \{\par
+1067         fprintf(fout, {\cf22 "DC_MM %d %d "}, ({\cf18 bool}) E.gti_sw_status, ({\cf18 bool}) ((int32_t) E.mvar[V_HDCSW]));\par
+1068         mqtt_ha_switch(E.client_p, TOPIC_PDCC, !E.gti_sw_status);\par
+1069         E.dc_mismatch = {\cf17 true};\par
+1070         fflush(fout);\par
+1071         sync = {\cf17 true};\par
+1072     \} {\cf19 else} \{\par
+1073         E.dc_mismatch = {\cf17 false};\par
+1074     \}\par
+1075 \par
+1076     E.ac_sw_status = (bool) ((int32_t) E.mvar[V_HACSW]); {\cf20 // TEMP FIX for MISmatch errors}\par
+1077     {\cf19 if} (E.ac_sw_status != ({\cf18 bool}) ((int32_t) E.mvar[V_HACSW])) \{\par
+1078         fprintf(fout, {\cf22 "AC_MM %d %d "}, ({\cf18 bool}) E.ac_sw_status, ({\cf18 bool}) ((int32_t) E.mvar[V_HACSW]));\par
+1079         mqtt_ha_switch(E.client_p, TOPIC_PACC, !E.ac_sw_status);\par
+1080         E.ac_mismatch = {\cf17 true};\par
+1081         fflush(fout);\par
+1082         sync = {\cf17 true};\par
+1083     \} {\cf19 else} \{\par
+1084         E.ac_mismatch = {\cf17 false};\par
+1085     \}\par
+1086     {\cf19 return} sync;\par
+1087 \}\par
+}
+}
+{\xe \v timer_callback\:energy.h}
+{\xe \v energy.h\:timer_callback}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void timer_callback (int32_t signum)}}
+\par
+{\bkmkstart AAAAAAAAFJ}
+{\bkmkend AAAAAAAAFJ}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 285 \{\par
+286     signal(signum, timer_callback);\par
+287     ha_flag_vars_ss.runner = {\cf17 true};\par
+288     E.ten_sec_clock++;\par
+289     E.log_spam++;\par
+290     E.log_time_reset++;\par
+291     {\cf19 if} (E.log_spam > MAX_LOG_SPAM) \{\par
+292         E.log_spam = 0;\par
+293     \}\par
+294 \}\par
+}
+}
+{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Variable Documentation\par
+\pard\plain 
+{\xe \v E\:energy.h}
+{\xe \v energy.h\:E}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+struct {\b energy_type} E{\f2 [extern]}}}
+\par
+{\bkmkstart AAAAAAAAFK}
+{\bkmkend AAAAAAAAFK}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 109                        \{\par
+110     .once_gti = {\cf17 true},\par
+111     .once_ac = {\cf17 true},\par
+112     .once_gti_zero = {\cf17 true},\par
+113     .iammeter = {\cf17 false},\par
+114     .fm80 = {\cf17 false},\par
+115     .dumpload = {\cf17 false},\par
+116     .homeassistant = {\cf17 false},\par
+117     .ac_low_adj = 0.0f,\par
+118     .gti_low_adj = 0.0f,\par
+119     .ac_sw_on = {\cf17 true},\par
+120     .gti_sw_on = {\cf17 true},\par
+121     .im_delay = 0,\par
+122     .gti_delay = 0,\par
+123     .im_display = 0,\par
+124     .rc = 0,\par
+125     .speed_go = 0,\par
+126     .mode.pid.iMax = PV_IMAX,\par
+127     .mode.pid.iMin = 0.0f,\par
+128     .mode.pid.pGain = PV_PGAIN,\par
+129     .mode.pid.iGain = PV_IGAIN,\par
+130     .mode.mode_tmr = 0,\par
+131     .mode.mode = {\cf17 true},\par
+132     .mode.in_pid_control = {\cf17 false},\par
+133     .mode.dl_mqtt_max = PV_DL_MPTT_MAX,\par
+134     .mode.E = E_INIT,\par
+135     .mode.R = R_INIT,\par
+136     .mode.no_float = {\cf17 true},\par
+137     .mode.data_error = {\cf17 false},\par
+138     .ac_sw_status = {\cf17 false},\par
+139     .gti_sw_status = {\cf17 false},\par
+140     .solar_mode = {\cf17 false},\par
+141     .solar_shutdown = {\cf17 false},\par
+142     .mode.pv_bias = PV_BIAS_LOW,\par
+143     .sane = S_DLAST,\par
+144     .startup = {\cf17 true},\par
+145     .ac_mismatch = {\cf17 false},\par
+146     .dc_mismatch = {\cf17 false},\par
+147     .mode_mismatch = {\cf17 false},\par
+148     .link.shutdown = 0,\par
+149     .mode.bat_crit = {\cf17 false},\par
+150     .dl_excess = {\cf17 false},\par
+151     .dl_excess_adj = 0.0f,\par
+152 \};\par
+}
+}
+{\xe \v ha_flag_vars_ss\:energy.h}
+{\xe \v energy.h\:ha_flag_vars_ss}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+struct {\b ha_flag_type} ha_flag_vars_ss{\f2 [extern]}}}
+\par
+{\bkmkstart AAAAAAAAFM}
+{\bkmkend AAAAAAAAFM}
+{
+\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+{
+\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 73                                       \{\par
+74     .runner = {\cf17 false},\par
+75     .receivedtoken = {\cf17 false},\par
+76     .deliveredtoken = {\cf17 false},\par
+77     .rec_ok = {\cf17 false},\par
+78     .ha_id = FM80_ID,\par
+79     .var_update = 0,\par
+80     .energy_mode = NORM_MODE,\par
+81 \};\par
+}
+}
+\par \pard\plain 
+
+\pard\plain \sect\sbkpage
+\s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+energy.h\par \pard\plain 
+{\tc\tcl2 \v ha_energy/energy.h}
+{\xe \v ha_energy/energy.h}
+{\bkmkstart AAAAAAAAAD}
+{\bkmkend AAAAAAAAAD}
+Go to the documentation of this file.\par
+{
+\par
+\pard\plain \s40\li0\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 1 \par
+4 \par
+5 {\cf21 #ifndef BMC_H}\par
+6 {\cf21 #define BMC_H}\par
+7 \par
+8 {\cf21 #ifdef __cplusplus}\par
+9 {\cf17 extern} {\cf22 "C"} \{\par
+10 {\cf21 #endif}\par
+11 {\cf21 #include <stdlib.h>}\par
+12 {\cf21 #include <stdio.h>} {\cf20 /* for printf() */}\par
+13 {\cf21 #include <unistd.h>}\par
+14 {\cf21 #include <stdint.h>}\par
+15 {\cf21 #include <string.h>}\par
+16 {\cf21 #include <stdbool.h>}\par
+17 {\cf21 #include <signal.h>}\par
+18 {\cf21 #include <time.h>}\par
+19 {\cf21 #include <sys/wait.h>}\par
+20 {\cf21 #include <sys/types.h>}\par
+21 {\cf21 #include <sys/time.h>}\par
+22 {\cf21 #include <errno.h>}\par
+23 {\cf21 #include <cjson/cJSON.h>}\par
+24 {\cf21 #include <curl/curl.h>}\par
+25 {\cf21 #include <pthread.h>}\par
+26 {\cf21 #include <sys/stat.h>}\par
+27 {\cf21 #include <syslog.h>}\par
+28 {\cf21 #include <arpa/inet.h>}\par
+29 {\cf21 #include <sys/socket.h>}\par
+30 {\cf21 #include <netdb.h>}\par
+31 {\cf21 #include <ifaddrs.h>}\par
+32 {\cf21 #include "MQTTClient.h"}\par
+33 {\cf21 #include "pid.h"}\par
+34 \par
+35 \par
+36 {\cf21 #define LOG_VERSION     "V0.74"}\par
+37 {\cf21 #define MQTT_VERSION    "V3.11"}\par
+38 {\cf21 #define TNAME  "maint9"}\par
+39 {\cf21 #define LADDRESS        "tcp://127.0.0.1:1883"}\par
+40 {\cf21 #ifdef __amd64}\par
+41 {\cf21 #define ADDRESS         "tcp://10.1.1.172:1883"}\par
+42 {\cf21 #else}\par
+43 {\cf21 #define ADDRESS         "tcp://10.1.1.30:1883"}\par
+44 {\cf21 #endif}\par
+45 {\cf21 #define CLIENTID1       "Energy_Mqtt_HA1"}\par
+46 {\cf21 #define CLIENTID2       "Energy_Mqtt_HA2"}\par
+47 {\cf21 #define CLIENTID3       "Energy_Mqtt_HA3" }\par
+48 {\cf21 #define TOPIC_P         "mateq84/data/gticmd"}\par
+49 {\cf21 #define TOPIC_SPAM      "mateq84/data/spam"}\par
+50 {\cf21 #define TOPIC_PACA      "home-assistant/gtiac/availability"}\par
+51 {\cf21 #define TOPIC_PDCA      "home-assistant/gtidc/availability"}\par
+52 {\cf21 #define TOPIC_PACC      "home-assistant/gtiac/contact"}\par
+53 {\cf21 #define TOPIC_PDCC      "home-assistant/gtidc/contact"}\par
+54 {\cf21 #define TOPIC_PPID      "home-assistant/solar/pid"}\par
+55 {\cf21 #define TOPIC_SHUTDOWN  "home-assistant/solar/shutdown"}\par
+56 {\cf21 #define TOPIC_SS        "mateq84/data/solar"}\par
+57 {\cf21 #define TOPIC_SD        "mateq84/data/dumpload"}\par
+58 {\cf21 #define TOPIC_HA        "home-assistant/status/switch"}\par
+59 {\cf21 #define QOS             1}\par
+60 {\cf21 #define TIMEOUT         10000L}\par
+61 {\cf21 #define SPACING_USEC    500 * 1000}\par
+62 {\cf21 #define USEC_SEC        1000000L}\par
+63 \par
+64 {\cf21 #define DAQ_STR 32}\par
+65 {\cf21 #define DAQ_STR_M DAQ_STR-1}\par
+66 \par
+67 {\cf21 #define SBUF_SIZ        16  }{\cf20 // short buffer string size}\par
+68 {\cf21 #define RBUF_SIZ        82}\par
+69 {\cf21 #define SYSLOG_SIZ      512}\par
+70 \par
+71 {\cf21 #define MQTT_TIMEOUT    900}\par
+72 {\cf21 #define SW_QOS          1}\par
+73 \par
+74 {\cf21 #define NO_CYLON}\par
+75 {\cf21 #define CRITIAL_SHUTDOWN_LOG}\par
+76 \par
+77 {\cf21 #define UNIT_TEST       2}\par
+78 {\cf21 #define NORM_MODE       0}\par
+79 {\cf21 #define PID_MODE        1}\par
+80 {\cf21 #define MAX_ERROR       5}\par
+81 {\cf21 #define IAM_DELAY       120}\par
+82 \par
+83 {\cf21 #define CMD_SEC         10}\par
+84 {\cf21 #define TIME_SYNC_SEC   30}\par
+85 \par
+86     {\cf20 /*}\par
+87 {\cf20      * Battery SoC cycle limits parameters}\par
+88 {\cf20      */}\par
+89 {\cf21 #define BAT_M_KW            5120.0f}\par
+90 {\cf21 #define BAT_SOC_TOP         0.98f}\par
+91 {\cf21 #define BAT_SOC_HIGH        0.95f}\par
+92 {\cf21 #define BAT_SOC_LOW         0.68f}\par
+93 {\cf21 #define BAT_SOC_LOW_AC      0.72f   }\par
+94 {\cf21 #define BAT_CRITICAL        746.0f }\par
+95 {\cf21 #define MIN_BAT_KW_BSOC_SLP 4000.0f}\par
+96 {\cf21 #define MIN_BAT_KW_BSOC_HI  4550.0f}\par
+97 \par
+98 {\cf21 #define MIN_BAT_KW_GTI_HI   BAT_M_KW*BAT_SOC_TOP}\par
+99 {\cf21 #define MIN_BAT_KW_GTI_LO   BAT_M_KW*BAT_SOC_LOW}\par
+100 \par
+101 {\cf21 #define MIN_BAT_KW_AC_HI    BAT_M_KW*BAT_SOC_HIGH}\par
+102 {\cf21 #define MIN_BAT_KW_AC_LO    BAT_M_KW*BAT_SOC_LOW_AC}\par
+103 \par
+104     {\cf20 /*}\par
+105 {\cf20      * PV panel cycle limits parameters}\par
+106 {\cf20      */}\par
+107 {\cf21 #define PV_PGAIN            0.85f}\par
+108 {\cf21 #define PV_IGAIN            0.12f}\par
+109 {\cf21 #define PV_IMAX             1400.0f}\par
+110 {\cf21 #define PV_BIAS             288.0f}\par
+111 {\cf21 #define PV_BIAS_ZERO          0.0f}\par
+112 {\cf21 #define PV_BIAS_LOW         222.0f}\par
+113 {\cf21 #define PV_BIAS_FLOAT       399.0f}\par
+114 {\cf21 #define PV_BIAS_SLEEP       480.0f}\par
+115 {\cf21 #define PV_BIAS_RATE        320.0f}\par
+116 {\cf21 #define PV_DL_MPTT_MAX     1200.0f}\par
+117 {\cf21 #define PV_DL_MPTT_EXCESS  1300.0f}\par
+118 {\cf21 #define PV_DL_MPTT_IDLE     57.0f}\par
+119 {\cf21 #define PV_DL_BIAS_RATE     75.0f}\par
+120 {\cf21 #define PV_DL_EXCESS       500.0f}\par
+121 {\cf21 #define PV_DL_B_AH_LOW     100.0f}\par
+122 {\cf21 #define PV_DL_B_AH_MIN     150.0f }{\cf20 // DL battery should be at least 175Ah}\par
+123 {\cf21 #define PV_DL_B_V_LOW       23.8f }{\cf20 // Battery low-voltqage cutoff}\par
+124 {\cf21 #define PWA_SLEEP          200.0f}\par
+125 {\cf21 #define DL_AC_DC_EFF        1.24f}\par
+126 \par
+127     {\cf20 /*}\par
+128 {\cf20      * Energy control loop parameters}\par
+129 {\cf20      */}\par
+130 {\cf21 #define BAL_MIN_ENERGY_AC   -200.0f}\par
+131 {\cf21 #define BAL_MAX_ENERGY_AC   200.0f}\par
+132 {\cf21 #define BAL_MIN_ENERGY_GTI  -1400.0f}\par
+133 {\cf21 #define BAL_MAX_ENERGY_GTI  200.0f}\par
+134 \par
+135 {\cf21 #define LOG_TO_FILE         "/store/logs/energy.log"}\par
+136 {\cf21 #define LOG_TO_FILE_ALT     "/tmp/energy.log"}\par
+137 \par
+138 {\cf21 #define MAX_LOG_SPAM  60}\par
+139 {\cf21 #define LOW_LOG_SPAM  2}\par
+140 {\cf21 #define RESET_LOG_SPAM  120}\par
+141 \par
+142     {\cf20 //#define IM_DEBUG                      // WEM3080T LOGGING}\par
+143     {\cf20 //#define B_ADJ_DEBUG                   // debug printing}\par
+144     {\cf20 //#define FAKE_VPV                      // NO AC CHARGER for DUMPLOAD, batteries are cross-connected to a parallel bank}\par
+145     {\cf20 //#define PSW_DEBUG}\par
+146     {\cf20 //#define DEBUG_SHUTDOWN}\par
+147 \par
+148     {\cf20 //#define AUTO_CHARGE                   // turn on dumpload charger during restarts}\par
+149     {\cf20 //#define B_DLE_DEBUG    // Dump Load debugging}\par
+150     {\cf20 //#define BSOC_DEGUB}\par
+151     {\cf20 //#define DEBUG_HA_CMD}\par
+152 \par
+153 {\cf21 #define IM_DELAY            1   }{\cf20 // tens of second updates}\par
+154 {\cf21 #define IM_DISPLAY          1}\par
+155 {\cf21 #define GTI_DELAY           1}\par
+156 \par
+157     {\cf20 /*}\par
+158 {\cf20      * sane limits for system data elements}\par
+159 {\cf20      */}\par
+160 {\cf21 #define PWA_SANE            1700.0f}\par
+161 {\cf21 #define PAMPS_SANE          16.0f}\par
+162 {\cf21 #define PVOLTS_SANE         150.0f}\par
+163 {\cf21 #define BAMPS_SANE          70.0f}\par
+164 \par
+165     {\cf20 /*}\par
+166 {\cf20         Three Phase WiFi Energy Meter (WEM3080T)}\par
+167 {\cf20     name    Unit    Description}\par
+168 {\cf20     wem3080t_voltage_a  V   A phase voltage}\par
+169 {\cf20     wem3080t_current_a  A   A phase current}\par
+170 {\cf20     wem3080t_power_a    W   A phase active power}\par
+171 {\cf20     wem3080t_importenergy_a kWh A phase import energy}\par
+172 {\cf20     wem3080t_exportgrid_a   kWh A phase export energy}\par
+173 {\cf20     wem3080t_frequency_a    kWh A phase frequency}\par
+174 {\cf20     wem3080t_pf_a   kWh A phase power factor}\par
+175 {\cf20     wem3080t_voltage_b  V   B phase voltage}\par
+176 {\cf20     wem3080t_current_b  A   B phase current}\par
+177 {\cf20     wem3080t_power_b    W   B phase active power}\par
+178 {\cf20     wem3080t_importenergy_b kWh B phase import energy}\par
+179 {\cf20     wem3080t_exportgrid_b   kWh B phase export energy}\par
+180 {\cf20     wem3080t_frequency_b    kWh B phase frequency}\par
+181 {\cf20     wem3080t_pf_b   kWh B phase power factor}\par
+182 {\cf20     wem3080t_voltage_c  V   C phase voltage}\par
+183 {\cf20     wem3080t_current_c  A   C phase current}\par
+184 {\cf20     wem3080t_power_c    W   C phase active power}\par
+185 {\cf20     wem3080t_importenergy_c kWh C phase import energy}\par
+186 {\cf20     wem3080t_exportgrid_c   kWh C phase export energy}\par
+187 {\cf20     wem3080t_frequency_c    kWh C phase frequency}\par
+188 {\cf20     wem3080t_pf_c   kWh C phase power factor}\par
+189 {\cf20      */}\par
+190 \par
+191     {\cf17 enum} energy_state \{\par
+192         E_INIT,\par
+193         E_RUN,\par
+194         E_WAIT,\par
+195         E_IDLE,\par
+196         E_STOP,\par
+197         E_LAST,\par
+198     \};\par
+199 \par
+200     {\cf17 enum} running_state \{\par
+201         R_INIT,\par
+202         R_FLOAT,\par
+203         R_SLEEP,\par
+204         R_RUN,\par
+205         R_IDLE,\par
+206         R_LAST,\par
+207     \};\par
+208 \par
+209     {\cf17 enum} iammeter_phase \{\par
+210         PHASE_A,\par
+211         PHASE_B,\par
+212         PHASE_C,\par
+213         PHASE_LAST,\par
+214     \};\par
+215 \par
+216     {\cf17 enum} iammeter_id \{\par
+217         IA_VOLTAGE,\par
+218         IA_CURRENT,\par
+219         IA_POWER,\par
+220         IA_IMPORT,\par
+221         IA_EXPORT,\par
+222         IA_FREQ,\par
+223         IA_PF,\par
+224         IA_LAST,\par
+225     \};\par
+226 \par
+227     {\cf17 enum} mqtt_vars \{\par
+228         V_FCCM,\par
+229         V_FBEKW,\par
+230         V_FRUNT,\par
+231         V_FBAMPS,\par
+232         V_FBV,\par
+233         V_FLO,\par
+234         V_FSO,\par
+235         V_FACE,\par
+236         V_BEN,\par
+237         V_PWA,\par
+238         V_PAMPS,\par
+239         V_PVOLTS,\par
+240         V_FLAST,\par
+241         V_HDCSW,\par
+242         V_HACSW,\par
+243         V_HSHUT,\par
+244         V_HMODE,\par
+245         V_HCON0,\par
+246         V_HCON1,\par
+247         V_HCON2,\par
+248         V_HCON3,\par
+249         V_HCON4,\par
+250         V_HCON5,\par
+251         V_HCON6,\par
+252         V_HCON7,\par
+253         {\cf20 // add other data ranges here}\par
+254         V_DVPV,\par
+255         V_DPPV,\par
+256         V_DPBAT,\par
+257         V_DVBAT,\par
+258         V_DCMPPT,\par
+259         V_DPMPPT,\par
+260         V_DAHBAT,\par
+261         V_DCCMODE,\par
+262         V_DGTI,\par
+263         V_DLAST,\par
+264     \};\par
+265 \par
+266     {\cf17 enum} sane_vars \{\par
+267         S_FCCM,\par
+268         S_FBEKW,\par
+269         S_FRUNT,\par
+270         S_FBAMPS,\par
+271         S_FBV,\par
+272         S_FLO,\par
+273         S_FSO,\par
+274         S_FACE,\par
+275         S_BEN,\par
+276         S_PWA,\par
+277         S_PAMPS,\par
+278         S_PVOLTS,\par
+279         S_FLAST,\par
+280         S_HDCSW,\par
+281         S_HACSW,\par
+282         S_HSHUT,\par
+283         S_HMODE,\par
+284         {\cf20 // add other data ranges here}\par
+285         S_DVPV,\par
+286         S_DPPV,\par
+287         S_DPBAT,\par
+288         S_DVBAT,\par
+289         S_DCMPPT,\par
+290         S_DPMPPT,\par
+291         S_DAHBAT,\par
+292         S_DCCMODE,\par
+293         S_DGTI,\par
+294         S_DLAST,\par
+295     \};\par
+296 \par
+297 {\cf21 #define MAX_IM_VAR  IA_LAST*PHASE_LAST}\par
+298 \par
+299 {\cf21 #define L1_P    IA_POWER}\par
+300 {\cf21 #define L2_P    L1_P+IA_LAST}\par
+301 {\cf21 #define L3_P    L2_P+IA_LAST}\par
+302 \par
+303     {\cf17 struct }link_type \{\par
+304         {\cf17 volatile} uint32_t iammeter_error, iammeter_count;\par
+305         {\cf17 volatile} uint32_t mqtt_error, mqtt_count;\par
+306         {\cf17 volatile} uint32_t shutdown;\par
+307     \};\par
+308 \par
+309     {\cf17 struct }mode_type \{\par
+310         {\cf17 volatile} {\cf18 double} error, target, total_system, gti_dumpload, pv_bias, dl_mqtt_max, off_grid, sequence;\par
+311         {\cf17 volatile} {\cf18 bool} mode, in_pid_control, con0, con1, con2, con3, con4, con5, con6, con7, no_float, data_error, bat_crit;\par
+312         {\cf17 volatile} uint32_t mode_tmr;\par
+313         {\cf17 volatile} {\cf17 struct }SPid pid;\par
+314         {\cf17 volatile} {\cf17 enum} energy_state E;\par
+315         {\cf17 volatile} {\cf17 enum} running_state R;\par
+316     \};\par
+317 \par
+318     {\cf17 struct }energy_type \{\par
+319         {\cf17 volatile} {\cf18 double} print_vars[MAX_IM_VAR];\par
+320         {\cf17 volatile} {\cf18 double} im_vars[IA_LAST][PHASE_LAST];\par
+321         {\cf17 volatile} {\cf18 double} mvar[V_DLAST + 1];\par
+322         {\cf17 volatile} {\cf18 bool} once_gti, once_ac, iammeter, fm80, dumpload, homeassistant, once_gti_zero;\par
+323         {\cf17 volatile} {\cf18 double} gti_low_adj, ac_low_adj, dl_excess_adj;\par
+324         {\cf17 volatile} {\cf18 bool} ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode, startup, ac_mismatch, dc_mismatch, mode_mismatch, dl_excess;\par
+325         {\cf17 volatile} uint32_t speed_go, im_delay, im_display, gti_delay;\par
+326         {\cf17 volatile} int32_t rc, sane;\par
+327         {\cf17 volatile} uint32_t ten_sec_clock, log_spam, log_time_reset;\par
+328         pthread_mutex_t ha_lock;\par
+329         {\cf17 struct }mode_type mode;\par
+330         {\cf17 struct }link_type link;\par
+331         MQTTClient client_p, client_sd, client_ha;\par
+332     \};\par
+333 \par
+334     {\cf17 extern} {\cf17 struct }energy_type E;\par
+335     {\cf17 extern} {\cf17 struct }ha_flag_type ha_flag_vars_ss;\par
+336     {\cf17 extern} FILE* fout;\par
+337 \par
+338     {\cf18 void} timer_callback(int32_t);\par
+339     {\cf18 void} connlost({\cf18 void} *, {\cf18 char} *);\par
+340 \par
+341     {\cf18 void} ramp_up_gti(MQTTClient, {\cf18 bool}, {\cf18 bool});\par
+342     {\cf18 void} ramp_up_ac(MQTTClient, {\cf18 bool});\par
+343     {\cf18 void} ramp_down_gti(MQTTClient, {\cf18 bool});\par
+344     {\cf18 void} ramp_down_ac(MQTTClient, {\cf18 bool});\par
+345     {\cf18 void} ha_ac_off({\cf18 void});\par
+346     {\cf18 void} ha_ac_on({\cf18 void});\par
+347     {\cf18 void} ha_dc_off({\cf18 void});\par
+348     {\cf18 void} ha_dc_on({\cf18 void});\par
+349 \par
+350     {\cf18 size_t} iammeter_write_callback({\cf18 char} *, {\cf18 size_t}, {\cf18 size_t}, {\cf18 void} *);\par
+351     {\cf18 void} iammeter_read({\cf18 void});\par
+352     {\cf18 void} print_im_vars({\cf18 void});\par
+353     {\cf18 void} print_mvar_vars({\cf18 void});\par
+354 \par
+355     {\cf18 bool} sanity_check({\cf18 void});\par
+356     {\cf18 char} * log_time({\cf18 bool});\par
+357     {\cf18 bool} sync_ha({\cf18 void});\par
+358     {\cf18 bool} log_timer({\cf18 void});\par
+359 \par
+360 {\cf21 #ifdef __cplusplus}\par
+361 \}\par
+362 {\cf21 #endif}\par
+363 \par
+364 {\cf21 #endif }{\cf20 /* BMC_H */}{\cf21 }\par
+365 \par
+}
+\par \pard\plain 
+
+\pard\plain \sect\sbkpage
+\s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+http_vars.h\par \pard\plain 
+{\tc\tcl2 \v ha_energy/http_vars.h}
+{\xe \v ha_energy/http_vars.h}
+{\bkmkstart AAAAAAAAAB}
+{\bkmkend AAAAAAAAAB}
+{
+\par
+\pard\plain \s40\li0\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 1 {\cf20 /*}\par
+2 {\cf20  * File:   http_vars.h}\par
+3 {\cf20  * Author: root}\par
+4 {\cf20  *}\par
+5 {\cf20  * Created on February 16, 2024, 8:37 AM}\par
+6 {\cf20  */}\par
+7 \par
+8 {\cf21 #ifndef HTTP_VARS_H}\par
+9 {\cf21 #define HTTP_VARS_H}\par
+10 \par
+11 {\cf21 #ifdef __cplusplus}\par
+12 {\cf17 extern} {\cf22 "C"} \{\par
+13 {\cf21 #endif}\par
+14 \par
+15 {\cf21 #include "energy.h"}\par
+16 \par
+17     {\cf17 extern} FILE* fout;\par
+18 \par
+19 {\cf21 #ifdef __cplusplus}\par
+20 \}\par
+21 {\cf21 #endif}\par
+22 \par
+23 {\cf21 #endif }{\cf20 /* HTTP_VARS_H */}{\cf21 }\par
+24 \par
+}
+\par \pard\plain 
+
+\pard\plain \sect\sbkpage
+\s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+mqtt_rec.h\par \pard\plain 
+{\tc\tcl2 \v ha_energy/mqtt_rec.h}
+{\xe \v ha_energy/mqtt_rec.h}
+{\bkmkstart AAAAAAAAAC}
+{\bkmkend AAAAAAAAAC}
+{
+\par
+\pard\plain \s40\li0\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 1 {\cf20 /* }\par
+2 {\cf20  * File:   mqtt_rec.h}\par
+3 {\cf20  * Author: root}\par
+4 {\cf20  *}\par
+5 {\cf20  * Created on February 5, 2024, 2:54 PM}\par
+6 {\cf20  */}\par
+7 \par
+8 {\cf21 #ifndef MQTT_REC_H}\par
+9 {\cf21 #define MQTT_REC_H}\par
+10 \par
+11 {\cf21 #ifdef __cplusplus}\par
+12 {\cf17 extern} {\cf22 "C"} \{\par
+13 {\cf21 #endif}\par
+14 \par
+15 {\cf21 #include "energy.h"}\par
+16 {\cf21 #include "mqtt_vars.h"}\par
+17 \par
+18 {\cf21 #define RDEV_SIZE        10}\par
+19 \par
+20 {\cf21 #define SLEEP_CODE      0}\par
+21 {\cf21 #define FLOAT_CODE      1}\par
+22     {\cf20 //#define DEBUG_REC}\par
+23     {\cf20 //#define GET_DEBUG}\par
+24     \par
+25 {\cf21 #define MBMQTT      1024}\par
+26 \par
+27     {\cf17 enum} mqtt_id \{\par
+28         P8055_ID,\par
+29         FM80_ID,\par
+30         DUMPLOAD_ID,\par
+31     HA_ID,\par
+32         LAST_MQTT_ID,\par
+33     \};\par
+34 \par
+35     {\cf17 struct }ha_flag_type \{\par
+36         {\cf17 volatile} MQTTClient_deliveryToken deliveredtoken, receivedtoken;\par
+37         {\cf17 volatile} {\cf18 bool} runner, rec_ok;\par
+38         int32_t ha_id;\par
+39         {\cf17 volatile} int32_t var_update, energy_mode;\par
+40     \};\par
+41 \par
+42     {\cf17 extern} FILE* fout;\par
+43 \par
+44     int32_t msgarrvd({\cf18 void} *, {\cf18 char} *, {\cf18 int}, MQTTClient_message *);\par
+45     {\cf18 void} delivered({\cf18 void} *, MQTTClient_deliveryToken);\par
+46 \par
+47     {\cf18 bool} json_get_data(cJSON *, {\cf17 const} {\cf18 char} *, cJSON *, uint32_t);\par
+48     {\cf18 bool} fm80_float({\cf17 const} {\cf18 bool} set_bias);\par
+49     {\cf18 bool} fm80_sleep({\cf18 void});\par
+50 \par
+51 {\cf21 #ifdef __cplusplus}\par
+52 \}\par
+53 {\cf21 #endif}\par
+54 \par
+55 {\cf21 #endif }{\cf20 /* MQTT_REC_H */}{\cf21 }\par
+56 \par
+}
+\par \pard\plain 
+
+\pard\plain \sect\sbkpage
+\s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+mqtt_vars.h\par \pard\plain 
+{\tc\tcl2 \v ha_energy/mqtt_vars.h}
+{\xe \v ha_energy/mqtt_vars.h}
+{\bkmkstart AAAAAAAAAE}
+{\bkmkend AAAAAAAAAE}
+{
+\par
+\pard\plain \s40\li0\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 1 {\cf20 /* }\par
+2 {\cf20  * File:   mqtt_vars.h}\par
+3 {\cf20  * Author: root}\par
+4 {\cf20  *}\par
+5 {\cf20  * Created on February 9, 2024, 6:50 AM}\par
+6 {\cf20  */}\par
+7 \par
+8 {\cf21 #ifndef MQTT_VARS_H}\par
+9 {\cf21 #define MQTT_VARS_H}\par
+10 \par
+11 {\cf21 #ifdef __cplusplus}\par
+12 {\cf17 extern} {\cf22 "C"} \{\par
+13 {\cf21 #endif}\par
+14 \par
+15     {\cf20 //#define GTI_NO_POWER      // do we actually run power commands}\par
+16 \par
+17     {\cf20 //#define DEBUG_HA_CMD    // show debug text}\par
+18 {\cf21 #define HA_SW_DELAY     400000  }{\cf20 // usecs}\par
+19 {\cf21 #define TOKEN_DELAY     250}\par
+20 {\cf21 #define GTI_TOKEN_DELAY 300}\par
+21 \par
+22 {\cf21 #define QOS             1}\par
+23 \par
+24     {\cf17 extern} {\cf17 const} {\cf18 char}* mqtt_name[V_DLAST];\par
+25 \par
+26     {\cf18 void} mqtt_ha_switch(MQTTClient, {\cf17 const} {\cf18 char} *, {\cf17 const} {\cf18 bool});\par
+27     {\cf18 void} mqtt_ha_pid(MQTTClient, {\cf17 const} {\cf18 char} *);\par
+28     {\cf18 void} mqtt_ha_shutdown(MQTTClient, {\cf17 const} {\cf18 char} *);\par
+29     {\cf18 bool} mqtt_gti_power(MQTTClient, {\cf17 const} {\cf18 char} *, {\cf18 char} *, uint32_t);\par
+30     {\cf18 bool} mqtt_gti_time(MQTTClient, {\cf17 const} {\cf18 char} *, {\cf18 char} *);\par
+31 \par
+32 {\cf21 #ifdef __cplusplus}\par
+33 \}\par
+34 {\cf21 #endif}\par
+35 \par
+36 {\cf21 #endif }{\cf20 /* MQTT_VARS_H */}{\cf21 }\par
+37 \par
+}
+\par \pard\plain 
+
+\pard\plain \sect\sbkpage
+\s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+pid.h\par \pard\plain 
+{\tc\tcl2 \v ha_energy/pid.h}
+{\xe \v ha_energy/pid.h}
+{\bkmkstart AAAAAAAAAF}
+{\bkmkend AAAAAAAAAF}
+{
+\par
+\pard\plain \s40\li0\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid 1 {\cf20 /* }\par
+2 {\cf20  * File:   pid.h}\par
+3 {\cf20  * Author: root}\par
+4 {\cf20  *}\par
+5 {\cf20  * Created on March 6, 2024, 7:03 AM}\par
+6 {\cf20  */}\par
+7 \par
+8 {\cf21 #ifndef PID_H}\par
+9 {\cf21 #define PID_H}\par
+10 \par
+11 {\cf21 #ifdef __cplusplus}\par
+12 {\cf17 extern} {\cf22 "C"} \{\par
+13 {\cf21 #endif}\par
+14 \par
+15     {\cf17 struct }SPid \{\par
+16         {\cf18 double} dState; {\cf20 // Last position input}\par
+17         {\cf18 double} iState; {\cf20 // Integrator state}\par
+18         {\cf18 double} iMax, iMin; {\cf20 // Maximum and minimum allowable integrator state}\par
+19         {\cf18 double} iGain, {\cf20 // integral gain}\par
+20         pGain, {\cf20 // proportional gain}\par
+21         dGain; {\cf20 // derivative gain}\par
+22     \};\par
+23 \par
+24     {\cf18 double} UpdatePI({\cf17 volatile} {\cf17 struct} SPid * {\cf17 const}, {\cf17 const} {\cf18 double});\par
+25     {\cf18 void} ResetPI({\cf17 volatile} {\cf17 struct} SPid * {\cf17 const});\par
+26 \par
+27 \par
+28 {\cf21 #ifdef __cplusplus}\par
+29 \}\par
+30 {\cf21 #endif}\par
+31 \par
+32 {\cf21 #endif }{\cf20 /* PID_H */}{\cf21 }\par
+33 \par
+}
+
+\pard\plain \sect\sbkpage
+\s1\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs36\kerning36\cgrid 
+\s1\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs36\kerning36\cgrid Index\par 
+\pard\plain 
+{\tc \v Index}
+{\field\fldedit {\*\fldinst INDEX \\c2 \\*MERGEFORMAT}{\fldrslt INDEX}}
+}

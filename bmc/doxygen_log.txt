@@ -1,0 +1,817 @@
+Doxygen version used: 1.14.0 (33a89a6668ac70ebc8971a69423c030698998967)
+Searching for include files...
+Searching for example files...
+Searching for images...
+Searching for dot files...
+Searching for msc files...
+Searching for dia files...
+Searching for plantuml files...
+Searching for files to exclude
+Searching INPUT for files to process...
+Searching for files in directory /dlna/ha_energy/bmc
+Searching for files in directory /dlna/ha_energy/bmc/en-cppcheck-build-dir
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/build
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/build/Release
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/build/Release/GNU-Linux
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/build/Release/GNU-Linux/_ext
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/build/Release/GNU-Linux/_ext/5c0
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/build/Debug
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/build/Debug/GNU-Linux
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/build/Debug/GNU-Linux/_ext
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/build/Debug/GNU-Linux/_ext/5c0
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/dist
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/dist/Debug
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/dist/Debug/GNU-Linux-x86
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/dist/Debug/GNU-Linux
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/dist/Debug/None-Linux-x86
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/dist/Debug/None-Linux
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/dist/Release
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/dist/Release/GNU-Linux-x86
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/dist/Release/GNU-Linux
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/nbproject
+Searching for files in directory /dlna/ha_energy/bmc/ha_energy/nbproject/private
+Reading and parsing tag files
+Parsing files
+Processing input using 32 threads.
+Reading /dlna/ha_energy/bmc/ha_energy/build/Release/GNU-Linux/_ext/5c0/energy.o.d...
+Reading /dlna/ha_energy/bmc/ha_energy/build/Debug/GNU-Linux/http_vars.o.d...
+Reading /dlna/ha_energy/bmc/ha_energy/build/Debug/GNU-Linux/mqtt_vars.o.d...
+Reading /dlna/ha_energy/bmc/ha_energy/build/Debug/GNU-Linux/pid.o.d...
+Reading /dlna/ha_energy/bmc/ha_energy/build/Release/GNU-Linux/http_vars.o.d...
+Reading /dlna/ha_energy/bmc/ha_energy/build/Release/GNU-Linux/mqtt_vars.o.d...
+Reading /dlna/ha_energy/bmc/ha_energy/build/Debug/GNU-Linux/bsoc.o.d...
+Reading /dlna/ha_energy/bmc/ha_energy/build/Release/GNU-Linux/mqtt_rec.o.d...
+Reading /dlna/ha_energy/bmc/ha_energy/build/Debug/GNU-Linux/_ext/5c0/energy.o.d...
+Reading /dlna/ha_energy/bmc/ha_energy/.dep.inc...
+Reading /dlna/ha_energy/bmc/ha_energy/build/Release/GNU-Linux/pid.o.d...
+Reading /dlna/ha_energy/bmc/ha_energy/build/Release/GNU-Linux/bsoc.o.d...
+Reading /dlna/ha_energy/bmc/ha_energy/build/Debug/GNU-Linux/mqtt_rec.o.d...
+Preprocessing /dlna/ha_energy/bmc/ha_energy/bsoc.h...
+Preprocessing /dlna/ha_energy/bmc/ha_energy/bsoc.c...
+Preprocessing /dlna/ha_energy/bmc/ha_energy/http_vars.c...
+Preprocessing /dlna/ha_energy/bmc/ha_energy/http_vars.h...
+Preprocessing /dlna/ha_energy/bmc/ha_energy/mqtt_rec.h...
+Preprocessing /dlna/ha_energy/bmc/energy.c...
+Preprocessing /dlna/ha_energy/bmc/ha_energy/nbproject/private/c_standard_headers_indexer.c...
+Preprocessing /dlna/ha_energy/bmc/ha_energy/mqtt_rec.c...
+Preprocessing /dlna/ha_energy/bmc/ha_energy/energy.h...
+Preprocessing /dlna/ha_energy/bmc/ha_energy/pid.c...
+Preprocessing /dlna/ha_energy/bmc/ha_energy/mqtt_vars.c...
+Preprocessing /dlna/ha_energy/bmc/ha_energy/mqtt_vars.h...
+Preprocessing /dlna/ha_energy/bmc/ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp...
+Preprocessing /dlna/ha_energy/bmc/ha_energy/pid.h...
+Parsing file /dlna/ha_energy/bmc/ha_energy/.dep.inc...
+Parsing file /dlna/ha_energy/bmc/ha_energy/mqtt_vars.h...
+Parsing file /dlna/ha_energy/bmc/ha_energy/build/Release/GNU-Linux/mqtt_vars.o.d...
+Parsing file /dlna/ha_energy/bmc/ha_energy/build/Release/GNU-Linux/http_vars.o.d...
+Parsing file /dlna/ha_energy/bmc/ha_energy/build/Release/GNU-Linux/_ext/5c0/energy.o.d...
+Parsing file /dlna/ha_energy/bmc/ha_energy/build/Debug/GNU-Linux/pid.o.d...
+Parsing file /dlna/ha_energy/bmc/ha_energy/build/Debug/GNU-Linux/bsoc.o.d...
+Parsing file /dlna/ha_energy/bmc/ha_energy/build/Release/GNU-Linux/bsoc.o.d...
+Parsing file /dlna/ha_energy/bmc/ha_energy/build/Debug/GNU-Linux/mqtt_vars.o.d...
+Parsing file /dlna/ha_energy/bmc/ha_energy/build/Debug/GNU-Linux/http_vars.o.d...
+Parsing file /dlna/ha_energy/bmc/ha_energy/build/Debug/GNU-Linux/mqtt_rec.o.d...
+Parsing file /dlna/ha_energy/bmc/ha_energy/build/Release/GNU-Linux/mqtt_rec.o.d...
+Parsing file /dlna/ha_energy/bmc/ha_energy/build/Release/GNU-Linux/pid.o.d...
+Parsing file /dlna/ha_energy/bmc/ha_energy/nbproject/private/c_standard_headers_indexer.c...
+Parsing file /dlna/ha_energy/bmc/ha_energy/pid.h...
+Parsing file /dlna/ha_energy/bmc/ha_energy/build/Debug/GNU-Linux/_ext/5c0/energy.o.d...
+Parsing file /dlna/ha_energy/bmc/ha_energy/pid.c...
+Parsing file /dlna/ha_energy/bmc/ha_energy/http_vars.c...
+Parsing file /dlna/ha_energy/bmc/ha_energy/http_vars.h...
+Parsing file /dlna/ha_energy/bmc/ha_energy/energy.h...
+Parsing file /dlna/ha_energy/bmc/ha_energy/mqtt_rec.h...
+Parsing file /dlna/ha_energy/bmc/ha_energy/mqtt_vars.c...
+Parsing file /dlna/ha_energy/bmc/ha_energy/mqtt_rec.c...
+Parsing file /dlna/ha_energy/bmc/ha_energy/bsoc.c...
+Parsing file /dlna/ha_energy/bmc/ha_energy/bsoc.h...
+Parsing file /dlna/ha_energy/bmc/energy.c...
+Parsing file /dlna/ha_energy/bmc/ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp...
+Building macro definition list...
+Building group list...
+Building directory list...
+Building namespace list...
+Building file list...
+Building class list...
+Building concept list...
+Computing nesting relations for classes...
+Associating documentation with classes...
+Associating documentation with concepts...
+Associating documentation with modules...
+Building example list...
+Searching for enumerations...
+Searching for documented typedefs...
+Searching for members imported via using declarations...
+Searching for included using directives...
+Searching for documented variables...
+Building interface member list...
+Building member list...
+Searching for friends...
+Searching for documented defines...
+Computing class inheritance relations...
+Computing class usage relations...
+Flushing cached template relations that have become invalid...
+Warn for undocumented namespaces...
+Computing class relations...
+Add enum values to enums...
+Searching for member function documentation...
+Creating members for template instances...
+Building page list...
+Search for main page...
+Computing page relations...
+Determining the scope of groups...
+Computing module relations...
+Sorting lists...
+Determining which enums are documented
+Computing member relations...
+Building full member lists recursively...
+Adding members to member groups.
+Computing member references...
+Inheriting documentation...
+Generating disk names...
+Adding source references...
+Adding xrefitems...
+Sorting member lists...
+Setting anonymous enum type...
+Computing dependencies between directories...
+Generating citations page...
+Counting members...
+Counting data structures...
+Resolving user defined references...
+Finding anchors and sections in the documentation...
+Transferring function references...
+Combining using relations...
+Adding members to index pages...
+Correcting members for VHDL...
+Computing tooltip texts...
+Generating style sheet...
+Generating search indices...
+Generating example documentation...
+Generating file sources...
+Generating code files using 32 threads.
+Parsing code for file energy.c...
+Parsing code for file ha_energy/.dep.inc...
+Parsing code for file ha_energy/bsoc.c...
+Generating code for file ha_energy/bsoc.h...
+Parsing code for file ha_energy/build/Debug/GNU-Linux/bsoc.o.d...
+Parsing code for file ha_energy/build/Debug/GNU-Linux/http_vars.o.d...
+Parsing code for file ha_energy/build/Release/GNU-Linux/mqtt_rec.o.d...
+Parsing code for file ha_energy/build/Debug/GNU-Linux/_ext/5c0/energy.o.d...
+Parsing code for file ha_energy/build/Debug/GNU-Linux/mqtt_vars.o.d...
+Parsing code for file ha_energy/build/Release/GNU-Linux/mqtt_vars.o.d...
+Parsing code for file ha_energy/build/Release/GNU-Linux/http_vars.o.d...
+Parsing code for file ha_energy/build/Release/GNU-Linux/bsoc.o.d...
+Parsing code for file ha_energy/build/Release/GNU-Linux/_ext/5c0/energy.o.d...
+Parsing code for file ha_energy/build/Debug/GNU-Linux/pid.o.d...
+Generating code for file ha_energy/mqtt_rec.h...
+Parsing code for file ha_energy/mqtt_vars.c...
+Generating code for file ha_energy/energy.h...
+Generating code for file ha_energy/http_vars.h...
+Parsing code for file ha_energy/http_vars.c...
+Parsing code for file ha_energy/mqtt_rec.c...
+Generating code for file ha_energy/mqtt_vars.h...
+Parsing code for file ha_energy/build/Release/GNU-Linux/pid.o.d...
+Parsing code for file ha_energy/build/Debug/GNU-Linux/mqtt_rec.o.d...
+Parsing code for file ha_energy/nbproject/private/c_standard_headers_indexer.c...
+Parsing code for file ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp...
+Parsing code for file ha_energy/pid.c...
+Generating code for file ha_energy/pid.h...
+Generating file documentation...
+Generating docs for file energy.c...
+Generating docs for file ha_energy/.dep.inc...
+Generating docs for file ha_energy/bsoc.c...
+Generating docs for file ha_energy/bsoc.h...
+Generating docs for file ha_energy/build/Debug/GNU-Linux/_ext/5c0/energy.o.d...
+Generating docs for file ha_energy/build/Release/GNU-Linux/_ext/5c0/energy.o.d...
+Generating docs for file ha_energy/build/Release/GNU-Linux/bsoc.o.d...
+Generating docs for file ha_energy/build/Debug/GNU-Linux/bsoc.o.d...
+Generating docs for file ha_energy/build/Debug/GNU-Linux/http_vars.o.d...
+Generating docs for file ha_energy/build/Release/GNU-Linux/http_vars.o.d...
+Generating docs for file ha_energy/build/Debug/GNU-Linux/mqtt_rec.o.d...
+Generating docs for file ha_energy/build/Release/GNU-Linux/mqtt_rec.o.d...
+Generating docs for file ha_energy/build/Debug/GNU-Linux/mqtt_vars.o.d...
+Generating docs for file ha_energy/build/Release/GNU-Linux/mqtt_vars.o.d...
+Generating docs for file ha_energy/build/Debug/GNU-Linux/pid.o.d...
+Generating docs for file ha_energy/build/Release/GNU-Linux/pid.o.d...
+Generating docs for file ha_energy/energy.h...
+Generating docs for file ha_energy/http_vars.c...
+Generating docs for file ha_energy/http_vars.h...
+Generating docs for file ha_energy/mqtt_rec.c...
+Generating docs for file ha_energy/mqtt_rec.h...
+Generating docs for file ha_energy/mqtt_vars.c...
+Generating docs for file ha_energy/mqtt_vars.h...
+Generating docs for file ha_energy/nbproject/private/c_standard_headers_indexer.c...
+Generating docs for file ha_energy/nbproject/private/cpp_standard_headers_indexer.cpp...
+Generating docs for file ha_energy/pid.c...
+Generating docs for file ha_energy/pid.h...
+warning: Include graph for 'cpp_standard_headers_indexer.cpp' not generated, too many nodes (51), threshold is 50. Consider increasing DOT_GRAPH_MAX_NODES.
+Generating call graph for function mqtt_gti_power
+Generating call graph for function connlost
+Generating caller graph for function ac0_filter
+Generating call graph for function mqtt_gti_power
+Generating caller graph for function delivered
+Generating caller graph for function iammeter_get_data
+Generating caller graph for function ResetPI
+Generating caller graph for function delivered
+Generating caller graph for function ResetPI
+Generating caller graph for function mqtt_gti_power
+Generating caller graph for function connlost
+Generating caller graph for function ac1_filter
+Generating call graph for function iammeter_read
+Generating caller graph for function fm80_float
+Generating caller graph for function ac0_filter
+Generating caller graph for function mqtt_gti_power
+Generating caller graph for function UpdatePI
+Generating caller graph for function UpdatePI
+Generating caller graph for function fm80_float
+Generating call graph for function mqtt_gti_time
+Generating caller graph for function ac2_filter
+Generating caller graph for function iammeter_read
+Generating call graph for function connlost
+Generating call graph for function ha_ac_off
+Generating caller graph for function fm80_sleep
+Generating caller graph for function ac1_filter
+Generating call graph for function mqtt_ha_pid
+Generating caller graph for function mqtt_gti_time
+Generating caller graph for function fm80_sleep
+Generating call graph for function ac_test
+Generating caller graph for function connlost
+Generating call graph for function iammeter_write_callback
+Generating caller graph for function mqtt_ha_pid
+Generating caller graph for function ha_ac_off
+Generating caller graph for function ac2_filter
+Generating call graph for function mqtt_ha_pid
+Generating caller graph for function ac_test
+Generating call graph for function json_get_data
+Generating call graph for function ha_ac_off
+Generating call graph for function json_get_data
+Generating caller graph for function iammeter_write_callback
+Generating call graph for function ha_ac_on
+Generating call graph for function mqtt_ha_shutdown
+Generating caller graph for function mqtt_ha_pid
+Generating call graph for function ac_test
+Generating caller graph for function bat_current_stable
+Generating caller graph for function json_get_data
+Generating caller graph for function ha_ac_off
+Generating caller graph for function json_get_data
+Generating call graph for function mqtt_gti_time
+Generating caller graph for function mqtt_ha_shutdown
+Generating call graph for function mqtt_ha_shutdown
+Generating caller graph for function ha_ac_on
+Generating call graph for function ha_ac_on
+Generating call graph for function bsoc_ac
+Generating caller graph for function ac_test
+Generating caller graph for function mqtt_gti_time
+Generating call graph for function msgarrvd
+Generating caller graph for function mqtt_ha_shutdown
+Generating call graph for function msgarrvd
+Generating call graph for function mqtt_ha_switch
+Generating call graph for function ha_dc_off
+Generating caller graph for function ha_ac_on
+Generating call graph for function bsoc_data_collect
+Generating call graph for function print_im_vars
+Generating caller graph for function bat_current_stable
+Generating caller graph for function msgarrvd
+Generating caller graph for function msgarrvd
+Generating caller graph for function mqtt_ha_switch
+Generating call graph for function mqtt_ha_switch
+Generating caller graph for function ha_dc_off
+Generating call graph for function ha_dc_off
+Generating caller graph for function bsoc_data_collect
+Generating caller graph for function print_im_vars
+Generating call graph for function bsoc_ac
+Generating caller graph for function print_mvar_vars
+Generating call graph for function ha_dc_on
+Generating caller graph for function mqtt_ha_switch
+Generating caller graph for function ha_dc_off
+Generating call graph for function bsoc_gti
+Generating call graph for function bsoc_data_collect
+Generating call graph for function log_time
+Generating caller graph for function bsoc_gti
+Generating call graph for function ha_dc_on
+Generating caller graph for function bsoc_data_collect
+Generating caller graph for function log_time
+Generating call graph for function iammeter_read
+Generating call graph for function bsoc_init
+Generating call graph for function bsoc_gti
+Generating caller graph for function log_timer
+Generating caller graph for function iammeter_read
+Generating caller graph for function bsoc_init
+Generating caller graph for function bsoc_gti
+Generating call graph for function iammeter_write_callback
+Generating call graph for function bsoc_init
+Generating call graph for function bsoc_set_mode
+Generating call graph for function main
+Generating caller graph for function iammeter_write_callback
+Generating caller graph for function bsoc_init
+Generating caller graph for function bsoc_set_mode
+Generating call graph for function ramp_down_ac
+Generating call graph for function log_time
+Generating caller graph for function bsoc_set_std_dev
+Generating call graph for function bsoc_set_mode
+Generating caller graph for function ramp_down_ac
+Generating caller graph for function log_time
+Generating caller graph for function calculateStandardDeviation
+Generating caller graph for function bsoc_set_mode
+Generating call graph for function ramp_down_gti
+Generating caller graph for function log_timer
+Generating caller graph for function dc0_filter
+Generating caller graph for function bsoc_set_std_dev
+Generating caller graph for function ramp_down_gti
+Generating call graph for function print_im_vars
+Generating caller graph for function dc1_filter
+Generating caller graph for function dc0_filter
+Generating call graph for function ramp_up_ac
+Generating caller graph for function print_im_vars
+Generating caller graph for function dc2_filter
+Generating caller graph for function dc1_filter
+Generating caller graph for function ramp_up_ac
+Generating caller graph for function print_mvar_vars
+Generating caller graph for function drive1_filter
+Generating caller graph for function dc2_filter
+Generating call graph for function ramp_up_gti
+Generating call graph for function ramp_down_ac
+Generating caller graph for function error_filter
+Generating caller graph for function drive1_filter
+Generating caller graph for function ramp_down_ac
+Generating caller graph for function ramp_up_gti
+Generating caller graph for function get_batc_dev
+Generating caller graph for function get_batc_dev
+Generating call graph for function ramp_down_gti
+Generating caller graph for function sanity_check
+Generating call graph for function gti_test
+Generating call graph for function gti_test
+Generating caller graph for function ramp_down_gti
+Generating caller graph for function gti_test
+Generating caller graph for function showIP
+Generating caller graph for function gti_test
+Generating call graph for function ramp_up_ac
+Generating call graph for function skeleton_daemon
+Generating caller graph for function ramp_up_ac
+Generating caller graph for function skeleton_daemon
+Generating call graph for function ramp_up_gti
+Generating call graph for function solar_shutdown
+Generating caller graph for function ramp_up_gti
+Generating caller graph for function solar_shutdown
+Generating caller graph for function sanity_check
+Generating call graph for function sync_ha
+Generating call graph for function sync_ha
+Generating caller graph for function sync_ha
+Generating caller graph for function sync_ha
+Generating call graph for function timer_callback
+Generating call graph for function timer_callback
+Generating caller graph for function timer_callback
+Generating caller graph for function timer_callback
+Generating page documentation...
+Generating group documentation...
+Generating class documentation...
+Generating docs for compound energy_type...
+Generating docs for compound link_type...
+Generating docs for compound local_type...
+Generating docs for compound mode_type...
+Generating docs for compound ha_flag_type...
+Generating docs for compound SPid...
+Generating concept documentation...
+Generating module documentation...
+Generating namespace documentation...
+Generating graph info page...
+Generating directory documentation...
+Generating dependency graph for directory ha_energy/build/Debug/GNU-Linux/_ext/5c0
+Generating dependency graph for directory ha_energy/build/Release/GNU-Linux/_ext/5c0
+Generating dependency graph for directory ha_energy/build/Debug/GNU-Linux/_ext
+Generating dependency graph for directory ha_energy/build/Release/GNU-Linux/_ext
+Generating dependency graph for directory ha_energy/build
+Generating dependency graph for directory ha_energy/build/Debug
+Generating dependency graph for directory ha_energy/build/Debug/GNU-Linux
+Generating dependency graph for directory ha_energy/build/Release/GNU-Linux
+Generating dependency graph for directory ha_energy/nbproject
+Generating dependency graph for directory ha_energy/nbproject/private
+Generating dependency graph for directory ha_energy/build/Release
+Generating index page...
+Generating page index...
+Generating topic index...
+Generating module index...
+Generating module member index...
+Generating namespace index...
+Generating namespace member index...
+Generating concept index...
+Generating annotated compound index...
+Generating alphabetical compound index...
+Generating hierarchical class index...
+Generating graphical class hierarchy...
+Generating member index...
+Generating file index...
+Generating file member index...
+Generating example index...
+finalizing index lists...
+writing tag file...
+Combining RTF output...
+Running plantuml with JAVA...
+Running dot...
+Generating dot graphs using 33 parallel threads...
+Running dot for graph 1/374
+Running dot for graph 2/374
+Running dot for graph 3/374
+Running dot for graph 4/374
+Running dot for graph 5/374
+Running dot for graph 6/374
+Running dot for graph 7/374
+Running dot for graph 8/374
+Running dot for graph 9/374
+Running dot for graph 10/374
+Running dot for graph 11/374
+Running dot for graph 12/374
+Running dot for graph 13/374
+Running dot for graph 14/374
+Running dot for graph 15/374
+Running dot for graph 16/374
+Running dot for graph 17/374
+Running dot for graph 18/374
+Running dot for graph 19/374
+Running dot for graph 20/374
+Running dot for graph 21/374
+Running dot for graph 22/374
+Running dot for graph 23/374
+Running dot for graph 24/374
+Running dot for graph 25/374
+Running dot for graph 26/374
+Running dot for graph 27/374
+Running dot for graph 28/374
+Running dot for graph 29/374
+Running dot for graph 30/374
+Running dot for graph 31/374
+Running dot for graph 32/374
+Running dot for graph 33/374
+Running dot for graph 34/374
+Running dot for graph 35/374
+Running dot for graph 36/374
+Running dot for graph 37/374
+Running dot for graph 38/374
+Running dot for graph 39/374
+Running dot for graph 40/374
+Running dot for graph 41/374
+Running dot for graph 42/374
+Running dot for graph 43/374
+Running dot for graph 44/374
+Running dot for graph 45/374
+Running dot for graph 46/374
+Running dot for graph 47/374
+Running dot for graph 48/374
+Running dot for graph 49/374
+Running dot for graph 50/374
+Running dot for graph 51/374
+Running dot for graph 52/374
+Running dot for graph 53/374
+Running dot for graph 54/374
+Running dot for graph 55/374
+Running dot for graph 56/374
+Running dot for graph 57/374
+Running dot for graph 58/374
+Running dot for graph 59/374
+Running dot for graph 60/374
+Running dot for graph 61/374
+Running dot for graph 62/374
+Running dot for graph 63/374
+Running dot for graph 64/374
+Running dot for graph 65/374
+Running dot for graph 66/374
+Running dot for graph 67/374
+Running dot for graph 68/374
+Running dot for graph 69/374
+Running dot for graph 70/374
+Running dot for graph 71/374
+Running dot for graph 72/374
+Running dot for graph 73/374
+Running dot for graph 74/374
+Running dot for graph 75/374
+Running dot for graph 76/374
+Running dot for graph 77/374
+Running dot for graph 78/374
+Running dot for graph 79/374
+Running dot for graph 80/374
+Running dot for graph 81/374
+Running dot for graph 82/374
+Running dot for graph 83/374
+Running dot for graph 84/374
+Running dot for graph 85/374
+Running dot for graph 86/374
+Running dot for graph 87/374
+Running dot for graph 88/374
+Running dot for graph 89/374
+Running dot for graph 90/374
+Running dot for graph 91/374
+Running dot for graph 92/374
+Running dot for graph 93/374
+Running dot for graph 94/374
+Running dot for graph 95/374
+Running dot for graph 96/374
+Running dot for graph 97/374
+Running dot for graph 98/374
+Running dot for graph 99/374
+Running dot for graph 100/374
+Running dot for graph 101/374
+Running dot for graph 102/374
+Running dot for graph 103/374
+Running dot for graph 104/374
+Running dot for graph 105/374
+Running dot for graph 106/374
+Running dot for graph 107/374
+Running dot for graph 108/374
+Running dot for graph 109/374
+Running dot for graph 110/374
+Running dot for graph 111/374
+Running dot for graph 112/374
+Running dot for graph 113/374
+Running dot for graph 114/374
+Running dot for graph 115/374
+Running dot for graph 116/374
+Running dot for graph 117/374
+Running dot for graph 118/374
+Running dot for graph 119/374
+Running dot for graph 120/374
+Running dot for graph 121/374
+Running dot for graph 122/374
+Running dot for graph 123/374
+Running dot for graph 124/374
+Running dot for graph 125/374
+Running dot for graph 126/374
+Running dot for graph 127/374
+Running dot for graph 128/374
+Running dot for graph 129/374
+Running dot for graph 130/374
+Running dot for graph 131/374
+Running dot for graph 132/374
+Running dot for graph 133/374
+Running dot for graph 134/374
+Running dot for graph 135/374
+Running dot for graph 136/374
+Running dot for graph 137/374
+Running dot for graph 138/374
+Running dot for graph 139/374
+Running dot for graph 140/374
+Running dot for graph 141/374
+Running dot for graph 142/374
+Running dot for graph 143/374
+Running dot for graph 144/374
+Running dot for graph 145/374
+Running dot for graph 146/374
+Running dot for graph 147/374
+Running dot for graph 148/374
+Running dot for graph 149/374
+Running dot for graph 150/374
+Running dot for graph 151/374
+Running dot for graph 152/374
+Running dot for graph 153/374
+Running dot for graph 154/374
+Running dot for graph 155/374
+Running dot for graph 156/374
+Running dot for graph 157/374
+Running dot for graph 158/374
+Running dot for graph 159/374
+Running dot for graph 160/374
+Running dot for graph 161/374
+Running dot for graph 162/374
+Running dot for graph 163/374
+Running dot for graph 164/374
+Running dot for graph 165/374
+Running dot for graph 166/374
+Running dot for graph 167/374
+Running dot for graph 168/374
+Running dot for graph 169/374
+Running dot for graph 170/374
+Running dot for graph 171/374
+Running dot for graph 172/374
+Running dot for graph 173/374
+Running dot for graph 174/374
+Running dot for graph 175/374
+Running dot for graph 176/374
+Running dot for graph 177/374
+Running dot for graph 178/374
+Running dot for graph 179/374
+Running dot for graph 180/374
+Running dot for graph 181/374
+Running dot for graph 182/374
+Running dot for graph 183/374
+Running dot for graph 184/374
+Running dot for graph 185/374
+Running dot for graph 186/374
+Running dot for graph 187/374
+Running dot for graph 188/374
+Running dot for graph 189/374
+Running dot for graph 190/374
+Running dot for graph 191/374
+Running dot for graph 192/374
+Running dot for graph 193/374
+Running dot for graph 194/374
+Running dot for graph 195/374
+Running dot for graph 196/374
+Running dot for graph 197/374
+Running dot for graph 198/374
+Running dot for graph 199/374
+Running dot for graph 200/374
+Running dot for graph 201/374
+Running dot for graph 202/374
+Running dot for graph 203/374
+Running dot for graph 204/374
+Running dot for graph 205/374
+Running dot for graph 206/374
+Running dot for graph 207/374
+Running dot for graph 208/374
+Running dot for graph 209/374
+Running dot for graph 210/374
+Running dot for graph 211/374
+Running dot for graph 212/374
+Running dot for graph 213/374
+Running dot for graph 214/374
+Running dot for graph 215/374
+Running dot for graph 216/374
+Running dot for graph 217/374
+Running dot for graph 218/374
+Running dot for graph 219/374
+Running dot for graph 220/374
+Running dot for graph 221/374
+Running dot for graph 222/374
+Running dot for graph 223/374
+Running dot for graph 224/374
+Running dot for graph 225/374
+Running dot for graph 226/374
+Running dot for graph 227/374
+Running dot for graph 228/374
+Running dot for graph 229/374
+Running dot for graph 230/374
+Running dot for graph 231/374
+Running dot for graph 232/374
+Running dot for graph 233/374
+Running dot for graph 234/374
+Running dot for graph 235/374
+Running dot for graph 236/374
+Running dot for graph 237/374
+Running dot for graph 238/374
+Running dot for graph 239/374
+Running dot for graph 240/374
+Running dot for graph 241/374
+Running dot for graph 242/374
+Running dot for graph 243/374
+Running dot for graph 244/374
+Running dot for graph 245/374
+Running dot for graph 246/374
+Running dot for graph 247/374
+Running dot for graph 248/374
+Running dot for graph 249/374
+Running dot for graph 250/374
+Running dot for graph 251/374
+Running dot for graph 252/374
+Running dot for graph 253/374
+Running dot for graph 254/374
+Running dot for graph 255/374
+Running dot for graph 256/374
+Running dot for graph 257/374
+Running dot for graph 258/374
+Running dot for graph 259/374
+Running dot for graph 260/374
+Running dot for graph 261/374
+Running dot for graph 262/374
+Running dot for graph 263/374
+Running dot for graph 264/374
+Running dot for graph 265/374
+Running dot for graph 266/374
+Running dot for graph 267/374
+Running dot for graph 268/374
+Running dot for graph 269/374
+Running dot for graph 270/374
+Running dot for graph 271/374
+Running dot for graph 272/374
+Running dot for graph 273/374
+Running dot for graph 274/374
+Running dot for graph 275/374
+Running dot for graph 276/374
+Running dot for graph 277/374
+Running dot for graph 278/374
+Running dot for graph 279/374
+Running dot for graph 280/374
+Running dot for graph 281/374
+Running dot for graph 282/374
+Running dot for graph 283/374
+Running dot for graph 284/374
+Running dot for graph 285/374
+Running dot for graph 286/374
+Running dot for graph 287/374
+Running dot for graph 288/374
+Running dot for graph 289/374
+Running dot for graph 290/374
+Running dot for graph 291/374
+Running dot for graph 292/374
+Running dot for graph 293/374
+Running dot for graph 294/374
+Running dot for graph 295/374
+Running dot for graph 296/374
+Running dot for graph 297/374
+Running dot for graph 298/374
+Running dot for graph 299/374
+Running dot for graph 300/374
+Running dot for graph 301/374
+Running dot for graph 302/374
+Running dot for graph 303/374
+Running dot for graph 304/374
+Running dot for graph 305/374
+Running dot for graph 306/374
+Running dot for graph 307/374
+Running dot for graph 308/374
+Running dot for graph 309/374
+Running dot for graph 310/374
+Running dot for graph 311/374
+Running dot for graph 312/374
+Running dot for graph 313/374
+Running dot for graph 314/374
+Running dot for graph 315/374
+Running dot for graph 316/374
+Running dot for graph 317/374
+Running dot for graph 318/374
+Running dot for graph 319/374
+Running dot for graph 320/374
+Running dot for graph 321/374
+Running dot for graph 322/374
+Running dot for graph 323/374
+Running dot for graph 324/374
+Running dot for graph 325/374
+Running dot for graph 326/374
+Running dot for graph 327/374
+Running dot for graph 328/374
+Running dot for graph 329/374
+Running dot for graph 330/374
+Running dot for graph 331/374
+Running dot for graph 332/374
+Running dot for graph 333/374
+Running dot for graph 334/374
+Running dot for graph 335/374
+Running dot for graph 336/374
+Running dot for graph 337/374
+Running dot for graph 338/374
+Running dot for graph 339/374
+Running dot for graph 340/374
+Running dot for graph 341/374
+Running dot for graph 342/374
+Running dot for graph 343/374
+Running dot for graph 344/374
+Running dot for graph 345/374
+Running dot for graph 346/374
+Running dot for graph 347/374
+Running dot for graph 348/374
+Running dot for graph 349/374
+Running dot for graph 350/374
+Running dot for graph 351/374
+Running dot for graph 352/374
+Running dot for graph 353/374
+Running dot for graph 354/374
+Running dot for graph 355/374
+Running dot for graph 356/374
+Running dot for graph 357/374
+Running dot for graph 358/374
+Running dot for graph 359/374
+Running dot for graph 360/374
+Running dot for graph 361/374
+Running dot for graph 362/374
+Running dot for graph 363/374
+Running dot for graph 364/374
+Running dot for graph 365/374
+Running dot for graph 366/374
+Running dot for graph 367/374
+Running dot for graph 368/374
+Running dot for graph 369/374
+Running dot for graph 370/374
+Running dot for graph 371/374
+Running dot for graph 372/374
+Running dot for graph 373/374
+Running dot for graph 374/374
+Patching output file 1/26
+Patching output file 2/26
+Patching output file 3/26
+Patching output file 4/26
+Patching output file 5/26
+Patching output file 6/26
+Patching output file 7/26
+Patching output file 8/26
+Patching output file 9/26
+Patching output file 10/26
+Patching output file 11/26
+Patching output file 12/26
+Patching output file 13/26
+Patching output file 14/26
+Patching output file 15/26
+Patching output file 16/26
+Patching output file 17/26
+Patching output file 18/26
+Patching output file 19/26
+Patching output file 20/26
+Patching output file 21/26
+Patching output file 22/26
+Patching output file 23/26
+Patching output file 24/26
+Patching output file 25/26
+Patching output file 26/26
+type lookup cache used 316/65536 hits=287 misses=320
+symbol lookup cache used 674/65536 hits=5065 misses=675
+finished...
+
+*** Doxygen has finished

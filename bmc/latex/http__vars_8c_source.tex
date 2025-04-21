@@ -1,0 +1,130 @@
+\doxysection{http\+\_\+vars.\+c}
+\hypertarget{http__vars_8c_source}{}\label{http__vars_8c_source}\index{ha\_energy/http\_vars.c@{ha\_energy/http\_vars.c}}
+\mbox{\hyperlink{http__vars_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}http\_vars.h"{}}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <time.h>}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00004}00004\ \textcolor{keyword}{static}\ CURL\ *curl;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00005}00005\ \textcolor{keyword}{static}\ CURLcode\ res;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00006}00006\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ iammeter\_get\_data(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double},\ \textcolor{keyword}{const}\ uint32\_t,\ \textcolor{keyword}{const}\ uint32\_t);}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00008}00008\ \textcolor{keywordtype}{bool}\ mqtt\_gti\_time(MQTTClient,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *,\ \textcolor{keywordtype}{char}\ *);}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00013}00013\ \textcolor{keywordtype}{size\_t}\ iammeter\_write\_callback(\textcolor{keywordtype}{char}\ *buffer,\ \textcolor{keywordtype}{size\_t}\ size,\ \textcolor{keywordtype}{size\_t}\ nitems,\ \textcolor{keywordtype}{void}\ *stream)}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00014}00014\ \{}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00015}00015\ \ \ \ \ cJSON\ *json\ =\ cJSON\_ParseWithLength(buffer,\ strlen(buffer));}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structenergy__type}{energy\_type}}\ *\ e\ =\ stream;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00017}00017\ \ \ \ \ uint32\_t\ next\_var\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00019}00019\ \ \ \ \ E.link.iammeter\_count++;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{if}\ (json\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *error\_ptr\ =\ cJSON\_GetErrorPtr();}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00023}00023\ \ \ \ \ \ \ \ \ E.link.iammeter\_error++;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (error\_ptr\ !=\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}Error\ in\ iammeter\_write\_callback\ \%u:\ \%s\(\backslash\)n"{}},\ E.link.iammeter\_error,\ error\_ptr);}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00026}00026\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ iammeter\_exit;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00028}00028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00029}00029\ \textcolor{preprocessor}{\#ifdef\ IM\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00030}00030\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)n\ iammeter\_read\_callback\ \%s\ \(\backslash\)n"{}},\ buffer);}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00031}00031\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00033}00033\ \ \ \ \ cJSON\ *data\_result\ =\ cJSON\_GetObjectItemCaseSensitive(json,\ \textcolor{stringliteral}{"{}Datas"{}});}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00035}00035\ \ \ \ \ \textcolor{keywordflow}{if}\ (!data\_result)\ \{}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00036}00036\ \ \ \ \ \ \ \ \ size\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00037}00037\ \ \ \ \ \ \ \ \ nitems\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ iammeter\_exit;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00039}00039\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00041}00041\ \ \ \ \ cJSON\ *jname;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00042}00042\ \ \ \ \ uint32\_t\ phase\ =\ PHASE\_A;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00044}00044\ \ \ \ \ cJSON\_ArrayForEach(jname,\ data\_result)}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00045}00045\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00046}00046\ \ \ \ \ \ \ \ \ cJSON\ *ianame;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00047}00047\ \textcolor{preprocessor}{\#ifdef\ IM\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00048}00048\ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)n\ iammeter\ variables\ "{}});}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00049}00049\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00051}00051\ \ \ \ \ \ \ \ \ cJSON\_ArrayForEach(ianame,\ jname)}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00052}00052\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ phase\_var\ =\ IA\_VOLTAGE;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ iammeter\_get\_data(ianame-\/>valuedouble,\ phase\_var,\ phase);}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ e-\/>print\_vars[next\_var++]\ =\ ianame-\/>valuedouble;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00056}00056\ \textcolor{preprocessor}{\#ifdef\ IM\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%8.2f\ "{}},\ im\_vars[phase\_var][phase]);}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00058}00058\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ phase\_var++;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00060}00060\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00061}00061\ \ \ \ \ \ \ \ \ phase++;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00062}00062\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00063}00063\ \textcolor{preprocessor}{\#ifdef\ IM\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00064}00064\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00065}00065\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00067}00067\ iammeter\_exit:}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00068}00068\ \ \ \ \ cJSON\_Delete(json);}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{return}\ size\ *\ nitems;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00070}00070\ \}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00072}00072\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00073}00073\ \textcolor{comment}{\ *\ use\ the\ standard\ IAMMETER\ HTTP\ API\ for\ AC\ line\ power\ status}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00074}00074\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00075}00075\ \textcolor{keywordtype}{void}\ iammeter\_read(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00076}00076\ \{}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00078}00078\ \ \ \ \ curl\ =\ curl\_easy\_init();}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00079}00079\ \ \ \ \ \textcolor{keywordflow}{if}\ (curl)\ \{}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00080}00080\ \ \ \ \ \ \ \ \ E.link.iammeter\_count++;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00081}00081\ \ \ \ \ \ \ \ \ curl\_easy\_setopt(curl,\ CURLOPT\_URL,\ \textcolor{stringliteral}{"{}http://10.1.1.101/monitorjson"{}});}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00082}00082\ \ \ \ \ \ \ \ \ curl\_easy\_setopt(curl,\ CURLOPT\_WRITEFUNCTION,\ iammeter\_write\_callback);}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00083}00083\ \ \ \ \ \ \ \ \ curl\_easy\_setopt(curl,\ CURLOPT\_WRITEDATA,\ E.print\_vars);\ \textcolor{comment}{//\ external\ data\ array\ for\ iammeter\ values}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00085}00085\ \ \ \ \ \ \ \ \ res\ =\ curl\_easy\_perform(curl);}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Check\ for\ errors\ */}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00087}00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (res\ !=\ CURLE\_OK)\ \{}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}curl\_easy\_perform()\ failed\ in\ iammeter\_read:\ \%s\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ curl\_easy\_strerror(res));}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ E.iammeter\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ E.link.iammeter\_error++;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ E.iammeter\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00094}00094\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00095}00095\ \ \ \ \ \ \ \ \ curl\_easy\_cleanup(curl);}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00096}00096\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00097}00097\ \}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00099}00099\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00100}00100\ \textcolor{comment}{\ *\ move\ data\ into\ global\ state\ structure}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00101}00101\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00102}00102\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ iammeter\_get\_data(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ valuedouble,\ \textcolor{keyword}{const}\ uint32\_t\ i,\ \textcolor{keyword}{const}\ uint32\_t\ j)}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00103}00103\ \{}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00104}00104\ \ \ \ \ E.im\_vars[i][j]\ =\ valuedouble;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00105}00105\ \}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00107}00107\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00108}00108\ \textcolor{comment}{\ *\ logging}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00109}00109\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00110}00110\ \textcolor{keywordtype}{void}\ print\_im\_vars(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00111}00111\ \{}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00112}00112\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ time\_log[RBUF\_SIZ]\ =\ \{0\};}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00113}00113\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ sync\_time\ =\ TIME\_SYNC\_SEC\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00114}00114\ \ \ \ \ time\_t\ rawtime\_log;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00115}00115\ \ \ \ \ \textcolor{keywordtype}{char}\ imvars[SYSLOG\_SIZ];}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00117}00117\ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00118}00118\ \ \ \ \ snprintf(imvars,\ SYSLOG\_SIZ-\/1,\ \textcolor{stringliteral}{"{}House\ L1\ \%7.2fW,\ House\ L2\ \%7.2fW,\ GTI\ L1\ \%7.2fW"{}},\ E.print\_vars[L1\_P],\ E.print\_vars[L2\_P],\ E.print\_vars[L3\_P]);}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00119}00119\ \ \ \ \ fprintf(fout,\ \textcolor{stringliteral}{"{}\%s"{}},\ imvars);}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00120}00120\ \ \ \ \ fflush(fout);}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00121}00121\ \ \ \ \ time(\&rawtime\_log);}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00122}00122\ \ \ \ \ \textcolor{keywordflow}{if}\ (sync\_time++\ >\ TIME\_SYNC\_SEC)\ \{}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00123}00123\ \ \ \ \ \ \ \ \ sync\_time\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00124}00124\ \ \ \ \ \ \ \ \ snprintf(time\_log,\ RBUF\_SIZ\ -\/\ 1,\ \textcolor{stringliteral}{"{}VT\%lut"{}},\ rawtime\_log);\ \textcolor{comment}{//\ format\ for\ dumpload\ controller\ gti\ time\ commands}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00125}00125\ \ \ \ \ \ \ \ \ mqtt\_gti\_time(E.client\_p,\ TOPIC\_P,\ time\_log);}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00126}00126\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{http__vars_8c_source_l00127}00127\ \}}
+
+\end{DoxyCode}
