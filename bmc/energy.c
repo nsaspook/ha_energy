@@ -54,6 +54,7 @@
  * V.072 -> V.073 fine tune GTI and AC power lower limits
  * V.074 Doxygen comments added
  * V.075 connection lost logging and Keep Alive fixes
+ * V.076 control setpoints tuning for main battery runtime limits
  */
 
 /*
@@ -302,7 +303,8 @@ void connlost(void *context, char *cause)
 	struct ha_flag_type *ha_flag = context;
 	int32_t id_num = ha_flag->ha_id;
 	static uint32_t times = 0;
-	char * where = "Missing Topic";
+	char * where = "Context is NULL";
+	char * what = "Reconnection Retry";
 
 	// bug-out if no context variables passed to callback
 	if (context == NULL) {
@@ -326,18 +328,20 @@ void connlost(void *context, char *cause)
 	if (times++ > MQTT_RECONN) {
 		goto bugout;
 	} else {
-
-		fprintf(fout, "%s Connection lost, retrying %d \n", log_time(false), times);
-		fprintf(fout, "%s     cause: %s, h_id %d c_id %d %s \n", log_time(false), cause, id_num, ha_flag->cid, where);
-		fprintf(fout, "%s MQTT DAEMON failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
+		if (times > 1) {
+			fprintf(fout, "%s Connection lost, retrying %d \n", log_time(false), times);
+			fprintf(fout, "%s Cause: %s, h_id %d, c_id %d, %s \n", log_time(false), cause, id_num, ha_flag->cid, what);
+			fprintf(fout, "%s MQTT DAEMON reconnection failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
+		}
 		fflush(fout);
+		times = 0;
 		return;
 	}
 
 bugout:
 	fprintf(fout, "%s Connection lost, exit ha_energy program\n", log_time(false));
-	fprintf(fout, "%s     cause: %s, h_id %d c_id %d %s \n", log_time(false), cause, id_num, ha_flag->cid, where);
-	fprintf(fout, "%s MQTT DAEMON failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
+	fprintf(fout, "%s Cause: %s, h_id %d, c_id %d, %s \n", log_time(false), cause, id_num, ha_flag->cid, where);
+	fprintf(fout, "%s MQTT DAEMON context is null failure  LOG Version %s : MQTT Version %s\n", log_time(false), LOG_VERSION, MQTT_VERSION);
 	fflush(fout);
 	exit(EXIT_FAILURE);
 }
@@ -512,7 +516,8 @@ int main(int argc, char *argv[])
 			 * use libcurl to read AC power meter HTTP data
 			 * iammeter connected for split single phase monitoring and one leg GTI power exporting
 			 */
-			iammeter_read();
+			iammeter_read1(IAMM1);
+			iammeter_read2(IAMM2);
 
 			/*
 			 * start the main energy monitoring loop
@@ -735,12 +740,29 @@ int main(int argc, char *argv[])
 					/*
 					 * shutdown GTI power at low DL battery Ah or Voltage
 					 */
-					if ((E.mvar[V_DAHBAT] < PV_DL_B_AH_LOW) || (E.mvar[V_DVBAT] < PV_DL_B_V_LOW)) {
+					if ((E.mvar[V_DAHBAT] < PV_DL_B_AH_LOW) || (E.mvar[V_DVBAT] < PV_DL_B_V_LOW) || (get_bat_runtime() < BAT_RUNTIME_GTI)) {
 						error_drive = PV_BIAS_ZERO;
 					}
 
+					if (get_bat_runtime() < BAT_RUNTIME_LOW) {
+						error_drive = PV_BIAS_ZERO;
+						ha_ac_off();
+						ha_ac_off();
+						ha_ac_off();
+						ha_ac_off();
+						ha_dc_off();
+						ha_dc_off();
+						ha_dc_off();
+						ha_dc_off();
+						fprintf(fout, "%s Main Battery Runtime too low, shutting down power drains, %6f Hrs\r\n", log_time(false), get_bat_runtime());
+						ramp_down_ac(E.client_p, true);
+						ramp_down_gti(E.client_p, true);
+						mqtt_ha_shutdown(E.client_p, TOPIC_SHUTDOWN);
+						fflush(fout);
+					}
 					snprintf(gti_str, SBUF_SIZ - 1, "V%04dX", error_drive); // format for dumpload controller gti power commands
 					mqtt_gti_power(E.client_p, TOPIC_P, gti_str, 2);
+
 				}
 
 #ifndef  FAKE_VPV
@@ -808,7 +830,8 @@ int main(int argc, char *argv[])
 
 			if (E.im_delay++ >= IM_DELAY) {
 				E.im_delay = 0;
-				iammeter_read();
+				iammeter_read1(IAMM1);
+				iammeter_read2(IAMM2);
 			}
 			if (E.im_display++ >= IM_DISPLAY) {
 				char buffer[SYSLOG_SIZ];
@@ -884,9 +907,11 @@ void ramp_up_gti(MQTTClient client_p, bool start, bool excess)
 		E.once_gti = false;
 		sequence = 0;
 		if (!excess) {
-			mqtt_ha_switch(client_p, TOPIC_PDCC, true);
-			E.gti_sw_status = true;
-			usleep(500000); // wait for PS voltage to ramp
+			if (get_bat_runtime() > BAT_RUNTIME_GTI) {
+				mqtt_ha_switch(client_p, TOPIC_PDCC, true);
+				E.gti_sw_status = true;
+				usleep(500000); // wait for PS voltage to ramp
+			}
 		} else {
 			sequence = 1;
 		}
@@ -902,9 +927,13 @@ void ramp_up_gti(MQTTClient client_p, bool start, bool excess)
 		E.once_gti_zero = true;
 		if (bat_current_stable() || E.dl_excess) { // check battery current std dev, stop 'motorboating'
 			sequence++;
-			if (!mqtt_gti_power(client_p, TOPIC_P, "+#", 3)) {
+			if (get_bat_runtime() > BAT_RUNTIME_GTI) {
+				if (!mqtt_gti_power(client_p, TOPIC_P, "+#", 3)) {
+					sequence = 0;
+				}; // +100W power
+			} else {
 				sequence = 0;
-			}; // +100W power
+			}
 		} else {
 			usleep(500000); // wait a bit more for power to be stable
 			sequence = 1; // do power ramps when ready
@@ -963,10 +992,12 @@ void ramp_up_ac(MQTTClient client_p, bool start)
 	}
 
 	if (E.once_ac) {
-		E.once_ac = false;
-		mqtt_ha_switch(client_p, TOPIC_PACC, true);
-		E.ac_sw_status = true;
-		usleep(200000); // wait for voltage to ramp
+		if (get_bat_runtime() > BAT_RUNTIME_GTI) {
+			E.once_ac = false;
+			mqtt_ha_switch(client_p, TOPIC_PACC, true);
+			E.ac_sw_status = true;
+			usleep(200000); // wait for voltage to ramp
+		}
 	}
 }
 

@@ -31,9 +31,10 @@ extern "C" {
 #include <ifaddrs.h>
 #include "MQTTClient.h"
 #include "pid.h"
+#include "http_vars.h"
 
 
-#define LOG_VERSION     "V0.75"
+#define LOG_VERSION     "V0.76"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
@@ -95,6 +96,8 @@ extern "C" {
 #define BAT_SOC_LOW         0.68f
 #define BAT_SOC_LOW_AC      0.72f
 #define BAT_CRITICAL        746.0f /// one electrical HP, for one hour
+#define BAT_RUNTIME_LOW     5.0f
+#define BAT_RUNTIME_GTI     6.0f
 #define MIN_BAT_KW_BSOC_SLP 4000.0f
 #define MIN_BAT_KW_BSOC_HI  4550.0f
 
@@ -122,7 +125,7 @@ extern "C" {
 #define PV_DL_BIAS_RATE     75.0f
 #define PV_DL_EXCESS       500.0f
 #define PV_DL_B_AH_LOW     100.0f
-#define PV_DL_B_AH_MIN     150.0f // DL battery should be at least 175Ah
+#define PV_DL_B_AH_MIN     120.0f // DL battery should be at least 175Ah
 #define PV_DL_B_V_LOW       23.8f // Battery low-voltqage cutoff
 #define PWA_SLEEP          200.0f
 #define DL_AC_DC_EFF        1.24f
@@ -135,7 +138,7 @@ extern "C" {
 #define BAL_MIN_ENERGY_GTI  -1400.0f
 #define BAL_MAX_ENERGY_GTI  200.0f
 
-#define DL_POWER_ZERO		"V0000X"
+#define DL_POWER_ZERO  "V0000X"
 
 #define LOG_TO_FILE         "/store/logs/energy.log"
 #define LOG_TO_FILE_ALT     "/tmp/energy.log"
@@ -221,6 +224,7 @@ extern "C" {
 		PHASE_A,
 		PHASE_B,
 		PHASE_C,
+		PHASE_S,
 		PHASE_LAST,
 	};
 
@@ -310,6 +314,7 @@ extern "C" {
 #define L1_P    IA_POWER
 #define L2_P    L1_P+IA_LAST
 #define L3_P    L2_P+IA_LAST
+#define L4_P    L3_P+IA_LAST
 
 	struct link_type {
 		volatile uint32_t iammeter_error, iammeter_count;
@@ -331,7 +336,7 @@ extern "C" {
 		volatile double im_vars[IA_LAST][PHASE_LAST];
 		volatile double mvar[V_DLAST + 1];
 		volatile bool once_gti, once_ac, iammeter, fm80, dumpload, homeassistant, once_gti_zero;
-		volatile double gti_low_adj, ac_low_adj, dl_excess_adj;
+		volatile double gti_low_adj, ac_low_adj, dl_excess_adj, bat_runtime;
 		volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode, startup, ac_mismatch, dc_mismatch, mode_mismatch, dl_excess;
 		volatile uint32_t speed_go, im_delay, im_display, gti_delay;
 		volatile int32_t rc, sane;
@@ -357,11 +362,6 @@ extern "C" {
 	void ha_ac_on(void);
 	void ha_dc_off(void);
 	void ha_dc_on(void);
-
-	size_t iammeter_write_callback(char *, size_t, size_t, void *);
-	void iammeter_read(void);
-	void print_im_vars(void);
-	void print_mvar_vars(void);
 
 	bool sanity_check(void);
 	char * log_time(bool);
