@@ -53,8 +53,12 @@ void mqtt_ha_pid(MQTTClient client_p, const char * topic_p)
 
 	E.link.mqtt_count++;
 	E.mode.sequence++;
-	if (E.mode.sequence > SYSTEM_STABLE) {
+	/*
+	 * at startup wait for energy data systems to settle down before controlling energy
+	 */
+	if (!C.system_stable && (E.mode.sequence > SYSTEM_STABLE)) {
 		C.system_stable = true;
+		fprintf(fout, "%s Energy Monitor Startup Complete, System Running in Stable Mode\r\n", log_time(false));
 	}
 	json = cJSON_CreateObject();
 	cJSON_AddStringToObject(json, "name", CLIENTID1);

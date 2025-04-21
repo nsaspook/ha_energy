@@ -34,7 +34,7 @@ extern "C" {
 #include "http_vars.h"
 
 
-#define LOG_VERSION     "V0.78"
+#define LOG_VERSION     "V0.79"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
@@ -148,7 +148,7 @@ extern "C" {
 #define LOW_LOG_SPAM  2
 #define RESET_LOG_SPAM  120
 	
-#define SYSTEM_STABLE	10.0f
+#define SYSTEM_STABLE	6.0f
 
 	//#define IM_DEBUG                      // WEM3080T LOGGING
 	//#define B_ADJ_DEBUG                   // debug printing

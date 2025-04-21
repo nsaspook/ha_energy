@@ -1,21 +1,21 @@
 <?xml version="1.0"?>
-<analyzerinfo hash="4962718240816494928">
+<analyzerinfo hash="5925368631567813299">
   <FileInfo check="CheckUnusedFunctions">
     <functiondecl functionName="mqtt_ha_shutdown" lineNumber="12"/>
     <functiondecl functionName="mqtt_ha_pid" lineNumber="45"/>
-    <functiondecl functionName="mqtt_ha_switch" lineNumber="106"/>
-    <functiondecl functionName="mqtt_gti_power" lineNumber="186"/>
-    <functiondecl functionName="mqtt_gti_time" lineNumber="248"/>
+    <functiondecl functionName="mqtt_ha_switch" lineNumber="113"/>
+    <functiondecl functionName="mqtt_gti_power" lineNumber="195"/>
+    <functiondecl functionName="mqtt_gti_time" lineNumber="257"/>
     <functiondecl functionName="mqtt_ha_shutdown" lineNumber="12"/>
     <functiondecl functionName="mqtt_ha_pid" lineNumber="45"/>
-    <functiondecl functionName="mqtt_ha_switch" lineNumber="106"/>
-    <functiondecl functionName="mqtt_gti_power" lineNumber="186"/>
-    <functiondecl functionName="mqtt_gti_time" lineNumber="248"/>
+    <functiondecl functionName="mqtt_ha_switch" lineNumber="113"/>
+    <functiondecl functionName="mqtt_gti_power" lineNumber="195"/>
+    <functiondecl functionName="mqtt_gti_time" lineNumber="257"/>
     <functiondecl functionName="mqtt_ha_shutdown" lineNumber="12"/>
     <functiondecl functionName="mqtt_ha_pid" lineNumber="45"/>
-    <functiondecl functionName="mqtt_ha_switch" lineNumber="106"/>
-    <functiondecl functionName="mqtt_gti_power" lineNumber="186"/>
-    <functiondecl functionName="mqtt_gti_time" lineNumber="248"/>
+    <functiondecl functionName="mqtt_ha_switch" lineNumber="113"/>
+    <functiondecl functionName="mqtt_gti_power" lineNumber="195"/>
+    <functiondecl functionName="mqtt_gti_time" lineNumber="257"/>
     <functioncall functionName="IA_LAST"/>
     <functioncall functionName="MQTTClient"/>
     <functioncall functionName="MQTTClient_deliveryToken"/>

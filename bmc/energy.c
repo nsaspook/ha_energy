@@ -54,9 +54,10 @@
  * V.072 -> V.073 fine tune GTI and AC power lower limits
  * V.074 Doxygen comments added
  * V.075 connection lost logging and Keep Alive fixes
- * V.076 control setpoints tuning for main battery runtime limits
+ * V.076 control set-points tuning for main battery run-time limits
  * V.077 limit shutdown calls th HA
  * V.078 3 IMAMETER sensors
+ * V.079 system startup stability improvements
  */
 
 /*
@@ -533,6 +534,7 @@ int main(int argc, char *argv[])
 			 * iammeter connected for split single phase monitoring and one leg GTI power exporting
 			 */
 			iammeter_read1(IAMM1);
+			iammeter_read2(IAMM2);
 			iammeter_read3(IAMM3);
 
 			/*
@@ -608,7 +610,7 @@ int main(int argc, char *argv[])
 				}
 				E.call_shutdown = true;
 				E.link.shutdown = 0;
-				fprintf(fout, "%s RESTART Solar Energy Control\r\n", log_time(false));
+				fprintf(fout, "%s RESTART Solar Energy Control, wait for system stable\r\n", log_time(false));
 				fflush(fout);
 				bsoc_set_mode(E.mode.pv_bias, true, true);
 				E.dl_excess = true;
@@ -627,6 +629,7 @@ int main(int argc, char *argv[])
 				E.homeassistant = true;
 				E.mode.in_pid_control = false; // shutdown auto energy control
 				E.mode.R = R_INIT;
+				C.system_stable = false;
 			}
 			if (ha_flag_vars_ss.receivedtoken) {
 				ha_flag_vars_ss.receivedtoken = false;
@@ -696,14 +699,16 @@ int main(int argc, char *argv[])
 					 * reset the control mode from simple switched power to PID control
 					 */
 					if (!E.mode.in_pid_control) {
-						mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
-						E.gti_sw_status = true;
-						usleep(100000); // wait
-						mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
-						E.ac_sw_status = true;
-						E.mode.pv_bias = C.pv_bias;
-						fprintf(fout, "%s in_pid_mode AC/DC switch true \r\n", log_time(false));
-						fm80_float(true);
+						if (C.system_stable) {
+							mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
+							E.gti_sw_status = true;
+							usleep(100000); // wait
+							mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
+							E.ac_sw_status = true;
+							E.mode.pv_bias = C.pv_bias;
+							fprintf(fout, "%s in_pid_mode AC/DC switch true \r\n", log_time(false));
+							fm80_float(true);
+						}
 					} else {
 						if (!fm80_float(true)) {
 							E.mode.pv_bias = (int32_t) E.mode.error - C.pv_bias;
@@ -774,11 +779,15 @@ int main(int argc, char *argv[])
 						ha_dc_off();
 						ha_dc_off();
 						ha_dc_off();
-						fprintf(fout, "%s Main Battery Runtime too low, shutting down power drains, %6f Hrs\r\n", log_time(false), get_bat_runtime());
+						if (C.system_stable) {
+							fprintf(fout, "%s Main Battery Runtime too low, shutting down power drains, %6f Hrs\r\n", log_time(false), get_bat_runtime());
+						}
 						ramp_down_ac(E.client_p, true);
 						ramp_down_gti(E.client_p, true);
 						if (E.call_shutdown) {
-							mqtt_ha_shutdown(E.client_p, TOPIC_SHUTDOWN);
+							if (C.system_stable) {
+								mqtt_ha_shutdown(E.client_p, TOPIC_SHUTDOWN);
+							}
 							E.call_shutdown = false;
 						}
 						fflush(fout);
@@ -797,18 +806,21 @@ int main(int argc, char *argv[])
 						C.dl_bat_charge_zero = false;
 					}
 
-					snprintf(gti_str, SBUF_SIZ - 1, "V%04dX", error_drive); // format for dumpload controller gti power commands
-					mqtt_gti_power(E.client_p, TOPIC_P, gti_str, 2);
-
+					if (C.system_stable) {
+						snprintf(gti_str, SBUF_SIZ - 1, "V%04dX", error_drive); // format for dumpload controller gti power commands
+						mqtt_gti_power(E.client_p, TOPIC_P, gti_str, 2);
+					}
 				}
 
 #ifndef  FAKE_VPV
 				if (fm80_float(true) || ((ac1_filter(E.mvar[V_BEN]) > BAL_MAX_ENERGY_AC) && (ac_test() > MIN_BAT_KW_AC_HI))) {
-					ramp_up_ac(E.client_p, E.ac_sw_on); // use once control
+					if (C.system_stable) {
+						ramp_up_ac(E.client_p, E.ac_sw_on); // use once control
 #ifdef PSW_DEBUG
-					fprintf(fout, "%s MIN_BAT_KW_AC_HI AC switch %d \r\n", log_time(false), E.ac_sw_on);
+						fprintf(fout, "%s MIN_BAT_KW_AC_HI AC switch %d \r\n", log_time(false), E.ac_sw_on);
 #endif
-					E.ac_sw_on = false; // once flag
+						E.ac_sw_on = false; // once flag
+					}
 				}
 #endif
 				if (((ac2_filter(E.mvar[V_BEN]) < C.bal_min_energy_ac) || ((ac_test() < (C.min_bat_kw_ac_lo))))) {
@@ -819,8 +831,8 @@ int main(int argc, char *argv[])
 							fprintf(fout, "%s RAMP DOWN AC, MIN_BAT_KW_AC_LO AC switch %d \r\n", log_time(false), E.ac_sw_on);
 #endif
 						}
+						E.ac_sw_on = true;
 					}
-					E.ac_sw_on = true;
 				}
 
 
@@ -835,13 +847,15 @@ int main(int argc, char *argv[])
 						fprintf(fout, "%s DL excess ramp_up_gti, DC switch %d\r\n", log_time(false), E.gti_sw_on);
 					}
 #endif
-					ramp_up_gti(E.client_p, E.gti_sw_on, E.dl_excess);
-					if (log_timer()) {
+					if (C.system_stable) {
+						ramp_up_gti(E.client_p, E.gti_sw_on, E.dl_excess);
+						if (log_timer()) {
 #ifdef RAMP_SW_LOG
-						fprintf(fout, "%s RAMP DOWN DC, MIN_BAT_KW_GTI_HI DC switch %d \r\n", log_time(false), E.gti_sw_on);
+							fprintf(fout, "%s RAMP DOWN DC, MIN_BAT_KW_GTI_HI DC switch %d \r\n", log_time(false), E.gti_sw_on);
 #endif
+						}
+						E.gti_sw_on = false; // once flag
 					}
-					E.gti_sw_on = false; // once flag
 #endif
 				} else {
 					if ((dc2_filter(E.mvar[V_BEN]) < BAL_MIN_ENERGY_GTI) || (gti_test() < (MIN_BAT_KW_GTI_LO + E.gti_low_adj))) {
