@@ -105,7 +105,7 @@ bool bsoc_data_collect(void)
 	L.bat_voltage = E.mvar[V_DVBAT];
 	L.bat_current = E.mvar[V_DCMPPT];
 	L.bat_runtime = E.mvar[V_FRUNT];
-	E.ac_low_adj = E.mvar[V_FSO]/0.5f;
+	E.ac_low_adj = E.mvar[V_FSO] / 0.5f;
 	E.gti_low_adj = E.mvar[V_FACE] * -0.5f;
 	E.mode.dl_mqtt_max = E.mvar[V_DPMPPT];
 	E.bat_runtime = E.mvar[V_FRUNT];
@@ -137,7 +137,6 @@ bool bsoc_data_collect(void)
  */
 double bsoc_ac(void)
 {
-
 	return ac0_filter(L.ac_weight);
 };
 
@@ -168,8 +167,6 @@ double bsoc_gti(void)
 			}
 		}
 	}
-
-
 	return dc0_filter(L.gti_weight);
 };
 
@@ -399,7 +396,7 @@ static double error_filter(const double raw)
 double ac0_filter(const double raw)
 {
 	static double accum = BAT_CRITICAL;
-;
+	;
 	static double coef = COEFF;
 	accum = accum - accum / coef + raw;
 	return accum / coef;

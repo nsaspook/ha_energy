@@ -58,6 +58,8 @@
  * V.077 limit shutdown calls th HA
  * V.078 3 IMAMETER sensors
  * V.079 system startup stability improvements
+ * V.080 Fix logging and switching bugs
+ * V.081 JSON NULL logging info
  */
 
 /*
@@ -203,7 +205,6 @@ void showIP(void)
 			printf("\t  Address : <%s>\n", host);
 		}
 	}
-
 	freeifaddrs(ifaddr);
 }
 
@@ -264,7 +265,6 @@ static void skeleton_daemon()
 	for (x = sysconf(_SC_OPEN_MAX); x >= 0; x--) {
 		close(x);
 	}
-
 }
 
 /*
@@ -341,7 +341,6 @@ void connlost(void *context, char *cause)
 		break;
 	}
 
-
 	if (times++ > MQTT_RECONN) {
 		goto bugout;
 	} else {
@@ -396,7 +395,6 @@ int main(int argc, char *argv[])
 	while (true) {
 		switch (E.mode.E) {
 		case E_INIT:
-
 #ifdef LOG_TO_FILE
 			fout = fopen(LOG_TO_FILE, "a");
 			if (fout == NULL) {
@@ -541,7 +539,6 @@ int main(int argc, char *argv[])
 			 * start the main energy monitoring loop
 			 */
 			fprintf(fout, "\r\n%s Solar Energy AC power controller\r\n", log_time(false));
-
 #ifdef FAKE_VPV
 			fprintf(fout, "\r\n Faking dumpload PV voltage\r\n");
 #endif
@@ -811,7 +808,6 @@ int main(int argc, char *argv[])
 						mqtt_gti_power(E.client_p, TOPIC_P, gti_str, 2);
 					}
 				}
-
 #ifndef  FAKE_VPV
 				if (fm80_float(true) || ((ac1_filter(E.mvar[V_BEN]) > BAL_MAX_ENERGY_AC) && (ac_test() > MIN_BAT_KW_AC_HI))) {
 					if (C.system_stable) {
@@ -834,7 +830,6 @@ int main(int argc, char *argv[])
 						E.ac_sw_on = true;
 					}
 				}
-
 
 				/*
 				 * Dump Load Excess testing
@@ -871,7 +866,6 @@ int main(int argc, char *argv[])
 					}
 				}
 			};
-
 #ifdef B_ADJ_DEBUG
 			fprintf(fout, "\r\n LO ADJ: AC %8.2fWh, GTI %8.2fWh\r\n", MIN_BAT_KW_AC_LO + E.ac_low_adj, MIN_BAT_KW_GTI_LO + E.gti_low_adj);
 #endif
@@ -880,7 +874,6 @@ int main(int argc, char *argv[])
 				fprintf(fout, "%s DL excess vars from ha_energy %d %d : Flag %d\r\n", log_time(false), E.mode.con4, E.mode.con5, E.dl_excess);
 			}
 #endif
-
 			time(&rawtime);
 
 			if (E.im_delay++ >= IM_DELAY) {
@@ -921,7 +914,7 @@ int main(int argc, char *argv[])
 				snprintf(buffer, RBUF_SIZ - 1, "%s", ctime(&rawtime));
 				len = strlen(buffer);
 				buffer[len - 1] = 0; // munge out the return character
-				fprintf(fout, "%s ", buffer);
+				fprintf(fout, "%s ", log_time(false));
 				fflush(fout);
 				E.fm80 = false;
 				E.dumpload = false;
@@ -930,7 +923,7 @@ int main(int argc, char *argv[])
 				sync_ha();
 				print_im_vars();
 				print_mvar_vars();
-				fprintf(fout, "%s\r", ctime(&rawtime));
+				fprintf(fout, "%s\r\n", log_time(false));
 			}
 			E.mode.E = E_WAIT;
 			fflush(fout);
@@ -1046,7 +1039,6 @@ void ramp_down_gti(MQTTClient client_p, bool sw_off)
  */
 void ramp_up_ac(MQTTClient client_p, bool start)
 {
-
 	if (start) {
 		E.once_ac = true;
 	}
@@ -1144,7 +1136,6 @@ static bool solar_shutdown(void)
 			ret = false;
 			E.link.shutdown = 0;
 		}
-
 #ifdef DEBUG_SHUTDOWN
 		fprintf(fout, "%s Solar shutdown comms check ret = %d \r\n", log_time(false), ret);
 		fflush(fout);
@@ -1179,7 +1170,6 @@ char * log_time(bool log)
 		fprintf(fout, "%s ", time_log);
 		fflush(fout);
 	}
-
 	return time_log;
 }
 
@@ -1190,7 +1180,8 @@ bool sync_ha(void)
 {
 	bool sync = false;
 	if (E.gti_sw_status != (bool) ((int32_t) E.mvar[V_HDCSW])) {
-		fprintf(fout, "DC_MM %d %d ", (bool) E.gti_sw_status, (bool) ((int32_t) E.mvar[V_HDCSW]));
+		fflush(fout);
+		fprintf(fout, "DCM %d %d ", (bool) E.gti_sw_status, (bool) ((int32_t) E.mvar[V_HDCSW]));
 		mqtt_ha_switch(E.client_p, TOPIC_PDCC, !E.gti_sw_status);
 		E.dc_mismatch = true;
 		fflush(fout);
@@ -1201,7 +1192,8 @@ bool sync_ha(void)
 
 	E.ac_sw_status = (bool) ((int32_t) E.mvar[V_HACSW]); // TEMP FIX for MISmatch errors
 	if (E.ac_sw_status != (bool) ((int32_t) E.mvar[V_HACSW])) {
-		fprintf(fout, "AC_MM %d %d ", (bool) E.ac_sw_status, (bool) ((int32_t) E.mvar[V_HACSW]));
+		fflush(fout);
+		fprintf(fout, "ACM %d %d ", (bool) E.ac_sw_status, (bool) ((int32_t) E.mvar[V_HACSW]));
 		mqtt_ha_switch(E.client_p, TOPIC_PACC, !E.ac_sw_status);
 		E.ac_mismatch = true;
 		fflush(fout);

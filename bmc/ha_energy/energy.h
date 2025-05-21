@@ -34,7 +34,7 @@ extern "C" {
 #include "http_vars.h"
 
 
-#define LOG_VERSION     "V0.79"
+#define LOG_VERSION     "V0.81"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
@@ -93,13 +93,13 @@ extern "C" {
 #define BAT_M_KW            5120.0f
 #define BAT_SOC_TOP         0.98f
 #define BAT_SOC_HIGH        0.95f
-#define BAT_SOC_LOW         0.68f
-#define BAT_SOC_LOW_AC      0.72f
+#define BAT_SOC_LOW         0.48f
+#define BAT_SOC_LOW_AC      0.52f
 #define BAT_CRITICAL        746.0f /// one electrical HP, for one hour
 #define BAT_RUNTIME_LOW     5.0f
 #define BAT_RUNTIME_GTI     6.0f
-#define MIN_BAT_KW_BSOC_SLP 4000.0f
-#define MIN_BAT_KW_BSOC_HI  4550.0f
+#define MIN_BAT_KW_BSOC_SLP 3000.0f
+#define MIN_BAT_KW_BSOC_HI  3550.0f
 
 #define MIN_BAT_KW_GTI_HI   BAT_M_KW*BAT_SOC_TOP
 #define MIN_BAT_KW_GTI_LO   BAT_M_KW*BAT_SOC_LOW
@@ -171,7 +171,7 @@ extern "C" {
 	 */
 #define PWA_SANE            1700.0f
 #define PAMPS_SANE          16.0f
-#define PVOLTS_SANE         150.0f
+#define PVOLTS_SANE         155.0f
 #define BAMPS_SANE          70.0f
 
 	/*

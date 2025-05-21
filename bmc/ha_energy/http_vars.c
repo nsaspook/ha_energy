@@ -130,7 +130,6 @@ iammeter_exit:
  */
 void iammeter_read1(const char * meter)
 {
-
 	curl = curl_easy_init();
 	if (curl) {
 		E.link.iammeter_count++;
@@ -164,7 +163,6 @@ void iammeter_read1(const char * meter)
 
 void iammeter_read2(const char * meter)
 {
-
 	curl = curl_easy_init();
 	if (curl) {
 		E.link.iammeter_count++;
@@ -198,7 +196,6 @@ void iammeter_read2(const char * meter)
 
 void iammeter_read3(const char * meter)
 {
-
 	curl = curl_easy_init();
 	if (curl) {
 		E.link.iammeter_count++;

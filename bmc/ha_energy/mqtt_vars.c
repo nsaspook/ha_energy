@@ -164,7 +164,9 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, const bool sw_sta
 	}
 #endif
 	if (C.system_stable) {
+#ifdef MQTT_HA_SWITCH_MESS
 		fprintf(fout, "%s mqtt_ha_switch message sent to %s \r\n", log_time(false), topic_p);
+#endif
 	}
 	MQTTClient_publishMessage(client_p, topic_p, &pubmsg, &token);
 	// a busy, wait loop for the async delivery thread to complete

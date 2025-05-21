@@ -35,7 +35,7 @@ int32_t msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_messag
 	if (json == NULL) {
 		const char *error_ptr = cJSON_GetErrorPtr();
 		if (error_ptr != NULL) {
-			fprintf(fout, "%s Error: %s NULL cJSON pointer\n", log_time(false), error_ptr);
+			fprintf(fout, "%s Error: %s NULL cJSON pointer %s\n", log_time(false), error_ptr, topicName);
 		}
 		ret = -1;
 		ha_flag->rec_ok = false;

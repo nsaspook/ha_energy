@@ -22,7 +22,7 @@ extern "C" {
 	//#define DEBUG_REC
 	//#define GET_DEBUG
 
-#define MBMQTT  1024
+#define MBMQTT  2048
 
 	enum mqtt_id {
 		P8055_ID,
