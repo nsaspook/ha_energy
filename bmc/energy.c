@@ -60,6 +60,8 @@
  * V.079 system startup stability improvements
  * V.080 Fix logging and switching bugs
  * V.081 JSON NULL logging info
+ * V.082 adjust running power levels higher
+ * V.083 control excess mode using PV Power
  */
 
 /*

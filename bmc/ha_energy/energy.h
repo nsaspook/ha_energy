@@ -34,7 +34,7 @@ extern "C" {
 #include "http_vars.h"
 
 
-#define LOG_VERSION     "V0.81"
+#define LOG_VERSION     "V0.83"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
@@ -113,22 +113,24 @@ extern "C" {
 #define PV_PGAIN            0.85f
 #define PV_IGAIN            0.12f
 #define PV_IMAX             1400.0f
-#define PV_BIAS             288.0f
+#define PV_BIAS             500.0f
 #define PV_BIAS_ZERO          0.0f
-#define PV_BIAS_LOW         222.0f
-#define PV_BIAS_FLOAT       399.0f
-#define PV_BIAS_SLEEP       480.0f
-#define PV_BIAS_RATE        320.0f
+#define PV_BIAS_LOW         500.0f
+#define PV_BIAS_FLOAT       600.0f
+#define PV_BIAS_SLEEP       580.0f
+#define PV_BIAS_RATE        520.0f
 #define PV_DL_MPTT_MAX     1200.0f
 #define PV_DL_MPTT_EXCESS  1300.0f
 #define PV_DL_MPTT_IDLE     57.0f
 #define PV_DL_BIAS_RATE     75.0f
 #define DL_BAT_CHARGE_HIGH 200.0f
-#define PV_DL_EXCESS       500.0f
+#define PV_DL_EXCESS       580.0f
+#define PV_DL_EXCESS_LOW   180.0f
+#define EXCESS_COUNT     32
 #define PV_DL_B_AH_LOW     100.0f
-#define PV_DL_B_AH_MIN     120.0f // DL battery should be at least 175Ah
+#define PV_DL_B_AH_MIN     120.0f // DL battery should be at least 145Ah
 #define PV_DL_B_V_LOW       23.8f // Battery low-voltqage cutoff
-#define PWA_SLEEP          200.0f
+#define PWA_SLEEP          500.0f
 #define DL_AC_DC_EFF        1.24f
 
 	/*
@@ -147,8 +149,8 @@ extern "C" {
 #define MAX_LOG_SPAM  60
 #define LOW_LOG_SPAM  2
 #define RESET_LOG_SPAM  120
-	
-#define SYSTEM_STABLE	6.0f
+
+#define SYSTEM_STABLE 6.0f
 
 	//#define IM_DEBUG                      // WEM3080T LOGGING
 	//#define B_ADJ_DEBUG                   // debug printing
@@ -353,7 +355,7 @@ extern "C" {
 	};
 
 	struct config_type {
-		volatile double dl_bat_charge_high, pv_bias, pv_dl_excess, pv_bias_rate ,bal_min_energy_ac, min_bat_kw_ac_lo;
+		volatile double dl_bat_charge_high, pv_bias, pv_dl_excess, pv_bias_rate, bal_min_energy_ac, min_bat_kw_ac_lo;
 		volatile bool dl_bat_charge_zero, system_stable;
 	};
 
