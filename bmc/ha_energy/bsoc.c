@@ -365,13 +365,13 @@ bool bsoc_set_mode(const double target, const bool mode, const bool init)
 					fprintf(fout, "%s HA start excess from PV Power\n", log_time(false));
 					E.dl_excess = true;
 				}
-			} else {
-				if (E.dl_excess == true) {
+			}
+		} else {
+			if (E.dl_excess == true) {
+				if (E.mvar[V_PWA] < PV_DL_EXCESS_LOW) {
+					fprintf(fout, "%s HA stop excess from PV Power\n", log_time(false));
+					E.dl_excess = false;
 					excess_count = 0;
-					if (E.mvar[V_PWA] < PV_DL_EXCESS_LOW) {
-						fprintf(fout, "%s HA stop excess from PV Power\n", log_time(false));
-						E.dl_excess = false;
-					}
 				}
 			}
 		}
