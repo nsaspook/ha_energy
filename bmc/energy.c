@@ -172,6 +172,7 @@ struct energy_type E = {
 	.dl_excess = false,
 	.dl_excess_adj = 0.0f,
 	.call_shutdown = true, // limit shutdown calls to one per data error
+	.bat_runtime_low = BAT_RUNTIME_LOW,
 };
 
 static bool solar_shutdown(void);
@@ -662,7 +663,9 @@ int main(int argc, char *argv[])
 					if (gti_test() > MIN_BAT_KW_GTI_HI) {
 						mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
 						E.gti_sw_status = true;
-						fprintf(fout, "%s R_FLOAT DC switch true \r\n", log_time(false));
+						if (!E.dl_excess) {
+							fprintf(fout, "%s R_FLOAT DC switch true \r\n", log_time(false));
+						}
 					}
 				}
 				usleep(100000); // wait
@@ -670,7 +673,9 @@ int main(int argc, char *argv[])
 					if (ac_test() > MIN_BAT_KW_AC_HI) {
 						mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
 						E.ac_sw_status = true;
-						fprintf(fout, "%s R_FLOAT AC switch true \r\n", log_time(false));
+						if (!E.dl_excess) {
+							fprintf(fout, "%s R_FLOAT AC switch true \r\n", log_time(false));
+						}
 					}
 				}
 				E.mode.pv_bias = C.pv_bias;
@@ -768,7 +773,13 @@ int main(int argc, char *argv[])
 						error_drive = PV_BIAS_ZERO;
 					}
 
-					if (get_bat_runtime() < BAT_RUNTIME_LOW) {
+
+					if (E.dl_excess) { // run the system lean in excess mode
+						E.bat_runtime_low = BAT_RUNTIME_LOW_EXCESS;
+					} else {
+						E.bat_runtime_low = BAT_RUNTIME_LOW;
+					}
+					if (get_bat_runtime() < E.bat_runtime_low) {
 						error_drive = PV_BIAS_ZERO;
 						ha_ac_off();
 						ha_ac_off();
@@ -803,6 +814,10 @@ int main(int argc, char *argv[])
 						C.dl_bat_charge_zero = true;
 					} else {
 						C.dl_bat_charge_zero = false;
+					}
+
+					if (E.dl_excess && fm80_float(true)) { // run the system lean in excess mode
+						error_drive = PV_DL_EXCESS_FLOAT;
 					}
 
 					if (C.system_stable) {

@@ -54,7 +54,7 @@ static struct local_type L = {
 };
 
 static double error_filter(const double);
-static uint32_t excess_count = 0;
+static uint32_t excess_count_on = 0, excess_count_off = 0;
 
 /** \file bsoc.c
  * setup basic start state for BSOC functions
@@ -360,18 +360,25 @@ bool bsoc_set_mode(const double target, const bool mode, const bool init)
 		fprintf(fout, "%s HA start excess button pressed\n", log_time(false));
 	} else { // control excess mode from PV Power
 		if (E.mvar[V_PWA] > C.pv_dl_excess) {
-			if (excess_count++ >= EXCESS_COUNT) {
+			if (excess_count_on++ >= EXCESS_COUNT_ON) {
 				if (E.dl_excess == false) {
+					mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
+					E.gti_sw_status = true;
+					mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
+					E.ac_sw_status = true;
 					fprintf(fout, "%s HA start excess from PV Power\n", log_time(false));
 					E.dl_excess = true;
+					excess_count_off = 0;
 				}
 			}
 		} else {
 			if (E.dl_excess == true) {
 				if (E.mvar[V_PWA] < PV_DL_EXCESS_LOW) {
-					fprintf(fout, "%s HA stop excess from PV Power\n", log_time(false));
-					E.dl_excess = false;
-					excess_count = 0;
+					if (excess_count_off++ >= EXCESS_COUNT_OFF) {
+						fprintf(fout, "%s HA stop excess from PV Power\n", log_time(false));
+						E.dl_excess = false;
+						excess_count_on = 0;
+					}
 				}
 			}
 		}

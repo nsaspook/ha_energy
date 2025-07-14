@@ -19,7 +19,7 @@ extern "C" {
 #define TOKEN_DELAY     500
 #define GTI_TOKEN_DELAY 600
 
-#define QOS             1
+//#define QOS             2
 
 	extern const char* mqtt_name[V_DLAST];
 

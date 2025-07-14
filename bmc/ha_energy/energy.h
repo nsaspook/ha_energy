@@ -57,7 +57,7 @@ extern "C" {
 #define TOPIC_SS        "mateq84/data/solar"
 #define TOPIC_SD        "mateq84/data/dumpload"
 #define TOPIC_HA        "home-assistant/status/switch"
-#define QOS             1
+#define QOS             2
 #define TIMEOUT         10000L
 #define SPACING_USEC    500 * 1000
 #define USEC_SEC        1000000L
@@ -90,15 +90,16 @@ extern "C" {
 	/*
 	 * Battery SoC cycle limits parameters
 	 */
-#define BAT_M_KW            5120.0f
-#define BAT_SOC_TOP         0.98f
-#define BAT_SOC_HIGH        0.95f
-#define BAT_SOC_LOW         0.48f
-#define BAT_SOC_LOW_AC      0.52f
-#define BAT_CRITICAL        746.0f /// one electrical HP, for one hour
-#define BAT_RUNTIME_LOW     5.0f
-#define BAT_RUNTIME_GTI     6.0f
-#define MIN_BAT_KW_BSOC_SLP 3000.0f
+#define BAT_M_KW   5120.0f
+#define BAT_SOC_TOP   0.98f
+#define BAT_SOC_HIGH   0.95f
+#define BAT_SOC_LOW   0.48f
+#define BAT_SOC_LOW_AC   0.52f
+#define BAT_CRITICAL   746.0f /// one electrical HP, for one hour
+#define BAT_RUNTIME_LOW_EXCESS  2.0f
+#define BAT_RUNTIME_LOW   5.0f
+#define BAT_RUNTIME_GTI   6.0f
+#define MIN_BAT_KW_BSOC_SLP  3000.0f
 #define MIN_BAT_KW_BSOC_HI  3550.0f
 
 #define MIN_BAT_KW_GTI_HI   BAT_M_KW*BAT_SOC_TOP
@@ -124,9 +125,11 @@ extern "C" {
 #define PV_DL_MPTT_IDLE     57.0f
 #define PV_DL_BIAS_RATE     75.0f
 #define DL_BAT_CHARGE_HIGH 200.0f
-#define PV_DL_EXCESS       580.0f
+#define PV_DL_EXCESS       512.0f
+#define PV_DL_EXCESS_FLOAT 600.0f
 #define PV_DL_EXCESS_LOW   180.0f
-#define EXCESS_COUNT     32
+#define EXCESS_COUNT_ON     12
+#define EXCESS_COUNT_OFF     6
 #define PV_DL_B_AH_LOW     100.0f
 #define PV_DL_B_AH_MIN     120.0f // DL battery should be at least 145Ah
 #define PV_DL_B_V_LOW       23.8f // Battery low-voltqage cutoff
@@ -343,7 +346,7 @@ extern "C" {
 		volatile double im_vars[IA_LAST][PHASE_LAST];
 		volatile double mvar[V_DLAST + 1];
 		volatile bool once_gti, once_ac, iammeter, fm80, dumpload, homeassistant, once_gti_zero, call_shutdown;
-		volatile double gti_low_adj, ac_low_adj, dl_excess_adj, bat_runtime;
+		volatile double gti_low_adj, ac_low_adj, dl_excess_adj, bat_runtime, bat_runtime_low;
 		volatile bool ac_sw_on, gti_sw_on, ac_sw_status, gti_sw_status, solar_shutdown, solar_mode, startup, ac_mismatch, dc_mismatch, mode_mismatch, dl_excess;
 		volatile uint32_t speed_go, im_delay, im_display, gti_delay;
 		volatile int32_t rc, sane;

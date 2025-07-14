@@ -147,7 +147,7 @@ void mqtt_ha_switch(MQTTClient client_p, const char * topic_p, const bool sw_sta
 	pubmsg.payload = json_str;
 	pubmsg.payloadlen = strlen(json_str);
 	pubmsg.qos = QOS;
-	pubmsg.retained = 0;
+	pubmsg.retained = 1;
 
 #ifdef DEBUG_HA_CMD
 	if (spam) {
