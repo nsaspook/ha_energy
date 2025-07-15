@@ -34,7 +34,7 @@ extern "C" {
 #include "http_vars.h"
 
 
-#define LOG_VERSION     "V0.83"
+#define LOG_VERSION     "V0.84"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
@@ -110,6 +110,7 @@ extern "C" {
 
 	/*
 	 * PV panel cycle limits parameters
+	 * Use value on tens, values like 512 will not work
 	 */
 #define PV_PGAIN            0.85f
 #define PV_IGAIN            0.12f
@@ -118,16 +119,16 @@ extern "C" {
 #define PV_BIAS_ZERO          0.0f
 #define PV_BIAS_LOW         500.0f
 #define PV_BIAS_FLOAT       600.0f
-#define PV_BIAS_SLEEP       580.0f
-#define PV_BIAS_RATE        520.0f
+#define PV_BIAS_SLEEP       600.0f
+#define PV_BIAS_RATE        500.0f
 #define PV_DL_MPTT_MAX     1200.0f
 #define PV_DL_MPTT_EXCESS  1300.0f
-#define PV_DL_MPTT_IDLE     57.0f
-#define PV_DL_BIAS_RATE     75.0f
+#define PV_DL_MPTT_IDLE     60.0f
+#define PV_DL_BIAS_RATE     80.0f
 #define DL_BAT_CHARGE_HIGH 200.0f
-#define PV_DL_EXCESS       512.0f
+#define PV_DL_EXCESS       500.0f
 #define PV_DL_EXCESS_FLOAT 600.0f
-#define PV_DL_EXCESS_LOW   180.0f
+#define PV_DL_EXCESS_LOW   200.0f
 #define EXCESS_COUNT_ON     12
 #define EXCESS_COUNT_OFF     6
 #define PV_DL_B_AH_LOW     100.0f

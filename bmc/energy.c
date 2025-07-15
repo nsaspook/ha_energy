@@ -62,6 +62,7 @@
  * V.081 JSON NULL logging info
  * V.082 adjust running power levels higher
  * V.083 control excess mode using PV Power
+ * V.084 set all control points to 10's, numbers like 512 for power don't work
  */
 
 /*
@@ -816,12 +817,13 @@ int main(int argc, char *argv[])
 						C.dl_bat_charge_zero = false;
 					}
 
-					if (E.dl_excess && fm80_float(true)) { // run the system lean in excess mode
+					if (E.dl_excess && fm80_float(true)) { // run the system lean in excess mode during float
 						error_drive = PV_DL_EXCESS_FLOAT;
 					}
 
 					if (C.system_stable) {
 						snprintf(gti_str, SBUF_SIZ - 1, "V%04dX", error_drive); // format for dumpload controller gti power commands
+						gti_str[4]='0'; // make sure to use 10's of numbers, the Chinese GTI reject some power settings
 						mqtt_gti_power(E.client_p, TOPIC_P, gti_str, 2);
 					}
 				}
