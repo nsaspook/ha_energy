@@ -359,7 +359,7 @@ bool bsoc_set_mode(const double target, const bool mode, const bool init)
 		E.mode.con4 = false;
 		fprintf(fout, "%s HA start excess button pressed\n", log_time(false));
 	} else { // control excess mode from PV Power
-		if (E.mvar[V_PWA] > C.pv_dl_excess) {
+		if ((E.mvar[V_PWA] > C.pv_dl_excess) && (E.mvar[V_FBEKW] > MIN_BAT_KW_BSOC_HI)) {
 			if (excess_count_on++ >= EXCESS_COUNT_ON) {
 				if (E.dl_excess == false) {
 					mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
@@ -405,6 +405,7 @@ bool bsoc_set_mode(const double target, const bool mode, const bool init)
 	}
 
 	fflush(fout);
+
 	return bsoc_mode;
 }
 
@@ -415,6 +416,7 @@ static double error_filter(const double raw)
 {
 	static double accum = 0.0f;
 	accum = accum - accum / L.coef + raw;
+
 	return accum / L.coef;
 }
 
@@ -424,6 +426,7 @@ double ac0_filter(const double raw)
 	;
 	static double coef = COEFF;
 	accum = accum - accum / coef + raw;
+
 	return accum / coef;
 }
 
@@ -432,6 +435,7 @@ double ac1_filter(const double raw)
 	static double accum = BAT_CRITICAL;
 	static double coef = COEF;
 	accum = accum - accum / coef + raw;
+
 	return accum / coef;
 }
 
@@ -440,6 +444,7 @@ double ac2_filter(const double raw)
 	static double accum = BAT_CRITICAL;
 	static double coef = COEF;
 	accum = accum - accum / coef + raw;
+
 	return accum / coef;
 }
 
@@ -448,6 +453,7 @@ double dc0_filter(const double raw)
 	static double accum = 0.0f;
 	static double coef = COEFF;
 	accum = accum - accum / coef + raw;
+
 	return accum / coef;
 }
 
@@ -456,6 +462,7 @@ double dc1_filter(const double raw)
 	static double accum = 0.0f;
 	static double coef = COEF;
 	accum = accum - accum / coef + raw;
+
 	return accum / coef;
 }
 
@@ -464,6 +471,7 @@ double dc2_filter(const double raw)
 	static double accum = 0.0f;
 	static double coef = COEF;
 	accum = accum - accum / coef + raw;
+
 	return accum / coef;
 }
 
@@ -472,6 +480,7 @@ double drive0_filter(const double raw)
 	static double accum = 0.0f;
 	static double coef = COEF;
 	accum = accum - accum / coef + raw;
+
 	return accum / coef;
 }
 
