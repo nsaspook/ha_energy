@@ -359,7 +359,7 @@ bool bsoc_set_mode(const double target, const bool mode, const bool init)
 		E.mode.con4 = false;
 		fprintf(fout, "%s HA start excess button pressed\n", log_time(false));
 	} else { // control excess mode from PV Power
-		if ((E.mvar[V_PWA] > C.pv_dl_excess) && (E.mvar[V_FBEKW] > MIN_BAT_KW_BSOC_HI)) {
+		if ((E.mvar[V_PWA] > C.pv_dl_excess) && (E.mvar[V_FBEKW] > MIN_BAT_KW_BSOC_HI) && (E.mvar[V_FCCM] == FLOAT_CODE)) {
 			if (excess_count_on++ >= EXCESS_COUNT_ON) {
 				if (E.dl_excess == false) {
 					mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
