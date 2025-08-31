@@ -162,7 +162,7 @@ double bsoc_gti(void)
 			} else {
 				L.gti_weight = 0.0f; // reduce power to zero
 				if (once) {
-					fprintf(fout, "%s Dump Load Battery Ah below %f \n", log_time(false), PV_DL_B_AH_MIN);
+					fprintf(fout, "%s Dump Load Battery Ah below %f BSOC GTI\n", log_time(false), PV_DL_B_AH_MIN);
 					once = false;
 				}
 			}
@@ -191,7 +191,7 @@ double gti_test(void)
 			} else {
 				L.gti_weight = 0.0f; // reduce power to zero
 				if (once) {
-					fprintf(fout, "%s Dump Load Battery Ah below %f \n", log_time(false), PV_DL_B_AH_MIN);
+					fprintf(fout, "%s Dump Load Battery Ah below %f GIT Test\n", log_time(false), PV_DL_B_AH_MIN);
 					once = false;
 				}
 			}

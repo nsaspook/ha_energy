@@ -115,26 +115,26 @@ extern "C" {
 #define PV_PGAIN            0.85f
 #define PV_IGAIN            0.12f
 #define PV_IMAX             1400.0f
-#define PV_BIAS             400.0f
+#define PV_BIAS             500.0f
 #define PV_BIAS_ZERO          0.0f
-#define PV_BIAS_LOW         400.0f
-#define PV_BIAS_FLOAT       500.0f
-#define PV_BIAS_SLEEP       500.0f
-#define PV_BIAS_RATE        400.0f
+#define PV_BIAS_LOW         500.0f
+#define PV_BIAS_FLOAT       550.0f
+#define PV_BIAS_SLEEP       550.0f
+#define PV_BIAS_RATE        500.0f
 #define PV_DL_MPTT_MAX     1200.0f
 #define PV_DL_MPTT_EXCESS  1300.0f
 #define PV_DL_MPTT_IDLE     60.0f
 #define PV_DL_BIAS_RATE     80.0f
 #define DL_BAT_CHARGE_HIGH 200.0f
-#define PV_DL_EXCESS       400.0f
-#define PV_DL_EXCESS_FLOAT 500.0f
-#define PV_DL_EXCESS_LOW   400.0f
+#define PV_DL_EXCESS       550.0f
+#define PV_DL_EXCESS_FLOAT 570.0f
+#define PV_DL_EXCESS_LOW   200.0f
 #define EXCESS_COUNT_ON     12
 #define EXCESS_COUNT_OFF     6
 #define PV_DL_B_AH_LOW     120.0f
 #define PV_DL_B_AH_MIN     120.0f // DL battery should be at least 145Ah
 #define PV_DL_B_V_LOW       23.8f // Battery low-voltqage cutoff
-#define PWA_SLEEP          400.0f
+#define PWA_SLEEP          550.0f
 #define DL_AC_DC_EFF        1.24f
 
 	/*
