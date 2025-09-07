@@ -97,8 +97,8 @@ extern "C" {
 #define BAT_SOC_LOW_AC   0.52f
 #define BAT_CRITICAL   746.0f /// one electrical HP, for one hour
 #define BAT_RUNTIME_LOW_EXCESS  2.0f
-#define BAT_RUNTIME_LOW   5.0f
-#define BAT_RUNTIME_GTI   6.0f
+#define BAT_RUNTIME_LOW   4.0f
+#define BAT_RUNTIME_GTI   5.0f
 #define MIN_BAT_KW_BSOC_SLP  3000.0f
 #define MIN_BAT_KW_BSOC_HI  4800.0f
 

@@ -780,7 +780,7 @@ int main(int argc, char *argv[])
 					} else {
 						E.bat_runtime_low = BAT_RUNTIME_LOW;
 					}
-					if (get_bat_runtime() < E.bat_runtime_low) {
+					if ((get_bat_runtime() < E.bat_runtime_low) && (E.mvar[V_BEN] <  MIN_BAT_KW_BSOC_SLP)) {
 						error_drive = PV_BIAS_ZERO;
 						ha_ac_off();
 						ha_ac_off();
