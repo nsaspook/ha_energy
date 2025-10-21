@@ -9,6 +9,7 @@ bool mqtt_gti_time(MQTTClient, const char *, char *);
 
 /** \file http_vars.c
  * read and format data returned from libcurl http WRITEDATA function call
+ * 3-phase meters
  */
 size_t iammeter_write_callback1(char *buffer, size_t size, size_t nitems, void *stream)
 {
@@ -70,6 +71,9 @@ iammeter_exit:
 	return size * nitems;
 }
 
+/*
+ * single phase meters
+ */
 size_t iammeter_write_callback2(char *buffer, size_t size, size_t nitems, void *stream)
 {
 	cJSON *json = cJSON_ParseWithLength(buffer, strlen(buffer));

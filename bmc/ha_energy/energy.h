@@ -57,104 +57,103 @@ extern "C" {
 #define TOPIC_SS        "mateq84/data/solar"
 #define TOPIC_SD        "mateq84/data/dumpload"
 #define TOPIC_HA        "home-assistant/status/switch"
-#define QOS             2
-#define TIMEOUT         10000L
-#define SPACING_USEC    500 * 1000
-#define USEC_SEC        1000000L
+
+#define DL_POWER_ZERO  "V0000X"
+
+#define LOG_TO_FILE  "/store/logs/energy.log"
+#define LOG_TO_FILE_ALT  "/tmp/energy.log"
+#define NO_CYLON
+#define CRITIAL_SHUTDOWN_LOG
 
 #define DAQ_STR 32
 #define DAQ_STR_M DAQ_STR-1
-
 #define SBUF_SIZ        16  // short buffer string size
 #define RBUF_SIZ        82
 #define SYSLOG_SIZ      512
 
-#define MQTT_TIMEOUT    900
-#define SW_QOS          1
+	static const uint32_t QOS = 2;
+	static const uint32_t TIMEOUT = 10000L;
+	static const uint32_t SPACING_USEC = 500 * 1000;
+	static const uint32_t USEC_SEC = 1000000L;
 
-#define MQTT_RECONN     3
-#define KAI             60
+	static const uint32_t MQTT_TIMEOUT = 900;
+	static const uint32_t MQTT_RECONN = 3;
+	static const uint32_t KAI = 60;
 
-#define NO_CYLON
-#define CRITIAL_SHUTDOWN_LOG
+	static const uint32_t UNIT_TEST = 2;
+	static const uint32_t NORM_MODE = 0;
+	static const uint32_t PID_MODE = 1;
+	static const uint32_t MAX_ERROR = 5;
+	static const uint32_t IAM_DELAY = 120;
 
-#define UNIT_TEST       2
-#define NORM_MODE       0
-#define PID_MODE        1
-#define MAX_ERROR       5
-#define IAM_DELAY       120
-
-#define CMD_SEC         10
-#define TIME_SYNC_SEC   30
+	static const uint32_t CMD_SEC = 10;
+	static const uint32_t TIME_SYNC_SEC = 30;
 
 	/*
 	 * Battery SoC cycle limits parameters
 	 */
-#define BAT_M_KW   5120.0f
-#define BAT_SOC_TOP   0.98f
-#define BAT_SOC_HIGH   0.95f
-#define BAT_SOC_LOW   0.48f
-#define BAT_SOC_LOW_AC   0.52f
-#define BAT_CRITICAL   746.0f /// one electrical HP, for one hour
-#define BAT_RUNTIME_LOW_EXCESS  2.0f
-#define BAT_RUNTIME_LOW   4.0f
-#define BAT_RUNTIME_GTI   5.0f
-#define MIN_BAT_KW_BSOC_SLP  3000.0f
-#define MIN_BAT_KW_BSOC_HI  4800.0f
+	static const double BAT_M_KW = 5120.0f;
+	static const double BAT_SOC_TOP = 0.98f;
+	static const double BAT_SOC_HIGH = 0.95f;
+	static const double BAT_SOC_LOW = 0.48f;
+	static const double BAT_SOC_LOW_AC = 0.52f;
+	static const double BAT_CRITICAL = 746.0f; /// one electrical HP, for one hour
+	static const double BAT_RUNTIME_LOW_EXCESS = 2.0f;
+	static const double BAT_RUNTIME_LOW = 4.0f;
+	static const double BAT_RUNTIME_GTI = 5.0f;
+	static const double MIN_BAT_KW_BSOC_SLP = 3000.0f;
+	static const double MIN_BAT_KW_BSOC_HI = 4800.0f;
 
-#define MIN_BAT_KW_GTI_HI   BAT_M_KW*BAT_SOC_TOP
-#define MIN_BAT_KW_GTI_LO   BAT_M_KW*BAT_SOC_LOW
+	static const double MIN_BAT_KW_GTI_HI = BAT_M_KW*BAT_SOC_TOP;
+	static const double MIN_BAT_KW_GTI_LO = BAT_M_KW*BAT_SOC_LOW;
 
-#define MIN_BAT_KW_AC_HI    BAT_M_KW*BAT_SOC_HIGH
-#define MIN_BAT_KW_AC_LO    BAT_M_KW*BAT_SOC_LOW_AC
+	static const double MIN_BAT_KW_AC_HI = BAT_M_KW*BAT_SOC_HIGH;
+	static const double MIN_BAT_KW_AC_LO = BAT_M_KW*BAT_SOC_LOW_AC;
 
 	/*
 	 * PV panel cycle limits parameters
 	 * Use value on tens, values like 512 will not work
 	 */
-#define PV_PGAIN            0.85f
-#define PV_IGAIN            0.12f
-#define PV_IMAX             1400.0f
-#define PV_BIAS             500.0f
-#define PV_BIAS_ZERO          0.0f
-#define PV_BIAS_LOW         500.0f
-#define PV_BIAS_FLOAT       550.0f
-#define PV_BIAS_SLEEP       550.0f
-#define PV_BIAS_RATE        500.0f
-#define PV_DL_MPTT_MAX     1200.0f
-#define PV_DL_MPTT_EXCESS  1300.0f
-#define PV_DL_MPTT_IDLE     60.0f
-#define PV_DL_BIAS_RATE     80.0f
-#define DL_BAT_CHARGE_HIGH 200.0f
-#define PV_DL_EXCESS       550.0f
-#define PV_DL_EXCESS_FLOAT 570.0f
-#define PV_DL_EXCESS_LOW   200.0f
-#define EXCESS_COUNT_ON     12
-#define EXCESS_COUNT_OFF     6
-#define PV_DL_B_AH_LOW     120.0f
-#define PV_DL_B_AH_MIN     120.0f // DL battery should be at least 145Ah
-#define PV_DL_B_V_LOW       23.8f // Battery low-voltqage cutoff
-#define PWA_SLEEP          550.0f
-#define DL_AC_DC_EFF        1.24f
+	static const double PV_PGAIN = 0.85f;
+	static const double PV_IGAIN = 0.12f;
+	static const double PV_IMAX = 1400.0f;
+	static const double PV_BIAS = 500.0f;
+	static const double PV_BIAS_ZERO = 0.0f;
+	static const double PV_BIAS_LOW = 500.0f;
+	static const double PV_BIAS_FLOAT = 550.0f;
+	static const double PV_BIAS_SLEEP = 550.0f;
+	static const double PV_BIAS_RATE = 500.0f;
+	static const double PV_DL_MPTT_MAX = 1200.0f;
+	static const double PV_DL_MPTT_EXCESS = 1300.0f;
+	static const double PV_DL_MPTT_IDLE = 60.0f;
+	static const double PV_DL_BIAS_RATE = 80.0f;
+	static const double DL_BAT_CHARGE_HIGH = 200.0f;
+	static const double PV_DL_EXCESS = 550.0f;
+	static const double PV_DL_EXCESS_FLOAT = 570.0f;
+	static const double PV_DL_EXCESS_LOW = 200.0f;
+	static const uint32_t EXCESS_COUNT_ON = 12;
+	static const uint32_t EXCESS_COUNT_OFF = 6;
+	static const double PV_DL_B_AH_LOW = 120.0f;
+	static const double PV_DL_B_AH_MIN = 120.0f; // DL battery should be at least 145Ah
+	static const double PV_DL_B_V_LOW = 23.8f; // Battery low-voltqage cutoff
+	static const double PWA_SLEEP = 550.0f;
+	static const double DL_AC_DC_EFF = 1.24f;
 
 	/*
 	 * Energy control loop parameters
 	 */
-#define BAL_MIN_ENERGY_AC   -200.0f
-#define BAL_MAX_ENERGY_AC   200.0f
-#define BAL_MIN_ENERGY_GTI  -1400.0f
-#define BAL_MAX_ENERGY_GTI  200.0f
+	static const double BAL_MIN_ENERGY_AC = -200.0f;
+	static const double BAL_MAX_ENERGY_AC = 200.0f;
+	static const double BAL_MIN_ENERGY_GTI = -1400.0f;
+	static const double BAL_MAX_ENERGY_GTI = 200.0f;
 
-#define DL_POWER_ZERO  "V0000X"
 
-#define LOG_TO_FILE         "/store/logs/energy.log"
-#define LOG_TO_FILE_ALT     "/tmp/energy.log"
 
-#define MAX_LOG_SPAM  60
-#define LOW_LOG_SPAM  2
-#define RESET_LOG_SPAM  120
+	static const uint32_t MAX_LOG_SPAM = 60;
+	static const uint32_t LOW_LOG_SPAM = 2;
+	static const uint32_t RESET_LOG_SPAM = 120;
 
-#define SYSTEM_STABLE 6.0f
+	static const uint32_t SYSTEM_STABLE = 6;
 
 	//#define IM_DEBUG                      // WEM3080T LOGGING
 	//#define B_ADJ_DEBUG                   // debug printing
@@ -168,17 +167,17 @@ extern "C" {
 	//#define DEBUG_HA_CMD
 	//#define RAMP_SW_LOG
 
-#define IM_DELAY            1   // tens of second updates
-#define IM_DISPLAY          1
-#define GTI_DELAY           1
+	static const uint32_t IM_DELAY = 1; // tens of second updates
+	static const uint32_t IM_DISPLAY = 1;
+	static const uint32_t GTI_DELAY = 1;
 
 	/*
 	 * sane limits for system data elements
 	 */
-#define PWA_SANE            1700.0f
-#define PAMPS_SANE          16.0f
-#define PVOLTS_SANE         155.0f
-#define BAMPS_SANE          70.0f
+	static const double PWA_SANE = 1700.0f;
+	static const double PAMPS_SANE = 16.0f;
+	static const double PVOLTS_SANE = 155.0f;
+	static const double BAMPS_SANE = 70.0f;
 
 	/*
 	    Three Phase WiFi Energy Meter (WEM3080T)

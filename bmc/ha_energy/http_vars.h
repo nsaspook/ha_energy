@@ -18,7 +18,8 @@ extern "C" {
 #define IAMM2 "http://10.1.1.102/monitorjson"
 #define IAMM3 "http://10.1.1.103/monitorjson"
 
-//#define IM_DEBUG2
+	//#define IM_DEBUG2
+
 	extern FILE* fout;
 
 	size_t iammeter_write_callback1(char *, size_t, size_t, void *);

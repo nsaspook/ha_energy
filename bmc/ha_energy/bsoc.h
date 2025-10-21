@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   bsoc.h
  * Author: root
  *
@@ -12,26 +12,6 @@
 extern "C" {
 #endif
 #include <math.h>
-	//#define BSOC_DEBUG
-
-#define MIN_PV_VOLTS    5.0f
-#define MIN_BAT_VOLTS   23.0f
-#define MIN_BAT_KW      4100.0f
-
-#define DEV_SIZE        10
-#define MAX_BATC_DEV    1.5f
-#define BAT_C_DRAW      3.0f
-
-#define PBAL_OFFSET     -50.0f // postive bias for control point
-#define PV_FULL_PWR     200.0f
-#define PV_MIN_PWR      120.0f
-#define PV_V_NOM        60.0f
-#define PV_V_FAKE       0.336699f
-
-#define COEF            8.0f
-#define COEFN           4.0f
-#define COEFF           2.0f
-
 #include <stdlib.h>
 #include <stdio.h> /* for printf() */
 #include <unistd.h>
@@ -47,6 +27,24 @@ extern "C" {
 #include <math.h>
 #include "pid.h"
 #include "mqtt_rec.h"
+
+	//#define BSOC_DEBUG
+#define DEV_SIZE  10
+
+	static const double MIN_PV_VOLTS = 5.0f;
+	static const double MIN_BAT_VOLTS = 23.0f;
+	static const double MIN_BAT_KW = 4100.0f;
+	static const double MAX_BATC_DEV = 1.5f;
+	static const double BAT_C_DRAW = 3.0f;
+	static const double PBAL_OFFSET = -50.0f; // positive bias for control point
+	static const double PV_FULL_PWR = 200.0f;
+	static const double PV_MIN_PWR = 120.0f;
+	static const double PV_V_NOM = 60.0f;
+	static const double PV_V_FAKE = 0.336699f;
+
+	static const double COEF = 8.0f;
+	static const double COEFN = 4.0f;
+	static const double COEFF = 2.0f;
 
 	bool bsoc_init(void);
 	bool bsoc_data_collect(void);

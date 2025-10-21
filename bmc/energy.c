@@ -63,6 +63,7 @@
  * V.082 adjust running power levels higher
  * V.083 control excess mode using PV Power
  * V.084 set all control points to 10's, numbers like 512 for power don't work
+ * V.085 convert defines to static const variable when possible
  */
 
 /*
@@ -279,18 +280,22 @@ bool sanity_check(void)
 {
 	if (E.mvar[V_PWA] > PWA_SANE) {
 		E.sane = S_PWA;
+		E.mvar[V_PWA] = 0.0f;
 		return false;
 	}
 	if (E.mvar[V_PAMPS] > PAMPS_SANE) {
 		E.sane = S_PAMPS;
+		E.mvar[V_PAMPS] = 0.0f;
 		return false;
 	}
 	if (E.mvar[V_PVOLTS] > PVOLTS_SANE) {
 		E.sane = S_PVOLTS;
+		E.mvar[S_PVOLTS] = 0.0f;
 		return false;
 	}
 	if (E.mvar[V_FBAMPS] > BAMPS_SANE) {
 		E.sane = S_FBAMPS;
+		E.mvar[V_FBAMPS] = 0.0f;
 		return false;
 	}
 	return true;
@@ -780,7 +785,7 @@ int main(int argc, char *argv[])
 					} else {
 						E.bat_runtime_low = BAT_RUNTIME_LOW;
 					}
-					if ((get_bat_runtime() < E.bat_runtime_low) && (E.mvar[V_BEN] <  MIN_BAT_KW_BSOC_SLP)) {
+					if ((get_bat_runtime() < E.bat_runtime_low) && (E.mvar[V_BEN] < MIN_BAT_KW_BSOC_SLP)) {
 						error_drive = PV_BIAS_ZERO;
 						ha_ac_off();
 						ha_ac_off();
@@ -823,7 +828,7 @@ int main(int argc, char *argv[])
 
 					if (C.system_stable) {
 						snprintf(gti_str, SBUF_SIZ - 1, "V%04dX", error_drive); // format for dumpload controller gti power commands
-						gti_str[4]='0'; // make sure to use 10's of numbers, the Chinese GTI reject some power settings
+						gti_str[4] = '0'; // make sure to use 10's of numbers, the Chinese GTI reject some power settings
 						mqtt_gti_power(E.client_p, TOPIC_P, gti_str, 2);
 					}
 				}
@@ -920,9 +925,10 @@ int main(int argc, char *argv[])
 					snprintf(buffer, SYSLOG_SIZ - 1, "\r\n%s !!!! Source data update error !!!! , check FM80 %i, DUMPLOAD %i, IAMMETER %i channels M %u,%u I %u,%u\r\n", log_time(false), E.fm80, E.dumpload, E.fm80,
 						E.link.mqtt_count, E.link.mqtt_error, E.link.iammeter_count, E.link.iammeter_error);
 					syslog(LOG_NOTICE, buffer);
-					if (E.call_shutdown) {
+					if (E.call_shutdown && (E.link.shutdown > MAX_ERROR)) {
 						mqtt_ha_shutdown(E.client_p, TOPIC_SHUTDOWN);
 						E.call_shutdown = false;
+						E.link.shutdown = 0;
 					}
 					E.mode.data_error = true;
 				} else {

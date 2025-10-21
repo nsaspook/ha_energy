@@ -15,14 +15,13 @@ extern "C" {
 #include "energy.h"
 #include "mqtt_vars.h"
 
-#define RDEV_SIZE        10
-
-#define SLEEP_CODE      0
-#define FLOAT_CODE      1
 	//#define DEBUG_REC
 	//#define GET_DEBUG
 
-#define MBMQTT  2048
+	static const uint32_t RDEV_SIZE = 10;
+	static const uint32_t SLEEP_CODE = 0;
+	static const uint32_t FLOAT_CODE = 1;
+	static const uint32_t MBMQTT = 2048;
 
 	enum mqtt_id {
 		P8055_ID,

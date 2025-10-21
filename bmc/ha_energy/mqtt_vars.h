@@ -12,14 +12,15 @@
 extern "C" {
 #endif
 
+#include <unistd.h>
+#include <stdint.h>
+
 	//#define GTI_NO_POWER      // do we actually run power commands
-
 	//#define DEBUG_HA_CMD    // show debug text
-#define HA_SW_DELAY     400000  // usecs
-#define TOKEN_DELAY     500
-#define GTI_TOKEN_DELAY 600
-
-//#define QOS             2
+	
+	static const uint32_t HA_SW_DELAY = 400000; // usecs
+	static const uint32_t TOKEN_DELAY = 500;
+	static const uint32_t GTI_TOKEN_DELAY = 600;
 
 	extern const char* mqtt_name[V_DLAST];
 
