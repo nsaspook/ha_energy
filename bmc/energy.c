@@ -64,6 +64,7 @@
  * V.083 control excess mode using PV Power
  * V.084 set all control points to 10's, numbers like 512 for power don't work
  * V.085 convert defines to static const variable when possible
+ * V.086 use dynamic variable settings from config file
  */
 
 /*
@@ -117,7 +118,7 @@ const char *board_name = "NO_BOARD", *driver_name = "NO_DRIVER";
 FILE* fout; // logging stream
 
 // program config parameters and current status
-// values are boot defaults but change be change during program operation
+// values are boot defaults but change during program operation
 struct config_type C = {
 	.dl_bat_charge_high = DL_BAT_CHARGE_HIGH,
 	.pv_bias = PV_BIAS,
@@ -125,7 +126,6 @@ struct config_type C = {
 	.pv_bias_rate = PV_BIAS_RATE,
 	.dl_bat_charge_zero = false,
 	.bal_min_energy_ac = BAL_MIN_ENERGY_AC,
-	.min_bat_kw_ac_lo = MIN_BAT_KW_AC_LO,
 	.system_stable = false,
 };
 
@@ -147,8 +147,7 @@ struct energy_type E = {
 	.im_display = 0,
 	.rc = 0,
 	.speed_go = 0,
-	.mode.pid.iMax = PV_IMAX,
-	.mode.pid.iMin = 0.0f,
+	.mode.pid.iMin = 0.0f, // iMax set from config file variable in pid.c
 	.mode.pid.pGain = PV_PGAIN,
 	.mode.pid.iGain = PV_IGAIN,
 	.mode.mode_tmr = 0,
@@ -177,8 +176,95 @@ struct energy_type E = {
 	.bat_runtime_low = BAT_RUNTIME_LOW,
 };
 
+/*
+ * BMC default setting structure for local configuration setup from host config file
+ */
+struct bmc_settings S = {
+	.BENERGYV = DBENERGY,
+	.BVOLTAGEV = DBVOLTAGE,
+	.PVENERGYV = DPVENERGY,
+	.PVVOLTAGEV = DPVVOLTAGE,
+	.SOC_MODEV = DSOC_MODE,
+	.BSOC_SLEEP = DBSOC_SLEEP,
+	.BSOC_HIGH = DBSOC_HIGH,
+};
+
 static bool solar_shutdown(void);
 void showIP(void);
+
+bool get_set_config(void)
+{
+	static const char *output_file = "/etc/daq_bmc/ha_config.cfg"; // will only read data from here
+	static const char *output_file_tmp = "/tmp/ha_config.cfg"; // if the correct directory is missing
+	config_t cfg;
+	config_setting_t *setting, *group;
+	bool config_status = false;
+
+	/*
+	 * read configuration file settings
+	 */
+	config_init(&cfg);
+	/* Read the file. If there is an error, create a new file */
+	if (!config_read_file(&cfg, output_file)) {
+		fprintf(stderr, "%s:%d - %s\n", config_error_file(&cfg),
+			config_error_line(&cfg), config_error_text(&cfg));
+		config_destroy(&cfg);
+
+		config_init(&cfg);
+		group = config_root_setting(&cfg);
+		setting = config_setting_add(group, "BENERGYV", CONFIG_TYPE_FLOAT);
+		config_setting_set_float(setting, S.BENERGYV);
+		setting = config_setting_add(group, "BVOLTAGEV", CONFIG_TYPE_FLOAT);
+		config_setting_set_float(setting, S.BVOLTAGEV);
+		setting = config_setting_add(group, "PVENERGYV", CONFIG_TYPE_FLOAT);
+		config_setting_set_float(setting, S.PVENERGYV);
+		setting = config_setting_add(group, "PVVOLTAGEV", CONFIG_TYPE_FLOAT);
+		config_setting_set_float(setting, S.PVVOLTAGEV);
+		setting = config_setting_add(group, "SOC_MODEV", CONFIG_TYPE_FLOAT);
+		config_setting_set_float(setting, S.SOC_MODEV);
+		setting = config_setting_add(group, "BSOC_SLEEPV", CONFIG_TYPE_FLOAT);
+		config_setting_set_float(setting, S.BSOC_SLEEP);
+		setting = config_setting_add(group, "BSOC_HIGHV", CONFIG_TYPE_FLOAT);
+		config_setting_set_float(setting, S.BSOC_HIGH);
+
+		/* Write out the new configuration. */
+		if (!config_write_file(&cfg, output_file)) {
+			if (!config_write_file(&cfg, output_file_tmp)) {
+				fprintf(stderr, "Error while writing file to %s and %s.\n", output_file, output_file_tmp);
+#ifdef EXIT_CONFIG_WRITE_FAIL
+				config_destroy(&cfg);
+				return(EXIT_FAILURE);
+#endif
+			} else {
+				fprintf(stderr, "Testing configuration successfully written to: %s\n",
+					output_file_tmp);
+			}
+		} else {
+			fprintf(stderr, "New configuration successfully written to: %s\n",
+				output_file);
+			config_status = true;
+		}
+		config_destroy(&cfg);
+	} else {
+
+		if (config_lookup_float(&cfg, "BENERGYV", &S.BENERGYV)
+			&& config_lookup_float(&cfg, "BVOLTAGEV", &S.BVOLTAGEV)
+			&& config_lookup_float(&cfg, "PVENERGYV", &S.PVENERGYV)
+			&& config_lookup_float(&cfg, "PVVOLTAGEV", &S.PVVOLTAGEV)
+			&& config_lookup_float(&cfg, "SOC_MODEV", &S.SOC_MODEV)
+			&& config_lookup_float(&cfg, "BSOC_SLEEPV", &S.BSOC_SLEEP)
+			&& config_lookup_float(&cfg, "BSOC_HIGHV", &S.BSOC_HIGH)
+			) {
+			fprintf(stderr, "Configuration successfully read %4.1f %4.1f %4.1f %4.1f %4.1f from: %s\n",
+				S.BENERGYV, S.BVOLTAGEV, S.PVENERGYV, S.PVVOLTAGEV, S.SOC_MODEV, output_file);
+			config_status = true;
+		} else {
+			fprintf(stderr, "No/Incorrect settings in configuration file.\n");
+		}
+		config_destroy(&cfg);
+	}
+	return config_status;
+}
 
 /*
  * show all assigned networking addresses and types
@@ -395,6 +481,8 @@ int main(int argc, char *argv[])
 	char hname[256], *hname_ptr = hname;
 	size_t hname_len = 12;
 
+	get_set_config();
+	C.min_bat_kw_ac_lo = S.BENERGYV*BAT_SOC_LOW_AC;
 	gethostname(hname, hname_len);
 	hname[12] = 0;
 	printf("\r\n  LOG Version %s : MQTT Version %s : Host Name %s\r\n", LOG_VERSION, MQTT_VERSION, hname);
@@ -666,7 +754,7 @@ int main(int argc, char *argv[])
 					E.mode.no_float = false;
 				}
 				if (!E.gti_sw_status) {
-					if (gti_test() > MIN_BAT_KW_GTI_HI) {
+					if (gti_test() > S.BENERGYV * BAT_SOC_TOP) {
 						mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);
 						E.gti_sw_status = true;
 						if (!E.dl_excess) {
@@ -676,7 +764,7 @@ int main(int argc, char *argv[])
 				}
 				usleep(100000); // wait
 				if (!E.ac_sw_status) {
-					if (ac_test() > MIN_BAT_KW_AC_HI) {
+					if (ac_test() > (S.BENERGYV * BAT_SOC_HIGH)) {
 						mqtt_ha_switch(E.client_p, TOPIC_PACC, true);
 						E.ac_sw_status = true;
 						if (!E.dl_excess) {
@@ -749,7 +837,7 @@ int main(int argc, char *argv[])
 					if (error_drive < 0) {
 						error_drive = PV_BIAS_LOW; // control wide power swings
 						if (!fm80_sleep()) { // check for using sleep bias
-							if ((E.mvar[V_FBEKW] > MIN_BAT_KW_BSOC_SLP) && (E.mvar[V_PWA] > PWA_SLEEP)) {
+							if ((E.mvar[V_FBEKW] > S.BSOC_SLEEP) && (E.mvar[V_PWA] > PWA_SLEEP)) {
 								error_drive = PV_BIAS_SLEEP; // use higher power when we still have sun for better inverter efficiency
 							}
 						}
@@ -785,7 +873,7 @@ int main(int argc, char *argv[])
 					} else {
 						E.bat_runtime_low = BAT_RUNTIME_LOW;
 					}
-					if ((get_bat_runtime() < E.bat_runtime_low) && (E.mvar[V_BEN] < MIN_BAT_KW_BSOC_SLP)) {
+					if ((get_bat_runtime() < E.bat_runtime_low) && (E.mvar[V_BEN] < S.BSOC_SLEEP)) {
 						error_drive = PV_BIAS_ZERO;
 						ha_ac_off();
 						ha_ac_off();
@@ -833,7 +921,7 @@ int main(int argc, char *argv[])
 					}
 				}
 #ifndef  FAKE_VPV
-				if (fm80_float(true) || ((ac1_filter(E.mvar[V_BEN]) > BAL_MAX_ENERGY_AC) && (ac_test() > MIN_BAT_KW_AC_HI))) {
+				if (fm80_float(true) || ((ac1_filter(E.mvar[V_BEN]) > BAL_MAX_ENERGY_AC) && (ac_test() > (S.BENERGYV * BAT_SOC_HIGH)))) {
 					if (C.system_stable) {
 						ramp_up_ac(E.client_p, E.ac_sw_on); // use once control
 #ifdef PSW_DEBUG
@@ -859,7 +947,7 @@ int main(int argc, char *argv[])
 				 * Dump Load Excess testing
 				 * send excess power into the home power grid taking care not to export energy to the utility grid
 				 */
-				if (((dc1_filter(E.mvar[V_BEN]) > BAL_MAX_ENERGY_GTI) && (gti_test() > MIN_BAT_KW_GTI_HI)) || E.dl_excess) {
+				if (((dc1_filter(E.mvar[V_BEN]) > BAL_MAX_ENERGY_GTI) && (gti_test() > S.BENERGYV * BAT_SOC_TOP)) || E.dl_excess) {
 #ifndef  FAKE_VPV
 #ifdef B_DLE_DEBUG
 					if (E.dl_excess) {
@@ -877,7 +965,7 @@ int main(int argc, char *argv[])
 					}
 #endif
 				} else {
-					if ((dc2_filter(E.mvar[V_BEN]) < BAL_MIN_ENERGY_GTI) || (gti_test() < (MIN_BAT_KW_GTI_LO + E.gti_low_adj))) {
+					if ((dc2_filter(E.mvar[V_BEN]) < BAL_MIN_ENERGY_GTI) || (gti_test() < ((S.BENERGYV * BAT_SOC_LOW) + E.gti_low_adj))) {
 						if (!E.dl_excess) {
 							if (log_timer()) {
 								ramp_down_gti(E.client_p, true);
@@ -891,7 +979,7 @@ int main(int argc, char *argv[])
 				}
 			};
 #ifdef B_ADJ_DEBUG
-			fprintf(fout, "\r\n LO ADJ: AC %8.2fWh, GTI %8.2fWh\r\n", MIN_BAT_KW_AC_LO + E.ac_low_adj, MIN_BAT_KW_GTI_LO + E.gti_low_adj);
+			fprintf(fout, "\r\n LO ADJ: AC %8.2fWh, GTI %8.2fWh\r\n", (S.BENERGYV * BAT_SOC_LOW_AC) + E.ac_low_adj, (S.BENERGYV * BAT_SOC_LOW) + E.gti_low_adj);
 #endif
 #ifdef B_DLE_DEBUG
 			if (E.dl_excess) {

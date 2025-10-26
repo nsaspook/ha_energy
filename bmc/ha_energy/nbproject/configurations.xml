@@ -110,6 +110,7 @@
             <linkerLibStdlibItem>Mathematics</linkerLibStdlibItem>
             <linkerOptionItem>`pkg-config --libs libcurl`</linkerOptionItem>
           </linkerLibItems>
+          <commandLine>-lconfig</commandLine>
         </linkerTool>
       </compileType>
       <item path="../energy.c" ex="false" tool="0" flavor2="0">

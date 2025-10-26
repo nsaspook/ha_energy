@@ -43,7 +43,6 @@ struct local_type {
 };
 
 static struct local_type L = {
-	.ac_weight = BAT_M_KW,
 	.bat_current = 0.0f,
 	.bat_voltage = 0.0f,
 	.batc_std_dev = 0.0f,
@@ -61,7 +60,7 @@ static uint32_t excess_count_on = 0, excess_count_off = 0;
  */
 bool bsoc_init(void)
 {
-	L.ac_weight = BAT_M_KW;
+	L.ac_weight = S.BENERGYV;
 	L.gti_weight = 0.0f;
 	// use MUTEX locks for message passing between remote programs
 	if (pthread_mutex_init(&E.ha_lock, NULL) != 0) {
@@ -296,7 +295,7 @@ bool bsoc_set_mode(const double target, const bool mode, const bool init)
 	accum = accum - accum / COEFN + E.mvar[V_PWA];
 	vpwa = accum / COEFN;
 
-	if ((vpwa >= PV_FULL_PWR) && (E.mvar[V_FBEKW] >= MIN_BAT_KW_BSOC_HI)) {
+	if ((vpwa >= PV_FULL_PWR) && (E.mvar[V_FBEKW] >= S.BSOC_HIGH)) {
 		if (!bsoc_mode) {
 			ResetPI(&E.mode.pid);
 		}
@@ -309,7 +308,7 @@ bool bsoc_set_mode(const double target, const bool mode, const bool init)
 
 	} else {
 		if (bsoc_high) { // turn off at min limit power
-			if ((vpwa >= PV_MIN_PWR) && (E.mvar[V_FBEKW] >= MIN_BAT_KW_BSOC_HI)) {
+			if ((vpwa >= PV_MIN_PWR) && (E.mvar[V_FBEKW] >= S.BSOC_HIGH)) {
 				bsoc_mode = true;
 				if (ha_ac_mode) {
 					ha_ac_off();
@@ -359,7 +358,7 @@ bool bsoc_set_mode(const double target, const bool mode, const bool init)
 		E.mode.con4 = false;
 		fprintf(fout, "%s HA start excess button pressed\n", log_time(false));
 	} else { // control excess mode from PV Power
-		if ((E.mvar[V_FBEKW] > MIN_BAT_KW_BSOC_HI) && (E.mvar[V_FCCM] == FLOAT_CODE)) {
+		if ((E.mvar[V_FBEKW] > S.BSOC_HIGH) && (E.mvar[V_FCCM] == FLOAT_CODE)) {
 			if (excess_count_on++ >= EXCESS_COUNT_ON) {
 				if (E.dl_excess == false) {
 					mqtt_ha_switch(E.client_p, TOPIC_PDCC, true);

@@ -65,7 +65,7 @@ LDLIBSOPTIONS=`pkg-config --libs libcjson` -lpaho-mqtt3c -lm  `pkg-config --libs
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ha_energy: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ha_energy ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ha_energy ${OBJECTFILES} ${LDLIBSOPTIONS} -lconfig
 
 ${OBJECTDIR}/_ext/5c0/energy.o: ../energy.c
 	${MKDIR} -p ${OBJECTDIR}/_ext/5c0

@@ -29,12 +29,12 @@ extern "C" {
 #include <sys/socket.h>
 #include <netdb.h>
 #include <ifaddrs.h>
+#include <libconfig.h>
 #include "MQTTClient.h"
 #include "pid.h"
 #include "http_vars.h"
 
-
-#define LOG_VERSION     "V0.85"
+#define LOG_VERSION     "V0.86"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
@@ -71,6 +71,17 @@ extern "C" {
 #define RBUF_SIZ        82
 #define SYSLOG_SIZ      512
 
+	/*
+	 * default file configuration data for Home Assistant
+	 */
+#define DBENERGY  5120.0f // in use
+#define DBVOLTAGE 25.2f
+#define DPVENERGY 700.0f // in use
+#define DPVVOLTAGE 115.2f
+#define DSOC_MODE 1.0f
+#define DBSOC_SLEEP  3000.0f
+#define DBSOC_HIGH  4800.0f
+
 	static const uint32_t QOS = 2;
 	static const uint32_t TIMEOUT = 10000L;
 	static const uint32_t SPACING_USEC = 500 * 1000;
@@ -92,7 +103,6 @@ extern "C" {
 	/*
 	 * Battery SoC cycle limits parameters
 	 */
-	static const double BAT_M_KW = 5120.0f;
 	static const double BAT_SOC_TOP = 0.98f;
 	static const double BAT_SOC_HIGH = 0.95f;
 	static const double BAT_SOC_LOW = 0.48f;
@@ -101,14 +111,6 @@ extern "C" {
 	static const double BAT_RUNTIME_LOW_EXCESS = 2.0f;
 	static const double BAT_RUNTIME_LOW = 4.0f;
 	static const double BAT_RUNTIME_GTI = 5.0f;
-	static const double MIN_BAT_KW_BSOC_SLP = 3000.0f;
-	static const double MIN_BAT_KW_BSOC_HI = 4800.0f;
-
-	static const double MIN_BAT_KW_GTI_HI = BAT_M_KW*BAT_SOC_TOP;
-	static const double MIN_BAT_KW_GTI_LO = BAT_M_KW*BAT_SOC_LOW;
-
-	static const double MIN_BAT_KW_AC_HI = BAT_M_KW*BAT_SOC_HIGH;
-	static const double MIN_BAT_KW_AC_LO = BAT_M_KW*BAT_SOC_LOW_AC;
 
 	/*
 	 * PV panel cycle limits parameters
@@ -116,7 +118,6 @@ extern "C" {
 	 */
 	static const double PV_PGAIN = 0.85f;
 	static const double PV_IGAIN = 0.12f;
-	static const double PV_IMAX = 1400.0f;
 	static const double PV_BIAS = 500.0f;
 	static const double PV_BIAS_ZERO = 0.0f;
 	static const double PV_BIAS_LOW = 500.0f;
@@ -135,7 +136,7 @@ extern "C" {
 	static const uint32_t EXCESS_COUNT_OFF = 6;
 	static const double PV_DL_B_AH_LOW = 120.0f;
 	static const double PV_DL_B_AH_MIN = 120.0f; // DL battery should be at least 145Ah
-	static const double PV_DL_B_V_LOW = 23.8f; // Battery low-voltqage cutoff
+	static const double PV_DL_B_V_LOW = DBVOLTAGE - 1.4f; // Battery low-voltqage cutoff
 	static const double PWA_SLEEP = 550.0f;
 	static const double DL_AC_DC_EFF = 1.24f;
 
@@ -161,8 +162,8 @@ extern "C" {
 	//#define PSW_DEBUG
 	//#define DEBUG_SHUTDOWN
 
-	//#define AUTO_CHARGE                   // turn on dumpload charger during restarts
-	//#define B_DLE_DEBUG    // Dump Load debugging
+	//#define AUTO_CHARGE			// turn on dumpload charger during restarts
+	//#define B_DLE_DEBUG			// Dump Load debugging
 	//#define BSOC_DEGUB
 	//#define DEBUG_HA_CMD
 	//#define RAMP_SW_LOG
@@ -174,9 +175,9 @@ extern "C" {
 	/*
 	 * sane limits for system data elements
 	 */
-	static const double PWA_SANE = 1700.0f;
+	static const double PWA_SANE = DPVENERGY + 300.0f;
 	static const double PAMPS_SANE = 16.0f;
-	static const double PVOLTS_SANE = 155.0f;
+	static const double PVOLTS_SANE = DPVVOLTAGE + 40.0f;
 	static const double BAMPS_SANE = 70.0f;
 
 	/*
@@ -188,21 +189,21 @@ extern "C" {
 	wem3080t_importenergy_a	kWh	A phase import energy
 	wem3080t_exportgrid_a	kWh	A phase export energy
 	wem3080t_frequency_a	kWh	A phase frequency
-	wem3080t_pf_a	kWh	A phase power factor
+	wem3080t_pf_a		kWh	A phase power factor
 	wem3080t_voltage_b	V	B phase voltage
 	wem3080t_current_b	A	B phase current
 	wem3080t_power_b	W	B phase active power
 	wem3080t_importenergy_b	kWh	B phase import energy
 	wem3080t_exportgrid_b	kWh	B phase export energy
 	wem3080t_frequency_b	kWh	B phase frequency
-	wem3080t_pf_b	kWh	B phase power factor
+	wem3080t_pf_b		kWh	B phase power factor
 	wem3080t_voltage_c	V	C phase voltage
 	wem3080t_current_c	A	C phase current
 	wem3080t_power_c	W	C phase active power
 	wem3080t_importenergy_c	kWh	C phase import energy
 	wem3080t_exportgrid_c	kWh	C phase export energy
 	wem3080t_frequency_c	kWh	C phase frequency
-	wem3080t_pf_c	kWh	C phase power factor
+	wem3080t_pf_c		kWh	C phase power factor
 	 */
 
 	enum client_id {
@@ -325,6 +326,10 @@ extern "C" {
 #define L3_P    L2_P+IA_LAST
 #define L4_P    L3_P+IA_LAST
 
+	struct bmc_settings {
+		double BENERGYV, BVOLTAGEV, PVENERGYV, PVVOLTAGEV, SOC_MODEV, BSOC_SLEEP, BSOC_HIGH;
+	};
+
 	struct link_type {
 		volatile uint32_t iammeter_error, iammeter_count;
 		volatile uint32_t mqtt_error, mqtt_count;
@@ -365,6 +370,7 @@ extern "C" {
 	extern struct energy_type E;
 	extern struct ha_flag_type ha_flag_vars_ss;
 	extern FILE* fout;
+	extern struct bmc_settings S;
 
 	void timer_callback(int32_t);
 	void connlost(void *, char *);
@@ -382,6 +388,7 @@ extern "C" {
 	char * log_time(bool);
 	bool sync_ha(void);
 	bool log_timer(void);
+	bool get_set_config(void);
 
 #ifdef __cplusplus
 }
