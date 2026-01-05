@@ -250,7 +250,7 @@ void print_im_vars(void)
 	char imvars[SYSLOG_SIZ];
 
 	fflush(fout);
-	snprintf(imvars, SYSLOG_SIZ - 1, "Home L1 %6.1fW, H L2 %6.1fW, GTI L1 %6.1fW, Server %6.2fW, S GTI %6.1fW, S UPS %6.1fW, Shed GTI %6.1fW",
+	snprintf(imvars, SYSLOG_SIZ - 1, "Home L1 %6.1fW, H L2 %6.1fW, GTI L1 %6.1fW, Server %6.1fW, S GTI %6.1fW, S UPS %6.1fW, Shed GTI %6.1fW",
 		E.print_vars[L1_P], E.print_vars[L2_P], E.print_vars[L3_P], E.print_vars3[L1_P], E.print_vars3[L2_P], E.print_vars3[L3_P], E.print_vars[L4_P]);
 	fprintf(fout, "%s", imvars);
 	fflush(fout);
