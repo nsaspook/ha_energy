@@ -235,7 +235,7 @@ bool json_get_data(cJSON *json_src, const char * data_id, cJSON *name, uint32_t 
  */
 void print_mvar_vars(void)
 {
-	fprintf(fout, ", Inv P %6.2fW, BAT E %6.2fWh, Solar E %7.2fWh, AC E %7.2fWh, PERR %6.2fW, PBAL %6.2fW, ST %6.2f, GDL %6.2f, %d,%d,%d %d\r",
+	fprintf(fout, ", Inv P %6.1fW, BAT E %6.1fWh, Solar E %7.2fWh, AC E %7.1fWh, PERR %6.1fW, PBAL %6.2fW, S TOT %6.1f, GTI DL %6.1f, %d,%d,%d %d\r",
 		E.mvar[V_FLO], E.mvar[V_FBEKW], E.mvar[V_FSO], E.mvar[V_FACE], E.mode.error, E.mvar[V_BEN], E.mode.total_system, E.mode.gti_dumpload, (int32_t) E.mvar[V_HDCSW], (int32_t) E.mvar[V_HACSW], (int32_t) E.mvar[V_HMODE],
 		(int32_t) C.dl_bat_charge_zero);
 }

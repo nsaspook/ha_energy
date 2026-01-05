@@ -34,7 +34,7 @@ extern "C" {
 #include "pid.h"
 #include "http_vars.h"
 
-#define LOG_VERSION     "V0.86"
+#define LOG_VERSION     "V0.87"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
@@ -176,7 +176,7 @@ extern "C" {
 	 * sane limits for system data elements
 	 */
 	static const double PWA_SANE = DPVENERGY + 300.0f;
-	static const double PAMPS_SANE = 16.0f;
+	static const double PAMPS_SANE = 26.0f;
 	static const double PVOLTS_SANE = DPVVOLTAGE + 40.0f;
 	static const double BAMPS_SANE = 70.0f;
 

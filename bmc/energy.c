@@ -48,8 +48,7 @@
  * V.065 DL excess logic tuning and power adjustments
  * V.066 -> V.068 Various timing fixes to reduce spamming commands and logs
  * V.069 send MQTT showdown commands to HA when critical energy conditions are meet
- * V.070 process Home Assistant MQTT commands sent from automation's
- *
+ * V.070 process Home Assistant MQTT commands sent from automations
  * V.071 comment additions, logging improvements and code cleanups
  * V.072 -> V.073 fine tune GTI and AC power lower limits
  * V.074 Doxygen comments added
@@ -62,9 +61,10 @@
  * V.081 JSON NULL logging info
  * V.082 adjust running power levels higher
  * V.083 control excess mode using PV Power
- * V.084 set all control points to 10's, numbers like 512 for power don't work
+ * V.084 set all control points to 10's, numbers like 512 for GTI power don't work
  * V.085 convert defines to static const variable when possible
  * V.086 use dynamic variable settings from config file
+ * V.086 cleanup logging data
  */
 
 /*
@@ -884,7 +884,9 @@ int main(int argc, char *argv[])
 						ha_dc_off();
 						ha_dc_off();
 						if (C.system_stable) {
-							fprintf(fout, "%s Main Battery Runtime too low, shutting down power drains, %6f Hrs\r\n", log_time(false), get_bat_runtime());
+							if (E.call_shutdown) {
+								fprintf(fout, "%s Main Battery Runtime too low, shutting down power drains, %6f Hrs\r\n", log_time(false), get_bat_runtime());
+							}
 						}
 						ramp_down_ac(E.client_p, true);
 						ramp_down_gti(E.client_p, true);
@@ -896,7 +898,9 @@ int main(int argc, char *argv[])
 						}
 						fflush(fout);
 					} else {
-						E.call_shutdown = true;
+						if (get_bat_runtime() > BAT_RUNTIME_LOW) {
+							E.call_shutdown = true;
+						}
 					}
 
 					/*
@@ -1022,7 +1026,7 @@ int main(int argc, char *argv[])
 				} else {
 					E.mode.data_error = false;
 					E.link.shutdown = 0;
-					E.call_shutdown = true;
+//					E.call_shutdown = true;
 				}
 				snprintf(buffer, RBUF_SIZ - 1, "%s", ctime(&rawtime));
 				len = strlen(buffer);
