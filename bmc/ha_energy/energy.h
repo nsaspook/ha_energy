@@ -34,7 +34,7 @@ extern "C" {
 #include "pid.h"
 #include "http_vars.h"
 
-#define LOG_VERSION     "V0.87"
+#define LOG_VERSION     "V0.88"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
@@ -74,13 +74,27 @@ extern "C" {
 	/*
 	 * default file configuration data for Home Assistant
 	 */
-#define DBENERGY  5120.0f // in use
+#define BAT_ENERGY 5120.0f
+#define BAT_UNITS 2.0f
+#define DBENERGY  BAT_ENERGY*BAT_UNITS // in use
 #define DBVOLTAGE 25.2f
 #define DPVENERGY 700.0f // in use
 #define DPVVOLTAGE 115.2f
 #define DSOC_MODE 1.0f
 #define DBSOC_SLEEP  3000.0f
 #define DBSOC_HIGH  4800.0f
+
+	/*
+	 * Battery SoC cycle limits parameters
+	 */
+	static const double BAT_SOC_TOP = 0.98f;
+	static const double BAT_SOC_HIGH = 0.95f;
+	static const double BAT_SOC_LOW = 0.48f;
+	static const double BAT_SOC_LOW_AC = 0.52f;
+	static const double BAT_CRITICAL = 746.0f; /// one electrical HP, for one hour
+	static const double BAT_RUNTIME_LOW_EXCESS = 2.0f;
+	static const double BAT_RUNTIME_LOW = 3.5f;
+	static const double BAT_RUNTIME_GTI = 4.0f;
 
 	static const uint32_t QOS = 2;
 	static const uint32_t TIMEOUT = 10000L;
@@ -99,18 +113,6 @@ extern "C" {
 
 	static const uint32_t CMD_SEC = 10;
 	static const uint32_t TIME_SYNC_SEC = 30;
-
-	/*
-	 * Battery SoC cycle limits parameters
-	 */
-	static const double BAT_SOC_TOP = 0.98f;
-	static const double BAT_SOC_HIGH = 0.95f;
-	static const double BAT_SOC_LOW = 0.48f;
-	static const double BAT_SOC_LOW_AC = 0.52f;
-	static const double BAT_CRITICAL = 746.0f; /// one electrical HP, for one hour
-	static const double BAT_RUNTIME_LOW_EXCESS = 2.0f;
-	static const double BAT_RUNTIME_LOW = 4.0f;
-	static const double BAT_RUNTIME_GTI = 5.0f;
 
 	/*
 	 * PV panel cycle limits parameters
