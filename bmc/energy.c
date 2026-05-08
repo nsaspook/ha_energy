@@ -64,7 +64,8 @@
  * V.084 set all control points to 10's, numbers like 512 for GTI power don't work
  * V.085 convert defines to static const variable when possible
  * V.086 use dynamic variable settings from config file
- * V.086 cleanup logging data
+ * V.086-V.088 cleanup logging data
+ * V.089 add slowdown logic for GTI battery limits
  */
 
 /*
@@ -885,7 +886,7 @@ int main(int argc, char *argv[])
 						ha_dc_off();
 						if (C.system_stable) {
 							if (E.call_shutdown) {
-								fprintf(fout, "%s Main Battery Runtime too low, shutting down power drains, %6f Hrs\r\n", log_time(false), get_bat_runtime());
+								fprintf(fout, "%s Main Battery Run-time too low, shutting down power drains, %6f Hrs\r\n", log_time(false), get_bat_runtime());
 							}
 						}
 						ramp_down_ac(E.client_p, true);
@@ -1026,7 +1027,7 @@ int main(int argc, char *argv[])
 				} else {
 					E.mode.data_error = false;
 					E.link.shutdown = 0;
-//					E.call_shutdown = true;
+					//					E.call_shutdown = true;
 				}
 				snprintf(buffer, RBUF_SIZ - 1, "%s", ctime(&rawtime));
 				len = strlen(buffer);
@@ -1115,8 +1116,12 @@ void ramp_up_gti(MQTTClient client_p, bool start, bool excess)
 	case 0:
 		sequence++;
 		if (E.once_gti_zero) {
-			mqtt_gti_power(client_p, TOPIC_P, DL_POWER_ZERO, 5); // zero power
+			mqtt_gti_power(client_p, TOPIC_P, DL_POWER_LOW, 5); // reducing power
 			E.once_gti_zero = false;
+			if (C.system_stable) {
+				fprintf(fout, "%s Main Battery GTI Run-time low, reducing power drains, %6f Hrs\r\n", log_time(false), get_bat_runtime());
+				mqtt_ha_shutdown(E.client_p, TOPIC_SLOWDOWN);
+			}
 		}
 		break;
 	default:

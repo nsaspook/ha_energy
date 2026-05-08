@@ -34,7 +34,7 @@ extern "C" {
 #include "pid.h"
 #include "http_vars.h"
 
-#define LOG_VERSION     "V0.88"
+#define LOG_VERSION     "V0.89"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
@@ -54,11 +54,13 @@ extern "C" {
 #define TOPIC_PDCC      "home-assistant/gtidc/contact"
 #define TOPIC_PPID      "home-assistant/solar/pid"
 #define TOPIC_SHUTDOWN  "home-assistant/solar/shutdown"
+#define TOPIC_SLOWDOWN  "home-assistant/solar/slowdown"
 #define TOPIC_SS        "mateq84/data/solar"
 #define TOPIC_SD        "mateq84/data/dumpload"
 #define TOPIC_HA        "home-assistant/status/switch"
 
 #define DL_POWER_ZERO  "V0000X"
+#define DL_POWER_LOW   "V0200X"
 
 #define LOG_TO_FILE  "/store/logs/energy.log"
 #define LOG_TO_FILE_ALT  "/tmp/energy.log"
@@ -78,7 +80,7 @@ extern "C" {
 #define BAT_UNITS 2.0f
 #define DBENERGY  BAT_ENERGY*BAT_UNITS // in use
 #define DBVOLTAGE 25.2f
-#define DPVENERGY 700.0f // in use
+#define DPVENERGY 2400.0f // in use
 #define DPVVOLTAGE 115.2f
 #define DSOC_MODE 1.0f
 #define DBSOC_SLEEP  3000.0f
@@ -87,10 +89,10 @@ extern "C" {
 	/*
 	 * Battery SoC cycle limits parameters
 	 */
-	static const double BAT_SOC_TOP = 0.98f;
-	static const double BAT_SOC_HIGH = 0.95f;
-	static const double BAT_SOC_LOW = 0.48f;
-	static const double BAT_SOC_LOW_AC = 0.52f;
+	static const double BAT_SOC_TOP = 0.98f / BAT_UNITS;
+	static const double BAT_SOC_HIGH = 0.95f / BAT_UNITS;
+	static const double BAT_SOC_LOW = 0.48f / BAT_UNITS;
+	static const double BAT_SOC_LOW_AC = 0.52f / BAT_UNITS;
 	static const double BAT_CRITICAL = 746.0f; /// one electrical HP, for one hour
 	static const double BAT_RUNTIME_LOW_EXCESS = 2.0f;
 	static const double BAT_RUNTIME_LOW = 3.5f;
@@ -120,26 +122,26 @@ extern "C" {
 	 */
 	static const double PV_PGAIN = 0.85f;
 	static const double PV_IGAIN = 0.12f;
-	static const double PV_BIAS = 500.0f;
+	static const double PV_BIAS = 600.0f;
 	static const double PV_BIAS_ZERO = 0.0f;
-	static const double PV_BIAS_LOW = 500.0f;
-	static const double PV_BIAS_FLOAT = 550.0f;
-	static const double PV_BIAS_SLEEP = 550.0f;
-	static const double PV_BIAS_RATE = 500.0f;
+	static const double PV_BIAS_LOW = 600.0f;
+	static const double PV_BIAS_FLOAT = 650.0f;
+	static const double PV_BIAS_SLEEP = 650.0f;
+	static const double PV_BIAS_RATE = 600.0f;
 	static const double PV_DL_MPTT_MAX = 1200.0f;
 	static const double PV_DL_MPTT_EXCESS = 1300.0f;
 	static const double PV_DL_MPTT_IDLE = 60.0f;
 	static const double PV_DL_BIAS_RATE = 80.0f;
 	static const double DL_BAT_CHARGE_HIGH = 200.0f;
-	static const double PV_DL_EXCESS = 550.0f;
-	static const double PV_DL_EXCESS_FLOAT = 570.0f;
+	static const double PV_DL_EXCESS = 650.0f;
+	static const double PV_DL_EXCESS_FLOAT = 670.0f;
 	static const double PV_DL_EXCESS_LOW = 200.0f;
 	static const uint32_t EXCESS_COUNT_ON = 12;
 	static const uint32_t EXCESS_COUNT_OFF = 6;
 	static const double PV_DL_B_AH_LOW = 120.0f;
 	static const double PV_DL_B_AH_MIN = 120.0f; // DL battery should be at least 145Ah
 	static const double PV_DL_B_V_LOW = DBVOLTAGE - 1.4f; // Battery low-voltqage cutoff
-	static const double PWA_SLEEP = 550.0f;
+	static const double PWA_SLEEP = 650.0f;
 	static const double DL_AC_DC_EFF = 1.24f;
 
 	/*
@@ -180,7 +182,7 @@ extern "C" {
 	static const double PWA_SANE = DPVENERGY + 300.0f;
 	static const double PAMPS_SANE = 26.0f;
 	static const double PVOLTS_SANE = DPVVOLTAGE + 40.0f;
-	static const double BAMPS_SANE = 70.0f;
+	static const double BAMPS_SANE = 85.0f;
 
 	/*
 	    Three Phase WiFi Energy Meter (WEM3080T)
