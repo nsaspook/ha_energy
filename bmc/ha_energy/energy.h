@@ -128,9 +128,9 @@ extern "C" {
 	static const double PV_BIAS_FLOAT = 650.0f;
 	static const double PV_BIAS_SLEEP = 650.0f;
 	static const double PV_BIAS_RATE = 600.0f;
-	static const double PV_DL_MPTT_MAX = 1200.0f;
-	static const double PV_DL_MPTT_EXCESS = 1300.0f;
-	static const double PV_DL_MPTT_IDLE = 60.0f;
+	static const double PV_DL_MPTT_MAX = 1400.0f;
+	static const double PV_DL_MPTT_EXCESS = 1500.0f;
+	static const double PV_DL_MPTT_IDLE = 120.0f;
 	static const double PV_DL_BIAS_RATE = 80.0f;
 	static const double DL_BAT_CHARGE_HIGH = 200.0f;
 	static const double PV_DL_EXCESS = 650.0f;
