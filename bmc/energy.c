@@ -66,6 +66,7 @@
  * V.086 use dynamic variable settings from config file
  * V.086-V.088 cleanup logging data
  * V.089 add slowdown logic for GTI battery limits
+ * V.090 highlight DCM and ACM conditions
  */
 
 /*
@@ -1041,7 +1042,7 @@ int main(int argc, char *argv[])
 				sync_ha();
 				print_im_vars();
 				print_mvar_vars();
-				fprintf(fout, "%s\r\n", log_time(false));
+				fprintf(fout, "\033[0m%s\r\n", log_time(false));
 			}
 			E.mode.E = E_WAIT;
 			fflush(fout);
@@ -1303,7 +1304,7 @@ bool sync_ha(void)
 	bool sync = false;
 	if (E.gti_sw_status != (bool) ((int32_t) E.mvar[V_HDCSW])) {
 		fflush(fout);
-		fprintf(fout, "DCM %d %d ", (bool) E.gti_sw_status, (bool) ((int32_t) E.mvar[V_HDCSW]));
+		fprintf(fout, "\033[1mDCM %d %d ", (bool) E.gti_sw_status, (bool) ((int32_t) E.mvar[V_HDCSW]));
 		mqtt_ha_switch(E.client_p, TOPIC_PDCC, !E.gti_sw_status);
 		E.dc_mismatch = true;
 		fflush(fout);
@@ -1315,7 +1316,7 @@ bool sync_ha(void)
 	E.ac_sw_status = (bool) ((int32_t) E.mvar[V_HACSW]); // TEMP FIX for MISmatch errors
 	if (E.ac_sw_status != (bool) ((int32_t) E.mvar[V_HACSW])) {
 		fflush(fout);
-		fprintf(fout, "ACM %d %d ", (bool) E.ac_sw_status, (bool) ((int32_t) E.mvar[V_HACSW]));
+		fprintf(fout, "\033[1mACM %d %d ", (bool) E.ac_sw_status, (bool) ((int32_t) E.mvar[V_HACSW]));
 		mqtt_ha_switch(E.client_p, TOPIC_PACC, !E.ac_sw_status);
 		E.ac_mismatch = true;
 		fflush(fout);
