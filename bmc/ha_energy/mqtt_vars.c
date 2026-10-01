@@ -78,6 +78,9 @@ void mqtt_ha_pid(MQTTClient client_p, const char * topic_p)
 	}
 	cJSON_AddNumberToObject(json, "off_grid", E.mode.off_grid);
 	cJSON_AddNumberToObject(json, "excess_mode", (double) E.dl_excess);
+	cJSON_AddNumberToObject(json, "FM_OK", E.fm80);
+	cJSON_AddNumberToObject(json, "DL_OK", E.dumpload);
+	cJSON_AddNumberToObject(json, "IM_OK", E.iammeter);
 	cJSON_AddStringToObject(json, "build_date", FW_Date);
 	cJSON_AddStringToObject(json, "build_time", FW_Time);
 	time(&rawtime);

@@ -34,7 +34,7 @@ extern "C" {
 #include "pid.h"
 #include "http_vars.h"
 
-#define LOG_VERSION     "V0.90"
+#define LOG_VERSION     "V0.91"
 #define MQTT_VERSION    "V3.11"
 #define TNAME  "maint9"
 #define LADDRESS        "tcp://127.0.0.1:1883"
