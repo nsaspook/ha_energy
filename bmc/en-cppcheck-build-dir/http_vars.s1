@@ -4,4 +4,4 @@ iammeter_read1 global:[E,curl,fout,res] call:[curl_easy_cleanup,curl_easy_init,c
 iammeter_read2 global:[E,curl,fout,res] call:[curl_easy_cleanup,curl_easy_init,curl_easy_perform,curl_easy_setopt,curl_easy_strerror,fflush,fprintf,log_time] noreturn:[curl_easy_cleanup]
 iammeter_read3 global:[E,curl,fout,res] call:[curl_easy_cleanup,curl_easy_init,curl_easy_perform,curl_easy_setopt,curl_easy_strerror,fflush,fprintf,log_time] noreturn:[curl_easy_cleanup]
 iammeter_get_data global:[E]
-print_im_vars global:[E,fout] call:[fflush,fprintf,mqtt_gti_time,snprintf,time] noreturn:[mqtt_gti_time]
+print_im_vars global:[E,TIME_SYNC_SEC,fout] call:[fflush,fprintf,mqtt_gti_time,snprintf,time] noreturn:[mqtt_gti_time]
